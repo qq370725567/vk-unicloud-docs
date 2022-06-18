@@ -331,7 +331,7 @@ vk.userCenter.unbindMobile({
  */
 vk.userCenter.bindNewMobile({
   data: {
-    oldMobileCode: '',
+    oldMobile: '',
     oldMobileCode: '',
     mobile: '',
     code: '',
