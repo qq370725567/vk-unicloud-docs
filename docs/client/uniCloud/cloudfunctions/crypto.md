@@ -22,7 +22,7 @@ let cryptostr = md5.update('Hello, world!').digest('hex');
 ```js
 const crypto = require('crypto');
 const hmac = crypto.createHmac('sha256', 'secret-key');
-let cryptostr = md5.update('Hello, world!').digest('hex');
+let cryptostr = hmac.update('Hello, world!').digest('hex');
 ```
 
 ## 4、AES加解密
