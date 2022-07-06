@@ -247,7 +247,7 @@ let sendRes = await vk.openapi.weixin.uniformMessage.send({
   url: "https://www.baidu.com", // 跳转网页时填写（如填了miniprogram参数则自动忽略url参数）
   miniprogram: {
     appid: "", // 需要跳转的小程序appid
-    pagepath: "pages/order/order?id=aaa", // 需要跳转的小程序页面
+    path: "pages/order/order?id=aaa", // 需要跳转的小程序页面
   },
   data: {
     "first": {
@@ -332,7 +332,7 @@ let sendRes = await vk.openapi.weixin.h5.templateMessage.send({
   url: "https://www.baidu.com", // 跳转网页时填写（如填了miniprogram参数则自动忽略url参数）
   miniprogram: {
     appid: "", // 需要跳转的小程序appid
-    pagepath: "pages/order/order?id=aaa", // 需要跳转的小程序页面
+    path: "pages/order/order?id=aaa", // 需要跳转的小程序页面
   },
   data: {
     "first": {
