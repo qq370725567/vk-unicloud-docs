@@ -396,7 +396,7 @@ export default {
       table1:{
         
         selectable:(row,index)=>{
-          // 返回true,代表可以多选,返回false代表改行的多选框禁用。
+          // 返回true,代表可以多选,返回false代表该行的多选框禁用。
           if (index == 1) {
             return false;
           } else {
