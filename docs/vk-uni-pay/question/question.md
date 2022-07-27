@@ -184,7 +184,9 @@ ___如何获取URL化完整地址___
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/21b12172-ea0c-4f69-a064-2211a1fe149c.png)
 
+## 报错：Cannot read property 'createPayment' of undefined
 
+报错原因：支付组件没有正确加载，检查`uni_modules`下的`vk-uni-pay`是否包含`pages`。
 
 
 
