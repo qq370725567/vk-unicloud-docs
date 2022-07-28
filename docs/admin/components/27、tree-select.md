@@ -117,6 +117,19 @@
      * option2 val2对应的对象
      */
     console.log(1,val, formData, column, index, option, val2, option2);
+    // 在多选模式下想获取树状结构的数据，可以参考下面写法
+    let newObj = vk.pubfn.copyObject(option2); //拷贝
+    let arr = []
+    for (let i = 0; i < newObj.length; i++) {
+        delete newObj[i].children //去除children
+        arr.push(newObj[i])
+    }
+    // 通过数组转对象的方法转成需要的树状结构并赋给formData
+    formData.objArr = vk.pubfn.arrayToTree(arr,{
+        id:"_id", 
+        parent_id:"parent_id", 
+        children:"children"
+    });
   }
 }
 ```
