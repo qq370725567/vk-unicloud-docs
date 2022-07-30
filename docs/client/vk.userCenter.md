@@ -600,7 +600,7 @@ vk.userCenter.loginByEmail({
  * @param {String} email 邮箱
  * @param {String} type  验证码类型
  * res 返回参数说明
- * @param {String} email 手机号
+ * @param {String} email 邮箱
  * @param {String} verifyCode 验证码
  */
 vk.userCenter.sendEmailCode({
