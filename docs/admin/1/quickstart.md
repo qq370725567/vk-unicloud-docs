@@ -29,14 +29,14 @@ uni-id-roles 角色表
 uni-id-permissions 权限表
 opendb-admin-menus 菜单表
 ```
-* 3、把 `admin端` 的服务空间直接绑定 `client端` 项目（注意是 `绑定` 不是 `关联`）（注意是 `绑定` 不是 `关联`）（注意是 `绑定` 不是 `关联`）
+* 4、把 `admin端` 的服务空间直接绑定 `client端` 项目（注意是 `绑定` 不是 `关联`）（注意是 `绑定` 不是 `关联`）（注意是 `绑定` 不是 `关联`）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/98c6961a-22c8-4d61-833f-f558d848b0e5.png)
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/8a9406fd-ff00-48d4-b1fe-6e133c2bf13a.png)
 
-* 4、上传 `router` 云函数
+* 5、上传 `router` 云函数
 
-* 5、完成
+* 6、完成
 
 ### 情况二
 已完成情况一的请直接跳过情况二和情况三
