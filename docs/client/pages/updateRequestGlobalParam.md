@@ -22,7 +22,7 @@ vk.callFunctionUtil.updateRequestGlobalParam({
 
 * 如果单独某一个不在此正则规则内的云函数也想自动 带上shop_id参数 
 * 则在对应的callFunction中增加参数 `globalParamName:"shop-manage"`
-
+* 问：该方法需要写在那里？答：该方法写哪都可以，主要能执行就行
 ```js
 vk.callFunction({
   url: 'xxx/xxxxxx',
