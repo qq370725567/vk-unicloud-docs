@@ -15,7 +15,7 @@ vk.callFunctionUtil.updateRequestGlobalParam({
 ```
 
 #### 提示:
-
+* 该方法需要写在那里？答：该方法写哪都可以，主要能执行就行
 * `shop-manage` ：标识，可自定义
 * `regExp` ：正则匹配规则，只要满足该正则表达式的请求才会带上全局请求参数（支持数组，如为数组，则满足数组内任意正则即算匹配）
 * `data` ：全局请求参数，json格式
