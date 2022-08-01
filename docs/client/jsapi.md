@@ -1055,7 +1055,7 @@ vk.switchTab(url);
 
 ### vk.navigateBack
 
-关闭当前页面，返回上一页面
+关闭当前页面，返回上一页面，支持原生`uni.navigateBack(OBJECT)`中的属性。
 
 ```js
 vk.navigateBack();
