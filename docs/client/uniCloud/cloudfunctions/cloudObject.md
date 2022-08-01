@@ -313,6 +313,9 @@ module.exports = {
 
 以下示例的逻辑是，当客户端调用shop云对象非pub_的方法时，校验当前登录用户是否有权限操作此店铺，校验失败则直接报错返回客户端，校验通过继续执行update方法。
 
+如果需要从_before传递数据到后续执行的方法里，可以在_before中写 `this.aaa = xxx`，然后在你自己的方法里通过 `this.aaa` 即可获取到（注意不要和方法名重复即可，最好加个前缀
+）。
+
 ```js
 module.exports = {
   _before: function(){
