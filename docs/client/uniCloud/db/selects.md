@@ -154,6 +154,17 @@ res = await vk.baseDao.selects({
   }]
 });
 ```
+##### 提示:使用地理位置经纬度查询前，数据表内需要事先准备好地理位置经纬度数据，例如：
+```js
+	let longitude = 120.12792 
+	let latitude = 30.228932
+	res.id = await vk.baseDao.add({
+		dbName:"vk-test",
+		dataJson:{
+			"location":new db.Geo.Point(longitude, latitude) // 使用new db.Geo.Point(longitude，latitude)方法写入
+		}
+	});
+```
 ### 场景5
 #### 连表查询，主表外键是数组（id数组），查询出数组内的每个记录详情
 ##### 主表：uni-id-users （用户表）
