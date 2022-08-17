@@ -673,7 +673,7 @@ data: function() {
             { validator: vk.pubfn.validator("postal"),  message: '邮政编码格式错误', trigger: 'blur' }
           ],
           email: [
-            // 邮政编码
+            // 邮箱
             { validator: vk.pubfn.validator("email"),  message: '邮箱格式错误', trigger: 'blur' }
           ],
           QQ: [
