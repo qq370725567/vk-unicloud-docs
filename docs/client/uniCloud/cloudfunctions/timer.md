@@ -49,6 +49,7 @@ exports.main = async (event, context) => {
       "name": "z_timer1",
       "type": "timer"
     }]
+    "runtime": "Nodejs12"
   }
 }
 
