@@ -57,7 +57,7 @@ export default {
 | top          | 通用 - margin-top的高度 | Number  | 10 | -  |
 | selection          | 通用 - 显示多选框 | Boolean  | false | true |
 | selectable          | 通用 - 搭配selection=true时使用，返回值用来决定这一行的 CheckBox 是否可以勾选 [查看用法](#表格自带的多选框禁用规则)  | Function(row,index)  | - | - |
-| rowNo          | 通用 - 显示序号 | Boolean  | false | true |
+| rowNo          | 通用 - 显示序号 | Boolean  | true | false |
 | pagination     | 通用 - 显示分页器 | Boolean  | false | true |
 | page-size       | 通用 - 每页显示数量 | Number  | 10 | - |
 | page-sizes      | 通用 - 每页显示数量选择列表 | Array  | [1, 5, 10, 20, 50, 100, 1000] | - |
