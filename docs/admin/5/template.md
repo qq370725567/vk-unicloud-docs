@@ -165,7 +165,7 @@ module.exports = {
 
 * 2、复制 `pages_template/kong/list.vue` 文件到 刚刚新建的`pages/user`目录
 
-* 3、修改变量`table1.columns `值 `template/db_api/sys/getList` 为 `admin/user/sys/getList`
+* 3、修改变量`table1.action `值 `template/db_api/sys/getList` 为 `admin/user/sys/getList`
 
 * 4、修改变量`addBtn ` 函数中的action `template/db_api/sys/add` 为 `admin/user/sys/add`
 
