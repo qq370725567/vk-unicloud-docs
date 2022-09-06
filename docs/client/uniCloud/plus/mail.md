@@ -100,7 +100,7 @@ module.exports = {
       await emailService.sendMail({
         "from": emailConfig[data.serviceType].auth.user, // 邮件的发送者
         "to": data.email, // 邮件的接收者
-        "cc": emailConfig[data.serviceType].auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把右键抄送给自己一份，就不会被当成垃圾邮件。
+        "cc": emailConfig[data.serviceType].auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
         "subject": data.subject, // 邮件的标题
         "text": `您的验证码是${code},打死也不要告诉别人哦!`, // 邮件的内容
       });
