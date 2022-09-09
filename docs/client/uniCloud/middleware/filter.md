@@ -31,7 +31,7 @@
 |------------------|-------------------------------|---------|--------|-------|
 | id           | 中间件ID，全局必须唯一，相同中间件ID会被覆盖 | String | - | - |
 | regExp       | 中间件的正则匹配规则(支持数组) | String Array  | 无 | -  |
-| description  | 中间的描述 | String  | - | -  |
+| description  | 中间件的描述 | String  | - | -  |
 | index        | 中间件的执行顺序，值越小越先执行 | Number  | - | -  |
 | mode         | 中间件的模式，详情见下方 | String  | onActionExecuting | 见下方mode参数说明 |
 | enable       | 是否启动该中间件 | Boolean  | false | true |
