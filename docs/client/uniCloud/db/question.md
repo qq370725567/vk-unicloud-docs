@@ -3,7 +3,7 @@
 ### 目录
 #### 1、[and、or、in、nin、neq用法](#and)
 #### 2、[针对同一个字段的and和or](#针对同一个字段的and和or)
-#### 3、[跨字段的and和or](#跨字段)
+#### 3、[跨字段的and和or](#跨字段的and和or)
 #### 4、[多字段模糊搜索or](#多字段模糊搜索or)
 #### 5、[in （包含其中）nin（都不包含）](#in)
 #### 6、[大于小于](#大于小于)
@@ -44,7 +44,6 @@ num : _.lte(0).or(_.gte(10))
 num : _.lte(0).or(_.gt(10).and(_.lt(20)))
 
 ```
-### 跨字段
 ### 跨字段的and和or
 ```js
 // num >50 and name = 'test'
@@ -83,7 +82,36 @@ whereJson: _.and([
   ])
 ])
 
+//跨字段综合使用示例 例如：查询(条件1) and （条件2 or 条件3） and （条件4 or 条件5)
+let time = Date.now();
+vk.baseDao.select({
+	dbName,
+	whereJson: _.and([
+	  {
+	  	status:0, 
+	  },
+	  _.or([
+	    {
+	      remain_count: _.gt(0) //剩余量大于0
+	    },
+	    {
+	      is_limited:true, //不限量
+	    }
+	  ]),
+	  _.or([
+	    {
+	      "time_arr.0":_.lt(time), //开始时间小于现行时间
+	  		"time_arr.1":_.gt(time) //结束时间大于现行时间
+	    },
+	    {
+	      is_timeout:0,//不限时
+	    }
+	  ]),
+	])
+});
+
 ```
+
 ### 多字段模糊搜索or
 ### 一个搜索value对应多个字段模糊搜索
 ```js
