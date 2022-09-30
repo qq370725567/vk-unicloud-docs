@@ -37,8 +37,8 @@
 | shortcuts            | 设置快捷选项，需要传入 { text, onClick }  | Object[]  | - | - |
 | disabledDate            | 设置禁用状态，参数为当前日期，要求返回 Boolean| Function  |- | -  |
 | cellClassName          |设置日期的 className | Function(Date)  | - | - |
-| firstDayOfWeek    | 周起始日 | Number  | - | -  |
-| onPick    | 选中日期后会执行的回调，只有当 daterange 或 datetimerange 才生效 | Function({ maxDate, minDate })  | 7 | 1 到 7 |
+| firstDayOfWeek    | 周起始日 | Number  | 7 | 1 到 7 |
+| onPick    | 选中日期后会执行的回调，只有当 daterange 或 datetimerange 才生效 | Function({ maxDate, minDate })  | - | -  |
 
 [点击查看更多element 官方API](https://element.eleme.cn/#/zh-CN/component/date-picker#ri-qi-ge-shi)
 
