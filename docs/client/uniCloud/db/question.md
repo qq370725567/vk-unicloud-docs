@@ -39,7 +39,7 @@ num : _.or(_.lte(0), _.gte(10))
 // 流式写法
 num : _.lte(0).or(_.gte(10))
 
-// num <=0 or (num > 10 or num <20)
+// num <=0 or (num > 10 and num <20)
 // 流式写法(复式)
 num : _.lte(0).or(_.gt(10).and(_.lt(20)))
 
