@@ -186,7 +186,7 @@ calc: async function(data) {
 
 [传送门 - 全局云端数据缓存](https://vkdoc.fsq.pub/client/uniCloud/cache/cache.html)
 
-[传送门 - 全局中间件](https://vkdoc.fsq.pub/client/uniCloud/cache/cache.html)
+[传送门 - 全局中间件](https://vkdoc.fsq.pub/client/uniCloud/middleware/filter.html)
 
 [传送门 - 云函数定时任务](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/timer.html)
 
