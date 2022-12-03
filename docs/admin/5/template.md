@@ -292,7 +292,7 @@ form1: {
 },
 ```
 
-* 10、在 `pages.json` 的 `subPackages`中配置页面路由
+* 10、在 `pages.json` 的 `Pages`中配置页面路由
 
 ```js
 "pages": [
