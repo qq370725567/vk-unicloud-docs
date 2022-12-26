@@ -123,6 +123,29 @@ uni.chooseImage({
 
 ```
 
+## 上传图片，并将图片记录保存到admin后台指定分类,category_id对应vk-files-categories表的分类ID(可在admin素材管理中新建分类)
+```js
+// 选择图片
+uni.chooseImage({
+  count: 1,
+  sizeType: ['compressed'],
+  success: (res) => {
+    vk.uploadFile({
+      title:"上传中...",
+      filePath: res.tempFilePaths[0],
+      file: res.tempFiles[0],
+      needSave:true,
+      category_id : "001"
+      success:(res) => {
+       // 上传成功
+
+      }
+    });
+  }
+});
+
+```
+
 ## 自定义云端图片保存路径
 
 通过 cloudPath 参数可直接指定路径（需包含文件后缀名）
