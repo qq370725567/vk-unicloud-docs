@@ -14,6 +14,7 @@
 - 9、[连表查询，并获取满足条件的第一条记录，以对象形式返回](#场景9-连表查询-并获取满足条件的第一条记录-以对象形式返回)
 - 10、[利用分组查询实现以指定字段去重复查询](#场景10-利用分组查询实现以指定字段去重复查询)
 - 11、[连表查询，使用数组下标对应的值进行连表（如连表查推荐人信息）](#场景11-使用数组下标对应的值进行连表)
+- 12、[连表查询，通过副表字段排序](#场景12-通过副表字段排序)
 
 ## vk.baseDao.selects（万能连表查询）
 
@@ -600,5 +601,32 @@ res = await vk.baseDao.selects({
     limit: 1,
     fieldJson:{ token: false, password: false },
   }]
+});
+```
+
+### 场景12：通过副表字段排序
+
+主表：opendb-mall-comments （评论表）
+
+副表：uni-id-users （用户表）
+
+以下代码作用是：用一条聚合查询语句，查询前10条女性用户的评论信息，且优先展示新用户
+
+```js
+res = await vk.baseDao.selects({
+  dbName:"opendb-mall-comments",
+  pageIndex: 1,
+  pageSize: 10,
+  // 副表列表
+  foreignDB:[
+    {
+      dbName:"uni-id-users",
+      localKey:"user_id",
+      foreignKey:"_id",
+      as:"userInfo",
+      limit:1
+    }
+  ],
+  lastSortArr: [{ name: "userInfo._add_time",type: "desc" }],
 });
 ```
