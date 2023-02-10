@@ -374,13 +374,13 @@ vk.pubfn.getOffsetTime(date, offsetObj);
 
 // 获取当前时间1小时之后的时间
 vk.pubfn.getOffsetTime(new Date(), {
-  day:1,
+  hour:1,
   mode:"after", // after 之后 before 之前
 });
 
 // 获取当前时间1小时30分钟之前的时间
 vk.pubfn.getOffsetTime(new Date(), {
-  day:1,
+  hour:1,
   minutes:30,
   mode:"before", // after 之后 before 之前
 });
