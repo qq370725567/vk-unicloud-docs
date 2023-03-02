@@ -39,7 +39,7 @@
       }
     }
   },
-  "h5-weixin": {
+  "h5-weixin": { //官方uni-id的config文件已经升级，这个写法已经不适用了。
     "oauth": {
       // 微信公众号登录所用的appid、appsecret
       "weixin": {
