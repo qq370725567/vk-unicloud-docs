@@ -508,7 +508,7 @@ console.log("result", result);
 注意：uniMap需要先[初始化实例](#初始化实例)
 
 ```js
-let result = await uniMap.location2address({
+let result = await uniMap.route({
   mode: "driving",
   from: "40.034852,116.319820",
   to: "39.771075,116.351395"
