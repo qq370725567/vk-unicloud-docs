@@ -16,6 +16,7 @@ sidebarDepth: 0
 | suffix								| 指定上传后的文件后缀，如果传了file 参数，则此参数可不传	| String	| -				| -			|
 | provider							| 云存储供应商，支持：unicloud、aliyun										| String	| unicloud| aliyun|
 | cloudPath							| 指定上传后的云端文件路径（不指定会自动生成）						| String	| -				| -			|
+| cloudDirectory				| 指定上传后的云端目录（若cloudPath有值，则此参数无效）		| String	| -				| -			|
 | needSave							| 是否需要将图片信息保存到admin素材库											| Boolean	| false		| true	|
 | category_id						| 素材库分类id，当needSave为true时生效										| String	| -				| -			|
 | uniCloud							| 上传到其他空间时使用，uniCloud和env二选一即可						| cloud		| -				| -			|
