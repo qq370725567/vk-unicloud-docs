@@ -49,6 +49,7 @@ module.exports = [{
     initialOpenGroupIndex: -1,
     children: [
       'uniCloud/cloudfunctions/resformat',
+      'uniCloud/cloudfunctions/error',
       {
         title: '云函数',
         collapsable: true,
