@@ -15,7 +15,6 @@ sidebarDepth: 0
 |  30202		  | token无效：数据库已不包含此token（uni-id返回）|
 |  30203		  | token无效：此token已过期（uni-id返回）         |
 |  30204		  | token无效：错误的token（uni-id返回）    |
-|  30204		  | token无效：错误的token（uni-id返回）    |
 
 注意：第三方接口的错误码均原样透传，不在此列举
 
