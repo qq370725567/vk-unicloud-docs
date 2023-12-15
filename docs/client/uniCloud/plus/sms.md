@@ -50,10 +50,10 @@ let sendSmsRes = await vk.system.smsUtil.sendSms({
 ```js
 "sms": {
   "name": "重要",
-  "codeExpiresIn": 180,         // 验证码过期时间，单位为秒，注意一定要是60的整数倍
-  "smsKey": "你的smsKey",       // 短信密钥key，开通短信服务处可以看到 https://dev.dcloud.net.cn/uniSms
-  "smsSecret": "你的smsSecret", // 短信密钥secret，开通短信服务处可以看到 https://dev.dcloud.net.cn/uniSms
-  "templateId": "你的短信模板ID" // 发送验证码的短信模板ID
+  "codeExpiresIn": 180,       // 验证码过期时间，单位为秒，注意一定要是60的整数倍
+  "templateId": "",           // 发送验证码的短信模板ID（此模板id仅配合uni-id需要）
+  "smsKey": "",               // 可不填，短信密钥key，开通短信服务处可以看到 https://dev.dcloud.net.cn/uniSms
+  "smsSecret": ""             // 可不填，短信密钥secret，开通短信服务处可以看到 https://dev.dcloud.net.cn/uniSms
 },
 ```
 
@@ -76,3 +76,11 @@ let sendSmsRes = await vk.system.smsUtil.sendSms({
   }
 },
 ```
+
+## 常见问题
+
+### 发送短信失败，报错uniCloud.sendSms由uni-cloud-sms扩展库提供，请确保云函数/云对象/clientDB依赖了此扩展库
+
+需要右键云函数，管理依赖，添加uni-cloud-sms扩展库，如下图所示
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/446.png)
