@@ -12,9 +12,9 @@ sidebarDepth: 0
 let { data = {}, userInfo, util, originalParam } = event;
 let { customUtil, config, pubFun, vk, db, _ } = util;
 let { uid } = data;
-let res = { code : 0, msg : '' };
+let res = { code: 0, msg: '' };
 // 业务逻辑开始-----------------------------------------------------------
-// 可写与数据库的交互逻辑等等
+
 // 开启事务
 const transaction = await vk.baseDao.startTransaction();
 try {
@@ -22,55 +22,55 @@ try {
   let money = 100;
   // 给用户001减100余额
   let update1Res = await vk.baseDao.updateById({
-    db:transaction,
+    db: transaction, // 本次数据库语句带上事务对象（重要，必须带上）
     dbName,
-    id:"001",
-    dataJson:{
-      account_balance:_.inc(money * -1)
+    id: "001",
+    dataJson: {
+      account_balance: _.inc(money * -1)
     },
   });
   // 给用户2加100余额
   let update2Res = await vk.baseDao.updateById({
-    db:transaction,
+    db: transaction, // 本次数据库语句带上事务对象（重要，必须带上）
     dbName,
-    id:"002",
-    dataJson:{
-      account_balance:_.inc(money)
+    id: "002",
+    dataJson: {
+      account_balance: _.inc(money)
     },
   });
   const endRes = await vk.baseDao.findById({
-    db:transaction,
+    db: transaction, // 本次数据库语句带上事务对象（重要，必须带上）
     dbName,
-    id:"001"
+    id: "001"
   });
   if (endRes.account_balance < 0) {
     // 事务回滚
     await transaction.rollback();
     return {
-      code:-1,
-      msg:"用户001账户余额不足",
+      code: -1,
+      msg: "用户001账户余额不足",
       aaaAccount: endRes.account_balance
     }
-  }else{
+  } else {
     // 提交事务
     await transaction.commit();
     console.log(`transaction succeeded`);
     return {
-      code:0,
-      msg:"转账成功",
+      code: 0,
+      msg: "转账成功",
       aaaAccount: endRes.account_balance
     }
   }
-}catch (err) {
+} catch (err) {
   // 事务回滚
   await transaction.rollback();
   console.error(`transaction error`, err)
   return {
     code: -1,
-    msg:"数据库写入异常,事务已回滚",
+    msg: "数据库写入异常,事务已回滚",
     err: {
-      message:err.message,
-      stack:err.stack
+      message: err.message,
+      stack: err.stack
     }
   }
 }
