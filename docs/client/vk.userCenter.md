@@ -921,6 +921,11 @@ vk.userCenter.unbindWeixin({
 
 ### vk.userCenter.getPhoneNumber（获取微信绑定的手机号）
 
+注意事项：
+
+1. 此接口需要 `隐私条款` 中包含获取用户手机号
+2. 需要已微信认证的企业小程序（含个体户）
+
 ```html
 <button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取微信绑定的手机号</button>
 ```
@@ -958,6 +963,11 @@ getPhoneNumber(e) {
 ```
 
 ### vk.userCenter.loginByWeixinPhoneNumber（通过微信小程序绑定的手机号登录）
+
+注意事项：
+
+1. 此接口需要 `隐私条款` 中包含获取用户手机号
+2. 需要已微信认证的企业小程序（含个体户）
 
 ```html
 <button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByWeixinPhoneNumber">使用微信绑定的手机号登录/注册</button>
