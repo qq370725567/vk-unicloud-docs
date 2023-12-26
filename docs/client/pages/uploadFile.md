@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 上传云储存或阿里云OSS
+# 文件上传
 
 ## 接口名：vk.uploadFile
 
@@ -14,7 +14,7 @@ sidebarDepth: 0
 | file									| 要上传的文件对象，file与filePath二选一即可							| File		| -				| -			|
 | filePath							| 要上传的文件路径，file与filePath二选一即可							| String	| -				| -			|
 | suffix								| 指定上传后的文件后缀，如果传了file 参数，则此参数可不传	| String	| -				| -			|
-| provider							| 云存储供应商，支持：unicloud、aliyun										| String	| unicloud| aliyun|
+| provider							| 云存储供应商，支持：<br/>unicloud 空间内置存储<br/>extStorage 扩展存储<br/>aliyun 阿里云oss	| String	| - |
 | cloudPath							| 指定上传后的云端文件路径（不指定会自动生成）						| String	| -				| -			|
 | cloudDirectory				| 指定上传后的云端目录（若cloudPath有值，则此参数无效）		| String	| -				| -			|
 | needSave							| 是否需要将图片信息保存到admin素材库											| Boolean	| false		| true	|
@@ -30,9 +30,11 @@ sidebarDepth: 0
 
 uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](https://vkdoc.fsq.pub/client/question/q9.html)
 
-## 上传至unicloud云储存
+## 上传至unicloud空间内置存储
 
 注意，记得小程序需要加域名白名单 [点击查看](https://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp)
+
+**示例代码**
 
 ```js
 // 选择图片
@@ -40,22 +42,89 @@ uni.chooseImage({
   count: 1,
   sizeType: ['compressed'],
   success: (res) => {
-    // 上传至 unicloud云储存
+    // 上传至 unicloud空间内置存储
     vk.uploadFile({
       title: "上传中...",
       file: res.tempFiles[0],
+      provider: "unicloud", // 指定上传至unicloud空间内置存储（provider可不传，默认从中配置中读取）
       success: (res) => {
        // 上传成功
 
+      },
+      fail: (err) => {
+       // 上传失败
+      
       }
     });
   }
 });
 ```
 
-提示： file和filePath二选一即可，都传也可以，如果传了file，可以不传suffix，suffix会自动从file.name中获取
+## 上传扩展存储
+
+**示例代码**
+
+```js
+// 选择图片
+uni.chooseImage({
+  count: 1,
+  sizeType: ['compressed'],
+  success: (res) => {
+    // 上传至 扩展存储
+    vk.uploadFile({
+      title: "上传中...",
+      file: res.tempFiles[0],
+      provider: "extStorage", // 指定上传至扩展存储
+      success:(res) => {
+       // 上传成功
+
+      },
+      fail: (err) => {
+       // 上传失败
+      
+      }
+    });
+  }
+});
+```
+
+注意，记得小程序需要加域名白名单
+
+**还需要在`app.config.js`中配置**
+
+一般只需要改下面配置中的 `domain` 为自己的即可
+
+```js
+// 第三方服务配置
+service: {
+  // 云储存相关配置
+  cloudStorage: {
+    /**
+     * vk.uploadFile 接口默认使用哪个存储
+     * unicloud 空间内置存储（默认）
+     * extStorage 扩展存储
+     * aliyun 阿里云oss 
+     */
+    defaultProvider: "extStorage", // 这里若设置 extStorage 则 vk.uploadFile默认会上传至 扩展存储
+    // 扩展存储配置
+    extStorage: {
+      provider: "qiniu", // qiniu: 扩展存储-七牛云
+      // 根目录名称（如果改了这里的dirname，则云函数user/pub/getUploadFileOptionsForExtStorage内判断的目录权限也要改，否则无法上传）
+      dirname: "public",
+      // 用于鉴权的云函数地址（一般不需要改这个参数）
+      authAction: "user/pub/getUploadFileOptionsForExtStorage",
+      // 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名）
+      domain: "cdn.example.com",
+      // 上传时，是否按用户id进行分组储存
+      groupUserId: false,
+    }
+  }
+},
+```
 
 ## 上传至阿里云oss
+
+**示例代码**
 
 ```js
 // 选择图片
@@ -67,10 +136,14 @@ uni.chooseImage({
     vk.uploadFile({
       title: "上传中...",
       file: res.tempFiles[0],
-      provider: "aliyun",
+      provider: "aliyun", // 指定上传到阿里云
       success:(res) => {
        // 上传成功
 
+      },
+      fail: (err) => {
+       // 上传失败
+      
       }
     });
   }
@@ -83,36 +156,48 @@ uni.chooseImage({
 
 ```js
 // 第三方服务配置
-service:{
-  // 阿里云oss配置
-  aliyunOSS:{
-    // 密钥和签名信息 (由于签名的获取比较麻烦,建议初学者使用上传到unicloud的方案,上传到阿里云OSS是给有特殊需求的用户使用)
-    uploadData:{
-      OSSAccessKeyId: "",
-      policy:"",
-      signature:"",
-    },
-    // oss上传地址
-    action:"https://xxxxxxxx.oss-cn-hangzhou.aliyuncs.com",
-    // 根目录名称
-    dirname:"test",
-    // oss外网访问地址，也可以是阿里云cdn地址
-    host:"https://xxx.xxx.com",
-    // 上传时,是否按用户id进行分组储存
-    groupUserId:false,
-    // vk.uploadFile 是否默认上传到阿里云OSS
-    isDefault:false
+service: {
+  // 云储存相关配置
+  cloudStorage: {
+    /**
+     * vk.uploadFile 接口默认使用哪个存储
+     * unicloud 空间内置存储（默认）
+     * extStorage 扩展存储
+     * aliyun 阿里云oss 
+     */
+    defaultProvider: "aliyun", // 这里若设置 aliyun 则 vk.uploadFile默认会上传至 阿里云oss 
+    // 阿里云oss
+    // 密钥和签名信息（由于签名的获取比较麻烦,建议初学者使用上传到unicloud或extStorage的方案，上传到阿里云OSS是给有特殊需求的用户使用）
+    // 相关文档 : https://help.aliyun.com/document_detail/31925.html?spm=a2c4g.11186623.6.1757.b7987d9czoFCVu
+    aliyun: {
+      // 密钥和签名信息
+      uploadData: {
+        OSSAccessKeyId: "",
+        policy:"",
+        signature:"",
+      },
+      // oss上传地址
+      action:"https://xxxxxxxx.oss-cn-hangzhou.aliyuncs.com",
+      // 根目录名称
+      dirname: "public",
+      // oss外网访问地址，也可以是阿里云cdn地址
+      host:"https://xxx.xxx.com",
+      // 上传时，是否按用户id进行分组储存
+      groupUserId: false,
+    }
   }
-}
+},
 ```
 
-service.aliyunOSS 参数生成工具 [点击下载](https://gitee.com/vk-uni/oss-h5-upload-js-direct.git)
+aliyun oss 参数生成工具 [点击下载](https://gitee.com/vk-uni/oss-h5-upload-js-direct.git)
 
 导入项目后,修改项目根目录`upload.js`内的参数,然后运行`index.html`,随便上传一张图片,页面上会显示`aliyunOSS`参数配置
 
 如下图所示
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/1a02b98c-ac0e-4662-95d9-e170f5f246d3.png)
+
+将生成的 `aliyunOSS` 对象内的值赋值给 `service.cloudStorage.aliyun` 即可
 
 **上传阿里云OSS注意**
 
@@ -153,6 +238,10 @@ uni.chooseImage({
       success:(res) => {
        // 上传成功
 
+      },
+      fail: (err) => {
+       // 上传失败
+      
       }
     });
   }
@@ -174,10 +263,14 @@ uni.chooseImage({
       title: "上传中...",
       file: res.tempFiles[0],
       needSave: true,
-      category_id: "001"
-      success:(res) => {
+      category_id: "001",
+      success :(res) => {
        // 上传成功
 
+      },
+      fail: (err) => {
+       // 上传失败
+      
       }
     });
   }
@@ -203,6 +296,10 @@ uni.chooseImage({
       success:(res) => {
        // 上传成功
 
+      },
+      fail: (err) => {
+       // 上传失败
+      
       }
     });
   }
@@ -230,6 +327,10 @@ uni.chooseImage({
       },
       success: (res) => {
         this.url = res.url;
+      },
+      fail: (err) => {
+       // 上传失败
+      
       }
     });
   }
