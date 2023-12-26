@@ -95,6 +95,18 @@ uni.chooseImage({
 
 注意，记得小程序需要加域名白名单
 
+**上传域名**
+
+将下方域名添加到小程序的uploadFile合法域名列表中
+
+```
+https://upload.qiniup.com
+```
+
+**下载域名**
+
+下载域名就是你开通扩展存储时绑定的自定义域名，将你的自定义域名添加到download合法域名列表中
+
 **还需要在`app.config.js`中配置**
 
 一般只需要改下面配置中的 `domain` 为自己的即可
@@ -126,6 +138,8 @@ service: {
   }
 },
 ```
+
+最后复制最新示例项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）
 
 ## 上传至阿里云oss
 
