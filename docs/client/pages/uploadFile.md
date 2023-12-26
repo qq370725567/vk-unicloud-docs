@@ -30,6 +30,29 @@ sidebarDepth: 0
 
 uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](https://vkdoc.fsq.pub/client/question/q9.html)
 
+## 返回值
+
+**vk-unicloud 核心库版本 ≥ 2.16.2 时**
+
+|参数名		|类型		|说明											|
+|:-:			|:-:		|:-:											|
+|provider	|string	|本次上传的存储供应商				|
+|filePath	|string	|本地文件路径							|
+|cloudPath|string	|云端文件路径							|
+|fileID		|string	|云端文件ID								|
+|fileURL	|string	|云端文件URL								|
+|url			|string	|云端文件URL，与fileURL一致	|
+
+旧版本唯一不兼容的参数是fileID，新版本fileID是云端文件ID，而旧版本中fileID和url是一致的，因此若在项目中有用到获取url时，请改用url或fileURL
+
+**vk-unicloud 核心库版本 < 2.16.2 时**
+
+|参数名		|类型		|说明											|
+|:-:			|:-:		|:-:											|
+|fileID		|string	|云端文件URL								|
+|url			|string	|云端文件URL，与fileID一致	|
+
+
 ## 上传至unicloud空间内置存储
 
 注意，记得小程序需要加域名白名单 [点击查看](https://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp)
