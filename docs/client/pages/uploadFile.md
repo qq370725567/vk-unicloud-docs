@@ -14,7 +14,7 @@ sidebarDepth: 0
 | file									| 要上传的文件对象，file与filePath二选一即可							| File		| -				| -			|
 | filePath							| 要上传的文件路径，file与filePath二选一即可							| String	| -				| -			|
 | suffix								| 指定上传后的文件后缀，如果传了file 参数，则此参数可不传	| String	| -				| -			|
-| provider							| 云存储供应商，支持：<br/>unicloud 空间内置存储<br/>extStorage 扩展存储<br/>aliyun 阿里云oss	| String	| - |
+| provider							| 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	| String	| - | 见说明|
 | cloudPath							| 指定上传后的云端文件路径（不指定会自动生成）						| String	| -				| -			|
 | cloudDirectory				| 指定上传后的云端目录（若cloudPath有值，则此参数无效）		| String	| -				| -			|
 | needSave							| 是否需要将图片信息保存到admin素材库											| Boolean	| false		| true	|
@@ -217,6 +217,63 @@ access-control-allow-origin
 ```js
 Etag
 x-oss-request-id
+```
+
+## 完整配置
+
+配置文件在项目根目录的 `app.config.js` 文件
+
+配置节点：`service.cloudStorage`
+
+```js
+// 第三方服务配置
+service: {
+  // 云储存相关配置
+  cloudStorage: {
+    /**
+     * vk.uploadFile 接口默认使用哪个存储
+     * unicloud 空间内置存储（默认）
+     * extStorage 扩展存储
+     * aliyun 阿里云oss 
+     */
+    defaultProvider: "unicloud",
+    // 空间内置存储
+    unicloud: {
+      // 暂无配置项
+    },
+    // 扩展存储配置
+    extStorage: {
+      provider: "qiniu", // qiniu: 扩展存储-七牛云
+      // 根目录名称（如果改了这里的dirname，则云函数user/pub/getUploadFileOptionsForExtStorage内判断的目录权限也要改，否则无法上传）
+      dirname: "public",
+      // 用于鉴权的云函数地址（一般不需要改这个参数）
+      authAction: "user/pub/getUploadFileOptionsForExtStorage",
+      // 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名）
+      domain: "cdn.example.com",
+      // 上传时，是否按用户id进行分组储存
+      groupUserId: false,
+    }
+    // 阿里云oss
+    // 密钥和签名信息（由于签名的获取比较麻烦,建议初学者使用上传到unicloud或extStorage的方案，上传到阿里云OSS是给有特殊需求的用户使用）
+    // 相关文档 : https://help.aliyun.com/document_detail/31925.html?spm=a2c4g.11186623.6.1757.b7987d9czoFCVu
+    aliyun: {
+      // 密钥和签名信息
+      uploadData: {
+        OSSAccessKeyId: "",
+        policy:"",
+        signature:"",
+      },
+      // oss上传地址
+      action:"https://xxxxxxxx.oss-cn-hangzhou.aliyuncs.com",
+      // 根目录名称
+      dirname: "public",
+      // oss外网访问地址，也可以是阿里云cdn地址
+      host:"https://xxx.xxx.com",
+      // 上传时，是否按用户id进行分组储存
+      groupUserId: false,
+    }
+  }
+},
 ```
 
 ## 更多示例
