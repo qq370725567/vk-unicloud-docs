@@ -139,7 +139,7 @@ service: {
 },
 ```
 
-最后复制最新示例项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）
+最后复制最新框架项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）
 
 ## 上传至阿里云oss
 
@@ -412,3 +412,14 @@ uni.chooseImage({
   }
 });
 ```
+
+## 常见问题
+
+### 小程序本地可以上传，体验版小程序无法上传
+
+通常都是因为域名白名单没有添加导致的，检查上传域名是否已加入到小程序的uploadFile合法域名列表中
+
+### 上传扩展存储报错，云函数user/pub/getUploadFileOptionsForExtStorage不存在
+
+下载最新框架项目，去复制这个云函数到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）
+
