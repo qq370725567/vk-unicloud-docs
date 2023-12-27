@@ -294,7 +294,7 @@ service: {
       domain: "cdn.example.com",
       // 上传时，是否按用户id进行分组储存
       groupUserId: false,
-    }
+    },
     // 阿里云oss
     // 密钥和签名信息（由于签名的获取比较麻烦,建议初学者使用上传到unicloud或extStorage的方案，上传到阿里云OSS是给有特殊需求的用户使用）
     // 相关文档 : https://help.aliyun.com/document_detail/31925.html?spm=a2c4g.11186623.6.1757.b7987d9czoFCVu
