@@ -205,9 +205,41 @@ await loginLogService.add({
 },util);
 ```
 
+## 云函数中如何写公共函数，方便代码复用
+
+#### 方式一（通过vk.require引入的方式）
+
+优势：公共函数的文件可以写在router的任意位置
+
+```js
+// 下方代码是演示调用 service/client/user/util/util.js 文件内的 test 函数
+let userUtil = vk.require("service/client/user/util/util.js");
+let testRes = await userUtil.test({
+  a: 1,
+  b: "2"
+});
+console.log('testRes: ', testRes);
+```
+
+#### 方式二（通过vk.myfn.xxx直接调用公共函数）
+
+优势：不需要vk.require引入，使用更方便
+
+公共函数文件地址：`router/util/pubFunction.js`（固定不可变）
+
+```js
+// 下方代码是演示调用 router/util/pubFunction.js 文件内的 test 函数
+let testRes = await vk.myfn.test({
+  a: 1,
+  b: "2"
+});
+console.log('testRes: ', testRes);
+```
+
 ## 文件上传成功后如何自动保存到vk-files表里？
 
 `vk.uploadFile` 的参数 `needSave` 设置为 true 如：
+
 ```js
 // 选择图片
 uni.chooseImage({
