@@ -32,7 +32,7 @@ uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](http
 
 ## 返回值
 
-**vk-unicloud 核心库版本 ≥ 2.16.2 时**
+**vk-unicloud 核心库版本 ≥ 2.17.0 时**
 
 |参数名		|类型		|说明											|
 |:-:			|:-:		|:-:											|
@@ -45,7 +45,7 @@ uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](http
 
 旧版本唯一不兼容的参数是fileID，新版本fileID是云端文件ID，而旧版本中fileID和url是一致的，因此若在项目中有用到获取url时，请改用url或fileURL
 
-**vk-unicloud 核心库版本 < 2.16.2 时**
+**vk-unicloud 核心库版本 < 2.17.0 时**
 
 |参数名		|类型		|说明											|
 |:-:			|:-:		|:-:											|
@@ -87,7 +87,7 @@ uni.chooseImage({
 
 **版本要求**
 
-1. vk-unicloud核心库版本 ≥ 2.16.2
+1. vk-unicloud核心库版本 ≥ 2.17.0
 2. hbx版本 ≥ 3.99
 
 **示例代码**
