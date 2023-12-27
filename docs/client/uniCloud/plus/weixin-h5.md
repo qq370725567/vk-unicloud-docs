@@ -129,6 +129,8 @@ let requestRes = await vk.openapi.weixin.h5.request({
 112.124.10.115
 ```
 
+注意：上面的IP是云端运行时的IP，若是本地运行云函数，则需要把自己电脑的外网IP加进去
+
 ## 常见问题
 
 ### 如何调用上传临时素材接口?
