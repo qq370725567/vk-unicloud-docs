@@ -69,7 +69,7 @@ uni.chooseImage({
     vk.uploadFile({
       title: "上传中...",
       file: res.tempFiles[0],
-      provider: "unicloud", // 指定上传至unicloud空间内置存储（provider可不传，默认从中配置中读取）
+      provider: "unicloud", // 指定上传至unicloud空间内置存储（provider可不传，默认会从中配置中读取）
       success: (res) => {
        // 上传成功
 
@@ -102,7 +102,7 @@ uni.chooseImage({
     vk.uploadFile({
       title: "上传中...",
       file: res.tempFiles[0],
-      provider: "extStorage", // 指定上传至扩展存储
+      provider: "extStorage", // 指定上传至扩展存储（provider可不传，默认会从中配置中读取）
       success:(res) => {
        // 上传成功
 
@@ -178,7 +178,7 @@ uni.chooseImage({
     vk.uploadFile({
       title: "上传中...",
       file: res.tempFiles[0],
-      provider: "aliyun", // 指定上传到阿里云
+      provider: "aliyun", // 指定上传到阿里云（provider可不传，默认会从中配置中读取）
       success:(res) => {
        // 上传成功
 
@@ -446,3 +446,6 @@ uni.chooseImage({
 
 下载最新框架项目，去复制这个云函数到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）
 
+### 我之前用的unicloud内置存储，现在想换成扩展存储，我的vk.uploadFile代码是否要指定provider为extStorage才行？
+
+不需要，只需要修改配置即可，将 `defaultProvider` 设置成 `extStorage` 则默认 `vk.uploadFile` 都会上传到扩展存储 [查看配置](#完整配置)
