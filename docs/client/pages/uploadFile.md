@@ -162,7 +162,7 @@ service: {
 },
 ```
 
-最后复制最新框架项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）
+最后复制最新框架项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）[传送门 - 最新框架项目](https://ext.dcloud.net.cn/plugin?id=2204)
 
 ## 上传至阿里云oss
 
