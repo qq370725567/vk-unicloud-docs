@@ -518,12 +518,12 @@ module.exports = {
       }
     });
     
-    // 等待500毫秒，给一个请求发出去的时间
-    return await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(res)
-      }, 500)
-    })
+    // 定义休眠函数
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+    // 强制云函数等待200毫秒，给一个请求发出去的时间
+    await sleep(200);
+    
+    return res;
     // 业务逻辑结束-----------------------------------------------------------
   }
 }
