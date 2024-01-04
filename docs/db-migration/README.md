@@ -83,7 +83,7 @@ export default {
 	"maxPageSize": 500,
 	"handleObjectKeyName": true, // 是否需要同时处理满足阿里云_id格式的字段名（true：同时处理字段名和字段值 false：只处理字段值，默认true）
 	// 数据库集合（表）列表，目前没有接口可以直接获取表列表，故需要在此手动填写数据库中需要搬家的表信息
-	// 可以自动根据 db_init.json 文件生成数据库表名列表 方法：在项目根目录执行 node vk.create-db-config.js
+	// 可以自动根据 database 目录下的文件生成数据库表名列表 方法：在项目根目录执行 node vk.create-db-config.js
 	"db": [
 		{ "name": "uni-id-users" },
 		{ "name": "uni-id-roles" },
@@ -104,19 +104,25 @@ export default {
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/433.png)
 
-- 2、生成 `db_init.json`
+- 2、生成 `database` 目录下的数据库初始化文件
 
-**如何生成 `db_init.json`**
+在 `uniCloud控制台` 云数据库菜单下点击 `生成初始化数据` 选择只导出首条记录，生成不包含ID（包含也没事）【一键搬家】运行时，会自动清空新空间的数据。
 
-在 `uniCloud控制台` 导出 `db_init.json` 选择只导出首条记录，生成不包含ID（包含也没事）【一键搬家】运行时，会自动清空新空间的数据。（也可以直接从你旧项目中复制 `db_init.json`，但需保证旧项目中的 `db_init.json` 包含了所有表和表索引）
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/451.png)
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/e491b1ee-4a0d-4f93-8348-7b6915ae3a71.png)
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/452.png)
 
-**注意：如果生成失败，那就一直试到成功为止，坚持就是胜利**
+**注意：如果生成失败，不要慌，过一会再试**
 
-- 3、把生成的 `db_init.json` 复制到【一键搬家】项目根目录的 `uniCloud/database目录下` ，然后在项目根目录执行 `node vk.create-db-config.js`
+- 3、把生成并解压的 `database` 文件全部复制到【一键搬家】项目根目录的 `uniCloud/database目录下` 
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/45141e8f-393d-4f4d-b7e7-c89a24e70086.png)
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/453.png)
+
+注意：如果【一键搬家】项目的 `uniCloud/database目录下` 有 `db_init.json` 文件，则需要删除Ta（这步很重要，因为上面介绍的是使用新的数据库初始化方式的，当然老的 `db_init.json` 方式目前也还是支持的）
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/455.png)
+
+然后在项目根目录执行 `node vk.create-db-config.js`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/4ee5f06a-4665-450e-8d8f-00825a8801ea.png)
 
@@ -136,9 +142,9 @@ export default {
 
 #### 特别注意：如果你购买的是普通授权版（非源码授权版），你可能需为两个空间各购买1次插件。
 
-- 6、切换到 `新空间` 后，在 `新空间` 初始化你自己数据库的 `db_init.json` （注意：如果初始化报错，不要急，再初始化一次，直到提示成功或提示没有任何表数据要上传时，则代表成功）
+- 6、切换到 `新空间` 后，在 `新空间` 初始化你自己数据库 （注意：如果初始化报错，不要急，再初始化一次，直到提示成功或提示没有任何表数据要上传时，则代表成功）
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/f6f08815-95a8-4645-bf78-bc3385bbf565.png)
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/454.png)
 
 - 7、启动 `一键搬家` 项目（请使用连接云端云函数）
 
