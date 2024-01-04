@@ -419,9 +419,9 @@ res = await vk.baseDao.selects({
   },
   groupJson: {
     _id: "$user_id", // _id是分组id（_id:为固定写法，必填属性），这里指按user_id字段进行分组
-    user_id: _.$.first("$user_id"), // 这里是为了把user_id原样输出
-    payment_amount: _.$.sum("$payment_amount"), // sum求和支付金额
-    count: _.$.sum(1), // count记录条数
+    user_id: $.first("$user_id"), // 这里是为了把user_id原样输出
+    payment_amount: $.sum("$payment_amount"), // sum求和支付金额
+    count: $.sum(1), // count记录条数
   },
   sortArr: [{ name: "payment_amount",type: "desc" }], // 对分组后的结果进行排序
   // 副表列表
@@ -538,7 +538,7 @@ let info = await vk.baseDao.selects({
 
 ### 场景10：利用分组查询实现以指定字段去重复查询
 
-**注意：分组后，显示其他字段需要通过`_.$.first("$key1"),`形式**
+**注意：分组后，显示其他字段需要通过`$.first("$key1"),`形式**
 
 first代表分组后，显示该组第一条数据的该字段值。
 
@@ -553,11 +553,11 @@ res = await vk.baseDao.selects({
   },
   groupJson: {
     _id: "$key1", // _id是分组id（_id:为固定写法，必填属性） $ 后面接字段名，如user_id字段进行分组
-    key1: _.$.first("$key1"), // $ 后面接字段名，如把user_id原样输出
-    key2: _.$.first("$key2"), // $ 后面接字段名，如把user_id原样输出
-    key3: _.$.first("$key3"), // $ 后面接字段名，如把user_id原样输出
-    key4: _.$.first("$key4"), // $ 后面接字段名，如把user_id原样输出
-    count: _.$.sum(1), // 代表每组各有多少条记录总量
+    key1: $.first("$key1"), // $ 后面接字段名，如把user_id原样输出
+    key2: $.first("$key2"), // $ 后面接字段名，如把user_id原样输出
+    key3: $.first("$key3"), // $ 后面接字段名，如把user_id原样输出
+    key4: $.first("$key4"), // $ 后面接字段名，如把user_id原样输出
+    count: $.sum(1), // 代表每组各有多少条记录总量
   },
   sortArr: [{ name: "count",type: "desc" }], // 对分组后的结果进行排序
   // 最后的where，（分组后的筛选）主要用于对分组后的结果再进行筛选 如：筛选金额大于1000才能上榜（这里的lastWhereJson在数据量大的情况下是有性能问题的，（建议主表的where条件中先进行筛选，如只查本季度数据，只要主表过滤完后数据量不大，则没有性能问题。）
@@ -583,11 +583,11 @@ res = await vk.baseDao.selects({
       key1:"$key1",
       key2:"$key2",
     }, // _id是分组id（_id:为固定写法，必填属性）， $ 后面接字段名，如user_id字段进行分组
-    key1: _.$.first("$key1"), // $ 后面接字段名，如把user_id原样输出
-    key2: _.$.first("$key2"), // $ 后面接字段名，如把user_id原样输出
-    key3: _.$.first("$key3"), // $ 后面接字段名，如把user_id原样输出
-    key4: _.$.first("$key4"), // $ 后面接字段名，如把user_id原样输出
-    count: _.$.sum(1), // 代表每组各有多少条记录总量
+    key1: $.first("$key1"), // $ 后面接字段名，如把user_id原样输出
+    key2: $.first("$key2"), // $ 后面接字段名，如把user_id原样输出
+    key3: $.first("$key3"), // $ 后面接字段名，如把user_id原样输出
+    key4: $.first("$key4"), // $ 后面接字段名，如把user_id原样输出
+    count: $.sum(1), // 代表每组各有多少条记录总量
   },
   sortArr: [{ name: "count",type: "desc" }], // 对分组后的结果进行排序
   // 最后的where，（分组后的筛选）主要用于对分组后的结果再进行筛选 如：筛选金额大于1000才能上榜（这里的lastWhereJson在数据量大的情况下是有性能问题的，（建议主表的where条件中先进行筛选，如只查本季度数据，只要主表过滤完后数据量不大，则没有性能问题。）
@@ -750,13 +750,13 @@ res = await vk.baseDao.selects({
   },
   groupJson: {
     // _id是分组id， 将$register_date转为date，然后将date转为需要分组的date格式，直接分组
-    _id: _.$.dateToString({
-      date: _.$.add([new Date(0), "$register_date"]),
+    _id: $.dateToString({
+      date: $.add([new Date(0), "$register_date"]),
       format: "%Y-%m",
       timezone: "+08:00", // +08:00 代表北京时间（东八区）
       onNull: null, // 可选。当 <日期表达式> 返回空或者不存在的时候，会返回此表达式指明的值。
     }),
-    count: _.$.sum(1),
+    count: $.sum(1),
   },
   sortArr: [{ "name": "_id", "type": "desc" }]
 });

@@ -35,9 +35,9 @@ res = await vk.baseDao.selects({
 
 1. `treeProps` 内的 `whereJson` 若需要用到 `or` 和 `and` 则
 
-`_.or` 需写成 `_.$.or`
+`_.or` 需写成 `$.or`
 
-`_.and` 需写成 `_.$.and`
+`_.and` 需写成 `$.and`
 
 同时不支持流式语法，只支持如下写法。
 
@@ -59,7 +59,7 @@ let selectsRes = await vk.baseDao.selects({
     children: "children",   // 自定义返回的下级字段名，默认为 children
     level: 3,               // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
     limit: 500,             // 每一级最大返回的数据。
-    whereJson: _.$.or([
+    whereJson: $.or([
       {
         menu_id: _.eq("sys-user-manage")
       },
@@ -91,18 +91,18 @@ let selectsRes = await vk.baseDao.selects({
     children: "children",   // 自定义返回的下级字段名，默认为 children
     level: 3,               // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
     limit: 500,             // 每一级最大返回的数据。
-    whereJson: _.$.and([
-    	{
-    		menu_id: _.eq("sys-user-manage")
-    	},
-    	_.$.or([
-    		{
-    			menu_id: _.eq("sys-user-manage2")
-    		},
-    		{
-    			menu_id: _.exists(true)
-    		}
-    	])
+    whereJson: $.and([
+      {
+        menu_id: _.eq("sys-user-manage")
+      },
+      $.or([
+        {
+          menu_id: _.eq("sys-user-manage2")
+        },
+        {
+          menu_id: _.exists(true)
+        }
+      ])
     ])
   }
 });

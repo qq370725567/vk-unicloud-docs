@@ -452,8 +452,8 @@ let selectRes = await vk.baseDao.select({
   dbName:"表名",
   pageIndex:1,
   pageSize:20,
-  whereJson:_.expr(_.$.and([
-    _.$.eq(['$a', '$b'])
+  whereJson:_.expr($.and([
+    $.eq(['$a', '$b'])
   ]))
 });
 
@@ -506,11 +506,11 @@ let selectRes = await vk.baseDao.selects({
   },
   groupJson: {
     _id: "$date_str", // _id是分组id， $ 后面接字段名，如按date_str字段进行分组(date_str字段是2021-08-19这样的字符串)
-    count: _.$.addToSet("$user_id"), // $ 后面接字段名
+    count: $.addToSet("$user_id"), // $ 后面接字段名
   },
   sortArr: [{ name: "_id",type: "desc" }], // 对分组后的结果进行排序
   addFields:{
-    count: _.$.size("$count")
+    count: $.size("$count")
   }
 });
 ```
@@ -530,13 +530,13 @@ res = await vk.baseDao.selects({
   },
   groupJson: {
     // _id是分组id， 将$register_date转为date，然后将date转为需要分组的date格式，直接分组
-    _id: _.$.dateToString({
-      date: _.$.add([new Date(0), "$register_date"]),
+    _id: $.dateToString({
+      date: $.add([new Date(0), "$register_date"]),
       format: "%Y-%m",
       timezone: "+08:00", // +08:00 代表北京时间（东八区）
       onNull: null, // 可选。当 <日期表达式> 返回空或者不存在的时候，会返回此表达式指明的值。
     }),
-    count: _.$.sum(1),
+    count: $.sum(1),
   },
   sortArr: [{ "name": "_id", "type": "desc" }]
 });

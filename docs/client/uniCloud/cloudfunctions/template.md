@@ -5,6 +5,7 @@ sidebarDepth: 0
 # 云函数模板
 
 ## 简易模板
+
 ```js
 'use strict';
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
    */
   main: async (event) => {
     let { data = {}, userInfo, util, filterResponse, originalParam } = event;
-    let { customUtil, config, pubFun, vk, db, _ } = util;
+    let { customUtil, config, pubFun, vk, db, _, $ } = util;
     let { uid } = data;
     let res = { code: 0, msg: "" };
     // 业务逻辑开始-----------------------------------------------------------
@@ -33,6 +34,7 @@ module.exports = {
 ```
 
 ## 完整模板
+
 ```js
 'use strict';
 module.exports = {
@@ -56,7 +58,7 @@ module.exports = {
   main: async (event) => {
     //  注意: userInfo 和 uid 是可信任的，但默认只有kh目录下的函数才有此值
     let { data = {}, userInfo, util, filterResponse, originalParam } = event;
-    let { customUtil, uniID, config, pubFun, vk, db, _ } = util;
+    let { customUtil, uniID, config, pubFun, vk, db, _, $ } = util;
     let { uid } = data;
     let res = { code: 0, msg: "" };
     // 业务逻辑开始----------------------------------------------------------- 
