@@ -789,3 +789,14 @@ res = await vk.baseDao.selects({
 |%u			|ISO 8601 格式的星期几						|1 - 7			|
 |%V			|ISO 8601 格式的一年中的一周			|1 - 53			|
 |%%			|百分号作为字符										|%					|
+
+
+## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$
+
+以下是 _ 和 $ 变量实际代表的含义
+
+```javascript
+var db = uniCloud.database(); // 全局数据库引用
+var _ = db.command; // 数据库操作符
+var $ = _.aggregate; // 聚合查询操作符
+```

@@ -135,4 +135,14 @@ res = await vk.baseDao.selects({
 ```
 
 
+## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$
+
+以下是 _ 和 $ 变量实际代表的含义
+
+```javascript
+var db = uniCloud.database(); // 全局数据库引用
+var _ = db.command; // 数据库操作符
+var $ = _.aggregate; // 聚合查询操作符
+```
+
 
