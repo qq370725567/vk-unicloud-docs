@@ -28,7 +28,7 @@ sidebarDepth: 0
 
 * `baseDao`相当于 `万能dao`，他是最基础的零件，而 `dao` 层是利用零件组装不同形状和规则的积木，供 `service` 层使用。
 
-## 前缀规范（参考）
+## 命名规范（参考）
 
 * `查单条记录`: 获取单条记录的方法用 `find` 或 `get` 作为前缀
 * `查多条记录`: 获取多个对象的方法用 `list` 作为前缀
@@ -38,7 +38,7 @@ sidebarDepth: 0
 * `修改` : 修改的方法用 `update` 作为前缀
 
 
-## 前缀 + 条件类型（适用于1个dao只操作1张表的情况）
+**前缀 + 条件类型（适用于1个dao只操作1张表的情况）**
 
 如：
 
@@ -55,7 +55,7 @@ sidebarDepth: 0
 * 批量修改，根据自定义条件 `updateByWhereJson`
 * 批量删除，根据自定义条件 `deleteByWhereJson`
 
-## 前缀 + 表名 + 条件类型（适用于1个dao可能操作多张表的情况）
+**前缀 + 表名 + 条件类型（适用于1个dao可能操作多张表的情况）**
 
 如：
 
@@ -71,5 +71,7 @@ sidebarDepth: 0
 * 修改用户，根据用户ID `updateUserById`
 * 批量修改用户，根据自定义条件 `updateUserByWhereJson`
 * 批量删除用户，根据自定义条件 `deleteUserByWhereJson`
+
+## Dao文件代码生成工具
 
 > [点击安装自动生成Dao层基础代码插件](https://ext.dcloud.net.cn/plugin?id=6663)

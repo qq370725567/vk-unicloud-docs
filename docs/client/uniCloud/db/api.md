@@ -8,7 +8,7 @@ sidebarDepth: 0
 
 演示页面在`pages/db-test/db-test`
 
-### vk.baseDao数据库API部分调用示例展示
+以下是vk.baseDao数据库API部分调用示例展示
 
 ## 增
 
@@ -22,8 +22,8 @@ sidebarDepth: 0
 
 ```js
 let id = await vk.baseDao.add({
-  dbName:"vk-test",// 表名
-  dataJson:{ // 需要新增的数据 json格式
+  dbName: "vk-test", // 表名
+  dataJson: { // 需要新增的数据 json格式
     money: Math.floor(Math.random() * 9 + 1)
   }
 });
@@ -53,8 +53,8 @@ let id = await vk.baseDao.add({
 
 ```js
 let ids = await vk.baseDao.adds({
-  dbName:"vk-test",// 表名
-  dataJson:[
+  dbName: "vk-test",// 表名
+  dataJson: [
     { money: Math.floor(Math.random() * 9 + 1) },
     { money: Math.floor(Math.random() * 9 + 1) }
   ]
@@ -80,9 +80,9 @@ ___注意: `add` 和 `adds` 默认会自动加上 `_add_time`字段，该字段�
 可以通过参数 `cancelAddTime:true` 来取消 `_add_time` 字段的添加，如下
 ```js
 let id = await vk.baseDao.add({
-  dbName:"vk-test",
+  dbName: "vk-test",
   cancelAddTime: true, // 通过设置 cancelAddTime:true 可以取消 _add_time 字段的添加
-  dataJson:{ 
+  dataJson: { 
     money: Math.floor(Math.random() * 9 + 1)
   }
 });
@@ -105,9 +105,9 @@ let id = await vk.baseDao.add({
 ```js
 // 返回被删除的记录条数
 await vk.baseDao.del({
-  dbName:"vk-test",
-  whereJson:{
-    money:1
+  dbName: "vk-test",
+  whereJson: {
+    money: 1
   }
 });
 ```
@@ -128,9 +128,9 @@ await vk.baseDao.del({
 
 ```js
 await vk.baseDao.del({
-  dbName:"vk-test",
-  whereJson:{
-    _id : _.exists(true),
+  dbName: "vk-test",
+  whereJson: {
+    _id: _.exists(true),
   }
 });
 ```
@@ -148,8 +148,8 @@ await vk.baseDao.del({
 ```js
 // 返回被删除的记录条数
 await vk.baseDao.deleteById({
-  dbName:"vk-test",
-  id:1
+  dbName: "vk-test",
+  id: 1
 });
 
 ```
@@ -180,13 +180,13 @@ await vk.baseDao.deleteById({
 ```js
 // 返回被修改的记录条数
 let num = await vk.baseDao.update({
-  dbName:"vk-test", // 表名
-  whereJson:{ // 条件
-    _id:"5f3a14823d11c6000106ff5c",
-    money:_.gte(100)
+  dbName: "vk-test", // 表名
+  whereJson: { // 条件
+    _id: "5f3a14823d11c6000106ff5c",
+    money: _.gte(100)
   },
-  dataJson:{ // 需要修改的数据
-    money:_.inc(-100)
+  dataJson: { // 需要修改的数据
+    money: _.inc(-100)
   }
 });
 ```
@@ -208,12 +208,12 @@ let num = await vk.baseDao.update({
 
 ```js
 let num = await vk.baseDao.update({
-  dbName:"vk-test", // 表名
-  whereJson:{ // 条件
-    _id : _.exists(true),
+  dbName: "vk-test", // 表名
+  whereJson: { // 条件
+    _id: _.exists(true),
   },
   dataJson:{ // 需要修改的数据
-    money:_.inc(-1)
+    money: _.inc(-1)
   }
 });
 ```
@@ -228,12 +228,12 @@ let num = await vk.baseDao.update({
 
 ```js
 let newInfo = await vk.baseDao.updateById({
-  dbName:"vk-test",
-  id:_id,
-  dataJson:{
-    money:1
+  dbName: "vk-test",
+  id: _id,
+  dataJson: {
+    money: 1
   },
-  getUpdateData:true, // 去掉getUpdateData，则不会返回修改后的数据对象
+  getUpdateData: true, // 去掉getUpdateData，则不会返回修改后的数据对象
 });
 ```
 
@@ -328,8 +328,8 @@ vk.baseDao.updateAndReturn 可以实现什么功能？
 
 ```js
 let setRes = await vk.baseDao.setById({
-  dbName:"vk-test",
-  dataJson:{
+  dbName: "vk-test",
+  dataJson: {
     _id: "666",
     money: 1
   }
@@ -365,8 +365,8 @@ let setRes = await vk.baseDao.setById({
 
 ```js
 let info = await vk.baseDao.findById({
-  dbName:"vk-test",
-  id:"5f3a125b3d11c6000106d338"
+  dbName: "vk-test",
+  id: "5f3a125b3d11c6000106d338"
 });
 
 ```
@@ -396,9 +396,9 @@ let info = await vk.baseDao.findById({
 
 ```js
 let info = await vk.baseDao.findByWhereJson({
-  dbName:"vk-test",
-  whereJson:{
-    _id:"5f3a125b3d11c6000106d338",
+  dbName: "vk-test",
+  whereJson: {
+    _id: "5f3a125b3d11c6000106d338",
   }
 });
 ```
@@ -433,22 +433,22 @@ let info = await vk.baseDao.findByWhereJson({
 
 ```js
 let res = await vk.baseDao.select({
-  dbName:"vk-test", // 表名
-  getCount:false, // 是否需要同时查询满足条件的记录总数量，默认false
-  getMain:false, // 是否只返回rows数据，默认false
-  pageIndex:1, // 当前第几页
-  pageSize:20, // 每页条数
-  whereJson:{ // 条件
-    money:_.gte(0)  // 金额大于0
+  dbName: "vk-test", // 表名
+  getCount: false, // 是否需要同时查询满足条件的记录总数量，默认false
+  getMain: false, // 是否只返回rows数据，默认false
+  pageIndex: 1, // 当前第几页
+  pageSize: 20, // 每页条数
+  whereJson: { // 条件
+    money: _.gte(0)  // 金额大于0
   },
   // 代表只显示_id和money字段
-  fieldJson:{
+  fieldJson: {
     _id: true,
     money: true, 
   },
   // 按_id降序 asc 升序 desc 降序 
-  sortArr:[
-    { name:"_id", type:"desc" }
+  sortArr: [
+    { name: "_id", type: "desc" }
   ],
 });
 ```
@@ -493,7 +493,7 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 
 ```js
 let num = await vk.baseDao.count({
-  dbName:"vk-test",// 表名
+  dbName: "vk-test",// 表名
 });
 ```
 
@@ -501,8 +501,8 @@ let num = await vk.baseDao.count({
 
 ```js
 let num = await vk.baseDao.count({
-  dbName:"vk-test",// 表名
-  whereJson:{ // 条件
+  dbName: "vk-test",// 表名
+  whereJson: { // 条件
     
   }
 });
@@ -536,8 +536,8 @@ let num = await vk.baseDao.count({
 ```js
 // 判断用户名是否存在
 let num = await vk.baseDao.count({
-  dbName:"uni-id-users",// 表名
-  whereJson:{ // 条件
+  dbName: "uni-id-users",// 表名
+  whereJson: { // 条件
     username: "admin"
   }
 });
@@ -552,8 +552,8 @@ if(num>0){
 // 判断用户名是否存在
 let uid = "当前要修改的用户的_id";
 let num = await vk.baseDao.count({
-  dbName:"uni-id-users",// 表名
-  whereJson:{ // 条件
+  dbName: "uni-id-users",// 表名
+  whereJson: { // 条件
     _id: _.neq(uid), // 这里排除掉自己
     nickname: "我要修改的昵称"
   }
@@ -575,9 +575,9 @@ sum求和 对应的传统sql语句: `select sum(money) from vk-test`
 
 ```js
 let sum = await vk.baseDao.sum({
-  dbName:"vk-test", // 表名
-  fieldName:"money", // 需要求和的字段名
-  whereJson:{ // 条件
+  dbName: "vk-test", // 表名
+  fieldName: "money", // 需要求和的字段名
+  whereJson: { // 条件
     
   }
 });
@@ -608,9 +608,9 @@ let sum = await vk.baseDao.sum({
 
 ```js
 let max = await vk.baseDao.max({
-  dbName:"vk-test", // 表名
-  fieldName:"money", // 需要取最大值的字段名
-  whereJson:{ // 条件
+  dbName: "vk-test", // 表名
+  fieldName: "money", // 需要取最大值的字段名
+  whereJson: { // 条件
     
   }
 });
@@ -641,9 +641,9 @@ let max = await vk.baseDao.max({
 
 ```js
 let min = await vk.baseDao.min({
-  dbName:"vk-test", // 表名
-  fieldName:"money", // 需要取最小值的字段名
-  whereJson:{ // 条件
+  dbName: "vk-test", // 表名
+  fieldName: "money", // 需要取最小值的字段名
+  whereJson: { // 条件
     
   }
 });
@@ -674,9 +674,9 @@ let min = await vk.baseDao.min({
 
 ```js
 let avg = await vk.baseDao.avg({
-  dbName:"vk-test", // 表名
-  fieldName:"money", // 需要取平均值的字段名
-  whereJson:{ // 条件
+  dbName: "vk-test", // 表名
+  fieldName: "money", // 需要取平均值的字段名
+  whereJson: { // 条件
     
   }
 });
@@ -709,9 +709,9 @@ let avg = await vk.baseDao.avg({
 
 ```js
 let list = await vk.baseDao.sample({
-  dbName:"vk-test", // 表名
-  size:1, // 随机条数
-  whereJson:{ // 条件
+  dbName: "vk-test", // 表名
+  size: 1, // 随机条数
+  whereJson: { // 条件
     
   }
 });
