@@ -122,7 +122,7 @@ mounted() {
 小知识：
 
 * 查看镜像源 `npm config get registry`
-* 设置taobao镜像 `npm config set registry https://registry.npm.taobao.org`
+* 设置taobao镜像 `npm config set registry https://registry.npmmirror.com`
 * 恢复成原来的镜像 `npm config set registry https://registry.npmjs.org`
 
 
