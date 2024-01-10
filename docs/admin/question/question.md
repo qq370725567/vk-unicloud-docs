@@ -210,7 +210,6 @@ mounted() {
 3. 等待一键部署完成，此过程大概10-20分钟左右，慢慢等即可
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/457.png)
 
-
 4. 打开你需要使用uni统计2.0的项目的根目录的 `manifest.json` 文件，点击uni统计，全部开启
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/458.png)
@@ -244,9 +243,9 @@ uniCloud内的参数说明
 6. 启动项目，随便跳转几个页面(持续20秒左右)，去查看uni统计对应的服务空间里的数据库表 `uni-stat-page-logs` 是否有数据，如果有代表成功了。
 7. 前往uni统计对应的服务空间控制台页面，点击前端托管，参数配置，绑定下自定义域名（默认域名有访问限制）
 8. 通过 `https://自定义域名/admin/` 即可进入uni-admin 统计后台
-9. 然后需要在uni-admin添加下你的应用id，点击系统管理-应用管理，新增应用
+9. 然后需要在uni-admin添加下你的应用id，点击系统管理-应用管理，新增应用（只需要填写appid和应用名称即可）
 
-![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/459.png)
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/460.png)
 
 10. 操作完成后，明天就可以查看到数据了（注意：今天的数据需要明天跑批后才能看）
 
