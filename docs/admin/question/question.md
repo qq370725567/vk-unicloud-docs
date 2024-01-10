@@ -188,10 +188,67 @@ mounted() {
 实现上一页通过 where id > 本页的第一条记录，且 _id 是升序排序，这样查到的就是上一页数据
 
 
+## 如何使用官方的uni统计2.0
+
+由于 `uni统计2.0` 被内置在了 `uni-admin` 项目中，同时涉及到的表较多，且 `uni-admin` 内置的云函数、公共模块也较多，如果直接集成到 `vk-admin` 中，比较复杂，那么有没有更方便的集成方式呢？
+
+答案是有的，你只需要按下面的步骤一一进行即可。
+
+**该集成方式的优势：**
+
+1. 统计与业务分离，统计的并发和业务的并发量独立计算，互不影响QPS
+2. 一个空间可以管理多个应用的统计，且这些应用不需要关联这个空间（可跨账号）
+3. 集成非常方便，适合任何项目
+
+**操作步骤**
+
+1. 新建一个服务空间（需全新的，没有部署过任何应用的）
+2. 前往[uni-admin插件详情页](https://ext.dcloud.net.cn/plugin?id=3268)，点击【在线体验/部署】
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/456.png)
+
+3. 等待一键部署完成，此过程大概10-20分钟左右，慢慢等即可
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/457.png)
 
 
+4. 打开你需要使用uni统计2.0的项目的根目录的 `manifest.json` 文件，点击uni统计，全部开启
 
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/458.png)
 
+5. 别急着关闭 `manifest.json` 文件，再打开Ta的源码视图，找到根节点的 `uniStatistics` 节点，增加 `uniCloud` 配置，并设置 debug 为 true（方便调试的时候也能上报统计数据）
+
+```js
+"uniStatistics" : {
+    "debug" : true,
+    "enable" : true,
+    "version" : "2",
+    "uniCloud" : {
+        "provider" : "aliyun",
+        "spaceId" : "空间id,
+        "clientSecret" : "空间clientSecret"
+    }
+},
+```
+
+uniCloud内的参数说明
+
+|    参数名			     |   类型	   | 必填	 |                                          默认值						                                          |                                说明																					                                |
+|:-------------:|:-------:|:---:|:-------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------:|
+|  provider		   | String	 | 是		 |                                          -							                                           |                        aliyun、tencent、alipay																		                        |
+|   spaceId		   | String	 | 是		 |                                          -							                                           |                        服务空间ID，**注意是服务空间ID，不是服务空间名称**										                        |
+| clientSecret	 | String	 | 是		 |                                          -							                                           |           仅阿里云支持，可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间列表中查看	           |
+|   accessKey   | String  |  是  |                                              -                                              |         仅支付宝小程序云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
+|   secretKey   | String  |  是  |                                              -                                              |         仅支付宝小程序云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
+|  spaceAppId   | String  |  是  |                                              -                                              |         仅支付宝小程序云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
+
+6. 启动项目，随便跳转几个页面(持续20秒左右)，去查看uni统计对应的服务空间里的数据库表 `uni-stat-page-logs` 是否有数据，如果有代表成功了。
+7. 前往uni统计对应的服务空间控制台页面，点击前端托管，参数配置，绑定下自定义域名（默认域名有访问限制）
+8. 通过 `https://自定义域名/admin/` 即可进入uni-admin 统计后台
+9. 然后需要在uni-admin添加下你的应用id，点击系统管理-应用管理，新增应用
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/459.png)
+
+10. 操作完成后，明天就可以查看到数据了（注意：今天的数据需要明天跑批后才能看）
 
 <style scoped>
 h1{
