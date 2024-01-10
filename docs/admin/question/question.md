@@ -216,7 +216,7 @@ mounted() {
 3. 等待一键部署完成，此过程大概10-20分钟左右，慢慢等即可
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/457.png)
 
-4. 打开你需要使用uni统计2.0的项目的根目录的 `manifest.json` 文件，点击uni统计，全部开启
+4. 打开你需要使用uni统计2.0的项目(你自己的客户端项目)的根目录的 `manifest.json` 文件，点击uni统计，全部开启
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/458.png)
 
@@ -229,7 +229,7 @@ mounted() {
     "version" : "2",
     "uniCloud" : {
         "provider" : "aliyun",
-        "spaceId" : "空间id,
+        "spaceId" : "空间id",
         "clientSecret" : "空间clientSecret"
     }
 },
