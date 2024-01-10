@@ -30,6 +30,16 @@
 
 注意看上图的命名格式
 
+FontClass前缀：vk-xxx-icon-
+
+Font Family：vk-xxx-icon
+
+你只改动xxx，如
+
+FontClass前缀：vk-aaa-icon-
+
+Font Family：vk-aaa-icon
+
 * 2、下载至本地
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/82b89772-7a86-445a-be0f-c22af9127bdb.png)
