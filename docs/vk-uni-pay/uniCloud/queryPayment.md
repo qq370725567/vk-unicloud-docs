@@ -29,7 +29,7 @@ exports.main = async (event, context) => {
 |------- |-----------|---------|-------|-------|
 | out_trade_no  |   必填项，商户支付订单号，需自行保证全局唯一    | String  | -    | -  |
 | await_notify  |   是否需要等待异步通知执行完成后才返回给前端支付结果   | Boolean  | false  | true  |
-| await_max_time  |   最大等待时长，默认20秒（单位秒）   | Number  | 20  | 范围1-40  |
+| await_max_time  |   最大等待时长，默认20秒（单位秒）   | Number  | 20  | 范围 5-40  |
 | pay_order_info  |   是否需要返回支付订单信息  | Boolean  | false  | true  |
  
 ## await_notify
@@ -58,4 +58,23 @@ exports.main = async (event, context) => {
 |transaction_id			|string	|第三方支付交易单号（只有付款成功的才会返回）																																																		|
 |status							|int		|当前支付订单状态 -1：已关闭 0：未支付 1：已支付 2：已部分退款 3：已全额退款																																		|
 |payOrder						|object	|支付订单完整信息（参数pay_order_info为true时才会返回此值）																																											|
+
+
+**建议按如下方式进行逻辑处理**
+
+```js
+if (orderPaid) {
+  if (user_order_success === true) {
+    // 用户付款成功，且已接收到异步回调，同时自定义回调逻辑也执行成功
+  } else if (user_order_success === false) {
+    // 用户付款成功，且已接收到异步回调，但自定义回调逻辑执行失败
+  } else if (status === 0) {
+    // 用户付款成功，但还未收到异步回调
+  } else {
+    // 用户付款成功，且已接收到异步回调，但自定义回调逻辑还在执行中
+  }
+} else {
+  // 用户未付款
+}
+```
 
