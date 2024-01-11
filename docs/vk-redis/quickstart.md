@@ -25,6 +25,6 @@ await redis.set('a','我是a的值');
 let redisRes = await redis.get('a');
 ```
 
-#### 特别注意：
+**特别注意：**
 
 * 使用腾讯云node12和redis，务必仔细阅读此文档：[keepRunningAfterReturn](https://uniapp.dcloud.net.cn/uniCloud/cf-functions.html#keep-running)
