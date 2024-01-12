@@ -34,6 +34,7 @@ sidebarDepth: 0
 `and` 、`or`、`in`、`nin`、`neq`的用法
 
 ### 针对同一个字段的and和or
+
 ```js
 // num >=0 and num <= 10
 // 流式简写法
@@ -120,7 +121,6 @@ whereJson: _.or([
   ])
 ])
 ```
-
 
 **多个嵌套**
 
@@ -274,11 +274,11 @@ num : _.gte(0).lte(10)
 ```js
 let { todayStart, todayEnd } = vk.pubfn.getCommonTime();
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:{
-    register_date : _.gte(todayStart).lte(todayEnd)  
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
+    register_date: _.gte(todayStart).lte(todayEnd)  
   }
 });
 
@@ -289,10 +289,10 @@ let selectRes = await vk.baseDao.select({
 ```js
 let time = Date.now();
 let selectRes = await vk.baseDao.select({
-  dbName:"xxxx表",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:{
+  dbName: "xxxx表",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
     "arr.0": _.lte(time),
     "arr.1": _.gte(time)
   }
@@ -305,12 +305,12 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  fieldJson:{
-    username:true, 
-    nickname:true
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  fieldJson: {
+    username: true, 
+    nickname: true
   }
 });
 ```
@@ -319,12 +319,12 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  fieldJson:{
-    token:false, 
-    password:false 
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  fieldJson: {
+    token: false, 
+    password: false 
   }
 });
 ```
@@ -334,10 +334,10 @@ let selectRes = await vk.baseDao.select({
 ```js
 // 按注册时间升序
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  sortArr:[{ "name":"register_date", "type":"asc" }]
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  sortArr: [{ "name":"register_date", "type":"asc" }]
 });
 ```
 
@@ -346,10 +346,10 @@ let selectRes = await vk.baseDao.select({
 ```js
 // 按注册时间降序
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  sortArr:[{ "name":"register_date", "type":"desc" }]
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  sortArr: [{ "name":"register_date", "type":"desc" }]
 });
 ```
 
@@ -358,10 +358,10 @@ let selectRes = await vk.baseDao.select({
 ```js
 // 按注册时间降序，时间相同者按_id 降序
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  sortArr:[
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  sortArr: [
     { "name":"register_date", "type":"desc" },
     { "name":"_id", "type":"desc" }
   ]
@@ -374,11 +374,11 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:{
-    nickname : new RegExp('^'+searchvalue)
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
+    nickname: new RegExp('^'+searchvalue)
   }
 });
 ```
@@ -387,11 +387,11 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:{
-    nickname : new RegExp(searchvalue+'$')
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
+    nickname: new RegExp(searchvalue+'$')
   }
 });
 ```
@@ -400,11 +400,24 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:{
-    nickname : new RegExp(searchvalue)
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
+    nickname: new RegExp(searchvalue)
+  }
+});
+```
+
+### 包含 `xxxx` 或 `yyyy`
+
+```js
+let selectRes = await vk.baseDao.select({
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
+    nickname: new RegExp(`xxxx|yyyy`)
   }
 });
 ```
@@ -413,11 +426,11 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:{
-    nickname : _.exists(true), // true：存在 false：不存在
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
+    nickname: _.exists(true), // true：存在 false：不存在
   }
 });
 
@@ -431,14 +444,14 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.selects({
-  dbName:"uni-id-users",
-  pageIndex:1,
-  pageSize:20,
-  fieldJson:{
-    user_id:"$_id",
-    nickname:true
+  dbName: "uni-id-users",
+  pageIndex: 1,
+  pageSize: 20,
+  fieldJson: {
+    user_id: "$_id",
+    nickname: true
   },
-  whereJson:{
+  whereJson: {
     
   }
 });
@@ -449,10 +462,10 @@ let selectRes = await vk.baseDao.selects({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"表名",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:_.expr($.and([
+  dbName: "表名",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: _.expr($.and([
     $.eq(['$a', '$b'])
   ]))
 });
@@ -465,10 +478,10 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName:"表名",
-  pageIndex:1,
-  pageSize:20,
-  whereJson:{
+  dbName: "表名",
+  pageIndex: 1,
+  pageSize: 20,
+  whereJson: {
     role: roleId, // role 在数据库中是数组形式字段，如["roleid1","roleid2","roleid3"]  而 roleId = "roleid1" 代表查询数组内有包含roleid1的数据
   }
 });
@@ -509,7 +522,7 @@ let selectRes = await vk.baseDao.selects({
     count: $.addToSet("$user_id"), // $ 后面接字段名
   },
   sortArr: [{ name: "_id",type: "desc" }], // 对分组后的结果进行排序
-  addFields:{
+  addFields: {
     count: $.size("$count")
   }
 });
@@ -603,7 +616,7 @@ let info = await vk.baseDao.selects({
   foreignDB: [
     {
       dbName: "vip", // 副表名
-      localKey:"vip_id", // 主表外键字段名
+      localKey: "vip_id", // 主表外键字段名
       foreignKey: "user_id", // 副表外键字段名
       as: "vipInfo",
       limit: 1, // 当limit = 1时，以对象形式返回，否则以数组形式返回
@@ -665,8 +678,8 @@ let info = await vk.baseDao.selects({
 
 ```js
 await vk.baseDao.update({
-  dbName:"vk-test",
-  dataJson:{
+  dbName: "vk-test",
+  dataJson: {
     money: _.rename('money2')
   }
 });
@@ -676,8 +689,8 @@ await vk.baseDao.update({
 
 ```js
 await vk.baseDao.update({
-  dbName:"vk-test",
-  dataJson:{
+  dbName: "vk-test",
+  dataJson: {
     'someObject.someField': _.rename('someObject.renamedField')
   }
 });
@@ -687,8 +700,8 @@ await vk.baseDao.update({
 
 ```js
 await vk.baseDao.update({
-  dbName:"vk-test",
-  dataJson:{
+  dbName: "vk-test",
+  dataJson: {
      money: _.rename('money2'),
     'someObject.someField': _.rename('someObject.renamedField')
   }
