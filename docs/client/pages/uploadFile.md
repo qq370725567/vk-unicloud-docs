@@ -60,7 +60,7 @@ uni.chooseImage({
   count: 1,
   sizeType: ['compressed'],
   success: (res) => {
-    // 上传至 unicloud空间内置存储
+    // 文件上传
     vk.uploadFile({
       title: "上传中...",
       file: res.tempFiles[0],
