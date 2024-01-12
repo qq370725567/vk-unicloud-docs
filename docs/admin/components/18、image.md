@@ -20,6 +20,7 @@
 | provider         | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	  | String  | - | - |
 | needSave         | 是否需要保存图片url到admin后台 | Boolean  | false | true  |
 | categoryId       | 当needSave=true时，图片保存的分类id（即vk-files-categories表的_id） | String  | - | -  |
+| cloudPathRemoveChinese | 删除文件名中的中文（默认true） 		| Boolean	| true		| false	|
 | cloudDirectory   | 上传至指定的云端目录（默认会以年月日为目录）  | String  | - | - |
 | httpRequest      | 覆盖默认的上传行为，可以自定义上传的实现（下方有详细说明） | function  | - | -  |
 | listType         | 文件列表的类型  | String  | picture-card | text/picture/picture-card |

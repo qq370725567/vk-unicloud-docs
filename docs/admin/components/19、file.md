@@ -26,9 +26,10 @@
 |------------------|-------------------------------|---------|--------|-------|
 | limit            | 最大上传数量 | Number  | - | -  |
 | provider          | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	 | String  | - | - |
-| needSave          | 是否需要保存图片url到admin后台 | Boolean  | false | true  |
-| categoryId          | 当needSave=true时，文件保存的分类id（即vk-files-categories表的_id） | String  | - | -  |
+| needSave          | 是否需要将图片信息保存到admin素材库 | Boolean  | false | true  |
+| categoryId          | 素材库分类id，当needSave为true时生效				 | String  | - | -  |
 | cloudDirectory    | 上传至指定的云端目录（默认会以年月日为目录）  | String  | - | - |
+| cloudPathRemoveChinese | 删除文件名中的中文（默认true） 		| Boolean	| true		| false	|
 | httpRequest       | 覆盖默认的上传行为，可以自定义上传的实现（下方有详细说明） | function  | - | -  |
 | buttonText        | 上传按钮的文本  | String  | 点击上传 | - |
 | drag          | 是否开启拖拽上传  | Boolean  | false | true |
