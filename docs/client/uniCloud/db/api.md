@@ -341,7 +341,7 @@ let setRes = await vk.baseDao.setById({
 |    参数名   |   类型   | 必填 |    说明    |
 |------------|----------|------|-----------|
 |   dbName   |  String  |  是  |   表名    |
-|   dataJson |  Object  |  是  |   需要修改或新增的数据（必须包含_id） |
+|   dataJson |  Object  |  是  |   需要修改或新增的完整数据（必须包含_id） |
 |   id |  String  |  否  |  如果传了id参数，则会与dataJson中的_id判断是否一致，不一致会报错 |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
@@ -705,7 +705,7 @@ let avg = await vk.baseDao.avg({
 
 **调用示例**
 
-注意：暂不支持连表查询
+注意：不支持连表查询
 
 ```js
 let list = await vk.baseDao.sample({
