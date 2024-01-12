@@ -3,7 +3,7 @@
 ### 万能表单使用方式
 
 ```js
-{ key: "image1", title: "image类型", type: "image", limit: 9 },
+{ key: "image1", title: "image类型", type: "image", limit: 9, cloudPathRemoveChinese: true },
 ```
 
 ### API

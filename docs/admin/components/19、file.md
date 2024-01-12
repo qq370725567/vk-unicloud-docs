@@ -5,13 +5,13 @@
 **文件**
 
 ```js
-{ key: "file", title: "文件类型", type: "file", buttonText: "点击上传", limit: 9, accept: ".txt,.xls,.xlsx,.doc,.docx,.ppt,.pptx,.pdf" },
+{ key: "file", title: "文件类型", type: "file", buttonText: "点击上传", limit: 9, cloudPathRemoveChinese: true, accept: ".txt,.xls,.xlsx,.doc,.docx,.ppt,.pptx,.pdf" },
 ```
 
 **视频**
 
 ```js
-{ key: "file", title: "视频类型", type: "file", buttonText: "点击上传", limit: 9, accept: ".mp4,.avi,.3gp,.mov,.rmvb,.rm,.flv,.mkv" },
+{ key: "file", title: "视频类型", type: "file", buttonText: "点击上传", limit: 9, cloudPathRemoveChinese: true, accept: ".mp4,.avi,.3gp,.mov,.rmvb,.rm,.flv,.mkv" },
 ```
 
 ### API
