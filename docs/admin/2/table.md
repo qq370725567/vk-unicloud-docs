@@ -75,7 +75,7 @@ export default {
 | empty-text      | 通用 - 空数据时显示的文本内容 | String  | "暂无数据" | - |
 | default-expand-all      | 通用 - 是否默认展开所有行，当 Table 包含展开行存在或者为树形表格时有效 | Boolean  | false | true |
 | tree-props      | 通用 - 渲染嵌套数据的配置选项 | Object  | {children: 'children', hasChildren: 'hasChildren'} | - |
-| border     | 通用 - 是否带有纵向边框 | Boolean  | false | true |
+| border     | 通用 - 是否带有纵向边框，设置为true后列可以通过拖动改变宽度 | Boolean  | false | true |
 | stripe     | 通用 - 是否为斑马纹 | Boolean  | false | true |
 | size     | 通用 - Table 的尺寸 | String  | 无 | medium / small / mini |
 | show-header     | 通用 - 是否显示表头 | Boolean  | true | false |
@@ -91,8 +91,6 @@ export default {
 | right-fixed     | 通用 - 操作按钮是否固定在右侧 |Boolean  | true | false |
 | searched-clean-selection     | 通用 - 表格搜索后是否清空多选框选中的值 |Boolean  | true | false |
 | need-alert | 通用 - 表格请求失败后，是否自动alert弹窗（若设为false，则可以通过监听fail事件自己处理错误） |Boolean  | true | false |
-
-
 
 ### columns（字段列表）
 
@@ -733,6 +731,17 @@ export default {
 ```
 
 注意：并非所有异常都会重试，框架会合理判断。（目前此判断逻辑也还在不断优化中）
+
+### 列支持拖动改变宽度
+
+设置 border 为 true 即可
+
+```html
+<vk-data-table
+  ref="table1"
+  :border="true"
+></vk-data-table>
+```
 
 ## columns（属性详细说明）
 
