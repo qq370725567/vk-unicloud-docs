@@ -52,12 +52,7 @@ uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](http
 |fileID		|string	|云端文件URL								|
 |url			|string	|云端文件URL，与fileID一致	|
 
-
-## 上传至unicloud空间内置存储
-
-注意，记得小程序需要加域名白名单 [点击查看](https://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp)
-
-**示例代码**
+## 上传文件示例代码
 
 ```js
 // 选择图片
@@ -69,9 +64,10 @@ uni.chooseImage({
     vk.uploadFile({
       title: "上传中...",
       file: res.tempFiles[0],
-      provider: "unicloud", // 指定上传至unicloud空间内置存储（provider可不传，默认会从中配置中读取）
       success: (res) => {
        // 上传成功
+       let url = res.url;
+       console.log('url: ', url)
 
       },
       fail: (err) => {
@@ -83,56 +79,41 @@ uni.chooseImage({
 });
 ```
 
-## 上传扩展存储
+## 配置默认云存储供应商
+
+### 默认上传至unicloud空间内置存储
+
+在 `app.config.js` 中配置 `cloudStorage.defaultProvider` 值为 `unicloud`
+
+注意，记得小程序需要加域名白名单 [点击查看](https://uniapp.dcloud.net.cn/uniCloud/publish.html#useinmp)
+
+```js
+// 第三方服务配置
+service: {
+  // 云储存相关配置
+  cloudStorage: {
+    /**
+     * vk.uploadFile 接口默认使用哪个存储
+     * unicloud 空间内置存储（默认）
+     * extStorage 扩展存储
+     * aliyun 阿里云oss 
+     */
+    defaultProvider: "unicloud", // 这里若设置 extStorage 则 vk.uploadFile默认会上传至 扩展存储
+  }
+},
+```
+
+### 默认上传至扩展存储
 
 **版本要求**
 
 1. vk-unicloud核心库版本 ≥ 2.17.0
 2. hbx版本 ≥ 3.99
 
-**示例代码**
+**配置步骤**
 
-```js
-// 选择图片
-uni.chooseImage({
-  count: 1,
-  sizeType: ['compressed'],
-  success: (res) => {
-    // 上传至 扩展存储
-    vk.uploadFile({
-      title: "上传中...",
-      file: res.tempFiles[0],
-      provider: "extStorage", // 指定上传至扩展存储（provider可不传，默认会从中配置中读取）
-      success:(res) => {
-       // 上传成功
-
-      },
-      fail: (err) => {
-       // 上传失败
-      
-      }
-    });
-  }
-});
-```
-
-注意，记得小程序需要加域名白名单
-
-**上传域名**
-
-将下方域名添加到小程序的uploadFile合法域名列表中
-
-```
-https://upload.qiniup.com
-```
-
-**下载域名**
-
-下载域名就是你开通扩展存储时绑定的自定义域名，将你的自定义域名添加到download合法域名列表中
-
-**还需要在`app.config.js`中配置**
-
-一般只需要改下面配置中的 `domain` 为自己的即可
+1. 在 `app.config.js` 中配置 `cloudStorage.defaultProvider` 值为 `extStorage`
+2. 修改 `cloudStorage.extStorage` 中的 `domain` 为你开通扩展存储时绑定的域名
 
 ```js
 // 第三方服务配置
@@ -162,39 +143,26 @@ service: {
 },
 ```
 
-最后复制最新框架项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）[传送门 - 最新框架项目](https://ext.dcloud.net.cn/plugin?id=2204)
-
-## 上传至阿里云oss
-
-**示例代码**
-
-```js
-// 选择图片
-uni.chooseImage({
-  count: 1,
-  sizeType: ['compressed'],
-  success: (res) => {
-    // 上传至 阿里云oss
-    vk.uploadFile({
-      title: "上传中...",
-      file: res.tempFiles[0],
-      provider: "aliyun", // 指定上传到阿里云（provider可不传，默认会从中配置中读取）
-      success:(res) => {
-       // 上传成功
-
-      },
-      fail: (err) => {
-       // 上传失败
-      
-      }
-    });
-  }
-});
-```
-
 注意，记得小程序需要加域名白名单
 
-**还需要在`app.config.js`中配置**
+**上传域名**
+
+将下方域名添加到小程序的uploadFile合法域名列表中
+
+```
+https://upload.qiniup.com
+```
+
+**下载域名**
+
+下载域名就是你开通扩展存储时绑定的自定义域名，将你的自定义域名添加到download合法域名列表中
+
+最后复制最新框架项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）[传送门 - 最新框架项目](https://ext.dcloud.net.cn/plugin?id=2204)
+
+### 默认上传至阿里云OSS
+
+1. 在 `app.config.js` 中配置 `cloudStorage.defaultProvider` 值为 `aliyun`
+2. 修改 `cloudStorage.aliyun` 内的参数
 
 ```js
 // 第三方服务配置
@@ -230,6 +198,8 @@ service: {
   }
 },
 ```
+
+注意，记得小程序需要加域名白名单
 
 aliyun oss 参数生成工具 [点击下载](https://gitee.com/vk-uni/oss-h5-upload-js-direct.git)
 

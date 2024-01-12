@@ -25,7 +25,7 @@
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
 | limit            | 最大上传数量 | Number  | - | -  |
-| provider          | 储存空间供应商 | String  | unicloud | aliyun |
+| provider          | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	 | String  | - | - |
 | needSave          | 是否需要保存图片url到admin后台 | Boolean  | false | true  |
 | categoryId          | 当needSave=true时，文件保存的分类id（即vk-files-categories表的_id） | String  | - | -  |
 | cloudDirectory    | 上传至指定的云端目录（默认会以年月日为目录）  | String  | - | - |
