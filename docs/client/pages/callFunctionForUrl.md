@@ -9,7 +9,7 @@ sidebarDepth: 0
 ```js
 cloudfunction-config": {
   "concurrency": 1,
-  "memorySize": 256,
+  "memorySize": 512,
   "path": "/http/router",
   "timeout": 60,
   "triggers": [],
