@@ -63,7 +63,7 @@ exports.main = async (event, context) => {
 | user_id  | 用户id（选填） | String  | -    | -  |
 | nickname  | 用户昵称（选填） | String  | -    | -  |
 | return_url  | 手机端同步回调地址，仅`provider=vkspay`时生效（选填） | String  | -    | -  |
-| time_expire  | 指定支付截至时间，时间戳形式（选填）| Number  | -    | -  |
+| time_expire  | 指定支付截至时间，13位时间戳格式（选填）| Number  | -    | -  |
 
  * out_trade_no作用: 用于根据out_trade_no查订单状态、发起退款等接口需要。
  * 同时该订单号需保证全局唯一。
