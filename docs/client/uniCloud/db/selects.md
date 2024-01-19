@@ -72,8 +72,8 @@ let res = await vk.baseDao.selects({
 |   groupJson |  Object  |  否  |   主表分组规则（副表不支持分组） |
 |   sortArr |  Array  |  否  |   主表排序规则  |
 |   foreignDB |  Array  |  否  |   连表规则 [详情](#foreigndb-连表规则) |
-|   lastWhereJson |  Object  |  否  |   连表后的查询条件  |
-|   lastSortArr |  Array  |  否  |   连表后的排序条件  |
+|   lastWhereJson |  Object  |  否  |   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)  |
+|   lastSortArr |  Array  |  否  |   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)   |
 |   fieldJson |  Object  |  否  |   字段显示规则  |
 |   addFields |  Object  |  否  |   添加自定义字段规则  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
@@ -165,6 +165,23 @@ foreignDB:[
 |   addFields |  Object  |  否  |   副表添加自定义字段规则  |
 |   sortArr |  Array  |  否  |   副表排序规则  |
 |   foreignDB |  Array  |  否  |   副表连表规则 |
+
+
+### lastWhereJson
+
+主要用于对连表或分组后的结果再进行筛选，但lastWhereJson在数据量大的情况下是有性能问题的，建议先在主表的where条件中进行筛选，如只查本季度数据
+
+劣势：在数据量大的情况下是有性能问题
+
+场景示例：[分组查询后再筛选](#场景7-分组查询)
+
+### lastSortArr
+
+主要用于对连表或分组后的结果再进行筛选，但lastSortArr在数据量大的情况下是有性能问题的，建议先在主表的where条件中进行筛选，如只查本季度数据
+
+劣势：在数据量大的情况下是有性能问题
+
+场景示例：[连表查询，通过副表字段排序](#场景12-通过副表字段排序)
 
 ## 场景示例
 
