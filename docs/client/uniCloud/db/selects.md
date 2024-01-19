@@ -74,8 +74,8 @@ let res = await vk.baseDao.selects({
 |   foreignDB |  Array  |  否  |   连表规则 [详情](#foreigndb-连表规则) |
 |   lastWhereJson |  Object  |  否  |   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)  |
 |   lastSortArr |  Array  |  否  |   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)   |
-|   fieldJson |  Object  |  否  |   字段显示规则  |
 |   addFields |  Object  |  否  |   添加自定义字段规则  |
+|   fieldJson |  Object  |  否  |   字段显示规则  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
 ### 返回值
@@ -154,18 +154,18 @@ foreignDB:[
 
 ### foreignDB（参数说明）
 
-|    参数名   |   类型   | 必填 |    说明    |
-|------------|----------|------|-----------|
-|   dbName   |  String  |  是  |   副表表名  |
-|   localKey |  String  |  是  |   主表外键名 |
-|   foreignKey |  String  |  是  |   副表外键名 |
-|   as         |  String  |  是  |   副表连表结果的别名 |
-|   whereJson |  Object  |  否  |   副表 where 条件  |
-|   fieldJson |  Object  |  否  |   副表字段显示规则  |
-|   addFields |  Object  |  否  |   副表添加自定义字段规则  |
-|   sortArr |  Array  |  否  |   副表排序规则  |
-|   foreignDB |  Array  |  否  |   副表连表规则 |
-
+|    参数名		|   类型			| 必填		|    说明																															|
+|------------	|----------	|------	|-----------																													|
+|   dbName		|  String		|  是		|   副表表名																														|
+|   localKey	|  String		|  是		|   主表外键名																													|
+|   foreignKey|  String		|  是		|   副表外键名																													|
+|   as				|  String		|  是		|   副表连表结果的别名																										|
+|   whereJson	|  Object		|  否		|   副表 where 条件																										|
+|   sortArr		|  Array		|  否		|   副表排序规则																												|
+|   limit			|  Number		|  否		|   副表限制取多少条数据，当limit = 1时，以对象形式返回，否则以数组形式返回	|
+|   foreignDB	|  Array		|  否		|   副表连表规则																												|
+|   addFields	|  Object		|  否		|   副表添加自定义字段规则																								|
+|   fieldJson	|  Object		|  否		|   副表字段显示规则																										|
 
 ### lastWhereJson
 
