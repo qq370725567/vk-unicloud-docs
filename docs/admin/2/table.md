@@ -1442,7 +1442,11 @@ ___tips: 左右各 3 个下划线____
 
 ## vk.baseDao.getTableData
 
-用法与 `vk.baseDao.selects` 相似，区别是 `vk.baseDao.getTableData` 多了一个 `data` 参数
+用法与 `vk.baseDao.selects` 基本相似，除了以下区别
+ 
+1. 多了一个[data参数](#data-参数介绍)
+2. 有默认排序规则，默认以 `_add_time` 降序 [设置全局默认排序规则](#设置全局默认排序规则)
+3. 参数 `getCount` 的值在无 `lastWhere` 或 `lastSortArr` 时，默认为 true，否则，默认为 false（兼顾性能和实用性）[getCount说明](#https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#getCount)
 
 [vk.baseDao.selects万能连表文档](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html)
 
@@ -1490,7 +1494,7 @@ vk.baseDao.getTableData({
   data,
   // 强制where条件，比如这里设置了只能查询当前登录用户的数据
   whereJson: {
-    user_id:uid
+    user_id: uid
   }, 
   // 强制字段显示规则
   fieldJson: {
@@ -1509,7 +1513,6 @@ vk.baseDao.getTableData({
     
   } 
 });
-
 ```
 
 ### 设置全局默认排序规则

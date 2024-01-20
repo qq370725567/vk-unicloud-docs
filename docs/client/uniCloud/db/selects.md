@@ -33,26 +33,26 @@ sidebarDepth: 0
 
 ```js
 let res = await vk.baseDao.selects({
-  dbName:"",
-  getCount:false,
-  pageIndex:1,
-  pageSize:20,
+  dbName: "表名",
+  getCount: false,
+  pageIndex: 1,
+  pageSize: 20,
   // 主表where条件
-  whereJson:{
+  whereJson: {
     
   },
   // 主表字段显示规则
-  fieldJson:{},
+  fieldJson: {},
   // 主表排序规则
-  sortArr:[{ name:"_id", type:"desc" }],
+  sortArr: [{ name:"_id", type:"desc" }],
   // 副表列表
-  foreignDB:[
+  foreignDB: [
     {
-      dbName:"副表表名",
-      localKey:"主表外键名",
-      foreignKey:"副表外键名",
-      as:"副表as字段",
-      limit:1
+      dbName: "副表表名",
+      localKey: "主表外键名",
+      foreignKey: "副表外键名",
+      as: "副表as字段",
+      limit: 1
     }
   ]
 });
@@ -68,7 +68,7 @@ let res = await vk.baseDao.selects({
 |   pageSize |  Number  |  否  |   每页显示数量 默认 10  |
 |   getOne |  Boolean  |  否  |   是否只返回第一条数据。默认 false  |
 |   getMain |  Boolean  |  否  |   是否只返回rows数组。默认 false |
-|   getCount |  Boolean  |  否  |   是否返回满足条件的记录总数。默认 false |
+|   getCount |  Boolean  |  否  |   是否返回满足条件的记录总数。默认 false [详情](#getCount)  |
 |   groupJson |  Object  |  否  |   主表分组规则（副表不支持分组） |
 |   sortArr |  Array  |  否  |   主表排序规则  |
 |   foreignDB |  Array  |  否  |   连表规则 [详情](#foreigndb-连表规则) |
@@ -86,6 +86,7 @@ let res = await vk.baseDao.selects({
 |   total   |  Number  |    满足条件的记录总数（如果getCount为false，则total=rows.length  |
 |   hasMore   |  Boolean  |    分页参数，true 还有下一页 false 无下一页    |
 |   pagination   |  Object  |   当前分页的页码pageIndex和每页显示的大小pageSize    |
+|   getCount   |  Boolean  |  是否有执行过getCount，true：有，false：无    |
 
 ### vk.baseDao.getTableData的连表
 
@@ -166,6 +167,20 @@ foreignDB:[
 |   foreignDB	|  Array		|  否		|   副表连表规则																												|
 |   addFields	|  Object		|  否		|   副表添加自定义字段规则																								|
 |   fieldJson	|  Object		|  否		|   副表字段显示规则																										|
+
+### getCount
+
+`vk.baseDao.selects` 默认 getCount 为 false，`vk.baseDao.getTableData` 默认 getCount 为 true
+
+设置为 true 后，会同时查询满足条件的总记录条数，并返回真实的 total，若为 false，则 total = rows.length
+
+特别注意：
+
+1. 设置为 true 会多一次 count 请求，因此，如果仅为了获取 rows，则应该设置 false
+2. 带 whereJson 条件的 count 请求，其中 whereJson 能匹配的记录数越多，性能越差，甚至会超时报错
+3. `lastWhereJson` 如果和 `getCount: true` 一起使用，性能很差，甚至会超时报错
+
+因此大表（数据很多的表）在进行带条件的 count 请求时，除了设置必要的索引外，还应该限制查询条件范围，比如只能查本月、本季度、本年（确保满足条件的数据不会太多），而如果 count 请求不带查询条件，则没有性能问题。
 
 ### lastWhereJson
 
