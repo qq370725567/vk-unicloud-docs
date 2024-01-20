@@ -60,23 +60,25 @@ let res = await vk.baseDao.selects({
 
 ### 参数说明
 
-|    参数名   |   类型   | 必填 |    说明    |
-|------------|----------|------|-----------|
-|   dbName   |  String  |  是  |   主表表名    |
-|   whereJson |  Object  |  否  |   主表 where 条件  |
-|   pageIndex |  Number  |  否  |   第几页 默认 1  |
-|   pageSize |  Number  |  否  |   每页显示数量 默认 10  |
-|   getOne |  Boolean  |  否  |   是否只返回第一条数据。默认 false  |
-|   getMain |  Boolean  |  否  |   是否只返回rows数组。默认 false |
-|   getCount |  Boolean  |  否  |   是否返回满足条件的记录总数。默认 false [详情](#getCount)  |
-|   groupJson |  Object  |  否  |   主表分组规则（副表不支持分组） |
-|   sortArr |  Array  |  否  |   主表排序规则  |
-|   foreignDB |  Array  |  否  |   连表规则 [详情](#foreigndb-连表规则) |
-|   lastWhereJson |  Object  |  否  |   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)  |
-|   lastSortArr |  Array  |  否  |   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)   |
-|   addFields |  Object  |  否  |   添加自定义字段规则  |
-|   fieldJson |  Object  |  否  |   字段显示规则  |
-|   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
+|    参数名				|   类型			| 必填		|    说明																													|
+|------------			|----------	|------	|-----------																											|
+|   dbName				|  String		|  是		|   主表表名																												|
+|   whereJson			|  Object		|  否		|   主表 where 条件																								|
+|   pageIndex			|  Number		|  否		|   第几页 默认 1																										|
+|   pageSize			|  Number		|  否		|   每页显示数量 默认 10																						|
+|   getOne				|  Boolean	|  否		|   是否只返回第一条数据。默认 false																	|
+|   getMain				|  Boolean	|  否		|   是否只返回rows数组。默认 false																		|
+|   getCount			|  Boolean	|  否		|   是否返回满足条件的记录总数。默认 false [详情](#getCount)						|
+|   groupJson			|  Object		|  否		|   主表分组规则（副表不支持分组）																		|
+|   sortArr				|  Array		|  否		|   主表排序规则																										|
+|   foreignDB			|  Array		|  否		|   连表规则 [详情](#foreigndb-连表规则)															|
+|   lastWhereJson	|  Object		|  否		|   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)					|
+|   lastSortArr		|  Array		|  否		|   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)						|
+|   addFields			|  Object		|  否		|   添加自定义字段规则																								|
+|   fieldJson			|  Object		|  否		|   字段显示规则																										|
+|   db						|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();									|
+|   debug					|  Boolean	|  否		|  是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
+
 
 ### 返回值
 
@@ -170,7 +172,9 @@ foreignDB:[
 
 ### getCount
 
-`vk.baseDao.selects` 默认 getCount 为 false，`vk.baseDao.getTableData` 默认 getCount 为 true
+`vk.baseDao.selects` 默认 getCount 为 false
+
+`vk.baseDao.getTableData` 默认 getCount 为 true
 
 设置为 true 后，会同时查询满足条件的总记录条数，并返回真实的 total，若为 false，则 total = rows.length
 
@@ -178,21 +182,31 @@ foreignDB:[
 
 1. 设置为 true 会多一次 count 请求，因此，如果仅为了获取 rows，则应该设置 false
 2. 带 whereJson 条件的 count 请求，其中 whereJson 能匹配的记录数越多，性能越差，甚至会超时报错
-3. `lastWhereJson` 如果和 `getCount: true` 一起使用，性能很差，甚至会超时报错
+3. lastWhereJson 如果和 `getCount: true` 一起使用，性能较差，甚至会超时报错
 
 因此大表（数据很多的表）在进行带条件的 count 请求时，除了设置必要的索引外，还应该限制查询条件范围，比如只能查本月、本季度、本年（确保满足条件的数据不会太多），而如果 count 请求不带查询条件，则没有性能问题。
 
+友情提示：
+
+设置 `debug: true` 可以返回 count 和 rows 查询的数据库耗时（单位ms）
+
+|    耗时					|     说明																		|
+|------------			|-----------																|
+|   [0,100ms)			|   正常																			|
+|   [100ms,300ms)	| 检查索引，优化查询条件												|
+|   300ms以上			| 检查索引，优化查询条件，必要时修改业务实现逻辑	|
+
 ### lastWhereJson
 
-主要用于对连表或分组后的结果再进行筛选，但lastWhereJson在数据量大的情况下是有性能问题的，建议先在主表的where条件中进行筛选，如只查本季度数据
+主要用于对连表或分组后的结果再进行筛选，但 lastWhereJson 在数据量大的情况下是有性能问题的，建议先在主表的 where 条件中进行筛选，如只查本季度数据
 
-劣势：在数据量大的情况下是有性能问题，特别是 getCount:true 的情况下，lastWhereJson有严重的性能问题
+劣势：在数据量大的情况下是有性能问题，特别是 getCount:true 的情况下，lastWhereJson 有严重的性能问题
 
 场景示例：[分组查询后再筛选](#场景7-分组查询)
 
 ### lastSortArr
 
-主要用于连表后，再通过副表字段进行排序，但lastSortArr在数据量大的情况下是有性能问题的，建议先在主表的where条件中进行筛选，如只查本季度数据
+主要用于连表后，再通过副表字段进行排序，但 lastSortArr 在数据量大的情况下是有性能问题的，建议先在主表的 where 条件中进行筛选，如只查本季度数据
 
 劣势：在数据量大的情况下是有性能问题
 
