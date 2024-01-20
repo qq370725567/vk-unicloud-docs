@@ -77,7 +77,7 @@ let res = await vk.baseDao.selects({
 |   addFields			|  Object		|  否		|   添加自定义字段规则																								|
 |   fieldJson			|  Object		|  否		|   字段显示规则																										|
 |   db						|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();									|
-|   debug					|  Boolean	|  否		|  是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
+|   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
 
 
 ### 返回值
