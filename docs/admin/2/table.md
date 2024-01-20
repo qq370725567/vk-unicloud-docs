@@ -1444,9 +1444,9 @@ ___tips: 左右各 3 个下划线____
 
 用法与 `vk.baseDao.selects` 基本相似，除了以下区别
  
-1. 多了一个[data参数](#data-参数介绍)
+1. 多了一个data参数 [data参数介绍](#data-参数介绍)
 2. 有默认排序规则，默认以 `_add_time` 降序 [设置全局默认排序规则](#设置全局默认排序规则)
-3. 参数 `getCount` 的值在无 `lastWhere` 或 `lastSortArr` 时，默认为 true，否则，默认为 false（兼顾性能和实用性）[getCount说明](#https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#getCount)
+3. 参数 `getCount` 的值在无 `lastWhere` 或 `lastSortArr` 时，默认为 true，否则，默认为 false（兼顾性能和实用性）[getCount说明](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#getcount)
 
 [vk.baseDao.selects万能连表文档](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html)
 
