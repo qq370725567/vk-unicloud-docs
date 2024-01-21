@@ -564,7 +564,9 @@ export default {
               if (typeof success === "function") {
                 success({
                   rows: res.rows, // 列表数据
-                  total: res.total, // 总记录数
+                  total: res.total, // 总记录数（如果没有总记录数，则需要返回getCount和hasMore）
+                  getCount: res.getCount, // 是否执行了count请求，当total的值不是总记录数时需要返回 getCount: false
+                  hasMore: res.hasMore, // 是否还有下一页，当total的值不是总记录数时需要返回是否还有下一页
                 });
               }
             },
@@ -616,7 +618,9 @@ export default {
               if (typeof success === "function") {
                 success({
                   rows: res.rows, // 列表数据
-                  total: res.total, // 总记录数
+                  total: res.total, // 总记录数（如果没有总记录数，则需要返回getCount和hasMore）
+                  getCount: res.getCount, // 是否执行了count请求，当total的值不是总记录数时需要返回 getCount: false
+                  hasMore: res.hasMore, // 是否还有下一页，当total的值不是总记录数时需要返回是否还有下一页
                 });
               }
             },
