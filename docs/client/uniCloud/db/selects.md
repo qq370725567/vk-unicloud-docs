@@ -192,7 +192,7 @@ foreignDB:[
 
 注意：测试耗时必须连接云端云函数，并多测试几次，取个稳定值（本地云函数由于是外网访问数据库，很慢，不准）
 
-![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/466.png)
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/500.png)
 
 rows 的耗时
 
