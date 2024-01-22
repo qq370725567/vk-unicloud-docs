@@ -66,6 +66,7 @@ export default {
 | pagination     | 通用 - 显示分页器 | Boolean  | false | true |
 | page-size       | 通用 - 每页显示数量 | Number  | 10 | - |
 | page-sizes      | 通用 - 每页显示数量选择列表 | Array  | [1, 5, 10, 20, 50, 100, 1000] | - |
+| get-count-mode| [1.18.0新增] 通用 - 执行count请求的模式，与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String		|auto	| -			|auto、always、never|
 | right-btns      | 通用 - 右侧显示的按钮列表 [查看right-btns](#right-btns-右侧固定按钮列表) | Array  | [] | - |
 | right-btns-type      | 通用 - 右侧显示的按钮类型 | String  | button | text |
 | right-btns-align     | 通用 - 右侧显示的按钮对齐方式 | String  | center | left right |
@@ -1040,6 +1041,127 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
   }
 },
 ```
+
+## 分页
+
+以下是与分页相关的属性
+
+| 参数					| 说明												| 类型			| 默认值													| 可选值	|
+| pagination		| 通用 - 显示分页器						| Boolean	| false													| true	|
+| page-size			| 通用 - 每页显示数量					| Number	| 10														| -			|
+| page-sizes		| 通用 - 每页显示数量选择列表	| Array		| [1, 5, 10, 20, 50, 100, 1000]	| -			|
+| page-sizes		| 通用 - 每页显示数量选择列表	| Array		| [1, 5, 10, 20, 50, 100, 1000]	| -			|
+| get-count-mode| [1.18.0新增] 通用 - 执行count请求的模式，与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String		|auto	| -			|auto、always、never|
+
+当设置 pagination 为 true 时，表格会开启分页功能
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/501.png)
+
+在 `vk-unicloud-admin-ui` ≥ `1.18.0` 后，新增了 `get-count-mode` 参数，该参数与云端 `vk.baseDao.getTableData` 配合使用可以达到节省count请求次数，提升查询性能的效果，具体可以实现以下几种分页效果：
+
+### 分页方案一
+
+描述：传统分页方案，每次请求同时查询 rows（当前页数据） 和 total（总记录条数），前端显示当前页数据以及分页器，分页器支持直接跳到任意页面
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/504.png)
+
+优势：实现起来简单，使用方便，分页数据实时，能显示总记录条数
+
+劣势：每次查询都会进行count请求，有点浪费性能（带条件的count在数据越多的时候性能越差）
+
+适用场景：非大表
+
+使用方法：万能表格组件设置属性 `get-count-mode="always"`
+
+```html
+<vk-data-table
+  get-count-mode="always"
+></vk-data-table>
+```
+
+### 分页方案二
+
+描述：在方案一的基础上，进行了优化，在查询条件没变的情况下，翻页时不进行 count 请求
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/503.png)
+
+优势：翻页的时候可以节省一次count请求，能显示总记录条数
+
+劣势：分页数据非实时，只在第一页的时候拉取一次分页数据
+
+适用场景：非大表，并想节省count请求
+
+使用方法：万能表格组件设置属性 `get-count-mode="auto"` 如不设置，默认也是 auto
+
+```html
+<vk-data-table
+  get-count-mode="auto"
+></vk-data-table>
+```
+
+### 分页方案三
+
+描述：从不执行count请求，但翻页只能下一页或上一页，且不显示总记录条数
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/502.png)
+
+优势：高性能
+
+劣势：不显示总记录条数，不能跳转到指定的页码，翻页只能下一页或上一页
+
+适用场景：大表
+
+使用方法：万能表格组件设置属性 `get-count-mode="never"`
+
+```html
+<vk-data-table
+  get-count-mode="never"
+></vk-data-table>
+```
+
+### 分页方案四
+
+描述：上面3个方案的翻页都是通过数据库的 `skip+limit` 组合使用实现的，这种方式当 `skip` 的值越大，性能越差，而此方案翻页不通过 `skip` 实现，而是通过一个唯一索引字段进行排序+where实现
+
+前端展示的效果与方案三一致
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/502.png)
+
+如用 `_id` 排序
+
+以 实现 _id 升序排序为例
+
+实现下一页通过 where _id > 本页的最后一条记录，且 _id 是升序排序，这样查询到的就是下一页的数据
+
+实现上一页通过 where id < 本页的第一条记录，且 _id 降序排序，这样查到的就是上一页数据
+
+以 实现 _id 降序排序为例
+
+实现下一页通过 where _id < 本页的最后一条记录，且 _id 是降序排序，这样查询到的就是下一页的数据
+
+实现上一页通过 where id > 本页的第一条记录，且 _id 是升序排序，这样查到的就是上一页数据
+
+优势：高性能，且无论翻到哪一页，基本都一样快，能完整遍历完表内所有数据（不管表格里有多少数据）
+
+劣势：不显示总记录条数，不能跳转到指定的页码，翻页只能下一页或上一页，且必须依赖唯一索引排序，不可按其他字段排序，限制较多
+
+适用场景：超大表
+
+使用方法：此方案暂未封装到组件中
+
+### getCount处理逻辑
+
+1. get-count-mode 为 auto 时，前端加载第一页时 getCount 视为 true 分页加载非第一页时，getCount 视为 false
+2. get-count-mode 为 always 时，前端每次查询 getCount 均视为 true 
+3. get-count-mode 为 never 时，前端每次查询 getCount 均视为 false 
+4. 云端 `vk.baseDao.getTableData` 不指定 getCount 时，若查询语句含有 `lastWhereJson` 或 `lastSortArr` 则 getCount 视为 false，不含则视为 true
+5. 云端 `vk.baseDao.getTableData` 指定 getCount 时，按指定的值决定
+
+因为云端也可能会直接指定 getCount，故当云端的 getCount 和前端 getCount 不一致时的策略：
+
+1. 云端 true 前端 true 最终 getCount 视为 true
+2. 云端 true 前端 false 最终 getCount 视为 false
+3. 云端 false 前端不管 true 还是 false 最终 getCount 均视为 false
 
 ## 事件
 
