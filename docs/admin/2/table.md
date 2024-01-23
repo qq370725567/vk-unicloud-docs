@@ -66,7 +66,7 @@ export default {
 | pagination     | 通用 - 显示分页器 | Boolean  | false | true |
 | page-size       | 通用 - 每页显示数量 | Number  | 10 | - |
 | page-sizes      | 通用 - 每页显示数量选择列表 | Array  | [1, 5, 10, 20, 50, 100, 1000] | - |
-| get-count-mode| [1.18.0新增] 通用 - 执行count请求的模式，与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String		|auto	| -			|auto、always、never|
+| get-count | [1.18.0新增] 通用 - 执行count请求的模式，与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String		|auto	| -			|auto、always、never|
 | right-btns      | 通用 - 右侧显示的按钮列表 [查看right-btns](#right-btns-右侧固定按钮列表) | Array  | [] | - |
 | right-btns-type      | 通用 - 右侧显示的按钮类型 | String  | button | text |
 | right-btns-align     | 通用 - 右侧显示的按钮对齐方式 | String  | center | left right |
@@ -1051,13 +1051,13 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 | pagination				| 通用 - 显示分页器																																																															| Boolean	| false													| true	|
 | page-size					| 通用 - 每页显示数量																																																														| Number	| 10														| -			|
 | page-sizes				| 通用 - 每页显示数量选择列表																																																										| Array		| [1, 5, 10, 20, 50, 100, 1000]	| -			|
-| get-count-mode		| [1.18.0新增] 通用 - 执行count请求的模式<br/>与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String	|auto														| -			|auto、always、never	|
+| get-count		| [1.18.0新增] 通用 - 执行count请求的模式<br/>与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String	|auto														| -			|auto、always、never	|
 
 当设置 pagination 为 true 时，表格会开启分页功能
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/505.png)
 
-在 `vk-unicloud-admin-ui` ≥ `1.18.0` 后，新增了 `get-count-mode` 参数，该参数与云端 `vk.baseDao.getTableData` 配合使用可以达到节省count请求次数，提升查询性能的效果，具体可以实现以下几种分页效果：
+在 `vk-unicloud-admin-ui` ≥ `1.18.0` 后，新增了 `getCount` 参数，该参数与云端 `vk.baseDao.getTableData` 配合使用可以达到节省count请求次数，提升查询性能的效果，具体可以实现以下几种分页效果：
 
 ### 分页方案一（传统分页）
 
@@ -1082,17 +1082,17 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 **使用方法**
 
-万能表格组件设置属性 `get-count-mode="always"`
+万能表格组件设置属性 `:getCount="true"`
 
 ```html
 <vk-data-table
-  get-count-mode="always"
+  :getCount="true"
 ></vk-data-table>
 ```
 
 ### 分页方案二（智能分页）
 
-大部分情况下都推荐使用此方案
+大部分情况下都推荐使用此方案，此方案也是目前万能表格的默认方案
 
 描述：在方案一的基础上，进行了优化，在查询条件没变的情况下，翻页时不进行 count 请求（即缓存首次查询时的总记录条数）
 
@@ -1115,15 +1115,15 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 **使用方法**
 
-万能表格组件设置属性 `get-count-mode="auto"` 如不设置，默认也是 auto
+万能表格组件设置属性 `getCount="auto"` 如不设置，默认也是 auto
 
 ```html
 <vk-data-table
-  get-count-mode="auto"
+  getCount="auto"
 ></vk-data-table>
 ```
 
-### 分页方案三（滚动翻页）
+### 分页方案三（滚动分页）
 
 描述：从不执行count请求，但翻页只能下一页或上一页，且不显示总记录条数
 
@@ -1145,11 +1145,11 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 **使用方法**
 
-万能表格组件设置属性 `get-count-mode="never"`
+万能表格组件设置属性 `:getCount="false"`
 
 ```html
 <vk-data-table
-  get-count-mode="never"
+  :getCount="false"
 ></vk-data-table>
 ```
 
@@ -1159,7 +1159,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 游标分页不使用 `skip` 而是使用一个游标（通常是记录的唯一标识符，比如 `_id`）来确定从哪里开始获取下一页的数据。客户端通过向服务器传递上一页最后一条记录的游标来获取下一页数据。
 
-前端展示的效果与方案三一致
+前端展示的效果与分页方案三（滚动分页）一致
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/502.png)
 
@@ -1197,9 +1197,9 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 ### getCount处理逻辑
 
-1. get-count-mode 为 auto 时，前端加载第一页时 getCount 视为 true 分页加载非第一页时，getCount 视为 false
-2. get-count-mode 为 always 时，前端每次查询 getCount 均视为 true 
-3. get-count-mode 为 never 时，前端每次查询 getCount 均视为 false 
+1. 前端 getCount 为 auto 时，前端加载第一页时 getCount 视为 true 分页加载非第一页时，getCount 视为 false
+2. 前端 getCount 为 true 时，前端每次查询 getCount 均视为 true 
+3. 前端 getCount 为 false 时，前端每次查询 getCount 均视为 false 
 4. 云端 `vk.baseDao.getTableData` 不指定 getCount 时，若查询语句含有 `lastWhereJson` 或 `lastSortArr` 则 getCount 视为 false，不含则视为 true
 5. 云端 `vk.baseDao.getTableData` 指定 getCount 时，按指定的值决定
 
