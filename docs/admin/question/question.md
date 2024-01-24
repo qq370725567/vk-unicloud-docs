@@ -20,22 +20,26 @@
 
 ## 为什么云函数URL化后，明明数据库里有该用户，登录提示用户不存在？
 
-这是因为现在的 `uni-id` 模块强制不同端用户隔离导致的，你需要在URL化请求后多传2个参数
+这是因为现在的 `uni-id` 模块强制不同端用户隔离导致的，你需要在URL化的请求头中多传2个参数
 
 分别为：
 
-* vk_appid    （你项目的manifest.json内的appid）
-* vk_platform （当前环境，比如h5）
+* vk-appId    （你项目的manifest.json内的appid）
+* vk-platform （运行环境，如 h5、mp-weixin、app-plus 等）
 
 以jquery为例
 
 ```js
 $.ajax({
   type: 'POST',
-  url: "https://xxxxxx.com/http/router/user/pub/login",
+  url: "https://xxx.com/http/router/template/test/pub/test",
+  headers:{ 
+    'content-type': 'application/json;charset=utf8',
+    'uni-id-token': 'xxxxxxxxx', // 用户token
+    'vk-appId': '__UNI__89927A9', // 你项目的dcloud_appid
+    'vk-platform': 'mp-weixin', // 运行环境，如 h5、mp-weixin、app-plus 等
+  },
   data: JSON.stringify({
-    vk_appid: "__UNI__A8V6E8P",
-    vk_platform: "h5",
     username: "test",
     password: "123456"
   }),
