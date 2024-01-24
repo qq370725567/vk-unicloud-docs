@@ -33,8 +33,7 @@
 | queryColumns      | 搜索栏字段显示规则 | Array  |  -  |  -  |
 | multiple      | 是否允许多选 | Boolean  | false | true  |
 | multipleLimit  | 最多可选择的数量 | Number  | - | -  |
-| formData      | 默认搜索字段的值 | Object  |  -  |  -  |
-| listKey          | 后端返回的list数组的字段名称 | String  |  rows  |  -  |
+| formData      | 默认搜索字段的值 | Object、Function  |  -  |  -  |
 | showCancel      | 是否显示取消按钮 | Boolean  | true | false  |
 | cancelText      | 取消按钮的文字 | String  | 关闭 | -  |
 | submitText      | 确定按钮的文字 | String  | 确定 | -  |
@@ -125,9 +124,11 @@ props 对象属性
     { key: "nickname", title: "用户昵称", type: "text", width: 150, mode: "%%" },
     { key: "mobile", title: "手机号", type: "text", width: 150, mode: "%%" }
   ],
-  formData: {
-    nickname: "",
-    mobile: ""
+  formData: () => {
+    return {
+      nickname: that.form1.data.nickname,
+      mobile: that.form1.data.mobile,
+    }
   }
 },
 ```

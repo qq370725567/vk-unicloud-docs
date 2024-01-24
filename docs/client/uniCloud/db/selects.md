@@ -82,13 +82,20 @@ let res = await vk.baseDao.selects({
 
 ### 返回值
 
-|    参数名   |   类型   |     说明    |
-|------------|----------|-----------|
-|   rows   |  Array  |    数据列表    |
-|   total   |  Number  |    满足条件的记录总数（如果getCount为false，则total=rows.length  |
-|   hasMore   |  Boolean  |    分页参数，true 还有下一页 false 无下一页    |
-|   pagination   |  Object  |   当前分页的页码pageIndex和每页显示的大小pageSize    |
-|   getCount   |  Boolean  |  是否有执行过getCount，true：有，false：无    |
+|    参数名		|   类型			|     说明																																														|
+|------------	|----------	|-----------																																												|
+|   rows			|  Array		|  数据列表																																													|
+|   total			|  Number		|  满足条件的记录总数（如果返回的getCount为false，则 total = (pageIndex - 1) * pageSize + rows.length）	|
+|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 无下一页																															|
+|   pagination|  Object		|  当前分页参数																																												|
+|   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
+
+**pagination对象的属性**
+
+|    参数名		|   类型			|     说明					|
+|------------	|----------	|-----------			|
+|   pageIndex	|  Number		|  当前分页的页码	|
+|   pageSize	|  Number		|  每页显示的大小	|
 
 ### vk.baseDao.getTableData的连表
 
