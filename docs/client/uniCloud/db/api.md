@@ -423,11 +423,13 @@ let info = await vk.baseDao.findByWhereJson({
 
 `vk.baseDao.select`
 
-云开发数据库最大支持查询500条数据，而此API可以达到1万条数据，通过设置`pageSize: 10000`，最大极限要看你返回的数据量大小。
-
 查多条记录（具有分页功能） 对应的传统sql语句: `select * from vk-test where money>=0 limit 1,20
 
-特别注意：此分页功能会随着 `pageIndex` 的值越大，效率越低（传统mysql也有此问题），pageIndex * pageSize 的值最好不要超过 400万（如每页显示10条，则建议最多让用户查看到第40万页）
+云开发数据库最大支持查询1000条数据，而此API可以达到1万条数据，通过设置 `pageSize: 10000`，最大极限要看你返回的数据量大小。
+
+特别注意：此分页功能会随着 `pageIndex` 的值越大，效率越低（传统mysql也有此问题），pageIndex * pageSize 的值最好不要超过 300万（如每页显示10条，则建议最多让用户查看到第30万页）
+
+`vk-admin` 的 `万能表格` 针对分页进行了优化，有多种方案可选 [传送门](https://vkdoc.fsq.pub/admin/2/table.html#%E5%88%86%E9%A1%B5)
 
 **调用示例**
 
@@ -453,7 +455,7 @@ let res = await vk.baseDao.select({
 });
 ```
 
-___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库本身有最大每次只能查500条的限制。（使用VK框架可以突破到1万条以上，联表查询时，依然为500条限制）___
+___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库本身有最大每次只能查1000条的限制。（使用VK框架可以突破到1万条以上，联表查询时，依然为1000条限制）___
 
 **参数说明**
 
@@ -469,15 +471,24 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |   fieldJson |  Object  |  否  |   字段显示规则（见上方调用示例）   |
 |   sortArr |  Array  |  否  |   排序规则（见上方调用示例）  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
+|   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
 
 **返回值**
 
-|    参数名   |   类型   |     说明    |
-|------------|----------|-----------|
-|   rows   |  Array  |    数据列表    |
-|   total   |  Number  |    满足条件的记录总数（如果getCount为false，则total=rows.length  |
-|   hasMore   |  Boolean  |    分页参数，true 还有下一页 false 无下一页    |
-|   pagination   |  Object  |   当前分页的页码pageIndex和每页显示的大小pageSize    |
+|    参数名		|   类型			|     说明																																														|
+|------------	|----------	|-----------																																												|
+|   rows			|  Array		|  数据列表																																													|
+|   total			|  Number		|  满足条件的记录总数（如果返回的getCount为false，则 total = (pageIndex - 1) * pageSize + rows.length）	|
+|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 无下一页																															|
+|   pagination|  Object		|  当前分页参数																																												|
+|   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
+
+**pagination对象的属性**
+
+|    参数名		|   类型			|     说明					|
+|------------	|----------	|-----------			|
+|   pageIndex	|  Number		|  当前分页的页码	|
+|   pageSize	|  Number		|  每页显示的大小	|
 
 ### vk.baseDao.count（获取记录总条数）
 

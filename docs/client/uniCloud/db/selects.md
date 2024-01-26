@@ -25,9 +25,11 @@ sidebarDepth: 0
 
 **接口名**
 
-云开发数据库连表查询最大支持查询500条数据，即pageSize最大值为500
+云开发数据库连表查询最大支持查询1000条数据，即pageSize最大值为1000
 
-特别注意：此分页功能会随着 `pageIndex` 的值越大，效率越低（传统mysql也有此问题），pageIndex * pageSize 的值最好不要超过 400万（如每页显示10条，则建议最多让用户查看到第40万页）
+特别注意：此分页功能会随着 `pageIndex` 的值越大，效率越低（传统mysql也有此问题），pageIndex * pageSize 的值最好不要超过 300万（如每页显示10条，则建议最多让用户查看到第30万页）
+
+`vk-admin` 的 `万能表格` 针对分页进行了优化，有多种方案可选 [传送门](https://vkdoc.fsq.pub/admin/2/table.html#%E5%88%86%E9%A1%B5)
 
 ### 调用示例
 
@@ -78,7 +80,6 @@ let res = await vk.baseDao.selects({
 |   fieldJson			|  Object		|  否		|   字段显示规则																										|
 |   db						|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();									|
 |   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
-
 
 ### 返回值
 
@@ -431,7 +432,7 @@ res = await vk.baseDao.selects({
     localKeyType: "array",
     foreignKey: "role_id",
     as: "roleList",
-    limit: 500
+    limit: 1000
   }]
 });
 ```
@@ -462,7 +463,7 @@ res = await vk.baseDao.selects({
       foreignKey:"role",
       foreignKeyType:"array",
       as:"userInfo",
-      limit:500
+      limit: 1000
     }
   ]
 });
@@ -515,7 +516,7 @@ res = await vk.baseDao.selects({
 res = await vk.baseDao.selects({
   dbName: "学生学科成绩表",
   pageIndex: 1,
-  pageSize: 500,
+  pageSize: 1000,
   // 主表where条件
   whereJson: {
     no:"20211201", // 本期考试编号

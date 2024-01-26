@@ -66,7 +66,8 @@ export default {
 | pagination     | 通用 - 显示分页器 | Boolean  | false | true |
 | page-size       | 通用 - 每页显示数量 | Number  | 10 | - |
 | page-sizes      | 通用 - 每页显示数量选择列表 | Array  | [1, 5, 10, 20, 50, 100, 1000] | - |
-| get-count | [1.18.0新增] 通用 - 执行count请求的模式，与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String		|auto	| -			|auto、always、never|
+| get-count      |  [1.18.0新增] 通用 - 执行count请求的模式 <br/>与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>true：总是执行<br/>false：从不执行 | String、Boolean  | auto | auto、true、false |
+| max-page-count		| [1.18.0新增] 通用 - 最大可显示的页数																																																								| Number	|-															|-|
 | right-btns      | 通用 - 右侧显示的按钮列表 [查看right-btns](#right-btns-右侧固定按钮列表) | Array  | [] | - |
 | right-btns-type      | 通用 - 右侧显示的按钮类型 | String  | button | text |
 | right-btns-align     | 通用 - 右侧显示的按钮对齐方式 | String  | center | left right |
@@ -1046,12 +1047,13 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 以下是与分页相关的属性
 
-| 参数							| 说明																																																																					| 类型			| 默认值													| 可选值	|
-|------------------	|-------------------------------																																																							|---------|--------												|-------|
-| pagination				| 通用 - 显示分页器																																																															| Boolean	| false													| true	|
-| page-size					| 通用 - 每页显示数量																																																														| Number	| 10														| -			|
-| page-sizes				| 通用 - 每页显示数量选择列表																																																										| Array		| [1, 5, 10, 20, 50, 100, 1000]	| -			|
-| get-count		| [1.18.0新增] 通用 - 执行count请求的模式<br/>与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>always：总是执行<br/>never：从不执行	| String	|auto														| -			|auto、always、never	|
+| 参数							| 说明																																																																						| 类型							| 默认值													| 可选值							|
+|------------------	|-------------------------------																																																								|---------				|--------												|-------						|
+| pagination				| 通用 - 显示分页器																																																																| Boolean					| false													| true							|
+| page-size					| 通用 - 每页显示数量																																																															| Number					| 10														| -									|
+| page-sizes				| 通用 - 每页显示数量选择列表																																																											| Array						| [1, 5, 10, 20, 50, 100, 1000]	| -									|
+| get-count					| [1.18.0新增] 通用 - 执行count请求的模式 <br/>与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>true：总是执行<br/>false：从不执行	| String、Boolean	| auto													| auto、true、false	|
+| max-page-count		| [1.18.0新增] 通用 - 最大可显示的页数																																																							| Number					|-															|-									|
 
 当设置 pagination 为 true 时，表格会开启分页功能
 
@@ -1074,7 +1076,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 **劣势**
 
 1. 每次查询都会进行count请求，有点浪费性能（带条件的count在数据越多的时候性能越差）
-2. 性能在翻页过程中有衰减，如翻到第10万页时，性能明显降低
+2. 性能在翻页过程中有衰减，如翻到第10万页时，性能明显降低，可以通过设置 max-page-size 来限制最大页数
 
 **适用场景**
 
@@ -1106,7 +1108,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 **劣势**
 
-1. 性能在翻页过程中有衰减，如翻到第10万页时，性能明显降低
+1. 性能在翻页过程中有衰减，如翻到第10万页时，性能明显降低，可以通过设置 max-page-count 来限制最大页数
 
 **适用场景**
 
