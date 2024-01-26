@@ -99,7 +99,7 @@ let res = await vk.baseDao.selects({
 
 ### vk.baseDao.getTableData的连表
 
-注意：`vk.baseDao.getTableData` 和 `vk.baseDao.selects` 的连表用法完全一致，也支持 `foreignDB` 属性。
+注意：`vk.baseDao.getTableData` 和 `vk.baseDao.selects` 的连表用法完全一致，也支持 `foreignDB` 属性。在 vk-admin 项目中比较常用 [详细介绍](https://vkdoc.fsq.pub/admin/2/table.html#vk-basedao-gettabledata)
 
 getTableData连表示例：
 
