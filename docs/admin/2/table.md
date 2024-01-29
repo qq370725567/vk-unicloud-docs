@@ -58,7 +58,7 @@ export default {
 | height           | 通用 - table的高度 | Number  | 无 | -  |
 | max-height        | 通用 - table的最大高度 | Number  | 无 | -  |
 | row-height        | 通用 - 行高 | Number  | 无 | -  |
-| row-key      | 通用 - 行数据的 Key （重要：值必须唯一，默认是_id） | Function,String  | "_id" | - |
+| row-key      | 通用 - 行数据的 Key （重要：值必须唯一，默认是_id） | String  | "_id" | - |
 | top          | 通用 - margin-top的高度 | Number  | 10 | -  |
 | selection          | 通用 - 显示多选框 | Boolean  | false | true |
 | selectable          | 通用 - 搭配selection=true时使用，返回值用来决定这一行的 CheckBox 是否可以勾选 [查看用法](#表格自带的多选框禁用规则)  | Function(row,index)  | - | - |
