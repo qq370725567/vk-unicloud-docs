@@ -344,7 +344,7 @@ uni.requestSubscribeMessage({
  * @param {String} template_appid     公众号appid（不传自动从uni-id配置中获取）
  * @param {String} template_id        所需下发的消息模板id
  * @param {String} url                跳转网页时填写
- * @param {Object} miniprogram  			跳转小程序时填写
+ * @param {Object} miniprogram        跳转小程序时填写
  * @param {Object} data               模板内容
  */
 let sendRes = await vk.openapi.weixin.uniformMessage.send({
@@ -433,7 +433,7 @@ let sendRes = await vk.openapi.weixin.uniformMessage.send({
  * @param {String} touser             接收者（用户）的 openid（只能是公众号下的openid）
  * @param {String} template_id        所需下发的消息模板id
  * @param {String} url                跳转网页时填写
- * @param {Object} miniprogram  			跳转小程序时填写
+ * @param {Object} miniprogram        跳转小程序时填写
  * @param {Object} data               模板内容
  */
 let sendRes = await vk.openapi.weixin.h5.templateMessage.send({
