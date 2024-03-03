@@ -169,6 +169,8 @@ if (transferRes.code === 0) {
 
 ## 设置IP白名单
 
+微信转账需要设置IP白名单，前往 [微信支付后台](https://pay.weixin.qq.com) - 上方菜单产品中心 - 找到商家转账到零钱 - 设置
+
 ### 腾讯云空间
 
 前往unicloud控制台，打开转账对应的云函数详情，开启固定IP即可。
@@ -177,7 +179,7 @@ if (transferRes.code === 0) {
 
 ### 阿里云空间
 
-直接把下面的ip都加进去即可。
+直接把下面的ip都加到[微信支付后台](https://pay.weixin.qq.com)即可。
 
 **代理服务器IP列表**
 
@@ -191,7 +193,7 @@ if (transferRes.code === 0) {
 
 ### 支付宝小程序云空间
 
-直接把下面的ip都加进去即可。
+直接把下面的ip都加到[微信支付后台](https://pay.weixin.qq.com)即可。
 
 **固定出口IP列表**
 
