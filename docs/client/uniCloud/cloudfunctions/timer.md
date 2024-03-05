@@ -61,6 +61,8 @@ exports.main = async (event, context) => {
 `cloudfunction-config` 的子参数含义
 
 **注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释**
+**注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释**
+**注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释**
 
 ```js
 // 注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释
