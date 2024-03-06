@@ -377,7 +377,7 @@ let info = await vk.baseDao.findById({
 |------------|----------|------|-----------|
 |   dbName   |  String  |  是  |   表名    |
 |   id |  String  |  是  |   记录的_id |
-|   fieldJson |  Object  |  否  |   字段显示规则  |
+|   fieldJson |  Object  |  否  |   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
 **返回值**
@@ -409,7 +409,7 @@ let info = await vk.baseDao.findByWhereJson({
 |------------|----------|------|-----------|
 |   dbName   |  String  |  是  |   表名    |
 |   whereJson |  Object  |  是  |   where 条件  |
-|   fieldJson |  Object  |  否  |   字段显示规则  |
+|   fieldJson |  Object  |  否  |   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）  |
 |   sortArr |  Array  |  否  |   排序规则  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
@@ -468,7 +468,7 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |   pageIndex |  Number  |  否  |   第几页 默认 1  |
 |   pageSize |  Number  |  否  |   每页显示数量 默认 10  |
 |   whereJson |  Object  |  否  |   where 条件  |
-|   fieldJson |  Object  |  否  |   字段显示规则（见上方调用示例）   |
+|   fieldJson |  Object  |  否  |   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）（见上方调用示例）   |
 |   sortArr |  Array  |  否  |   排序规则（见上方调用示例）  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 |   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
@@ -735,7 +735,7 @@ let list = await vk.baseDao.sample({
 |   dbName   |  String  |  是  |   表名    |
 |   size |  Number  |  是  |   随机获取的记录数量 |
 |   whereJson |  Object  |  否  |   where 条件  |
-|   fieldJson |  Object  |  否  |   字段显示规则  |
+|   fieldJson |  Object  |  否  |   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
 **返回值**

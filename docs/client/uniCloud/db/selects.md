@@ -76,8 +76,8 @@ let res = await vk.baseDao.selects({
 |   foreignDB			|  Array		|  否		|   连表规则 [详情](#foreigndb-连表规则)															|
 |   lastWhereJson	|  Object		|  否		|   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)					|
 |   lastSortArr		|  Array		|  否		|   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)						|
-|   addFields			|  Object		|  否		|   添加自定义字段规则																								|
-|   fieldJson			|  Object		|  否		|   字段显示规则																										|
+|   addFields			|  Object		|  否		|   添加自定义字段规则（用来添加虚拟字段，如增加一个通过某种计算得出的字段）			|
+|   fieldJson			|  Object		|  否		|   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）							|
 |   db						|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();									|
 |   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
 
