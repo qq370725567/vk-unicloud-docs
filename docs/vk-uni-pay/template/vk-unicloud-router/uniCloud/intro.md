@@ -1,10 +1,14 @@
+---
+sidebarDepth: 0
+---
+
 # 0、框架简介
 
-### 不使用此框架的请忽视
+## 不使用此框架的请忽视
 
 [点击查看](https://vkdoc.fsq.pub/client/)
 
-### 同时需要在 `uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js` 添加 `uniPayConfig` 配置
+## 同时需要在 `uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js` 添加 `uniPayConfig` 配置
 
 代码如下
 
@@ -18,7 +22,7 @@ module.exports = {
 };
 ```
 
-### 还需要右键 `router` 云函数，管理云函数依赖，添加 `vk-uni-pay` 依赖。
+## 还需要右键 `router` 云函数，管理云函数依赖，添加 `vk-uni-pay` 依赖。
 
 如下图所示。
 

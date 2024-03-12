@@ -1,6 +1,10 @@
+---
+sidebarDepth: 0
+---
+
 # 4、发起退款
 
-### 接口名：`vk.vkPay.refund`
+## 接口名：`vk.vkPay.refund`
 
 ```js
 let refundRes = await vk.vkPay.refund({
@@ -15,8 +19,7 @@ res = { code: 0, msg: '退款成功' };
 
 ```
 
- 
-### 参数
+## 请求参数
 
 | 参数   | 说明       | 类型    | 默认值  | 可选值 |
 |------- |-----------|---------|-------|-------|
@@ -32,3 +35,15 @@ res = { code: 0, msg: '退款成功' };
 自动生成规则：商户支付订单号-退款次数
 
 如：你的 out_trade_no 是 20220101090012541213652，本次是第一次退款，则 out_refund_no = 20220101090012541213652-1
+
+## 返回值
+
+|参数名				|类型		|说明					|支持平台	|
+|:-:					|:-:		|:-:					|:-:			|
+|outTradeNo		|String	|商户订单号		|-				|
+|transactionId|String	|平台订单号		|-				|
+|outRefundNo	|String	|商户退款单号	|微信支付	|
+|refundId			|String	|平台退款单号	|-				|
+|refundFee		|Number	|退款总金额		|-				|
+|cashRefundFee|Number	|现金退款金额	|-				|
+

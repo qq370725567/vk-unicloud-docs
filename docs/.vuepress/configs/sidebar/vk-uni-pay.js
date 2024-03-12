@@ -66,7 +66,10 @@ module.exports = [{
           'template/service/pay/queryPayment',
           'template/service/pay/queryRefund',
           'template/service/pay/refund',
-          'template/service/pay/transfer'
+          'template/service/pay/transfer',
+          'template/service/pay/wxpayTransfer3',
+          'template/service/pay/wxpayBatchTransfer3',
+          'template/service/pay/queryAccountBalance'
         ]
       },
       {
@@ -92,7 +95,9 @@ module.exports = [{
           'template/vk-unicloud-router/uniCloud/queryPayment',
           'template/vk-unicloud-router/uniCloud/queryRefund',
           'template/vk-unicloud-router/uniCloud/refund',
-          'template/vk-unicloud-router/uniCloud/transfer'
+          'template/vk-unicloud-router/uniCloud/transfer',
+          'template/vk-unicloud-router/uniCloud/transfer3',
+          'template/vk-unicloud-router/uniCloud/queryAccountBalance'
         ]
       },
       {
