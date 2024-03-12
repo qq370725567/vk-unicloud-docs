@@ -1,3 +1,7 @@
+---
+sidebarDepth: 0
+---
+
 # IOS内购支付
 
 > vk-pay的版本需 >= 1.10.0

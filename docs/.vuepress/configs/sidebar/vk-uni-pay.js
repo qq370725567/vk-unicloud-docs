@@ -48,12 +48,13 @@ module.exports = [{
     ]
   },
   "iosiap",
+  "wxpay-virtual",
   "vkspay",
   "error",
   {
     title: 'vk-pay云函数示例代码',
     path: '/vk-uni-pay/template/service/tips',
-    collapsable: false,
+    collapsable: true,
     children: [{
         title: 'pay',
         collapsable: false,

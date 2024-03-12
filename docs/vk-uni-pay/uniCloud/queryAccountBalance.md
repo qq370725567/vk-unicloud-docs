@@ -4,9 +4,9 @@ sidebarDepth: 0
 
 # 8、查询账户余额
 
-## 接口名：`queryAccountBalance`
+> vk-pay的版本需 >= 1.12.2
 
-**需要 vk-uni-pay 版本 ≥ 1.12.2**
+## 接口名：`queryAccountBalance`
 
 仅支持查询商家支付宝账户的余额，此接口一般用于商家支付宝转账给用户前查询商家账户余额是否充足
 
