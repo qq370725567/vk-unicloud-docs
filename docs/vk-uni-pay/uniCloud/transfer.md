@@ -81,7 +81,7 @@ if (transferRes.code === 0) {
 | pay_type  |  wxpay：微信支付 alipay：支付宝支付     | String  | -    | wxpay、alipay  |
 | remark  |  转账备注  | String  | -    | -  |
 | out_biz_no  |  转账单号  | String  | -    | -  |
-| check_name  |  是否需要检测真实姓名  | Boole  | true    | false  |
+| check_name  |  是否需要检测真实姓名  | Boolean  | true    | false  |
 | openid  |  微信专用 - 用户的openid   | String  | -    | -  |
 | platform  |  微信专用 - 平台类型：app-plus、mp-weixin，用于获取对应平台的支付配置信息     | String  | -    | app-plus、mp-weixin、h5  |
 | pid  |  多商户模式下的自定义商户id（等于vk-pay-config表的_id） [查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)   | String  | -    | -  |

@@ -52,12 +52,12 @@ exports.main = async (event, context) => {
 
 |参数名							|类型		|说明																																																																						|
 |:-:								|:-:		|:-:																																																																						|
-|orderPaid					|boolean|标记用户是否已付款成功（此参数只能表示用户确实付款了，但系统的异步回调逻辑可能还未执行完成）																										|
-|user_order_success	|boolean|用户异步通知逻辑是否全部执行完成，且无异常（参数await_notify为true时此值才能正常返回，此时建议前端可以通过此参数是否为true来判断是否支付成功）	|
-|out_trade_no				|string	|支付插件订单号																																																																	|
-|transaction_id			|string	|第三方支付交易单号（只有付款成功的才会返回）																																																		|
-|status							|int		|当前支付订单状态 -1：已关闭 0：未支付 1：已支付 2：已部分退款 3：已全额退款																																		|
-|payOrder						|object	|支付订单完整信息（参数pay_order_info为true时才会返回此值）																																											|
+|orderPaid					|Boolean|标记用户是否已付款成功（此参数只能表示用户确实付款了，但系统的异步回调逻辑可能还未执行完成）																										|
+|user_order_success	|Boolean|用户异步通知逻辑是否全部执行完成，且无异常（参数await_notify为true时此值才能正常返回，此时建议前端可以通过此参数是否为true来判断是否支付成功）	|
+|out_trade_no				|String	|支付插件订单号																																																																	|
+|transaction_id			|String	|第三方支付交易单号（只有付款成功的才会返回）																																																		|
+|status							|Number	|当前支付订单状态 -1：已关闭 0：未支付 1：已支付 2：已部分退款 3：已全额退款																																		|
+|payOrder						|Object	|支付订单完整信息（参数pay_order_info为true时才会返回此值）																																											|
 
 如果不需要等待异步回调，则直接通过 orderPaid 来判定是否支付即可
 

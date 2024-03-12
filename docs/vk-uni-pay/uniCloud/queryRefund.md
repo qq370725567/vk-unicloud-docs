@@ -31,5 +31,5 @@ exports.main = async (event, context) => {
 
 |参数名			|类型		|说明													|
 |:-:				|:-:		|:-:													|
-|queryResult|object	|第三方支付返回的结果					|
-|orderInfo	|object	|订单信息（只包含了部分信息）	|
+|queryResult|Object	|第三方支付返回的结果					|
+|orderInfo	|Object	|订单信息（只包含了部分信息）	|

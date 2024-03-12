@@ -43,7 +43,7 @@ exports.main = async (event, context) => {
 | 参数			| 说明																																																																																												| 类型		| 默认值| 可选值								|
 |-------		|-----------																																																																																									|---------|-------|-------								|
 | context		|  客户端请求环境，用于自动识别支付方式，如识别是小程序支付还是APP支付还是H5支付等等 <br/>VK云函数传 `originalParam.context` <br/>云对象传 `this.getClientInfo()` <br/>官方云函数传 `context`	| Object	| -			| -											|
-| provider	|  支付供应商：<br/>wxpay：微信支付官方 <br/>alipay：支付宝支付官方 <br/>appleiap：IOS内购支付 [详情](https://vkdoc.fsq.pub/vk-uni-pay/iosiap.html) <br/>vkspay：VksPay个人支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/vkspay.html)																																															| String	| -			| wxpay、alipay、vkspay	|
+| provider	|  支付供应商：<br/>wxpay：微信支付官方 <br/>alipay：支付宝支付官方 <br/>appleiap：IOS内购支付 [详情](https://vkdoc.fsq.pub/vk-uni-pay/iosiap.html) <br/>vkspay：VksPay个人支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/vkspay.html)		| String	| -			| wxpay、alipay、vkspay	|
 | isPC			|  如果是PC扫码支付，则设为true（使用支付组件时，组件会自动上传isPC的参数）																																																										| Boolean	| false	| true									|
 | needQRcode|  是否强制使用二维码支付（让顾客扫码支付，一般用于物联网，如按摩椅上的扫码支付） [查看详情](#needqrcode-强制使用二维码支付模式)																															| Boolean	| false	| true									|
 | data			|  订单数据 [查看详情](#data-参数)																																																																														| Object	| -			|												|
@@ -89,14 +89,14 @@ time_expire的值是时间戳，如 `time_expire: Date.now() + 1000*60` 代表60
 
 |参数名				|类型		|说明																																								|
 |:-:					|:-:		|:-:																																								|
-|orderInfo		|object	|用于发起支付的订单信息（不同的付款方式返回的值不同）																|
-|out_trade_no	|string	|本次交易的商户支付订单号																														|
-|provider			|string	|本次交易的支付供应商																																|
-|pay_type			|string	|本次交易的付款方式																																	|
-|needQRcode		|boolean|本次交易的是否是扫码支付模式																												|
-|qrcodeImage	|string	|如果是扫码支付，且设置了`needQRcode:'image'`，则会返回此字段，代表二维码的base64值	|
-|total_fee		|number	|本次交易的付款金额（单位分 100 = 1元）（新增于 1.11.3）														|
-|platform			|string	|发起支付时的客户端运行环境（新增于 1.11.3）																				|
+|orderInfo		|Object	|用于发起支付的订单信息（不同的付款方式返回的值不同）																|
+|out_trade_no	|String	|本次交易的商户支付订单号																														|
+|provider			|String	|本次交易的支付供应商																																|
+|pay_type			|String	|本次交易的付款方式																																	|
+|needQRcode		|Boolean|本次交易的是否是扫码支付模式																												|
+|qrcodeImage	|String	|如果是扫码支付，且设置了`needQRcode:'image'`，则会返回此字段，代表二维码的base64值	|
+|total_fee		|Number	|本次交易的付款金额（单位分 100 = 1元）（新增于 1.11.3）														|
+|platform			|String	|发起支付时的客户端运行环境（新增于 1.11.3）																				|
 
 ## pid（多商户模式）
 
