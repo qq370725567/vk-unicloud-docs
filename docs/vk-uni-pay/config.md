@@ -194,6 +194,22 @@ module.exports = {
       "sandbox": true, // 是否是沙箱环境（正式上线时必须配置为false）
     }
   },
+  // 微信虚拟支付
+  "wxpay-virtual": {
+    // 微信 - 小程序支付
+    "mp-weixin": {
+      "appId": "", // 小程序的appid
+      "secret": "", // 小程序的secret
+      "mchId": "", // 商户id
+      "offerId": "", // 支付应用ID
+      "appKey": "", // 现网AppKey（正式环境）
+      "sandboxAppKey": "", // 沙箱AppKey
+      "rate": 100, // 代币兑换比例，比如1元兑换100代币，那么这里就是100，建议设置为100（需要开通虚拟支付的时候也设置成 1 人民币 = 100 代币）
+      "token": "", // 微信小程序通信的token，在开发 - 开发管理 - 消息推送 - Token(令牌)
+      "encodingAESKey": "", // 必须43位，微信小程序消息加密密钥，在开发 - 开发管理 - 消息推送 - EncodingAESKey(消息加解密密钥)
+      "sandbox": false, // 是否是沙箱环境（注意：沙箱环境异步回调可能有延迟，建议直接正式环境测试）
+    }
+  },
   /**
    * VksPay商户支付配置
    * 支持个人无需营业执照即可签约开户，正规通道，非市面上的挂机免签。（同时也支持企业签约）

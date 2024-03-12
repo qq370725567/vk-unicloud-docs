@@ -18,6 +18,8 @@ sidebarDepth: 0
 
 ## 配置
 
+![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/c209fb67-fe1a-4a7e-8e43-11cbffadb50c.png)
+
 对应支付配置的节点是 `wxpay-virtual.mp-weixin`
 
 ```js
