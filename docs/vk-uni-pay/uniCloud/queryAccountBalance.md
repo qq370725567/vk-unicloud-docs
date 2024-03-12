@@ -2,13 +2,13 @@
 sidebarDepth: 0
 ---
 
-# 8、查询商户余额
+# 8、查询账户余额
 
 ## 接口名：`queryAccountBalance`
 
 **需要 vk-uni-pay 版本 ≥ 1.12.2**
 
-仅支持查询支付宝余额，此接口一般用于支付宝转账前查询余额是否充足
+仅支持查询商家支付宝账户的余额，此接口一般用于商家支付宝转账给用户前查询商家账户余额是否充足
 
 ```js
 const vkPay = require("vk-uni-pay");
@@ -20,9 +20,10 @@ let queryAccountBalanceRes = await vkPay.queryAccountBalance({
 if (queryAccountBalanceRes.code === 0) {
   // 成功后的逻辑
   let {
-    available_amount, // 可用余额
-    freeze_amount, // 冻结余额
-  } = queryAccountBalanceRes; 
+    available_amount, // 可用余额（注意，这里单位是元）
+    freeze_amount, // 冻结余额（注意，这里单位是元）
+  } = queryAccountBalanceRes;
+  console.log('可用余额: ', available_amount);
 } else {
   // 失败后的逻辑
 
@@ -41,5 +42,5 @@ if (queryAccountBalanceRes.code === 0) {
 
 |参数名              |类型		|说明												|
 |:-:                |:-:		|:-:												|
-|available_amount   |Number	|可用余额										|
-|freeze_amount      |Number	|冻结余额										|
+|available_amount   |Number	|可用余额（单位：元）					|
+|freeze_amount      |Number	|冻结余额（单位：元）					|
