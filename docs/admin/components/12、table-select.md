@@ -289,9 +289,9 @@ props 对象属性
 
 ### 注意：
 
-1、`idKey` 和 `nameKey` 只能各设置1个。
-2、 设置了`idKey:true`的字段，必须在列表中非空唯一(如主键_id)，默认`idKey`为`_id`
-3、 设置了`nameKey:true`的字段，用于展示在已选择的列表中（如用户昵称字段）默认`nameKey`为`name`
+1. `idKey` 和 `nameKey` 只能各设置1个。
+2. 设置了 `idKey:true` 的字段，必须在列表中非空唯一（如主键_id），默认 `idKey` 为 `_id`
+3. 设置了 `nameKey:true` 的字段，用于展示在已选择的列表中（如用户昵称字段）默认 `nameKey` 为 `name`
 
 ### summaryKey 求和
 
