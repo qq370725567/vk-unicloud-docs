@@ -34,7 +34,7 @@ res = await vk.vkPay.createPayment({
 | 参数			| 说明																																																																																												| 类型		| 默认值| 可选值								|
 |-------		|-----------																																																																																									|---------|-------|-------								|
 | context		|  客户端请求环境，用于自动识别支付方式，如识别是小程序支付还是APP支付还是H5支付等等 <br/>VK云函数传 `originalParam.context` <br/>云对象传 `this.getClientInfo()` <br/>官方云函数传 `context`	| Object	| -			| -											|
-| provider	|  支付供应商：<br/>wxpay：微信支付官方 <br/>alipay：支付宝支付官方 <br/>appleiap：IOS内购支付 [详情](https://vkdoc.fsq.pub/vk-uni-pay/iosiap.html) <br/>vkspay：VksPay个人支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/vkspay.html)		| String	| -			| wxpay、alipay、vkspay	|
+| provider	|  支付供应商：<br/>wxpay：微信支付官方 <br/>alipay：支付宝支付官方 <br/>appleiap：IOS内购支付 [详情](https://vkdoc.fsq.pub/vk-uni-pay/iosiap.html) <br/>vkspay：VksPay个人支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/vkspay.html)	<br/>wxpay-virtual：微信小程序虚拟支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/wxpay-virtual.html)		| String	| -			| wxpay、alipay、appleiap、vkspay、wxpay-virtual	|
 | isPC			|  如果是PC扫码支付，则设为true（使用支付组件时，组件会自动上传isPC的参数）																																																										| Boolean	| false	| true									|
 | needQRcode|  是否强制使用二维码支付（让顾客扫码支付，一般用于物联网，如按摩椅上的扫码支付） [查看详情](#needqrcode-强制使用二维码支付模式)																															| Boolean	| false	| true									|
 | data			|  订单数据 [查看详情](#data-参数)																																																																														| Object	| -			|												|

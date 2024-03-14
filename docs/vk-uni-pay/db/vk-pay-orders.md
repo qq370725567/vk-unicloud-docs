@@ -51,16 +51,21 @@ ___该表为插件支付专用表，正常你自己业务的订单还应有一�
 
 支付方式  如  wxpay_mp-weixin _ 左边是支付供应商（wxpay） _ 右边是支付类型（mp-weixin）
 
-|         值          |     说明       | 
-|-------------------- |---------------|
-| wxpay_mp-weixin     |  微信 - 小程序 |
-| wxpay_app-plus      |  微信 - APP   |
-| wxpay_h5            |   微信 - 网站二维码 |
-| wxpay_h5-weixin     |   微信 - 公众号   |
-| wxpay_mweb          |   微信 - 手机外部浏览器H5 |
-| alipay_mp-alipay    |  支付宝 - 小程序 |
-| alipay_app-plus     |  支付宝 - APP   |
-| alipay_h5           |  支付宝 - H5    |
+|         值							|     说明									|
+|--------------------			|---------------					|
+| wxpay_mp-weixin					|  微信 - 小程序						|
+| wxpay_app-plus					|  微信 - APP							|
+| wxpay_h5								|  微信 - 网站二维码				|
+| wxpay_h5-weixin					|  微信 - 公众号						|
+| wxpay_mweb							|  微信 - 手机外部浏览器H5	|
+| alipay_mp-alipay				|  支付宝 - 小程序					|
+| alipay_app-plus					|  支付宝 - APP						|
+| alipay_h5								|  支付宝 - H5							|
+| appleiap_app-plus				|  iOS内购 - APP						|
+| vkspay_h5								|  VksPay - H5			 			|
+| vkspay_mp-weixin				|  VksPay - 微信小程序			|
+| vkspay_app-plus					|  VksPay - APP						|
+| wxpay-virtual_mp-weixin	|  微信虚拟支付 - 微信小程序	|
 
 ### refund_list
 
