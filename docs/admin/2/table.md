@@ -1609,6 +1609,8 @@ queryForm1:{
 | search-text            | 搜索按钮的文本 | String  | 搜索 | -  |
 | senior-search-text            | 高级搜索按钮的文本 | String  | 高级搜索 | -  |
 | auto-search            | 选择型组件触发change时是否自动搜索 | Boolean  | true | false  |
+| @search         | 搜索按钮事件 | Function  | - | -  |
+| @reset         | 重置按钮事件 | Function  | - | -  |
 
 ### columns
 
