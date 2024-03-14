@@ -1463,6 +1463,91 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 </vk-data-table>
 ```
 
+### 表头插槽
+
+每个字段的表头插槽名：`v-slot:header_字段名`
+
+下发代码中实现了表头使用input输入框代替实现自定义搜索功能
+
+其中 `v-model="queryForm1.formData.nickname"` 表示双向绑定 `nickname` 字段
+
+`@keyup.enter.native="search"` 表示当按下回车时执行搜索
+
+代码示例
+
+```vue
+<template>
+  <vk-data-table>
+  
+    <!-- v-slot:header_nickname 中的 header_nickname 对应 columns中的 "header_" + key -->
+    <template  v-slot:header_nickname="{ column, index }">
+      <el-input v-model="queryForm1.formData.nickname" size="mini" placeholder="输入关键字搜索" @keyup.enter.native="search"></el-input>
+    </template>
+    
+  </vk-data-table>
+</template>
+<script>
+	export default {
+    data() {
+      // 页面数据变量
+      return {
+        // 查询表单开始
+        queryForm1: {
+          // 查询表单数据源，可在此设置默认值
+          formData: {
+            nickname: ""
+          },
+          columns: [
+            // 实现昵称模糊查询
+            { key:"nickname", title:"昵称", type:"text", width:160, mode:"%%" },
+          ]
+        },
+        // 查询表单结束 -----------------------------------------------------------
+      };
+    },
+  }
+</script>
+```
+
+右侧操作按钮的表头插槽
+
+代码示例
+
+```vue
+<template>
+  <vk-data-table>
+  
+    <!-- v-slot:header___operation 中的 header___operation 是固定的-->
+    <template  v-slot:header___operation="{ column, index }">
+    	<el-input v-model="queryForm1.formData.nickname" size="mini" placeholder="输入关键字搜索" @keyup.enter.native="search"></el-input>
+    </template>
+    
+  </vk-data-table>
+</template>
+<script>
+	export default {
+    data() {
+      // 页面数据变量
+      return {
+        // 查询表单开始
+        queryForm1: {
+          // 查询表单数据源，可在此设置默认值
+          formData: {
+            nickname: ""
+          },
+          columns: [
+            // 实现昵称模糊查询
+            { key:"nickname", title:"昵称", type:"text", width:160, mode:"%%" },
+          ]
+        },
+        // 查询表单结束 -----------------------------------------------------------
+      };
+    },
+  }
+</script>
+```
+
+
 [返回展开行](#展开行)
 
 ## 万能表格搜索组件 
