@@ -8,6 +8,8 @@ sidebarDepth: 0
 
 custom-editor-tinymce 是基于 tinymce 实现的多功能富文本编辑器组件，仅支持PC端
 
+作者：VK
+
 **特点**
 
 1. 支持插入视频
@@ -21,10 +23,6 @@ custom-editor-tinymce 是基于 tinymce 实现的多功能富文本编辑器组�
 9. 支持插入代码块
 10. 支持全屏
 11. 支持自定义拓展按钮
-
-作者：VK
-
-作者QQ：370725567
 
 [源码仓库](https://gitee.com/vk-uni/vk-unicloud-admin/tree/master/components/custom-editor-tinymce)
 
