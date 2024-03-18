@@ -75,7 +75,14 @@ module.exports = [{
     collapsable: false,
     children: [
       'custom-components/custom-components',
-      'custom-components/custom-components-list'
+      'custom-components/custom-components-list',
+      {
+        title: '已提交的自定义组件',
+        collapsable: false,
+        children: [
+          'custom-components/components/custom-editor-tinymce'
+        ]
+      }
     ]
   },
   {
