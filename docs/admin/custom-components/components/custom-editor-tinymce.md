@@ -191,6 +191,6 @@ this.$refs.editorTinymce1.insertVideos([
 
 需要满足以下条件
 
-1. vk-admin 框架版本 ≥ 1.18.4
-2. vk-unicloud-admin-ui 的npm包 ≥ 1.18.9
+1. vk-admin 框架版本 ≥ 1.19.0
+2. vk-unicloud-admin-ui 的npm包 ≥ 1.19.0
 3. PC端打开，移动端部分浏览器不支持（已知手机微信、手机QQ不支持）
