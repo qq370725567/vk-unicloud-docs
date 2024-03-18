@@ -4,14 +4,16 @@
 
 > VK框架官方Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
 
-**格式**
-
-```js
-[组件名--作者QQ--组件标题](#仓库地址)
-```
+格式：参考第一个组件
 
 注意：请按时间排序，新加的组件在下面显示，此页面后续可能会优化，暂先这样展示。
 
-- [aaa--22466457--测试组件1，支持xxx功能](#仓库地址)
+## custom-editor-tinymce 多功能富文本编辑器
 
-- [bbb--22466457--测试组件2，支持yyy功能](#仓库地址)
+介绍：基于tinymce实现的多功能富文本编辑器组件，支持PC端
+
+作者：VK
+
+作者QQ：370725567
+
+[源码仓库](#https://gitee.com/vk-uni/vk-unicloud-admin/components/custom-editor-tinymce)

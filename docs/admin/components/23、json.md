@@ -22,8 +22,8 @@
 
 ### 暂无
 
-
 ### template 使用方式
+
 ```html
 <vk-data-input-json v-model="value1"></vk-data-input-json>
 ```
