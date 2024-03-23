@@ -66,19 +66,20 @@ show:["detail"] 是为了控制只在点击详情时显示
 | 参数									| 说明																																											| 类型						| 默认值		| 可选值	|
 |------------------			|-------------------------------																													|---------			|--------	|-------|
 | id										| 编辑器id，默认自动生成																																		| String				| -				| -			|
-| placeholder						| 输入前的提示																																							| String				| 开始输入...				| -			|
+| placeholder						| 输入前的提示，默认为"开始输入..."																																										| String				| 开始输入...				| -			|
 | toolbar								| 工具栏	 [详细配置](https://www.tiny.cloud/docs/tinymce/latest/toolbar-configuration-options/)																																								| Array					| -				| -			|
 | menubar								| 菜单栏	 [详细配置](https://www.tiny.cloud/docs/tinymce/latest/menus-configuration-options/)																																								| String				| -				| -			|
 | width									| 宽度，值为数字时单位是px																																		| Number、String	| -				| -			|
 | height								| 高度，值为数字时单位是px																																		| Number、String	| -				| -			|
 | editorConfig					| 编辑器其他透传配置 [详细配置](https://www.tiny.cloud/docs/tinymce/latest/basic-setup/)	| Object				| -				| -			|
-| language							| 多语言	zh 中文 en 英文																																		| String				| zh				| zh、en			|
-| disabled							| 是否禁止编辑																																							| Boolean				| false				| true、false			|
-| needSave							| 上传的图片是否需要保存到素材库																															| Boolean				| false				| true、false			|
+| language							| 多语言	<br/>zh-Hans 中文简体 <br/>zh-Hant 中文繁体 <br/>en 英文																																| String				| zh				| zh、en			|
+| disabled							| 是否禁止编辑，默认为false																																										| Boolean				| false				| true、false			|
+| needSave							| 上传的图片是否需要保存到素材库，默认为false																																	| Boolean				| false				| true、false			|
 | category_id						| 当 needSave 为true时，上传的分类id																												| String				| -				| -			|
 | cloudDirectory				| 上传的目录																																								| String				| -				| -			|
 | env										| 上传文件使用的uniCloud环境																																| String				| -				| -			|
 | cloudPathRemoveChinese| 上传后的文件名是否需要删除中文																															| Boolean				| false				| true、false			|
+| showLoading| 初始化时是否显示loading，默认为true			
 
 ## 组件方法
 
