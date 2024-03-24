@@ -188,9 +188,9 @@
 | showSort            | 是否显示排序按钮 | Boolean  | false | true |
 | showDelete            | 是否显示删除按钮,array object不支持,请用rightBtns控制 | Boolean  | true | false |
 | emptyText            | 没有数据时显示的文字 | String  | 暂无数据 | -  |
-| defaultValue            | 每一项的默认值 | Object  | - | -  |
+| defaultValue            | 每一项的默认值 | Object、Function  | - | -  |
 | rowKey            | 每一项唯一索引值 | String  | _index | -  |
-| columnIndexMethod            | 序号格式化方法 | String/Function  | - | -  |
+| columnIndexMethod            | 序号格式化方法 | String、Function  | - | -  |
 | columnIndexWidth            | 序号显示的宽度 | Number  | 80 | -  |
 | columnIndexLabel            | 序号显示的标题 | String  | # | -  |
 | rightBtns            | 右侧按钮显示列表 | Array  | - | ['copy','delete'] |
