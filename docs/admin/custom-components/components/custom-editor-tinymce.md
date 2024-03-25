@@ -23,7 +23,8 @@ custom-editor-tinymce 是基于 tinymce 实现的多功能富文本编辑器组�
 9. 支持源码编辑
 10. 支持插入代码块
 11. 支持全屏
-12. 支持自定义拓展按钮
+12. 支持国际化
+13. 支持自定义拓展按钮
 
 [源码仓库](https://gitee.com/vk-uni/vk-unicloud-admin/tree/master/components/custom-editor-tinymce)
 
@@ -72,7 +73,7 @@ show:["detail"] 是为了控制只在点击详情时显示
 | width									| 宽度，值为数字时单位是px																																		| Number、String	| -				| -			|
 | height								| 高度，值为数字时单位是px																																		| Number、String	| -				| -			|
 | editorConfig					| 编辑器其他透传配置 [详细配置](https://www.tiny.cloud/docs/tinymce/latest/basic-setup/)	| Object				| -				| -			|
-| language							| 多语言	<br/>zh-Hans 中文简体 <br/>zh-Hant 中文繁体 <br/>en 英文																																| String				| zh				| zh、en			|
+| language							| 国际化多语言	<br/>zh-Hans 中文简体 <br/>zh-Hant 中文繁体 <br/>en 英文																																| String				| zh-Hans		| zh-Hans、zh-Hant、en			|
 | disabled							| 是否禁止编辑，默认为false																																										| Boolean				| false				| true、false			|
 | needSave							| 上传的图片是否需要保存到素材库，默认为false																																	| Boolean				| false				| true、false			|
 | category_id						| 当 needSave 为true时，上传的分类id																												| String				| -				| -			|
