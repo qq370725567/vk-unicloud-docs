@@ -36,6 +36,10 @@ custom-editor-tinymce 是基于 tinymce 实现的多功能富文本编辑器组�
 { key:"editor", title:"多功能富文本组件", type:"custom", component:"custom-editor-tinymce", width: 750, height: 500, placeholder: "开始输入..." },
 ```
 
+**特别注意**
+
+ `万能表单` 与 `弹窗组件` 搭配使用时，弹窗组件需要设置属性 `:destroy-on-close="true"` 才能正常使用此富文本编辑器
+
 ### template使用方式
 
 ```html
