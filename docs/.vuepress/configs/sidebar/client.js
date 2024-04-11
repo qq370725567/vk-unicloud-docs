@@ -35,6 +35,7 @@ module.exports = [{
       'pages/localStorage',
       'pages/sessionStorage',
       'pages/isQingming',
+      'pages/icon',
       {
         title: '组件',
         children: [
