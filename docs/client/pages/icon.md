@@ -4,7 +4,9 @@ sidebarDepth: 0
 
 # 扩展图标库
 
-* 1、从 [https://www.iconfont.cn](https://www.iconfont.cn) 网站上生成图标库css文件
+## 下载安装图标
+
+* 从 [https://www.iconfont.cn](https://www.iconfont.cn) 网站上生成图标库css文件
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/0a5b6fdc-aeb3-44e8-ab82-95bfdf052457.png)
 
@@ -20,7 +22,7 @@ FontClass前缀：vk-aaa-icon-
 
 Font Family：vk-aaa-icon
 
-* 2、下载至本地
+* 下载至本地
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/82b89772-7a86-445a-be0f-c22af9127bdb.png)
 
@@ -41,6 +43,7 @@ Font Family：vk-aaa-icon
 
 则 `vk-custom-icon-update` 就是图标的 `name`，也是图标的值
 
+## 使用示例
 
 **显示图标**
 
