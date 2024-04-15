@@ -43,6 +43,8 @@ AES属于对称加密方法，高级加密标准(Advanced Encryption Standard，
 
 即加密和解密都用同一个密钥
 
+### aes192算法
+
 ```js
 const crypto = require('crypto');
  
@@ -62,6 +64,58 @@ let decrypted = decipher.update(encrypted, 'hex', 'utf8');
 decrypted += decipher.final('utf8');
 // decrypted 为解密后的内容，即最开始需要加密的原始数据文本text
 console.log('decrypted: ', decrypted)
+
+```
+
+### aes-256-ecb算法
+
+```js
+const crypto = require('crypto');
+
+// 密钥
+const key = "5d44a032652974c3e53644945a95b126"; // AES-256位密钥
+
+// 待加密的文本
+const text = '我是待加密的信息';
+console.log('加密前的原文:', text);
+
+// 加密
+const cipher = crypto.createCipheriv('aes-256-ecb', key, '');
+let encrypted = cipher.update(text, 'utf8', 'hex');
+encrypted += cipher.final('hex');
+console.log('加密后的密文:', encrypted);
+
+// 解密
+const decipher = crypto.createDecipheriv('aes-256-ecb', key, '');
+let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+decrypted += decipher.final('utf8');
+console.log('解密后的明文:', decrypted);
+```
+
+### aes-256-cbc算法（带偏移量）
+
+```js
+const crypto = require('crypto');
+
+// 密钥和偏移量（IV）
+const key = "5d44a032652974c3e53644945a95b126"; // AES-256位密钥，必须32位
+const iv = "652974c3e5364494"; // 初始化向量（IV）必须16位
+
+// 待加密的文本
+const text = '我是待加密的信息';
+console.log('加密前的原文:', text);
+
+// 加密
+const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+let encrypted = cipher.update(text, 'utf8', 'hex');
+encrypted += cipher.final('hex');
+console.log('加密后的密文:', encrypted);
+
+// 解密
+const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
+let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+decrypted += decipher.final('utf8');
+console.log('解密后的明文:', decrypted);
 
 ```
 
