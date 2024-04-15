@@ -8,36 +8,72 @@ sidebarDepth: 1
  
 crypto 是 Nodejs 的内置模块，提供了加密功能，包括对 OpenSSL 的哈希、HMAC、加密、解密、签名、以及验证功能的一整套封装。
 
-## MD5加密 
+## Hash（哈希函数）
 
-MD5称为不可逆加密，该加密方式会生成固定长度的加密内容，无法通过加密内容解密成原始内容。
+又称为不可逆加密函数，主要用于生成数据的一个固定长度的“指纹”，无法通过加密内容解密成原始内容。
 
-```js
-const crypto = require('crypto');
-const md5 = crypto.createHash('md5');
-let cryptostr = md5.update('Hello, world!').digest('hex');
-```
+安全性排序：SHA3 ＞ SHA256 ＞ SHA1 ＞ MD5
 
-## SHA1加密 
+性能排序：MD5 ＞ SHA1 ＞ SHA256 ＞ SHA3
 
-```js
-const crypto = require('crypto');
-const sha1 = crypto.createHash('sha1');
-let cryptostr = sha1.update('Hello, world!').digest('hex');
-```
+### MD5算法 
 
-
-## HMAC加密
-
-HMAC算法也是一种哈希算法，它可以利用MD5或SHA1等哈希算法，需要配置密钥。
+MD5生成一个128位的哈希值，通常表示为32个十六进制数，在其早期广泛用于各种验证和安全性较低的场合，如检查文件完整性。
 
 ```js
 const crypto = require('crypto');
-const hmac = crypto.createHmac('sha256', 'secret-key');
-let cryptostr = hmac.update('Hello, world!').digest('hex');
+let text = 'Hello, world!';
+let hash = crypto.createHash('md5').update(text).digest('hex');
+console.log('md5 Hash: ', hash);
 ```
 
-## AES加解密
+### SHA1算法
+
+SHA-1比MD5安全的哈希算法，生成一个160位的哈希值，通常表示为40个十六进制数。
+
+```js
+const crypto = require('crypto');
+let text = 'Hello, world!';
+let hash = crypto.createHash('sha1').update(text).digest('hex');
+console.log('sha1 Hash: ', hash);
+```
+
+### SHA256算法
+
+比SHA1更安全的哈希算法，SHA-256生成的哈希值长度为256位，通常以64个十六进制数字表示。这种哈希算法被广泛认为是安全的，适用于多种需要数据完整性和安全性的场合。
+
+```js
+const crypto = require('crypto');
+// 待哈希的数据
+let text = 'Hello, world!';
+let hash = crypto.createHash('sha256').update(text).digest('hex');
+console.log('SHA-256 Hash: ', hash);
+```
+
+### SHA3算法
+
+SHA-3（Secure Hash Algorithm 3）是NIST（美国国家标准与技术研究院）在2015年公布的一种加密哈希函数。它是继SHA-1和SHA-2之后，作为新的安全哈希标准而设计的。SHA-3的设计目的是为了提高安全性，尤其是在面对量子计算威胁的背景下。
+
+```js
+const crypto = require('crypto');
+// 待哈希的数据
+let text = 'Hello, world!';
+let hash = crypto.createHash('sha3-512').update(text).digest('hex');
+console.log('sha3-512 Hash: ', hash);
+```
+
+## Hmac（加密哈希函数）
+
+Hmac算法也是一种哈希算法，它也可以指定MD5、SHA1、SHA256、SHA3等哈希算法，但需要配置密钥，它主要用于消息认证，即验证一条消息是否未被篡改，并且确实是由持有共享密钥的发送者发送的。
+
+```js
+const crypto = require('crypto');
+let text = 'Hello, world!';
+let hmac = crypto.createHmac('sha256', 'secret-key').update(text).digest('hex');
+console.log('SHA-256 Hmac: ', hmac);
+```
+
+## AES加解密（对称加密）
 
 AES属于对称加密方法，高级加密标准(Advanced Encryption Standard，AES)
 
@@ -119,13 +155,64 @@ console.log('解密后的明文:', decrypted);
 
 ```
 
-## RSA-SHA256签名
+## RSA算法（非对称加密）
+
+### RSA加解密
+
+RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的
+
+RSA算法是一种非对称加密算法，与对称加密算法不同的是，RSA算法有两个不同的密钥，一个是公钥，一个是私钥。其中公钥用来加密，私钥用来解密
+
+```js
+const crypto = require('crypto');
+
+// 生成PKCS#8格式的RSA密钥对
+const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+	modulusLength: 2048, // 密钥长度
+	publicKeyEncoding: {
+		type: 'spki', // 公钥格式
+		format: 'pem', // PEM格式
+	},
+	privateKeyEncoding: {
+		type: 'pkcs8', // 私钥格式
+		format: 'pem', // PEM格式
+	},
+});
+
+console.log('Public Key (PKCS8):', publicKey);
+console.log('Private Key (PKCS8):', privateKey);
+
+// 使用公钥加密
+const text = '我是待加密的信息';
+console.log('加密前的原文:', text);
+
+const encryptBuffer = crypto.publicEncrypt({
+		key: publicKey,
+		padding: crypto.constants.RSA_PKCS1_OAEP_PADDING, // 填充方式
+	},
+	Buffer.from(text)
+);
+
+console.log('加密后的密文:', encryptBuffer.toString('hex'));
+
+// 使用私钥解密
+const decryptBuffer = crypto.privateDecrypt({
+		key: privateKey,
+		padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+	},
+	encryptBuffer
+);
+
+console.log('解密后的明文:', decryptBuffer.toString());
+```
+
+### RSA签名
 
 一般用于对传输的http文本内容进行签名，防止伪造。
 
 __与AES加密的区别是，签名是固定长度的字符串，无法通过签名解密原始文本，只能通过原始文本和密钥验证签名是否正确。__
 
-`RSA-SHA256` 属于非对称加密，即 `公钥签名` 需要用 `私钥验签`，而 `私钥签名` 需要用 `公钥验签`
+`RSA` 属于非对称加密，即 `公钥签名` 需要用 `私钥验签`，而 `私钥签名` 需要用 `公钥验签`
 
 ```js
 // 引入crypto模块
