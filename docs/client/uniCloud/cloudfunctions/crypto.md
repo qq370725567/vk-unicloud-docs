@@ -154,6 +154,7 @@ console.log('publicKey: ', publicKey);
 ```js
 // 加密数据
 let encryptedKey = vk.crypto.aes.encrypt({
+  mode: "aes-256-ecb",
   data: {
     sessionKey: "XXXXX"
   }
@@ -162,6 +163,7 @@ console.log('encryptedKey: ', encryptedKey)
 
 // 解密 sessionKey 示例
 let decryptedRes = vk.crypto.aes.decrypt({
+  mode: "aes-256-ecb",
   data: encryptedKey, // 待解密的原文
 });
 console.log('decryptedRes: ', decryptedRes)
