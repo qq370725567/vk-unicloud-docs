@@ -259,6 +259,56 @@ uniCloud内的参数说明
 
 10. 操作完成后，明天就可以查看到数据了（注意：今天的数据需要明天跑批后才能看）
 
+## 如何指定某个页面不显示leftWindow和topWindow
+
+在 `pages.json` 里配置即可，参考登录页面的配置，只需要配置 `style` 下的 `topWindow` 为 `false`，`leftWindow` 也为 `false`
+
+```js
+{
+	"path": "pages/login/index",
+	"style": {
+		"topWindow": false,
+		"leftWindow": false,
+		"navigationBarTitleText": "登录"
+	}
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style scoped>
 h1{
   font-size:1.4em;
