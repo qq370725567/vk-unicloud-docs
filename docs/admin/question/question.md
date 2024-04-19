@@ -263,7 +263,7 @@ uniCloud内的参数说明
 
 在 `pages.json` 里配置即可，参考登录页面的配置，只需要配置 `style` 下的 `topWindow` 为 `false`，`leftWindow` 也为 `false`
 
-```js
+```json
 {
 	"path": "pages/login/index",
 	"style": {
