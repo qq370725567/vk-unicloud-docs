@@ -3,7 +3,10 @@ sidebarDepth: 0
 ---
 
 # 定时器（定时任务）
- 
+
+## 单次执行时长小于180秒的定时任务
+
+
 以实现1小时自动请求一次指定的云函数为例
 
 - 1、编写 `client/timedTask/pub/autoCancelOrder` 的云函数，写定时任务的业务逻辑。（没有则新建）
@@ -16,7 +19,7 @@ sidebarDepth: 0
 'use strict';
 exports.main = async (event, context) => {
   /**
-  * 定时器1号 - 自动取消订单
+  * 定时器1号 - xxxxx
   */
   let res = { code:0, msg:"" };
   res.callFunctionResult = await uniCloud.callFunction({
@@ -72,7 +75,7 @@ exports.main = async (event, context) => {
   "concurrency": 1, // 阿里云专属，固定为1即可
   "memorySize": 512, // 函数的最大可用内存，单位MB，可选值： 128|256|512|1024|2048，默认值512
   "path": "", // 云函数Url化path部分（定时器不需要填）
-  "timeout": 600, // 函数的超时时间，单位秒，阿里云最长7200秒 腾讯云900秒
+  "timeout": 600, // 函数的超时时间，单位秒，阿里云最长7200秒 腾讯云900秒 支付宝云180秒
   // triggers 字段是触发器数组，目前仅支持一个触发器，即数组只能填写一个，不可添加多个
   "triggers": [{
      // config: 触发器配置，在定时触发器下，config 格式为 cron 表达式，规则见 https://uniapp.dcloud.net.cn/uniCloud/trigger
@@ -86,6 +89,109 @@ exports.main = async (event, context) => {
 - 5、右键 `z_timer1` 上传部署
 
 - 6、完成
+
+## 单次执行时长大于180秒的定时任务
+
+因为通过 `await uniCloud.callFunction` 方式调用其他云函数时，阿里云最长执行180秒，故当单次执行时长大于180秒时，不能用 `await uniCloud.callFunction` 的方式，只能将逻辑全部写在定时任务里
+
+具体操作步骤如下
+
+- 1、右键 `cloudfunctions` 目录 新建云函数，取名为 `z_timer1`（名字任意，这里以 `z_timer1` 为定时器1号的名称）
+
+- 2、复制定时器模板代码到 `z_timer1` 的 `index.js`
+
+```js
+'use strict';
+// 引入 vk-unicloud
+const vkCloud = require('vk-unicloud');
+// 通过 vkCloud.createInstance 创建 vk 实例
+const vk = vkCloud.createInstance({
+  baseDir: __dirname,
+  requireFn: require
+});
+exports.main = async (event, context) => {
+  /**
+  * 定时器1号 - xxxxxx
+  */
+  let res = { code:0, msg:"" };
+  
+  // 这里直接写你的定时任务逻辑
+  
+  // 可以直接调用baseDao的API了
+  let userList = await vk.baseDao.select({
+    dbName:"uni-id-users",
+    getMain: true,
+    pageIndex: 1,
+    pageSize: 1000,
+    whereJson: {
+
+    },
+    fieldJson: {},
+    sortArr: [{ "name":"_id", "type":"desc" }],
+  });
+  
+ 
+  return res;
+};
+
+```
+
+- 3、编写 `z_timer1/package.json` 的代码
+
+```json
+{
+  "name": "z_timer1",
+  "main": "index.js",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "uni-config-center": "file:../../../uni_modules/uni-config-center/uniCloud/cloudfunctions/common/uni-config-center",
+    "uni-id": "file:../../../uni_modules/uni-id/uniCloud/cloudfunctions/common/uni-id",
+    "vk-unicloud": "file:../../../uni_modules/vk-unicloud/uniCloud/cloudfunctions/common/vk-unicloud"
+  },
+  "cloudfunction-config": {
+    "concurrency": 1,
+    "memorySize": 512,
+    "path": "",
+    "timeout": 7200,
+    "triggers": [{
+      "config": "0 0 * * * * *",
+      "name": "z_timer1",
+      "type": "timer"
+    }],
+    "runtime": "Nodejs12"
+  }
+}
+```
+
+`cloudfunction-config` 的子参数含义
+
+**注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释**
+**注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释**
+**注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释**
+
+**定时任务阿里云最长运行 7200秒 腾讯云 900秒 支付宝小程序云 180秒（但支付宝小程序云后面会支持异步执行）**
+
+```js
+// 注意：不可直接复制下面的代码，因为`package.json`文件不可以写注释
+{
+  "concurrency": 1, // 阿里云专属，固定为1即可
+  "memorySize": 512, // 函数的最大可用内存，单位MB，可选值： 128|256|512|1024|2048，默认值512
+  "path": "", // 云函数Url化path部分（定时器不需要填）
+  "timeout": 7200, // 函数的超时时间，单位秒，阿里云最长7200秒 腾讯云900秒 支付宝云180秒
+  // triggers 字段是触发器数组，目前仅支持一个触发器，即数组只能填写一个，不可添加多个
+  "triggers": [{
+     // config: 触发器配置，在定时触发器下，config 格式为 cron 表达式，规则见 https://uniapp.dcloud.net.cn/uniCloud/trigger
+    "config": "0 0 2 1 * * *", 
+    "name": "z_timer1",// name: 触发器的名字
+    "type": "timer", // 触发器类型 固定为 timer
+  }]
+}
+```
+
+- 4、右键 `z_timer1` 上传部署
+
+- 5、完成
 
 ## Cron 表达式
 
@@ -141,6 +247,5 @@ Cron 表达式有七个必需字段（阿里云是6个），按空格分隔。
 
 1. 阿里云不支持秒级触发（最低是1分钟）
 2. 支付宝云不支持星期参数
-
 
 
