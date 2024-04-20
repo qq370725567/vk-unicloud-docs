@@ -6,11 +6,15 @@
 
 1. 没有营业执照的个人想接入在线支付
 2. 有营业执照的企业但对公账户因某种原因不可用时或就想收款到个人时
-3. 多商户（多租户）平台给每一个商户（租户）开通自己的在线支付（租户可能不是企业，是个人），收款直接到商户（租户）自己的商户号中，而不是平台企业代收，可以规避平台二清风险，欢迎多商户平台联系QQ：[370725567](tencent://message/?uin=370725567) 咨询合作。
+3. 多商户（多租户）平台给每一个商户（租户）开通自己的在线支付（租户可能不是企业，是个人），收款直接到商户（租户）自己的商户号中，而不是平台企业代收，可以规避平台二清风险，欢迎多商户平台联系QQ：[370725567](tencent://message/?uin=370725567) 咨询合作（无需ICP许可证）。
 
 ## 企业合作
 
 如果你的公司有 `ICP许可证` 或 `EDI许可证`，可联系QQ：[370725567](tencent://message/?uin=370725567) 咨询更进一步的合作。
+
+[传送门 - ICP许可证代办 - 阿里云官方](https://tm.aliyun.com/channel/product/icp?scm=20140722.S_card%40%40%E5%95%86%E5%93%81%40%40453951.S_card0.ID_card%40%40%E5%95%86%E5%93%81%40%40453951-RL_ICP%E8%AE%B8%E5%8F%AF%E8%AF%81-LOC_search%7EUND%7Ecard%7EUND%7Eitem-OR_ser-V_3-P0_0&source=5176.11533457&userCode=eeg47b5x)
+
+[传送门 - ICP、EDI许可证代办 - 阿里云云市场](https://market.aliyun.com/products/56838014/cmfw00042320.html?innerSource=search_ICP#sku=yuncode3632000002&source=5176.11533457&userCode=eeg47b5x)
 
 ## 配置
 
