@@ -405,15 +405,14 @@ await redis.pexpireat(key, timestamp);
 - 调用示例
 
 ```js
-await redis.keys(key, pattern);
-await redis.keys(key, "a*");
+await redis.keys(patten: string)
+await redis.keys("a*");
 ```
 
 - 参数说明
 
 | 参数      | 说明             | 类型    | 必填  | 说明 |
 |-----------|-----------------|---------|--------|-------|
-| key       | 键名            | String  | 是     | - |
 | pattern       | 表达式            | String  | 是     | -  |
 
 ### move
