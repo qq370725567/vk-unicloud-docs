@@ -32,7 +32,7 @@ let lockId = "001"; // 锁的id
 // 获得锁的实例
 const lockManage = vk.getReentrantLockManage({
 	id: lockId, // 锁的id
-	timeout: 5, // 锁的超时时间，超时后强制归还锁，单位秒，0代表用不超时，默认5秒
+	timeout: 5, // 锁的超时时间，超时后强制归还锁，单位秒，0代表永不超时，默认5秒
 });
 
 // 尝试获取锁
