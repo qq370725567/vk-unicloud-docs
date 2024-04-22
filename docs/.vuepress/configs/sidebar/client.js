@@ -69,6 +69,7 @@ module.exports = [{
           'uniCloud/cloudfunctions/originalParam',
           'uniCloud/cloudfunctions/urlOriginalParam',
           'uniCloud/cloudfunctions/sseChannel',
+          'uniCloud/cloudfunctions/reentrantLock',
           'uniCloud/cloudfunctions/question'
         ]
       },
