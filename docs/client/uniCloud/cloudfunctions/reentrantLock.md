@@ -49,6 +49,10 @@ try {
 	// 归还锁
 	await lock.unlock();
 }
+return {
+  code: 0,
+  msg: "成功拿到了锁"
+}
 ```
 
 **前端模拟并发测试**
