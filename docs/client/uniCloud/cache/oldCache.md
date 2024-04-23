@@ -4,6 +4,8 @@ sidebarDepth: 0
 
 # 云端数据缓存（旧版）
 
+> 此为旧版文档，推荐使用[新版云端数据缓存](https://vkdoc.fsq.pub/client/uniCloud/cache/cache.html)
+
 ## 介绍
 
 云端数据缓存是通过`key`，`value`键值对的形式进行数据的储存，通过`key`对数据进行读取
