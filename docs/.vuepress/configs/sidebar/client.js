@@ -92,7 +92,8 @@ module.exports = [{
         title: '缓存',
         collapsable: false,
         children: [
-          'uniCloud/cache/cache'
+          'uniCloud/cache/cache',
+          'uniCloud/cache/oldCache'
         ]
       },
       {

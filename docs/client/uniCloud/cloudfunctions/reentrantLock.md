@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 高并发分布式重入锁
 
-> vk-unicloud版本需 ≥ 2.17.6
+> vk-unicloud版本需 ≥ 2.18.0
 
 ## 介绍
 
