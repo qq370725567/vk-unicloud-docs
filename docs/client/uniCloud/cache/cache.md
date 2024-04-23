@@ -10,19 +10,29 @@ sidebarDepth: 0
 
 全局数据缓存是通过 `key`，`value` 键值对的形式进行数据的储存，通过 `key` 对数据进行读取
 
+新版全局数据缓存同时支持 `空间内置数据库` 和 `redis数据库`，且可以自由切换
+
 ## 初始化实例
 
 在调用API前，需要先初始化实例
 
 ```js
-const cache = vk.getCacheManage();
+const cacheManage = vk.getCacheManage();
+```
+
+**指定存储模式**
+
+```js
+const cacheManage = vk.getCacheManage({
+  mode: "db"
+});
 ```
 
 **参数**
 
 |参数								|类型		|必填	|说明																												|
-|:-:								|:-:		|:-:	|:-:																												|
-|mode								|String	|否		|如不填，则自动从配置中获取，可选<br/>db 使用空间内置数据库作为缓存<br/>redis 使用Redis数据库作为缓存	|
+|:-:								|:-:		|:-:	|:-																												|
+|mode								|String	|否		|存储模式，如不填，则自动从配置中获取，可选<br/>db：使用空间内置数据库作为缓存<br/>redis：使用Redis数据库作为缓存	|
 
 **配置文件**
 
@@ -41,10 +51,10 @@ const cache = vk.getCacheManage();
 
 ## API
 
-### get（获取）
+### get（获取缓存）
 
 ```js
-let value = await cache.get(key);
+let value = await cacheManage.get(key);
 ```
 
 **参数**
@@ -57,10 +67,10 @@ let value = await cache.get(key);
 
 缓存内容
 
-### set（设置）
+### set（设置缓存）
 
 ```js
-await cache.set(key, value, second);
+await cacheManage.set(key, value, second);
 ```
 
 **参数**
@@ -85,7 +95,7 @@ await cache.set(key, value, second);
 只有在 key 不存在时才设置 key 的值。
 
 ```js
-let setnxRes = await cache.setnx(key, value, second);
+let setnxRes = await cacheManage.setnx(key, value, second);
 ```
 
 **参数**
@@ -104,10 +114,10 @@ let setnxRes = await cache.setnx(key, value, second);
 |msg	|string	|失败原因	|
 |key	|string	|缓存的键名	|
 
-### del（删除）
+### del（删除缓存）
 
 ```js
-await cache.del(key);
+await cacheManage.del(key);
 ```
 
 **参数**
@@ -120,10 +130,10 @@ await cache.del(key);
 
 受影响的记录数
 
-### clear（清空）
+### clear（清空缓存）
 
 ```js
-await cache.clear(prefix);
+await cacheManage.clear(prefix);
 ```
 
 **参数**
@@ -136,10 +146,10 @@ await cache.clear(prefix);
 
 受影响的记录数
 
-### count（缓存数量）
+### count（获取缓存数量）
 
 ```js
-await cache.count(prefix);
+await cacheManage.count(prefix);
 ```
 
 **参数**
@@ -152,10 +162,10 @@ await cache.count(prefix);
 
 记录数
 
-### exists（判断键是否存在）
+### exists（判断缓存是否存在）
 
 ```js
-await cache.exists(key);
+await cacheManage.exists(key);
 ```
 
 **参数**
@@ -168,10 +178,10 @@ await cache.exists(key);
 
 1：存在 0：不存在
 
-### expire（判断键是否存在）
+### expire（修改缓存过期时间）
 
 ```js
-await cache.expire(key, seconds);
+await cacheManage.expire(key, seconds);
 ```
 
 **参数**
@@ -188,7 +198,7 @@ await cache.expire(key, seconds);
 ### ttl（获取过期时间剩余多少秒）
 
 ```js
-await cache.ttl(key);
+await cacheManage.ttl(key);
 ```
 
 **参数**
@@ -204,7 +214,7 @@ await cache.ttl(key);
 ### pttl（获取过期时间剩余多少毫秒）
 
 ```js
-await cache.pttl(key);
+await cacheManage.pttl(key);
 ```
 
 **参数**
