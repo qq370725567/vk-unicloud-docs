@@ -16,7 +16,7 @@ sidebarDepth: 0
 
 在调用API前，需要先初始化实例
 
-注意：以下API均只能在云端运行，前端的本地缓存请查看 [本地持久化缓存](https://vkdoc.fsq.pub/client/pages/localStorage.html) 或 [vuex](https://vkdoc.fsq.pub/client/pages/localStorage.html) 
+注意：以下API均只能在云端运行，前端的本地缓存请查看 [本地持久化缓存](https://vkdoc.fsq.pub/client/pages/localStorage.html) 或 [vuex](https://vkdoc.fsq.pub/client/pages/vuex.html) 
 
 ```js
 const cacheManage = vk.getCacheManage();
