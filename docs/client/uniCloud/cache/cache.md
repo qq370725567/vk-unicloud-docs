@@ -2,19 +2,21 @@
 sidebarDepth: 0
 ---
 
-# 全局数据缓存（新版）
+# 云端数据缓存（新版）
 
 > vk-unicloud版本需 ≥ 2.18.0
 
 ## 介绍
 
-全局数据缓存是通过 `key`，`value` 键值对的形式进行数据的储存，通过 `key` 对数据进行读取
+云端数据缓存是通过 `key`，`value` 键值对的形式进行数据的储存，通过 `key` 对数据进行读取
 
-新版全局数据缓存同时支持 `空间内置数据库` 和 `redis数据库`，且可以自由切换
+新版云端数据缓存同时支持 `空间内置数据库` 和 `redis数据库`，且可以自由切换
 
 ## 初始化实例
 
 在调用API前，需要先初始化实例
+
+注意：以下API均只能在云端运行，前端的本地缓存请查看 [本地持久化缓存](https://vkdoc.fsq.pub/client/pages/localStorage.html) 或 [vuex](https://vkdoc.fsq.pub/client/pages/localStorage.html) 
 
 ```js
 const cacheManage = vk.getCacheManage();
