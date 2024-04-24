@@ -45,35 +45,32 @@ module.exports = [{
     ]
   },
   {
-    title: '后端（云函数）',
+    title: '后端（云端）',
     collapsable: false,
     initialOpenGroupIndex: -1,
     children: [
       'uniCloud/cloudfunctions/resformat',
       'uniCloud/cloudfunctions/error',
       {
-        title: '云函数',
-        collapsable: true,
+        title: '云函数/云对象',
+        collapsable: false,
         children: [
           'uniCloud/cloudfunctions/catalogue',
-          'uniCloud/cloudfunctions/template',
-          'uniCloud/cloudfunctions/serviceParam',
-          'uniCloud/cloudfunctions/userInfo',
-          'uniCloud/cloudfunctions/http',
+          'uniCloud/cloudfunctions/cloudFunctions',
+          'uniCloud/cloudfunctions/cloudObject',
           'uniCloud/cloudfunctions/timer',
+          'uniCloud/cloudfunctions/eip',
+          'uniCloud/cloudfunctions/http',
           'uniCloud/cloudfunctions/cloudfunctionsForHttp',
           'uniCloud/cloudfunctions/urlrewrite',
           'uniCloud/cloudfunctions/beautifyCode',
           'uniCloud/cloudfunctions/crypto',
           'uniCloud/cloudfunctions/formRules',
-          'uniCloud/cloudfunctions/originalParam',
-          'uniCloud/cloudfunctions/urlOriginalParam',
           'uniCloud/cloudfunctions/sseChannel',
           'uniCloud/cloudfunctions/reentrantLock',
           'uniCloud/cloudfunctions/question'
         ]
       },
-      'uniCloud/cloudfunctions/cloudObject',
       {
         title: '数据库',
         collapsable: false,

@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 云函数逻辑层目录结构说明
+# 云端逻辑层目录结构
 
 `router/service` 此目录为业务逻辑层
 

@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 云函数URL化之URL重写
+# URL化之URL重写
 
 **什么是URL化?**
 

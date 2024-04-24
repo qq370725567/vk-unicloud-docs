@@ -118,7 +118,7 @@ let requestRes = await vk.openapi.weixin.h5.request({
 8.142.185.204
 ```
 
-### 支付宝小程序云空间
+### 支付宝云空间
 
 直接把下面的ip都加进去即可。
 
