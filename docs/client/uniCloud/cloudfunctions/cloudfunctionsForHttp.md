@@ -4,6 +4,8 @@ sidebarDepth: 0
 
 # 使用axios等工具请求云函数或云对象
 
+## 开启URL化
+
 ___必须开启云函数的URL化，假如URL地址为：https://xxx.bspapp.com/http/router___
 
 开启URL化方法为：打开 `router/package.json` 文件，在 `path` 里填写 `/http/router`，最后重新上传云函数。
@@ -19,7 +21,7 @@ cloudfunction-config": {
 }
 ```
 
-**如何获得云函数URL化的域名地址？**
+## 获得云函数URL化的域名地址
 
 进入uniCloud后台，在云函数的函数列表里找到router，点详情
 
@@ -27,7 +29,9 @@ cloudfunction-config": {
 
 ___注意：如果你直接在浏览器中访问url化地址，会触发下载请求，需要用 `postman` 等工具进行访问测试。___
 
-## axios请求示例
+## 请求示例
+
+### 使用axios发起请求
 
 假设router的url化地址是 `https://xxx.com/http/router`
 
@@ -75,8 +79,7 @@ axios({
 });
 ```
 
-
-## jquery ajax请求示例
+### 使用jquery发起请求
 
 假设router的url化地址是 `https://xxx.com/http/router`
 
@@ -122,7 +125,7 @@ $.ajax({
 })
 ```
 
-## uni.request示例
+### 使用uni.request发起请求
 
 假设router的url化地址是 `https://xxx.com/http/router`
 
