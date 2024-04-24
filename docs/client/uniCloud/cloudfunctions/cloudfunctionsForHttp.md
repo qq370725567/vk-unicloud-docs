@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 使用axios等工具请求云函数或云对象接口
+# 使用axios等工具请求云函数或云对象
 
 ___必须开启云函数的URL化，假如URL地址为：https://xxx.bspapp.com/http/router___
 
