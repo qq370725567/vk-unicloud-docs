@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 云端数据缓存（新版）
 
-> vk-unicloud版本需 ≥ 2.18.0
+> vk-unicloud版本需 ≥ 2.18.1
 
 ## 介绍
 
