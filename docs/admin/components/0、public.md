@@ -1,24 +1,29 @@
 # 0、公共属性
 
-| 参数           | 说明             | 类型   | 默认值 | 可选值 |
-|---------------|------------------|--------|-------|-------|
-| key           | 字段名  [查看](#key-字段名)           | String | -    | -      |
-| title         | 字段显示的名称  [查看](#title-标题)     | String | -    | -      |
-| type          | 组件类型    [查看](#type-组件类型)        | String | -    | -      |
-| width         | 宽度      [查看](#width-宽度)          | Number | -    | -      |
+| 参数					| 说明																	  | 类型			| 默认值	| 可选值	|
+|---------------|------------------										|--------	|-------|-------|
+| key						| 字段名  [查看](#key-字段名)						| String	| -			| -			|
+| title					| 字段显示的名称  [查看](#title-标题)		| String	| -			| -			|
+| type					| 组件类型    [查看](#type-组件类型)		| String	| -			| -			|
+| width					| 宽度，单位px      [查看](#width-宽度)	| Number	| -			| -			|
 
 **万能表单专用公共属性**
 
-| 参数           | 说明             | 类型   | 默认值 | 可选值 |
-|---------------|------------------|--------|-------|-------|
-| placeholder   | 占位符   [查看](#placeholder-占位符)               | String | -    | -      |
-| tips          | 下方的提示   [查看](#tips-下方的固定提示)            | String | - | -  |
-| showLabel  |  是否显示label  [查看](#showLabel-是否显示label)  | Boolean  | true    | false  |
-| show  | 复用时的显示规则 [查看](#show-复用时的显示规则)  | array | -  | - |
-| showRule  |  自定义显示规则 [查看](#showrule-自定义显示规则)  | String、Function  | -    | -  |
-| disabled      | 自定义禁用规则 [查看](#disabled-自定义禁用规则)    | Boolean、String、Function | - | -  |
-| clearable     | 是否可以清空选项   [查看](#clearable-是否允许清空)      | Boolean | true | false  |
-| watch         | 监听key对应的值的改变（只监听组件内部造成的值的改变） [查看](#watch-监听) | Function | - | - |
+| 参数					| 说明																																	| 类型												| 默认值	| 可选值	|
+|---------------|------------------																										|--------										|-------|-------|
+| placeholder		| 占位符   [查看](#placeholder-占位符)																	| String										| -			| -			|
+| tips					| 下方的提示   [查看](#tips-下方的固定提示)																| String										| -			| -			|
+| labelWidth		| label的宽度，单位px[查看](#labelwidth-label宽度)												| Number										| -			| -			|
+| showLabel			| 是否显示label  [查看](#showLabel-是否显示label)												| Boolean										| true	| false	|
+| show					| 复用时的显示规则 [查看](#show-复用时的显示规则)													| array											| -			| -			|
+| showRule			| 自定义显示规则 [查看](#showrule-自定义显示规则)													| String、Function						| -			| -			|
+| disabled			| 自定义禁用规则 [查看](#disabled-自定义禁用规则)													| Boolean、String、Function	| -			| -			|
+| clearable			| 是否可以清空选项   [查看](#clearable-是否允许清空)											| Boolean										| true	| false	|
+| watch					| 监听key对应的值的改变（只监听组件内部造成的值的改变） [查看](#watch-监听)	| Function									| -			| -			|
+
+**万能表格专用公共属性**
+|---------------|------------------	|--------	|-------|-------|
+| defaultValue	| 当该行的该字段为空时的默认值		| any			| -			| -			|
 
 ## key（字段名）
 
@@ -44,13 +49,20 @@
 { key: "nickname", title: "昵称", type: "text" },
 ```
 
-
 ## width（宽度）
 
 单位是px，只能是数字，如下
 
 ```js
 { key: "nickname", title: "昵称", type: "text", width: 200 },
+```
+
+## labelWidth（label宽度）
+
+单位是px，只能是数字，如下
+
+```js
+{ key: "nickname", title: "昵称", type: "text", labelWidth: 120 },
 ```
 
 ## placeholder（占位符）
@@ -80,7 +92,6 @@
 * 如果 show 字段不存在，代表显示。
 * 如果 show 的某元素中包含 `form-type`的值，则代表显示。
 * 如果 show 的某元素中不包含 `form-type`的值，则不显示。
-
 
 ## showRule（自定义显示规则）
 
@@ -139,7 +150,6 @@
   }
 },
 ```
-
 
 ## disabled（自定义禁用规则）
 
