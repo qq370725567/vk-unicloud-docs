@@ -63,7 +63,7 @@ axios({
   headers: {
     'content-type': 'application/json;charset=utf8',
     'uni-id-token': 'xxxxxxxxx', // 用户token
-    'vk-appId': '__UNI__89927A9', // 你项目的dcloud_appid
+    'vk-appid': '__UNI__89927A9', // 你项目的dcloud_appid
     'vk-platform': 'mp-weixin', // 运行环境，如 h5、mp-weixin、app-plus 等
   },
   data: {
@@ -112,7 +112,7 @@ $.ajax({
   headers:{ 
     'content-type': 'application/json;charset=utf8',
     'uni-id-token': 'xxxxxxxxx', // 用户token
-    'vk-appId': '__UNI__89927A9', // 你项目的dcloud_appid
+    'vk-appid': '__UNI__89927A9', // 你项目的dcloud_appid
     'vk-platform': 'mp-weixin', // 运行环境，如 h5、mp-weixin、app-plus 等
   },
   data: JSON.stringify({
@@ -158,7 +158,7 @@ uni.request({
   header: {
     'content-type': 'application/json;charset=utf8',
     'uni-id-token': 'xxxxxxxxx', // 用户token
-    'vk-appId': '__UNI__89927A9', // 你项目的dcloud_appid
+    'vk-appid': '__UNI__89927A9', // 你项目的dcloud_appid
     'vk-platform': 'mp-weixin', // 运行环境，如 h5、mp-weixin、app-plus 等
   },
   data: {
@@ -177,9 +177,9 @@ uni.request({
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/eb418f3f-7268-433f-9ca4-79f8902752c7.png)
 
-则需要在请求头多传2个参数 `vk-appId` 和 `vk-platform`
+则需要在请求头多传2个参数 `vk-appid` 和 `vk-platform`
 
-其中 `vk-appId` 是 `manifest.json` 内的 `dcloud_appid`
+其中 `vk-appid` 是 `manifest.json` 内的 `dcloud_appid`
 `vk-platform` 是当前环境，如：`h5` `mp-weixin` `app-plus` 等
 
 以 axios 示例
@@ -191,7 +191,7 @@ axios({
   headers: {
     'content-type': 'application/json;charset=utf8',
     'uni-id-token': 'xxxxxxxxx', // 用户token
-    'vk-appId': '__UNI__89927A9', // 你项目的dcloud_appid
+    'vk-appid': '__UNI__89927A9', // 你项目的dcloud_appid
     'vk-platform': 'mp-weixin', // 运行环境，如 h5、mp-weixin、app-plus 等
     'vk-locale': 'zh-Hans', // 默认语言
   },

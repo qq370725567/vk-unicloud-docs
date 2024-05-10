@@ -355,7 +355,7 @@ vk.userCenter.loginByWeixin({
 
 分别为：
 
-* vk-appId    （你项目的manifest.json内的appid）
+* vk-appid    （你项目的manifest.json内的appid）
 * vk-platform （运行环境，如 h5、mp-weixin、app-plus 等）
 
 以jquery为例
@@ -367,7 +367,7 @@ $.ajax({
   headers:{ 
     'content-type': 'application/json;charset=utf8',
     'uni-id-token': 'xxxxxxxxx', // 用户token
-    'vk-appId': '__UNI__89927A9', // 你项目的dcloud_appid
+    'vk-appid': '__UNI__89927A9', // 你项目的dcloud_appid
     'vk-platform': 'mp-weixin', // 运行环境，如 h5、mp-weixin、app-plus 等
   },
   data: JSON.stringify({
