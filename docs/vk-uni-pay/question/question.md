@@ -216,6 +216,11 @@ ___如何获取URL化完整地址___
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/21b12172-ea0c-4f69-a064-2211a1fe149c.png)
 
+## 如何使用http方式获取支付参数?
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/1715841080654k3jsq5k9cag.png)
+
+注意：正式上线的项目，请不要将退款、转账等涉及资金外流的函数写到 `vk-pay` 自带的云函数中，你应该写在 `router` 或其他具有权限判断的云函数中鉴权（其他云函数可通过 `vk-uni-pay` 这个公共模块来调用退款等接口）
 
 
 
