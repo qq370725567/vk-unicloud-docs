@@ -68,6 +68,7 @@ module.exports = [{
       'components2/2、vk-data-link',
       'components2/3、vk-data-dialog',
       'components2/4、vk-data-drawer',
+      'components2/5、vk-data-menu-nav',
     ]
   },
   {
