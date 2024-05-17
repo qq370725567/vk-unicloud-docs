@@ -53,18 +53,18 @@ ___该表为插件支付专用表，正常你自己业务的订单还应有一�
 
 |         值							|     说明									|    对应支付产品			|
 |--------------------			|---------------					|---------------		|
-| wxpay_mp-weixin					|  微信 - 小程序						|		小程序支付				|
-| wxpay_app-plus					|  微信 - APP							|		APP支付					|
-| wxpay_h5								|  微信 - 网站二维码				|		Native支付				|
-| wxpay_h5-weixin					|  微信 - 公众号						|		JSAPI支付				|
-| wxpay_mweb							|  微信 - 手机外部浏览器H5	|		H5支付						|
-| alipay_mp-alipay				|  支付宝 - 小程序					|		JSAPI支付				|
-| alipay_app-plus					|  支付宝 - APP						|		APP支付					|
-| alipay_h5								|  支付宝 - H5							|		Native支付				|
+| wxpay_mp-weixin					|  微信 - 小程序						|		微信小程序支付		|
+| wxpay_app-plus					|  微信 - APP							|		微信APP支付			|
+| wxpay_h5								|  微信 - 网站二维码				|		微信Native支付		|
+| wxpay_h5-weixin					|  微信 - 公众号						|		微信JSAPI支付		|
+| wxpay_mweb							|  微信 - 手机外部浏览器H5	|		微信H5支付				|
+| alipay_mp-alipay				|  支付宝 - 小程序					|		支付宝JSAPI支付		|
+| alipay_app-plus					|  支付宝 - APP						|		支付宝APP支付			|
+| alipay_h5								|  支付宝 - H5							|		支付宝当面付			|
 | appleiap_app-plus				|  iOS内购 - APP						|		苹果应用内购			|
-| vkspay_h5								|  VksPay - H5						|		vkspay个人支付		|
-| vkspay_mp-weixin				|  VksPay - 微信小程序			|		vkspay个人支付		|
-| vkspay_app-plus					|  VksPay - APP						|		vkspay个人支付		|
+| vkspay_h5								|  VksPay - H5						|		VksPay个人支付		|
+| vkspay_mp-weixin				|  VksPay - 微信小程序			|		VksPay个人支付		|
+| vkspay_app-plus					|  VksPay - APP						|		VksPay个人支付		|
 | wxpay-virtual_mp-weixin	|  微信虚拟支付 - 微信小程序	|		微信小程序虚拟支付	|
 
 ### refund_list
