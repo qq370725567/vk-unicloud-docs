@@ -26,10 +26,6 @@ sidebarDepth: 0
 
 ## d.ts 语法提示
 
-> vk-unicloud版本需 ≥ 2.18.2
-
-自2.18.2版本起，新增了d.ts语法提示功能，具体效果如下：
-
 **效果**
 
 可以清楚的看到某个方法可接受哪些参数，并且返回值是什么
@@ -40,14 +36,13 @@ vk.navigateTo 也能自动提示页面了
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/171578624935168169cn3k3.png)
 
-**因为目前云端不支持ts，但如果想在云端也能有d.ts的语法提示，按照如下步骤安装即可。**
+**安装代码块步骤**
 
-1. 复制文件 `/uni_modules/vk-unicloud/uniCloud/cloudfunctions/common/vk-unicloud/vk.d.ts`
-2. 粘贴到 `你的HBX安装目录\plugins\hbuilderx-language-services\builtin-dts\uniapp@vue2\node_modules\@dcloudio\types\uni-cloud-server`
-3. 修改上面目录下的 `index.d.ts` 新增代码 `/// <reference path="./vk.d.ts" />`
+**下载最新版 [VK框架快速开发辅助工具](https://ext.dcloud.net.cn/plugin?id=6663)**
 
-![](https://cdn.fsq.pub/vkdoc/vk-client/17157865882296b936falre8.png)
+安装好后重启下HBX，然后在任意页面右键，VK-开启VK框架d.ts语法提示（提示成功后，再重启HBX即可生效）
 
-![](https://cdn.fsq.pub/vkdoc/vk-client/1715786661474jpamj7690po.png)
+![](https://cdn.fsq.pub/vkdoc/vk-client/171604049333666si8c9fm4g.png)
+
 
 
