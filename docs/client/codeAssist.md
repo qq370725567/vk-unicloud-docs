@@ -91,6 +91,32 @@ ___作者：`VK`___
 ### 13、一键删除所有类型日志
 在编辑器文档内右键，点击VK-删除所有类型日志
 
+### 14、使用核心库的语法提示
+在任意vue或js文档内右键，点击VK-使用核心库的语法提示（需重启HBX才会生效）
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/171601687453287e3neuvtc8.png)
+
+**效果**
+
+1. 使用当前项目的 `/uni_modules/vk-unicloud/index.d.ts` 作为前端语法提示
+2. 使用当前项目的 `/uni_modules/vk-unicloud/uniCloud/cloudfunctions/common/vk-unicloud/vk.d.ts` 作为云端语法提示
+
+### 15、恢复框架默认语法提示
+在任意vue或js文档内右键，点击VK-恢复框架默认语法提示（需重启HBX才会生效）
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/1716016915694him09vpga7.png)
+
+**效果**
+
+1. 使用本工具内置的 `index.d.ts` 作为前端语法提示
+2. 使用本工具内置的 `vk.d.ts` 作为云端语法提示
+
+
+### 16、关闭VK语法提示
+在任意vue或js文档内右键，点击VK-关闭VK语法提示（需重启HBX才会生效）
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/1716016945267o62cu2d4m4.png)
+
 ### 如何设置快捷键
 
 | 快捷键命令                           | 说明                           |
