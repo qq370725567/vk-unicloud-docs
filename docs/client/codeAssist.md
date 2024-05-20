@@ -101,6 +101,14 @@ ___作者：`VK`___
 1. 使用本工具内置的 `index.d.ts` 作为前端语法提示
 2. 使用本工具内置的 `vk.d.ts` 作为云端语法提示
 
+可以清楚的看到某个方法可接受哪些参数，并且返回值是什么
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/1715786134138t96cpsvdqq8.png)
+
+vk.navigateTo 也能自动提示页面了
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/171578624935168169cn3k3.png)
+
 ### 15、关闭VK框架d.ts语法提示
 在任意vue或js文档内右键，点击VK-关闭VK框架d.ts语法提示（需重启HBX才会生效）
 
