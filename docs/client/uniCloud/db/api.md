@@ -69,15 +69,20 @@ let ids = await vk.baseDao.adds({
 |   dataJson |  Array  |  是  |   需要批量添加的数据    |
 |   cancelAddTime   |  Boolean  |  否  |   取消自动生成 _add_time 和 _add_time_str 字段    |
 |   cancelAddTimeStr   |  Boolean  |  否  |   取消自动生成 _add_time_str 字段    |
+|   needReturnIds   |  Boolean  |  否  |   是否需要返回ids数组数据，默认dataJson的长度 `≤10万` 则true，`＞10万` 则false，false时返回的ids是空数组   |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
 **返回值**
 
-返回值是是添加数据的_id数组，添加失败，则返回null
+返回值为添加数据的_id数组，添加失败，则返回null
+
+1. 若 `needReturnIds` 为false，则返回的是空数组，设置为false可以减少内存占用，提升性能
+2. 若 `needReturnIds` 为true，则返回的所有添加数据的_id
 
 ___注意: `add` 和 `adds` 默认会自动加上 `_add_time`字段，该字段表示该条记录的添加时间___
 
 可以通过参数 `cancelAddTime:true` 来取消 `_add_time` 字段的添加，如下
+
 ```js
 let id = await vk.baseDao.add({
   dbName: "vk-test",
@@ -87,6 +92,7 @@ let id = await vk.baseDao.add({
   }
 });
 ```
+
 也可以通过配置 `/common/uni-config-center/vk-unicloud/index.js` 内的 `vk.db.unicloud.cancelAddTime = true` 来全局取消
 
 提示：正常情况下，没有必要特意取消该字段，该字段记录了本条记录的实际添加时间，且该字段可以用于按时间排序（默认 `vk.baseDao.getTableData` 的排序规则就是按 `_add_time` 降序。）
