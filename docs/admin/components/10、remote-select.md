@@ -73,6 +73,36 @@
 },
 ```
 
+#### 多个下拉远程联动
+
+```js
+{
+  key: "select1", title: "远程select（单选）", type: "remote-select", placeholder: "请选择分类",
+  action: "admin/system/user/sys/getList",
+  props: { list: "rows", value: "_id", label: "nickname" },
+  showAll: true,
+  actionData: {
+    pageSize: 1000
+  },
+  watch: ({ value, formData, column, index, option, $set }) => {
+    // 此处演示根据选择的值动态改变select2的actionData的值
+    let item = vk.pubfn.getListItem(this.formData1.columns, "key", "select2");
+    item.actionData.selectValue1 = value;
+  }
+},
+{
+  key: "select2", title: "远程select（单选）", type: "remote-select", placeholder: "请选择分类",
+  action: "admin/system/user/sys/getList",
+  props: { list: "rows", value: "_id", label: "nickname" },
+  showAll: true,
+  actionData: {
+    pageSize: 1000,
+    selectValue1: "", // 关联select1选择的值
+  }
+},
+```
+
+
 ### API
 
 ### 公共属性
