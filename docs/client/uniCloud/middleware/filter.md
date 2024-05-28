@@ -71,7 +71,12 @@ module.exports = [
     main: async function(event) {
       let { util, filterResponse } = event;
       let { vk , db, _ } = util;
-      let { userInfo = {} } = filterResponse; // 此处的 userInfo 是 kh 过滤器传过来的（kh的index是200）
+      let { uid, userInfo = {} } = filterResponse;
+      if (vk.pubfn.isNull(userInfo) && uid) {
+        // 如果userInfo为空，则通过uid获取用户信息（kh类型的云对象默认userInfo为空，需要手动获取）
+        userInfo = await vk.daoCenter.userDao.findById(uid);
+        filterResponse.userInfo = userInfo; // 将用户信息重新赋值给filterResponse.userInfo，方便云对象内执行this.getUserInfo();时无需再查库
+      }
       let { role = [] } = userInfo;
       let res = { code : 0, msg : 'ok' };
       // 用户没有shopManage角色则拦截。（拦截后后面的云函数将不会运行，达到了简单的权限控制效果）
@@ -82,8 +87,6 @@ module.exports = [
     }
   }
 ]
-
-
 ```
 
 ### 多店版（多商家版本）
@@ -108,7 +111,12 @@ module.exports = [
     main: async function(event) {
       let { data = {}, util, filterResponse } = event;
       let { vk , db, _ } = util;
-      let { userInfo = {} } = filterResponse;
+      let { uid, userInfo = {} } = filterResponse;
+      if (vk.pubfn.isNull(userInfo) && uid) {
+        // 如果userInfo为空，则通过uid获取用户信息（kh类型的云对象默认userInfo为空，需要手动获取）
+        userInfo = await vk.daoCenter.userDao.findById(uid);
+        filterResponse.userInfo = userInfo; // 将用户信息重新赋值给filterResponse.userInfo，方便云对象内执行this.getUserInfo();时无需再查库
+      }
       let { shop_ids = [] } = userInfo;
       // 此 shop_id 为用户前端传过来的，因此我们需要在此进行判断，此用户是否有权限可操作这个该店铺
       let { shop_id } = data;
