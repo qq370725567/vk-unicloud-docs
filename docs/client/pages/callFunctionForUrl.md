@@ -17,13 +17,13 @@ cloudfunction-config": {
 }
 ```
 
-isRequest:true 代表使用url访问云函数，一般用于PC后台管理页面使用
+isRequest:true 代表使用url请求访问云函数
 
 ```js
 uni.vk.callFunction({
-  url: 'user/kh/setAvatar',
-  title:'请求中...',
-  isRequest:true,
+  url: "user/kh/setAvatar",
+  title: "请求中...",
+  isRequest: true,
   data:{
     avatar: "https://xxxxxxx.jpg"
   },
@@ -43,8 +43,8 @@ ___如果 `云函数url化` 是给外部访问（不在uniapp内访问），则�
 
 ```js
 // 云函数对应的url化地址
-functionNameToUrl:{
-  "router":"https://fa72b138-15f6-47c4-994e-8bdc2353fc98.bspapp.com/http/router",
+functionNameToUrl: {
+  "router": "https://fa72b138-15f6-47c4-994e-8bdc2353fc98.bspapp.com/http/router",
 },
 // vk.callFunction的isRequest的默认值，
 isRequestDefault: true,
