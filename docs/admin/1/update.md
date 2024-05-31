@@ -51,6 +51,8 @@
 
 * 5、重启hbx编译器
 
+提示：其中第2步和第3步可以合并为1步，即项目根目录执行 `npm i vk-unicloud-admin-ui@latest` 即可自动安装最新的npm依赖
+
 ## 注意
 
 * 更新 `vk-unicloud` 后，需要在 `common/vk-unicloud` 右键上传公共模块才会生效
