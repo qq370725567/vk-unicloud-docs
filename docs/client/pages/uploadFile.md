@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 文件上传
+# 前端文件上传
 
 ## 接口名：vk.uploadFile
 

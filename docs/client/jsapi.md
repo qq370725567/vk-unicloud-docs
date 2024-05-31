@@ -1829,42 +1829,42 @@ vk.navigateTo({
     // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
     update: (data) => {
       // 当B页面运行 eventChannel.emit('update', { a:1 }); 时，会运行这里的代码逻辑。
-      
+      console.log(`A页面：执行监听的update事件`, data);
     }
   },
   success: (res) => {
     // 通过eventChannel向被打开页面传送数据
     res.eventChannel.emit('data', { b:2 })
   }
-})
+});
 ```
 
 B页面接收A页面传过来的数据，并在B页面返回时，触发A页面逻辑（如刷新A页面数据）
 
 ```vue
 <script setup>
-  import { onLoad, getCurrentInstance } from 'vue';
+  import { onLoad } from '@dcloudio/uni-app';
+  import { getCurrentInstance } from 'vue';
+  const vk = uni.vk;
+  const instance = getCurrentInstance().proxy;
   
   // 监听 - 页面每次【加载时】执行(如：前进)
   onLoad((options) => {
-    const instance = getCurrentInstance().proxy;
     const eventChannel = instance.getOpenerEventChannel();
     // 监听data事件，获取上一页面通过eventChannel.emit传送到当前页面的数据
     if (eventChannel.on) {
       eventChannel.on('data', (data) => {
-        
+        console.log(`B页面：收到了A页面传来的参数`, data);
       });
     }
   });
   
   // 返回页面的函数，在需要返回的时候执行，如 navigateBack({ a:1 });
   const navigateBack = (options) => {
-    const instance = getCurrentInstance().proxy;
     const eventChannel = instance.getOpenerEventChannel();
     if (eventChannel.emit) eventChannel.emit('update', options); // 触发A页面 vk.navigateTo 跳转时参数 events 内的 update 监听事件
     vk.navigateBack();
   };
-  
 </script>
 ```
 
