@@ -53,6 +53,42 @@ loading:{ that:this, name:"loading2"}
 loading:{ that:this, name:"page.loading"}
 ```
 
+**Vue3 setup 用法示例**
+
+因为Vue3的setup模式下没有this，但that属性的本质其实就是一个对象，因此我们直接传一个对象给Ta就可以了，代码如下
+
+```vue
+<template>
+	<view class="app">
+		{{ loading }}
+	</view>
+</template>
+
+<script setup>
+	import { onLoad } from '@dcloudio/uni-app';
+	import { ref, reactive } from 'vue';
+
+	const vk = uni.vk;
+
+	const loading = reactive({
+		a: false,
+		b: false
+	});
+
+	onLoad((options) => {
+		vk.callFunction({
+			url: 'template/pub.test.test500',
+			loading: { that: loading, name: "a" },
+			data: {
+
+			},
+			success: (data) => {
+
+			}
+		});
+	});
+</script>
+```
 
 ## 公共返回信息
 

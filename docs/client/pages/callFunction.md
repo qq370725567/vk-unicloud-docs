@@ -91,13 +91,50 @@ loading 参数说明
 * 若 `loading` 的值类型为 `Object`，如下方代码效果是：请求时，会自动执行 `this.loading2=true` ，请求完成时，会自动执行 `this.loading2=false`
 
 ```js
-loading:{ that:this, name:"loading2"}
+loading:{ that: this, name:"loading2"}
 ```
 
 * name 支持. 如下方代码效果是：请求时，会自动执行 `this.page.loading=true` ，请求完成时，会自动执行 `this.page.loading=false`
 
 ```js
-loading:{ that:this, name:"page.loading"}
+loading:{ that: this, name:"page.loading"}
+```
+
+**Vue3 setup 用法示例**
+
+因为Vue3的setup模式下没有this，但that属性的本质其实就是一个对象，因此我们直接传一个对象给Ta就可以了，代码如下
+
+```vue
+<template>
+	<view class="app">
+		{{ loading }}
+	</view>
+</template>
+
+<script setup>
+	import { onLoad } from '@dcloudio/uni-app';
+	import { ref, reactive } from 'vue';
+
+	const vk = uni.vk;
+
+	const loading = reactive({
+		a: false,
+		b: false
+	});
+
+	onLoad((options) => {
+		vk.callFunction({
+			url: 'template/pub.test.test500',
+			loading: { that: loading, name: "a" },
+			data: {
+
+			},
+			success: (data) => {
+
+			}
+		});
+	});
+</script>
 ```
 
 ### globalParamName
