@@ -14,6 +14,7 @@ module.exports = [{
       'codeTips',
       'codeAssist',
       'i18n',
+      'globalAccelerate',
       'product'
     ]
   },
