@@ -246,9 +246,10 @@ uniCloud内的参数说明
 |  provider		   | String	 | 是		 |                                          -							                                           |                        aliyun、tencent、alipay																		                        |
 |   spaceId		   | String	 | 是		 |                                          -							                                           |                        服务空间ID，**注意是服务空间ID，不是服务空间名称**										                        |
 | clientSecret	 | String	 | 是		 |                                          -							                                           |           仅阿里云支持，可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间列表中查看	           |
-|   secretId  | String  |  是  |                                              -                                              |      对应 accessKey 仅支付宝云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
+|   accessKey  | String  |  是  |                                              -                                              |      仅支付宝云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
+|   secretId  | String  |  是  |                                              -                                              |      保持和 accessKey 一样即可，仅支付宝云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
 |   secretKey   | String  |  是  |                                              -                                              |         仅支付宝云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
-|  appid   | String  |  是  |                                              -                                              |     对应 spaceAppId 仅支付宝云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
+|  spaceAppId   | String  |  是  |                                              -                                              |     仅支付宝云支持, 可以在[uniCloud控制台](https://unicloud.dcloud.net.cn)服务空间详情中查看         |
 
 6. 启动项目，随便跳转几个页面(持续20秒左右)，去查看uni统计对应的服务空间里的数据库表 `uni-stat-page-logs` 是否有数据，如果有代表成功了。
 7. 前往uni统计对应的服务空间控制台页面，点击前端托管，参数配置，绑定下自定义域名（默认域名有访问限制）
