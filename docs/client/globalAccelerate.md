@@ -36,13 +36,13 @@ sidebarDepth: 0
 	"envs": {
 		// 当有设置 default 的环境时，不传env，会自动用此环境调用云函数。
 		"default": {
-			"provider": "", // 通用参数 支付宝云：alipay 阿里云：aliyun 腾讯云：tencent 
+			"provider": "", // 通用参数 支付宝云：alipay 阿里云：aliyun
 			"spaceId": "", // 通用参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceId参数
 			"clientSecret": "", // 阿里云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应ClientSecret参数
 			"spaceAppId": "", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceAppId参数
 			"accessKey": "", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应AK参数 
 			"secretKey": "", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SK参数
-			"endpoint": "https://api.example.com" // 选填 api网关域名，需要海外加速时使用，仅阿里云和支付宝云支持此参数
+			"endpoint": "https://api.example.com" // 海外加速网关地址，仅阿里云和支付宝云支持此参数
 		}
 	}
 }
