@@ -349,10 +349,18 @@ let {
   encrypted, // 接受A云函数传过来的加密的数据
 } = data;
 // 解密
-let decrypted = vk.crypto.aes.decrypt({
-  mode: "aes-256-ecb",
-  data: encrypted
-});
+let decrypted;
+try {
+  decrypted = vk.crypto.aes.decrypt({
+    mode: "aes-256-ecb",
+    data: encrypted
+  });
+} catch (err) {
+  return {
+    code: -1,
+    msg: "参数未正确加密"
+  }
+}
 // 解密后的数据
 console.log("云函数B收到的请求参数: ", decrypted);
 let {
@@ -371,7 +379,7 @@ return {
     mode: "aes-256-ecb",
     data: res
   })
-}
+};
 ```
 
 ### 在云函数加密，java或php等其他后端语言解密
