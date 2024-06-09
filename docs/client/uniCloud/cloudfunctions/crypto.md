@@ -312,6 +312,53 @@ let sessionKey = decryptedRes.sessionKey;
 console.log('sessionKey: ', sessionKey)
 ```
 
+### 跨云函数加解密
+
+**A云函数加密请求B云函数**
+
+```js
+// 加密
+let encrypted = vk.crypto.aes.encrypt({
+  mode: "aes-256-ecb",
+  data: {
+    a: 1,
+    b: "2"
+  }
+});
+// 请求云函数B
+let callFunctionRes = await vk.callFunction({
+	url: 'B云函数的地址',
+  data: {
+    encrypted, // 只传加密后的数据给云函数B
+  }
+});
+console.log('callFunctionRes: ', callFunctionRes);
+```
+
+**B云函数解密并执行逻辑**
+
+```js
+let {
+  encrypted, // 接受A云函数传过来的加密的数据
+} = data;
+// 解密
+let decrypted = vk.crypto.aes.decrypt({
+  mode: "aes-256-ecb",
+  data: encrypted
+});
+// 解密后的数据
+console.log("decrypted", decrypted);
+let {
+  a,
+  b
+} = decrypted;
+// 你的业务逻辑开始
+
+
+
+
+```
+
 ### 在云函数加密，java或php等其他后端语言解密
 
 > 以下API需要vk-unicloud核心库版本 >= 2.14.1
