@@ -312,7 +312,7 @@ let sessionKey = decryptedRes.sessionKey;
 console.log('sessionKey: ', sessionKey)
 ```
 
-### 跨云函数加解密
+### 跨云函数双向安全加密通信
 
 **A云函数加密请求B云函数**
 
