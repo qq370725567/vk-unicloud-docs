@@ -76,6 +76,7 @@ let data = await vk.callFunction({
 | globalParamName  | 全局请求参数的名称， 如果设置了正则规则，则不需要此参数  [查看详情](#globalparamname)  | String  | - | - |
 | env              | 请求多服务空间的环境 [查看详情](https://vkdoc.fsq.pub/client/question/q9.html#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4)| String  | - | - |
 | retryCount       | 系统异常重试机制（表单提交时慎用，建议只用在查询请求中，即无任何数据库修改的请求中） | Number  | 0 | - |
+| secretType       | 安全网络类型 [查看详情](#secrettype-安全网络) | String  | none | - |
 | success          | 请求成功时，执行的回调函数 | Function  | - | - |
 | fail             | 请求失败时，执行的回调函数 | Function  | - | - |
 | complete         | 无论请求成功与否，都会执行的回调函数 | Function  | - | - |
@@ -206,3 +207,24 @@ uniCloud.addInterceptor('callFunction', {
   }
 });
 ```
+
+### secretType（安全网络）
+
+`vk.callFunction` 多传一个参数 `secretType: "both"` 即可开启安全网络
+
+|secretType值	|描述																					|
+|:-:					|:-:																					|
+|none					|上下行都不加密，默认值													|
+|request			|只加密客户端请求时的上行数据，服务器下发数据不加密	|
+|response			|客户端请求时不加密数据，只加密服务器下发的数据			|
+|both					|客户端和服务器上行下行数据都加密数据							|
+
+**注意：**
+
+1. 之所以提供如此精细的加密配置，是因为加解密都是消耗资源的，增加了等待时间。一般只对真正需要防止网络窃取的保密数据才加密。
+2. 只支持APP、微信小程序，不支持H5和其他小程序
+
+如何开通？[传送门](https://doc.dcloud.net.cn/uniCloud/secure-network.html#%E5%A6%82%E4%BD%95%E5%BC%80%E9%80%9A)
+
+安全网络详细文档：[传送门](https://doc.dcloud.net.cn/uniCloud/secure-network.html)
+
