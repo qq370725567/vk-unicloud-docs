@@ -130,7 +130,16 @@ module.exports = [{
       'uniCloud/redis/redis',
     ]
   },
-  'publish',
+  {
+    title: '发行',
+    collapsable: true,
+    children: [
+      'publish/cloud',
+      'publish/h5',
+      'publish/mp-weixin',
+      'publish/app'
+    ]
+  },
   {
     title: '常见问题',
     collapsable: true,
