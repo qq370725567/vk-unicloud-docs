@@ -368,6 +368,20 @@ vk.userCenter.getCurrentUserInfo({
 });
 ```
 
+### vk.userCenter.loginByToken（刷新token）
+
+> vk-unicloud版本需 ≥ 2.18.7
+
+当token有效期大于1天时，做用户每日登录统计时就会有问题，因为用户可能好几天只需要登录一次，但此用户可能每天都在线，导致每日登录用户数量不准确，因此可以在 App.vue 的 onLaunch 函数中执行 vk.userCenter.loginByToken()
+
+作用：调用此接口后，会使用当前token进行登录（token需在有效期内），并获得新的token，同时增加登录日志，方便做每日登录统计。
+
+注意：此接口一天内重复调用多次时，只有每日的第一次调用生效。
+
+```js
+vk.userCenter.loginByToken();
+```
+
 ### vk.userCenter.checkToken（token云端校验）
 
 **注意：实际开发过程中，无需你主动执行这个api来判断用户tokne是否有效**
