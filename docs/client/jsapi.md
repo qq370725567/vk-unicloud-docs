@@ -1279,6 +1279,7 @@ vk.request({
 |responseType		|String											|否		|text		|设置响应的数据类型。合法值：text、arraybuffer																					|支付宝小程序不支持																															|
 |needOriginalRes|Boolean										|否		|false	|此参数为vk新增，设置为true后，返回数据会多一个originalRes参数，里面有请求头等信息			|																																								|
 |interceptor		|Object											|否		|false	|此参数为vk新增，请求拦截器[详情](#interceptor)																														|																																								|
+|encrypt		|Boolean											|否		|false	|此参数为vk新增，是否加密通信 [详情](#encrypt)																												|																																								|
 |success				|Function										|否		|				|收到开发者服务器成功返回的回调函数																											|																																								|
 |fail						|Function										|否		|				|接口调用失败的回调函数																																	|																																								|
 |complete				|Function										|否		|				|接口调用结束的回调函数（调用成功、失败都会执行）																				|&nbsp;																																					|
@@ -1363,6 +1364,32 @@ vk.request({
 });
 ```
 
+##### encrypt
+
+> vk-unicloud 核心库版本需 >= 2.18.7
+
+仅用于和vk框架的router开启URL化的接口进行加密通信
+
+**效果**
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/1718613145738t3p8sk22aag.png)
+
+```js
+vk.request({
+	url: "https://fc-mp-666666-6666-45cd-a7d4-1289bec9cd4f.next.bspapp.com/http/router/template/test/pub/testEncryptRequest",
+	encrypt: true, // 开启加密通信
+	header: {
+		'uni-id-token': 'xxxxxxxxx', // 用户token
+		'vk-appid': '__UNI__66666', // 你项目的dcloud_appid
+		'vk-platform': 'h5', // 运行环境，如 h5、mp-weixin、app-plus 等
+	},
+	data: {
+		a: 1,
+		b: "2"
+	}
+})
+```
+
 #### vk.request（云端调用）
 
 云端必须加 `await` 同时没有 success 和 fail 回调
@@ -1405,6 +1432,7 @@ await vk.request({
 |stream							|ReadStream																																		|-				|-			|发送请求正文的可读数据流																																																																									|
 |writeStream				|WriteStream																																	|-				|-			|接受响应数据的可写数据流																																																																									|
 |streaming					|Boolean																																			|-				|false	|是否直接返回响应流，开启 streaming 之后，HttpClient 会在拿到响应对象 res 之后马上返回， 此时 result.headers 和 result.status 已经可以读取到，只是没有读取 data 数据而已。|
+|encrypt		|Boolean											|否		|false	|此参数为vk新增，是否加密通信 [详情](#encrypt)																												|																																								|
 
 **注意**
 

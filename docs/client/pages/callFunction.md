@@ -77,6 +77,7 @@ let data = await vk.callFunction({
 | env              | 请求多服务空间的环境 [查看详情](https://vkdoc.fsq.pub/client/question/q9.html#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4)| String  | - | - |
 | retryCount       | 系统异常重试机制（表单提交时慎用，建议只用在查询请求中，即无任何数据库修改的请求中） | Number  | 0 | - |
 | secretType       | 安全网络类型 [查看详情](#secrettype-安全网络) | String  | none | - |
+| encrypt          | 是否加密通信（可以不开启安全网络实现加密通信） [查看详情](#encrypt-加密通信) | Boolean  | none | - |
 | success          | 请求成功时，执行的回调函数 | Function  | - | - |
 | fail             | 请求失败时，执行的回调函数 | Function  | - | - |
 | complete         | 无论请求成功与否，都会执行的回调函数 | Function  | - | - |
@@ -228,3 +229,90 @@ uniCloud.addInterceptor('callFunction', {
 
 安全网络详细文档：[传送门](https://doc.dcloud.net.cn/uniCloud/secure-network.html)
 
+### encrypt（加密通信）
+
+> vk-unicloud 核心库版本需 >= 2.18.7
+
+**效果**
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/1718612831526pg0c8hcmd9o.png)
+
+#### 单独指定某个请求加密通信
+
+`vk.callFunction` 多传一个参数 `encrypt: true` 即可开启加密通信
+
+```js
+vk.callFunction({
+	url: 'template/test/pub/testEncryptRequest',
+	title: '请求中...',
+	encrypt: true, // 是否加密通信
+	data: {
+		a: 1,
+		b: "2",
+	},
+	success: (data) => {
+		console.log('data: ', data.data)
+	}
+});
+```
+
+#### 通过配置方式实现加密通信
+
+项目根目录 app.config.js 添加以下配置
+
+```js
+// 需要检查是否哪些请求需要加密通信
+checkEncryptRequest: {
+	/**
+	 * 如果 mode = 0 则不做处理
+	 * 如果 mode = 1 则代表list内的云函数或云对象需要加密通信，不在list内的不需要加密通信
+	 * 注意1: list内是正则表达式，非通配符表达式
+	 * 注意2: 建议与 router/middleware/modules/encryptFilter.js 内的regExp保持一致
+	 */
+	mode: 1,
+	list: [
+		"^template/test/pub/testEncryptRequest$", // 表示 template/test/pub/testEncryptRequest 云函数需要加密通信
+		"^template/encrypt/(.*)", // 表示以 template/encrypt/ 开头的云函数或云对象需要加密通信
+	]
+},
+```
+
+#### 强制云函数或云对象必须加密通信
+
+修改中间件 `router/middleware/modules/encryptFilter.js` 内的 `regExp` 与前端 `checkEncryptRequest.list` 保持一致（如果你没有此中间件则新建一个 encryptFilter.js 代码如下）
+
+```js
+/**
+ * 加密函数拦截器 - 前置
+ * 作用：用于指定哪些函数必须加密请求
+ */
+
+module.exports = [{
+	id: "encryptFilter",
+	// 正则匹配规则，满足以下规则的云函数会强制需要加密通信
+	regExp: [
+		"^template/test/pub/testEncryptRequest$",
+		"^template/encrypt/(.*)"
+	],
+	description: "加密函数拦截器",
+	index: 10, // 此处建议填一个很小的值，建议小于100，这是为了让该过滤器最先执行（越小越先执行）
+	mode: "onActionExecuting", // 可选 onActionExecuting onActionExecuted
+	enable: true, // 通过设置enable=false可以关闭该中间件
+	main: async function(event) {
+		// 这里是拦截规则，可以查数据库，最终code:0 代表通过，其他均为未通过，msg是被拦截的原因
+		let { data = {}, util } = event;
+		let { vk } = util;
+		// 如果未使用加密通信，则拦截
+		if (!event.encrypt) {
+			return {
+				code: 413,
+				msg: "请求非法，请求参数未加密"
+			}
+		}
+		return {
+			code: 0,
+			msg: "ok"
+		}
+	}
+}]
+```
