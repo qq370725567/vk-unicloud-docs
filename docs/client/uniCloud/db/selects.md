@@ -240,7 +240,7 @@ count 的耗时
 若觉得副表的层级过深，则可以通过（addFields和fieldJson的组合使用）将副表的字段拆分到顶层显示，具体代码如下
 
 ```js
-let res = await vk.baseDao.selects({
+res = await vk.baseDao.selects({
   dbName: "表名",
   getCount: false,
   pageIndex: 1,
