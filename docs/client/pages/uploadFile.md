@@ -34,14 +34,29 @@ uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](http
 
 **vk-unicloud 核心库版本 ≥ 2.17.0 时**
 
-|参数名		|类型		|说明											|
-|:-:			|:-:		|:-:											|
-|provider	|string	|本次上传的存储供应商				|
-|filePath	|string	|本地文件路径							|
-|cloudPath|string	|云端文件路径							|
-|fileID		|string	|云端文件ID								|
-|fileURL	|string	|云端文件URL								|
-|url			|string	|云端文件URL，与fileURL一致	|
+|参数名			|类型		|说明											|
+|:-:				|:-:		|:-:											|
+|provider		|string	|本次上传的存储供应商				|
+|filePath		|string	|本地文件路径								|
+|cloudPath	|string	|云端文件路径								|
+|fileID			|string	|云端文件ID								|
+|fileURL		|string	|云端文件URL								|
+|url				|string	|云端文件URL，与fileURL一致	|
+|extendInfo	|object	|扩展存储额外返回的信息			|
+
+**extendInfo**
+
+> vk-unicloud 核心库版本 ≥ 2.18.7
+
+|参数名	|类型		|说明																|
+|:-:		|:-:		|:-:																|
+|key		|string	| 等于cloudPath											|
+|hash		|string	| 文件的hash值												|
+|name		|string	| 上传前的文件名											|
+|size		|number	| 文件大小，单位B（字节）1KB = 1024B	|
+|width	|number	| 图片或视频的宽度										|
+|height	|number	| 图片或视频的高度										|
+|format	|string	| 文件格式														|
 
 旧版本唯一不兼容的参数是fileID，新版本fileID是云端文件ID，而旧版本中fileID和url是一致的，因此若在项目中有用到获取url时，请改用url或fileURL
 
