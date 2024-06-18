@@ -48,6 +48,8 @@ uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](http
 
 > vk-unicloud 核心库版本 ≥ 2.18.7
 
+仅扩展存储会返回此字段
+
 |参数名	|类型		|说明																|
 |:-:		|:-:		|:-:																|
 |key		|string	| 等于cloudPath											|
