@@ -235,6 +235,40 @@ count 的耗时
 
 场景示例：[连表查询，通过副表字段排序](#场景12-通过副表字段排序)
 
+### addFields和fieldJson的组合使用
+
+```js
+let res = await vk.baseDao.selects({
+  dbName: "表名",
+  getCount: false,
+  pageIndex: 1,
+  pageSize: 20,
+  // 主表where条件
+  whereJson: {
+    
+  },
+  addFields: { 
+    a: "$副表as字段.a", // 以$为前缀，将副表字段的a字段赋值给主表的a字段（不会改变数据库实际数据，只是改变本次显示）
+    b: "$副表as字段.b", // 以$为前缀，将副表字段的b字段赋值给主表的b字段（不会改变数据库实际数据，只是改变本次显示）
+  },
+  fieldJson: {
+    副表as字段: false, // 不显示副表的字段
+  },
+  // 主表排序规则
+  sortArr: [{ name:"_id", type:"desc" }],
+  // 副表列表
+  foreignDB: [
+    {
+      dbName: "副表表名",
+      localKey: "主表外键名",
+      foreignKey: "副表外键名",
+      as: "副表as字段",
+      limit: 1
+    }
+  ]
+});
+```
+
 ## 场景示例
 
 ### 场景1：1张主表多张副表
