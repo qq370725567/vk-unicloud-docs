@@ -77,7 +77,7 @@ let data = await vk.callFunction({
 | env              | 请求多服务空间的环境 [查看详情](https://vkdoc.fsq.pub/client/question/q9.html#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4)| String  | - | - |
 | retryCount       | 系统异常重试机制（表单提交时慎用，建议只用在查询请求中，即无任何数据库修改的请求中） | Number  | 0 | - |
 | secretType       | 安全网络类型 [查看详情](#secrettype-uni官方版安全网络) | String  | none | - |
-| encrypt          | 是否加密通信（可以不开启安全网络实现加密通信） [查看详情](#encrypt-vk版加密通信) | Boolean  | none | - |
+| encrypt          | 是否加密通信（可以不开启安全网络实现加密通信） [查看详情](#encrypt-vk版双向加密通信) | Boolean  | none | - |
 | success          | 请求成功时，执行的回调函数 | Function  | - | - |
 | fail             | 请求失败时，执行的回调函数 | Function  | - | - |
 | complete         | 无论请求成功与否，都会执行的回调函数 | Function  | - | - |
@@ -222,24 +222,26 @@ uniCloud.addInterceptor('callFunction', {
 
 **注意：**
 
-1. 之所以提供如此精细的加密配置，是因为加解密都是消耗资源的，增加了等待时间。一般只对真正需要防止网络窃取的保密数据才加密。
-2. 只支持APP、微信小程序，不支持H5和其他小程序，推荐使用 [VK版加密通信](#encrypt-vk版加密通信) 支持全端双向通信加密。
+1. 建议只对真正需要防止网络窃取的保密数据才加密。
+2. 只支持APP、微信小程序，不支持H5和其他小程序，推荐使用 [VK版双向加密通信](#encrypt-vk版双向加密通信) 支持全端双向通信加密。
 
 如何开通？[传送门](https://doc.dcloud.net.cn/uniCloud/secure-network.html#%E5%A6%82%E4%BD%95%E5%BC%80%E9%80%9A)
 
 安全网络详细文档：[传送门](https://doc.dcloud.net.cn/uniCloud/secure-network.html)
 
-### encrypt（vk版加密通信）
+### encrypt（vk版双向加密通信）
 
 > vk-unicloud 核心库版本需 >= 2.18.7
 
-`vk版加密通信` 和 `uni官方版安全网络` 是2个不同的功能，可以一起使用，也可以单独使用
+`vk版双向加密通信` 和 `uni官方版安全网络` 是2个不同的功能，可以一起使用，也可以单独使用
 
-**vk版加密通信特点**
+**vk版双向加密通信特点**
 
 1. 上手更简单
 2. 全端支持（H5、APP、小程序）
 3. 支持URL化后的加密通信
+4. 请求参数和返回值均是密文传输
+5. 防重放攻击（请求的密文具有时效性，默认10秒过期）
 
 **效果**
 
@@ -323,4 +325,15 @@ module.exports = [{
 		}
 	}
 }]
+```
+
+#### 设置请求参数密文有效期
+
+打开配置文件 `common/uni-config-center/vk-unicloud/index.js` 修改配置 `clientCrypto.expTime` 的值（单位秒，此值如果设置太小，可能会影响正常用户的请求）
+
+```js
+// 客户端加密通信配置
+"clientCrypto": {
+  "expTime": 10, // 同一个请求过期时间，单位秒（可防止重放攻击）取值范围：5 ~ 3600（特别注意：此值如果设置太小，可能会影响正常用户的请求）
+},
 ```

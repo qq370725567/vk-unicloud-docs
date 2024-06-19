@@ -35,7 +35,11 @@ module.exports = {
     },
     // 加密的密钥
     "crypto": {
-      "aes": "dad4c0cb88c7d005bc5e844b8e79a9f0dad4c0cb88c7d005bc5e844b8e79a9f0", // 对称加密的密钥，建议长度在64位-128位（此处建议修改成自己的密钥）
+      "aes": "dad4c0cb88c7d005bc5e844b8e79a9f0", // 对称加密的密钥，长度固定32位（此处建议修改成自己的密钥）
+    },
+    // 客户端加密通信配置
+    "clientCrypto": {
+      "expTime": 10, // 同一个请求过期时间，单位秒（可防止重放攻击）取值范围：5 ~ 3600（特别注意：此值如果设置太小，可能会影响正常用户的请求）
     },
     // 当 context 内的下面值为空时，赋予默认的值（主要用于解决云函数 URL 后的默认 APPID 问题。
     "context": {
@@ -56,6 +60,16 @@ module.exports = {
           "auth": {
             "user": "你的邮箱@qq.com",
             "pass": "邮箱授权码"
+          }
+        },
+        // 163邮箱配置
+        "163":{
+          "host": "smtp.163.com",
+          "port": 465,
+          "secure": true,
+          "auth": {
+            "user": "",
+            "pass": ""
           }
         }
       },
@@ -87,11 +101,32 @@ module.exports = {
           "appid": "",    // 对应的API Key
           "appsecret": "" // 对应的Secret Key
         }
+      },
+      // 云储存相关配置
+      "cloudStorage": {
+        /**
+         * vk.uploadFile 接口默认使用哪个存储
+         * unicloud 空间内置存储（默认）
+         * extStorage 扩展存储
+         */
+        "defaultProvider": "unicloud",
+        // 空间内置存储
+        "unicloud": {
+          // 暂无配置项
+        },
+        // 扩展存储配置
+        "extStorage": {
+          "provider": "qiniu", // qiniu: 扩展存储-七牛云
+          "domain": "", // 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名）
+          "endpoint": {
+            "upload": "", // 上传接口的代理地址，在国内上传无需填写
+          }
+        }
       }
     },
     "db": {
       "unicloud": {
-        "maxLimit": 500, // 最大limit限制(目前腾讯云最大1000,阿里云最大500)
+        "maxLimit": 1000, // 最大limit限制(目前腾讯云最大1000,阿里云最大1000)
         "cancelAddTime": false, // 取消 vk.baseDao.add 时自动生成 _add_time 和 _add_time_str
         "cancelAddTimeStr": false, // 仅取消 vk.baseDao.add 时自动生成的 _add_time_str，若已设置 cancelAddTime 为true，则 cancelAddTimeStr 也会强制为true
         "getTableData": {
@@ -99,9 +134,9 @@ module.exports = {
         }
       }
     },
-    // 其他小程序的密钥，当需要多个小程序绑定同一服务空间，并调用小程序服务端API时需要填写
+    // 其他小程序的密钥 当需要多个小程序绑定同一服务空间,并调用小程序服务端API时需要填写 暂只支持微信小程序
     "oauth": {
-      // 微信（含小程序、公众号、APP）
+      // 微信小程序
       "weixin": {
         // 密钥列表
         "list": [
@@ -109,15 +144,15 @@ module.exports = {
           { "appid": "", "appsecret": "" }
         ]
       },
-      // 支付宝（小程序）
+      // 支付宝小程序
       "alipay": {
-        // 密钥列表（注意：支付宝比较特殊，没有appsecret，这里的 privateKey 是应用私钥）
+        // 密钥列表
         "list": [
           { "appid": "", "privateKey": "" },
           { "appid": "", "privateKey": "" }
         ]
       },
-      // qq（小程序）
+      // qq小程序
       "qq": {
         // 密钥列表
         "list": [
@@ -125,7 +160,7 @@ module.exports = {
           { "appid": "", "appsecret": "" }
         ]
       },
-      // 抖音（小程序）
+      // 抖音小程序
       "toutiao": {
         // 密钥列表
         "list": [
