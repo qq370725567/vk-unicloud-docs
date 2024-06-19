@@ -235,7 +235,7 @@ uniCloud.addInterceptor('callFunction', {
 
 `vk版加密通信` 和 `uni官方版安全网络` 是2个不同的功能，可以一起使用，也可以单独使用
 
-**VK版特点**
+**vk版加密通信特点**
 
 1. 上手更简单
 2. 全端支持（H5、APP、小程序）
