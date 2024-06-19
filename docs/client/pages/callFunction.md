@@ -247,6 +247,10 @@ uniCloud.addInterceptor('callFunction', {
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/17187802997748lqdrqtjlu.png)
 
+**友情提示**
+
+加密通信与安全网络一样，只能保证相对安全，无法保证绝对安全，如果你发布APP，可以考虑再配合使用APP的安全加固，防止APP端被破解，这样加密通信起到的安全效果会更好。
+
 #### 单独指定某个请求加密通信
 
 `vk.callFunction` 多传一个参数 `encrypt: true` 即可开启加密通信
