@@ -239,13 +239,13 @@ uniCloud.addInterceptor('callFunction', {
 
 1. 上手更简单
 2. 全端支持（H5、APP、小程序）
-3. 支持URL化后的加密通信
+3. 支持URL化后的加密通信（需要用vk.request请求）
 4. 请求参数和返回值均是密文传输
 5. 防重放攻击（请求的密文具有时效性，默认10秒过期）
 
 **效果**
 
-![](https://cdn.fsq.pub/vkdoc/vk-client/17187802997748lqdrqtjlu.png)
+![](https://cdn.fsq.pub/vkdoc/vk-client/1718791729028adqot3kut6o.png)
 
 **友情提示**
 
@@ -295,6 +295,10 @@ checkEncryptRequest: {
 
 修改中间件 `router/middleware/modules/encryptFilter.js` 内的 `regExp` 与前端 `checkEncryptRequest.list` 保持一致（如果你没有此中间件则新建一个 encryptFilter.js 代码如下）
 
+**效果**
+
+在此设置的云函数或云对象如果请求参数没有加密，会报413错误码：请求非法，请求参数未加密，不再执行后续逻辑
+
 ```js
 /**
  * 加密函数拦截器 - 前置
@@ -341,3 +345,7 @@ module.exports = [{
   "expTime": 10, // 同一个请求过期时间，单位秒（可防止重放攻击）取值范围：5 ~ 3600（特别注意：此值如果设置太小，可能会影响正常用户的请求）
 },
 ```
+
+**效果**
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/1718791854830p67v9fq24q8.png)
