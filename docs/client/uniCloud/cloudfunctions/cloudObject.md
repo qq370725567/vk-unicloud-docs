@@ -766,6 +766,21 @@ let res = await pubObject.getList({
 });
 ```
 
+**开启加密通信**
+
+```js
+const pubObject = uni.vk.importObject('client/user', {
+  encrypt: true, // 开启加密通信
+});
+
+let res = await pubObject.getList({
+  data: { 
+    a: 1,
+    b: "2"
+  }
+});
+```
+
 ## 本地运行
 
 **VK框架下的云对象是支持本地运行的**

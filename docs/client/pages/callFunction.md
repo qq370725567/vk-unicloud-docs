@@ -335,6 +335,10 @@ module.exports = [{
 }]
 ```
 
+**特别注意**
+
+如果开启了强制加密，则云端一个云函数（或云对象）调用另外一个云函数（或云对象）时，`vk.callFunction` 必须多传一个参数 `encrypt: true` 才能正常调用
+
 #### 设置请求参数密文有效期
 
 打开配置文件 `common/uni-config-center/vk-unicloud/index.js` 修改配置 `clientCrypto.expTime` 的值（单位秒，此值如果设置太小，可能会影响正常用户的请求）
