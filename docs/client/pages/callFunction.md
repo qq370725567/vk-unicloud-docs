@@ -235,7 +235,7 @@ uniCloud.addInterceptor('callFunction', {
 
 **效果**
 
-![](https://cdn.fsq.pub/vkdoc/vk-client/1718612831526pg0c8hcmd9o.png)
+![](https://cdn.fsq.pub/vkdoc/vk-client/17187802997748lqdrqtjlu.png)
 
 #### 单独指定某个请求加密通信
 
