@@ -19,11 +19,7 @@ let queryAccountBalanceRes = await vkPay.queryAccountBalance({
 });
 if (queryAccountBalanceRes.code === 0) {
   // 成功后的逻辑
-  let {
-    available_amount, // 可用余额（注意，这里单位是元）
-    freeze_amount, // 冻结余额（注意，这里单位是元）
-  } = queryAccountBalanceRes;
-  console.log('可用余额: ', available_amount);
+  console.log('余额详情: ', queryAccountBalanceRes);
 } else {
   // 失败后的逻辑
 
@@ -40,7 +36,11 @@ if (queryAccountBalanceRes.code === 0) {
 
 ## 返回值
 
-|参数名              |类型		|说明												|
-|:-:                |:-:		|:-:												|
-|available_amount   |Number	|可用余额（单位：元）					|
-|freeze_amount      |Number	|冻结余额（单位：元）					|
+注意：1.13.0之前的版本此处返回的是蛇形，1.13.0之后返回的是驼峰格式
+
+|参数名							|类型		|说明									| 兼容性						|
+|:-:								|:-:		|:-:									|:-:							|
+|availableAmount		|Number	|可用余额（单位：元）		| 支付宝						|
+|freezeAmount				|Number	|冻结余额（单位：元）		|	支付宝、抖音支付	|
+|onlineAmount				|Number	|在途余额（单位：元）		|	抖音支付					|
+|withdrawableAmount	|Number	|可提现余额（单位：元）	|	抖音支付					|
