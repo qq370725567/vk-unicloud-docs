@@ -222,10 +222,37 @@ ___如何获取URL化完整地址___
 
 注意：正式上线的项目，请不要将退款、转账等涉及资金外流的函数写到 `vk-pay` 自带的云函数中，你应该写在 `router` 或其他具有权限判断的云函数中鉴权（其他云函数可通过 `vk-uni-pay` 这个公共模块来调用退款等接口）
 
+## 抖音支付如何请求其他API
 
+以 `发起结算及分账` 接口为例，代码如下
 
-
-
+```js
+// 引入 vk-uni-pay 模块
+const vkPay = require("vk-uni-pay");
+// 初始化抖音支付实例
+let uniPayInstance = await vkPay.initUniPayInstance({
+	pay_type: "douyin_mp-toutiao"
+});
+let out_trade_no = "test_1719298119508";
+// 发起请求
+let requestRes = await uniPayInstance.request({
+	method: "POST",
+	action: "api/apps/ecpay/v1/settle",
+	data: {
+		out_settle_no: `st_${out_trade_no}`, // 自定义结算分账单号
+		out_order_no: out_trade_no, // 订单号
+		settle_desc: "主动结算", // 备注
+		notify_url: `https://fc-mp-33d35e24-c2f3-47b4-80fc-7b23a666666.next.bspapp.com/http/vk-pay/vk-pay-notify/douyin_mp-toutiao/${out_trade_no}`, // 这里改成你的支付回调地址
+		finish: "true", // 是否完结订单
+	}
+});
+console.log('requestRes: ', requestRes)
+if (requestRes.code === 0) {
+  // 执行成功
+} else {
+  // 执行失败
+}
+```
 
 
 
