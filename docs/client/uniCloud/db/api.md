@@ -320,9 +320,11 @@ vk.baseDao.updateAndReturn 可以实现什么功能？
 * 3、实现跟数值有关的自增和自减（同时需要实时获取自增或自减后的值）
 
 
-### vk.baseDao.setById（根据ID判断存在则修改，不存在则添加）
+### vk.baseDao.setById（根据ID判断存在则替换，不存在则添加）
 
-优势：此为原子操作，并不是先判断是否存在，再进行修改或新增。只计一次写操作。（原子操作）（支持事务）
+优势：此为原子操作，并不是先判断是否存在，再进行替换或新增。只计一次写操作。（原子操作）（支持事务）
+
+注意：若id存在，则会用传的数据进行替换，即未写在 dataJson 内的字段会被删除
 
 > VK框架核心库版本需 >= 2.15.1
 
@@ -347,7 +349,7 @@ let setRes = await vk.baseDao.setById({
 |    参数名   |   类型   | 必填 |    说明    |
 |------------|----------|------|-----------|
 |   dbName   |  String  |  是  |   表名    |
-|   dataJson |  Object  |  是  |   需要修改或新增的完整数据（必须包含_id） |
+|   dataJson |  Object  |  是  |   需要替换或新增的完整数据（必须包含_id） |
 |   id |  String  |  否  |  如果传了id参数，则会与dataJson中的_id判断是否一致，不一致会报错 |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
@@ -355,7 +357,7 @@ let setRes = await vk.baseDao.setById({
 
 |    参数名		|   类型		| 必填	|    说明																						|
 |------------	|----------	|------	|-----------																				|
-|   type			|  String		|  是		|  add 添加 update 修改															|
+|   type			|  String		|  是		|  add 添加 update 修改（替换）															|
 |   id				|  String		|  是		|   若返回的type=add，则会额外返回当前新增的记录的id|
 
 ## 查
