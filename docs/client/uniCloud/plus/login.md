@@ -29,8 +29,12 @@ sidebarDepth: 0
 
 具体代码请直接查看示例项目源代码 `router/service/user/pub/loginByDouyin.js`
 
-## 命中过滤器returnUserInfoFilter的regExp
+## 命中过滤器
+ 
+如果云函数不以 `user/pub/login` 开头，则需要额外在以下2个过滤器中添加 `regExp`
 
-文件地址：`router/middleware/modules/returnUserInfoFilter.js`
+过滤器1号：`returnUserInfoFilter` 文件地址：`router/middleware/modules/returnUserInfoFilter.js`
 
-使当前登录的云函数 `user/pub/loginByDouyin` 满足 `regExp` 内的规则即可
+过滤器2号：`registerInitFilter` 文档地址：`router/middleware/modules/registerInitFilter.js`
+
+使当前登录的云函数 `user/pub/loginByDouyin` 满足 `regExp` 内的规则即可（默认user/pub/login*开头的已命中过滤器）
