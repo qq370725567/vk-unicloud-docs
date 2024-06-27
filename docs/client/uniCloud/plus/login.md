@@ -1,0 +1,36 @@
+---
+sidebarDepth: 0
+---
+
+# 三方登录扩展
+
+> 以下API需要vk-unicloud核心库版本 >= 2.18.8
+
+以扩展抖音小程序登录为例
+
+## 配置文件
+
+打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
+
+"mp-toutiao" 抖音小程序（此值=uniapp的条件编译的值即可）
+
+```js
+"mp-toutiao": {
+  "oauth": {
+    "toutiao": {
+      "appid": "",
+      "privateKey": ""
+    }
+  }
+}
+```
+
+## 编写云函数user/pub/loginByDouyin
+
+具体代码请直接查看示例项目源代码 `router/service/user/pub/loginByDouyin.js`
+
+## 命中过滤器returnUserInfoFilter的regExp
+
+文件地址：`router/middleware/modules/returnUserInfoFilter.js`
+
+使当前登录的云函数 `user/pub/loginByDouyin` 满足 `regExp` 内的规则即可
