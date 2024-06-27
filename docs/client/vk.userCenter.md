@@ -880,6 +880,8 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  * @description 用户登录(微信授权)
  * data 请求参数 说明
  * @param {String} type 可传login或register，若为login：则不存在不会自动注册，若为register，则用户存在会报错，不传，则存在自动登录，不存在，则注册。
+ * @param {String} nickname 用户昵称（仅注册时生效）
+ * @param {String} avatar 用户头像（仅注册时生效）其他参数需要在修改云函数 user/pub/loginByDouyin 内的 customData 字段
  * res 返回参数说明
  * @param {String} token 登录成功之后返回的token信息
  * @param {String} tokenExpired token过期时间
@@ -1306,6 +1308,46 @@ vk.userCenter.unbindQQ({
 });
 ```
 
+## 抖音
+
+### vk.userCenter.loginByQQ（抖音登录）
+
+> vk-unicloud版本需 ≥ 2.18.8
+
+目前仅支持抖音小程序登录
+
+___框架会自动保存 `token`，无需你再手动去保存。___
+
+[查看token介绍](#token介绍) 
+
+注意：
+
+抖音小程序登录配置
+
+* 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-toutiao` 的 `appid` 和 `appsecret`
+* 在 `manifest.json` 内配置抖音小程序的 `appid`
+
+```js
+/**
+ * 抖音登录
+ * data 请求参数 说明
+ * @param {String} type 可传login或register，若为login：则不存在不会自动注册，若为register，则用户存在会报错，不传，则存在自动登录，不存在，则注册。
+ * @param {String} nickname 用户昵称（仅注册时生效）
+ * @param {String} avatar 用户头像（仅注册时生效）其他参数需要在修改云函数 user/pub/loginByDouyin 内的 customData 字段
+ * res 返回参数说明
+ * @param {String} token 登录成功之后返回的token信息
+ * @param {String} tokenExpired token过期时间
+ */
+vk.userCenter.loginByDouyin({
+  data: {
+    type: ""
+  },
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
 
 ## 裂变分销
 
