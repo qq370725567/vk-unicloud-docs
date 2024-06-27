@@ -1310,7 +1310,7 @@ vk.userCenter.unbindQQ({
 
 ## 抖音
 
-### vk.userCenter.loginByQQ（抖音登录）
+### vk.userCenter.loginByDouyin（抖音登录）
 
 > vk-unicloud版本需 ≥ 2.18.8
 
