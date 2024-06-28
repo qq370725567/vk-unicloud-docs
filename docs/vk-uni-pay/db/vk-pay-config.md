@@ -12,12 +12,16 @@ sidebarDepth: 0
 
 ## 字段
 
-| 字段名称						| 字段类型| 必填| 默认值| 说明																																					|
-|---								|:---:		|:---:|:---:	|---																																					|
-| _id									|  string	| 是	|				| 商户支付pid																																		|
-| alipay							|  object	| 否	|				| 支付宝支付配置 [详情](#alipay字段-支付宝配置说明)															|
-| wxpay								|  object	| 否	|				| 微信支付配置[详情](#wxpay字段-微信支付配置说明)																|
-| alipayAppPayToH5Pay	|  boolean| 否	| false	| 是否使用当面付接口来代替支付宝app支付<br/>优势：可免去申请支付宝APP支付的接口	|
+| 字段名称						| 字段类型	| 必填	| 默认值	| 说明																																			|
+|---									|:---:		|:---:|:---:	|---																																			|
+| _id									|  string	| 是		|				| 商户支付pid																															|
+| alipay							|  object	| 否		|				| 支付宝支付配置 [详情](#alipay字段-支付宝配置说明)														|
+| wxpay								|  object	| 否		|				| 微信支付配置[详情](#wxpay字段-微信支付配置说明)															|
+| alipayAppPayToH5Pay	|  boolean| 否		| false	| 是否使用当面付接口来代替支付宝app支付<br/>优势：可免去申请支付宝APP支付的接口	|
+| appleiap						|  object	| 否		|				| ios内购支付配置																														|
+| vkspay							|  object	| 否		|				| VksPay个人支付配置																												|
+| wxpay-virtual				|  object	| 否		|				| 微信小程序虚拟支付配置																										|
+| douyin							|  object	| 否		|				| 抖音支付配置																															|
 
 ## 完整数据格式示例
 
@@ -34,7 +38,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
-      "version": 2
+      "version": 3
     },
     "app-plus": {
       "appId": "",
@@ -45,7 +49,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
-      "version": 2
+      "version": 3
     },
     "h5": {
       "appId": "",
@@ -56,7 +60,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
-      "version": 2
+      "version": 3
     },
     "h5-weixin": {
       "appId": "",
@@ -67,7 +71,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
-      "version": 2
+      "version": 3
     },
     "mweb": {
       "appId": "",
@@ -78,7 +82,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
-      "version": 2,
+      "version": 3,
       "sceneInfo": {
         "h5_info": {
           "type": "Wap",
@@ -128,6 +132,42 @@ sidebarDepth: 0
       "alipayPublicCertContent": "",
       "alipayRootCertContent": "",
       "appCertContent": "",
+      "sandbox": false
+    }
+  },
+  "appleiap": {
+    "app-plus": {
+      "password": "", 
+      "timeout": 10000, 
+      "receiptExpiresIn": 86400, 
+      "sandbox": false
+    }
+  },
+  "wxpay-virtual": {
+    "mp-weixin": {
+      "appId": "",
+      "secret": "",
+      "mchId": "",
+      "offerId": "",
+      "appKey": "", 
+      "sandboxAppKey": "",
+      "rate": 100, 
+      "token": "", 
+      "encodingAESKey": "", 
+      "sandbox": false
+    }
+  },
+  "vkspay": {
+    "mchId": "",
+    "key": ""
+  },
+  "douyin": {
+    "mp-toutiao": {
+      "appId": "", 
+      "secret": "", 
+      "mchId": "",
+      "salt": "", 
+      "token": "", 
       "sandbox": false
     }
   }

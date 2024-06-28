@@ -15,7 +15,7 @@ sidebarDepth: 1
 * 配置文件是 `.js` 文件，不是 `.json` 文件
 * 配置文件是 `.js` 文件，不是 `.json` 文件
 
-## 完整的支付配置
+## 完整的支付配置示例
 
 ___注意：就算你只使用部分支付功能，如微信小程序支付，也需保留其他支付配置（其他支付配置不填即可，但不要直接删除其他配置，包括支付宝空白证书也不要删除）___
 
@@ -219,6 +219,368 @@ module.exports = {
   "vkspay": {
     "mchId": "", // 商户号
     "key": "" // 商户key
+  },
+    // 抖音支付
+  "douyin": {
+    // 抖音小程序支付，请在支付配置信息中配置URL(服务器地址)为 https://vk-pay的url化地址/vk-pay-notify/
+    "mp-toutiao": {
+      "appId": "", // 抖音小程序的appId
+      "secret": "", // 抖音小程序的secret
+      "mchId": "", // 商户id（商户号）
+      "salt": "", // SALT，从支付信息 - 支付设置中获取
+      "token": "", // Token(令牌)，从支付信息 - 支付设置中获取
+      "sandbox": false, // 是否是沙箱环境
+    }
+  }
+}
+```
+
+## 分渠道支付配置示例
+
+### 支付宝
+
+```js
+const fs = require('fs');
+const path = require('path');
+module.exports = {
+  /**
+   * 统一支付回调地址，格式为 "服务空间SpaceID":"URL化完整地址"
+   * 这里的本地开发并不是指 http://localhost:8080/ 的地址，而是另外一个服务空间的ULR化地址（如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可）
+   * 回调的云函数地址，建议填 /http/vk-pay，因为vk-pay云函数已经写好了回调处理的逻辑，否则你需要自己写全部的回调逻辑。
+   * 其中vk-pay是可以改名的，只需要修改 uniCloud/cloudfunctions/vk-pay/package.json 文件中的 "path": "/http/vk-pay", 把 /http/vk-pay 改成 /http/xxxx 即可(需要重新上传云函数vk-pay)。
+   */
+  "notifyUrl": {
+    // 本地开发环境，如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可
+    "mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22": "https://fc-mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22.next.bspapp.com/http/vk-pay",
+    // 线上正式环境
+    "mp-6666d886-00b6-22b2-9156-84afeadcf669": "https://fc-mp-6666d886-00b6-22b2-9156-84afeadcf669.next.bspapp.com/http/vk-pay"
+  },
+  // 此密钥主要用于跨云函数回调或回调java、php等外部系统时的通信密码（建议修改成自己的，最好64位以上，更加安全）
+  // 详细介绍：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html#特别注意
+  "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
+  // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
+  "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
+  // 是否使用当面付接口来代替支付宝app支付（可免去申请支付宝APP支付的接口）
+  "alipayAppPayToH5Pay": false,
+  /**
+   * 支付宝官方商户配置
+   * 公共参数说明
+   * appId                  支付宝开放平台的应用appId
+   * privateKey             应用私钥
+   * alipayPublicCertPath   [证书模式] 支付宝公钥证书路径地址  与之对应的 alipayPublicCertContent 为支付宝公钥证书内容（值可以是字符串也可以是Buffer）
+   * alipayRootCertPath     [证书模式] 支付宝根证书路径地址   与之对应的 alipayRootCertContent 为支付宝根证书内容（值可以是字符串也可以是Buffer）
+   * appCertPath            [证书模式] 应用证书路径地址      与之对应的 appCertPathContent 为应用证书内容（值可以是字符串也可以是Buffer）
+   * alipayPublicKey        [密钥模式] 支付宝公钥（证书模式3个参数，密钥模式1个参数，选一种模式即可，密钥模式不支持转账到支付宝）
+   * sandbox                是否沙箱模式 true 沙箱模式 false 正常模式
+   */
+  "alipay": {
+    // 支付宝 - 小程序支付配置
+    "mp-alipay": {
+      "appId": "",
+      "privateKey": "",
+      "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'),
+      "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'),
+      "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'),
+      "sandbox": false
+    },
+    // 支付宝 - APP支付配置
+    "app-plus": {
+      "appId": "",
+      "privateKey": "",
+      "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'),
+      "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'),
+      "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'),
+      "sandbox": false
+    },
+    // 支付宝 - H5支付配置（包含：网站二维码、手机H5，需申请支付宝当面付接口权限）
+    "h5": {
+      "appId": "",
+      "privateKey": "",
+      "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'),
+      "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'),
+      "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'),
+      "sandbox": false
+    },
+    // 支付宝 - 转账到支付宝等资金转出接口
+    "transfer": {
+      "appId": "",
+      "privateKey": "",
+      "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'),
+      "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'),
+      "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'),
+      "sandbox": false
+    }
+  }
+}
+```
+
+### 微信支付
+
+```js
+const fs = require('fs');
+const path = require('path');
+module.exports = {
+  /**
+   * 统一支付回调地址，格式为 "服务空间SpaceID":"URL化完整地址"
+   * 这里的本地开发并不是指 http://localhost:8080/ 的地址，而是另外一个服务空间的ULR化地址（如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可）
+   * 回调的云函数地址，建议填 /http/vk-pay，因为vk-pay云函数已经写好了回调处理的逻辑，否则你需要自己写全部的回调逻辑。
+   * 其中vk-pay是可以改名的，只需要修改 uniCloud/cloudfunctions/vk-pay/package.json 文件中的 "path": "/http/vk-pay", 把 /http/vk-pay 改成 /http/xxxx 即可(需要重新上传云函数vk-pay)。
+   */
+  "notifyUrl": {
+    // 本地开发环境，如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可
+    "mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22": "https://fc-mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22.next.bspapp.com/http/vk-pay",
+    // 线上正式环境
+    "mp-6666d886-00b6-22b2-9156-84afeadcf669": "https://fc-mp-6666d886-00b6-22b2-9156-84afeadcf669.next.bspapp.com/http/vk-pay"
+  },
+  // 此密钥主要用于跨云函数回调或回调java、php等外部系统时的通信密码（建议修改成自己的，最好64位以上，更加安全）
+  // 详细介绍：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html#特别注意
+  "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
+  // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
+  "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
+  /**
+   * 微信支付官方商户配置
+   * 公共参数说明
+   * appId              微信后台的appId
+   * secret             微信后台的secret
+   * mchId              微信支付的商户id
+   * key                微信支付V2版本的api密钥
+   * pfx                微信支付V2版本的p12证书（apiclient_cert.p12）（退款需要）
+   * v3Key              微信支付V3版本的api密钥
+   * appCertPath        微信支付V3版本需要用到的证书（apiclient_cert.pem）
+   * appPrivateKeyPath  微信支付V3版本需要用到的证书（apiclient_key.pem）
+   * version            启用支付的版本 2代表v2版本 3 代表v3版本，默认是2
+   */
+  "wxpay": {
+    // 微信 - 小程序支付
+    "mp-weixin": {
+      "appId": "", // 微信小程序的appId
+      "secret": "", // 微信小程序的secret（需要填写）
+      "mchId": "", // 微信支付的商户id
+      "key": "", // 微信支付V2版本的api密钥
+      "pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // 微信支付V2版本的api密钥
+      "v3Key": "", // 微信支付V3版本的api密钥
+      "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
+      "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "version": 2
+    },
+    // 微信 - APP支付
+    "app-plus": {
+      "appId": "", // 微信开放平台下app的appId
+      "secret": "", // 微信开放平台下app的secret（app可不填此项）
+      "mchId": "", // 微信支付的商户id
+      "key": "", // 微信支付V2版本的api密钥
+      "pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // 微信支付V2版本的api密钥
+      "v3Key": "", // 微信支付V3版本的api密钥
+      "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
+      "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "version": 2
+    },
+    // 微信 - H5网站二维码支付
+    "h5": {
+      "appId": "", // 微信公众号或小程序或app的appId（任意都可）
+      "secret": "", // 微信后台与之对应的secret（可不填此项）
+      "mchId": "", // 微信支付的商户id
+      "key": "", // 微信支付V2版本的api密钥
+      "pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // 微信支付V2版本的api密钥
+      "v3Key": "", // 微信支付V3版本的api密钥
+      "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
+      "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "version": 2
+    },
+    // 微信 - 公众号支付
+    "h5-weixin": {
+      "appId": "", // 微信公众号下app的appId
+      "secret": "", // 微信公众号的secret（需要填写）
+      "mchId": "", // 微信支付的商户id
+      "key": "", // 微信支付V2版本的api密钥
+      "pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // 微信支付V2版本的api密钥
+      "v3Key": "", // 微信支付V3版本的api密钥
+      "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
+      "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "version": 2
+    },
+    // 微信 - 手机外部浏览器H5支付
+    "mweb": {
+      "appId": "", // 微信公众号或小程序或app的appId（任意都可）
+      "secret": "", // 微信后台与之对应的secret（可不填此项）
+      "mchId": "", // 微信支付的商户id
+      "key": "", // 微信支付V2版本的api密钥
+      "pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // 微信支付V2版本的api密钥
+      "v3Key": "", // 微信支付V3版本的api密钥
+      "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
+      "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      // 场景信息，必填
+      "sceneInfo": {
+        "h5_info": {
+          "type": "Wap", // 此值固定Wap
+          "wap_url": "https://www.xxxxxx.com", // 你的H5首页地址，必须和你发起支付的页面的域名一致。
+          "wap_name": "网站名称" // 你的H5网站名称
+        }
+      },
+      "version": 2
+    },
+    // 微信 - 转账到零钱 v3版本
+    "transfer": {
+      "appId": "", // 微信公众号或小程序或app的appId（任意都可）
+      "mchId": "", // 微信支付的商户id
+      "v3Key": "", // 微信支付V3版本的api密钥
+      "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
+      "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "wxpayPublicCertSn": "", // 微信平台证书序列号，详见：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#_7-2%E3%80%81%E6%89%B9%E9%87%8F%E6%A8%A1%E5%BC%8F
+      "wxpayPublicCertContent": "" // 微信平台证书内容，详见：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#_7-2%E3%80%81%E6%89%B9%E9%87%8F%E6%A8%A1%E5%BC%8F
+    },
+  }
+}
+```
+
+### ios内购支付  
+
+```js
+const fs = require('fs');
+const path = require('path');
+module.exports = {
+  /**
+   * 统一支付回调地址，格式为 "服务空间SpaceID":"URL化完整地址"
+   * 这里的本地开发并不是指 http://localhost:8080/ 的地址，而是另外一个服务空间的ULR化地址（如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可）
+   * 回调的云函数地址，建议填 /http/vk-pay，因为vk-pay云函数已经写好了回调处理的逻辑，否则你需要自己写全部的回调逻辑。
+   * 其中vk-pay是可以改名的，只需要修改 uniCloud/cloudfunctions/vk-pay/package.json 文件中的 "path": "/http/vk-pay", 把 /http/vk-pay 改成 /http/xxxx 即可(需要重新上传云函数vk-pay)。
+   */
+  "notifyUrl": {
+    // 本地开发环境，如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可
+    "mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22": "https://fc-mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22.next.bspapp.com/http/vk-pay",
+    // 线上正式环境
+    "mp-6666d886-00b6-22b2-9156-84afeadcf669": "https://fc-mp-6666d886-00b6-22b2-9156-84afeadcf669.next.bspapp.com/http/vk-pay"
+  },
+  // 此密钥主要用于跨云函数回调或回调java、php等外部系统时的通信密码（建议修改成自己的，最好64位以上，更加安全）
+  // 详细介绍：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html#特别注意
+  "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
+  // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
+  "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
+  // ios内购相关
+  "appleiap": {
+    // ios内购支付
+    "app-plus": {
+      "password": "", // 非自动续订场景不需要此参数
+      "timeout": 10000, // 请求超时时间，单位：毫秒
+      "receiptExpiresIn": 86400, // ios内购凭据有效期，单位：秒 86400 = 24小时 3600 = 1小时
+      "sandbox": true, // 是否是沙箱环境（正式上线时必须配置为false）
+    }
+  }
+}
+```
+
+### VksPay个人支付
+
+```js
+const fs = require('fs');
+const path = require('path');
+module.exports = {
+  /**
+   * 统一支付回调地址，格式为 "服务空间SpaceID":"URL化完整地址"
+   * 这里的本地开发并不是指 http://localhost:8080/ 的地址，而是另外一个服务空间的ULR化地址（如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可）
+   * 回调的云函数地址，建议填 /http/vk-pay，因为vk-pay云函数已经写好了回调处理的逻辑，否则你需要自己写全部的回调逻辑。
+   * 其中vk-pay是可以改名的，只需要修改 uniCloud/cloudfunctions/vk-pay/package.json 文件中的 "path": "/http/vk-pay", 把 /http/vk-pay 改成 /http/xxxx 即可(需要重新上传云函数vk-pay)。
+   */
+  "notifyUrl": {
+    // 本地开发环境，如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可
+    "mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22": "https://fc-mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22.next.bspapp.com/http/vk-pay",
+    // 线上正式环境
+    "mp-6666d886-00b6-22b2-9156-84afeadcf669": "https://fc-mp-6666d886-00b6-22b2-9156-84afeadcf669.next.bspapp.com/http/vk-pay"
+  },
+  // 此密钥主要用于跨云函数回调或回调java、php等外部系统时的通信密码（建议修改成自己的，最好64位以上，更加安全）
+  // 详细介绍：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html#特别注意
+  "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
+  // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
+  "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
+  /**
+   * VksPay商户支付配置
+   * 支持个人无需营业执照即可签约开户，正规通道，非市面上的挂机免签。（同时也支持企业签约）
+   * 消费者付款资金直接进入您签约的支付宝、微信支付商户号里，支付资金由支付宝、微信支付官方结算，避免二次清算。
+   * 开户联系QQ：370725567
+   */
+  "vkspay": {
+    "mchId": "", // 商户号
+    "key": "" // 商户key
+  }
+}
+```
+
+### 微信小程序虚拟支付
+
+```js
+const fs = require('fs');
+const path = require('path');
+module.exports = {
+  /**
+   * 统一支付回调地址，格式为 "服务空间SpaceID":"URL化完整地址"
+   * 这里的本地开发并不是指 http://localhost:8080/ 的地址，而是另外一个服务空间的ULR化地址（如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可）
+   * 回调的云函数地址，建议填 /http/vk-pay，因为vk-pay云函数已经写好了回调处理的逻辑，否则你需要自己写全部的回调逻辑。
+   * 其中vk-pay是可以改名的，只需要修改 uniCloud/cloudfunctions/vk-pay/package.json 文件中的 "path": "/http/vk-pay", 把 /http/vk-pay 改成 /http/xxxx 即可(需要重新上传云函数vk-pay)。
+   */
+  "notifyUrl": {
+    // 本地开发环境，如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可
+    "mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22": "https://fc-mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22.next.bspapp.com/http/vk-pay",
+    // 线上正式环境
+    "mp-6666d886-00b6-22b2-9156-84afeadcf669": "https://fc-mp-6666d886-00b6-22b2-9156-84afeadcf669.next.bspapp.com/http/vk-pay"
+  },
+  // 此密钥主要用于跨云函数回调或回调java、php等外部系统时的通信密码（建议修改成自己的，最好64位以上，更加安全）
+  // 详细介绍：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html#特别注意
+  "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
+  // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
+  "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
+  // 微信虚拟支付
+  "wxpay-virtual": {
+    // 微信 - 小程序支付
+    "mp-weixin": {
+      "appId": "", // 小程序的appid
+      "secret": "", // 小程序的secret
+      "mchId": "", // 商户id
+      "offerId": "", // 支付应用ID
+      "appKey": "", // 现网AppKey（正式环境）
+      "sandboxAppKey": "", // 沙箱AppKey
+      "rate": 100, // 代币兑换比例，比如1元兑换100代币，那么这里就是100，建议设置为100（需要开通虚拟支付的时候也设置成 1 人民币 = 100 代币）
+      "token": "", // 微信小程序通信的token，在开发 - 开发管理 - 消息推送 - Token(令牌)
+      "encodingAESKey": "", // 必须43位，微信小程序消息加密密钥，在开发 - 开发管理 - 消息推送 - EncodingAESKey(消息加解密密钥)
+      "sandbox": false, // 是否是沙箱环境（注意：沙箱环境异步回调可能有延迟，建议直接正式环境测试）
+    }
+  }
+}
+```
+
+### 抖音支付
+
+```js
+const fs = require('fs');
+const path = require('path');
+module.exports = {
+  /**
+   * 统一支付回调地址，格式为 "服务空间SpaceID":"URL化完整地址"
+   * 这里的本地开发并不是指 http://localhost:8080/ 的地址，而是另外一个服务空间的ULR化地址（如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可）
+   * 回调的云函数地址，建议填 /http/vk-pay，因为vk-pay云函数已经写好了回调处理的逻辑，否则你需要自己写全部的回调逻辑。
+   * 其中vk-pay是可以改名的，只需要修改 uniCloud/cloudfunctions/vk-pay/package.json 文件中的 "path": "/http/vk-pay", 把 /http/vk-pay 改成 /http/xxxx 即可(需要重新上传云函数vk-pay)。
+   */
+  "notifyUrl": {
+    // 本地开发环境，如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可
+    "mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22": "https://fc-mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22.next.bspapp.com/http/vk-pay",
+    // 线上正式环境
+    "mp-6666d886-00b6-22b2-9156-84afeadcf669": "https://fc-mp-6666d886-00b6-22b2-9156-84afeadcf669.next.bspapp.com/http/vk-pay"
+  },
+  // 此密钥主要用于跨云函数回调或回调java、php等外部系统时的通信密码（建议修改成自己的，最好64位以上，更加安全）
+  // 详细介绍：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html#特别注意
+  "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
+  // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
+  "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
+    // 抖音支付
+  "douyin": {
+    // 抖音小程序支付，请在支付配置信息中配置URL(服务器地址)为 https://vk-pay的url化地址/vk-pay-notify/
+    "mp-toutiao": {
+      "appId": "", // 抖音小程序的appId
+      "secret": "", // 抖音小程序的secret
+      "mchId": "", // 商户id（商户号）
+      "salt": "", // SALT，从支付信息 - 支付设置中获取
+      "token": "", // Token(令牌)，从支付信息 - 支付设置中获取
+      "sandbox": false, // 是否是沙箱环境
+    }
   }
 }
 ```
@@ -229,14 +591,16 @@ module.exports = {
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/aa2bef2a-8b61-4dbd-9627-ea7e83767a63.png)
 
+目前只有支付宝和微信支付需要证书
+
 * 蓝色框内是支付宝证书（3个）
 * 绿色框内是微信支付证书（3个）
 
-## 支付宝支付证书生成教程 
+### 支付宝支付证书生成教程 
 
 [支付宝支付证书生成教程](https://docs.qq.com/doc/DWVBlVkZ1Z21SZFpS)
 
-## 微信支付证书生成教程 
+### 微信支付证书生成教程 
 
 [微信支付证书生成教程](https://docs.qq.com/doc/DWUpGTW1kSUdpZGF5)
 
