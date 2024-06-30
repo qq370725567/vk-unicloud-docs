@@ -898,6 +898,7 @@ vk.userCenter.loginByWeixin({
 ```
 
 云函数端解密 `encryptedKey` 
+
 ```js
 // 解密 sessionKey 示例
 let decryptedRes = vk.crypto.aes.decrypt({
@@ -905,7 +906,6 @@ let decryptedRes = vk.crypto.aes.decrypt({
 });
 let sessionKey = decryptedRes.sessionKey;
 ```
-
 
 ### vk.userCenter.code2SessionWeixin（获取微信openid）
 
@@ -919,10 +919,6 @@ let sessionKey = decryptedRes.sessionKey;
  * res 返回参数说明
  * @param {String} openid 用户openid
  * @param {String} unionid 用户unionid，可以取到此值时返回
- * @param {String} sessionKey 客户端为微信小程序时返回
- * @param {String} accessToken 客户端为APP时返回
- * @param {String} expiresIn 客户端为APP时返回，accessToken 接口调用凭证超时时间，单位（秒）
- * @param {String} refreshToken 客户端为APP时返回，用于刷新accessToken
  * @param {String} encryptedKey 密钥的加密数据
  * 
  */
@@ -935,6 +931,7 @@ vk.userCenter.code2SessionWeixin({
 ```
 
 云函数端解密 `encryptedKey` 
+
 ```js
 // 解密 sessionKey 示例
 let decryptedRes = vk.crypto.aes.decrypt({
@@ -1419,6 +1416,34 @@ vk.userCenter.unbindDouyin({
     
   }
 });
+```
+
+### vk.userCenter.code2SessionDouyin（获取抖音openid）
+
+```js
+/**
+ * 获取抖音openid
+ * res 返回参数说明
+ * @param {String} openid 用户openid
+ * @param {String} unionid 用户unionid，可以取到此值时返回
+ * @param {String} encryptedKey 加密信息
+ */
+vk.userCenter.code2SessionWeixin({
+  success: (data) => {
+    // 成功后的逻辑
+
+  }
+});
+```
+
+云函数端解密 `encryptedKey` 可获得 `sessionKey` 等信息
+
+```js
+// 解密 sessionKey 示例
+let decryptedRes = vk.crypto.aes.decrypt({
+  data: encryptedKey, // 待解密的原文
+});
+let sessionKey = decryptedRes.sessionKey;
 ```
 
 ## 裂变分销
