@@ -1014,7 +1014,7 @@ getPhoneNumber(e) {
 },
 ```
 
-### vk.userCenter.loginByWeixinPhoneNumber（通过微信小程序绑定的手机号登录）
+### vk.userCenter.loginByWeixinPhoneNumber（微信手机号授权登录）
 
 注意事项：
 
@@ -1342,6 +1342,78 @@ vk.userCenter.loginByDouyin({
   data: {
     type: ""
   },
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+### vk.userCenter.loginByDouyinPhoneNumber（抖音手机号授权登录）
+
+注意事项：
+
+1. 此接口需要 `隐私条款` 中包含获取用户手机号
+2. 需要单独申请接口权限 [申请教程](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/operation/management/specification/account-login-standard)
+
+```html
+<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByDouyinPhoneNumber">使用抖音绑定的手机号登录/注册</button>
+```
+
+```js
+// 需要先在onLoad内执行此函数
+vk.userCenter.code2SessionDouyin({
+  data: {
+    needCache: true
+  },
+  success: (data) => {
+    this.encryptedKey = data.encryptedKey;
+  }
+});
+```
+        
+```js
+// 使用微信绑定的手机号登录/注册
+loginByDouyinPhoneNumber(e) {
+  let { encryptedData, iv } = e.detail;
+  if (!encryptedData || !iv) {
+    return false;
+  }
+  vk.userCenter.loginByDouyinPhoneNumber({
+    data: {
+      encryptedData,
+      iv,
+      encryptedKey: this.encryptedKey
+    },
+    success: (data) => {
+      // 成功后的逻辑
+
+    }
+  });
+},
+```
+
+### vk.userCenter.bindDouyin（绑定抖音）
+
+```js
+/**
+ * 绑定抖音
+ */
+vk.userCenter.bindDouyin({
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+### vk.userCenter.unbindDouyin（解绑抖音）
+
+```js
+/**
+ * 解绑抖音
+ */
+vk.userCenter.unbindDouyin({
   success: (data) => {
     // 成功后的逻辑
     
