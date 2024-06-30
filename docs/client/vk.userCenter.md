@@ -1348,6 +1348,8 @@ vk.userCenter.loginByDouyin({
 
 ### vk.userCenter.loginByDouyinPhoneNumber（抖音手机号授权登录）
 
+> vk-unicloud版本需 ≥ 2.18.8
+
 注意事项：
 
 1. 此接口需要 `隐私条款` 中包含获取用户手机号
@@ -1392,6 +1394,8 @@ loginByDouyinPhoneNumber(e) {
 
 ### vk.userCenter.bindDouyin（绑定抖音）
 
+> vk-unicloud版本需 ≥ 2.18.8
+
 ```js
 /**
  * 绑定抖音
@@ -1406,6 +1410,8 @@ vk.userCenter.bindDouyin({
 
 ### vk.userCenter.unbindDouyin（解绑抖音）
 
+> vk-unicloud版本需 ≥ 2.18.8
+
 ```js
 /**
  * 解绑抖音
@@ -1419,6 +1425,8 @@ vk.userCenter.unbindDouyin({
 ```
 
 ### vk.userCenter.code2SessionDouyin（获取抖音openid）
+
+> vk-unicloud版本需 ≥ 2.18.8
 
 ```js
 /**
