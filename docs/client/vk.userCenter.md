@@ -1392,6 +1392,51 @@ loginByDouyinPhoneNumber(e) {
 },
 ```
 
+### vk.userCenter.getPhoneNumber（获取抖音绑定的手机号）
+
+> vk-unicloud版本需 ≥ 2.18.8
+
+注意事项：
+
+1. 此接口需要 `隐私条款` 中包含获取用户手机号
+2. 需要单独申请接口权限 [申请教程](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/operation/management/specification/account-login-standard)
+
+```html
+<button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取微信绑定的手机号</button>
+```
+
+```js
+// 需要先在onLoad内执行此函数
+vk.userCenter.code2SessionDouyin({
+  data: {
+    needCache: true
+  },
+  success: (data) => {
+    this.encryptedKey = data.encryptedKey;
+  }
+});
+```
+        
+```js
+// 获取微信绑定的手机号码
+getPhoneNumber(e) {
+  let { encryptedData, iv } = e.detail;
+  if (!encryptedData || !iv) {
+    return false;
+  }
+  vk.userCenter.getPhoneNumber({
+    data: {
+      encryptedData,
+      iv,
+      encryptedKey: this.encryptedKey
+    },
+    success: (data) => {
+      vk.alert("手机号:" + data.phone);
+    }
+  });
+},
+```
+
 ### vk.userCenter.bindDouyin（绑定抖音）
 
 > vk-unicloud版本需 ≥ 2.18.8
@@ -1436,7 +1481,7 @@ vk.userCenter.unbindDouyin({
  * @param {String} unionid 用户unionid，可以取到此值时返回
  * @param {String} encryptedKey 加密信息
  */
-vk.userCenter.code2SessionWeixin({
+vk.userCenter.code2SessionDouyin({
   success: (data) => {
     // 成功后的逻辑
 
