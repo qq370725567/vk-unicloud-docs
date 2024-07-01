@@ -907,66 +907,50 @@ let decryptedRes = vk.crypto.aes.decrypt({
 let sessionKey = decryptedRes.sessionKey;
 ```
 
-### vk.userCenter.code2SessionWeixin（获取微信openid）
+### vk.userCenter.loginByWeixinPhoneNumber（微信手机号授权登录）
 
-注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
- 
-不要将 sessionKey 和 accessToken 暴露给前端，否则会有安全隐患
+注意事项：
+
+1. 此接口需要 `隐私条款` 中包含获取用户手机号
+2. 需要已微信认证的企业小程序（含个体户）
+
+```html
+<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByWeixinPhoneNumber">使用微信绑定的手机号登录/注册</button>
+```
 
 ```js
-/**
- * 获取微信openid
- * res 返回参数说明
- * @param {String} openid 用户openid
- * @param {String} unionid 用户unionid，可以取到此值时返回
- * @param {String} encryptedKey 密钥的加密数据
- * 
- */
+// 需要先在onLoad内执行此函数
 vk.userCenter.code2SessionWeixin({
+  data: {
+    needCache: true
+  },
   success: (data) => {
-    // 成功后的逻辑
-
+    this.encryptedKey = data.encryptedKey;
   }
 });
 ```
-
-云函数端解密 `encryptedKey` 
-
+        
 ```js
-// 解密 sessionKey 示例
-let decryptedRes = vk.crypto.aes.decrypt({
-  data: encryptedKey, // 待解密的原文
-});
-let sessionKey = decryptedRes.sessionKey;
-```
-
-### vk.userCenter.bindWeixin（绑定微信）
-
-```js
-/**
- * 绑定微信
- */
-vk.userCenter.bindWeixin({
-  success: (data) => {
-    // 成功后的逻辑
-    
+// 使用微信绑定的手机号登录/注册
+loginByWeixinPhoneNumber(e) {
+  let { encryptedData, iv } = e.detail;
+  if (!encryptedData || !iv) {
+    return false;
   }
-});
+  vk.userCenter.loginByWeixinPhoneNumber({
+    data: {
+      encryptedData,
+      iv,
+      encryptedKey: this.encryptedKey
+    },
+    success: (data) => {
+      // 成功后的逻辑
+
+    }
+  });
+},
 ```
 
-### vk.userCenter.unbindWeixin（解绑微信）
-
-```js
-/**
- * 解绑微信
- */
-vk.userCenter.unbindWeixin({
-  success: (data) => {
-    // 成功后的逻辑
-    
-  }
-});
-```
 
 ### vk.userCenter.getPhoneNumber（获取微信绑定的手机号）
 
@@ -1011,48 +995,66 @@ getPhoneNumber(e) {
 },
 ```
 
-### vk.userCenter.loginByWeixinPhoneNumber（微信手机号授权登录）
-
-注意事项：
-
-1. 此接口需要 `隐私条款` 中包含获取用户手机号
-2. 需要已微信认证的企业小程序（含个体户）
-
-```html
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByWeixinPhoneNumber">使用微信绑定的手机号登录/注册</button>
-```
+### vk.userCenter.bindWeixin（绑定微信）
 
 ```js
-// 需要先在onLoad内执行此函数
-vk.userCenter.code2SessionWeixin({
-  data: {
-    needCache: true
-  },
+/**
+ * 绑定微信
+ */
+vk.userCenter.bindWeixin({
   success: (data) => {
-    this.encryptedKey = data.encryptedKey;
+    // 成功后的逻辑
+    
   }
 });
 ```
-        
-```js
-// 使用微信绑定的手机号登录/注册
-loginByWeixinPhoneNumber(e) {
-  let { encryptedData, iv } = e.detail;
-  if (!encryptedData || !iv) {
-    return false;
-  }
-  vk.userCenter.loginByWeixinPhoneNumber({
-    data: {
-      encryptedData,
-      iv,
-      encryptedKey: this.encryptedKey
-    },
-    success: (data) => {
-      // 成功后的逻辑
 
-    }
-  });
-},
+### vk.userCenter.unbindWeixin（解绑微信）
+
+```js
+/**
+ * 解绑微信
+ */
+vk.userCenter.unbindWeixin({
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+
+### vk.userCenter.code2SessionWeixin（获取微信openid）
+
+注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
+ 
+不要将 sessionKey 和 accessToken 暴露给前端，否则会有安全隐患
+
+```js
+/**
+ * 获取微信openid
+ * res 返回参数说明
+ * @param {String} openid 用户openid
+ * @param {String} unionid 用户unionid，可以取到此值时返回
+ * @param {String} encryptedKey 密钥的加密数据
+ * 
+ */
+vk.userCenter.code2SessionWeixin({
+  success: (data) => {
+    // 成功后的逻辑
+
+  }
+});
+```
+
+云函数端解密 `encryptedKey` 
+
+```js
+// 解密 sessionKey 示例
+let decryptedRes = vk.crypto.aes.decrypt({
+  data: encryptedKey, // 待解密的原文
+});
+let sessionKey = decryptedRes.sessionKey;
 ```
 
 ### vk.userCenter.getWeixinMPqrcode（生成微信小程序码）
@@ -1171,6 +1173,35 @@ let decryptedRes = vk.crypto.aes.decrypt({
 let sessionKey = decryptedRes.sessionKey;
 ```
 
+### vk.userCenter.bindAlipay（绑定支付宝）
+
+```js
+/**
+ * 绑定支付宝
+ */
+vk.userCenter.bindAlipay({
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+### vk.userCenter.unbindAlipay（解绑支付宝）
+
+```js
+/**
+ * 解绑支付宝
+ */
+vk.userCenter.unbindAlipay({
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+
 
 ### vk.userCenter.code2SessionAlipay（获取支付宝openid）
 
@@ -1203,35 +1234,6 @@ let decryptedRes = vk.crypto.aes.decrypt({
   data: encryptedKey, // 待解密的原文
 });
 let sessionKey = decryptedRes.sessionKey;
-```
-
-
-### vk.userCenter.bindAlipay（绑定支付宝）
-
-```js
-/**
- * 绑定支付宝
- */
-vk.userCenter.bindAlipay({
-  success: (data) => {
-    // 成功后的逻辑
-    
-  }
-});
-```
-
-### vk.userCenter.unbindAlipay（解绑支付宝）
-
-```js
-/**
- * 解绑支付宝
- */
-vk.userCenter.unbindAlipay({
-  success: (data) => {
-    // 成功后的逻辑
-    
-  }
-});
 ```
 
 ## QQ
@@ -1469,6 +1471,16 @@ vk.userCenter.unbindDouyin({
 });
 ```
 
+云函数端解密 `encryptedKey` 可获得 `sessionKey` 等信息
+
+```js
+// 解密 sessionKey 示例
+let decryptedRes = vk.crypto.aes.decrypt({
+  data: encryptedKey, // 待解密的原文
+});
+let sessionKey = decryptedRes.sessionKey;
+```
+
 ### vk.userCenter.code2SessionDouyin（获取抖音openid）
 
 > vk-unicloud版本需 ≥ 2.18.8
@@ -1487,16 +1499,6 @@ vk.userCenter.code2SessionDouyin({
 
   }
 });
-```
-
-云函数端解密 `encryptedKey` 可获得 `sessionKey` 等信息
-
-```js
-// 解密 sessionKey 示例
-let decryptedRes = vk.crypto.aes.decrypt({
-  data: encryptedKey, // 待解密的原文
-});
-let sessionKey = decryptedRes.sessionKey;
 ```
 
 ## 裂变分销
