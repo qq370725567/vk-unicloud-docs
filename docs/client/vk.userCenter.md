@@ -1374,7 +1374,7 @@ vk.userCenter.code2SessionDouyin({
 ```
         
 ```js
-// 使用微信绑定的手机号登录/注册
+// 使用抖音绑定的手机号登录/注册
 loginByDouyinPhoneNumber(e) {
   let { encryptedData, iv } = e.detail;
   if (!encryptedData || !iv) {
@@ -1404,7 +1404,7 @@ loginByDouyinPhoneNumber(e) {
 2. 需要单独申请接口权限 [申请教程](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/operation/management/specification/account-login-standard)
 
 ```html
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取微信绑定的手机号</button>
+<button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取抖音绑定的手机号</button>
 ```
 
 ```js
@@ -1420,7 +1420,7 @@ vk.userCenter.code2SessionDouyin({
 ```
         
 ```js
-// 获取微信绑定的手机号码
+// 获取抖音绑定的手机号码
 getPhoneNumber(e) {
   let { encryptedData, iv } = e.detail;
   if (!encryptedData || !iv) {
