@@ -29,6 +29,11 @@ sidebarDepth: 0
 
 具体代码请直接查看示例项目源代码 `router/service/user/pub/loginByDouyin.js`
 
+注意：
+
+1. code换取openid需要自己实现（框架已内置的除外）
+2. 自己定义好openid存储的字段名
+
 ## 命中过滤器
  
 如果云函数不以 `user/pub/login` 开头，则需要额外在以下2个过滤器中添加 `regExp`
