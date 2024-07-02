@@ -354,6 +354,8 @@ vk.userCenter.updateUser({
 
 ### vk.userCenter.getCurrentUserInfo（取用户信息）
 
+调用此接口会自动更新本地vuex里的用户信息
+
 ```js
 /**
  * 获取用户最新信息
