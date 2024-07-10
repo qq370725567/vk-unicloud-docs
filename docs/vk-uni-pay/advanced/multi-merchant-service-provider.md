@@ -123,6 +123,42 @@ exports.main = async (event, context) => {
 };
 ```
 
+### 支付宝小程序特殊参数
+
+服务商模式下，支付宝小程序支付需要在other参数里额外传以下参数，同时注释掉原本的openid参数
+
+```js
+const vkPay = require("vk-uni-pay");
+
+exports.main = async (event, context) => {
+  
+  let res = await vkPay.createPayment({
+    context,
+    provider: "alipay",
+    data: {
+      app_auth_token: "xxxxxxxxxxxx", // 子商户的授权token（若不传，会尝试从配置去获取）
+      //openid: "用户openid，小程序支付时必传", // 服务商这里的openid不传
+      out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
+      total_fee: 1, // 订单金额(单位分 100 = 1元)
+      subject: "订单标题",
+      type: "订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。", // 此处type的值如果是goods，则回调时就会执行 pay-notify 目录下的 goods.js 内的逻辑
+      // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
+      custom:{
+        
+      },
+      // 微信、支付宝文档上的其他选填参数（other内的参数会原样发送给微信、支付宝）
+      other:{
+        product_code: "JSAPI_PAY",
+        op_app_id: "实际唤起支付的小程序appid"，
+        op_buyer_open_id: "实际唤起支付的小程序对应的用户的openid"
+      }
+    }
+  });
+
+  return res;
+};
+```
+
 ## 常见问题
 
 ### 为什么小程序报code无效或openid无效？
