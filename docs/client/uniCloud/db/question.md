@@ -27,7 +27,7 @@ sidebarDepth: 0
 18. [删除某个字段](#删除某个字段)
 19. [vk.baseDao.findById和vk.baseDao.findByWhereJson如何连表](#findbyid如何连表)
 20. [如何更改字段名](#如何更改字段名)
-
+20. [字段如何自增](#字段如何自增)
 
 ## and
 
@@ -710,6 +710,22 @@ await vk.baseDao.update({
 
 **特别注意：如果数据库数据很多，会报超时，但不用管，数据库依然在执行，速度大概是 `5万条记录/秒`，因此你可以用 `总数据量/50000` 计算出大概需要耗时多少。**
 
+## 字段如何自增
+
+通过 `_.inc(1)` 来实现字段自增，同时再通过 `updateAndReturn` 返回自增后的值
+
+```js
+let newInfo = await vk.baseDao.updateAndReturn({
+  dbName: "vk-test",
+  whereJson: {
+    _id: _id
+  },
+  dataJson: {
+    money: _.inc(1)
+  }
+});
+console.log("自增后的值：", newInfo.money);
+```
 
 ## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$
 
