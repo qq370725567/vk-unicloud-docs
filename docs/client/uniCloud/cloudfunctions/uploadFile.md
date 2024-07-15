@@ -36,8 +36,8 @@ sidebarDepth: 0
 
 | 可选项						| 说明														|
 |------------------	|-------------------------------|
-| unicloud					| unicloud 空间内置存储						|
-| extStorage				| extStorage 扩展存储						|
+| unicloud					| 空间内置存储										|
+| extStorage				| 扩展存储												|
 
 ## 上传文件示例代码
 
