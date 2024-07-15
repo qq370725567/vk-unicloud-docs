@@ -14,12 +14,10 @@ sidebarDepth: 0
 
 | 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
 |------------------	|-------------------------------																								|---------|--------	|-------							|
-| provider					| 指定云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储	| string	| -				| unicloud、extStorage	|
+| provider					| [查看provider](#provider)	| string	| -				| -			|
 | cloudPath					| 云端文件路径																																		| string	| -				| -										|
 | fileContent				| buffer 或要上传的文件可读流																											| -				| -				| -										|
 | isPrivate					| 是否是私有文件，仅扩展存储有效																										| boolean	| -				| -										|
-
-注意：若 `provider` 不传，则自动从云端配置 `uni-config-center/vk-unicloud/index.js` 中获取 `vk.service.cloudStorage.defaultProvider` 的值
 
 ## 返回值
 
@@ -31,6 +29,15 @@ sidebarDepth: 0
 |fileURL	|string	|云端文件URL													|
 |url			|string	|云端文件URL，与fileURL一致						|
 |isPrivate|boolean|是否是私有文件，仅扩展存储会返回此字段	|
+
+## provider
+
+`provider` 可指定云存储供应商，若 `provider` 不传，则自动从云端配置 `uni-config-center/vk-unicloud/index.js` 中获取 `vk.service.cloudStorage.defaultProvider` 的值
+
+| 可选项						| 说明														|
+|------------------	|-------------------------------|
+| unicloud					| unicloud 空间内置存储						|
+| extStorage				| extStorage 扩展存储						|
 
 ## 上传文件示例代码
 
@@ -126,3 +133,75 @@ console.log('uploadFileRes: ', uploadFileRes);
   }
 },
 ```
+
+## 其他API
+
+### vk.getTempFileURL（获取临时下载链接）
+
+#### 示例代码
+
+```js
+vk.getTempFileURL({
+  fileList: ["https://www.xxx.com/test.jpg"], // 文件地址列表
+});
+```
+
+#### 请求参数
+
+| 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
+|------------------	|-------------------------------																								|---------|--------	|-------							|
+| provider					| [查看provider](#provider)	| string	| -				| -			|
+| fileList					| 云端文件列表																																		| Array	| -				| -										|
+
+#### 返回值
+
+|参数名		|类型		|说明																|
+|:-:			|:-:		|:-:																|
+|fileList	|Array	|存储下载链接的数组。									|
+
+### vk.downloadFile（下载文件）
+
+#### 示例代码
+
+```js
+vk.downloadFile({
+  fileID: "https://www.xxx.com/test.jpg",
+});
+```
+
+#### 请求参数
+
+| 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
+|------------------	|-------------------------------																								|---------|--------	|-------							|
+| provider					| [查看provider](#provider)	| string	| -				| -			|
+| fileID					| 待下载的文件																																		| string	| -				| -										|
+
+#### 返回值
+
+|参数名			|类型		|说明							|
+|:-:				|:-:		|:-:							|
+|fileContent|Buffer	|下载的文件的内容。	|
+
+### vk.deleteFile（删除文件）
+
+#### 示例代码
+
+```js
+vk.deleteFile({
+  fileList: ["https://www.xxx.com/test.jpg"], // 文件地址列表
+});
+```
+
+#### 请求参数
+
+| 参数							| 说明															| 类型			| 默认值		| 可选值	|
+|------------------	|-------------------------------	|---------|--------	|-------|
+| provider					| [查看provider](#provider)	| string	| -				| -			|
+| fileList					| 云端文件列表											| Array		| -				| -			|
+
+#### 返回值
+
+|参数名		|类型		|说明																|
+|:-:			|:-:		|:-:																|
+|fileList	|Array	|删除结果组成的数组。									|
+
