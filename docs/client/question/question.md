@@ -407,19 +407,23 @@ const vk = vkCloud.createInstance({
   requireFn: require
 });
 
+var db = uniCloud.database(); // 全局数据库引用
+var _ = db.command; // 数据库操作符
+var $ = _.aggregate; // 聚合查询操作符
+
 exports.main = async (event, context) => {
   //event为客户端上传的参数
   
   // 调用 select API
   let res = await vk.baseDao.select({
-    dbName:"uni-id-users",
-    pageIndex:1,
-    pageSize:20,
-    whereJson:{
+    dbName: "uni-id-users",
+    pageIndex: 1,
+    pageSize: 20,
+    whereJson: {
 
     },
-    fieldJson:{},
-    sortArr:[{ "name":"_id", "type":"desc" }],
+    fieldJson: {},
+    sortArr: [{ "name":"_id", "type":"desc" }],
   });
 
   //返回数据给客户端
@@ -440,19 +444,23 @@ vk.init({
   requireFn: require
 });
 
+var db = uniCloud.database(); // 全局数据库引用
+var _ = db.command; // 数据库操作符
+var $ = _.aggregate; // 聚合查询操作符
+
 exports.main = async (event, context) => {
   //event为客户端上传的参数
   
   // 调用 select API
   let res = await vk.baseDao.select({
-    dbName:"uni-id-users",
-    pageIndex:1,
-    pageSize:20,
-    whereJson:{
+    dbName: "uni-id-users",
+    pageIndex: 1,
+    pageSize: 20,
+    whereJson: {
 
     },
-    fieldJson:{},
-    sortArr:[{ "name":"_id", "type":"desc" }],
+    fieldJson: {},
+    sortArr: [{ "name":"_id", "type":"desc" }],
   });
 
   //返回数据给客户端
