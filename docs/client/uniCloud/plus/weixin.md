@@ -67,22 +67,37 @@ let code2SessionRes = await vk.openapi.weixin.auth.code2Session({
   js_code : js_code
 });
 ```
+
 ### 获取微信绑定的手机号
+
 `vk.openapi.weixin.decrypt.getPhoneNumber`
+
+**方式一：通过code**
+
 ```js
 /**
  * 获取微信绑定的手机号
- * @param {String} code 微信新增了code参数，可以直接传code，不再需要传 encryptedData 和 iv
- * @param {String} encryptedData 加密数据 （留旧版本使用）
- * @param {String} iv 密钥1 （留旧版本使用）
- * @param {String} sessionKey 密钥2 （传encryptedKey是为了上一步获取的openid结合绑定）
+ * @param {String} code 通过前端button组件事件getphonenumber得到的 e.detail.code
+ */
+let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
+  code
+});
+```
+
+**方式二：通过encryptedData+iv+sessionKey**
+
+```js
+/**
+ * 获取微信绑定的手机号
+ * @param {String} encryptedData 加密数据 通过前端button组件事件getphonenumber得到的 e.detail.encryptedData
+ * @param {String} iv 密钥1 通过前端button组件事件getphonenumber得到的 e.detail.iv
+ * @param {String} sessionKey 密钥2 通过code2Session接口得到sessionKey
  */
 let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
   encryptedData,
   iv,
   sessionKey
 });
-
 ```
 
 ### 获取小程序码
