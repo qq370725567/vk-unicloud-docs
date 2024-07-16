@@ -134,11 +134,11 @@ console.log('uploadFileRes: ', uploadFileRes);
 },
 ```
 
-## 其他API
+## 公共API
 
 ### vk.getTempFileURL（获取临时下载链接）
 
-#### 示例代码
+**示例代码**
 
 ```js
 vk.getTempFileURL({
@@ -146,14 +146,14 @@ vk.getTempFileURL({
 });
 ```
 
-#### 请求参数
+**请求参数**
 
 | 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
 |------------------	|-------------------------------																								|---------|--------	|-------							|
 | provider					| [查看provider](#provider)	| string	| -				| -			|
 | fileList					| 云端文件列表																																		| Array	| -				| -										|
 
-#### 返回值
+**返回值**
 
 |参数名		|类型		|说明																|
 |:-:			|:-:		|:-:																|
@@ -161,7 +161,7 @@ vk.getTempFileURL({
 
 ### vk.downloadFile（下载文件）
 
-#### 示例代码
+**示例代码**
 
 ```js
 vk.downloadFile({
@@ -169,14 +169,14 @@ vk.downloadFile({
 });
 ```
 
-#### 请求参数
+**请求参数**
 
 | 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
 |------------------	|-------------------------------																								|---------|--------	|-------							|
 | provider					| [查看provider](#provider)	| string	| -				| -			|
 | fileID					| 待下载的文件																																		| string	| -				| -										|
 
-#### 返回值
+**返回值**
 
 |参数名			|类型		|说明							|
 |:-:				|:-:		|:-:							|
@@ -184,7 +184,7 @@ vk.downloadFile({
 
 ### vk.deleteFile（删除文件）
 
-#### 示例代码
+**示例代码**
 
 ```js
 vk.deleteFile({
@@ -192,16 +192,144 @@ vk.deleteFile({
 });
 ```
 
-#### 请求参数
+**请求参数**
 
 | 参数							| 说明															| 类型			| 默认值		| 可选值	|
 |------------------	|-------------------------------	|---------|--------	|-------|
 | provider					| [查看provider](#provider)	| string	| -				| -			|
 | fileList					| 云端文件列表											| Array		| -				| -			|
 
-#### 返回值
+**返回值**
 
 |参数名		|类型		|说明																|
 |:-:			|:-:		|:-:																|
 |fileList	|Array	|删除结果组成的数组。									|
 
+## 扩展存储专属API
+
+### 获取扩展存储管理对象
+
+扩展存储相比内置存储具有更多的云端API，在调用这些云端API前，需要先通过 `vk.getExtStorageManager` 获取 `extStorageManager` 对象实例，然后再通过 `extStorageManager.xxx` 调用对应的API
+
+**云端代码**
+
+```js
+// 获取扩展存储管理对象
+const extStorageManager = vk.getExtStorageManager();
+```
+
+**请求参数**
+
+`vk.getExtStorageManager` 若不传参数，则会自动从 `uni-config-center/vk-unicloud/index.js` 中获取配置 `vk.service.cloudStorage.extStorage`
+
+若传了参数，则 `provider` 和 `domain` 为必填参数
+
+|参数名				|类型		|必填	|默认值	|说明																								|
+|:-:					|:-:		|:-:	|:-:		|:-																									|
+|provider			|String	|否		|-			|必填，扩展存储供应商，可选<br/>qiniu 七牛云						|
+|domain				|String	|否		|-			|必填，扩展储存域名（域名地址）如：example.com					|
+|bucketName		|String	|否		|-			|选填，扩展储存的bucket名称，不填会自动从绑定的空间中获取（此参数当前仅云端运行时生效）	|
+|bucketSecret	|String	|否		|-			|选填，扩展储存的bucket密钥，不填会自动从绑定的空间中获取（此参数当前仅云端运行时生效）	|
+
+### 修改文件状态
+
+接口名：updateFileStatus
+
+可以将指定文件设置为私有权限或公共权限
+
+默认上传的文件都是公共权限，如果需要将文件设置为私有权限，则可调用此接口
+
+**云端代码**
+
+```js
+// 获取扩展存储管理对象
+const extStorageManager = vk.getExtStorageManager();
+// 修改文件状态
+let updateFileStatus = await extStorageManager.updateFileStatus({
+	fileID: "qiniu://test.jpg", // 待修改的文件
+	isPrivate: true, // true 私有 false 公共
+});
+console.log('updateFileStatus: ', updateFileStatus);
+```
+
+**请求参数**
+
+|参数名		|类型		|必填	|默认值	|说明																							|
+|:-:			|:-:		|:-:	|:-:		|:-																							|
+|fileID		|String	|是		|-			|待修改的文件，该字段支持的值类型：fileID、cloudPath、fileURL <br/>如："qiniu://test.jpg" "test.jpg" "https://example.com/test.jpg" 均表示同一个文件	|
+|isPrivate|Boolean|是		|-			|true 设为私有权限 false 设为公共读权限						|
+
+
+**响应参数**
+
+|字段		|类型		|说明								|
+|:-:		|:-:		|:-									|
+|errCode|Number	|0 成功 其他均为失败	|
+|errMsg	|String	|失败描述						|
+
+### 获取域名列表
+
+接口名：getDomains
+
+注意：获取的域名列表是账号绑定的所有域名
+
+**云端代码**
+
+```js
+// 获取扩展存储管理对象
+const extStorageManager = vk.getExtStorageManager();
+// 获取域名列表
+let { domains = [] } = await extStorageManager.getDomains();
+console.log('域名列表: ', domains);
+```
+
+**响应参数**
+
+|字段		|类型	|说明			|
+|:-:		|:-:	|:-				|
+|domains|Array| 域名列表	|
+
+### 获取TOP100统计数据
+
+接口名：getCdnTop
+
+注意：获取的域名列表是账号绑定的所有域名
+
+**云端代码**
+
+```js
+// 获取扩展存储管理对象
+const extStorageManager = vk.getExtStorageManager();
+// 获取域名列表
+let { domains = [] } = await extStorageManager.getDomains();
+// 查询 2024-05-12 日的TOP100统计数据
+let startDate = "2024-05-12";
+let endDate = "2024-05-12";
+// 获取TOP100统计数据
+let getCdnTopRes = await extStorageManager.getCdnTop({
+	type: 2, // 1 topURL 2 topIP
+	domains,
+	startDate,
+	endDate
+});
+console.log("TOP100统计数据: ", getCdnTopRes.data);
+```
+
+**请求参数**
+
+|参数名		|类型		|必填	|默认值	|说明																								|
+|:-:			|:-:		|:-:	|:-:		|:-																									|
+|type			|Number	|是		|-			| 必填，查询类型，值为1代表查询topURL 值为2代表查询topIP	|
+|domains	|Array	|是		|-			| 必填，域名列表，总数不超过100条												|
+|startDate|String	|是		|-			| 必填，开始时间，格式为：2006-01-02。起止最大间隔为31天	|
+|endDate	|String	|是		|-			| 必填，结束时间，格式为：2006-01-02。起止最大间隔为31天	|
+
+**响应参数**
+
+|字段	|类型	|说明			|
+|:-:	|:-:	|:-				|
+|data	|Array| TOP100统计数据	|
+
+### 图片处理
+
+图片处理请参考[uniCloud官方文档](https://doc.dcloud.net.cn/uniCloud/ext-storage/dev.html#imageshandle)

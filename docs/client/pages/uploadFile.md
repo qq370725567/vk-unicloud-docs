@@ -423,11 +423,31 @@ uni.chooseImage({
 });
 ```
 
+## 小程序域名白名单
+
+小程序需要添加域名白名单，否则无法正常使用
+
+### 内置存储域名
+
+[点击查看](https://vkdoc.fsq.pub/client/publish/mp-weixin.html#%E9%85%8D%E7%BD%AE%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9F%9F%E5%90%8D%E7%99%BD%E5%90%8D%E5%8D%95)
+
+### 扩展存储域名
+
+**上传域名**
+
+```js
+https://upload.qiniup.com
+```
+
+**下载域名**
+
+下载域名就是你开通扩展存储时绑定的自定义域名，将你的自定义域名添加到download合法域名列表中
+
 ## 常见问题
 
 ### 小程序本地可以上传，体验版小程序无法上传
 
-通常都是因为域名白名单没有添加导致的，检查上传域名是否已加入到小程序的uploadFile合法域名列表中
+通常都是因为域名白名单没有添加导致的，检查上传域名是否已加入到小程序的uploadFile合法域名列表中，[查看小程序域名白名单](#小程序域名白名单)
 
 ### 上传扩展存储报错，云函数user/pub/getUploadFileOptionsForExtStorage不存在
 
