@@ -72,9 +72,10 @@ let code2SessionRes = await vk.openapi.weixin.auth.code2Session({
 ```js
 /**
  * 获取微信绑定的手机号
- * @param {String} encryptedData 加密数据
- * @param {String} iv 密钥1
- * @param {String} sessionKey 密钥2
+ * @param {String} code 微信新增了code参数，可以直接传code，不再需要传 encryptedData 和 iv
+ * @param {String} encryptedData 加密数据 （留旧版本使用）
+ * @param {String} iv 密钥1 （留旧版本使用）
+ * @param {String} sessionKey 密钥2 （传encryptedKey是为了上一步获取的openid结合绑定）
  */
 let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
   encryptedData,
