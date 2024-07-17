@@ -79,30 +79,6 @@ AES属于对称加密方法，高级加密标准(Advanced Encryption Standard，
 
 即加密和解密都用同一个密钥
 
-### aes192算法
-
-```js
-const crypto = require('crypto');
- 
-let key = ""; // 密钥
-
-// 加密
-let text = "aaa"; // 需要加密的原始数据文本
-const cipher = crypto.createCipher('aes192', key);
-let encrypted = cipher.update(text, 'utf8', 'hex');
-encrypted += cipher.final('hex');
-// encrypted 为加密后的内容
-console.log('encrypted: ', encrypted)
-
-// 解密
-const decipher = crypto.createDecipher('aes192', key);
-let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-decrypted += decipher.final('utf8');
-// decrypted 为解密后的内容，即最开始需要加密的原始数据文本text
-console.log('decrypted: ', decrypted)
-
-```
-
 ### aes-256-ecb算法
 
 ```js
@@ -117,13 +93,13 @@ console.log('加密前的原文:', text);
 
 // 加密
 const cipher = crypto.createCipheriv('aes-256-ecb', key, '');
-let encrypted = cipher.update(text, 'utf8', 'hex');
-encrypted += cipher.final('hex');
+let encrypted = cipher.update(text, 'utf8', 'base64');
+encrypted += cipher.final('base64');
 console.log('加密后的密文:', encrypted);
 
 // 解密
 const decipher = crypto.createDecipheriv('aes-256-ecb', key, '');
-let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+let decrypted = decipher.update(encrypted, 'base64', 'utf8');
 decrypted += decipher.final('utf8');
 console.log('解密后的明文:', decrypted);
 ```
@@ -143,13 +119,13 @@ console.log('加密前的原文:', text);
 
 // 加密
 const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
-let encrypted = cipher.update(text, 'utf8', 'hex');
-encrypted += cipher.final('hex');
+let encrypted = cipher.update(text, 'utf8', 'base64');
+encrypted += cipher.final('base64');
 console.log('加密后的密文:', encrypted);
 
 // 解密
 const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
-let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+let decrypted = decipher.update(encrypted, 'base64', 'utf8');
 decrypted += decipher.final('utf8');
 console.log('解密后的明文:', decrypted);
 
