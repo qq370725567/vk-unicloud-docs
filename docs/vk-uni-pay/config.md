@@ -147,13 +147,11 @@ module.exports = {
    * sandbox                是否沙箱模式 true 沙箱模式 false 正常模式
    */
   "alipay": {
-    // 支付宝 - 小程序支付配置
+    // 支付宝 - 小程序支付配置（由于uni-id目前只支持密钥模式，所以小程序支付的配置默认也是密钥模式的配置）
     "mp-alipay": {
-      "appId": "",
-      "privateKey": "",
-      "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'),
-      "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'),
-      "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'),
+      "appId": "", // 支付宝小程序appid
+      "privateKey": "", // 支付宝商户私钥
+      "alipayPublicKey": "", // 支付宝公钥字符串
       "sandbox": false
     },
     // 支付宝 - APP支付配置
@@ -274,13 +272,11 @@ module.exports = {
    * sandbox                是否沙箱模式 true 沙箱模式 false 正常模式
    */
   "alipay": {
-    // 支付宝 - 小程序支付配置
+    // 支付宝 - 小程序支付配置（由于uni-id目前只支持密钥模式，所以小程序支付的配置默认也是密钥模式的配置）
     "mp-alipay": {
-      "appId": "",
-      "privateKey": "",
-      "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'),
-      "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'),
-      "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'),
+      "appId": "", // 支付宝小程序appid
+      "privateKey": "", // 支付宝商户私钥
+      "alipayPublicKey": "", // 支付宝公钥字符串
       "sandbox": false
     },
     // 支付宝 - APP支付配置
