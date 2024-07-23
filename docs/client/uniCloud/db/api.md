@@ -470,8 +470,8 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |    参数名   |   类型   | 必填 |    说明    |
 |------------|----------|------|-----------|
 |   dbName   |  String  |  是  |   表名    |
-|   getCount |  Boolean  |  否  |   是否返回满足条件的记录总数。默认 false |
-|   hasMore |  Boolean  |  否  |   是否返回精确的是否还有下一页。默认 false，若已设置 getCount 为 true，则无需设置此参数 |
+|   getCount |  Boolean  |  否  |   是否返回满足条件的记录总数。默认 false  [详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#getcount)  |
+|   hasMore |  Boolean  |  否  |   是否返回精确的是否还有下一页。默认 false，若已设置 getCount 为 true，则无需设置此参数 [详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#hasmore) |
 |   getMain |  Boolean  |  否  |   是否只返回rows数组。默认 false |
 |   getOne |  Boolean  |  否  |   是否只返回第一条数据。默认 false  |
 |   pageIndex |  Number  |  否  |   第几页 默认 1  |
@@ -488,7 +488,7 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |------------	|----------	|-----------																																												|
 |   rows			|  Array		|  数据列表																																													|
 |   total			|  Number		|  满足条件的记录总数（如果返回的getCount为false，则 total = (pageIndex - 1) * pageSize + rows.length）	|
-|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页																															|
+|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#hasmore) 																														|
 |   pagination|  Object		|  当前分页参数																																												|
 |   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
 

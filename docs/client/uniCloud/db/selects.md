@@ -70,13 +70,13 @@ let res = await vk.baseDao.selects({
 |   pageSize			|  Number		|  否		|   每页显示数量 默认 10																															|
 |   getOne				|  Boolean	|  否		|   是否只返回第一条数据。默认 false																										|
 |   getMain				|  Boolean	|  否		|   是否只返回rows数组。默认 false																										|
-|   getCount			|  Boolean	|  否		|   是否返回满足条件的记录总数。默认 false [详情](#getCount)														|
-|   hasMore				|  Boolean	|  否		|   是否返回精确的是否还有下一页。默认 false，若已设置 getCount 为 true，则无需设置此参数 [详情](#hasMore)		|
+|   getCount			|  Boolean	|  否		|   是否返回满足条件的记录总数。默认 false [详情](#getcount)														|
+|   hasMore				|  Boolean	|  否		|   是否返回精确的是否还有下一页。默认 false，若已设置 getCount 为 true，则无需设置此参数 [详情](#hasmore)		|
 |   groupJson			|  Object		|  否		|   主表分组规则（副表不支持分组）																											|
 |   sortArr				|  Array		|  否		|   主表排序规则																																			|
 |   foreignDB			|  Array		|  否		|   连表规则 [详情](#foreigndb-连表规则)																							|
-|   lastWhereJson	|  Object		|  否		|   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)														|
-|   lastSortArr		|  Array		|  否		|   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)															|
+|   lastWhereJson	|  Object		|  否		|   连表后的查询条件，有性能问题，慎用 [详情](#lastwherejson)														|
+|   lastSortArr		|  Array		|  否		|   连表后的排序条件，有性能问题，慎用 [详情](#lastsortarr)															|
 |   addFields			|  Object		|  否		|   添加自定义字段规则（用来添加虚拟字段，如增加一个通过某种计算得出的字段）								|
 |   fieldJson			|  Object		|  否		|   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）																|
 |   db						|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();																		|
@@ -88,7 +88,7 @@ let res = await vk.baseDao.selects({
 |------------	|----------	|-----------																																												|
 |   rows			|  Array		|  数据列表																																													|
 |   total			|  Number		|  满足条件的记录总数（如果返回的getCount为false，则 total = (pageIndex - 1) * pageSize + rows.length）	|
-|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](#hasMore)																											|
+|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](#hasmore)																											|
 |   pagination|  Object		|  当前分页参数																																												|
 |   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
 
