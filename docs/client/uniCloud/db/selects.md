@@ -231,7 +231,7 @@ count 的耗时
 
 为了能够返回精确的 hasMore，需要在查询时，多传一个请求参数 `hasMore: true`
 
-当请求参数 hasMore 设置为 true 时，框架会返回精确的 hasMore，其原理是通过多查一条数据实现的，即本次如果要查10条数据，则框架实际查了11条数据，如果存在11条数据，代表一定还有下一页，否则代表没有下一页了
+当请求参数 hasMore 设置为 true 时，框架会返回精确的 hasMore，其原理是通过多查一条数据实现的，即本次如果要查10条数据，则框架实际查了11条数据（接口返回的数据rows还是10条），如果存在11条数据，代表一定还有下一页，否则代表没有下一页了
 
 若请求参数 getCount 已经设置为 true 时，会忽略参数 hasMore，因为此时的返回值 total 是满足查询条件的总数量（数据库多执行了一次count请求），通过 `最大页数 = Math.ceil(total / pageSize)` 已经可以求出最大页数，所以此时返回值 hasMore 的计算方式是 `hasMore = pageIndex < Math.ceil(total / pageSize) ? true : false`
 
