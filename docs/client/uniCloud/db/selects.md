@@ -60,26 +60,27 @@ let res = await vk.baseDao.selects({
 });
 ```
 
-### 参数说明
+### 请求参数
 
-|    参数名				|   类型			| 必填		|    说明																													|
-|------------			|----------	|------	|-----------																											|
-|   dbName				|  String		|  是		|   主表表名																												|
-|   whereJson			|  Object		|  否		|   主表 where 条件																								|
-|   pageIndex			|  Number		|  否		|   第几页 默认 1																										|
-|   pageSize			|  Number		|  否		|   每页显示数量 默认 10																						|
-|   getOne				|  Boolean	|  否		|   是否只返回第一条数据。默认 false																	|
-|   getMain				|  Boolean	|  否		|   是否只返回rows数组。默认 false																		|
-|   getCount			|  Boolean	|  否		|   是否返回满足条件的记录总数。默认 false [详情](#getCount)						|
-|   groupJson			|  Object		|  否		|   主表分组规则（副表不支持分组）																		|
-|   sortArr				|  Array		|  否		|   主表排序规则																										|
-|   foreignDB			|  Array		|  否		|   连表规则 [详情](#foreigndb-连表规则)															|
-|   lastWhereJson	|  Object		|  否		|   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)					|
-|   lastSortArr		|  Array		|  否		|   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)						|
-|   addFields			|  Object		|  否		|   添加自定义字段规则（用来添加虚拟字段，如增加一个通过某种计算得出的字段）			|
-|   fieldJson			|  Object		|  否		|   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）							|
-|   db						|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();									|
-|   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
+|    参数名				|   类型			| 必填		|    说明																																						|
+|------------			|----------	|------	|-----------																																				|
+|   dbName				|  String		|  是		|   主表表名																																					|
+|   whereJson			|  Object		|  否		|   主表 where 条件																																	|
+|   pageIndex			|  Number		|  否		|   第几页 默认 1																																		|
+|   pageSize			|  Number		|  否		|   每页显示数量 默认 10																															|
+|   getOne				|  Boolean	|  否		|   是否只返回第一条数据。默认 false																										|
+|   getMain				|  Boolean	|  否		|   是否只返回rows数组。默认 false																										|
+|   getCount			|  Boolean	|  否		|   是否返回满足条件的记录总数。默认 false [详情](#getCount)														|
+|   hasMore				|  Boolean	|  否		|   是否返回精确的是否还有下一页。默认 false，若已设置 getCount 为 true，则无需设置此参数 [详情](#hasMore)		|
+|   groupJson			|  Object		|  否		|   主表分组规则（副表不支持分组）																											|
+|   sortArr				|  Array		|  否		|   主表排序规则																																			|
+|   foreignDB			|  Array		|  否		|   连表规则 [详情](#foreigndb-连表规则)																							|
+|   lastWhereJson	|  Object		|  否		|   连表后的查询条件，有性能问题，慎用 [详情](#lastWhereJson)														|
+|   lastSortArr		|  Array		|  否		|   连表后的排序条件，有性能问题，慎用 [详情](#lastSortArr)															|
+|   addFields			|  Object		|  否		|   添加自定义字段规则（用来添加虚拟字段，如增加一个通过某种计算得出的字段）								|
+|   fieldJson			|  Object		|  否		|   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）																|
+|   db						|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();																		|
+|   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false									|
 
 ### 返回值
 
@@ -87,7 +88,7 @@ let res = await vk.baseDao.selects({
 |------------	|----------	|-----------																																												|
 |   rows			|  Array		|  数据列表																																													|
 |   total			|  Number		|  满足条件的记录总数（如果返回的getCount为false，则 total = (pageIndex - 1) * pageSize + rows.length）	|
-|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 无下一页																															|
+|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](#hasMore)																											|
 |   pagination|  Object		|  当前分页参数																																												|
 |   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
 
@@ -218,6 +219,21 @@ count 的耗时
 |   [100ms,300ms)	|   可选优化																	|
 |   [300ms,1000ms)| 检查索引，优化查询条件												|
 |   1000ms以上		| 检查索引，优化查询条件，必要时修改业务实现逻辑	|
+
+
+### hasMore
+
+查询结果会同时返回 hasMore，代表是否还有下一页
+
+若请求参数 hasMore 不传，默认情况下，返回值 hasMore 的计算方式是 `hasMore = rows.length >= pageSize ? true : false`
+
+在上面这种计算方式下，会出现返回值 hasMore 为 true，但请求下一页其实已经没有数据的情况出现
+
+为了能够返回精确的 hasMore，需要在查询时，多传一个请求参数 `hasMore: true`
+
+当请求参数 hasMore 设置为 true 时，框架会返回精确的 hasMore，其原理是通过多查一条数据实现的，即本次如果要查10条数据，则框架实际查了11条数据，如果存在11条数据，代表一定还有下一页，否则代表没有下一页了
+
+若请求参数 getCount 已经设置为 true 时，会忽略参数 hasMore，因为此时的返回值 total 是满足查询条件的总数量（数据库多执行了一次count请求），通过 `最大页数 = Math.ceil(total / pageSize)` 已经可以求出最大页数，所以此时返回值 hasMore 的计算方式是 `hasMore = pageIndex < Math.ceil(total / pageSize) ? true : false`
 
 ### lastWhereJson
 
