@@ -43,6 +43,15 @@ sidebarDepth: 0
       }
     }
   },
+  "h5": {
+    "oauth": {
+      // 微信PC网站扫码登录所用的appid、appsecret（前往微信开放平台申请）
+      "weixin": {
+        "appid": "",
+        "appsecret": ""
+      }
+    }
+  },
   "h5-weixin": {
     "oauth": {
       // 微信公众号登录所用的appid、appsecret

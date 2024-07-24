@@ -872,7 +872,94 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 **注意3：网页授权时拼接的scope参数的值必须是snsapi_userinfo，同时再绑定开放平台，才能获取到unionid**
 
-注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
+**微信PC网站扫码登录配置**
+
+* 配置 `common/uni-config-center/uni-id/config.json` 内 `h5` 的 `appid` 和 `appsecret`
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/0dcff7ef-e503-4941-8f2c-19c1c0ca01fb.png)
+
+1. 需要前往微信开放平台申请，类型为网站应用
+2. 先拼接微信扫码授权的url，然后跳转，进入微信的扫码授权页面，扫码完成后会自动跳转到你指定的redirect_uri页面，然后页面onLoad内获得code参数，再调用 vk.userCenter.loginByWeixin 登录
+
+具体代码如下
+
+```vue
+<template>
+	<view class="content">
+		<button type="default" @click="getWeixinCode()">扫码授权获取code</button>
+		<button type="default" @click="loginByWeixin()">微信登录(不存在自动注册)</button>
+	</view>
+</template>
+
+<script>
+	var vk = uni.vk;
+	export default {
+		data() {
+			return {
+				options: {}
+			};
+		},
+		onLoad(options) {
+			vk = uni.vk;
+			this.options = options || {};
+			this.init(options);
+		},
+		methods: {
+			// 初始化
+			init(options) {
+				if (this.options.code) {
+					vk.toast("已获取到code，请点击相应操作。");
+					return false;
+				}
+			},
+			getWeixinCode() {
+				let appid = ""; // 填写公众号的appid
+				let redirect_uri = window.location.href.split("?")[0];
+				let url = `https://open.weixin.qq.com/connect/qrconnect?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect`;
+				window.location.href = url;
+			},
+			// 微信登陆
+			loginByWeixin(type) {
+				if (!this.options.code) {
+					vk.toast("请先获取code");
+					return false;
+				}
+				vk.userCenter.loginByWeixin({
+					data: {
+						code: this.options.code,
+						state: this.options.state,
+						type
+					},
+					success: (data) => {
+						vk.alert(data.msg);
+						this.data = data;
+					}
+				});
+			}
+		}
+	};
+</script>
+
+<style lang="scss" scoped>
+	.content {
+		padding: 30rpx;
+	}
+
+	.content button {
+		margin-bottom: 30rpx;
+	}
+
+	.tips {
+		font-size: 28rpx;
+		color: #999999;
+		margin-bottom: 32rpx;
+	}
+</style>
+```
+
+**注意**
+
+自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
  
 不要将 sessionKey 和 accessToken 暴露给前端，否则会有安全隐患
 
