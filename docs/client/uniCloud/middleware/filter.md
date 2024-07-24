@@ -23,25 +23,25 @@ sidebarDepth: 0
 
 ## 框架内置的过滤器
 
-无需配置，已自动生效，编写同ID的过滤器可以覆盖内置过滤器
+无需配置，已自动生效，编写同ID的过滤器可以覆盖内置过滤器（层级index比内置的小1即可）
 
-| 过滤器ID | 正则规则 |   层级  |         类型      |     说明                    |
-|---------|----------|--------| ----------------- |---------------------------|
-|   pub   | /pub/    |   100  | onActionExecuting |  所有人都可以访问，不进行过滤    |
-|   kh    | /kh/     |   200  | onActionExecuting |  用户token过滤器，检测用户是否已登录  |
-|   sys   | /sys/    |   300  | onActionExecuting |  云函数层的权限过滤器，检测用户是否有此业务云函数的执行权限  |
+| 过滤器ID| 正则规则		|   层级		|         类型				|     说明																								|
+|---------|----------	|--------	| -----------------	|---------------------------														|
+|   pub		| /pub/			|   100		| onActionExecuting	|  所有人都可以访问，不进行过滤															|
+|   kh		| /kh/			|   200		| onActionExecuting	|  用户token过滤器，检测用户是否已登录											|
+|   sys		| /sys/			|   300		| onActionExecuting	|  云函数层的权限过滤器，检测用户是否有此业务云函数的执行权限	|
 
 ## 中间件参数说明
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| id           | 中间件ID，全局必须唯一，相同中间件ID会被覆盖 | String | - | - |
-| regExp       | 中间件的正则匹配规则(支持数组) | String Array  | 无 | -  |
-| description  | 中间件的描述 | String  | - | -  |
-| index        | 中间件的执行顺序，值越小越先执行 | Number  | - | -  |
-| mode         | 中间件的模式，详情见下方 | String  | onActionExecuting | 见下方mode参数说明 |
-| enable       | 是否启动该中间件 | Boolean  | false | true |
-| main         | 执行的函数 | async function(event, serviceRes)   | - | -  |
+| 参数							| 说明																			| 类型																| 默认值							| 可选值							|
+|------------------	|-------------------------------					|---------													|--------						|-------						|
+| id								| 中间件ID，全局必须唯一，相同中间件ID会被覆盖	| String														| -									| -									|
+| regExp						| 中间件的正则匹配规则(支持数组)							| String Array											| 无									| -									|
+| description				| 中间件的描述															| String														| -									| -									|
+| index							| 中间件的执行顺序，值越小越先执行						| Number														| -									| -									|
+| mode							| 中间件的模式，详情见下方										| String														| onActionExecuting	| 见下方mode参数说明	|
+| enable						| 是否启动该中间件													| Boolean														| false							| true							|
+| main							| 执行的函数																| async function(event, serviceRes)	| -									| -									|
 
 ### mode参数说明
 
