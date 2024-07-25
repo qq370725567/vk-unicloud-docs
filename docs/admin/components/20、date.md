@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 ## 万能表单使用方式
 
-### 单个时间
+### 单个日期
 
 #### date类型（年月日）
 
@@ -64,7 +64,7 @@ sidebarDepth: 0
 { key: "date8", title: "date类型", type: "date", dateType: "date", valueFormat: "yyyy", format: "yyyy年", tips: "可选择年" },
 ```
 
-### 时间范围
+### 日期范围
 
 #### date类型（年月日）
 
@@ -120,6 +120,50 @@ sidebarDepth: 0
 
 ```js
 { key: "dateArr8", title: "date类型范围", type: "date", dateType: "daterange", valueFormat: "yyyy", format: "yyyy年", tips: "可选择年" },
+```
+
+### 日期多选
+
+#### 年份多选
+
+双向绑定的值为时间戳数组（如：`[1640966400000,1672502400000,1704038400000]`）
+
+```js
+{ key: "years1", title: "年份多选", type: "date", dateType: "years", valueFormat: "timestamp", format: "yyyy", placeholder: "请选择年份" },
+```
+
+双向绑定的值为字符串（如：`["2022", "2023", "2024"]`）
+
+```js
+{ key: "years2", title: "年份多选", type: "date", dateType: "years", valueFormat: "yyyy", format: "yyyy", placeholder: "请选择年份" },
+```
+
+#### 月份多选
+
+双向绑定的值为时间戳数组（如：`[1714492800000,1717171200000,1719763200000]`）
+
+```js
+{ key: "months1", title: "月份多选", type: "date", dateType: "months", valueFormat: "timestamp", format: "yyyy-MM", placeholder: "请选择月份" },
+```
+
+双向绑定的值为字符串（如：`["2024-05","2024-06","2024-07"]`）
+
+```js
+{ key: "months2", title: "月份多选", type: "date", dateType: "months", valueFormat: "yyyy-MM", format: "yyyy-MM", placeholder: "请选择月份" },
+```
+
+#### 天多选
+
+双向绑定的值为时间戳数组（如：`[1721664000000,1721750400000,1721836800000]`）
+
+```js
+{ key: "dates1", title: "日期多选", type: "date", dateType: "dates", valueFormat: "timestamp", format: "yyyy-MM-dd", placeholder: "请选择日期"  },
+```
+
+双向绑定的值为字符串（如：`[ "2024-07-23","2024-07-24","2024-07-25"]`）
+
+```js
+{ key: "dates2", title: "日期多选", type: "date", dateType: "dates", valueFormat: "yyyy-MM-dd", format: "yyyy-MM-dd", placeholder: "请选择日期"  },
 ```
 
 ## API
