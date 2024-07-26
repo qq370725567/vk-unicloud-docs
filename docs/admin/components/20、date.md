@@ -176,7 +176,7 @@ sidebarDepth: 0
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
-| dateType            | 时间格式类型 | String  | - | date、datetime、daterange、datetimerange |
+| dateType            | 时间格式类型 | String  | - | date、datetime、daterange、datetimerange、years、months、dates |
 | align            | 对其方式 | String  | left | left, center, right  |
 | format          | 显示在输入框中的格式 [详情](#日期格式) | String  | yyyy-MM-dd HH:mm:ss | - |
 | valueFormat          | 双向绑定的值的格式 [详情](#日期格式) | String | timestamp | - |
