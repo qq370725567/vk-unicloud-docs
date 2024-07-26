@@ -706,7 +706,6 @@ ___这个错误是HBX目前一直存在的问题，手动解决方案：___
 ```js
 // 请求另外一个云函数
 vk.callFunction({
-  name: "router",
   url: '云函数或云对象的请求路径',
   event, // 完美契合VK框架，且拥有继承当前用户token、ip等功能。
   data:{
@@ -722,7 +721,6 @@ await vk.pubfn.sleep(100);
 ```js
 // 请求另外一个云函数
 vk.callFunction({
-  name: "router",
   url: '云函数或云对象的请求路径',
   clientInfo: this.getClientInfo(), // 完美契合VK框架，且拥有继承当前用户token、ip等功能。
   data:{
