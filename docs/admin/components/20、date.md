@@ -255,25 +255,25 @@ sidebarDepth: 0
 
 ## template 使用方式
 
-### 单个时间 - date类型（年月日）
+### 单个日期 - date类型（年月日）
 
 ```html
 <vk-data-input-date-time v-model="value1" type="date"></vk-data-input-date-time>
 ```
 
-### 单个时间 - dataTime类型（年月日时分秒）
+### 单个日期 - dataTime类型（年月日时分秒）
 
 ```html
 <vk-data-input-date-time v-model="value1" type="datetime"></vk-data-input-date-time>
 ```
 
-### 时间范围 - date类型（年月日）
+### 日期范围 - date类型（年月日）
 
 ```html
 <vk-data-input-date-time v-model="value1" type="daterange"></vk-data-input-date-time>
 ```
 
-### 时间范围 - dataTime类型（年月日时分秒）
+### 日期范围 - dataTime类型（年月日时分秒）
 
 ```html
 <vk-data-input-date-time v-model="value1" type="datetimerange"></vk-data-input-date-time>
