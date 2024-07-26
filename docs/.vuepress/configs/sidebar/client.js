@@ -70,6 +70,7 @@ module.exports = [{
           'uniCloud/cloudfunctions/sseChannel',
           'uniCloud/cloudfunctions/reentrantLock',
           'uniCloud/cloudfunctions/uploadFile',
+          'uniCloud/cloudfunctions/websocket',
           'uniCloud/cloudfunctions/question'
         ]
       },
