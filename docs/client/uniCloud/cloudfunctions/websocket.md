@@ -30,8 +30,29 @@ WebSocket 是一种协议，可通过单个 TCP 连接在网络客户端与网�
 **VK版WebSocket优势**
 
 1. 双向加密通信，密文传输数据（注意：此加密通信只能相对安全，无法绝对安全）
-2. 适配VK框架，支持通过user_id发送消息
+2. 适配VK框架，支持通过user_id发送消息，支持强制用户断开连接，强制用户退出登录等
 3. 可以查看在线（与WebSocket建立连接未断开）的用户
+
+## 云端router添加WebSocket依赖代码
+
+打开 `router/index.js` 文件，替换代码如下
+
+```js
+'use strict';
+// 注意：此为云函数路由入口文件，请勿修改此文件代码，你自己的云函数逻辑应写在service目录下
+const vkCloud = require('vk-unicloud');                    // 引入 vk-unicloud
+const vk = vkCloud.createInstance(require('./config.js')); // 通过 vkCloud.createInstance 创建 vk 实例
+exports.main = async (event, context) => {
+	return await vk.router({ event, context, vk });
+};
+
+// router接入webSocket的依赖代码（当前仅支付宝云空间支持）
+const ws = vk.getWebSocketManage();
+exports.onWebsocketConnection = ws.onWebsocketConnection;
+exports.onWebsocketMessage = ws.onWebsocketMessage;
+exports.onWebsocketDisConnection = ws.onWebsocketDisConnection;
+exports.onWebsocketError = ws.onWebsocketError;
+```
 
 ## 云端（云对象） WebSocket 事件
 
@@ -325,15 +346,66 @@ module.exports = {
    * 生成适合与任何客户端连接的签名URL（可在非uniapp项目中连接WebSocket）
    */
   signedURL: async function(data) {
-  	let res = { code: 0, msg: '' };
-  	let { uid } = this.getClientInfo(); // 获取客户端信息
-  	// 业务逻辑开始-----------------------------------------------------------
-  	const ws = this.getWebSocketManage();
-  	res.url = await ws.signedURL();
-  	// 业务逻辑结束-----------------------------------------------------------
-  	return res;
+    let res = { code: 0, msg: '' };
+    let { uid } = this.getClientInfo(); // 获取客户端信息
+    // 业务逻辑开始-----------------------------------------------------------
+    const ws = this.getWebSocketManage();
+    res.url = await ws.signedURL();
+    // 业务逻辑结束-----------------------------------------------------------
+    return res;
   },
 }
+```
+
+### ws.forceLogout（强制用户退出登录）
+
+> 在云端强制通知客户端退出登录
+
+先在云端执行 ws.forceLogout，然后在前端监听 onVkError 事件，执行退出登录逻辑
+
+**云端代码**
+
+```javascript
+const ws = this.getWebSocketManage();
+await ws.forceLogout({
+  user_id: "用户id",
+  data: {
+    msg: "您已掉线，请重新登录"
+  }
+});
+```
+
+**参数说明**
+
+|参数|类型|说明|
+|---|---|---|
+|cid		|String、Array	|【特殊必填】连接id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
+|user_id|String、Array	|【特殊必填】用户id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
+|url		|String				| 【选填】云对象url路径，默认不需要传，会自动使用当前云对象										|
+
+**返回值**
+
+WebSocket 连接地址
+
+**前端代码**
+
+`this.webSocket` 通过执行 [vk.connectWebSocket](#vk-connectwebsocket-建立连接) 获得
+
+```javascript
+// 监听vk框架主动抛出的错误
+this.webSocket.onVkError(data => {
+  console.log("WebSocket:vkError", data);
+  // 在连接非pub云对象时，token过期框架会主动断开连接，data.close为true代表已断开连接
+  if (data.type === "forceLogout") {
+    // 退出登录
+    vk.userCenter.logout({
+      success: (data) => {
+        // 并跳登录页面
+        vk.navigateToLogin();
+      }
+    });
+  }
+});
 ```
 
 ## 前端（客户端） API
@@ -468,6 +540,506 @@ this.webSocket.close({
 | device_id		|  string	| 否		|				|设备id							|
 | appid				|  string	| 否		|				|dcloud_appid				|
 
+## 完整示例
+
+**云端代码**
+
+```js
+'use strict';
+var vk = uniCloud.vk; // 全局vk实例
+// 涉及的表名
+const dbName = {
+	//test: "vk-test", // 测试表
+};
+
+var db = uniCloud.database(); // 全局数据库引用
+var _ = db.command; // 数据库操作符
+var $ = _.aggregate; // 聚合查询操作符
+
+/**
+ * 权限注意：访问以下链接查看
+ * 文档地址：https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#内置权限
+ */
+var cloudObject = {
+	isCloudObject: true, // 标记为云对象模式
+	/**
+	 * 请求前处理，主要用于调用方法之前进行预处理，一般用于拦截器、统一的身份验证、参数校验、定义全局对象等。
+	 * 文档地址：https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#before-预处理
+	 */
+	_before: async function() {
+		// let { customUtil, uniID, config, pubFun } = this.getUtil(); // 获取工具包
+	},
+	/**
+	 * 请求后处理，主要用于处理本次调用方法的返回结果或者抛出的错误
+	 * 文档地址：https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#after-后处理
+	 */
+	_after: async function(options) {
+		let { err, res } = options;
+		if (err) {
+			return; // 如果方法抛出错误，直接return;不处理
+		}
+		return res;
+	},
+	// 当有客户端进行连接时触发
+	onWebsocketConnection: async function(data) {
+		console.log("onWebsocketConnection", data);
+		let { uid, cid } = this.getClientInfo(); // 获取客户端信息
+		let userInfo = await this.getUserInfo();
+		
+	},
+	// 当有客户端发送时触发
+	onWebsocketMessage: async function(data) {
+		console.log("onWebsocketMessage", data);
+		let { uid, cid } = this.getClientInfo(); // 获取客户端信息
+		let userInfo = await this.getUserInfo();
+
+		const ws = this.getWebSocketManage();
+		await ws.send({
+			//user_id: [uid], // 消息接收者的uid，不传则发送给所有在线用户
+			encrypt: true,
+			data: {
+				channel: data.channel, // 渠道：频道\房间号\群组号等
+				author: {
+					_id: uid, // 本条消息的原发送者
+					nickname: userInfo.nickname || userInfo.username
+				},
+				content: data.content,
+			}
+		});
+	},
+	// 当有客户端断开连接时触发
+	onWebsocketDisConnection: async function(data) {
+		console.log("onWebsocketDisConnection", data);
+		let { uid, cid } = this.getClientInfo(); // 获取客户端信息
+
+	},
+	// 当有客户端连接出错时触发
+	onWebsocketError: async function(data) {
+		console.log("onWebsocketError", data);
+		let { uid, cid } = this.getClientInfo(); // 获取客户端信息
+
+	},
+	/**
+	 * 模拟云端发送消息
+	 * @url template/web-socket/web-socket.send 前端调用的url参数地址
+	 */
+	send: async function(data) {
+		let res = { code: 0, msg: '' };
+		let { uid } = this.getClientInfo(); // 获取客户端信息
+		// 业务逻辑开始-----------------------------------------------------------
+		const ws = this.getWebSocketManage();
+		await ws.send({
+			encrypt: true,
+			user_id: [uid],
+			data: {
+				author: {
+					_id: null, // 本条消息的原发送者
+					nickname: "系统"
+				},
+				channel: data.channel, // 渠道：频道\房间号\群组号等
+				content: `这是只给你发的消息-${Date.now().toString(16)}`,
+			}
+		});
+		// 业务逻辑结束-----------------------------------------------------------
+		return res;
+	},
+	/**
+	 * 生成适合与任何客户端连接的签名URL（可在非uniapp项目中连接WebSocket）
+	 * @url template/web-socket/web-socket.signedURL 前端调用的url参数地址
+	 */
+	signedURL: async function(data) {
+		let res = { code: 0, msg: '' };
+		let { uid } = this.getClientInfo(); // 获取客户端信息
+		// 业务逻辑开始-----------------------------------------------------------
+		const ws = this.getWebSocketManage();
+		res.url = await ws.signedURL();
+		// 业务逻辑结束-----------------------------------------------------------
+		return res;
+	},
+	/**
+	 * 云端关闭连接
+	 * @url template/web-socket/web-socket.close 前端调用的url参数地址
+	 */
+	close: async function(data) {
+		let res = { code: 0, msg: '' };
+		let { uid } = this.getClientInfo(); // 获取客户端信息
+		// 业务逻辑开始-----------------------------------------------------------
+		let {
+			cid
+		} = data;
+		const ws = this.getWebSocketManage();
+		await ws.close({
+			//cid,
+			user_id: uid, // 关闭该用户所有的连接（这会导致用户的所有设备都会断开连接）
+		});
+		// 业务逻辑结束-----------------------------------------------------------
+		return res;
+	},
+	/**
+	 * 强制退出登录
+	 * @url template/web-socket/web-socket.forceLogout 前端调用的url参数地址
+	 */
+	forceLogout: async function(data) {
+		let res = { code: 0, msg: '' };
+		let { uid } = this.getClientInfo(); // 获取客户端信息
+		// 业务逻辑开始-----------------------------------------------------------
+		let {
+			cid,
+			user_id,
+		} = data;
+		
+		const ws = this.getWebSocketManage();
+		await ws.forceLogout({
+			cid,
+			user_id,
+			data: {
+				msg: "您已掉线，请重新登录"
+			}
+		});
+	
+		// 业务逻辑结束-----------------------------------------------------------
+		return res;
+	},
+	/**
+	 * 模板函数
+	 * @url template/web-socket/web-socket.test 前端调用的url参数地址
+	 */
+	test: async function(data) {
+		let res = { code: 0, msg: '' };
+		let { uid } = this.getClientInfo(); // 获取客户端信息
+		// 业务逻辑开始-----------------------------------------------------------
+
+
+		// 业务逻辑结束-----------------------------------------------------------
+		return res;
+	},
+};
+
+module.exports = cloudObject;
+```
+
+**前端代码**
+
+注意下方的代码需要改下这2个变量的值为你的
+
+```js
+cloudObjectUrl: "template/web-socket/web-socket", // 云对象地址
+userList: [
+  { username: 'test1', password: '123456' }, // 请自己先注册2个账号并添加到这里
+  { username: 'test2', password: '123456' }, // 请自己先注册2个账号并添加到这里
+],
+```
+
+```vue
+<template>
+	<view class="app">
+		<!-- 页面内容开始 -->
+		<view class="tips">注意：请用2个浏览器测试，在同一个浏览器无法同时登录2个账号</view>
+		<view class="title">切换账号</view>
+		<view style="display: flex;">
+			<button class="button" @click="login(0)">登录账号1</button>
+			<button class="button" @click="login(1)">登录账号2</button>
+		</view>
+		<view class="title">切换群</view>
+		<view style="display: flex;">
+			<button class="button" @click="channel = '001'">切换群1</button>
+			<button class="button" @click="channel = '002'">切换群2</button>
+		</view>
+		<view class="title">操作</view>
+		<template v-if="!cid">
+			<button class="button" @click="connectWebSocket()">建立连接</button>
+			<button class="button" @click="signedURL">建立连接（signedURL方式）</button>
+		</template>
+		<template v-else>
+			<view style="display: flex;">
+				<button class="button" @click="send">发送一条消息给云端</button>
+				<button class="button" @click="receive">云端下发一条消息</button>
+			</view>
+			<view style="display: flex;">
+				<button class="button" @click="closeWebSocket()">客户端断开连接</button>
+				<button class="button" @click="closeCloudWebSocket()">云端断开连接</button>
+			</view>
+			<view style="display: flex;">
+				<button class="button" @click="forceLogout({ cid })">强制设备退出登录</button>
+				<button class="button" @click="forceLogout({ user_id: vk.getVuex('$user.userInfo._id') })">强制用户退出登录</button>
+			</view>
+		</template>
+
+		<view class="console-box">
+			<view>当前群号：{{ channel }}</view>
+			<view v-for="(item, index) in messageListCom" :key="index">
+				<view v-if="vk.pubfn.getData(item, 'author._id') === vk.getVuex('$user.userInfo._id')" class="right">
+					我：{{ JSON.stringify(item.content) }}
+				</view>
+				<view v-else>
+					{{ vk.pubfn.getData(item, 'author.nickname') }}：{{ JSON.stringify(item.content) }}
+				</view>
+			</view>
+		</view>
+
+		<!-- 页面内容结束 -->
+	</view>
+</template>
+
+<script>
+	var vk = uni.vk;
+
+	export default {
+		data() {
+			// 页面数据变量
+			return {
+				cloudObjectUrl: "template/web-socket/web-socket", // 云对象地址
+				userList: [
+					{ username: 'test1', password: '123456' }, // 请自己先注册2个账号并添加到这里
+					{ username: 'test2', password: '123456' }, // 请自己先注册2个账号并添加到这里
+				],
+				
+				webSocket: null, // webSocket对象
+				cid: "", // 连接id
+				messageList: [], // 接收到的消息列表
+				channel: "001", // 默认群id
+			};
+		},
+		// 监听 - 页面每次【加载时】执行(如：前进)
+		onLoad(options = {}) {
+			vk = uni.vk;
+			this.options = options;
+			this.init(options);
+		},
+		// 监听 - 页面【首次渲染完成时】执行。注意如果渲染速度快，会在页面进入动画完成前触发
+		async onReady() {},
+		// 监听 - 页面每次【显示时】执行（如：前进和返回）（页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面）
+		onShow() {},
+		// 监听 - 页面每次【隐藏时】执行（如：返回）
+		onHide() {},
+		// 监听 - 页面每次【卸载时】（一般用于取消页面上的监听器）
+		onUnload() {
+			// 关闭 WebSocket 连接
+			this.closeWebSocket({
+				code: 1000,
+				reason: "页面关闭"
+			});
+		},
+		// 监听 - 页面下拉刷新
+		onPullDownRefresh() {
+			setTimeout(() => {
+				uni.stopPullDownRefresh();
+			}, 1000);
+		},
+		/**
+		 * 监听 - 点击右上角转发时 文档 https://uniapp.dcloud.io/api/plugins/share?id=onshareappmessage
+		 * 如果删除onShareAppMessage函数，则微信小程序右上角转发按钮会自动变灰
+		 */
+		onShareAppMessage(options) {},
+		// 函数
+		methods: {
+			// 页面数据初始化函数
+			init(options = {}) {
+				console.log("init: ", options);
+			},
+			login(index) {
+				let user = this.userList[index];
+				vk.userCenter.login({
+					data: user,
+					success: (data) => {
+						vk.toast(`已切换账号${index}`);
+						// 主动关闭
+						if (this.webSocket) {
+							this.webSocket.close({
+								code: 1000, // 这里固定1000，表示正常关闭
+								reason: "主动关闭"
+							});
+						}
+						// 连接
+						this.connectWebSocket();
+					}
+				});
+			},
+			async connectWebSocket() {
+				this.webSocket = await vk.connectWebSocket({
+					url: this.cloudObjectUrl,
+					encrypt: true, // 是否加密通信
+					title: "连接中...",
+					data: {
+
+					}
+				});
+
+				// 连接成功时触发
+				this.webSocket.onOpen(data => {
+					console.log("WebSocket:open", data);
+					this.cid = data.cid;
+				});
+
+				// 收到数据时触发
+				this.webSocket.onMessage(data => {
+					// 正常收到消息
+					console.log("WebSocket:message", data);
+					this.messageList.push(data);
+				});
+
+				// 监听vk框架主动抛出的错误
+				this.webSocket.onVkError(event => {
+					console.log("WebSocket:vkError", event);
+					let {
+						type,
+						data,
+						err
+					} = event;
+					// 在连接非pub云对象时，token过期会报错，在这里可以拦截到错误信息
+					
+					// 定义跳登录页面，登录成功后再跳回来的函数
+					const navigateToLogin = () => {
+						let { fullPath } = vk.pubfn.getCurrentPage();
+						vk.navigateToLogin({
+							redirectUrl: fullPath
+						});
+					};
+					
+					if (type === "invalidToken") {
+						// 这里可以写主动关闭连接并跳登录页面的逻辑
+						// 关闭连接
+						this.closeWebSocket({
+							code: 1000, // 这里固定1000，表示正常关闭
+							reason: err.msg
+						});
+						// 跳登录页面，登录成功后再跳回来
+						navigateToLogin();
+					} else if (type === "forceLogout") {
+						// 退出登录
+						vk.userCenter.logout({
+							success: (data) => {
+								// 跳登录页面，登录成功后再跳回来
+								navigateToLogin();
+							}
+						});
+					}
+				});
+
+				// 连接被关闭时触发
+				this.webSocket.onClose(data => {
+					console.log("WebSocket:close", data);
+					this.webSocket = null;
+					this.cid = "";
+				});
+
+				// 连接因错误而关闭时触发
+				this.webSocket.onError(data => {
+					console.log("WebSocket:error", data);
+					this.webSocket = null;
+					this.cid = "";
+				});
+
+			},
+			// 客户端发送消息给云端
+			send() {
+				this.webSocket.send({
+					data: {
+						channel: this.channel,
+						content: `你好-${Date.now().toString(16)}`
+					}
+				});
+			},
+			// 模拟让云端发送消息给客户端
+			receive() {
+				vk.callFunction({
+					url: `${this.cloudObjectUrl}.send`,
+					title: "请求中...",
+					data: {
+						channel: this.channel,
+					},
+					success: data => {}
+				});
+			},
+			// 客户端主动关闭连接
+			closeWebSocket(data = { code: 1000, reason: "主动关闭" }) {
+				if (this.webSocket) {
+					this.webSocket.close(data);
+					this.webSocket = null;
+					this.cid = "";
+				}
+			},
+			// 获取webSocket的已签名的连接地址
+			signedURL() {
+				vk.callFunction({
+					url: `${this.cloudObjectUrl}.signedURL`,
+					title: "请求中...",
+					data: {},
+					success: data => {
+						this.connectWebSocket(data.url);
+					}
+				});
+			},
+			closeCloudWebSocket() {
+				vk.callFunction({
+					url: `${this.cloudObjectUrl}.close`,
+					title: "请求中...",
+					data: {
+						cid: this.cid
+					},
+					success: data => {}
+				});
+			},
+			forceLogout(data){
+				vk.callFunction({
+					url: `${this.cloudObjectUrl}.forceLogout`,
+					title: '请求中...',
+					data,
+					success: (data) => {
+						
+					}
+				});
+			}
+		},
+		// 监听器
+		watch: {
+
+		},
+		// 计算属性
+		computed: {
+			messageListCom() {
+				// 根据群获取消息列表
+				let list = this.messageList.filter(item => item.channel === this.channel);
+				return list;
+			}
+		}
+	};
+</script>
+<style lang="scss" scoped>
+	.app {
+		display: flex;
+		flex-direction: column;
+
+		.tips {
+			font-size: 12px;
+			color: #e43d33;
+			padding: 5px 10px;
+		}
+
+		.title {
+			font-size: 16px;
+			font-weight: bold;
+			padding: 5px 10px;
+		}
+
+		.button {
+			margin: 5px;
+			font-size: 16px;
+			flex: 1;
+		}
+
+		.console-box {
+			padding: 10px;
+			font-size: 12px;
+			font-family: monospace;
+			.right{
+				text-align: right;
+			}
+		}
+	}
+</style>
+```
+
 ## 注意事项
 
 ### 数据库报表vk-ws-connection不存在
@@ -519,4 +1091,8 @@ this.webSocket.close({
 
 ### 报错，类型错误：Invalid URL
 
-WebSocket目前只能连接云端运行，无法本地运行。
+WebSocket 目前只能连接云端运行，无法本地运行。
+
+### 报错，权限不足？
+
+连接 WebSocket 的时候，`onWebsocketConnection`、`onWebsocketMessage`、`onWebsocketDisConnection`、`onWebsocketError` 这4个触发事件同样也会经过中间件过滤，如内置的pub、kh、sys这3个过滤器
