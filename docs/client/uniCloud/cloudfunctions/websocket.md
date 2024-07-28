@@ -4,11 +4,13 @@ sidebarDepth: 0
 
 # WebSocket
 
+> vk-unicloud版本 ≥ 2.18.13
+> 
 > 仅支付宝云（云端）支持
 > 
 > 不支持本地调试
 > 
-> Nodejs版本 >= 18
+> Nodejs版本 ≥ 18
 > 
 > WebSocket VK版目前只支持在云对象中使用
 
