@@ -26,12 +26,18 @@ sidebarDepth: 0
 
 ## 方式二：只升级模块
 
+右键项目根目录下的 `uni_modules` 目录，再点击从插件市场更新
+
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/c72fa719-9444-4874-93a5-7b09d440feee.jpg)
+
+在弹出的窗口中，按下图所示操作
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/2b326b97-e3f4-45ec-8551-27a0063c8029.png)
 
 ## 注意事项
 
 * 更新 `vk-unicloud` 后，需要在 `common/vk-unicloud` 右键上传公共模块才会生效
 
-* 若是本地调试模式，则需要重启本地服务才会生效。
+* 若是本地调试模式，如果不生效，尝试重启项目。
 
 * 注意事项：使用方式二更新框架不会造成你修改过的框架文件被覆盖，但是如果本次更新需要改动框架内一些文件，则需要你手动更改。
