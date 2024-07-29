@@ -542,6 +542,53 @@ this.webSocket.close({
 | device_id		|  string	| 否		|				|设备id							|
 | appid				|  string	| 否		|				|dcloud_appid				|
 
+**表初始化索引文件**
+
+在 database 目录新建文件 `vk-ws-connection.index.json`，内容如下
+
+```json
+[
+  {
+    "IndexName": "_add_time",
+    "MgoKeySchema": {
+      "MgoIndexKeys": [
+        {
+          "Name": "_add_time",
+          "Direction": "1"
+        }
+      ],
+      "MgoIsUnique": false
+    }
+  },
+  {
+    "IndexName": "user_id",
+    "MgoKeySchema": {
+      "MgoIndexKeys": [
+        {
+          "Name": "user_id",
+          "Direction": "1"
+        }
+      ],
+      "MgoIsUnique": false
+    }
+  },
+  {
+    "IndexName": "device_id",
+    "MgoKeySchema": {
+      "MgoIndexKeys": [
+        {
+          "Name": "device_id",
+          "Direction": "1"
+        }
+      ],
+      "MgoIsUnique": false
+    }
+  }
+]
+```
+
+再右键 database 目录，初始化数据库，出现弹窗后，所有已存在的表都不要打勾，直接点覆盖选中的表（因为没打勾，只会初始化不存在的表）
+
 ## 完整示例
 
 **云端代码**
