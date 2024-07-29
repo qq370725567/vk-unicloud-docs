@@ -166,6 +166,37 @@ sidebarDepth: 0
 { key: "dates2", title: "日期多选", type: "date", dateType: "dates", valueFormat: "yyyy-MM-dd", format: "yyyy-MM-dd", placeholder: "请选择日期"  },
 ```
 
+### 限制选择范围
+
+可通过 pickerOptions 内的 disabledDate 函数设置禁用的日期
+
+[pickerOptions内的各属性文档](https://element.eleme.cn/#/zh-CN/component/date-picker#picker-options)
+
+下方是仅能选最近7天内任意一天的示例代码
+
+```js
+{
+  key: "date1", title: "date类型", type: "date", valueFormat: "timestamp", dateType: "date", tips: "可选择年月日",
+  pickerOptions: {
+    disabledDate: (time) => {
+      let nowTime = new Date();
+      // 获取7天前的时间戳
+      let beforeTime = vk.pubfn.getOffsetTime(nowTime, {
+        day: 7,
+        mode: "before", // after 之后 before 之前
+      });
+      if (time.getTime() < beforeTime) {
+        return true;
+      }
+      if (time.getTime() > nowTime) {
+        return true;
+      }
+      return false;
+    }
+  }
+},
+```
+
 ## API
 
 ## 公共属性
