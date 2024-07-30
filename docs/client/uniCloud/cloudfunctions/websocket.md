@@ -193,13 +193,15 @@ await ws.send({
 
 **参数说明**
 
-|参数		|类型					|说明																																		|
-|---		|---					|---																																		|
-|encrypt|Boolean			| 【选填】是否加密发送																											|
-|cid		|String、Array	|【特殊必填】连接id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
-|user_id|String、Array	|【特殊必填】用户id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
-|data		|Object				|【必填】发送给客户端的json数据																						|
-|url		|String				| 【选填】云对象url路径，默认不需要传，会自动使用当前云对象										|
+|参数		|类型					|说明																										|
+|---		|---					|---																										|
+|data		|Object				|【必填】发送给客户端的json数据														|
+|encrypt|Boolean			| 【选填】是否加密发送																		|
+|cid		|String、Array	|【选填】连接id, 支持批量向客户端发送消息										|
+|user_id|String、Array	|【选填】用户id, 支持批量向客户端发送消息										|
+|url		|String				| 【选填】云对象url路径，默认不需要传，会自动使用当前云对象	|
+|appid	|String、Array	|【选填】dcloud_appid																		|
+|channel|String、Array	|【选填】渠道																							|
 
 
 **云对象示例**
@@ -283,7 +285,8 @@ module.exports = {
 |cid		|String、Array	|【特殊必填】连接id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
 |user_id|String、Array	|【特殊必填】用户id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
 |url		|String				| 【选填】云对象url路径，默认不需要传，会自动使用当前云对象										|
-
+|appid	|String、Array	|【选填】dcloud_appid																		|
+|channel|String、Array	|【选填】渠道																							|
 
 **云对象示例**
 
@@ -379,11 +382,13 @@ await ws.forceLogout({
 
 **参数说明**
 
-|参数|类型|说明|
-|---|---|---|
+|参数		|类型					|说明																																			|
+|---		|---					|---																																			|
 |cid		|String、Array	|【特殊必填】连接id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
 |user_id|String、Array	|【特殊必填】用户id, 支持批量向客户端发送消息，`cid` 和 `user_id` 二选一传即可	|
 |url		|String				| 【选填】云对象url路径，默认不需要传，会自动使用当前云对象										|
+|appid	|String、Array	|【选填】dcloud_appid																											|
+|channel|String、Array	|【选填】渠道																																|
 
 **返回值**
 
@@ -440,9 +445,10 @@ const webSocket = await vk.connectWebSocket({
 |参数		|类型		|说明												|
 |---		|---		|---												|
 |url		|String	| 【必填】云对象url路径				|
-|encrypt|Boolean| 【选填】是否加密通信					|
-|title	|String	|【选填】连接时的遮罩title			|
+|encrypt|Boolean| 【选填】是否加密通信				|
+|title	|String	|【选填】连接时的遮罩title		|
 |data		|Object	|【选填】发送给云端的json数据	|
+|channel|String	|【选填】渠道									|
 
 **返回值**
 
@@ -645,9 +651,10 @@ var cloudObject = {
 		const ws = this.getWebSocketManage();
 		await ws.send({
 			//user_id: [uid], // 消息接收者的uid，不传则发送给所有在线用户
+			channel: "default", // 只发给默认渠道
 			encrypt: true,
 			data: {
-				channel: data.channel, // 渠道：频道\房间号\群组号等
+				groupId: data.groupId, // 群ID
 				author: {
 					_id: uid, // 本条消息的原发送者
 					nickname: userInfo.nickname || userInfo.username
@@ -680,12 +687,13 @@ var cloudObject = {
 		await ws.send({
 			encrypt: true,
 			user_id: [uid],
+			channel: "default", // 只发给默认渠道
 			data: {
 				author: {
 					_id: null, // 本条消息的原发送者
 					nickname: "系统"
 				},
-				channel: data.channel, // 渠道：频道\房间号\群组号等
+				groupId: data.groupId, // 群ID
 				content: `这是只给你发的消息-${Date.now().toString(16)}`,
 			}
 		});
@@ -790,8 +798,8 @@ userList: [
 		</view>
 		<view class="title">切换群</view>
 		<view style="display: flex;">
-			<button class="button" @click="channel = '001'">切换群1</button>
-			<button class="button" @click="channel = '002'">切换群2</button>
+			<button class="button" @click="groupId = '001'">切换群1</button>
+			<button class="button" @click="groupId = '002'">切换群2</button>
 		</view>
 		<view class="title">操作</view>
 	<!-- 	<button class="button" @click="connectWebSocket()">建立连接</button> -->
@@ -816,7 +824,7 @@ userList: [
 		</template>
 
 		<view class="console-box">
-			<view>当前群号：{{ channel }}</view>
+			<view>当前群号：{{ groupId }}</view>
 			<view v-for="(item, index) in messageListCom" :key="index">
 				<view v-if="vk.pubfn.getData(item, 'author._id') === vk.getVuex('$user.userInfo._id')" class="right">
 					我：{{ JSON.stringify(item.content) }}
@@ -847,7 +855,7 @@ userList: [
 				webSocket: null, // webSocket对象
 				cid: "", // 连接id
 				messageList: [], // 接收到的消息列表
-				channel: "001", // 默认群id
+				groupId: "001", // 默认群id
 			};
 		},
 		// 监听 - 页面每次【加载时】执行(如：前进)
@@ -985,22 +993,24 @@ userList: [
 			},
 			// 重复连接测试
 			connectWebSocket2() {
-				// 重复连接相同云对象时，默认会复用之前的连接，不会重复创建
+				// 重复连接相同云对象时，可以通过设置不同的channel来创建新的连接
 				this.connectWebSocket({
-					cache: true, // 设置为false时，每次都会创建新的连接
+					channel: "default"
 				});
+				// 不同的channel会创建新的连接
 				this.connectWebSocket({
-					cache: true, // 设置为false时，每次都会创建新的连接
+					channel: "test"
 				});
+				// 重复的channel会复用之前的cid
 				this.connectWebSocket({
-					cache: false, // 设置为false时，每次都会创建新的连接
+					channel: "test"
 				});
 			},
 			// 客户端发送消息给云端
 			send() {
 				this.webSocket.send({
 					data: {
-						channel: this.channel,
+						groupId: this.groupId,
 						content: `你好-${Date.now().toString(16)}`
 					}
 				});
@@ -1011,7 +1021,7 @@ userList: [
 					url: `${this.cloudObjectUrl}.send`,
 					title: "请求中...",
 					data: {
-						channel: this.channel,
+						groupId: this.groupId,
 					},
 					success: data => {}
 				});
@@ -1064,7 +1074,7 @@ userList: [
 		computed: {
 			messageListCom() {
 				// 根据群获取消息列表
-				let list = this.messageList.filter(item => item.channel === this.channel);
+				let list = this.messageList.filter(item => item.groupId === this.groupId);
 				return list;
 			}
 		}
