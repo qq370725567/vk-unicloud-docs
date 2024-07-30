@@ -718,7 +718,6 @@ var cloudObject = {
 		} = data;
 		const ws = this.getWebSocketManage();
 		await ws.close({
-			//cid,
 			user_id: uid, // 关闭该用户所有的连接（这会导致用户的所有设备都会断开连接）
 		});
 		// 业务逻辑结束-----------------------------------------------------------
@@ -795,9 +794,11 @@ userList: [
 			<button class="button" @click="channel = '002'">切换群2</button>
 		</view>
 		<view class="title">操作</view>
+	<!-- 	<button class="button" @click="connectWebSocket()">建立连接</button> -->
 		<template v-if="!cid">
 			<button class="button" @click="connectWebSocket()">建立连接</button>
 			<button class="button" @click="signedURL">建立连接（signedURL方式）</button>
+			<button class="button" @click="connectWebSocket2()">模拟测试建立多个连接</button>
 		</template>
 		<template v-else>
 			<view style="display: flex;">
@@ -863,7 +864,7 @@ userList: [
 		onHide() {},
 		// 监听 - 页面每次【卸载时】（一般用于取消页面上的监听器）
 		onUnload() {
-			// 关闭 WebSocket 连接
+			// 页面卸载时需要关闭 WebSocket 连接
 			this.closeWebSocket({
 				code: 1000,
 				reason: "页面关闭"
@@ -904,16 +905,16 @@ userList: [
 					}
 				});
 			},
-			async connectWebSocket() {
+			async connectWebSocket(obj = {}) {
 				this.webSocket = await vk.connectWebSocket({
 					url: this.cloudObjectUrl,
 					encrypt: true, // 是否加密通信
 					title: "连接中...",
 					data: {
-
-					}
+					
+					},
+					...obj
 				});
-
 				// 连接成功时触发
 				this.webSocket.onOpen(data => {
 					console.log("WebSocket:open", data);
@@ -927,16 +928,15 @@ userList: [
 					this.messageList.push(data);
 				});
 
-				// 监听vk框架主动抛出的错误
-				this.webSocket.onVkError(event => {
-					console.log("WebSocket:vkError", event);
+				// 监听vk框架事件
+				this.webSocket.onVkMessage(event => {
+					console.log("WebSocket:onVkMessage", event);
 					let {
 						type,
 						data,
 						err
 					} = event;
 					// 在连接非pub云对象时，token过期会报错，在这里可以拦截到错误信息
-					
 					// 定义跳登录页面，登录成功后再跳回来的函数
 					const navigateToLogin = () => {
 						let { fullPath } = vk.pubfn.getCurrentPage();
@@ -944,9 +944,8 @@ userList: [
 							redirectUrl: fullPath
 						});
 					};
-					
 					if (type === "invalidToken") {
-						// 这里可以写主动关闭连接并跳登录页面的逻辑
+						// 监听token失效事件
 						// 关闭连接
 						this.closeWebSocket({
 							code: 1000, // 这里固定1000，表示正常关闭
@@ -955,6 +954,7 @@ userList: [
 						// 跳登录页面，登录成功后再跳回来
 						navigateToLogin();
 					} else if (type === "forceLogout") {
+						// 监听强制退出登录事件
 						// 退出登录
 						vk.userCenter.logout({
 							success: (data) => {
@@ -962,6 +962,9 @@ userList: [
 								navigateToLogin();
 							}
 						});
+					} else if (type === "error") {
+						// 错误事件
+						console.log("err", err);
 					}
 				});
 
@@ -979,6 +982,19 @@ userList: [
 					this.cid = "";
 				});
 
+			},
+			// 重复连接测试
+			connectWebSocket2() {
+				// 重复连接相同云对象时，默认会复用之前的连接，不会重复创建
+				this.connectWebSocket({
+					cache: true, // 设置为false时，每次都会创建新的连接
+				});
+				this.connectWebSocket({
+					cache: true, // 设置为false时，每次都会创建新的连接
+				});
+				this.connectWebSocket({
+					cache: false, // 设置为false时，每次都会创建新的连接
+				});
 			},
 			// 客户端发送消息给云端
 			send() {
