@@ -23,15 +23,17 @@
 
 ## 公共请求参数
 
-|参数			|说明																				|类型						|
-|:-:			|:-:																				|:-:						|
-|data			|发送到云函数的参数数据											|Object					|
-|title		|遮罩层提示语，为空或不传则代表不显示遮罩层	|String					|
-|loading	|自定义loading [查看详情](#loading)					|Boolean、Object|
-|needAlert|请求错误时是否弹窗提示，默认true											|Boolean				|
-|success	|请求成功时的回调函数												|Function				|
-|fail			|请求失败时的回调函数												|Function				|
-|complete	|请求完成时的回调函数												|Function				|
+|参数				|说明																																																																																									|类型						|
+|:-:				|:-:																																																																																									|:-:						|
+| data			| 发送到云函数的参数数据																																																																																	|Object					|
+| title			| 遮罩层提示语的文本																																																																																			|String					|
+| loading		| 自定义loading，设置为false则关闭遮罩层提示语 [查看详情](#loading)																																																												|Boolean、Object	|
+| needAlert	| 请求错误时是否弹窗提示，默认true																																																																												|Boolean				|
+| env				| 请求多服务空间的环境 [查看详情](https://vkdoc.fsq.pub/client/question/q9.html#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4)												| String				| -		| -	|
+| encrypt		| 是否加密通信（可以不开启安全网络实现加密通信） [查看详情](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt-vk%E7%89%88%E5%8F%8C%E5%90%91%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1)	| Boolean				| none| -	|
+| success		| 请求成功时的回调函数																																																																																		|Function				|
+| fail			| 请求失败时的回调函数																																																																																		|Function				|
+| complete	| 请求完成时的回调函数																																																																																		|Function				|
 
 ### loading
 
