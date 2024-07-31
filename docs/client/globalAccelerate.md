@@ -18,7 +18,8 @@ sidebarDepth: 0
 2. 需要购买阿里云全球加速产品（选按量付费即可）
 3. 需要购买一台阿里云ECS（需要买在杭州可用区H，买台便宜的即可，使用宝塔镜像搭建）
 4. 一个已经在阿里云备案过的自己的域名
-5. 开通扩展存储（如果你需要云存储也全球加速的话）
+5. 域名有SSL证书
+6. 开通扩展存储（如果你需要云存储也全球加速的话）
 
 ## 操作步骤
 
@@ -26,10 +27,10 @@ sidebarDepth: 0
 
 1. 进入ECS的宝塔页面，安装nginx
 2. 新建网站，网站域名填 `api.example.com`，并设置反向代理，如果是阿里云空间，填 `https://api.bspapp.com` ，如果是支付宝云空间填 `https://{spaceId}.api-hz.cloudbasefunction.cn` (其中{spaceId}替换成你的支付宝云空间id)
-3. 设置全球加速，选https并监听443端口（如果你的 `api.example.com` 没有ssl证书，则选http并监听80端口），其中后端服务选你搭建了nginx并反向代理的那台ECS，加速地区选你需要加速的地区，源站区域选杭州
+3. 设置全球加速，选https并监听443端口（你的 `api.example.com` 必须要有ssl证书），其中后端服务选你搭建了nginx并反向代理的那台ECS，加速地区选你需要加速的地区，源站区域选杭州
 4. 去域名解析后台配置cname解析 `api.example.com` 到全球加速的 cname 地址
 5. 等待10-20分钟，等全球加速配置全部生效后，此时访问 `api.example.com` 如果能正常访问，代表全球加速配置成功了
-6. 打开项目根目录的 `app.config.js` 文件，在根节点新增以下配置，若无ssl证书，则endpoint内的https改成http
+6. 打开项目根目录的 `app.config.js` 文件，在根节点新增以下配置
 ```js
 "uniCloud": {
 	// 自定义默认环境（一般无需配置，除非你知道这么配置带来的意义）
@@ -57,7 +58,7 @@ sidebarDepth: 0
 假设加速云存储的域名是 `storage.example.com` 
 
 1. 进入ECS的宝塔页面，新建网站，网站域名填 `storage.example.com`，并设置反向代理到 `https://upload.qiniup.com`
-2. 设置全球加速，选https并监听443端口（如果你的 `storage.example.com` 没有ssl证书，则选http并监听80端口），其中后端服务选你搭建了nginx并反向代理的那台ECS，加速地区选你需要加速的地区，源站区域选杭州
+2. 设置全球加速，选https并监听443端口（你的 `storage.example.com` 必须要有ssl证书），其中后端服务选你搭建了nginx并反向代理的那台ECS，加速地区选你需要加速的地区，源站区域选杭州
 3. 去域名解析后台配置cname解析 `storage.example.com` 到全球加速的 cname 地址
 4. 等待10-20分钟，等全球加速配置全部生效后，此时访问 `storage.example.com` 如果显示 `{"error":"only allow POST method"}` 代表全球加速配置成功了
 5. 打开项目文件 `/uni_modules/uni-config-center/uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js`，在 `vk.service` 节点填写配置
