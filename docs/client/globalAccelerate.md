@@ -30,7 +30,10 @@ sidebarDepth: 0
 3. 设置全球加速，选https并监听443端口（你的 `api.example.com` 必须要有ssl证书），其中后端服务选你搭建了nginx并反向代理的那台ECS，加速地区选你需要加速的地区，源站区域选杭州
 4. 去域名解析后台配置cname解析 `api.example.com` 到全球加速的 cname 地址
 5. 等待10-20分钟，等全球加速配置全部生效后，此时访问 `api.example.com` 如果能正常访问，代表全球加速配置成功了
-6. 打开项目根目录的 `app.config.js` 文件，在根节点新增以下配置
+6. 打开项目根目录的 `app.config.js` 文件，在 `根节点` 新增以下配置
+
+**注意，是加在 `根节点` ，而 `非service.cloudStorage.unicloud` 内**
+
 ```js
 "uniCloud": {
 	// 自定义默认环境（一般无需配置，除非你知道这么配置带来的意义）
