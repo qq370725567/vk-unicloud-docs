@@ -900,7 +900,7 @@ userList: [
 				vk.userCenter.login({
 					data: user,
 					success: (data) => {
-						vk.toast(`已切换账号${index}`);
+						vk.toast(`已切换账号${index+1}`);
 						// 主动关闭
 						if (this.webSocket) {
 							this.webSocket.close({
@@ -1019,7 +1019,6 @@ userList: [
 			receive() {
 				vk.callFunction({
 					url: `${this.cloudObjectUrl}.send`,
-					title: "请求中...",
 					data: {
 						groupId: this.groupId,
 					},
@@ -1041,7 +1040,9 @@ userList: [
 					title: "请求中...",
 					data: {},
 					success: data => {
-						this.connectWebSocket(data.url);
+						this.connectWebSocket({
+							url: data.url
+						});
 					}
 				});
 			},
