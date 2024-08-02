@@ -267,19 +267,7 @@ let newInfo = await vk.baseDao.updateById({
 
 **调用示例**
 
-方式一（此方式目前仅阿里云支持）
-
-```js
-let newInfo = await vk.baseDao.updateAndReturn({
-  dbName: "vk-test",
-  id: _id,
-  dataJson: {
-    money: _.inc(1)
-  }
-});
-```
-
-方式二（whereJson的条件查询后的结果必须有且只有1条记录）（此方式目前阿里云和腾讯云都支持）
+注意：whereJson条件不管写什么，只会修改满足条件的第一条记录，且不支持排序
 
 ```js
 let newInfo = await vk.baseDao.updateAndReturn({
@@ -297,13 +285,12 @@ let newInfo = await vk.baseDao.updateAndReturn({
 
 **请求参数**
 
-|    参数名   |   类型   | 必填 |    说明    |
-|------------|----------|------|-----------|
-|   dbName   |  String  |  是  |   表名    |
-|   id |  String  |  是  |   记录的_id（id与whereJson二选一）  |
-|   whereJson |  Object  |  是  |   where 条件（id与whereJson二选一）  |
-|   dataJson |  Object  |  是  |   需要修改的数据  |
-|   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
+|    参数名		|   类型			| 必填		|    说明																					|
+|------------	|----------	|------	|-----------																			|
+|   dbName		|  String		|  是		|   表名																						|
+|   whereJson	|  Object		|  是		|   where 条件																			|
+|   dataJson	|  Object		|  是		|   需要修改的数据																	|
+|   db				|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();	|
 
 **返回值**
 
