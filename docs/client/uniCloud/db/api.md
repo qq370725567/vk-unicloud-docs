@@ -468,7 +468,6 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |   sortArr |  Array  |  否  |   排序规则（见上方调用示例）  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 |   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
-|   concurrency		|  Number	|  否		|  当pageSize=-1或大于1000时生效，控制本次查询数据库最大并发量（此参数阿里云不生效，支付宝云和腾讯云默认为5）	|
 
 **返回值**
 
@@ -479,7 +478,6 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#hasmore) 																														|
 |   pagination|  Object		|  当前分页参数																																												|
 |   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
-|   concurrency	|  Number	|  当pageSize=-1或大于1000时会返回，代表本次查询数据库实际并发量																													|
 
 **pagination对象的属性**
 
