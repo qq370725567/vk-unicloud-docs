@@ -420,7 +420,7 @@ let info = await vk.baseDao.findByWhereJson({
 
 查多条记录（具有分页功能） 对应的传统sql语句: `select * from vk-test where money>=0 limit 1,20
 
-云开发数据库最大支持查询1000条数据，而此API可以达到1万条数据，通过设置 `pageSize: 10000`，最大极限要看你返回的数据量大小。
+云开发数据库最大支持查询1000条数据，而此API可以达到1万条数据，通过设置 `pageSize: 10000`，最大极限要看你返回的数据量大小。（建议控制在1万以内）
 
 特别注意：此分页功能会随着 `pageIndex` 的值越大，效率越低（传统mysql也有此问题），pageIndex * pageSize 的值最好不要超过 300万（如每页显示10条，则建议最多让用户查看到第30万页）
 
@@ -468,6 +468,7 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |   sortArr |  Array  |  否  |   排序规则（见上方调用示例）  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 |   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
+|   concurrency		|  Number	|  否		|  当pageSize=-1或大于1000时生效，控制本次查询数据库最大并发量（此参数阿里云不生效，支付宝云和腾讯云默认为5）	|
 
 **返回值**
 
@@ -478,6 +479,7 @@ ___若 pageSize 设置成-1，则默认查全部数据，但由于云数据库�
 |   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#hasmore) 																														|
 |   pagination|  Object		|  当前分页参数																																												|
 |   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
+|   concurrency	|  Number	|  当pageSize=-1或大于1000时会返回，代表本次查询数据库实际并发量																													|
 
 **pagination对象的属性**
 
