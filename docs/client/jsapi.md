@@ -1778,14 +1778,56 @@ vk.navigateToHome();
 
 ### vk.navigateToLogin
 
-关闭所有页面，并跳转到登录页 （app.config.js 的 login.url）
+登录页面即 app.config.js 的 login.url
+
+关闭所有页面，并跳转到登录页 
 
 ```js
-// 关闭所有页面，并跳转到登录页 
 vk.navigateToLogin();
-// 不关闭页面，直接跳转到登录页，登录成功自动返回当前页面
-vk.navigateToLogin({ mode:"navigateTo" });
 ```
+
+不关闭页面，直接跳转到登录页，登录成功自动返回当前页面
+
+```js
+vk.navigateToLogin({
+  mode: "navigateTo"
+});
+```
+
+关闭所有页面，并跳转到登录页，登录成功返回当前页面
+
+```js
+vk.navigateToLogin({
+  needBack: true
+});
+```
+
+关闭所有页面，并跳转到登录页，登录成功返回指定页面
+
+```js
+vk.navigateToLogin({
+  redirectUrl: `页面地址`
+});
+```
+
+仅关闭当前页面，并跳转到登录页，登录成功返回当前页面
+
+```js
+vk.navigateToLogin({
+  mode: "redirectTo",
+  needBack: true
+});
+```
+
+仅关闭当前页面，并跳转到登录页，登录成功返回指定页面
+
+```js
+vk.navigateToLogin({
+  mode: "redirectTo",
+  redirectUrl: `页面地址`
+});
+```
+
 
 ### vk.pubfn.checkLogin
 
