@@ -1459,10 +1459,7 @@ console.log(requestRes)
 let imageBuffer = await vk.request({
   url: "https://xxxx.xxxx.com/xxx.jpg",
   method: "GET",
-  dataType: "default",
-  header: {
-    "cache-control": "no-cache",
-  }
+  dataType: "default"
 });
 // 还可以把二进制流转base64
 let base64 = "data:image/png;base64," + imageBuffer.toString('base64');

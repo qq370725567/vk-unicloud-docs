@@ -261,10 +261,7 @@ module.exports = {
     let imageBuffer = await vk.request({
       url: id_card_front,
       method: "GET",
-      dataType: "default",
-      header: {
-        "cache-control": "no-cache",
-      }
+      dataType: "default"
     });
     
     // 将imageBuffer转待解密的字符串

@@ -115,10 +115,7 @@ let commonTime = vk.pubfn.getCommonTime(new Date());
 let imageBuffer = await vk.request({
   url: "https://xxxx.xxxx.com/xxx.jpg",
   method: "GET",
-  dataType: "default",
-  header: {
-    "cache-control": "no-cache",
-  }
+  dataType: "default"
 });
 let uploadFileRes = await uniCloud.uploadFile({
   cloudPath: "test.jpg",
@@ -133,10 +130,7 @@ let fileUrl = uploadFileRes.fileID;
 let imageBuffer = await vk.request({
   url: "https://xxxx.xxxx.com/xxx.jpg",
   method: "GET",
-  dataType: "default",
-  header: {
-    "cache-control": "no-cache",
-  }
+  dataType: "default"
 });
 let base64 = "data:image/png;base64," + imageBuffer.toString('base64');
 ```
