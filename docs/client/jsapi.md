@@ -1775,9 +1775,24 @@ vk.navigateToHome();
 
 ### vk.navigateToLogin
 
-登录页面即 app.config.js 的 login.url
+登录页面即 app.config.js 的 login.url 的值
 
-关闭所有页面，并跳转到登录页 
+|参数							|类型			|必填	|默认值	|说明																																									|平台差异说明	|
+|:-:							|:-:			|:-:	|:-:		|:-:																																									|:-:				|
+|mode							|String		|否		|				|跳转页面模式，可选值为 navigateTo redirectTo reLaunch																		|						|
+|needBack					|Boolean	|否		|				|当mode为reLaunch或redirectTo时，登录成功是否需要返回当前页面															|						|
+|redirectUrl			|String		|否		|				|当mode为reLaunch或redirectTo时，指定登录成功后跳转的地址，redirectUrl的优先级高于needBack	|						|
+|query						|String		|否		|				|跳转到登录页面时的url参数，如a=1&b=2（这里的参数值均为字符串）															|						|
+|events						|Object		|否		|				|当mode为navigateTo时，页面间通信接口，用于监听被打开页面发送到当前页面的数据。							|						|
+|animationType		|String		|否		|pop-in	|当mode为navigateTo时，窗口显示的动画效果，详见：窗口动画																	|App				|
+|animationDuration|Number		|否		|300		|当mode为navigateTo时，窗口动画持续时间，单位为 ms																				|App				|
+|success					|Function	|否		|				|接口调用成功的回调函数																																	|						|
+|fail							|Function	|否		|				|接口调用失败的回调函数																																	|						|
+|complete					|Function	|否		|				|接口调用结束的回调函数（调用成功、失败都会执行）																						|						|
+
+**示例**
+
+默认：关闭所有页面，并跳转到登录页
 
 ```js
 vk.navigateToLogin();
@@ -1788,6 +1803,22 @@ vk.navigateToLogin();
 ```js
 vk.navigateToLogin({
   mode: "navigateTo"
+});
+```
+
+不关闭页面，直接跳转到带参数的登录页，登录成功自动返回当前页面，并执行登录成功回调，详见：[vk.navigateTo（页面间通信）](https://vkdoc.fsq.pub/client/jsapi.html#vk-navigateto-%E9%A1%B5%E9%9D%A2%E9%97%B4%E9%80%9A%E4%BF%A1)
+
+```js
+vk.navigateToLogin({
+  mode: "navigateTo",
+  query: "a=1&b=2",
+  events: {
+    // 监听登录成功事件
+    loginSuccess: (data) => {
+      // 当登录页面运行 eventChannel.emit('loginSuccess', {}); 时，会运行这里的代码逻辑。
+      console.log("登录成功");
+    }
+  }
 });
 ```
 
