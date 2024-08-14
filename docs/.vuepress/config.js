@@ -30,7 +30,7 @@ module.exports = {
     // 显示所有页面的标题链接
     //displayAllHeaders: true,
     // 搜索框显示的最大结果数量
-    searchMaxSuggestions: 10,
+    searchMaxSuggestions: 1000,
     // 网站logo
     logo: '/image/logo.png',
     lastUpdated: "最后修改时间",

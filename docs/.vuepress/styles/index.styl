@@ -139,6 +139,13 @@ body::-webkit-scrollbar-thumb {
   right: calc(var(--ra-wrapper-width) + 0.2rem)
 }
 
+/* 设置虚拟滚动条 */
+#app .search-box .suggestions{
+  max-height: 80vh;
+  width: 666px;
+  overflow-y: auto;
+}
+
 @media (max-width: 1200px) {
   #app .ra-wrapper{
     display: none;
