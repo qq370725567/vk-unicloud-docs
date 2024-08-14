@@ -454,7 +454,7 @@ if (!vk.checkToken()) {
 [查看token介绍](#token介绍) 
 
 ```js
-let uni_id_token = vk.getToken();
+let token = vk.getToken();
 ```
 
 ## 手机号
