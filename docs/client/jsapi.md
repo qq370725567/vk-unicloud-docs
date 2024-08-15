@@ -2144,7 +2144,7 @@ let url = vk.getConfig("login.url");
 
 以下函数只能在云函数内调用
 
-### vk.pubfn.batchRun
+### vk.pubfn.batchRun（并发执行）
 
 批量循环并发执行异步函数（使用场景: 批量发送短信、邮件、消息通知等。）
 
@@ -2226,7 +2226,7 @@ res.group = batchRunRes.stack;
 return res;
 ```
 
-### vk.pubfn.getUniCloudRequestId
+### vk.pubfn.getUniCloudRequestId（获取请求id）
 
 获取本次云函数请求id（只有云端云函数才有，本地云函数无法获取请求id）
 
@@ -2235,7 +2235,7 @@ let request_id = vk.pubfn.getUniCloudRequestId();
 ```
 
 
-### vk.pubfn.randomAsync
+### vk.pubfn.randomAsync（产生不重复随机数）
 
 （异步）产生指定位数的不重复随机数（支持任意字符，s默认纯数字）
 
