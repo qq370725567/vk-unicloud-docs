@@ -4,6 +4,8 @@ sidebarDepth: 0
 
 # 对开发者的价值
 
+## 介绍
+
 如果你热爱编程，想快速入门云开发，欢迎使用 `vk-unicloud` 系列开发框架
 
 无需转变开发习惯，0成本上手云开发。
@@ -25,7 +27,9 @@ sidebarDepth: 0
 
 :::
 
-### `vk-unicloud-router` 是一个云函数路由模式开发框架，它提供以下主要功能：
+## vk-unicloud-router主要功能
+
+`vk-unicloud-router` 是一个云函数路由模式开发框架，它提供以下主要功能：
 
 - 1、实现云函数路由模式（同时支持对云对象的路由）
   - 1.1、使用纯原生代码实现路由模式（不使用任何第三方包），兼容性强，运行稳定。
@@ -78,24 +82,37 @@ sidebarDepth: 0
 
 - 22、其他好处…
 
-### 服务端 API
+## 服务端 API
 
 VK 框架已经集成了多种服务端 API，包括微信小程序、微信公众号、百度开放平台等，可以轻松地进行接口开发
 
-- 1、微信小程序服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin.html)
+- 微信小程序服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin.html)
 
-- 2、微信公众号服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin-h5.html)
+- 微信公众号服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin-h5.html)
 
-- 3、百度开放平台服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/baidu.html)
+- QQ小程序服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/qq.html)
 
-- 4、短信发送 [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/sms.html)
+- 抖音小程序服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/douyin.html)
 
-- 5、邮箱发送 [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/mail.html)
+- 支付宝小程序服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/alipay.html)
 
-- 6、Redis [传送门](https://vkdoc.fsq.pub/vk-redis/)
+- 抖音小程序服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/douyin.html)
 
+- 百度开放平台服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/baidu.html)
 
-### 开发辅助工具
+- 短信发送 [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/sms.html)
+
+- 邮箱发送 [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/mail.html)
+
+- 地图API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/map.html)
+
+- 支付API [传送门](https://vkdoc.fsq.pub/vk-uni-pay/)
+
+- Redis [传送门](https://vkdoc.fsq.pub/vk-redis/)
+
+## 开发辅助工具
+
+### HBX插件
 
 VK 框架提供了一些实用的开发辅助工具，可以大大提高开发效率。
 
