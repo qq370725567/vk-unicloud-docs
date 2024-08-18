@@ -102,7 +102,6 @@ module.exports = {
         showDepth: 3,
         ignore: [
           "/",
-          "/client/",
           "/client/vk-unicloud-router.html"
         ],
         expand: {
