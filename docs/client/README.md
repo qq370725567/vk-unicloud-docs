@@ -6,13 +6,15 @@ sidebarDepth: 0
 
 ## 介绍
 
-如果你热爱编程，想快速入门云开发，欢迎使用 `vk-unicloud` 系列开发框架
+:::tip 如果你热爱编程，想快速入门云开发，欢迎使用 vk-unicloud 系列开发框架
 
 无需转变开发习惯，0成本上手云开发。
 
 框架内置了众多API、工具包，为你的业务扫平障碍。使你的项目刚起步进度就是50%（微信登录、短信、验证码、缓存、生成小程序码等等）
 
 从此你又get一个新技能，只需用js，轻松搞定前后台整体业务。
+
+:::
 
 :::tip 下载地址与文档
 - client端框架下载： [https://ext.dcloud.net.cn/plugin?id=2204](https://ext.dcloud.net.cn/plugin?id=2204)
@@ -29,7 +31,7 @@ sidebarDepth: 0
 
 ## vk-unicloud-router主要功能
 
-`vk-unicloud-router` 是一个云函数路由模式开发框架，它提供以下主要功能：
+:::tip vk-unicloud-router 是一个云函数路由模式开发框架，它提供以下主要功能：
 
 - 1、实现云函数路由模式（同时支持对云对象的路由）
   - 1.1、使用纯原生代码实现路由模式（不使用任何第三方包），兼容性强，运行稳定。
@@ -82,10 +84,11 @@ sidebarDepth: 0
 
 - 22、其他好处…
 
+:::
+
 ## 服务端 API
 
-VK 框架已经集成了多种服务端 API，包括微信小程序、微信公众号、百度开放平台等，可以轻松地进行接口开发
-
+:::tip VK 框架已经集成了多种服务端 API，包括微信小程序、微信公众号、百度开放平台等，可以轻松地进行接口开发
 - 微信小程序服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin.html)
 
 - 微信公众号服务端API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin-h5.html)
@@ -109,6 +112,8 @@ VK 框架已经集成了多种服务端 API，包括微信小程序、微信公�
 - 支付API [传送门](https://vkdoc.fsq.pub/vk-uni-pay/)
 
 - Redis [传送门](https://vkdoc.fsq.pub/vk-redis/)
+
+:::
 
 ## 开发辅助工具
 
