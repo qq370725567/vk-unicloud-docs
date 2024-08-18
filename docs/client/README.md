@@ -25,12 +25,6 @@ sidebarDepth: 0
 
 :::
 
-:::tip AI助手
-简单的问题可以试试问这两个AI，如果是VK框架文档上就有的，可以问第一个AI，通用前端问题问第二个AI 
-- VK云开发AI：[https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c ](https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c ) 
-- 通用前端开发AI：[https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a](https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a) 
-:::
-
 ### `vk-unicloud-router` 是一个云函数路由模式开发框架，它提供以下主要功能：
 
 - 1、实现云函数路由模式（同时支持对云对象的路由）
@@ -106,3 +100,11 @@ VK 框架已经集成了多种服务端 API，包括微信小程序、微信公�
 VK 框架提供了一些实用的开发辅助工具，可以大大提高开发效率。
 
 - 1、VK框架快速开发辅助工具（VK框架必备工具） [传送门](https://vkdoc.fsq.pub/client/codeAssist.html)
+
+### AI助手
+
+:::tip AI助手
+简单的问题可以试试问这两个AI，如果是VK框架文档上就有的，可以问第一个AI，通用前端问题问第二个AI 
+- VK云开发AI：[https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c ](https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c ) 
+- 通用前端开发AI：[https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a](https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a) 
+:::
