@@ -4,6 +4,16 @@ sidebarDepth: 0
 
 # 关于vk-unicloud-admin框架
 
+:::tip 下载地址与文档
+- admin端框架下载： [https://ext.dcloud.net.cn/plugin?id=5043](https://ext.dcloud.net.cn/plugin?id=5043)
+
+- admin端框架文档： [https://vkdoc.fsq.pub/admin/](https://vkdoc.fsq.pub/admin/)
+
+- vk框架学习Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
+
+:::
+
+
 ### 什么是 `vk-unicloud-admin` ？
 
 * `vk-unicloud-admin` 是基于 `uniapp` + `unicloud` + `uni-id` + `vk-unicloud-router` + `element` 的一套快速 `admin` 完整开发框架

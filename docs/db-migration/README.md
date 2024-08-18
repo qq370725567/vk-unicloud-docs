@@ -1,5 +1,14 @@
 # 数据库一键搬家工具
 
+:::tip 下载地址与文档
+- 下载： [https://ext.dcloud.net.cn/plugin?id=6089](https://ext.dcloud.net.cn/plugin?id=6089)
+
+- 文档： [https://vkdoc.fsq.pub/db-migration/](https://vkdoc.fsq.pub/db-migration/)
+
+- vk框架学习Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
+
+:::
+
 ## 一键搬家的优势
 
 - 1、`官方的web控制台` 需要一个一个表导出导入，操作繁琐。而 `一键搬家` 不需要。
