@@ -59,3 +59,9 @@ exports.main = async (event, context) => {
 |refundId			|String	|平台退款单号	|-				|
 |refundFee		|Number	|退款总金额		|-				|
 |cashRefundFee|Number	|现金退款金额	|-				|
+
+## 微信支付v2退款报错说明
+
+目前hbx本地调试和支付宝云云端均为node18，而node18已废弃微信支付v2的p12证书，故建议改为微信支付v3版本，不要使用微信支付v2版本，详见配置 [传送门](https://vkdoc.fsq.pub/vk-uni-pay/config.html#%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98)
+
+
