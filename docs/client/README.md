@@ -17,6 +17,7 @@ sidebarDepth: 0
 :::
 
 :::tip 下载地址与文档
+
 - client端框架下载： [https://ext.dcloud.net.cn/plugin?id=2204](https://ext.dcloud.net.cn/plugin?id=2204)
 
 - admin端框架下载： [https://ext.dcloud.net.cn/plugin?id=5043](https://ext.dcloud.net.cn/plugin?id=5043)
@@ -24,8 +25,6 @@ sidebarDepth: 0
 - client端框架文档： [https://vkdoc.fsq.pub/client/](https://vkdoc.fsq.pub/client/)
 
 - admin端框架文档： [https://vkdoc.fsq.pub/admin/](https://vkdoc.fsq.pub/admin/)
-
-- vk框架学习Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
 
 :::
 

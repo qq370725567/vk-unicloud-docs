@@ -1,11 +1,10 @@
 # 数据库一键搬家工具
 
 :::tip 下载地址与文档
+
 - 下载： [https://ext.dcloud.net.cn/plugin?id=6089](https://ext.dcloud.net.cn/plugin?id=6089)
 
 - 文档： [https://vkdoc.fsq.pub/db-migration/](https://vkdoc.fsq.pub/db-migration/)
-
-- vk框架学习Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
 
 :::
 

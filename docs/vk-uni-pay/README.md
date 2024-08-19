@@ -5,11 +5,10 @@ sidebarDepth: 0
 # 关于vk-uni-pay
 
 :::tip 下载地址与文档
+
 - 下载： [https://ext.dcloud.net.cn/plugin?id=5642](https://ext.dcloud.net.cn/plugin?id=5642)
 
 - 文档： [https://vkdoc.fsq.pub/vk-uni-pay/](https://vkdoc.fsq.pub/vk-uni-pay/)
-
-- vk框架学习Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
 
 :::
 

@@ -9,8 +9,6 @@ sidebarDepth: 0
 
 - admin端框架文档： [https://vkdoc.fsq.pub/admin/](https://vkdoc.fsq.pub/admin/)
 
-- vk框架学习Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
-
 :::
 
 
