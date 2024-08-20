@@ -479,7 +479,7 @@ let res = await vk.baseDao.select({
 
 |    参数名		|   类型			|     说明																																														|
 |------------	|----------	|-----------																																												|
-|   rows			|  Array		|  数据列表																																													|
+|   rows			|  Array		|  数据列表，没有数据时返回空数组																																											|
 |   total			|  Number		|  满足条件的记录总数（如果返回的getCount为false，则 total = (pageIndex - 1) * pageSize + rows.length）	|
 |   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#hasmore) 																														|
 |   pagination|  Object		|  当前分页参数																																												|
