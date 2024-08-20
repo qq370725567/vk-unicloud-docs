@@ -6,11 +6,21 @@ sidebarDepth: 0
 
 > 下载地址：[https://ext.dcloud.net.cn/plugin?id=2204](https://ext.dcloud.net.cn/plugin?id=2204)
 
-## 后端（云函数端）安装步骤
+## 后端（云端）安装步骤
 
-打开 `uniCloud/cloudfunctions` 目录
+`uniCloud` 目录为云端目录（此目录内的文件不会被打包到前端）
 
-前置工作：修改云函数全局配置文件（用到微信登录的必须要配置）[微信小程序配置详细教程](https://vkdoc.fsq.pub/client/question/q12.html)
+1. 右键 `uniCloud` 目录，再点击【云服务空间初始化向导】
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/f5ae80c3-4228-43b1-9ee1-631f7b19af74.png)
+
+如果出现替换确认弹窗，则点替换
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/f966fde7-840c-42e4-a735-172a3cbdb904.png)
+
+2. 等待初始化完成
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/5ca4dd11-6a55-4ced-88cd-a0d5b810ca44.png)
 
 **注意：**
 
@@ -21,9 +31,7 @@ sidebarDepth: 0
 
 查看 `uni-id/config.json` 代码格式 [传送门](https://vkdoc.fsq.pub/client/uniCloud/config/uni-id.html)
 
-直接右键 `uniCloud` 目录 点击 `运行云服务空间初始化向导` 即可
-
-## 前端（页面端）安装步骤
+## 前端（页面）安装步骤
 
 ### Vue2.0版本
 
