@@ -25,6 +25,8 @@ sidebarDepth: 0
 }
 ```
 
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
+
 ## 编写云函数user/pub/loginByDouyin
 
 具体代码请直接查看示例项目源代码 `router/service/user/pub/loginByDouyin.js`

@@ -25,7 +25,7 @@ sidebarDepth: 0
 
 [传送门 - 支付宝官方文档](https://opendocs.alipay.com/mini/a25c5d8f_alipay.open.app.qrcode.create?pathHash=2334bbff)
 
-配置完需要上传 `uni-config-center` 这个公共模块
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
 ## 授权相关API
 

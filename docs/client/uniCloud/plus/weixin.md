@@ -42,7 +42,7 @@ app-plus" APP（需要用到APP登录才需要配置）
 },
 ```
 
-配置完需要上传 `uni-config-center` 这个公共模块
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
 ## 授权相关API
 

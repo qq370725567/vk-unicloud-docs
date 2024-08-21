@@ -25,7 +25,7 @@ sidebarDepth: 0
 
 [传送门 - 抖音官方文档](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/develop/server/interface-request-credential/get-access-token)
 
-配置完需要上传 `uni-config-center` 这个公共模块
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
 ## 授权相关API
 

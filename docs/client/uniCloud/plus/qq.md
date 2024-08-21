@@ -23,7 +23,7 @@ sidebarDepth: 0
 },
 ```
 
-配置完需要上传 `uni-config-center` 这个公共模块
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
 ## 授权相关API
 

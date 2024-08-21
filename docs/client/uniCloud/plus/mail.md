@@ -45,6 +45,8 @@ sidebarDepth: 0
 }
 ```
 
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
+
 ### 配置163邮箱教程
 
 * 1、登录163邮箱
@@ -69,6 +71,8 @@ sidebarDepth: 0
   }
 }
 ```
+
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
 ## 发送邮箱验证码示例
 

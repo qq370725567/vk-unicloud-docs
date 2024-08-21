@@ -81,6 +81,8 @@ console.log('sendSmsVerifyCodeRes: ', sendSmsVerifyCodeRes);
 },
 ```
 
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
+
 ## 配置阿里云短信
 
 定位到文件 `uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js` 的 `vk.service.sms`
@@ -100,6 +102,8 @@ console.log('sendSmsVerifyCodeRes: ', sendSmsVerifyCodeRes);
   }
 },
 ```
+
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
 ## 常见问题
 

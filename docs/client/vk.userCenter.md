@@ -841,6 +841,8 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/abf6f55a-7262-47d7-91ef-9a8958b9aeb0.png)
 
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+
 * 在 `manifest.json` 内配置微信小程序的 `appid`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/3f52a650-759d-4c21-a526-7041d4bcbca7.png)
@@ -856,11 +858,15 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/9464eee0-cfd8-4517-acbd-dfa07763aef0.png)
 
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+
 #### 微信公众号登录
 
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `h5-weixin` 的 `appid` 和 `appsecret`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/1944c923-65d7-47ed-a34c-0f8862225ac3.png)
+
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
 
 **注意1：h5的路由模式必须配置为 `history`，因为微信公众号登录的回调地址不支持 `hash` 模式。**
 
@@ -877,6 +883,8 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `h5` 的 `appid` 和 `appsecret`
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/0dcff7ef-e503-4941-8f2c-19c1c0ca01fb.png)
+
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
 
 1. 需要前往微信开放平台申请，类型为网站应用
 2. 先拼接微信扫码授权的url，然后跳转，进入微信的扫码授权页面，扫码完成后会自动跳转到你指定的redirect_uri页面，然后页面onLoad内获得code参数，再调用 vk.userCenter.loginByWeixin 登录
@@ -1229,6 +1237,8 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 * 需要在 `common/uni-config-center/uni-id/config.json` 内支付宝平台下配置 `appid`和 `privateKey`（应用私钥）
 
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+
 注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
  
 不要将 sessionKey 和 accessToken 暴露给前端，否则会有安全隐患
@@ -1343,11 +1353,15 @@ QQ小程序登录配置
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-qq` 的 `appid` 和 `appsecret`
 * 在 `manifest.json` 内配置QQ小程序的 `appid`
 
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+
 APP登录配置
 
 * 在 `manifest.json` 的APP模块配置QQ登录用 `appid`
 * 打包并使用自定义基座（注意一定要在 `manifest.json` 填写QQ `appid` 后再制作自定义基座）[自定义基座使用说明](https://ask.dcloud.net.cn/article/35115)
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.qq` 的 `appid` 和 `appsecret`
+
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
 
 ```js
 /**
@@ -1415,6 +1429,8 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-toutiao` 的 `appid` 和 `appsecret`
 * 在 `manifest.json` 内配置抖音小程序的 `appid`
+
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
 
 ```js
 /**

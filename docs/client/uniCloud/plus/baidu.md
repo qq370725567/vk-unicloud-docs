@@ -21,6 +21,8 @@ sidebarDepth: 0
 }
 ```
 
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
+
 **API Key申请地址：**[传送门](https://cloud.baidu.com/doc/OCR/s/rk3h7xzck) 
 
 目前百度云是有免费版本的，基本也够用了。
