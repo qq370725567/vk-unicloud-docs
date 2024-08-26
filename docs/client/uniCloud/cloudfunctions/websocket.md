@@ -366,7 +366,7 @@ module.exports = {
 
 > 在云端强制通知客户端退出登录
 
-先在云端执行 ws.forceLogout，然后在前端监听 onVkError 事件，执行退出登录逻辑
+先在云端执行 ws.forceLogout，然后在前端监听 onVkMessage 事件，执行退出登录逻辑
 
 **云端代码**
 
@@ -399,9 +399,9 @@ WebSocket 连接地址
 `this.webSocket` 通过执行 [vk.connectWebSocket](#vk-connectwebsocket-建立连接) 获得
 
 ```javascript
-// 监听vk框架主动抛出的错误
-this.webSocket.onVkError(data => {
-  console.log("WebSocket:vkError", data);
+// 监听vk框架事件
+this.webSocket.onVkMessage(data => {
+  console.log("WebSocket:onVkMessage", data);
   // 在连接非pub云对象时，token过期框架会主动断开连接，data.close为true代表已断开连接
   if (data.type === "forceLogout") {
     // 退出登录
@@ -480,9 +480,9 @@ onLoad(options = {}) {
 	  
 	});
 	
-	// 监听vk框架主动抛出的错误
-	this.webSocket.onVkError(data => {
-		console.log("WebSocket:vkError", data);
+	// 监听vk框架事件
+	this.webSocket.onVkMessage(data => {
+		console.log("WebSocket:onVkMessage", data);
 		// 在连接非pub云对象时，token过期框架会主动断开连接，data.close为true代表已断开连接
 		if (data.type === "invalidToken") {
 			// 主动关闭
