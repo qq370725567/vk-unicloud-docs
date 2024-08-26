@@ -82,6 +82,9 @@ vk.vuex.set('$user.userInfo.avatar', avatar);
 // 获取 Vuex getters 数据：
 vk.vuex.getters('$user/getUserInfo');
 
+// 获取 Vuex getters 数据（带参数）：
+vk.vuex.getters('$user/getUserInfo', data);
+
 // 提交 Vuex mutations：
 vk.vuex.commit('$user/addFootprint', data);
 
@@ -104,7 +107,6 @@ vk.vuex.dispatch('$user/addFootprint', data);
 原生写法获取到的值如果在外部赋值，严格模式下控制台会有黄色警告。
 
 而使用 `vk.getVuex(key)` 或 `vk.vuex.get(key)`时则不会有警告。
-
 
 ## 常见问题
 
@@ -256,4 +258,25 @@ vk.setVuex('$user.userInfo.avatar', avatar); 或 vk.vuex.set('$user.userInfo.ava
 
 ```
 
+### getters内的属性如何带参数？
 
+```js
+getters: {
+	getUserInfo: (state) => (a, b) => {
+		console.log("参数", a, b);
+		return state.userInfo;
+	}
+},
+```
+
+**template内访问**
+
+```vue
+<text>{{ vk.vuex.getters('$user/getUserInfo', 1, 2) }}</text>
+```
+
+**js内访问**
+
+```js
+vk.vuex.getters('$user/getUserInfo', 1, 2);
+```
