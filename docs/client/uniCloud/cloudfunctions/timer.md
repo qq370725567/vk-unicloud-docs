@@ -75,7 +75,7 @@ exports.main = async (event, context) => {
   "concurrency": 1, // 阿里云专属，固定为1即可
   "memorySize": 512, // 函数的最大可用内存，单位MB，可选值： 128|256|512|1024|2048，默认值512
   "path": "", // 云函数Url化path部分（定时器不需要填）
-  "timeout": 600, // 函数的超时时间，单位秒，阿里云最长7200秒 腾讯云900秒 支付宝云180秒
+  "timeout": 600, // 函数的超时时间，单位秒，阿里云最长7200秒 腾讯云900秒 支付宝云10800秒
   // triggers 字段是触发器数组，目前仅支持一个触发器，即数组只能填写一个，不可添加多个
   "triggers": [{
      // config: 触发器配置，在定时触发器下，config 格式为 cron 表达式，规则见 https://uniapp.dcloud.net.cn/uniCloud/trigger
@@ -92,7 +92,7 @@ exports.main = async (event, context) => {
 
 ## 单次执行时长大于180秒的定时任务
 
-因为通过 `await uniCloud.callFunction` 方式调用其他云函数时，阿里云最长执行180秒，故当单次执行时长大于180秒时，不能用 `await uniCloud.callFunction` 的方式，只能将逻辑全部写在定时任务里
+因为通过 `await uniCloud.callFunction` 方式调用其他云函数时，云函数最长执行180秒，故当单次执行时长大于180秒时，不能用 `await uniCloud.callFunction` 的方式，只能将逻辑全部写在定时任务里
 
 具体操作步骤如下
 
@@ -178,7 +178,7 @@ exports.main = async (event, context) => {
   "concurrency": 1, // 阿里云专属，固定为1即可
   "memorySize": 512, // 函数的最大可用内存，单位MB，可选值： 128|256|512|1024|2048，默认值512
   "path": "", // 云函数Url化path部分（定时器不需要填）
-  "timeout": 7200, // 函数的超时时间，单位秒，阿里云最长7200秒 腾讯云900秒 支付宝云180秒
+  "timeout": 7200, // 函数的超时时间，单位秒，阿里云最长7200秒 腾讯云900秒 支付宝云10800秒
   // triggers 字段是触发器数组，目前仅支持一个触发器，即数组只能填写一个，不可添加多个
   "triggers": [{
      // config: 触发器配置，在定时触发器下，config 格式为 cron 表达式，规则见 https://uniapp.dcloud.net.cn/uniCloud/trigger
