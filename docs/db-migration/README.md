@@ -186,6 +186,15 @@ ___注意：运行前先确认下，旧空间和新空间没有填错，否则�
 
 假设表 `uni-id-log` 有2000万条数据，其中这2000万条数据都不会再被修改和删除（因为这是日志表，不会被修改和删除，只会新增），这些数据的最后一条数据的 `_id` 是 `666c48a1a891ba9fb989fb30`（请必须通过 `_id` 降序排序后拿第一条数据的_id，千万不要去控制台翻最后一页）
 
+拿到目前最后一条 `_id` 的数据库语句如下，请在云函数中自己执行并获取到endId
+
+```js
+const db = uniCloud.database();
+let dbRes = await db.collection('uni-id-log').orderBy("_id", "desc").limit(1).get();
+let endId = dbRes.data[0]._id;
+console.log('endId: ', endId);
+```
+
 `vk.db.config.js` 配置的时候这样写，多配置一个参数 `endId`，配置如下
 
 解释：`endId` 代表只迁移到这个 `_id`（包含此id） 后就结束此表
