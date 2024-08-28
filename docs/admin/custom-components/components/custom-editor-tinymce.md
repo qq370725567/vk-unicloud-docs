@@ -204,4 +204,17 @@ this.$refs.editorTinymce1.insertVideos([
 
 ### 组件在弹窗时无法正常显示?
 
-`弹窗组件` 需要设置属性 `:destroy-on-close="true"` 才能正常使用此富文本编辑器
+在 `vk-data-dialog` 组件上需要设置属性 `:destroy-on-close="true"` 才能正常使用此富文本编辑器
+
+注意：该属性是加在 `vk-data-dialog` 组件上，而非 `vk-data-form` 组件上
+
+```vue
+<vk-data-dialog
+  ...弹窗组件其他属性
+  :destroy-on-close="true"
+>
+  <vk-data-form
+    ...表单组件其他属性
+  ></vk-data-form>
+</vk-data-dialog>
+```
