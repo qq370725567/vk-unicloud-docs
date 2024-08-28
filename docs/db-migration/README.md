@@ -85,13 +85,15 @@ export default {
 		"secretKey": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SK参数
 		"actionsecret": "5d44a032652974c3e53644945a95b126", // 通用参数 请求密钥，从 uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js 获取（两者保持一样即可）
 	},
-	// 数据库连接失败后重新连接次数，默认20次
-	"errorReconnectionCount": 20,
-	// 数据库单次请求获取数量，默认500，如果前端报内存超出大小限制的错误，可以尝试调小此值来解决。如设置为100或50或更小的值，最小为1，最大1000
-	"maxPageSize": 500,
-	"handleObjectKeyName": true, // 是否需要同时处理满足阿里云_id格式的字段名（true：同时处理字段名和字段值 false：只处理字段值，默认true）
+	"maxPageSize": 500, // 数据库单次请求获取数量，默认500，如果前端报内存超出大小限制的错误，可以尝试调小此值来解决。如设置为100或50或更小的值，最小为1，最大1000
+	"concurrencyImport": false, // 是否并发导入？设置为true可以提高性能，但无法保证迁移后的数据与原始顺序一致（一般业务进行查询时都会加排序条件，此时基本无影响），设置为false则可保证迁移后的数据与原始数据顺序一致
+	"debug": false, // 浏览器控制台是否打印请求日志，设置为 false 可以提升性能
+	"errorReconnectionCount": 20, // 数据库连接失败后重新连接次数，默认20次，一般无需修改
+	"maxImportQueueCount": 10, // 最大等待的导入队列数，默认10，一般无需修改（太大会影响前端性能）最小为1，最大为20
+	"maxLogCount": 200, // 控制台显示的最大日志数量，默认200，一般无需修改（太大会影响前端性能）
+	"handleObjectKeyName": true, // 是否需要同时处理满足阿里云_id格式的字段名，一般无需修改（true：同时处理字段名和字段值 false：只处理字段值，默认true）
 	// 数据库集合（表）列表，目前没有接口可以直接获取表列表，故需要在此手动填写数据库中需要搬家的表信息
-	// 可以自动根据 database 目录下的文件生成数据库表名列表 方法：在项目根目录执行 node vk.create-db-config.js
+	// 可以自动根据 database 目录内的文件 生成数据库表名列表 方法：在项目根目录执行 node vk.create-db-config.js 详见文档 https://vkdoc.fsq.pub/db-migration/#如何生成数据库初始化文件
 	"db": [
 		{ "name": "uni-id-users" },
 		{ "name": "uni-id-roles" },
@@ -170,12 +172,45 @@ ___注意：运行前先确认下，旧空间和新空间没有填错，否则�
 
 - 12、完成。
 
+
 ## 常见问题
 
 ### 如你已付费购买，缺还提示[vk-database-one-click-migration]：不能在当前云服务空间使用
 
 如果使用数据库搬家项目的时候遇到 `data undefined` 同时提示 `[vk-database-one-click-migration]：不能在当前云服务空间使用​`
 则去项目根目录下的 `package.json` 文件内查看看是否有名为 `sn` 的属性，把Ta删除后再试试。
+
+### 当需要迁移的数据条数非常多时，且迁移的时候不想停服太长时间时，支持先迁移部分数据（这部分数据需要保证不会再被修改和删除）
+
+只有表存在不会再被修改和删除的数据时才能先迁移这部分数据，迁移的时候旧空间是不需要停服的
+
+假设表 `uni-id-log` 有2000万条数据，其中这2000万条数据都不会再被修改和删除（因为这是日志表，不会被修改和删除，只会新增），这些数据的最后一条数据的 `_id` 是 `666c48a1a891ba9fb989fb30`（请必须通过 `_id` 降序排序后拿第一条数据的_id，千万不要去控制台翻最后一页）
+
+`vk.db.config.js` 配置的时候这样写，多配置一个参数 `endId`，配置如下
+
+解释：`endId` 代表只迁移到这个 `_id`（包含此id） 后就结束此表
+
+```js
+...其他配置
+
+"db": [
+  ...其他表
+	{ "name": "uni-id-log", "endId": "666c48a1a891ba9fb989fb30" },
+]
+```
+
+下次停服全量迁移的时候，再多配置一个参数 `startId`，并去掉之前的参数 `endId`，配置如下
+
+```js
+...其他配置
+
+"db": [
+  ...其他表
+	{ "name": "uni-id-log", "startId": "666c48a1a891ba9fb989fb30" },
+]
+```
+
+解释：`startId` 代表迁移时从这个 `_id`（不包含此id，即此id的下一条记录）开始
 
 ## 特别注意
 
