@@ -42,7 +42,7 @@ exports.main = async (event, context) => {
 
 | 参数			| 说明																																																																																												| 类型		| 默认值| 可选值								|
 |-------		|-----------																																																																																									|---------|-------|-------								|
-| context		|  客户端请求环境，用于自动识别支付方式，如识别是小程序支付还是APP支付还是H5支付等等 <br/>VK云函数传 `originalParam.context` <br/>云对象传 `this.getClientInfo()` <br/>官方云函数传 `context`	| Object	| -			| -											|
+| context		|  客户端请求环境，用于自动识别支付方式，如识别是小程序支付还是APP支付还是H5支付等等  [查看详情](#context-参数)			| Object	| -			| -											|
 | provider	|  支付供应商：<br/>wxpay：微信支付官方 <br/>alipay：支付宝支付官方 <br/>appleiap：IOS内购支付 [详情](https://vkdoc.fsq.pub/vk-uni-pay/iosiap.html) <br/>vkspay：VksPay个人支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/vkspay.html)	<br/>wxpay-virtual：微信小程序虚拟支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/wxpay-virtual.html)	<br/>douyin：抖音支付	| String	| -			| wxpay、alipay、appleiap、vkspay、wxpay-virtual、douyin	|
 | isPC			|  如果是PC扫码支付，则设为true（使用支付组件时，组件会自动上传isPC的参数）																																																										| Boolean	| false	| true									|
 | needQRcode|  是否强制使用二维码支付（让顾客扫码支付，一般用于物联网，如按摩椅上的扫码支付） [查看详情](#needqrcode-强制使用二维码支付模式)																															| Boolean	| false	| true									|
@@ -84,6 +84,24 @@ time_expire的值是时间戳，如 `time_expire: Date.now() + 1000*60` 代表60
 2. provider=alipay时，time_expire的最短时间是1秒
 3. provider=appleiap时，不支持此参数
 4. provider=vkspay时，不支持此参数
+
+## context 参数
+
+1. VK云函数传 `originalParam.context` 
+2. VK云对象传 `this.getClientInfo()` 
+3. 官方云函数传 `context`
+4. 官方云对象传如下格式
+```js
+context: {
+  "APPID": "", // DCloudAppId
+  "PLATFORM": "", // mp-weixin 微信小程序，h5，app-plus 等条件编译的平台字符串
+  "CLIENTIP": "127.0.0.1", // ip
+  "CLIENTUA": "HBuilderX", // ua（仅h5支付需要）
+  "SPACEINFO": {
+    "spaceId": "mp-70255e58-5282-4b64-941f-006c17c560c8", // 空间id
+  }
+}
+```
 
 ## 返回值
 
