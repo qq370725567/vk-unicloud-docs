@@ -365,6 +365,7 @@ vk.userCenter.updateUser({
  * @param {Object} userInfo 用户信息
  */
 vk.userCenter.getCurrentUserInfo({
+  loading: false,
   success: (data) => {
     // 成功后的逻辑
 

@@ -8,9 +8,9 @@
 
 **注意**
 
-H5需要设置 `manifest.json` - `H5配置` - `腾讯地图` - 填写key
+H5需要设置 `manifest.json` - `H5配置` - `腾讯地图和高德地图二选一` - 填写key
 
-key的申请地址：[点击查看](https://lbs.qq.com/)
+key的申请地址：[腾讯地图](https://lbs.qq.com) [高德](https://lbs.amap.com)
 
 ### API
 
