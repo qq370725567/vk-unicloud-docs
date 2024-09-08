@@ -119,6 +119,7 @@
 | props          | 数据源的属性匹配规则 | Object  | { list:'list', value:'value', label:'label' } | - |
 | dataPreprocess          | 动态模式 - 云函数返回的数据进行预处理 | function(list)  | - | -  |
 | showAll           | 是否一开始就全部加载 | Boolean  | false | true  |
+| showRefresh           | 当showAll为true时，是否显示[刷新选项]按钮 | Boolean  | true | false  |
 | multiple        | 是否允许多选 | Boolean  | false | true  |
 | limit        | 最多可选数量 | Number  | - | -  |
 | loadingText          | 远程加载时显示的文字 | String  | 加载中| -  |
