@@ -86,7 +86,7 @@ if (transferRes.code === 0) {
 | openid  |  微信专用 - 用户的openid   | String  | -    | -  |
 | platform  |  微信专用 - 平台类型：app-plus、mp-weixin，用于获取对应平台的支付配置信息     | String  | -    | app-plus、mp-weixin、h5  |
 | pid  |  多商户模式下的自定义商户id（等于vk-pay-config表的_id） [查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)   | String  | -    | -  |
-| `payer_use_alias`  |  支付宝专用 - 是否展示付款方别名，为true将展示商家支付宝在商家中心 商户信息 > 商户基本信息 页面配置的 商户别名   | Boolean  | false    | true  |
+| payer_use_alias  |  支付宝专用 - 是否展示付款方别名，为true将展示商家支付宝在商家中心 商户信息 > 商户基本信息 页面配置的 商户别名   | Boolean  | false    | true  |
 
 ## 注意事项
 
