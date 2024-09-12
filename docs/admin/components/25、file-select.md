@@ -44,13 +44,13 @@
 ### 注意：
 ### 需确保有以下云函数（如没有，则从新版本中拷贝）
 
-1. admin/system_uni/vk-files/files/kh/delete
-2. admin/system_uni/vk-files/files/kh/getList
-3. admin/system_uni/vk-files/files/kh/update
-4. admin/system_uni/vk-files/categories/kh/getList
-5. admin/system_uni/vk-files/categories/sys/add
-6. admin/system_uni/vk-files/categories/sys/delete
-7. admin/system_uni/vk-files/categories/sys/update
+1. admin/system_uni/uni-id-files/files/kh/delete
+2. admin/system_uni/uni-id-files/files/kh/getList
+3. admin/system_uni/uni-id-files/files/kh/update
+4. admin/system_uni/uni-id-files/categories/kh/getList
+5. admin/system_uni/uni-id-files/categories/sys/add
+6. admin/system_uni/uni-id-files/categories/sys/delete
+7. admin/system_uni/uni-id-files/categories/sys/update
 8. user/kh/addUploadRecord
 
 ### 若需要使用 `素材管理`，则还需要进行以下操作
