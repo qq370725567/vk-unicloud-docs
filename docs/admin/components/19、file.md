@@ -41,6 +41,7 @@
 | tipsImageText    | 右侧提示图的文本，一般配合drag=true时使用 如 示例图 | String  | - | - |
 | tipsImage        | 右侧提示图的图片地址，一般配合drag=true时使用 | String  | - | - |
 | tipsImageStyle   | 右侧提示图的图片样式，一般配合drag=true时使用 | String	| width: 200px| -													|
+| beforeRemove   |删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。[详情](#beforeRemove)  | function(file, fileList)	| -| -													|
 | onRemove   |文件列表移除文件时的事件 [详情](#onRemove)  | function(file, fileList)	| -| -													|
 | 其他              | 其他参数请查看element Upload 上传组件 https://element.eleme.cn/#/zh-CN/component/upload	| -				| -						| -													|
 
@@ -129,6 +130,34 @@
 #### 加密存储上传的文件
 
 [传送门](https://vkdoc.fsq.pub/admin/components/18%E3%80%81image.html#%E5%8A%A0%E5%AF%86%E5%AD%98%E5%82%A8%E4%B8%8A%E4%BC%A0%E7%9A%84%E6%96%87%E4%BB%B6)
+
+#### beforeRemove
+
+```js
+{ 
+  key: "file", title: "文件类型", type: "file", buttonText: "点击上传", limit: 9, cloudPathRemoveChinese: true, accept: ".txt,.xls,.xlsx,.doc,.docx,.ppt,.pptx,.pdf",
+  beforeRemove: (file, fileList) => {
+    let url = file.url;
+    console.log('url: ', url)
+    return new Promise((resolve, reject) => {
+      // 异步操作
+      vk.showLoading("请求中...");
+      setTimeout(() => {
+        let success = true; // 假设这是异步操作的结果
+        if (success) {
+          // 如果操作成功，调用 resolve 方法
+          vk.hideLoading();
+          resolve();
+        } else {
+          // 如果操作失败，调用 reject 方法
+          vk.hideLoading();
+          reject();
+        }
+      }, 1000); // 假设异步操作需要 1 秒
+    });
+  }
+},
+```
 
 #### onRemove
 
