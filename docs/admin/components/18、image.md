@@ -34,6 +34,7 @@
 | tipsImage        | 右侧提示图的图片地址，一般配合drag=true时使用 | String  | - | - |
 | tipsImageStyle   | 右侧提示图的图片样式，一般配合drag=true时使用 | String	| width: 200px| -													|
 | onPreview   | 用户点击图片预览时的事件（可通过此事件对图片进行处理，如原图替换预览图） [详情](#onPreview) | function(file, open)	| -| -													|
+| onRemove   |文件列表移除文件时的事件 [详情](#onRemove)  | function(file, fileList)	| -| -													|
 | 其他              | 其他参数请查看element Upload 上传组件 https://element.eleme.cn/#/zh-CN/component/upload	| -				| -						| -													|
 
 #### httpRequest 用法
@@ -286,11 +287,26 @@ module.exports = {
 #### onPreview
 
 ```js
-onPreview: (file, open) => {
-  // 主动调用open函数打开预览弹窗
-  open(file.url);
+{ 
+  key: "image1", title: "image类型", type: "image", limit: 9, cloudPathRemoveChinese: true,
+  onPreview: (file, open) => {
+    // 主动调用open函数打开预览弹窗
+    open(file.url);
+  }
 },
 ```
+
+#### onRemove
+
+```js
+{ 
+  key: "image1", title: "image类型", type: "image", limit: 9, cloudPathRemoveChinese: true,
+  onRemove: (file, fileList) => {
+    console.log(file.url);
+  }
+},
+```
+
 ### 万能表格使用方式
 
 ```js
