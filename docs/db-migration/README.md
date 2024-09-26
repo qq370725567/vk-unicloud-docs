@@ -92,6 +92,11 @@ export default {
 	"maxImportQueueCount": 10, // 最大等待的导入队列数，默认10，一般无需修改（太大会影响前端性能）最小为1，最大为20
 	"maxLogCount": 200, // 控制台显示的最大日志数量，默认200，一般无需修改（太大会影响前端性能）
 	"handleObjectKeyName": true, // 是否需要同时处理满足阿里云_id格式的字段名，一般无需修改（true：同时处理字段名和字段值 false：只处理字段值，默认true）
+	// 数据库内存储链接地址域名替换规则
+	// 打开 fileRule 内的注释，编写旧域名和新域名，导入后数据库内的文件链接会用新域名代替旧域名
+	"fileRule": [
+		// { "old": "https://test1.xxx.com", "new": "https://test2.xxx.com" }
+	],
 	// 数据库集合（表）列表，目前没有接口可以直接获取表列表，故需要在此手动填写数据库中需要搬家的表信息
 	// 可以自动根据 database 目录内的文件 生成数据库表名列表 方法：在项目根目录执行 node vk.create-db-config.js 详见文档 https://vkdoc.fsq.pub/db-migration/#如何生成数据库初始化文件
 	"db": [
@@ -220,6 +225,18 @@ console.log('endId: ', endId);
 ```
 
 解释：`startId` 代表迁移时从这个 `_id`（不包含此id，即此id的下一条记录）开始
+
+### 数据库里的文件URL域名如何替换？
+
+修改配置 `fileRule` 数组，如下所示
+
+注意：文件本身不会迁移，这里只替换域名，适用于云存储文件已迁移完成只需要改数据库内字段的URL值的情况。
+
+```js
+"fileRule": [
+	{ "old": "https://test1.xxx.com", "new": "https://test2.xxx.com" }
+],
+```
 
 ## 特别注意
 
