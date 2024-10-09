@@ -158,6 +158,10 @@ module.exports = {
 }
 ```
 
+**返回值**
+
+返回的 `userInfo` 为当前登录用户在数据库表 `uni-id-users` 中的除password和token之外的全部字段数据
+
 **特殊注意：**
 
 `await this.getUserInfo()` 有缓存，在同一次请求中，多次调用 `await this.getUserInfo()` ，只执行一次数据库查询
