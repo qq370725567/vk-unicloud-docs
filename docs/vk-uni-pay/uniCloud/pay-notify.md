@@ -4,6 +4,14 @@ sidebarDepth: 0
 
 # 2、接收付款成功异步通知
 
+**重要说明**
+
+为了兼容由于支付公司的异步回调出现延迟或未收到异步回调导致丢单情况出现，自 `1.14.0` 版本起，新增了主动触发回调模式 [详见](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/queryPayment.html#await-notify)
+
+但是主动触发回调的模式会缺少一些参数，因此自 `1.14.0` 版本起，自定义回调函数内的obj参数只有data一个参数值，data的内容为表 `vk-pay-orders` 内的数据 [详见](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-orders.html)
+
+**介绍**
+
 在你发起支付的api中，有个 `type` 属性，这个 `type` 属性的值你填了什么，最终回调的时候就会执行什么。
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/9b5b186c-f37b-4b0d-bd28-3be9feb3a659.png)
