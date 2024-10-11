@@ -34,9 +34,9 @@ exports.main = async (event, context) => {
 
 ## 主动执行回调函数
 
-**重要**
+> vk-pay的版本需 >= 1.14.0
 
-自 `1.14.0` 版本起，`vkPay.queryPayment` 若设置参数 `await_notify: true`，则等待0.5秒后如果还未接收到支付公司推送的异步通知，则主动执行自定义回调函数的逻辑，可做到即使支付公司的异步通知延迟了几分钟，甚至未发异步通知，也能正常响应支付成功的情况。
+`vkPay.queryPayment` 若设置参数 `await_notify: true`，则等待0.5秒后如果还未接收到支付公司推送的异步通知，则主动执行自定义回调函数的逻辑，可做到即使支付公司的异步通知延迟了几分钟，甚至未发异步通知，也能正常响应支付成功的情况。[异步回调说明](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html)
  
 ## await_notify
 
