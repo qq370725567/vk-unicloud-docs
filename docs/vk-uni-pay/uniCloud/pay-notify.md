@@ -6,9 +6,9 @@ sidebarDepth: 0
 
 **重要说明**
 
-为了兼容由于支付公司的异步回调出现延迟或未收到异步回调导致丢单情况出现，自 `1.14.0` 版本起，新增了主动触发回调模式 [详见](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/queryPayment.html#await-notify)
+为了兼容由于支付公司的异步回调出现延迟或未收到异步回调导致丢单情况出现，自 `1.14.0` 版本起，新增了[主动触发回调模式](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/queryPayment.html#%E4%B8%BB%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0)
 
-但是主动触发回调的模式会缺少一些参数，因此自 `1.14.0` 版本起，自定义回调函数内的obj参数只有data一个参数值，data的内容为表 `vk-pay-orders` 内的数据 [详见](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-orders.html)
+但是主动触发回调模式会缺少一些参数，因此自 `1.14.0` 版本起，自定义回调函数内的obj参数只有data一个参数值，data的内容为表 `vk-pay-orders` 内的数据 [详见](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-orders.html)
 
 **介绍**
 
