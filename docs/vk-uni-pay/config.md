@@ -133,6 +133,19 @@ module.exports = {
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 商家私钥证书
       "wxpayPublicCertSn": "", // 微信支付公钥证书的序列号 参数获取教程：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#参数的获取方式
       "wxpayPublicCertContent": "", // 微信支付公钥内容 参数获取教程：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#参数的获取方式
+    },
+    // 微信 - 付款码支付（只支持v2版本，故node18环境下无法退款，因此新增了参数refundVersion，退款走v3接口，也因此需要同时配置v2证书和v3证书）
+    "micropay": {
+      "appId": "", // 公众号的appid
+      "secret": "", // 公众号的secret
+      "mchId": "", // 微信支付的商户id
+      "key": "", // v2的api key
+      "pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // v2需要用到的证书
+      "v3Key": "", // v3的api key
+      "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
+      "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "version": 2, // 此处强制为v2
+      "refundVersion": 3 // 退款接口用v3
     }
   },
   /**
@@ -177,6 +190,15 @@ module.exports = {
       "appId": "", // 支付宝开放平台的应用appId
       "privateKey": "", // 支付宝商户私钥
       "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'), // 支付宝商户公钥路径
+      "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'), // 支付宝根证书路径
+      "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'), // 支付宝商户公钥路径
+      "sandbox": false
+    },
+    // 支付宝 - 付款码支付
+    "micropay": {
+      "appId": "", // 支付宝开放平台的应用appId
+      "privateKey": "", // 支付宝商户私钥
+      "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'), // 支付宝公钥路径
       "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'), // 支付宝根证书路径
       "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'), // 支付宝商户公钥路径
       "sandbox": false
