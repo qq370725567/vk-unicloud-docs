@@ -134,7 +134,7 @@ module.exports = {
       "wxpayPublicCertSn": "", // 微信支付公钥证书的序列号 参数获取教程：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#参数的获取方式
       "wxpayPublicCertContent": "", // 微信支付公钥内容 参数获取教程：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#参数的获取方式
     },
-    // 微信 - 付款码支付（只支持v2版本，故node18环境下无法退款，因此新增了参数refundVersion，退款走v3接口，也因此需要同时配置v2证书和v3证书）
+    // 微信 - 付款码支付（暂只支持v2版本，故node18环境下无法退款，因此新增了参数refundVersion，退款走v3接口，也因此需要同时配置v2证书和v3证书）
     "codepay": {
       "appId": "", // 公众号的appid
       "secret": "", // 公众号的secret
