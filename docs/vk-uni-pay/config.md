@@ -135,7 +135,7 @@ module.exports = {
       "wxpayPublicCertContent": "", // 微信支付公钥内容 参数获取教程：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#参数的获取方式
     },
     // 微信 - 付款码支付（只支持v2版本，故node18环境下无法退款，因此新增了参数refundVersion，退款走v3接口，也因此需要同时配置v2证书和v3证书）
-    "micropay": {
+    "codepay": {
       "appId": "", // 公众号的appid
       "secret": "", // 公众号的secret
       "mchId": "", // 微信支付的商户id
@@ -195,7 +195,7 @@ module.exports = {
       "sandbox": false
     },
     // 支付宝 - 付款码支付
-    "micropay": {
+    "codepay": {
       "appId": "", // 支付宝开放平台的应用appId
       "privateKey": "", // 支付宝商户私钥
       "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'), // 支付宝公钥路径
@@ -329,7 +329,7 @@ module.exports = {
       "sandbox": false
     },
     // 支付宝 - 付款码支付
-    "micropay": {
+    "codepay": {
       "appId": "", // 支付宝开放平台的应用appId
       "privateKey": "", // 支付宝商户私钥
       "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'), // 支付宝公钥路径
@@ -458,7 +458,7 @@ module.exports = {
       "wxpayPublicCertContent": "" // 微信平台证书内容，详见：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#_7-2%E3%80%81%E6%89%B9%E9%87%8F%E6%A8%A1%E5%BC%8F
     },
     // 微信 - 付款码支付（只支持v2版本，故node18环境下无法退款，因此新增了参数refundVersion，退款走v3接口，也因此需要同时配置v2证书和v3证书）
-    "micropay": {
+    "codepay": {
       "appId": "", // 公众号的appid
       "secret": "", // 公众号的secret
       "mchId": "", // 微信支付的商户id

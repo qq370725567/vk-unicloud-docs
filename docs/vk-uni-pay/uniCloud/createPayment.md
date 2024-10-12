@@ -303,13 +303,13 @@ exports.main = async (event, context) => {
 };
 ```
 
-前端完整示例页面请查看 `/pages/index/micropay.vue`，请一定要先运行示例页面进行体验，支付成功后，再根据示例页面代码集成到自己项目。
+前端完整示例页面请查看 `/pages/index/codepay.vue`，请一定要先运行示例页面进行体验，支付成功后，再根据示例页面代码集成到自己项目。
 
 **配置节点**
 
-微信支付：`wxpay.micropay`
+微信支付：`wxpay.codepay`
 
-支付宝：`alipay.micropay`
+支付宝：`alipay.codepay`
 
 [查看完整支付配置](https://vkdoc.fsq.pub/vk-uni-pay/config.html)
 
