@@ -318,6 +318,6 @@ exports.main = async (event, context) => {
 1. 当 `vkPay.createPayment` 接口内传了参数 `auth_code`，即代表使用付款码支付
 2. 付款码支付时，`out_trade_no` 和 `auth_code` 是一对一关系，且同一个 `auth_code` 只能发起一次支付，也代表着同一个 `out_trade_no` 也只能发起一次支付
 3. 如果订单付款失败再次发起支付需要更换 `out_trade_no`，请做好 `out_trade_no` 和你业务系统订单号的关联关系
-4. 微信支付的付款码支付只支持v2版本，但由于支付宝node18不支持微信v2的p12证书，导致无法退款，因此微信支付付款码采用支付走v2，退款走v3的模式
+4. 微信支付的付款码支付暂只支持v2版本，但由于支付宝node18不支持微信v2的p12证书，导致无法退款，因此微信支付付款码采用支付走v2，退款走v3的模式
 5. 微信支付的付款码支付成功没有异步回调，但自 `1.14.0` 版本起，新增了[主动触发回调模式](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/queryPayment.html#%E4%B8%BB%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0)，前端 vk-uni-pay 组件设置 `:await-notify="true"` 即可开启
 6. 支付宝的付款码支付无法监听到用户取消支付，不过小金额支付时，支付宝大概率是免密直接支付
