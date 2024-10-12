@@ -21,7 +21,7 @@ exports.main = async (event, context) => {
       out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
       total_fee: 1, // 订单金额（单位分 100 = 1元）
       subject: "订单标题",
-      type: "订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。", // 此处type的值如果是goods，则回调时就会执行 pay-notify 目录下的 goods.js 内的逻辑
+      type: "recharge", // 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等，此处type的值如果是recharge，则回调时就会执行 pay-notify 目录下的 recharge.js 内的逻辑
       // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
       custom:{
         
@@ -50,24 +50,29 @@ exports.main = async (event, context) => {
 
 ## data 参数
 
-| 参数   | 说明       | 类型    | 默认值  | 可选值 |
-|------- |-----------|---------|-------|-------|
-| openid    |   用户openid，小程序支付和微信公众号支付时必传    | String  | -    | - |
-| out_trade_no  |   必填项，商户支付订单号，需自行保证全局唯一    | String  | -    | -  |
-| total_fee  |   订单金额（单位分 100 = 1元）    | Number  | -    | -  |
-| subject  |   订单标题    | String  | -    | -  |
-| type  |   订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。    | String  | -    | -  |
-| custom  |   自定义数据，不可与外部已有字段重名（custom内的参数不会发送给微信、支付宝）    | Object  | -    | -  |
-| other  |   微信、支付宝文档上的其他选填参数（other内的参数会原样发送给微信、支付宝）    | Object  | -    | -  |
-| pid  |  多商户模式下的自定义商户id（等于vk-pay-config表的_id）[查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)   | String  | -    | -  |
-| user_id  | 用户id（选填） | String  | -    | -  |
-| nickname  | 用户昵称（选填） | String  | -    | -  |
-| return_url  | 手机端同步回调地址，仅`provider=vkspay`时生效（选填） | String  | -    | -  |
-| time_expire  | 指定支付截至时间，13位时间戳格式（选填）| Number  | -    | -  |
+| 参数				| 说明																																																															| 类型			| 默认值	| 可选值	|
+|-------			|-----------																																																											|---------|-------|-------|
+| openid			| 用户openid，小程序支付和微信公众号支付时必传																																												| String	| -			| -			|
+| out_trade_no| 必填项，商户支付订单号，需自行保证全局唯一																																														| String	| -			| -			|
+| total_fee		| 订单金额（单位分 100 = 1元）																																																			| Number	| -			| -			|
+| subject			| 订单标题																																																													| String	| -			| -			|
+| type				| 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。																																| String	| -			| -			|
+| custom			| 自定义数据，不可与外部已有字段重名（custom内的参数不会发送给微信、支付宝）																															| Object	| -			| -			|
+| other				| 微信、支付宝文档上的其他选填参数（other内的参数会原样发送给微信、支付宝）																																| Object	| -			| -			|
+| pid					| 多商户模式下的自定义商户id（等于vk-pay-config表的_id）[查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)	| String	| -			| -			|
+| user_id			| 用户id（选填）																																																										| String	| -			| -			|
+| nickname		| 用户昵称（选填）																																																									| String	| -			| -			|
+| return_url	| 手机端同步回调地址，仅`provider=vkspay`时生效（选填）																																								| String	| -			| -			|
+| time_expire	| 指定支付截至时间，13位时间戳格式（选填）																																														| Number	| -			| -			|
+| auth_code		| 用户的付款码																																																											| String	| -			| -			|
 
- * out_trade_no作用: 用于根据out_trade_no查订单状态、发起退款等接口需要。
+**out_trade_no**
+
+商户支付订单号out_trade_no参数说明：
+
+ * 用于根据out_trade_no查订单状态、发起退款等接口需要。
  * 同时该订单号需保证全局唯一。
- * 通常情况下，支付订单号就是你系统的订单表的订单号或订单表的_id 
+ * 通常情况下，支付订单号就是你系统的订单表的订单号或订单表的_id
  * 假设你的订单号是：2107151010101541001
  * 但如果你的订单分多次付款（如预付款，尾款等，则需要分别创建不同的支付订单号，如pre2107151010101541001、due2107151010101541001，也可以是2107151010101541001-1、2107151010101541001-2）
  * 对未支付的订单再次发起支付时，商户应该使用原单号发起，不要更换支付单号，避免用户重复支付。
@@ -116,6 +121,17 @@ context: {
 |total_fee		|Number	|本次交易的付款金额（单位分 100 = 1元）（新增于 1.11.3）														|
 |platform			|String	|发起支付时的客户端运行环境（新增于 1.11.3）																				|
 
+## 推荐支付交互流程
+
+以电商下单为例
+
+1. 【前端】提交购买的产品和数量到【云端】
+2. 【云端】生成业务订单，假设订单号为001，返回给【前端】
+3. 【前端】进入付款页面，选择微信支付或支付宝支付，提交【云端】
+4. 【云端】先根据订单号001查询到订单金额，再传给 vkPay.createPayment，注意，这里的金额不是前端传的，而是从你数据库的业务订单表中获取的，保证金额不被篡改，执行 vkPay.createPayment 后返回给前端支付信息
+5. 【前端】vk-uni-pay组件会自动响应支付信息并唤起支付
+6. 【云端】用户支付成功后，接收异步回调，执行自定义回调逻辑
+
 ## pid（多商户模式）
 
 ```js
@@ -132,7 +148,7 @@ exports.main = async (event, context) => {
       out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
       total_fee: 1, // 订单金额（单位分 100 = 1元）
       subject: "订单标题",
-      type: "订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。", // 此处type的值如果是goods，则回调时就会执行 pay-notify 目录下的 goods.js 内的逻辑
+      type: "recharge", // 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等，此处type的值如果是recharge，则回调时就会执行 pay-notify 目录下的 recharge.js 内的逻辑
       // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
       custom:{
         
@@ -167,7 +183,7 @@ exports.main = async (event, context) => {
        out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
        total_fee: 1, // 订单金额（单位分 100 = 1元）
        subject: "订单标题",
-       type: "订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。", // 此处type的值如果是goods，则回调时就会执行 pay-notify 目录下的 goods.js 内的逻辑
+       type: "recharge", // 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等，此处type的值如果是recharge，则回调时就会执行 pay-notify 目录下的 recharge.js 内的逻辑
        // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
        custom:{
          
@@ -200,7 +216,7 @@ exports.main = async (event, context) => {
        out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
        total_fee: 1, // 订单金额（单位分 100 = 1元）
        subject: "订单标题",
-       type: "订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。", // 此处type的值如果是goods，则回调时就会执行 pay-notify 目录下的 goods.js 内的逻辑
+       type: "recharge", // 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等，此处type的值如果是recharge，则回调时就会执行 pay-notify 目录下的 recharge.js 内的逻辑
        // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
        custom:{
          
@@ -236,7 +252,7 @@ exports.main = async (event, context) => {
       out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
       total_fee: 1, // 订单金额（单位分 100 = 1元）
       subject: "订单标题",
-      type: "订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。", // 此处type的值如果是goods，则回调时就会执行 pay-notify 目录下的 goods.js 内的逻辑
+      type: "recharge", // 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等，此处type的值如果是recharge，则回调时就会执行 pay-notify 目录下的 recharge.js 内的逻辑
       // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
       custom:{
         
@@ -252,3 +268,56 @@ exports.main = async (event, context) => {
   
 };
 ```
+
+## 商家扫用户付款码支付
+
+> vk-pay的版本需 >= 1.14.0
+
+```js
+const vkPay = require("vk-uni-pay");
+
+exports.main = async (event, context) => {
+  
+  let res = await vkPay.createPayment({
+    context,
+    provider: "alipay",
+    data: {
+      auth_code: data.auth_code, // 付款码
+      out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",  // 这里可以填和付款码一样，因为一个out_trade_no只能和一个auth_code发起支付，即使支付失败或取消支付，也需要更换out_trade_no
+      total_fee: 1, // 订单金额（单位分 100 = 1元）
+      subject: "订单标题",
+      type: "recharge", // 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等，此处type的值如果是recharge，则回调时就会执行 pay-notify 目录下的 recharge.js 内的逻辑
+      // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
+      custom: {
+        
+      },
+      // 微信、支付宝文档上的其他选填参数（other内的参数会原样发送给微信、支付宝）
+      other:{
+        
+      }
+    }
+  });
+
+  return res;
+  
+};
+```
+
+前端完整示例页面请查看 `/pages/index/micropay.vue`，请一定要先运行示例页面进行体验，支付成功后，再根据示例页面代码集成到自己项目。
+
+**配置节点**
+
+微信支付：`wxpay.micropay`
+
+支付宝：`alipay.micropay`
+
+[查看完整支付配置](https://vkdoc.fsq.pub/vk-uni-pay/config.html)
+
+**注意事项**
+
+1. 当 `vkPay.createPayment` 接口内传了参数 `auth_code`，即代表使用付款码支付
+2. 付款码支付时，`out_trade_no` 和 `auth_code` 是一对一关系，且同一个 `auth_code` 只能发起一次支付，也代表着同一个 `out_trade_no` 也只能发起一次支付
+3. 如果订单付款失败再次发起支付需要更换 `out_trade_no`，请做好 `out_trade_no` 和你业务系统订单号的关联关系
+4. 微信支付的付款码支付只支持v2版本，但由于支付宝node18不支持微信v2的p12证书，导致无法退款，因此微信支付付款码采用支付走v2，退款走v3的模式
+5. 微信支付的付款码支付成功没有异步回调，但自 `1.14.0` 版本起，新增了[主动触发回调模式](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/queryPayment.html#%E4%B8%BB%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0)，前端 vk-uni-pay 组件设置 `:await-notify="true"` 即可开启
+6. 支付宝的付款码支付无法监听到用户取消支付，不过小金额支付时，支付宝大概率是免密直接支付
