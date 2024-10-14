@@ -144,8 +144,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
-      "version": 2, // 此处强制为v2
-      "refundVersion": 3 // 退款接口用v3
+      "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     }
   },
   /**
@@ -467,8 +466,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
-      "version": 2, // 此处强制为v2
-      "refundVersion": 3 // 退款接口用v3
+      "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     }
   }
 }
