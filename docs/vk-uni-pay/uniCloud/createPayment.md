@@ -289,8 +289,8 @@ exports.main = async (event, context) => {
     context,
     provider: "alipay",
     data: {
-      auth_code: data.auth_code, // 付款码
-      store_id: data.store_id, // 付款码支付的门店id（微信支付v3必填）
+      auth_code: "用户的付款码", // 付款码
+      store_id: "001", // 付款码支付的门店id（微信支付v3必填）
       out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",  // 这里可以填和付款码一样，因为一个out_trade_no只能和一个auth_code发起支付，即使支付失败或取消支付，也需要更换out_trade_no
       total_fee: 1, // 订单金额（单位分 100 = 1元）
       subject: "订单标题",
