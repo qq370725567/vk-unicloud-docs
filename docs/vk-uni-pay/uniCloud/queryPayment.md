@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 4、查询付款状态
 
-## 接口名：`queryPayment`
+## vkPay.queryPayment
 
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
@@ -32,13 +32,13 @@ exports.main = async (event, context) => {
 | await_max_time  |   最大等待时长，默认20秒（单位秒）   | Number  | 20  | 范围 5-40  |
 | pay_order_info  |   是否需要返回支付订单信息  | Boolean  | false  | true  |
 
-## 主动执行回调函数
+### 主动执行回调函数
 
 > vk-pay的版本需 >= 1.14.0
 
 `vkPay.queryPayment` 若设置参数 `await_notify: true`，则等待0.5秒后如果还未接收到支付公司推送的异步通知，则主动执行自定义回调函数的逻辑，可做到即使支付公司的异步通知延迟了几分钟，甚至未发异步通知，也能正常响应支付成功的情况。[异步回调说明](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html)
  
-## await_notify
+### await_notify
 
 详细说明
 

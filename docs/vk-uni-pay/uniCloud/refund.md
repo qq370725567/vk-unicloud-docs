@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 3、发起退款
 
-## 接口名：`refund`
+## vkPay.refund
 
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
