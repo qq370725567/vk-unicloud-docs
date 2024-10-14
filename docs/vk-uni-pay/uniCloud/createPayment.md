@@ -314,6 +314,32 @@ exports.main = async (event, context) => {
 
 [查看完整支付配置](https://vkdoc.fsq.pub/vk-uni-pay/config.html)
 
+**如何区分付款码是微信支付还是支付宝支付的?**
+
+```js
+// 识别用户付款码类型
+const getAuthCodeProvider = (code) => {
+  if (!code) {
+    return;
+  }
+  if (!/^\d+$/.test(code)) {
+    return;
+  }
+  // 微信支付用户付款码规则：18位纯数字，前缀以10、11、12、13、14、15开头
+  if (code.length === 18 && ['10', '11', '12', '13', '14', '15'].includes(code.substring(0, 2))) {
+    return 'wxpay';
+  }
+  // 支付宝用户付款码规则：16-24位纯数字，前缀以 25-30 开头
+  if (code.length >= 16 && code.length <= 24 && ['25', '26', '27', '28', '29', '30'].includes(code.substring(0, 2))) {
+    return 'alipay';
+  }
+  return;
+}
+
+let provider = getAuthCodeProvider("133821125287601700");
+console.log('provider: ', provider);
+```
+
 **注意事项**
 
 1. 当 `vkPay.createPayment` 接口内传了参数 `auth_code`，即代表使用付款码支付
