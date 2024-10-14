@@ -10,6 +10,8 @@ sidebarDepth: 0
 
 仅支持查询商家支付宝账户的余额，此接口一般用于商家支付宝转账给用户前查询商家账户余额是否充足
 
+## 示例代码
+
 ```js
 const vkPay = require("vk-uni-pay");
 
