@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 1、获取支付参数
 
-## 接口名：`createPayment`
+## vkPay.createPayment
 
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
@@ -48,23 +48,25 @@ exports.main = async (event, context) => {
 | needQRcode|  是否强制使用二维码支付（让顾客扫码支付，一般用于物联网，如按摩椅上的扫码支付） [查看详情](#needqrcode-强制使用二维码支付模式)																															| Boolean	| false	| true									|
 | data			|  订单数据 [查看详情](#data-参数)																																																																														| Object	| -			|												|
 
-## data 参数
+### data 参数
 
 | 参数				| 说明																																																															| 类型			| 默认值	| 可选值	|
 |-------			|-----------																																																											|---------|-------|-------|
-| openid			| 用户openid，小程序支付和微信公众号支付时必传																																												| String	| -			| -			|
+| openid			| 用户openid，小程序支付和微信公众号支付时必传																																													| String	| -			| -			|
 | out_trade_no| 必填项，商户支付订单号，需自行保证全局唯一																																														| String	| -			| -			|
-| total_fee		| 订单金额（单位分 100 = 1元）																																																			| Number	| -			| -			|
+| total_fee		| 订单金额（单位分 100 = 1元）																																																				| Number	| -			| -			|
 | subject			| 订单标题																																																													| String	| -			| -			|
-| type				| 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。																																| String	| -			| -			|
+| type				| 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。																																	| String	| -			| -			|
 | custom			| 自定义数据，不可与外部已有字段重名（custom内的参数不会发送给微信、支付宝）																															| Object	| -			| -			|
 | other				| 微信、支付宝文档上的其他选填参数（other内的参数会原样发送给微信、支付宝）																																| Object	| -			| -			|
 | pid					| 多商户模式下的自定义商户id（等于vk-pay-config表的_id）[查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)	| String	| -			| -			|
 | user_id			| 用户id（选填）																																																										| String	| -			| -			|
 | nickname		| 用户昵称（选填）																																																									| String	| -			| -			|
 | return_url	| 手机端同步回调地址，仅`provider=vkspay`时生效（选填）																																								| String	| -			| -			|
-| time_expire	| 指定支付截至时间，13位时间戳格式（选填）																																														| Number	| -			| -			|
+| time_expire	| 指定支付截至时间，13位时间戳格式（选填）																																															| Number	| -			| -			|
 | auth_code		| 用户的付款码																																																											| String	| -			| -			|
+| store_id		| 付款码支付时的门店id（微信支付v3必填）																																															| String	| -			| -			|
+
 
 **out_trade_no**
 
@@ -90,12 +92,13 @@ time_expire的值是时间戳，如 `time_expire: Date.now() + 1000*60` 代表60
 3. provider=appleiap时，不支持此参数
 4. provider=vkspay时，不支持此参数
 
-## context 参数
+### context 参数
 
 1. VK云函数传 `originalParam.context` 
 2. VK云对象传 `this.getClientInfo()` 
 3. 官方云函数传 `context`
 4. 官方云对象传如下格式
+
 ```js
 context: {
   "APPID": "", // DCloudAppId
@@ -121,7 +124,9 @@ context: {
 |total_fee		|Number	|本次交易的付款金额（单位分 100 = 1元）（新增于 1.11.3）														|
 |platform			|String	|发起支付时的客户端运行环境（新增于 1.11.3）																				|
 
-## 推荐支付交互流程
+## 常见问题
+
+### 推荐支付交互流程
 
 以电商下单为例
 
@@ -132,7 +137,7 @@ context: {
 5. 【前端】vk-uni-pay组件会自动响应支付信息并唤起支付
 6. 【云端】用户支付成功后，接收异步回调，执行自定义回调逻辑
 
-## pid（多商户模式）
+### pid（多商户模式）
 
 ```js
 const vkPay = require("vk-uni-pay");
@@ -165,7 +170,7 @@ exports.main = async (event, context) => {
 };
 ```
  
-## needQRcode（强制使用二维码支付模式）
+### needQRcode（强制使用二维码支付模式）
 
 给vue页面使用时，传 `needQRcode:true`
  
@@ -233,7 +238,7 @@ exports.main = async (event, context) => {
  };
 ```
 
-## 支付宝小程序支付使用新版JSAPI接口
+### 支付宝小程序支付使用新版JSAPI接口
 
 支付宝官方公告：2024年4月1日起，小程序必须使用专用支付产品（JSAPI支付），否则可能影响支付功能。
 
@@ -269,7 +274,7 @@ exports.main = async (event, context) => {
 };
 ```
 
-## 商家扫用户付款码支付
+### 商家扫用户付款码支付
 
 > vk-pay的版本需 >= 1.14.0
 
