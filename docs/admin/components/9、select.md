@@ -75,7 +75,7 @@
 | group          | 是否需要分组 | Boolean  | false| true  |
 | clearable          | 是否可以清空选项 | Boolean  | true| false  |
 | onChange          | function(val, formData, column, index, option) | Function  | -| -  |
-| defaultIndex          | 默认选择第几个，仅单选模式下生效 | Number  | - | -  |
+| defaultIndex          | 默认选择第几个，仅在万能表单的单选模式下生效 | Number  | - | -  |
 
 **以下属性需 `vk-unicloud-admin-ui` npm依赖 ≥ `1.17.30`
 

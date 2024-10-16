@@ -131,7 +131,7 @@
 | requestHeader    |  http请求头 | Object  | - | - |
 | requestMethod    |  http请求method | String  | - | - |
 | onChange          | function(val, formData, column, index, option) | Function  | -| -  |
-| defaultIndex          | 默认选择第几个，仅单选模式下生效 | Number  | - | -  |
+| defaultIndex          | 默认选择第几个，仅在万能表单的单选模式下，且showAll为true时生效 | Number  | - | -  |
 
 **以下属性需 `vk-unicloud-admin-ui` npm依赖 ≥ `1.17.30`
 

@@ -132,7 +132,7 @@
 | onChange          | function(val, formData, column, index, option) | Function  | -| -  |
 | direction          | 元素排列方向 row 横向<br/>column 竖向 | String  | row | row、column  |
 | columnMargin          | direction=column时元素的上下间隔 | Number  | 20 | -  |
-| defaultIndex          | 默认选择第几个 | Number  | - | -  |
+| defaultIndex          | 默认选择第几个，仅在万能表单生效 | Number  | - | -  |
 
 #### onChange 使用示例
 
