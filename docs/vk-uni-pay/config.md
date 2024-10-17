@@ -716,20 +716,17 @@ module.exports = {
 
 ### 注意三
 
-* 如果提示找不到 `xxx` 模块，如 `uni-id` 模块，则
-* 1、在 `uniCloud/cloudfunctions/common/vk-uni-pay` 目录右键选择 `管理公共模块依赖` 菜单，引入这2个模块 `uni-config-center`、 `uni-pay`
+* 如果提示找不到 `vk-uni-pay` 模块，则
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/7a907421-c1e3-422a-ac6c-aa4016a33b2b.png)
-
-* 2、在需要引入支付API的云函数（如：vk-pay）右键选择 `管理公共模块依赖` 菜单，至少引入这2个模块 `uni-config-center`、 `vk-uni-pay`
+* 1、在需要引入支付API的云函数（如：vk-pay）右键选择 `管理公共模块依赖` 菜单，至少引入这2个模块 `uni-config-center`、 `vk-uni-pay`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/90bb2ac1-8165-44af-ae56-05d5616cef55.png)
 
-* 3、重新上传公共模块 `vk-uni-pay`
+* 2、重新上传公共模块 `vk-uni-pay`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/3505280b-dea1-4d17-a25f-b0b6bd1315c4.png)
 
-* 4、重新上传云函数 `vk-pay`
+* 3、重新上传云函数 `vk-pay`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/627737c7-0677-4f18-88c1-1f3ea087477c.png)
 
