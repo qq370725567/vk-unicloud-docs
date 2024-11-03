@@ -752,11 +752,12 @@ vk.pubfn.isNotNullAll(value1,value2,value3);
 ```
 
 ### vk.pubfn.isNullOneByObject（检测整个对象是否没有一个属性是空值）
-如果有空值，则返回首个是空值的属性名
+
+如果有空值，则返回首个是空值的属性名，如果没有空值，则返回undefined
 
 ```js
 /**
- * 检测整个对象是否没有一个属性是空值,如果有空值,则返回首个是空值的属性名
+ * 检测整个对象是否没有一个属性是空值，如果有空值，则返回首个是空值的属性名，如果没有空值，则返回undefined
  */
 let nullKey = vk.pubfn.isNullOneByObject({ title, content, avatar });
 if (nullKey) return { code: -1, msg: `${nullKey}不能为空` };
