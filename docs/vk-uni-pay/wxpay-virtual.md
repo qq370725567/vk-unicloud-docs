@@ -890,8 +890,8 @@ exports.main = async (event, context) => {
   
   // 获取微信虚拟支付实例
   const wxpayVirtualManager = await vkPay.getWxpayVirtualManager();
-  // 回退扣减代币
-  let res = await wxpayVirtualManager.cancelCurrencyPay({
+  // 赠送代币
+  let res = await wxpayVirtualManager.presentCurrency({
     openid, // 用户的openid
     userIp, // 用户的ip地址
     amount: Number(amount), // 赠送代币数量
