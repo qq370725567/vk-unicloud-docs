@@ -14,11 +14,11 @@
   "author": "VK",
   "license": "ISC",
   "devDependencies": {
-    "vuepress": "^1.8.2"
+    "vuepress": "1.9.9"
   },
   "dependencies": {
-    "@vuepress/plugin-back-to-top": "^1.8.2",
-    "@vuepress/plugin-medium-zoom": "^1.8.2",
+    "@vuepress/plugin-back-to-top": "1.9.9",
+    "@vuepress/plugin-medium-zoom": "1.9.9",
     "vuepress-plugin-copyright": "^1.0.2",
     "vuepress-plugin-juejin-style-copy": "^1.0.4",
     "vuepress-plugin-medium-zoom": "^1.1.9",
