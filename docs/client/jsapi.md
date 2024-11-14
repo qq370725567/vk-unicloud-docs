@@ -52,8 +52,8 @@ export default {
 </script>
 ```
 
-## 前后端通用
-### vk.pubfn.debounce（防抖函数）
+## 前后端通用@common
+### vk.pubfn.debounce（防抖函数）@debounce
 
 ```js
 /**
@@ -81,7 +81,7 @@ vk.pubfn.debounce(() => {
 }, 1000, true, "id1");
 ```
 
-### vk.pubfn.throttle（节流函数）
+### vk.pubfn.throttle（节流函数）@throttle
 
 ```js
 
@@ -108,7 +108,7 @@ vk.pubfn.throttle(() => {
 }, 1000, true, "id1");
 ```
 
-### vk.pubfn.arrayToTree（数组转树）
+### vk.pubfn.arrayToTree（数组转树）@arrayToTree
 
 ```js
 /**
@@ -182,7 +182,7 @@ let treeData = vk.pubfn.arrayToTree(arrayData, treeProps);
 ]
 ```
 
-### vk.pubfn.treeToArray（树转数组）
+### vk.pubfn.treeToArray（树转数组）@treeToArray
 
 ```js
 /**
@@ -255,7 +255,7 @@ let arrayData = vk.pubfn.treeToArray(treeData, treeProps);
 ]
 ```
 
-### vk.pubfn.sleep（进程强制等待，休眠）
+### vk.pubfn.sleep（进程强制等待，休眠）@sleep
 
 ```js
 /**
@@ -265,7 +265,7 @@ let arrayData = vk.pubfn.treeToArray(treeData, treeProps);
 await vk.pubfn.sleep(1000);
 ```
 
-### vk.pubfn.timeFormat（日期时间格式化）
+### vk.pubfn.timeFormat（日期时间格式化）@timeFormat
 
 ```js
 /**
@@ -292,7 +292,7 @@ let str = vk.pubfn.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss", 8); // 东8区
 let str = vk.pubfn.timeFormat(new Date(),"yyyy-MM-ddThh:mm:ssZ", 8); // 东8区
 ```
 
-### vk.pubfn.getDateInfo（解析日期对象属性）
+### vk.pubfn.getDateInfo（解析日期对象属性）@getDateInfo
 
 ```js
 /**
@@ -319,7 +319,7 @@ let dateObj = vk.pubfn.getDateInfo(new Date());
 }
 ```
 
-### vk.pubfn.getCommonTime（获取时间范围）
+### vk.pubfn.getCommonTime（获取时间范围）@getCommonTime
 
 使用 vk.pubfn.getCommonTime 可以很方便获取时间
 
@@ -390,7 +390,7 @@ for (let i = 0; i < 31; i++) {
 console.log('timeStart: ', timeStart)
 ```
 
-### vk.pubfn.getOffsetTime（获得指定时间偏移 year年 month月 day天 hours时 minutes分 seconds秒前或后的时间戳）
+### vk.pubfn.getOffsetTime（获得指定时间偏移 year年 month月 day天 hours时 minutes分 seconds秒前或后的时间戳）@getOffsetTime
 
 ```js
 /**
@@ -427,7 +427,7 @@ let timestamp = vk.pubfn.getOffsetTime(new Date(), {
 });
 ```
 
-### vk.pubfn.getHourOffsetStartAndEnd（获得相对当前时间的偏移 count 小时的起止日期）
+### vk.pubfn.getHourOffsetStartAndEnd（获得相对当前时间的偏移 count 小时的起止日期）@getHourOffsetStartAndEnd
 
 ```js
 /**
@@ -448,7 +448,7 @@ let timeObj = vk.pubfn.getHourOffsetStartAndEnd(0);
 let { startTime, endTime } = vk.pubfn.getHourOffsetStartAndEnd(0, new Date());
 ```
 
-### vk.pubfn.getDayOffsetStartAndEnd（获得相对当前时间的偏移 count 天的起止日期）
+### vk.pubfn.getDayOffsetStartAndEnd（获得相对当前时间的偏移 count 天的起止日期）@getDayOffsetStartAndEnd
 
 ```js
 /**
@@ -469,7 +469,7 @@ let timeObj = vk.pubfn.getDayOffsetStartAndEnd(0);
 let { startTime, endTime } = vk.pubfn.getDayOffsetStartAndEnd(0, new Date());
 ```
 
-### vk.pubfn.getWeekOffsetStartAndEnd（获得相对当前时间的偏移 count 周的起止日期）
+### vk.pubfn.getWeekOffsetStartAndEnd（获得相对当前时间的偏移 count 周的起止日期）@getWeekOffsetStartAndEnd
 
 ```js
 /**
@@ -491,7 +491,7 @@ let { startTime, endTime } = vk.pubfn.getWeekOffsetStartAndEnd(0, new Date());
 ```
 
 
-### vk.pubfn.getMonthOffsetStartAndEnd（获得相对当前时间的偏移 count 月的起止日期）
+### vk.pubfn.getMonthOffsetStartAndEnd（获得相对当前时间的偏移 count 月的起止日期）@getMonthOffsetStartAndEnd
 
 ```js
 /**
@@ -512,7 +512,7 @@ let timeObj = vk.pubfn.getMonthOffsetStartAndEnd(0);
 let { startTime, endTime } = vk.pubfn.getMonthOffsetStartAndEnd(0, new Date());
 ```
 
-### vk.pubfn.getQuarterOffsetStartAndEnd（获得相对当前时间的偏移 count 季度的起止日期）
+### vk.pubfn.getQuarterOffsetStartAndEnd（获得相对当前时间的偏移 count 季度的起止日期）@getQuarterOffsetStartAndEnd
 
 ```js
 /**
@@ -533,7 +533,7 @@ let timeObj = vk.pubfn.getQuarterOffsetStartAndEnd(0);
 let { startTime, endTime } = vk.pubfn.getQuarterOffsetStartAndEnd(0, new Date());
 ```
 
-### vk.pubfn.getYearOffsetStartAndEnd（获得相对当前时间的偏移 count 年的起止日期）
+### vk.pubfn.getYearOffsetStartAndEnd（获得相对当前时间的偏移 count 年的起止日期）@getYearOffsetStartAndEnd
 
 ```js
 /**
@@ -554,7 +554,7 @@ let timeObj = vk.pubfn.getYearOffsetStartAndEnd(0);
 let { startTime, endTime } = vk.pubfn.getYearOffsetStartAndEnd(0, new Date());
 ```
 
-### vk.pubfn.test（检测文本格式）
+### vk.pubfn.test（检测文本格式）@test
 
 ```js
 /**
@@ -623,7 +623,7 @@ if (testRes) {
 }
 ```
 
-### vk.pubfn.objectAssign（对象属性浅拷贝）
+### vk.pubfn.objectAssign（对象属性浅拷贝）@objectAssign
 
 ```js
 /**
@@ -636,7 +636,7 @@ if (testRes) {
 let newObj = vk.pubfn.objectAssign(obj1, obj2);
 ```
 
-### vk.pubfn.copyObject（复制一份对象-没有映射关系）
+### vk.pubfn.copyObject（复制一份对象-没有映射关系）@copyObject
 
 ```js
 /**
@@ -648,7 +648,7 @@ let newObj = vk.pubfn.objectAssign(obj1, obj2);
 let newObj = vk.pubfn.copyObject(obj);
 ```
 
-### vk.pubfn.deepClone（深度克隆一个对象-没有映射关系）
+### vk.pubfn.deepClone（深度克隆一个对象-没有映射关系）@deepClone
 
 ```js
 /**
@@ -660,7 +660,7 @@ let newObj = vk.pubfn.copyObject(obj);
 let newObj = vk.pubfn.deepClone(obj);
 ```
 
-### vk.pubfn.arr_concat（两个对象数组合并，并去除重复的数据）
+### vk.pubfn.arr_concat（两个对象数组合并，并去除重复的数据）@arrconcat
 
 ```js
 /**
@@ -675,7 +675,7 @@ let arr = vk.pubfn.arr_concat(arr1, arr2, flag);
 let arr = vk.pubfn.arr_concat(arr1, arr2, "_id");
 ```
 
-### vk.pubfn.getData（根据字符串路径获取对象的值）
+### vk.pubfn.getData（根据字符串路径获取对象的值）@getData
 支持.和[]，且任意一个值为undefined时，不会报错，会直接返回undefined
 
 ```js
@@ -691,7 +691,7 @@ let value = vk.pubfn.getData(dataObj, name, defaultValue);
 // 若在vue模板中使用，可以使用简写法 {{ $getData(userInfo, "a.b.c.d[1].a", '默认值') }}
 ```
 
-### vk.pubfn.setData（根据字符串路径设置对象的值）
+### vk.pubfn.setData（根据字符串路径设置对象的值）@setData
 支持.和[]
 
 ```js
@@ -704,7 +704,7 @@ let value = vk.pubfn.getData(dataObj, name, defaultValue);
 vk.pubfn.setData(dataObj, name, value);
 ```
 
-### vk.pubfn.isNull（参数是否为空）
+### vk.pubfn.isNull（参数是否为空）@isNull
 其中 undefined、null、{}、[]、"" 均为空值  true 空值  false 有值）
 
 ```js
@@ -714,7 +714,7 @@ vk.pubfn.setData(dataObj, name, value);
 vk.pubfn.isNull(value);
 ```
 
-### vk.pubfn.isNotNull（参数是否不为空）
+### vk.pubfn.isNotNull（参数是否不为空）@isNotNull
 结果与 vk.pubfn.isNull 相反
 
 ```js
@@ -724,7 +724,7 @@ vk.pubfn.isNull(value);
 vk.pubfn.isNotNull(value);
 ```
 
-### vk.pubfn.isNullOne（是否至少有一个参数为空）
+### vk.pubfn.isNullOne（是否至少有一个参数为空）@isNullOne
 
 ```js
 /**
@@ -733,7 +733,7 @@ vk.pubfn.isNotNull(value);
 vk.pubfn.isNullOne(value1,value2,value3);
 ```
 
-### vk.pubfn.isNullAll（是否全部为空）
+### vk.pubfn.isNullAll（是否全部为空）@isNullAll
 
 ```js
 /**
@@ -742,7 +742,7 @@ vk.pubfn.isNullOne(value1,value2,value3);
 vk.pubfn.isNullAll(value1,value2,value3);
 ```
 
-### vk.pubfn.isNotNullAll（是否全部都不为空）
+### vk.pubfn.isNotNullAll（是否全部都不为空）@isNotNullAll
 
 ```js
 /**
@@ -751,7 +751,7 @@ vk.pubfn.isNullAll(value1,value2,value3);
 vk.pubfn.isNotNullAll(value1,value2,value3);
 ```
 
-### vk.pubfn.isNullOneByObject（检测整个对象是否没有一个属性是空值）
+### vk.pubfn.isNullOneByObject（检测整个对象是否没有一个属性是空值）@isNullOneByObject
 
 如果有空值，则返回首个是空值的属性名，如果没有空值，则返回undefined
 
@@ -764,7 +764,7 @@ if (nullKey) return { code: -1, msg: `${nullKey}不能为空` };
 
 ```
 
-### vk.pubfn.getListItem（从对象数组中获取某一个对象）
+### vk.pubfn.getListItem（从对象数组中获取某一个对象）@getListItem
 获取对象数组中的某一个item，根据指定的键名和键值
 ```js
 /**
@@ -780,7 +780,7 @@ let item = vk.pubfn.getListItem(list, key, value);
 let item = vk.pubfn.getListItem(list, "_id", "001");
 ```
 
-### vk.pubfn.getListIndex（从对象数组中获取某个对象的index）
+### vk.pubfn.getListIndex（从对象数组中获取某个对象的index）@getListIndex
 获取对象数组中某个元素的index，根据指定的键名和键值
 ```js
 /**
@@ -796,7 +796,7 @@ let index = vk.pubfn.getListIndex(list, key, value);
 let index = vk.pubfn.getListIndex(list, "_id", "001");
 ```
 
-### vk.pubfn.getListItemIndex（从对象数组中获取某一个对象和index）
+### vk.pubfn.getListItemIndex（从对象数组中获取某一个对象和index）@getListItemIndex
 获取对象数组中某个元素的index，根据指定的键名和键值
 ```js
 /**
@@ -811,7 +811,7 @@ let { item, index } = vk.pubfn.getListItemIndex(list, key, value);
 let { item, index } = vk.pubfn.getListItemIndex(list, "_id", "001");
 ```
 
-### vk.pubfn.arrayToJson（对象数组转JSON）
+### vk.pubfn.arrayToJson（对象数组转JSON）@arrayToJson
 
 ```js
 /**
@@ -827,7 +827,7 @@ let obj = vk.pubfn.arrayToJson(list, key);
 let obj = vk.pubfn.arrayToJson(list, "_id");
 ```
 
-### vk.pubfn.arrayObjectGetArray（从数组中提取指定字段形式新的数组）
+### vk.pubfn.arrayObjectGetArray（从数组中提取指定字段形式新的数组）@arrayObjectGetArray
 
 ```js
 /**
@@ -844,7 +844,7 @@ let newList = vk.pubfn.arrayObjectGetArray(list, key);
 let newList = vk.pubfn.arrayObjectGetArray(list, "_id");
 ```
 
-### vk.pubfn.random（随机数）
+### vk.pubfn.random（随机数）@random
 支持任意字符，默认纯数字
 
 ```js
@@ -862,7 +862,7 @@ let n = vk.pubfn.random(6, "abcdefghijklmnopqrstuvwxyz0123456789");
 let n = vk.pubfn.random(1,"123456789",["1","2","3"]);
 ```
 
-### vk.pubfn.hidden（将手机号、账号等隐藏中间字段）
+### vk.pubfn.hidden（将手机号、账号等隐藏中间字段）@hidden
 
 ```js
 /**
@@ -877,7 +877,7 @@ let newStr = vk.pubfn.hidden(str, first, last);
 let newStr = vk.pubfn.hidden("15200000001", 3, 4);
 ```
 
-### vk.pubfn.checkArrayIntersection（两数组是否有交集)
+### vk.pubfn.checkArrayIntersection（两数组是否有交集)@checkArrayIntersection
 
 ```js
 /**
@@ -890,7 +890,7 @@ vk.pubfn.checkArrayIntersection(arr1, arr2);
 vk.pubfn.checkArrayIntersection([1,2,3], [3,4,5]);
 ```
 
-### vk.pubfn.calcFreights（计算运费）
+### vk.pubfn.calcFreights（计算运费）@calcFreights
 
 ```js
 /**
@@ -916,7 +916,7 @@ let freights = vk.pubfn.calcFreights({
 }, 10);
 ```
 
-### vk.pubfn.getNewObject（从一个对象中取多个属性，并生成一个全新的对象）
+### vk.pubfn.getNewObject（从一个对象中取多个属性，并生成一个全新的对象）@getNewObject
 
 ```js
 /**
@@ -928,7 +928,7 @@ let freights = vk.pubfn.calcFreights({
 let newObj = vk.pubfn.getNewObject(obj, keys);
 ```
 
-### vk.pubfn.deleteObjectKeys（对象删除指定的字段，返回新的对象）
+### vk.pubfn.deleteObjectKeys（对象删除指定的字段，返回新的对象）@deleteObjectKeys
 
 ```js
 /**
@@ -940,7 +940,7 @@ let newObj = vk.pubfn.getNewObject(obj, keys);
 let newObj = vk.pubfn.deleteObjectKeys(data, deleteKeys);
 ```
 
-### vk.pubfn.timeUtil.isLeapYear（判断是否是闰年）
+### vk.pubfn.timeUtil.isLeapYear（判断是否是闰年）@isLeapYear
 
 ```js
 /**
@@ -951,7 +951,7 @@ let newObj = vk.pubfn.deleteObjectKeys(data, deleteKeys);
 vk.pubfn.timeUtil.isLeapYear(2021);
 ```
 
-### vk.pubfn.timeUtil.isQingming（判断是否是清明节）
+### vk.pubfn.timeUtil.isQingming（判断是否是清明节）@isQingming
 
 ```js
 /**
@@ -962,7 +962,7 @@ vk.pubfn.timeUtil.isLeapYear(2021);
 vk.pubfn.timeUtil.isQingming(new Date());
 ```
 
-### vk.pubfn.calcSize（单位进制换算）
+### vk.pubfn.calcSize（单位进制换算）@calcSize
 
 ```js
 /**
@@ -978,7 +978,7 @@ let size = vk.pubfn.calcSize(length, arr, ary, precision);
 let size = vk.pubfn.calcSize(length, ["B","KB","MB","GB"], 1024, 3);
 ```
 
-### vk.pubfn.isArray（判断变量是否是数组）
+### vk.pubfn.isArray（判断变量是否是数组）@isArray
 
 ```js
 /**
@@ -989,7 +989,7 @@ let size = vk.pubfn.calcSize(length, ["B","KB","MB","GB"], 1024, 3);
 vk.pubfn.isArray(obj);
 ```
 
-### vk.pubfn.isObject（判断变量是否是对象）
+### vk.pubfn.isObject（判断变量是否是对象）@isObject
 
 ```js
 /**
@@ -1000,7 +1000,7 @@ vk.pubfn.isArray(obj);
 vk.pubfn.isObject(obj);
 ```
 
-### vk.pubfn.createOrderNo（产生订单号）
+### vk.pubfn.createOrderNo（产生订单号）@createOrderNo
 
 ```js
 /**
@@ -1017,7 +1017,7 @@ let no = vk.pubfn.createOrderNo("NO", 25);
 ```
 
 
-### vk.pubfn.snake2camelJson（对象内的属性名 - 蛇形转驼峰）
+### vk.pubfn.snake2camelJson（对象内的属性名 - 蛇形转驼峰）@snake2camelJson
 
 ```js
 /**
@@ -1028,7 +1028,7 @@ let no = vk.pubfn.createOrderNo("NO", 25);
 let newObj = vk.pubfn.snake2camelJson(obj);
 ```
 
-### vk.pubfn.camel2snakeJson（对象内的属性名 - 驼峰转蛇形）
+### vk.pubfn.camel2snakeJson（对象内的属性名 - 驼峰转蛇形）@camel2snakeJson
 
 ```js
 /**
@@ -1039,7 +1039,7 @@ let newObj = vk.pubfn.snake2camelJson(obj);
 let newObj = vk.pubfn.camel2snakeJson(obj);
 ```
 
-### vk.pubfn.snake2camel（字符串 - 蛇形转驼峰）
+### vk.pubfn.snake2camel（字符串 - 蛇形转驼峰）@snake2camel
 
 ```js
 /**
@@ -1050,7 +1050,7 @@ let newObj = vk.pubfn.camel2snakeJson(obj);
 let newVal = vk.pubfn.snake2camel(value);
 ```
 
-### vk.pubfn.camel2snake（字符串 - 驼峰转蛇形）
+### vk.pubfn.camel2snake（字符串 - 驼峰转蛇形）@camel2snake
 
 ```js
 /**
@@ -1061,7 +1061,7 @@ let newVal = vk.pubfn.snake2camel(value);
 let newVal = vk.pubfn.camel2snake(value);
 ```
 
-### vk.pubfn.string2Number 将能转成数字的字符串转数字（支持字符串、对象、数组）
+### vk.pubfn.string2Number 将能转成数字的字符串转数字（支持字符串、对象、数组）@string2Number
 
 ```js
 /**
@@ -1077,7 +1077,7 @@ let newVal = vk.pubfn.camel2snake(value);
 let newObj = vk.pubfn.string2Number(obj, option);
 ```
 
-### vk.pubfn.toDecimal 保留小数
+### vk.pubfn.toDecimal 保留小数@toDecimal
 
 ```js
 /**
@@ -1092,7 +1092,7 @@ let newVal = vk.pubfn.toDecimal(1.56555, 2);
 ```
 
 
-### vk.pubfn.priceFilter（金额显示过滤器）
+### vk.pubfn.priceFilter（金额显示过滤器）@priceFilter
 金额显示过滤器（以分为单位，将 100 转成 1）
 ```js
 /**
@@ -1105,7 +1105,7 @@ let newVal = vk.pubfn.priceFilter(money);
 let newVal = vk.pubfn.priceFilter(100); // 1
 ```
 
-### vk.pubfn.percentageFilter（百分比显示过滤器）
+### vk.pubfn.percentageFilter（百分比显示过滤器）@percentageFilter
 百分比过滤器 将 0.01 显示成 1%  1 显示成 100%
 ```js
 /**
@@ -1121,7 +1121,7 @@ let newVal = vk.pubfn.percentageFilter(0.1); // 10%
 ```
 
 
-### vk.pubfn.discountFilter（折扣显示过滤器）
+### vk.pubfn.discountFilter（折扣显示过滤器）@discountFilter
 折扣过滤器 将 0.1 显示成 1折 1 显示成 原价 0 显示成免费
 ```js
 /**
@@ -1137,7 +1137,7 @@ let newVal = vk.pubfn.discountFilter(0.7); // 7折
 ```
 
 
-### vk.pubfn.dateDiff（将时间显示成1秒前、1天前）
+### vk.pubfn.dateDiff（将时间显示成1秒前、1天前）@dateDiff
 
 ```js
 /**
@@ -1152,7 +1152,7 @@ let newStr = vk.pubfn.dateDiff(startTime, suffix);
 let newStr = vk.pubfn.dateDiff(Date.now()-1000*3600*24); // 1天前
 ```
 
-### vk.pubfn.dateDiff2（将时间显示成1秒、1天）
+### vk.pubfn.dateDiff2（将时间显示成1秒、1天）@dateDiff2
 
 ```js
 /**
@@ -1167,7 +1167,7 @@ let newStr = vk.pubfn.dateDiff2(endTime, endText);
 let newStr = vk.pubfn.dateDiff2(Date.now()+1000*3600*24); // 23小时
 ```
 
-### vk.pubfn.numStr（将大数字转中文）
+### vk.pubfn.numStr（将大数字转中文）@numStr
 
 ```js
 /**
@@ -1186,7 +1186,7 @@ let newStr = vk.pubfn.numStr(n);
 let newStr = vk.pubfn.numStr(1523412); // 1百万
 ```
 
-### vk.pubfn.splitArray（分割数组）
+### vk.pubfn.splitArray（分割数组）@splitArray
 
 ```js
 
@@ -1211,7 +1211,7 @@ let newArray = vk.pubfn.splitArray([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], 6);
 ]
 ```
 
-### vk.pubfn.objectKeySort（对象属性排序）
+### vk.pubfn.objectKeySort（对象属性排序）@objectKeySort
 
 ```js
 
@@ -1238,7 +1238,7 @@ let newObj = vk.pubfn.objectKeySort({
 }
 ```
 
-### vk.request（请求http接口）
+### vk.request（请求http接口）@request
 
 前端调用时文档看这里：[传送门 - 前端request](https://uniapp.dcloud.net.cn/api/request/request.html)
 
@@ -1246,7 +1246,7 @@ let newObj = vk.pubfn.objectKeySort({
 
 vk.request 就是通过上面2个API封装的，参数跟上面的基本一致
 
-#### vk.request（前端调用）
+#### vk.request（前端调用）@requestclient
 
 ```js
 vk.request({
@@ -1391,7 +1391,7 @@ vk.request({
 })
 ```
 
-#### vk.request（云端调用）
+#### vk.request（云端调用）@requestcloud
 
 云端必须加 `await` 同时没有 success 和 fail 回调
 
@@ -1468,7 +1468,7 @@ let base64 = "data:image/png;base64," + imageBuffer.toString('base64');
 
 ## 前端专属
 
-### vk.pubfn.getListData（手机长列表分页加载数据）
+### vk.pubfn.getListData（手机长列表分页加载数据）@getListData
 
 ```js
 /**
@@ -1495,7 +1495,7 @@ vk.pubfn.getListData({
 });
 ```
 
-### vk.pubfn.getComponentsDynamicData（动态组件数据获取）
+### vk.pubfn.getComponentsDynamicData（动态组件数据获取）@getComponentsDynamicData
 
 ```js
 /**
@@ -1533,7 +1533,7 @@ this.vk.pubfn.getComponentsDynamicData({
 });
 ```
 
-### vk.pubfn.getCurrentPage（获取当前页面实例）
+### vk.pubfn.getCurrentPage（获取当前页面实例）@getCurrentPage
 
 ```js
 /**
@@ -1547,7 +1547,7 @@ this.vk.pubfn.getComponentsDynamicData({
 vk.pubfn.getCurrentPage();
 ```
 
-### vk.pubfn.fileToBase64（文件转base64）
+### vk.pubfn.fileToBase64（文件转base64）@fileToBase64
 
 ```js
 /**
@@ -1561,7 +1561,7 @@ vk.pubfn.fileToBase64({
 });
 ```
 
-### vk.pubfn.base64ToFile（base64转文件）
+### vk.pubfn.base64ToFile（base64转文件）@base64ToFile
 
 ```js
 /**
@@ -1871,7 +1871,7 @@ setTimeout(() => {
 }, 0);
 ```
 
-### vk.navigateTo（页面间通信）
+### vk.navigateTo（页面间通信）@navigateTo
 
 #### Vue2写法
 
@@ -2145,7 +2145,7 @@ let url = vk.getConfig("login.url");
 
 以下函数只能在云函数内调用
 
-### vk.pubfn.batchRun（并发执行）
+### vk.pubfn.batchRun（并发执行）@batchRun
 
 批量循环并发执行异步函数（使用场景: 批量发送短信、邮件、消息通知等。）
 
@@ -2227,7 +2227,7 @@ res.group = batchRunRes.stack;
 return res;
 ```
 
-### vk.pubfn.getUniCloudRequestId（获取请求id）
+### vk.pubfn.getUniCloudRequestId（获取请求id）@getUniCloudRequestId
 
 获取本次云函数请求id（只有云端云函数才有，本地云函数无法获取请求id）
 
@@ -2235,8 +2235,7 @@ return res;
 let request_id = vk.pubfn.getUniCloudRequestId();
 ```
 
-
-### vk.pubfn.randomAsync（产生不重复随机数）
+### vk.pubfn.randomAsync（产生不重复随机数）@randomAsync
 
 （异步）产生指定位数的不重复随机数（支持任意字符，s默认纯数字）
 
