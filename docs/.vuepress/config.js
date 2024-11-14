@@ -1,5 +1,20 @@
 const navbar = require("./configs/navbar.js"); // 顶部导航
 const sidebar = require("./configs/sidebar.js"); // 左侧菜单
+const { slugify } = require('@vuepress/shared-utils'); // 用于处理标题的插件
+const headerPlugin = require('./markdown/header'); // 用于处理标题的插件
+
+function simplifySlugText(text) {
+  // 移除方法后面的括号及里面的内容
+  if (text.match(/^uni/) && text.match(/\)$/)) {
+    text = text.replace(/^uni/, '').replace(/\(.*\)$/, '');
+  }
+  // 处理部分非uni开头方法的括号内容，主要是会出现多参数的情况。
+  if (text.match(/\([\w+\s+\[\],]+\)$/)) {
+    text = text.replace(/\([\w+\s+\[\],]+\)$/, '');
+  }
+  return text;
+}
+
 module.exports = {
   base: "/", // 部署站点的基础路径
   title: 'vk-unicloud 快速开发框架', // 网站的标题
@@ -59,12 +74,28 @@ module.exports = {
     // }
   },
   markdown: {
+    slugify (str) {
+      if (typeof str !== 'string') return ''
+      let slug = str
+      if (slug.includes('@')) {
+        let array = slug.split('@')
+        slug = array.length > 1 ? array[array.length - 1] : str
+      } else {
+        slug = simplifySlugText(slug.toLowerCase()).trim()
+      }
+      return slugify(slug)
+    },
     lineNumbers: true, // 是否在每个代码块的左侧显示行号。
     externalLinks: {
       target: '_blank',
       rel: 'noopener noreferrer'
     },
-    extractHeaders: [ 'h1', 'h2', 'h3', 'h4' ]
+    extractHeaders: [ 'h1', 'h2', 'h3', 'h4' ],
+    chainMarkdown (config) {
+      config
+        .plugin('convert-header')
+        .use(headerPlugin)
+    }
   },
   plugins: [
     '@vuepress/back-to-top',
