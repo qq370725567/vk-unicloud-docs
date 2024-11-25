@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 > vk-unicloud版本需 ≥ 2.18.1
 
-## 介绍
+## 介绍@intro
 
 云端数据缓存是通过 `key`，`value` 键值对的形式进行数据的储存，通过 `key` 对数据进行读取
 
@@ -23,7 +23,7 @@ sidebarDepth: 0
 
 这些特性为用户提供了灵活、高效、可管理的云端数据缓存解决方案，适用于各种复杂的业务场景。
 
-## 初始化实例
+## 初始化实例@init
 
 在调用API前，需要先初始化实例
 
@@ -64,7 +64,7 @@ const cacheManage = vk.getCacheManage({
 
 ## API
 
-### get（获取缓存）
+### get（获取缓存）@get
 
 ```js
 let value = await cacheManage.get(key);
@@ -80,7 +80,7 @@ let value = await cacheManage.get(key);
 
 缓存内容
 
-### set（设置缓存）
+### set（设置缓存）@set
 
 ```js
 await cacheManage.set(key, value, second);
@@ -103,7 +103,7 @@ await cacheManage.set(key, value, second);
 |mode	|string	|add 添加 update 修改	|
 |key	|string	|缓存的键名	|
 
-### setnx（不存在才设置）
+### setnx（不存在才设置）@setnx
 
 只有在 key 不存在时才设置 key 的值。
 
@@ -127,7 +127,7 @@ let setnxRes = await cacheManage.setnx(key, value, second);
 |msg	|string	|失败原因	|
 |key	|string	|缓存的键名	|
 
-### del（删除缓存）
+### del（删除缓存）@del
 
 ```js
 await cacheManage.del(key);
@@ -143,7 +143,7 @@ await cacheManage.del(key);
 
 受影响的记录数
 
-### clear（清空缓存）
+### clear（清空缓存）@clear
 
 ```js
 await cacheManage.clear(prefix);
@@ -159,7 +159,7 @@ await cacheManage.clear(prefix);
 
 受影响的记录数
 
-### count（获取缓存数量）
+### count（获取缓存数量）@count
 
 ```js
 await cacheManage.count(prefix);
@@ -175,7 +175,7 @@ await cacheManage.count(prefix);
 
 记录数
 
-### exists（判断缓存是否存在）
+### exists（判断缓存是否存在）@exists
 
 ```js
 await cacheManage.exists(key);
@@ -191,7 +191,7 @@ await cacheManage.exists(key);
 
 1：存在 0：不存在
 
-### expire（修改缓存过期时间）
+### expire（修改缓存过期时间）@expire
 
 ```js
 await cacheManage.expire(key, seconds);
@@ -208,7 +208,7 @@ await cacheManage.expire(key, seconds);
 
 1：成功 0：失败
 
-### ttl（获取过期时间剩余多少秒）
+### ttl（获取过期时间剩余多少秒）@ttl
 
 ```js
 await cacheManage.ttl(key);
@@ -224,7 +224,7 @@ await cacheManage.ttl(key);
 
 秒数
 
-### pttl（获取过期时间剩余多少毫秒）
+### pttl（获取过期时间剩余多少毫秒）@pttl
 
 ```js
 await cacheManage.pttl(key);

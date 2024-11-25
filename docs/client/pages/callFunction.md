@@ -8,7 +8,7 @@ sidebarDepth: 0
 
 如果该请求是点击按钮进行的表单提交请求，建议加上参数 `title:'请求中...'` 具有遮罩功能，可以有效防止同一时间重复点击。
 
-## 回调形式 
+## 回调形式 @callback
 
 ```js
 // 回调形式 success fail complete
@@ -30,7 +30,7 @@ vk.callFunction({
 });
 ```
 
-## promise方式
+## promise方式@promise
 
 ```js
 // promise方式
@@ -47,7 +47,7 @@ vk.callFunction({
 });
 ```
 
-## async/await方式
+## async/await方式@async
 
 注意：该方式也同时支持在云函数或云对象内使用。
 
@@ -62,7 +62,7 @@ let data = await vk.callFunction({
 });
 ``` 
 
-## 属性
+## 属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -170,7 +170,7 @@ vk.callFunction({
 });
 ```
 
-### 请求拦截器
+### 请求拦截器@interceptor
 
 `uniCloud.addInterceptor` 提供了拦截器功能，[文档传送门](https://uniapp.dcloud.net.cn/uniCloud/client-sdk.html#add-interceptor)
 
@@ -209,7 +209,7 @@ uniCloud.addInterceptor('callFunction', {
 });
 ```
 
-### secretType（uni官方版安全网络）
+### secretType（uni官方版安全网络）@secretType
 
 `vk.callFunction` 多传一个参数 `secretType: "both"` 即可开启安全网络
 
@@ -229,7 +229,7 @@ uniCloud.addInterceptor('callFunction', {
 
 安全网络详细文档：[传送门](https://doc.dcloud.net.cn/uniCloud/secure-network.html)
 
-### encrypt（vk版双向加密通信）
+### encrypt（vk版双向加密通信）@encrypt
 
 > vk-unicloud 核心库版本需 >= 2.18.7
 
@@ -251,7 +251,7 @@ uniCloud.addInterceptor('callFunction', {
 
 加密通信与安全网络一样，只能保证相对安全，无法保证绝对安全，如果你发布APP，可以考虑再配合使用APP的安全加固，防止APP端被破解，这样加密通信起到的安全效果会更好。
 
-#### 单独指定某个请求加密通信
+#### 单独指定某个请求加密通信@encrypt-1
 
 `vk.callFunction` 多传一个参数 `encrypt: true` 即可开启加密通信
 
@@ -270,7 +270,7 @@ vk.callFunction({
 });
 ```
 
-#### 通过配置方式实现加密通信
+#### 通过配置方式实现加密通信@encrypt-2
 
 项目根目录 app.config.js 添加以下配置
 
@@ -291,7 +291,7 @@ checkEncryptRequest: {
 },
 ```
 
-#### 强制云函数或云对象必须加密通信
+#### 强制云函数或云对象必须加密通信@encrypt-3
 
 修改中间件 `router/middleware/modules/encryptFilter.js` 内的 `regExp` 与前端 `checkEncryptRequest.list` 保持一致（如果你没有此中间件则新建一个 encryptFilter.js 代码如下）
 
@@ -339,7 +339,7 @@ module.exports = [{
 
 如果开启了强制加密，则云端一个云函数（或云对象）调用另外一个云函数（或云对象）时，`vk.callFunction` 必须多传一个参数 `encrypt: true` 才能正常调用
 
-#### 设置请求参数密文有效期
+#### 设置请求参数密文有效期@encrypt-4
 
 打开配置文件 `common/uni-config-center/vk-unicloud/index.js` 修改配置 `clientCrypto.expTime` 的值（单位秒，此值如果设置太小，可能会影响正常用户的请求）
 

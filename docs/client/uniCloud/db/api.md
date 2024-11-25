@@ -12,7 +12,7 @@ sidebarDepth: 0
 
 ## 增
 
-### vk.baseDao.add（单条记录增加）
+### vk.baseDao.add（单条记录增加）@add
 
 **接口名**
 
@@ -43,7 +43,7 @@ let id = await vk.baseDao.add({
 
 返回值为添加数据的_id，添加失败，则返回null
 
-### vk.baseDao.adds（批量增加）
+### vk.baseDao.adds（批量增加）@adds
 
 **接口名**
 
@@ -98,7 +98,7 @@ let id = await vk.baseDao.add({
 提示：正常情况下，没有必要特意取消该字段，该字段记录了本条记录的实际添加时间，且该字段可以用于按时间排序（默认 `vk.baseDao.getTableData` 的排序规则就是按 `_add_time` 降序。）
 
 ## 删
-### vk.baseDao.del（批量删除）
+### vk.baseDao.del（批量删除）@del
 
 **接口名**
 
@@ -141,7 +141,7 @@ await vk.baseDao.del({
 });
 ```
 
-### vk.baseDao.deleteById（根据ID删除数据 ）
+### vk.baseDao.deleteById（根据ID删除数据 ）@deleteById
 
 **接口名**
 
@@ -173,7 +173,7 @@ await vk.baseDao.deleteById({
 返回值是删除的记录数量
 
 ## 改
-### vk.baseDao.update（批量修改）
+### vk.baseDao.update（批量修改）@update
 
 **接口名**
 
@@ -224,7 +224,7 @@ let num = await vk.baseDao.update({
 });
 ```
 
-### vk.baseDao.updateById（根据ID修改数据）
+### vk.baseDao.updateById（根据ID修改数据）@updateById
 
 **接口名**
 
@@ -257,7 +257,7 @@ let newInfo = await vk.baseDao.updateById({
 
 默认返回值是受影响的行数，如果getUpdateData为true，则返回修改后的数据对象
 
-### vk.baseDao.updateAndReturn（更新并返回更新后的数据，原子操作）
+### vk.baseDao.updateAndReturn（更新并返回更新后的数据，原子操作）@updateAndReturn
 
 **接口名**
 
@@ -307,7 +307,7 @@ vk.baseDao.updateAndReturn 可以实现什么功能？
 * 3、实现跟数值有关的自增和自减（同时需要实时获取自增或自减后的值）
 
 
-### vk.baseDao.setById（根据ID判断存在则替换，不存在则添加）
+### vk.baseDao.setById（根据ID判断存在则替换，不存在则添加）@setById
 
 优势：此为原子操作，并不是先判断是否存在，再进行替换或新增。只计一次写操作。（原子操作）（支持事务）
 
@@ -348,7 +348,7 @@ let setRes = await vk.baseDao.setById({
 |   id				|  String		|  是		|   若返回的type=add，则会额外返回当前新增的记录的id|
 
 ## 查
-### vk.baseDao.findById（根据id获取单条记录）
+### vk.baseDao.findById（根据id获取单条记录）@findById
 
 **接口名**
 
@@ -379,7 +379,7 @@ let info = await vk.baseDao.findById({
 
 返回值是该条记录数据
 
-### vk.baseDao.findByWhereJson（根据条件获取单条记录）
+### vk.baseDao.findByWhereJson（根据条件获取单条记录）@findByWhereJson
 
 **接口名**
 
@@ -412,7 +412,7 @@ let info = await vk.baseDao.findByWhereJson({
 
 返回值是该条记录数据（只返回第一条数据的内容）
 
-### vk.baseDao.select（查多条记录，具有分页功能）
+### vk.baseDao.select（查多条记录，具有分页功能）@select
 
 **接口名**
 
@@ -492,7 +492,7 @@ let res = await vk.baseDao.select({
 |   pageIndex	|  Number		|  当前分页的页码	|
 |   pageSize	|  Number		|  每页显示的大小	|
 
-### vk.baseDao.count（获取记录总条数）
+### vk.baseDao.count（获取记录总条数）@count
 
 **接口名**
 
@@ -576,7 +576,7 @@ if(num>0){
 }
 ```
 
-### vk.baseDao.sum（求和）
+### vk.baseDao.sum（求和）@sum
 
 **接口名**
 
@@ -609,7 +609,7 @@ let sum = await vk.baseDao.sum({
 
 返回值是求和的值（只能针对数值类型的字段求和，且求和的所有记录中，该字段不允许有字符串）
 
-### vk.baseDao.max（取最大值）
+### vk.baseDao.max（取最大值）@max
 
 **接口名**
 
@@ -642,7 +642,7 @@ let max = await vk.baseDao.max({
 
 返回值是最大值
 
-### vk.baseDao.min（取最小值）
+### vk.baseDao.min（取最小值）@min
 
 **接口名**
 
@@ -675,7 +675,7 @@ let min = await vk.baseDao.min({
 
 返回值是最小值
 
-### vk.baseDao.avg（取平均值）
+### vk.baseDao.avg（取平均值）@avg
 
 **接口名**
 
@@ -708,7 +708,7 @@ let avg = await vk.baseDao.avg({
 
 返回值是平均值
 
-### vk.baseDao.sample（随机取N条数据）
+### vk.baseDao.sample（随机取N条数据）@sample
 
 **接口名**
 

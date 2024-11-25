@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 常见问题
 
-## 运行示例项目报错
+## 运行示例项目报错@q1
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/c92a0b26-0745-4e0f-a138-73bd1e11d9d0.png)
 
@@ -12,19 +12,19 @@ sidebarDepth: 0
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/3ea7c826-8f63-4fd4-824a-e642f73a212a.png)
 
-## 运行示例项目提示不能本地运行
+## 运行示例项目提示不能本地运行@q2
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/32f459fb-c7f5-4a61-b88e-1944c44523c1.png)
 
 因为加密了，只能云端运行，不可以本地运行，如果要本地运行，则需要购买源码版。
 
-## 购买了源码版，但源码还是加密的
+## 购买了源码版，但源码还是加密的@q3
 
 删除这个文件即可。
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/90d1be7f-9d4c-4567-aa81-5bb255639d99.png)
 
-## 微信H5外部浏览器支付流程
+## 微信H5外部浏览器支付流程@q4
 
 * 1、用户点击发起支付
 * 2、唤起微信APP，在微信APP内输入支付密码
@@ -69,7 +69,7 @@ sidebarDepth: 0
 * 3、微信H5支付不支持在微信浏览器中支付（只能在非微信APP的浏览器中发起支付）（微信浏览器中只能用公众号支付）
 * 4、returnUrl的值必须是http或https开头的绝对路径，且在微信H5支付配置的域名白名单中。你还需要将此H5域名加入uniCloud白名单
 
-## 微信公众号支付注意事项
+## 微信公众号支付注意事项@q5
 
 * 1、h5的路由模式必须配置为 `history`，因为微信公众号登录的回调地址不支持 `hash` 模式。
 
@@ -158,7 +158,7 @@ module.exports = {
 }
 ```
 
-## H5支付浏览器报跨域错误
+## H5支付浏览器报跨域错误@q6
 
 * 进入 `unicloud` 控制台 [https://unicloud.dcloud.net.cn/home](https://unicloud.dcloud.net.cn/home)
 * 点击跨域配置
@@ -172,15 +172,15 @@ module.exports = {
 ___你浏览器中访问的域名是什么，就加什么域名___
 
 
-## 小程序体验版和正式版无法请求云函数
+## 小程序体验版和正式版无法请求云函数@q7
 
 [传送门 - 查看解决方案](https://vkdoc.fsq.pub/client/question/q10.html)
 
-## APP支付签名失败？
+## APP支付签名失败？@q8
 
 APP支付必须打自定义基座，包名和签名等必须和开放平台上填写的一致，且开放平台上申请的应用必须已通过审核。
 
-## 发起支付时提示：请先配置正确的异步回调URL
+## 发起支付时提示：请先配置正确的异步回调URL@q9
 
 配置文件在 `cloudfunctions/common/uni-config-center/uni-pay/config.js`(没有则新建)
 
@@ -210,19 +210,19 @@ ___如何获取URL化完整地址___
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/5722777d-d636-4b8e-9db5-f9c5ceac6ee0.png)
 
-## 微信支付的key密钥在哪里获取?
+## 微信支付的key密钥在哪里获取?@q10
 
 进入微信支付后台，点击账户中心 - API安全 - 设置APl2密钥 - 修改（密钥只能修改后才能查看）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/21b12172-ea0c-4f69-a064-2211a1fe149c.png)
 
-## 如何使用http方式获取支付参数?
+## 如何使用http方式获取支付参数?@q11
 
 ![](https://cdn.fsq.pub/vkdoc/vk-pay/1715841080654k3jsq5k9cag.png)
 
 注意：正式上线的项目，请不要将退款、转账等涉及资金外流的函数写到 `vk-pay` 自带的云函数中，你应该写在 `router` 或其他具有权限判断的云函数中鉴权（其他云函数可通过 `vk-uni-pay` 这个公共模块来调用退款等接口）
 
-## 抖音支付如何请求其他API
+## 抖音支付如何请求其他API@q12
 
 以 `发起结算及分账` 接口为例，代码如下
 
