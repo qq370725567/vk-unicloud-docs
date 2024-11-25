@@ -8,7 +8,7 @@ sidebarDepth: 1
 
 **核心思想：通过 JSON 配置渲染规则**
 
-## 基础用法
+## 基础用法@base
 
 ```html
 <vk-data-table :data="table1.data" :columns="table1.columns"></vk-data-table>
@@ -35,11 +35,11 @@ export default {
 };
 ```
 
-## 进阶用法
+## 进阶用法@pro
 
 请直接看示例文件 `/pages_template/components/table/table-easy`
 
-## 属性
+## 属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -94,7 +94,7 @@ export default {
 | searched-clean-selection     | 通用 - 表格搜索后是否清空多选框选中的值 |Boolean  | true | false |
 | need-alert | 通用 - 表格请求失败后，是否自动alert弹窗（若设为false，则可以通过监听fail事件自己处理错误） |Boolean  | true | false |
 
-### columns（字段列表）
+### columns（字段列表）@columns
 
 columns 是一个数组，数组内每个元素有以下属性
 
@@ -114,7 +114,7 @@ columns 是一个数组，数组内每个元素有以下属性
 | formatter  | 自定义格式化函数 | function(val, row, column, index)  | -  | -  |
 | buttons  | 扩展按钮列表 [查看buttons](#buttons-字段扩展按钮列表)| Array | -  | -  |
 
-### default-sort（默认排序）
+### default-sort（默认排序）@default-sort
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -149,7 +149,7 @@ columns:[
 ],
 ```
 
-### right-btns（右侧固定按钮列表）
+### right-btns（右侧固定按钮列表）@right-btns
 
 **高效用法**
 
@@ -355,7 +355,7 @@ data() {
 }
 ```
 
-### custom-right-btns（自定义右侧固定按钮）
+### custom-right-btns（自定义右侧固定按钮）@custom-right-btns
 
 **效果图**
 
@@ -496,7 +496,7 @@ data() {
 }
 ```
 
-### http请求模式
+### http请求模式@http
 
 **props 对象属性**
 
@@ -521,7 +521,7 @@ data() {
 ></vk-data-table>
 ```
 
-### 自定义function请求模式
+### 自定义function请求模式@function
 
 > vk-unicloud-admin-ui 的npm依赖版本需 >= 1.17.0
 
@@ -531,7 +531,7 @@ data() {
 
 劣势：代码量较多
 
-#### 自定义function-http请求模式示例
+#### 自定义function-http请求模式示例@function-http
 
 ```html
 <vk-data-table
@@ -588,7 +588,7 @@ export default {
 }
 ```
 
-#### 自定义function-云函数请求示例
+#### 自定义function-云函数请求示例@function-cloud
 
 ```html
 <vk-data-table
@@ -642,7 +642,7 @@ export default {
 }
 ```
 
-### 数据预处理
+### 数据预处理@data-preprocess
 
 ```html
 <vk-data-table
@@ -671,7 +671,7 @@ export default {
   
 ```
 
-### 展开行
+### 展开行@expand
 
 当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
 
@@ -689,7 +689,7 @@ export default {
 
 同时还可以通过插槽编写展开后的样式 [查看插槽](#展开行插槽)
 
-### 表格自带的多选框禁用规则
+### 表格自带的多选框禁用规则@selection
 
 ```html
 <vk-data-table
@@ -720,7 +720,7 @@ export default {
   
 ```
 
-### 异常重试机制
+### 异常重试机制@retry-count
 
 `retry-count` 属性异常重试机制可以有效解决当前阿里云空间偶尔会出现数据库连接超时导致的异常没有获取到数据的问题。
 
@@ -738,7 +738,7 @@ export default {
 
 注意：并非所有异常都会重试，框架会合理判断。（目前此判断逻辑也还在不断优化中）
 
-### 列支持拖动改变宽度
+### 列支持拖动改变宽度@border
 
 设置 border 为 true 即可
 
@@ -751,7 +751,7 @@ export default {
 
 ## columns（属性详细说明）
 
-### show（字段显示规则）
+### show（字段显示规则）@columns-show
 
 show是一个字符串数组，columns 数组内每一个元素都可以单独设置 show
 
@@ -781,7 +781,7 @@ this.$set(this.table1.columns[2], "show", ["detail","row","expand"]);
 
 [返回展开行](#展开行)
 
-### type（字段类型）
+### type（字段类型）@columns-type
 
 ```js
 table1:{
@@ -876,7 +876,7 @@ table1:{
 }
 ```
 
-### buttons（字段扩展按钮列表）
+### buttons（字段扩展按钮列表）@columns-buttons
 
 每个字段的扩展按钮列表（支持每行记录显示不同的按钮）
 
@@ -1000,7 +1000,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 },
 ```
 
-### filter（本地数据过滤器）
+### filter（本地数据过滤器）@columns-filter
 
 ```js
 { key:"remark", title:"备注", type:"text", width:200,
@@ -1019,7 +1019,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 },
 ```
 
-### formatter（自定义格式化渲染）
+### formatter（自定义格式化渲染）@columns-formatter
 
 一般用于 `type` 为 `html` 或 `text` 时使用，最终显示的结果时 `formatter` 函数 `return` 的值
 
@@ -1043,7 +1043,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 },
 ```
 
-## 分页
+## 分页@pagination
 
 以下是与分页相关的属性
 
@@ -1061,7 +1061,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 在 `vk-unicloud-admin-ui` ≥ `1.18.0` 后，新增了 `getCount` 参数，该参数与云端 `vk.baseDao.getTableData` 配合使用可以达到节省count请求次数，提升查询性能的效果，具体可以实现以下几种分页效果：
 
-### 分页方案一（传统分页）
+### 分页方案一（传统分页）@pagination-1
 
 描述：传统分页方案，每次请求同时查询 rows（当前页数据） 和 total（总记录条数），前端显示当前页数据以及分页器，分页器支持直接跳到任意页面
 
@@ -1092,7 +1092,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 ></vk-data-table>
 ```
 
-### 分页方案二（智能分页）
+### 分页方案二（智能分页）@pagination-2
 
 大部分情况下都推荐使用此方案，此方案也是目前万能表格的默认方案
 
@@ -1125,7 +1125,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 ></vk-data-table>
 ```
 
-### 分页方案三（滚动分页）
+### 分页方案三（滚动分页）@pagination-3
 
 描述：从不执行count请求，但翻页只能下一页或上一页，且不显示总记录条数
 
@@ -1155,7 +1155,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 ></vk-data-table>
 ```
 
-### 分页方案四（游标分页）
+### 分页方案四（游标分页）@pagination-4
 
 描述：上面3个方案的翻页都是通过数据库的 `skip+limit` 组合使用实现的，这种方式当 `skip` 的值越大，性能越差
 
@@ -1197,7 +1197,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 此方案暂未封装到组件中
 
-### getCount处理逻辑
+### getCount处理逻辑@getCount
 
 1. 前端 getCount 为 auto 时，前端加载第一页时 getCount 视为 true 分页加载非第一页时，getCount 视为 false
 2. 前端 getCount 为 true 时，前端每次查询 getCount 均视为 true 
@@ -1211,7 +1211,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 2. 云端 true 前端 false 最终 getCount 视为 false
 3. 云端 false 前端不管 true 还是 false 最终 getCount 均视为 false
 
-## 事件
+## 事件@event
 
 | 事件名   | 说明                    | 回调参数 |
 |----------|------------------------|------|
@@ -1242,7 +1242,7 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 | 其他 | 其他element自带的事件大部分也支持 |    -     |
 
 
-## 方法
+## 方法@methods
 
 **通过 this.$refs.table1.xxx(); 方式调用**
 
@@ -1431,7 +1431,7 @@ this.$refs.table1.toggleRowSelection(arr);
 let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据源
 ```
 
-## 插槽
+## 插槽@slot
 
 ### columns中每一个key都是插槽名称
 
@@ -1550,7 +1550,7 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 
 [返回展开行](#展开行)
 
-## 万能表格搜索组件 
+## 万能表格搜索组件 @query
 
 ```html
 <!-- 表格搜索组件开始 -->
@@ -1597,7 +1597,7 @@ queryForm1:{
 
 ```
 
-### 组件属性
+### 组件属性@query-props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -1612,7 +1612,7 @@ queryForm1:{
 | @search         | 搜索按钮事件 | Function  | - | -  |
 | @reset         | 重置按钮事件 | Function  | - | -  |
 
-### columns
+### columns@query-columns
 
 queryForm1.columns 参数说明
 columns属性的写法与万能表单相似(但部分表单组件搜索不支持)
@@ -1634,7 +1634,7 @@ columns属性的写法与万能表单相似(但部分表单组件搜索不支持
 | show     | 显示规则,page代表显示在页面上，drawer代表显示在高级搜索中 | Array  | ["page"] |  ["page","drawer"] |
 | autoSearch        | 选择型组件触发change时是否自动搜索 | Boolean  | true | false  |
 
-### fieldName 参数的用处
+### fieldName 参数的用处@query-fieldname
 
 ##### 如余额按金额范围查询
 
@@ -1651,7 +1651,7 @@ columns:[
 ]
 ```
 
-### lastWhereJson 参数的用处
+### lastWhereJson 参数的用处@query-lastWhereJson
 
 **如userInfo是连表字段的as的值，想要根据 userInfo.mobile 进行查询**
 
@@ -1664,7 +1664,7 @@ columns:[
 ]
 ```
 
-### mode
+### mode@query-mode
 
 queryForm1.columns 中 mode 参数详情
 
@@ -1701,7 +1701,7 @@ queryForm1.columns 中 mode 参数详情
 
 ___tips: 左右各 3 个下划线____
 
-## vk.baseDao.getTableData
+## vk.baseDao.getTableData@query-getTableData
 
 用法与 `vk.baseDao.selects` 基本相似，除了以下区别
  
@@ -1807,7 +1807,7 @@ sortArr 参数说明
 | type           | 排序类型            | String | asc（升序）  | desc（降序） |
 
 
-## 万能表格合计列的示例
+## 万能表格合计列的示例@show-summary
 
 ### 简单模式
 

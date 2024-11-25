@@ -28,7 +28,7 @@ sidebarDepth: 1
 
 ### 你甚至还可以通过 `表单可视化拖拽工具` 直接生成`vk框架代码` [点击体验](https://vkunicloud.fsq.pub/vk-form-visualizer/)
 
-## 基础用法
+## 基础用法@base
 
 vk-data-dialog为弹窗表单，去掉则为表单页面
 
@@ -110,13 +110,13 @@ export default {
 }
 ```
 
-## 进阶用法
+## 进阶用法@pro
 
 请直接看示例文件 `/pages_template/components/form/form-pro`
 
 # API
 
-## 属性
+## 属性@props
 
 | 参数							| 说明																																																													| 类型						| 默认值		| 可选值				|
 |------------------	|-----------------------																																																				|---------				|--------		|-------				|
@@ -149,7 +149,7 @@ export default {
 | columns-number		| 横向表单每行显示数量																																																					| Number					| 2					| -							|
 | need-alert				| 表单请求失败后，是否自动alert弹窗（若设为false，则可以通过监听fail事件自己处理错误）																					|Boolean					| true			| false					|
 
-### columns（字段渲染规则）
+### columns（字段渲染规则）@columns
 
 columns是一个数组，数组内每个元素有以下属性，每个元素代表一个表单元素
 
@@ -169,7 +169,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 | watch				| 监听key对应的值的改变（只监听组件内部造成的值的改变） [查看](#watch-监听)					| Function									| -			| -			|
 
 
-### key（字段名）
+### key（字段名）@columns-key
 
 字段名，如下方代码中，`key` 为 `nickname`，代表绑定 `nickname` 字段
 
@@ -177,7 +177,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 { key: "nickname", title:"昵称", type:"text", },
 ```
 
-### title（标题）
+### title（标题）@columns-title
 
 字段显示的名称，如下方代码中，`title` 为 `昵称`，代表该字段以别名 `昵称` 显示在页面上。
 
@@ -185,7 +185,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 { key: "nickname", title:"昵称", type:"text", },
 ```
 
-### type（组件类型）
+### type（组件类型）@columns-type
 
 页面需要渲染的组件类型，如下方代码中，`type` 为 `text`，在 `万能表格` 中渲染为 `字符串`，在 `万能表单` 中渲染为 `input输入框`
 
@@ -193,8 +193,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 { key: "nickname", title:"昵称", type:"text", },
 ```
 
-
-### width（宽度）
+### width（宽度）@columns-width
 
 单位是px，只能是数字，如下
 
@@ -202,13 +201,13 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 { key: "nickname", title:"昵称", type:"text", width: 200 },
 ```
 
-### placeholder（占位符）
+### placeholder（占位符）@columns-placeholder
 
 占位符，类似 `input` 组件中的 `placeholder` （即用户还未输入任何内容时输入框内的提示）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/8ccbc513-8bad-4a8f-903e-e745dfdecdfd.png)
 
-### tips（下方的固定提示）
+### tips（下方的固定提示）@columns-tips
 
 下方的固定提示，与 `placeholder` 不同的是：不管用户是否输入信息，此提示一直都在。而 `placeholder` 是当用户输入内容后，提示就隐藏了。
 
@@ -248,15 +247,15 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 },
 ```
 
-### labelWidth（单独设置label宽度）
+### labelWidth（单独设置label宽度）@columns-labelWidth
 
 默认在万能表单的属性上设置统一的labelWidth，如果在columns内设置了labelWidth，则此为准
 
-### showLabel（是否显示label）
+### showLabel（是否显示label）@columns-showLabel
 
 默认为true，当设置为false时，对应的title不显示。
 
-### show（复用时的显示规则）
+### show（复用时的显示规则）@columns-show
 
 表单组件的组件 `form-type` 可以动态复用同一个表单达到显示不同字段的功能。
 
@@ -268,7 +267,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 * 如果 show 的某元素中包含 `form-type`的值，则代表显示。
 * 如果 show 的某元素中不包含 `form-type`的值，则不显示。
 
-### showRule（自定义显示规则）
+### showRule（自定义显示规则）@columns-showRule
 
 与 show 不同，showRule 更灵活。
 
@@ -335,7 +334,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 },
 ```
 
-### disabled（自定义禁用规则）
+### disabled（自定义禁用规则）@columns-disabled
 
 `disabled` 和 `showRule` 基本写法一致，功能区别是，`showRule` 是满足条件则显示，`disabled` 是满足条件则禁用。
 
@@ -393,7 +392,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 },
 ```
 
-### watch（监听）
+### watch（监听）@columns-watch
 
 用于监听key对应的值的改变（只监听组件内部造成的值的改变）
 
@@ -408,8 +407,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 }
 ```
 
-
-### inline（行内表单）
+### inline（行内表单）@inline
 
 ```html
 <vk-data-form
@@ -430,7 +428,7 @@ columns:[
 ]
 ```
 
-### type（组件类型）
+### type（组件类型）@columns-type
 type类型（更多请见：`/pages_template/components/form/form-pro`）
 
 ```js
@@ -617,7 +615,7 @@ form1:{
 }
 ```
 
-### before-action（请求前拦截）
+### before-action（请求前拦截）@before-action
 
 ```html
 <vk-data-form
@@ -644,7 +642,7 @@ data: function() {
 }
 ```
 
-### rules（表单验证）
+### rules（表单验证）@rules
 
 表单验证规则，和 element 表单验证规则一致，以下是部分示例
 
@@ -803,7 +801,7 @@ data: function() {
 }
 ```
 
-## 事件
+## 事件@event
 
 | 事件名   | 说明                    | 回调参数 |
 |----------|------------------------|------|
@@ -829,7 +827,7 @@ methods: {
 },
 ```
 
-## 方法
+## 方法@methods
 
 通过 this.$refs.form1.xxx(); 方式调用
 
@@ -873,7 +871,7 @@ this.$refs.form1.setResetFormData(data);
 this.$refs.form1.resetForm();
 ```
 
-## 插槽
+## 插槽@slot
 
 ### columns中每一个key都是插槽名称
 
@@ -945,7 +943,7 @@ adopt(status){
 }
 ```
 
-## http请求模式
+## http请求模式@http
 
 **示例代码**
 
@@ -961,7 +959,7 @@ adopt(status){
 ></vk-data-form>
 ```
 
-## 自定义function请求模式
+## 自定义function请求模式@function
 
 > vk-unicloud-admin-ui 的npm依赖版本需 >= 1.17.0
 
@@ -971,7 +969,7 @@ adopt(status){
 
 劣势：代码量较多
 
-### 自定义function-http请求模式示例
+### 自定义function-http请求模式示例@function-http
 
 ```html
 <vk-data-form
@@ -1024,7 +1022,7 @@ export default {
 }
 ```
 
-### 自定义function-云函数请求示例
+### 自定义function-云函数请求示例@function-cloud
 
 ```html
 <vk-data-form
@@ -1075,7 +1073,7 @@ export default {
 
 ## 弹窗表单独立组件形式
 
-### 接口名：vk.pubfn.openForm
+### 接口名：vk.pubfn.openForm@openForm
 
 **介绍**
 
@@ -1305,7 +1303,7 @@ export default {
 - 4、完成，此时点击【角色绑定】按钮即可弹出表单【角色绑定】
 
 
-## 表单可视化拖拽工具
+## 表单可视化拖拽工具@visualizer
 
 可直接生成 `vk框架代码` 和 `element` 原生代码 [点击体验](https://vkunicloud.fsq.pub/vk-form-visualizer/)
 

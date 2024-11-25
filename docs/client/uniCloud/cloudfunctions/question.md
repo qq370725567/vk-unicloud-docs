@@ -2,15 +2,15 @@
 sidebarDepth: 0
 ---
 
-# 云端操作常见问题
+# 云端操作常见问题@cloud
 
 [点击查看更多问题解答](https://vkdoc.fsq.pub/client/question/question.html)
 
-## 如何在云函数中访问http服务
+## 如何在云函数中访问http服务@cloud1
 
 [传送门](https://vkdoc.fsq.pub/client/jsapi.html#vk-request-%E4%BA%91%E7%AB%AF%E8%B0%83%E7%94%A8)
 
-## 请求云函数报403错误
+## 请求云函数报403错误@cloud2
 
 ```js
 code=403 为权限不足，通常是因为你写的云函数没有放在`pub`或`kh`目录下导致的
@@ -19,26 +19,26 @@ kh目录：只有登录用户才可以请求的云函数
 sys目录：登录且拥有对应权限的用户才可以请求的云函数
 ```
 
-## 云函数中时区问题导致获取到的本月起始时间和截止时间不准确
+## 云函数中时区问题导致获取到的本月起始时间和截止时间不准确@cloud3
 
 ```js
 // 使用以下api可以解决时区问题：
 let commonTime = vk.pubfn.getCommonTime(new Date());
 ```
 
-## 云函数中如何使用缓存
+## 云函数中如何使用缓存@cloud4
 
 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cache/cache.html)
 
-## 云函数中如何将网络图片上传到云储存
+## 云函数中如何将网络图片上传到云储存@cloud5
 
 [传送门](https://vkdoc.fsq.pub/client/question/question.html#%E4%BA%91%E5%87%BD%E6%95%B0%E4%B8%AD%E5%A6%82%E4%BD%95%E5%B0%86%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E5%88%B0%E4%BA%91%E5%82%A8%E5%AD%98)
 
-## 云函数中如何将网络图片转成base64
+## 云函数中如何将网络图片转成base64@cloud6
 
 [传送门](https://vkdoc.fsq.pub/client/question/question.html#%E4%BA%91%E5%87%BD%E6%95%B0%E4%B8%AD%E5%A6%82%E4%BD%95%E5%B0%86%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E8%BD%AC%E6%88%90base64)
 
-## 云函数中如何调用另一个云函数
+## 云函数中如何调用另一个云函数@cloud7
 
 #### 方式一（推荐，vk-unicloud版本需>=2.9.0）
 **注意：方式一只支持符合VK框架路由规则的云函数或云对象**

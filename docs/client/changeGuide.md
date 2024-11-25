@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # client端框架升级指南
 
-## 方式一：升级整个框架
+## 方式一：升级整个框架@all
 
 ![输入图片说明](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/88cbde8c-30ac-4dbc-adbc-03fb675a34a7.png "插件更新方法.png")
 
@@ -24,7 +24,7 @@ sidebarDepth: 0
 
 **记得重新上传公共模块和云函数**
 
-## 方式二：只升级模块
+## 方式二：只升级模块@module
 
 右键项目根目录下的 `uni_modules` 目录，再点击从插件市场更新
 

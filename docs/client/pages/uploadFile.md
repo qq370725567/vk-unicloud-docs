@@ -4,9 +4,9 @@ sidebarDepth: 0
 
 # 前端文件上传
 
-## 接口名：vk.uploadFile
+## 接口名：vk.uploadFile@uploadFile
 
-## 请求参数
+## 请求参数@parame
 
 | 参数									| 说明																										| 类型		| 默认值	| 可选值|
 |------------------			|-------------------------------													|---------|--------	|-------|
@@ -30,7 +30,7 @@ sidebarDepth: 0
 
 uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](https://vkdoc.fsq.pub/client/question/q9.html)
 
-## 返回值
+## 返回值@return
 
 **vk-unicloud 核心库版本 ≥ 2.17.0 时**
 
@@ -69,7 +69,7 @@ uniCloud 和 env 参数用法与vk.callFunction 用法一致 [点击查看](http
 |fileID		|string	|云端文件URL								|
 |url			|string	|云端文件URL，与fileID一致	|
 
-## 上传文件示例代码
+## 上传文件示例代码@demo
 
 ```js
 // 选择图片
@@ -96,9 +96,9 @@ uni.chooseImage({
 });
 ```
 
-## 配置默认云存储供应商
+## 配置默认云存储供应商@default
 
-### 默认上传至unicloud空间内置存储
+### 默认上传至unicloud空间内置存储@defaultunicloud
 
 在 `app.config.js` 中配置 `cloudStorage.defaultProvider` 值为 `unicloud`
 
@@ -120,7 +120,7 @@ service: {
 },
 ```
 
-### 默认上传至扩展存储
+### 默认上传至扩展存储@defaultExtStorage
 
 **版本要求**
 
@@ -176,7 +176,7 @@ https://upload.qiniup.com
 
 最后复制最新框架项目中的云函数 `user/pub/getUploadFileOptionsForExtStorage` 到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）[传送门 - 最新框架项目](https://ext.dcloud.net.cn/plugin?id=2204)
 
-### 默认上传至阿里云OSS
+### 默认上传至阿里云OSS@defaultaliyunoss
 
 1. 在 `app.config.js` 中配置 `cloudStorage.defaultProvider` 值为 `aliyun`
 2. 修改 `cloudStorage.aliyun` 内的参数
@@ -248,7 +248,7 @@ Etag
 x-oss-request-id
 ```
 
-## 完整配置
+## 完整配置@config
 
 配置文件在项目根目录的 `app.config.js` 文件
 
@@ -305,9 +305,9 @@ service: {
 },
 ```
 
-## 更多示例
+## 更多示例@example
 
-### 上传图片，并将图片记录保存到admin后台
+### 上传图片，并将图片记录保存到admin后台@example1
 
 关键属性：`设置 needSave 为 true`
 
@@ -364,7 +364,7 @@ uni.chooseImage({
 
 ```
 
-### 自定义云端图片保存路径
+### 自定义云端图片保存路径@example2
 
 通过 cloudPath 参数可直接指定路径（需包含文件后缀名）
 
@@ -392,7 +392,7 @@ uni.chooseImage({
 });
 ```
 
-### 监听实时上传进度回调
+### 监听实时上传进度回调@example3
 
 关键属性：onUploadProgress
 
@@ -423,7 +423,7 @@ uni.chooseImage({
 });
 ```
 
-## 小程序域名白名单
+## 小程序域名白名单@whitelist
 
 小程序需要添加域名白名单，否则无法正常使用
 
@@ -443,16 +443,16 @@ https://upload.qiniup.com
 
 下载域名就是你开通扩展存储时绑定的自定义域名，将你的自定义域名添加到download合法域名列表中
 
-## 常见问题
+## 常见问题@q
 
-### 小程序本地可以上传，体验版小程序无法上传
+### 小程序本地可以上传，体验版小程序无法上传@q1
 
 通常都是因为域名白名单没有添加导致的，检查上传域名是否已加入到小程序的uploadFile合法域名列表中，[查看小程序域名白名单](#小程序域名白名单)
 
-### 上传扩展存储报错，云函数user/pub/getUploadFileOptionsForExtStorage不存在
+### 上传扩展存储报错，云函数user/pub/getUploadFileOptionsForExtStorage不存在@q2
 
 下载最新框架项目，去复制这个云函数到你的项目中（扩展存储上传需要依赖这个云函数来获取上传token）
 
-### 我之前用的unicloud内置存储，现在想换成扩展存储，我的vk.uploadFile代码是否要指定provider为extStorage才行？
+### 我之前用的unicloud内置存储，现在想换成扩展存储，我的vk.uploadFile代码是否要指定provider为extStorage才行？@q3
 
 不需要，只需要修改配置即可，将 `defaultProvider` 设置成 `extStorage` 则默认 `vk.uploadFile` 都会上传到扩展存储 [查看配置](#完整配置)

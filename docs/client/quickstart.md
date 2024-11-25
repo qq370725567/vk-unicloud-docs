@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 > 下载地址：[https://ext.dcloud.net.cn/plugin?id=2204](https://ext.dcloud.net.cn/plugin?id=2204)
 
-## 后端（云端）安装步骤
+## 后端（云端）安装步骤@cloud
 
 `uniCloud` 目录为云端目录（此目录内的文件不会被打包到前端）
 
@@ -31,7 +31,7 @@ sidebarDepth: 0
 
 查看 `uni-id/config.json` 代码格式 [传送门](https://vkdoc.fsq.pub/client/uniCloud/config/uni-id.html)
 
-## 前端（页面）安装步骤
+## 前端（页面）安装步骤@client
 
 ### Vue2.0版本
 
@@ -110,7 +110,7 @@ export function createApp() {
 
 ### 自 client端框架 2.6.0 起，不再内置任何 UI 框架，你可以选择自己喜欢的 UI 组件库进行开发。
 
-### 集成 `vk-uview-ui`（vue2.0版）
+### 集成 `vk-uview-ui`（vue2.0版）@vkuviewui2
 
 ___若不想集成 `vk-uview-ui` 可跳过此处___
 
@@ -139,7 +139,7 @@ Vue.use(uView);
 @import "@/uni_modules/vk-uview-ui/theme.scss";
 ```
 
-### 集成 `vk-uview-ui`（vue3.0版）
+### 集成 `vk-uview-ui`（vue3.0版）@vkuviewui3
 
 ___若不想集成 `vk-uview-ui` 可跳过此处___
 
@@ -209,7 +209,7 @@ export function createApp() {
 @import "@/uni_modules/vk-uview-ui/theme.scss";
 ```
 
-### 集成 `uview-ui`（nvue2.0版）
+### 集成 `uview-ui`（nvue2.0版）@uviewui2
 
 ___若不想集成 `uview-ui` 可跳过此处___
 
@@ -240,11 +240,11 @@ Vue.use(uView);
 @import "@/uni_modules/uview-ui/theme.scss";
 ```
 
-### 集成 `uview-ui`（nvue3.0版）
+### 集成 `uview-ui`（nvue3.0版）@uviewui3
 
 别想了，还没出生。
 
-### 集成 `tmui`（vue2.0版）
+### 集成 `tmui`（vue2.0版）@tmui2
 
 ___若不想集成 `tmui` 可跳过此处___
 
@@ -346,7 +346,7 @@ const modulesList = require.context('@/store', true, /\.js$/);
 const modulesList = require.context('@/store/modules', true, /\.js$/);
 ```
 
-### 集成 `tmui`（nvue3.0版）
+### 集成 `tmui`（nvue3.0版）@tmui3
 
 ___若不想集成 `tmui` 可跳过此处___
 

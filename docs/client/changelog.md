@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # client框架目录结构
 
-## 前端（页面）目录结构
+## 前端（页面）目录结构@client
 
 ```js
 .
@@ -31,7 +31,7 @@ sidebarDepth: 0
 
 以上标记为【重要】的目录是你实际开发过程中会经常使用的。
 
-## 后端（云函数）目录结构
+## 后端（云函数）目录结构@cloud
 
 [点击查看](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/catalogue.html)
 

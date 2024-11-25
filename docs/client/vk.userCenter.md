@@ -21,7 +21,7 @@
 </script>
 ```
 
-## 公共请求参数
+## 公共请求参数@publicparame
 
 |参数				|说明																																																																																									|类型						|
 |:-:				|:-:																																																																																									|:-:						|
@@ -92,16 +92,16 @@ loading:{ that:this, name:"page.loading"}
 </script>
 ```
 
-## 公共返回信息
+## 公共返回信息@publicreturn
 
 | 参数   | 说明       | 类型    | 
 |------- |-----------|---------|
 | code    |  错误码    | Number  |
 | msg  |   错误提示    | String  |
 
-## 监听
+## 监听@watch
 
-### vk.onRefreshToken（监听token更新事件）
+### vk.onRefreshToken（监听token更新事件）@onRefreshToken
 
 **在App.vue里全局监听示例：**
 
@@ -152,7 +152,7 @@ export default {
 }
 ```
 
-### vk.offRefreshToken（移除监听token更新事件）
+### vk.offRefreshToken（移除监听token更新事件）@offRefreshToken
 
 **一般只有在某个页面里局部监听时才需要用到**
 
@@ -185,9 +185,9 @@ export default {
 }
 ```
 
-## 通用
+## 通用@common
 
-### vk.userCenter.register（注册）
+### vk.userCenter.register（注册）@register
 
 通过用户名+密码方式进行注册，注册成功则自动登录。
 
@@ -223,7 +223,7 @@ vk.userCenter.register({
 ```
 
 
-### vk.userCenter.login（登录）
+### vk.userCenter.login（登录）@login
 
 用户名+密码
 
@@ -255,7 +255,7 @@ vk.userCenter.login({
 });
 ```
 
-### vk.userCenter.updatePwd（修改密码）
+### vk.userCenter.updatePwd（修改密码）@updatePwd
 
 ```js
 /**
@@ -278,7 +278,7 @@ vk.userCenter.updatePwd({
 });
 ```
 
-### vk.userCenter.logout（登出）
+### vk.userCenter.logout（登出）@logout
 
 ```js
 /**
@@ -293,7 +293,7 @@ vk.userCenter.logout({
 ```
 
 
-### vk.userCenter.resetPwd（重置密码）
+### vk.userCenter.resetPwd（重置密码）@resetPwd
 
 ```js
 /**
@@ -312,7 +312,7 @@ vk.userCenter.resetPwd({
 });
 ```
 
-### vk.userCenter.setAvatar（设置头像）
+### vk.userCenter.setAvatar（设置头像）@setAvatar
 
 ```js
 /**
@@ -333,7 +333,7 @@ vk.userCenter.setAvatar({
 });
 ```
 
-### vk.userCenter.updateUser（设置昵称等）
+### vk.userCenter.updateUser（设置昵称等）@updateUser
 
 ```js
 /**
@@ -354,7 +354,7 @@ vk.userCenter.updateUser({
 });
 ```
 
-### vk.userCenter.getCurrentUserInfo（取用户信息）
+### vk.userCenter.getCurrentUserInfo（取用户信息）@getCurrentUserInfo
 
 调用此接口会自动更新本地vuex里的用户信息
 
@@ -373,7 +373,7 @@ vk.userCenter.getCurrentUserInfo({
 });
 ```
 
-### vk.userCenter.loginByToken（刷新token）
+### vk.userCenter.loginByToken（刷新token）@loginByToken
 
 > vk-unicloud版本需 ≥ 2.18.7
 
@@ -387,7 +387,7 @@ vk.userCenter.getCurrentUserInfo({
 vk.userCenter.loginByToken();
 ```
 
-### vk.userCenter.checkToken（token云端校验）
+### vk.userCenter.checkToken（token云端校验）@checkTokenforcloud
 
 **注意：实际开发过程中，无需你主动执行这个api来判断用户tokne是否有效**
 
@@ -410,7 +410,7 @@ vk.userCenter.checkToken({
 });
 ```
 
-### vk.checkToken（token本地校验）
+### vk.checkToken（token本地校验）@checkToken
 
 **此api无网络请求，无延迟**
 
@@ -448,7 +448,7 @@ if (!vk.checkToken()) {
 
 ```
 
-### vk.getToken（获取本地token）
+### vk.getToken（获取本地token）@getToken
 
 注意：token会自动传给云函数，云函数也会自动解析token，故一般情况下，无需调用此api，如真需要，可使用此api获取。
 
@@ -458,9 +458,9 @@ if (!vk.checkToken()) {
 let token = vk.getToken();
 ```
 
-## 手机号
+## 手机号@mobile
 
-### vk.userCenter.bindMobile（绑定手机）
+### vk.userCenter.bindMobile（绑定手机）@bindMobile
  
 ```js
 /**
@@ -481,7 +481,7 @@ vk.userCenter.bindMobile({
 });
 ```
 
-### vk.userCenter.unbindMobile（解绑手机）
+### vk.userCenter.unbindMobile（解绑手机）@unbindMobile
 
 ```js
 /**
@@ -502,7 +502,7 @@ vk.userCenter.unbindMobile({
 });
 ```
 
-### vk.userCenter.bindNewMobile（换绑手机号）
+### vk.userCenter.bindNewMobile（换绑手机号）@bindNewMobile
 
 ```js
 /**
@@ -530,7 +530,7 @@ vk.userCenter.bindNewMobile({
 });
 ```
 
-### vk.userCenter.loginBySms（手机号登录）
+### vk.userCenter.loginBySms（手机号登录）@loginBySms
 
 ___框架会自动保存 `token`，无需你再手动去保存。___
 
@@ -564,7 +564,7 @@ vk.userCenter.loginBySms({
 });
 ```
 
-### vk.userCenter.sendSmsCode（发送手机号验证码）
+### vk.userCenter.sendSmsCode（发送手机号验证码）@sendSmsCode
 
 ```js
 /**
@@ -588,7 +588,7 @@ vk.userCenter.sendSmsCode({
 });
 ```
 
-### vk.userCenter.resetPasswordByMobile（根据手机验证码重置账号密码）
+### vk.userCenter.resetPasswordByMobile（根据手机验证码重置账号密码）@resetPasswordByMobile
 
 ```js
 /**
@@ -615,7 +615,7 @@ vk.userCenter.resetPasswordByMobile({
 
 * 对应发送短信验证码接口 `type` 为 `reset-pwd`
 
-### vk.userCenter.loginByUniverify（手机一键登录）
+### vk.userCenter.loginByUniverify（手机一键登录）@loginByUniverify
 
 只有 `APP` 端可以用
 
@@ -675,9 +675,9 @@ vk.userCenter.loginByUniverify({
 });
 ```
 
-## 邮箱
+## 邮箱@email
 
-### vk.userCenter.bindEmail（绑定邮箱）
+### vk.userCenter.bindEmail（绑定邮箱）@bindEmail
 
 ```js
 /**
@@ -698,7 +698,7 @@ vk.userCenter.bindEmail({
 });
 ```
 
-### vk.userCenter.unbindEmail（解绑邮箱）
+### vk.userCenter.unbindEmail（解绑邮箱）@unbindEmail
 
 ```js
 /**
@@ -718,7 +718,7 @@ vk.userCenter.unbindEmail({
 });
 ```
 
-### vk.userCenter.bindNewEmail（换绑邮箱）
+### vk.userCenter.bindNewEmail（换绑邮箱）@bindNewEmail
 
 ```js
 /**
@@ -742,7 +742,7 @@ vk.userCenter.bindNewEmail({
 });
 ```
 
-### vk.userCenter.loginByEmail（邮箱登录）
+### vk.userCenter.loginByEmail（邮箱登录）@loginByEmail
 
 ___框架会自动保存 `token`，无需你再手动去保存。___
 
@@ -775,7 +775,7 @@ vk.userCenter.loginByEmail({
 });
 ```
 
-### vk.userCenter.sendEmailCode（发送邮件验证码）
+### vk.userCenter.sendEmailCode（发送邮件验证码）@sendEmailCode
 
 ```js
 /**
@@ -801,7 +801,7 @@ vk.userCenter.sendEmailCode({
 });
 ```
 
-### vk.userCenter.resetPasswordByEmail（根据邮箱证码重置账号密码）
+### vk.userCenter.resetPasswordByEmail（根据邮箱证码重置账号密码）@resetPasswordByEmail
 
 ```js
 /**
@@ -828,15 +828,15 @@ vk.userCenter.resetPasswordByEmail({
 
 * 对应发送邮件验证码接口 `type` 为 `reset-pwd`
 
-## 微信
+## 微信@weixin
 
-### vk.userCenter.loginByWeixin（微信登录）
+### vk.userCenter.loginByWeixin（微信登录）@loginByWeixin
 
 ___框架会自动保存 `token`，无需你再手动去保存。___
 
 [查看token介绍](#token介绍) 
 
-#### 微信小程序登录
+#### 微信小程序登录@loginByWeixinMp
 
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-weixin` 的 `appid` 和 `appsecret`
 
@@ -848,7 +848,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/3f52a650-759d-4c21-a526-7041d4bcbca7.png)
 
-#### 微信APP登录
+#### 微信APP登录@loginByWeixinApp
 
 * 在 `manifest.json` 的APP模块配置微信登录用 `appid`
 
@@ -861,7 +861,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 **注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
 
-#### 微信公众号登录
+#### 微信公众号登录@loginByWeixinH5
 
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `h5-weixin` 的 `appid` 和 `appsecret`
 
@@ -879,7 +879,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 **注意3：网页授权时拼接的scope参数的值必须是snsapi_userinfo，同时再绑定开放平台，才能获取到unionid**
 
-#### 微信PC网站扫码登录
+#### 微信PC网站扫码登录@loginByWeixinPC
 
 * 配置 `common/uni-config-center/uni-id/config.json` 内 `h5` 的 `appid` 和 `appsecret`
 
@@ -1006,7 +1006,7 @@ let decryptedRes = vk.crypto.aes.decrypt({
 let sessionKey = decryptedRes.sessionKey;
 ```
 
-### vk.userCenter.loginByWeixinPhoneNumber（微信手机号授权登录）
+### vk.userCenter.loginByWeixinPhoneNumber（微信手机号授权登录）@loginByWeixinPhoneNumber
 
 注意事项：
 
@@ -1051,7 +1051,7 @@ loginByWeixinPhoneNumber(e) {
 ```
 
 
-### vk.userCenter.getPhoneNumber（获取微信绑定的手机号）
+### vk.userCenter.getPhoneNumber（获取微信绑定的手机号）@getPhoneNumber
 
 注意事项：
 
@@ -1094,7 +1094,7 @@ getPhoneNumber(e) {
 },
 ```
 
-### vk.userCenter.bindWeixin（绑定微信）
+### vk.userCenter.bindWeixin（绑定微信）@bindWeixin
 
 ```js
 /**
@@ -1108,7 +1108,7 @@ vk.userCenter.bindWeixin({
 });
 ```
 
-### vk.userCenter.unbindWeixin（解绑微信）
+### vk.userCenter.unbindWeixin（解绑微信）@unbindWeixin
 
 ```js
 /**
@@ -1123,7 +1123,7 @@ vk.userCenter.unbindWeixin({
 ```
 
 
-### vk.userCenter.code2SessionWeixin（获取微信openid）
+### vk.userCenter.code2SessionWeixin（获取微信openid）@code2SessionWeixin
 
 注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
  
@@ -1156,7 +1156,7 @@ let decryptedRes = vk.crypto.aes.decrypt({
 let sessionKey = decryptedRes.sessionKey;
 ```
 
-### vk.userCenter.getWeixinMPqrcode（生成微信小程序码）
+### vk.userCenter.getWeixinMPqrcode（生成微信小程序码）@getWeixinMPqrcode
 
 ```js
 /**
@@ -1183,7 +1183,7 @@ vk.userCenter.getWeixinMPqrcode({
 });
 ```
 
-### vk.userCenter.getWeixinMPscheme（生成微信小程序scheme码）
+### vk.userCenter.getWeixinMPscheme（生成微信小程序scheme码）@getWeixinMPscheme
 
 ```js
 /**
@@ -1205,7 +1205,7 @@ vk.userCenter.getWeixinMPscheme({
 ```
 
 
-### vk.userCenter.getWeixinMPurl（生成微信小程序url链接）
+### vk.userCenter.getWeixinMPurl（生成微信小程序url链接）@getWeixinMPurl
 
 ```js
 /**
@@ -1226,9 +1226,9 @@ vk.userCenter.getWeixinMPurl({
 });
 ```
 
-## 支付宝
+## 支付宝@alipay
 
-### vk.userCenter.loginByAlipay（支付宝登录）
+### vk.userCenter.loginByAlipay（支付宝登录）@loginByAlipay
 
 ___框架会自动保存 `token`，无需你再手动去保存。___
 
@@ -1274,7 +1274,7 @@ let decryptedRes = vk.crypto.aes.decrypt({
 let sessionKey = decryptedRes.sessionKey;
 ```
 
-### vk.userCenter.bindAlipay（绑定支付宝）
+### vk.userCenter.bindAlipay（绑定支付宝）@bindAlipay
 
 ```js
 /**
@@ -1288,7 +1288,7 @@ vk.userCenter.bindAlipay({
 });
 ```
 
-### vk.userCenter.unbindAlipay（解绑支付宝）
+### vk.userCenter.unbindAlipay（解绑支付宝）@unbindAlipay
 
 ```js
 /**
@@ -1304,7 +1304,7 @@ vk.userCenter.unbindAlipay({
 
 
 
-### vk.userCenter.code2SessionAlipay（获取支付宝openid）
+### vk.userCenter.code2SessionAlipay（获取支付宝openid）@code2SessionAlipay
 
 注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
  
@@ -1339,7 +1339,7 @@ let sessionKey = decryptedRes.sessionKey;
 
 ## QQ
 
-### vk.userCenter.loginByQQ（QQ登录）
+### vk.userCenter.loginByQQ（QQ登录）@loginByQQ
 
 目前仅支持app和小程序的qq登录
 
@@ -1384,7 +1384,7 @@ vk.userCenter.loginByQQ({
 });
 ```
 
-### vk.userCenter.bindQQ（绑定QQ）
+### vk.userCenter.bindQQ（绑定QQ）@bindQQ
 
 ```js
 /**
@@ -1398,7 +1398,7 @@ vk.userCenter.bindQQ({
 });
 ```
 
-### vk.userCenter.unbindQQ（解绑QQ）
+### vk.userCenter.unbindQQ（解绑QQ）@unbindQQ
 
 ```js
 /**
@@ -1412,9 +1412,9 @@ vk.userCenter.unbindQQ({
 });
 ```
 
-## 抖音
+## 抖音@douyin
 
-### vk.userCenter.loginByDouyin（抖音登录）
+### vk.userCenter.loginByDouyin（抖音登录）@loginByDouyin
 
 > vk-unicloud版本需 ≥ 2.18.8
 
@@ -1455,7 +1455,7 @@ vk.userCenter.loginByDouyin({
 });
 ```
 
-### vk.userCenter.loginByDouyinPhoneNumber（抖音手机号授权登录）
+### vk.userCenter.loginByDouyinPhoneNumber（抖音手机号授权登录）@loginByDouyinPhoneNumber
 
 > vk-unicloud版本需 ≥ 2.18.8
 
@@ -1501,7 +1501,7 @@ loginByDouyinPhoneNumber(e) {
 },
 ```
 
-### vk.userCenter.getPhoneNumber（获取抖音绑定的手机号）
+### vk.userCenter.getPhoneNumber（获取抖音绑定的手机号）@getPhoneNumber
 
 > vk-unicloud版本需 ≥ 2.18.8
 
@@ -1546,7 +1546,7 @@ getPhoneNumber(e) {
 },
 ```
 
-### vk.userCenter.bindDouyin（绑定抖音）
+### vk.userCenter.bindDouyin（绑定抖音）@bindDouyin
 
 > vk-unicloud版本需 ≥ 2.18.8
 
@@ -1562,7 +1562,7 @@ vk.userCenter.bindDouyin({
 });
 ```
 
-### vk.userCenter.unbindDouyin（解绑抖音）
+### vk.userCenter.unbindDouyin（解绑抖音）@unbindDouyin
 
 > vk-unicloud版本需 ≥ 2.18.8
 
@@ -1588,7 +1588,7 @@ let decryptedRes = vk.crypto.aes.decrypt({
 let sessionKey = decryptedRes.sessionKey;
 ```
 
-### vk.userCenter.code2SessionDouyin（获取抖音openid）
+### vk.userCenter.code2SessionDouyin（获取抖音openid）@code2SessionDouyin
 
 > vk-unicloud版本需 ≥ 2.18.8
 
@@ -1608,9 +1608,9 @@ vk.userCenter.code2SessionDouyin({
 });
 ```
 
-## 裂变分销
+## 裂变分销@distribution
 
-### vk.userCenter.setUserInviteCode（设置邀请码）
+### vk.userCenter.setUserInviteCode（设置邀请码）@setUserInviteCode
 
 ```js
 /**
@@ -1627,7 +1627,7 @@ vk.userCenter.setUserInviteCode({
 });
 ```
 
-### vk.userCenter.acceptInvite（用户接受邀请）
+### vk.userCenter.acceptInvite（用户接受邀请）@acceptInvite
 
 ```js
 /**
@@ -1647,7 +1647,7 @@ vk.userCenter.acceptInvite({
 });
 ```
 
-### vk.userCenter.getInvitedUser（获取接受邀请的用户列表）
+### vk.userCenter.getInvitedUser（获取接受邀请的用户列表）@getInvitedUser
 
 ```js
 /**
@@ -1671,7 +1671,7 @@ vk.userCenter.getInvitedUser({
 });
 ```
 
-### token介绍
+### token介绍@token
 
 以下仅为介绍 `token`，实际开发过程中，即使你不了解 `token` 的实现逻辑，也不影响你开发项目（框架已经处理完 `token` 的逻辑）。
 
