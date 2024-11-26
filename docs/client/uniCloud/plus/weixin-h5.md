@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 微信公众号API
 
-## 配置文件
+## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
 
@@ -23,7 +23,7 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 微信公众号万能API调用接口
+## 微信公众号万能API调用接口@generalapi
 
 
 **特别注意**
@@ -96,15 +96,15 @@ let requestRes = await vk.openapi.weixin.h5.request({
 
 其他返回参数参考微信公众号服务端API文档 [传送门](https://developers.weixin.qq.com/doc/offiaccount/Account_Management/Generating_a_Parametric_QR_Code.html)
 
-## 获取固定IP
+## 获取固定IP@ip
 
 **unicloud如何获取固定IP？**
 
-### 腾讯云空间
+### 腾讯云空间@ip-tcb
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/0c2634e7-b26a-4e6f-ae8b-ecdeed0772d2.png)
 
-### 阿里云空间
+### 阿里云空间@ip-aliyun
 
 直接把下面的ip都加进去即可。
 
@@ -118,7 +118,7 @@ let requestRes = await vk.openapi.weixin.h5.request({
 8.142.185.204
 ```
 
-### 支付宝云空间
+### 支付宝云空间@ip-alipay
 
 直接把下面的ip都加进去即可。
 
@@ -131,9 +131,9 @@ let requestRes = await vk.openapi.weixin.h5.request({
 
 注意：上面的IP是云端运行时的IP，若是本地运行云函数，则需要把自己电脑的外网IP加进去
 
-## 常见问题
+## 常见问题@question
 
-### 如何调用上传临时素材接口?
+### 如何调用上传临时素材接口?@q1
 
 上传素材接口与其他接口不一样，因为涉及到formData格式的参数
 
@@ -170,7 +170,7 @@ console.log('requestRes: ', requestRes)
 
 ```
 
-### 如何回复消息？
+### 如何回复消息？@q2
 
 因微信公众号回复消息需要返回xml格式，因此我们需要使用[返回集成响应](https://uniapp.dcloud.net.cn/uniCloud/http.html#integrationresponse)
 

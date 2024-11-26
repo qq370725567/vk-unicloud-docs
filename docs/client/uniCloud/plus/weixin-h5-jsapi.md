@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 > 以下API需要vk-unicloud核心库版本 >= 2.16.0
 
-## 介绍
+## 介绍@introduce
 
 微信公众号JSAPI是指微信公众平台面向网页开发者提供的基于微信内的网页API 
 
@@ -16,7 +16,7 @@ sidebarDepth: 0
 
 从上面的文档开始开发需要写很多代码才能使用微信公众号JSAPI的能力，但基于vk框架的微信公众号JSAPI只需要几行代码即可实现。见 [快速上手](#快速上手)
 
-## 配置文件
+## 配置文件@config
 
 微信公众号JSAPI依赖微信公众号API的配置
 
@@ -37,11 +37,11 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 依赖的云函数
+## 依赖的云函数@getWeiXinJsapiSign
 
 依赖云函数 `user/pub/getWeiXinJsapiSign`，文件路径：`/router/service/user/pub/getWeiXinJsapiSign.js` 如果没有这个云函数，请下载最新框架获取。
 
-## 快速上手
+## 快速上手@quickstart
 
 以微信分享为例
 
@@ -115,7 +115,7 @@ wx.scanQRCode({
 
 至于token获取，jsapi_ticket获取，页面签名等等各种繁琐的步骤再也不用管了，直接通过 `wx.xxx` 调用即可。
 
-## 多公众号调用
+## 多公众号调用@many
 
 只需要修改第一步 App.vue 的 onLaunch 的代码如下
 

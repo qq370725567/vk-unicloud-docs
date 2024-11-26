@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 百度开放平台API
 
-## 配置文件
+## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js` 文件，配置里面的 
 

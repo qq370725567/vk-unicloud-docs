@@ -4,9 +4,9 @@ sidebarDepth: 0
 
 # 短信发送（聚合版）
  
-## 调用示例
+## 调用示例@demo
 
-### 发送通知类短信（非验证码）
+### 发送通知类短信（非验证码）@sendSms
 
 ```js
 /**
@@ -45,7 +45,7 @@ let sendSmsRes = await vk.system.smsUtil.sendSms({
 });
 ```
 
-### 发送短信验证码
+### 发送短信验证码@sendSmsVerifyCode
 
 此写法会自动将验证码保存到数据库，可用于
 
@@ -67,7 +67,7 @@ let sendSmsVerifyCodeRes = await vk.system.smsUtil.sendSmsVerifyCode({
 console.log('sendSmsVerifyCodeRes: ', sendSmsVerifyCodeRes);
 ```
 
-## 配置unicloud短信
+## 配置unicloud短信@unicloud
 
 定位到文件 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 的 `service.sms`
 
@@ -83,7 +83,7 @@ console.log('sendSmsVerifyCodeRes: ', sendSmsVerifyCodeRes);
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 配置阿里云短信
+## 配置阿里云短信@aliyun
 
 定位到文件 `uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js` 的 `vk.service.sms`
 
@@ -105,9 +105,9 @@ console.log('sendSmsVerifyCodeRes: ', sendSmsVerifyCodeRes);
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 常见问题
+## 常见问题@question
 
-### 发送短信失败，报错uniCloud.sendSms由uni-cloud-sms扩展库提供，请确保云函数/云对象/clientDB依赖了此扩展库
+### 发送短信失败，报错uniCloud.sendSms由uni-cloud-sms扩展库提供，请确保云函数/云对象/clientDB依赖了此扩展库@q1
 
 需要右键云函数，管理依赖，添加uni-cloud-sms扩展库，如下图所示
 

@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 发送邮箱验证码
 
-## 配置
+## 配置@config
 
 ### 添加 vk-mail 公共模块依赖
 

@@ -1162,13 +1162,13 @@ console.log("result", result);
 
 > [unicloud-city-select 城市选择组件](https://uniapp.dcloud.net.cn/uniCloud/unicloud-city-select.html)
 
-## 常见问题
+## 常见问题@question
 
-### 使用uni-map-common后，我还需要购买5万元的地图商业授权费用吗?
+### 使用uni-map-common后，我还需要购买5万元的地图商业授权费用吗?@q1
 
 使用地图服务需要商业授权，可联系DCloud申请折扣优惠。详情参考 [商业授权相关说明](https://uniapp.dcloud.net.cn/tutorial/app-geolocation.html#lic)
 
-### 地图API报TypeError: vk.uniMap is not a constructor
+### 地图API报TypeError: vk.uniMap is not a constructor@q2
 
 1. 需要vk-unicloud核心库版本 >= 2.15.2
 2. 请确保云函数添加了相关依赖（如下图所示）

@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 > 以下API需要vk-unicloud核心库版本 >= 2.14.1
 
-## 配置文件
+## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
 
@@ -27,9 +27,9 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 授权相关API
+## 授权相关API@auth
 
-### 获取token 
+### 获取token@getAccessToken
 
 `vk.openapi.douyin.auth.getAccessToken` 
 
@@ -41,7 +41,7 @@ sidebarDepth: 0
 let access_token = await vk.openapi.douyin.auth.getAccessToken();
 ```
 
-### code换取openid 
+### code换取openid@code2Session
 
 `vk.openapi.douyin.auth.code2Session`
 
@@ -57,7 +57,7 @@ let code2SessionRes = await vk.openapi.douyin.auth.code2Session({
 });
 ```
 
-### 获取小程序码
+### 获取小程序码@getMiniCode
 
 `vk.openapi.douyin.acode.getMiniCode`
 
@@ -102,8 +102,8 @@ try {
 }
 ```
 
-## 内容安全
-### 检测文本是否违规
+## 内容安全@security
+### 检测文本是否违规@security-msgSecCheck
 
 `vk.openapi.douyin.security.msgSecCheck`
 
@@ -134,7 +134,7 @@ let msgSecCheckRes = await vk.openapi.douyin.security.msgSecCheck({
 });
 ```
 
-### 检测图片是否违规
+### 检测图片是否违规@security-imgSecCheck
 
 `vk.openapi.douyin.security.imgSecCheck`
 
@@ -150,9 +150,9 @@ let imgSecCheckRes = await vk.openapi.douyin.security.imgSecCheck({
 });
 ```
 
-## 发送消息
+## 发送消息@subscribeMessage
 
-### 发送订阅消息 
+### 发送订阅消息@subscribeMessage-send
 
 `vk.openapi.douyin.subscribeMessage.send`
 
@@ -197,7 +197,7 @@ uni.requestSubscribeMessage({
 });
 ```
 
-## 抖音小程序万能API调用接口
+## 抖音小程序万能API调用接口@generalapi
 
 **如果以上API不能满足你的需求，你可以使用这个万能API**
 
@@ -262,7 +262,7 @@ console.log('requestRes: ', requestRes);
 
 其他返回参数参考抖音小程序服务端API文档 [传送门 - 抖音官方文档](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/develop/server/interface-request-credential/get-access-token)
 
-## 多小程序调用
+## 多小程序调用@many
 
 以上所有API均支持多加2个参数 
 

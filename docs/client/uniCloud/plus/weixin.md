@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 微信小程序API
 
-## 配置文件
+## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
 
@@ -44,9 +44,9 @@ app-plus" APP（需要用到APP登录才需要配置）
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 授权相关API
+## 授权相关API@auth
 
-### 获取token 
+### 获取token@getAccessToken
 `vk.openapi.weixin.auth.getAccessToken` 
 ```js
 /**
@@ -56,7 +56,7 @@ app-plus" APP（需要用到APP登录才需要配置）
 let access_token = await vk.openapi.weixin.auth.getAccessToken();
 ```
 
-### code换取openid 
+### code换取openid@code2Session
 `vk.openapi.weixin.auth.code2Session`
 ```js
 /**
@@ -68,7 +68,7 @@ let code2SessionRes = await vk.openapi.weixin.auth.code2Session({
 });
 ```
 
-### 获取微信绑定的手机号
+### 获取微信绑定的手机号@getPhoneNumber
 
 `vk.openapi.weixin.decrypt.getPhoneNumber`
 
@@ -100,7 +100,7 @@ let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
 });
 ```
 
-### 获取小程序码
+### 获取小程序码@wxacode-getUnlimited
 `vk.openapi.weixin.wxacode.getUnlimited`
 ```js
 
@@ -158,7 +158,7 @@ try {
 ```
 
 
-### 获取scheme码
+### 获取scheme码@urlscheme-generate
 `vk.openapi.weixin.urlscheme.generate`
 ```js
 /**
@@ -189,7 +189,7 @@ let generateRes = await vk.openapi.weixin.urlscheme.generate({
 ```
 
 
-### 获取小程序URL链接
+### 获取小程序URL链接@urllink-generate
 `vk.openapi.weixin.urllink.generate`
 ```js
 /**
@@ -215,8 +215,8 @@ let generateRes = await vk.openapi.weixin.urllink.generate({
 });
 ```
 
-## 内容安全
-### 检测文本是否违规
+## 内容安全@security
+### 检测文本是否违规@security-msgSecCheck
 
 `vk.openapi.weixin.security.msgSecCheck`
 
@@ -238,7 +238,7 @@ let msgSecCheckRes = await vk.openapi.weixin.security.msgSecCheck({
 });
 ```
 
-### 检测图片是否违规
+### 检测图片是否违规@security-imgSecCheck
 
 `vk.openapi.weixin.security.imgSecCheck`
 
@@ -264,9 +264,9 @@ let imgSecCheckRes = await vk.openapi.weixin.security.imgSecCheck({
 
 - V2的检测结果是异步返回的，需要提前在微信公众平台「开发」-「开发设置」-「消息推送」开启消息服务，检测结果在 30 分钟内会推送到你的消息接收服务器。
 
-## 发送消息
+## 发送消息@subscribeMessage
 
-### 发送订阅消息 
+### 发送订阅消息@subscribeMessage-send
 
 `vk.openapi.weixin.subscribeMessage.send`
 
@@ -324,7 +324,7 @@ uni.requestSubscribeMessage({
 | 47003  |   模板参数不准确，可能为空或者不满足规则，errmsg会提示具体是哪个字段出错	    |
 | 41030  |   page路径不正确，需要保证在现网版本小程序中存在，与app.json保持一致    |
 
-### 小程序转公众号模板消息
+### 小程序转公众号模板消息@uniformMessage-send
 
 `vk.openapi.weixin.uniformMessage.send`
 
@@ -420,7 +420,7 @@ let sendRes = await vk.openapi.weixin.uniformMessage.send({
 | 45009  |   接口调用超过限额  |
 | 40013  |   不符合绑定关系要求   |
 
-### 单独公众号模板消息
+### 单独公众号模板消息@h5-templateMessage-send
 `vk.openapi.weixin.h5.templateMessage.send`
 
 该接口与 `vk.openapi.weixin.uniformMessage.send` 的区别是
@@ -507,9 +507,9 @@ let sendRes = await vk.openapi.weixin.h5.templateMessage.send({
 | 45009  |   接口调用超过限额  |
 | 40013  |   不符合绑定关系要求   |
 
-## 直播
+## 直播@livebroadcast
 
-### 获取直播间列表 
+### 获取直播间列表@livebroadcast-getLiveInfo 
 `vk.openapi.weixin.livebroadcast.getLiveInfo`
 ```js
 /**
@@ -524,7 +524,7 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 ```
 
 
-## 微信小程序万能API调用接口
+## 微信小程序万能API调用接口@generalapi
 
 **如果以上API不能满足你的需求，你可以使用这个万能API**
 
@@ -583,7 +583,7 @@ let requestRes = await vk.openapi.weixin.request({
 其他返回参数参考微信小程序服务端API文档 [传送门](https://developers.weixin.qq.com/miniprogram/dev/api-backend/)
 
 
-## 多小程序调用
+## 多小程序调用@many
 
 以上所有API均支持多加2个参数 
 

@@ -8,7 +8,7 @@ sidebarDepth: 0
 
 以扩展抖音小程序登录为例
 
-## 配置文件
+## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
 
@@ -27,7 +27,7 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 编写云函数user/pub/loginByDouyin
+## 编写云函数user/pub/loginByDouyin@loginByxxx
 
 具体代码请直接查看示例项目源代码 `router/service/user/pub/loginByDouyin.js`
 
@@ -36,7 +36,7 @@ sidebarDepth: 0
 1. code换取openid需要自己实现（框架已内置的除外）
 2. 自己定义好openid存储的字段名
 
-## 命中过滤器
+## 命中过滤器@filter
  
 如果云函数不以 `user/pub/login` 开头，则需要额外在以下2个过滤器中添加 `regExp`
 

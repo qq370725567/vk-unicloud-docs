@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 > 以下API需要vk-unicloud核心库版本 >= 2.14.3
 
-## 配置文件
+## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
 
@@ -27,9 +27,9 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 授权相关API
+## 授权相关API@auth
 
-### code换取openid 
+### code换取openid@code2Session
 
 `vk.openapi.alipay.auth.code2Session`
 
@@ -45,7 +45,7 @@ let code2SessionRes = await vk.openapi.alipay.auth.code2Session({
 });
 ```
 
-### 获取小程序码
+### 获取小程序码@getMiniCode
 
 `vk.openapi.alipay.acode.getMiniCode`
 
@@ -64,22 +64,22 @@ let qrcode = getMiniCodeRes.qr_code_url_circle_white;
 console.log('qrcode: ', qrcode);
 ```
 
-## 内容安全
-### 检测文本是否违规
+## 内容安全@security
+### 检测文本是否违规@security-msgSecCheck
 
 `vk.openapi.alipay.security.msgSecCheck`
 
 暂不支持，支付宝未开放此API。
 
-### 检测图片是否违规
+### 检测图片是否违规@security-imgSecCheck
 
 `vk.openapi.alipay.security.imgSecCheck`
 
 暂不支持，支付宝未开放此API。
 
-## 发送消息
+## 发送消息@subscribeMessage
 
-### 发送订阅消息 
+### 发送订阅消息@subscribeMessage-send
 
 `vk.openapi.alipay.subscribeMessage.send`
 
@@ -131,7 +131,7 @@ uni.requestSubscribeMessage({
 });
 ```
 
-## 支付宝小程序万能API调用接口
+## 支付宝小程序万能API调用接口@generalapi
 
 **如果以上API不能满足你的需求，你可以使用这个万能API**
 
@@ -192,7 +192,7 @@ console.log('requestRes: ', requestRes);
 
 其他返回参数参考支付宝小程序服务端API文档 [传送门 - 支付宝官方文档](https://opendocs.alipay.com/mini/a25c5d8f_alipay.open.app.qrcode.create?pathHash=2334bbff)
 
-## 多小程序调用
+## 多小程序调用@many
 
 以上所有API均支持多加2个参数 
 
