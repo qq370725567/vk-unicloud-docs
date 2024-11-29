@@ -131,8 +131,6 @@ module.exports = {
       "v3Key": "", // api v3密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 商家应用证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 商家私钥证书
-      "wxpayPublicCertSn": "", // 微信支付公钥证书的序列号 参数获取教程：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#参数的获取方式
-      "wxpayPublicCertContent": "", // 微信支付公钥内容 参数获取教程：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#参数的获取方式
     },
     // 微信 - 付款码支付
     "codepay": {
@@ -452,8 +450,6 @@ module.exports = {
       "v3Key": "", // 微信支付V3版本的api密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
-      "wxpayPublicCertSn": "", // 微信平台证书序列号，详见：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#_7-2%E3%80%81%E6%89%B9%E9%87%8F%E6%A8%A1%E5%BC%8F
-      "wxpayPublicCertContent": "" // 微信平台证书内容，详见：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/transfer3.html#_7-2%E3%80%81%E6%89%B9%E9%87%8F%E6%A8%A1%E5%BC%8F
     },
     // 微信 - 付款码支付
     "codepay": {
@@ -727,75 +723,3 @@ module.exports = {
 * 3、重新上传云函数 `vk-pay`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/627737c7-0677-4f18-88c1-1f3ea087477c.png)
-
-### 1.9.0以下的版本注意事项
-
-**支付宝**
-
-1.9.0之前，支付宝转账配置如下
-
-```js
-"transfer": {
-  "appId": "",
-  "privateKey": "",
-  "appCertSn": "", // 应用证书的序列号
-  "alipayRootCertSn": "", // 支付宝根证书的序列号
-  "sandbox": false
-}
-```
-
-`appCertSn` 和 `alipayRootCertSn` 参数获取方式
-
-> [传送门-获取证书序列号在线工具](https://vkunicloud.fsq.pub/getCertSn/#/)
-
-而1.9.0之后去掉了 `appCertSn` 和 `alipayRootCertSn`，直接使用证书代替。
-
-```js
-// 支付宝 - 转账到支付宝等资金转出接口
-"transfer": {
-  "appId": "",
-  "privateKey": "",
-  "alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'),
-  "alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'),
-  "appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'),
-  "sandbox": false
-}
-```
-
-**微信**
-
-1.9.0之前，微信转账配置如下
-
-```js
-"transfer": {
-  "appId": "",
-  "mchId": "",
-  "apiV3key": "", // api v3密钥
-  "appCertSn":"", // 商家应用证书的序列号
-  "privateKey":"", // 商家私钥
-  "wxpayPublicCertSn":"", // 微信支付公钥证书的序列号
-  "wxpayPublicCertContent": "", // 微信支付公钥内容
-}
-```
-
-* appCertSn 商家应用证书的序列号：可以直接在微信支付后台查看到证书的序列号
-
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/c87b06a2-64f2-4c6e-9bfd-2ceba8e3cd0d.png)
-
-* privateKey 商家私钥：从 `apiclient_key.pem` 这个证书的内容复制过来即可。需保持一行。
-
-[传送门 - 证书转换成一行](https://vkunicloud.fsq.pub/admin/?t=20220904#/pages_template/components/form/form-cert)
-
-而1.9.0之后
-
-```js
-"transfer": {
-  "appId": "",
-  "mchId": "",
-  "v3Key": "",
-  "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'),
-  "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'),
-  "wxpayPublicCertSn": "",
-  "wxpayPublicCertContent": ""
-},
-```

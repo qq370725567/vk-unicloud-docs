@@ -130,8 +130,6 @@ if (transferRes.code === 0) {
       "v3Key": "", // api v3密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 商家应用证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 商家私钥证书
-      "wxpayPublicCertSn": "", // 微信支付公钥证书的序列号
-      "wxpayPublicCertContent": "", // 微信支付公钥内容
     },
   }
 }
@@ -148,24 +146,6 @@ if (transferRes.code === 0) {
 * 4、appCertPath 商家应用证书（apiclient_cert.pem）的路径
 
 * 5、appPrivateKeyPath 商家私钥证书（apiclient_key.pem）的路径
-
-先把1-5的参数先填完，然后运行 `vk-uni-pay` 示例项目，将项目根目录 `使用帮助/7、vk-pay云函数示例代码/service/pay/getWxpayPublicCert.js` 文件复制到 `uniCloud/cloudfunctions/vk-pay/service/pay/` 目录中，然后启动项目，点击【获取微信支付v3平台证书】按钮，在浏览器控制台可看到证书信息。
-
-* 6、wxpayPublicCertSn 微信支付公钥证书的序列号（运行插件示例项目后获取）
-
-* 7、wxpayPublicCertContent 微信支付公钥内容（运行插件示例项目后获取）
-
-`wxpayPublicCertContent` 参数的值（需保持一行）（下方有小技巧）
-
-**秘钥文件内容转换为一行小技巧，高手可忽略**
-
-1. 打开谷歌浏览器，打开任意页面，再按F12
-2. 找到Console选项卡，这里可以执行简单的js
-3. `-----BEGIN PRIVATE KEY....不管换行不换行，都是字符串` 一定要用这个反单引号（就是键盘Tab上面那个键）框住apiclient_key.pem内的内容，按一下回车，自动把换行转化为\n
-
-**你也可以直接访问下面的链接快速转换并复制证书内容**
-
-[传送门 - 证书转换成一行](https://vkunicloud.fsq.pub/admin/?t=20220904#/pages_template/components/form/form-cert)
 
 ## 设置IP白名单
 

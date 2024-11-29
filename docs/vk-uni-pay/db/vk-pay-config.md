@@ -97,8 +97,6 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
-      "wxpayPublicCertSn": "",
-      "wxpayPublicCertContent": ""
     }
   },
   "alipay": {
