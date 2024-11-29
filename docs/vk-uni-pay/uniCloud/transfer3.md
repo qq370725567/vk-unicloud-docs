@@ -6,6 +6,8 @@ sidebarDepth: 0
 
 ## vkPay.transfer
 
+> vk-pay的版本需 >= 1.14.1
+
 **注意**
 
 需要申请开通微信支付的【商家转账到零钱】接口，如下图所示
