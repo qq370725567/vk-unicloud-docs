@@ -44,11 +44,11 @@ exports.main = async (event, context) => {
 
 | 参数			| 说明																																																																																												| 类型		| 默认值| 可选值								|
 |-------		|-----------																																																																																									|---------|-------|-------								|
-| context		|  客户端请求环境，用于自动识别支付方式，如识别是小程序支付还是APP支付还是H5支付等等  [查看详情](#context-参数)			| Object	| -			| -											|
-| provider	|  支付供应商：<br/>wxpay：微信支付官方 <br/>alipay：支付宝支付官方 <br/>appleiap：IOS内购支付 [详情](https://vkdoc.fsq.pub/vk-uni-pay/iosiap.html) <br/>vkspay：VksPay个人支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/vkspay.html)	<br/>wxpay-virtual：微信小程序虚拟支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/wxpay-virtual.html)	<br/>douyin：抖音支付	| String	| -			| wxpay、alipay、appleiap、vkspay、wxpay-virtual、douyin	|
+| context		|  客户端请求环境，用于自动识别支付方式，如识别是小程序支付还是APP支付还是H5支付等等  [详情](#context-参数)			| Object	| -			| -											|
+| provider	|  支付供应商：<br/>wxpay：微信支付官方 <br/>alipay：支付宝支付官方 <br/>appleiap：IOS内购支付 [详情](https://vkdoc.fsq.pub/vk-uni-pay/iosiap.html) <br/>vkspay：VksPay个人支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/vkspay.html)	<br/>wxpay-virtual：微信小程序虚拟支付	[详情](https://vkdoc.fsq.pub/vk-uni-pay/wxpay-virtual.html)	<br/>douyin：抖音支付 <br/>huawei：华为支付	| String	| -			| wxpay、alipay、appleiap、vkspay、wxpay-virtual、douyin、huawei	|
 | isPC			|  如果是PC扫码支付，则设为true（使用支付组件时，组件会自动上传isPC的参数）																																																										| Boolean	| false	| true									|
-| needQRcode|  是否强制使用二维码支付（让顾客扫码支付，一般用于物联网，如按摩椅上的扫码支付） [查看详情](#needqrcode-强制使用二维码支付模式)																															| Boolean	| false	| true									|
-| data			|  订单数据 [查看详情](#data-参数)																																																																														| Object	| -			|												|
+| needQRcode|  是否强制使用二维码支付（让顾客扫码支付，一般用于物联网，如按摩椅上的扫码支付） [详情](#needqrcode-强制使用二维码支付模式)																															| Boolean	| false	| true									|
+| data			|  订单数据 [详情](#data-参数)																																																																														| Object	| -			|												|
 
 ### data 参数
 
@@ -67,8 +67,8 @@ exports.main = async (event, context) => {
 | return_url	| 手机端同步回调地址，仅`provider=vkspay`时生效（选填）																																								| String	| -			| -			|
 | time_expire	| 指定支付截至时间，13位时间戳格式（选填）																																															| Number	| -			| -			|
 | auth_code		| 用户的付款码																																																											| String	| -			| -			|
-| store_id		| 付款码支付时的门店id（微信支付v3必填）																																															| String	| -			| -			|
-
+| store_id		| 微信支付v3必填，付款码支付时的门店id																																															| String	| -			| -			|
+| biz_type		| 华为支付必填，业务类型，注意类型是字符串 <br/>100001：虚拟商品购买<br/>100002：实物商品购买<br/>100003：预付类账号充值<br/>100004：航旅交通服务<br/>100005：活动票务订购<br/>100006：商业服务消费<br/>100007：生活服务消费<br/>100008：租金缴纳<br/>100009：会员费缴纳<br/>100011：其他商家消费<br/>100037：公共便民服务	| String	| -			| -			|
 
 **out_trade_no**
 
