@@ -15,7 +15,7 @@ sidebarDepth: 1
 * 配置文件是 `.js` 文件，不是 `.json` 文件
 * 配置文件是 `.js` 文件，不是 `.json` 文件
 
-## 完整的支付配置示例
+## 完整的支付配置示例@config
 
 ___注意：就算你只使用部分支付功能，如微信小程序支付，也需保留其他支付配置（其他支付配置不填即可，但不要直接删除其他配置，包括支付宝空白证书也不要删除）___
 
@@ -247,13 +247,34 @@ module.exports = {
       "token": "", // Token(令牌)，从支付信息 - 支付设置中获取
       "sandbox": false, // 是否是沙箱环境
     }
+  },
+  // 华为支付
+  "huawei": {
+    // 华为 - 元服务支付
+    "mp-harmony": {
+      "appId": "", // 应用的appId
+      "mchId": "", // 商户号
+      "mchAuthId": "", // 商户证书编号
+      "mchPrivateKey": "", // 商户私钥内容
+      "platformPublicKey": "", // 华为支付公钥
+      "clientType": "mp-harmony" // 固定 mp-harmony 请勿修改
+    },
+    // 华为 - APP支付
+    "app-harmony": {
+      "appId": "", // 应用的appId
+      "mchId": "", // 商户号
+      "mchAuthId": "", // 商户证书编号
+      "mchPrivateKey": "", // 商户私钥内容
+      "platformPublicKey": "", // 华为支付公钥
+      "clientType": "app-harmony" // 固定 app-harmony 请勿修改
+    }
   }
 }
 ```
 
 ## 分渠道支付配置示例
 
-### 支付宝
+### 支付宝@alipay
 
 ```js
 const fs = require('fs');
@@ -337,7 +358,7 @@ module.exports = {
 }
 ```
 
-### 微信支付
+### 微信支付@wxpay
 
 ```js
 const fs = require('fs');
@@ -466,7 +487,7 @@ module.exports = {
 }
 ```
 
-### ios内购支付  
+### ios内购支付@appleiap
 
 ```js
 const fs = require('fs');
@@ -502,7 +523,7 @@ module.exports = {
 }
 ```
 
-### VksPay个人支付
+### VksPay个人支付@vkspay
 
 ```js
 const fs = require('fs');
@@ -538,7 +559,7 @@ module.exports = {
 }
 ```
 
-### 微信小程序虚拟支付
+### 微信小程序虚拟支付@wxpay-virtual
 
 ```js
 const fs = require('fs');
@@ -580,7 +601,7 @@ module.exports = {
 }
 ```
 
-### 抖音支付
+### 抖音支付@douyin
 
 ```js
 const fs = require('fs');
@@ -603,7 +624,7 @@ module.exports = {
   "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
   // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
   "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
-    // 抖音支付
+  // 抖音支付
   "douyin": {
     // 抖音小程序支付，请在支付配置信息中配置URL(服务器地址)为 https://vk-pay的url化地址/vk-pay-notify/
     "mp-toutiao": {
@@ -618,7 +639,61 @@ module.exports = {
 }
 ```
 
-## 证书存放目录
+### 华为支付@huawei
+
+:::warning 提示
+
+- 鸿蒙元服务支付：HBuilderX需4.41+ [鸿蒙元服务运行教程](https://uniapp.dcloud.net.cn/tutorial/mp-harmony/intro.html)
+- 鸿蒙APP支付：暂无HBuilderX版本支持 [鸿蒙APP运行教程](https://uniapp.dcloud.net.cn/tutorial/harmony/intro.html)
+
+:::
+
+```js
+const fs = require('fs');
+const path = require('path');
+module.exports = {
+  /**
+   * 统一支付回调地址，格式为 "服务空间SpaceID":"URL化完整地址"
+   * 这里的本地开发并不是指 http://localhost:8080/ 的地址，而是另外一个服务空间的ULR化地址（如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可）
+   * 回调的云函数地址，建议填 /http/vk-pay，因为vk-pay云函数已经写好了回调处理的逻辑，否则你需要自己写全部的回调逻辑。
+   * 其中vk-pay是可以改名的，只需要修改 uniCloud/cloudfunctions/vk-pay/package.json 文件中的 "path": "/http/vk-pay", 把 /http/vk-pay 改成 /http/xxxx 即可(需要重新上传云函数vk-pay)。
+   */
+  "notifyUrl": {
+    // 本地开发环境，如果你本地开发和线上环境共用同一个服务空间则只需要填线上环境的即可
+    "mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22": "https://fc-mp-22d55e33-c2f3-22b4-55fc-7b33a6144e22.next.bspapp.com/http/vk-pay",
+    // 线上正式环境
+    "mp-6666d886-00b6-22b2-9156-84afeadcf669": "https://fc-mp-6666d886-00b6-22b2-9156-84afeadcf669.next.bspapp.com/http/vk-pay"
+  },
+  // 此密钥主要用于跨云函数回调或回调java、php等外部系统时的通信密码（建议修改成自己的，最好64位以上，更加安全）
+  // 详细介绍：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/pay-notify.html#特别注意
+  "notifyKey": "5fb2cd73c7b53918728417c50762e6d45fb2cd73c7b53918728417c50762e6d4",
+  // 自动删除N天前的订单（未付款的订单），若此值设为0，则代表不删除未付款订单，如果你的支付统计需要统计需要统计未付款订单数据，则此处可以填0
+  "autoDeleteExpiredOrders": 0, // 0代表永不删除，3代表3天（单位：天）
+  // 华为支付
+  "huawei": {
+    // 华为 - 元服务支付
+    "mp-harmony": {
+      "appId": "", // 应用的appId
+      "mchId": "", // 商户号
+      "mchAuthId": "", // 商户证书编号
+      "mchPrivateKey": "", // 商户私钥内容
+      "platformPublicKey": "", // 华为支付公钥
+      "clientType": "mp-harmony" // 固定 mp-harmony 请勿修改
+    },
+    // 华为 - APP支付
+    "app-harmony": {
+      "appId": "", // 应用的appId
+      "mchId": "", // 商户号
+      "mchAuthId": "", // 商户证书编号
+      "mchPrivateKey": "", // 商户私钥内容
+      "platformPublicKey": "", // 华为支付公钥
+      "clientType": "app-harmony" // 固定 app-harmony 请勿修改
+    }
+  }
+}
+```
+
+## 证书存放目录@cert
 
 如果你的证书名字不是图上的名字，则改名成图上对应的名字即可。
 
@@ -629,15 +704,15 @@ module.exports = {
 * 蓝色框内是支付宝证书（3个）
 * 绿色框内是微信支付证书（3个）
 
-### 支付宝支付证书生成教程 
+### 支付宝支付证书生成教程@cert-alipay
 
 [支付宝支付证书生成教程](https://docs.qq.com/doc/DWVBlVkZ1Z21SZFpS)
 
-### 微信支付证书生成教程 
+### 微信支付证书生成教程@cert-wxpay
 
 [微信支付证书生成教程](https://docs.qq.com/doc/DWUpGTW1kSUdpZGF5)
 
-## 设置异步回调notifyUrl
+## 设置异步回调notifyUrl@notifyUrl
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/c3f0b18c-8d24-440c-8752-12330c124d14.png)
 
@@ -678,7 +753,7 @@ module.exports = {
 
 支付宝证书生成指南：[点击查看](https://opendocs.alipay.com/open/291/105971)
 
-## 支付宝支付使用密钥模式
+## 支付宝支付使用密钥模式@alipayPublicKey
 
 支付宝官方推荐使用证书模式，默认已使用证书模式，但由于目前uni-id的支付宝小程序登录仅支持密钥模式，因为vk-pay也支持密钥模式，只需要更改配置如下
 
@@ -693,22 +768,22 @@ module.exports = {
 }
 ```
 
-## 特别注意
+## 特别注意@tips
 
-### 注意一
+### 注意一@tips1
 
 * 支付宝H5网站扫码支付需签约 支付宝当面付（非PC网站支付）
 * 支付宝H5移动支付需签约 支付宝当面付（非移动网站支付）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/4b40e4ab-b507-43a1-9fbb-1cc3364d67c7.png)
 
-### 注意二
+### 注意二@tips2
 
 * 每次修改了支付参数后，需要重新上传公共模块 `uni-config-center`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/5bb008ac-3032-4374-88fa-1cd66e72984f.png)
 
-### 注意三
+### 注意三@tips3
 
 * 如果提示找不到 `vk-uni-pay` 模块，则
 
