@@ -272,7 +272,7 @@ module.exports = {
 }
 ```
 
-## 分渠道支付配置示例
+## 分渠道支付配置示例@config-part
 
 ### 支付宝@alipay
 
