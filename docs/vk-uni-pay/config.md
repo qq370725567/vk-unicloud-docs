@@ -783,9 +783,26 @@ module.exports = {
   },
 }
 ```
+
 ## 为什么突然多了一个微信支付公钥？@wxpaypublickeypath
 
-微信支付官方在2024年12月左右升级了Ta的验签证书模式，原来的微信支付平台证书，证书是通过API下载的，现在改成了微信支付公钥，证书是在网页端直接下载的。[查看详情](https://vkdoc.fsq.pub/vk-uni-pay/config.html#wxpaypublickeypath)
+微信支付官方在2024年12月左右升级了Ta的验签证书模式，原来的微信支付平台证书，证书是通过API下载的，现在改成了微信支付公钥，证书是在网页端直接下载的。
+
+老的商户只能选微信支付平台证书，此时配置里的 wxpayPublicKeyPath 参数可以无视
+
+新的商户只能选择微信支付公钥模式，此时配置里的 wxpayPublicKeyPath 参数指向微信支付公钥证书地址，默认为 `wxpay/pub_key.pem`
+
+插件目前同时支持这两种证书模式，会根据 wxpayPublicKeyPath 指向的地址的证书是否有内容来判断使用哪种模式验签。
+
+**如何判断新老商户?**
+
+老商户显示的是平台证书，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/115e2f45-3e1f-455d-a689-8e0f39287a2a.png)
+
+新商户显示的是微信支付公钥，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/af5ce109-7cce-4664-b04f-fc44126441e8.png)
 
 ## 特别注意@tips
 
