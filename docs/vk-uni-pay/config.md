@@ -52,6 +52,7 @@ module.exports = {
    * v3Key              微信支付V3版本的api密钥
    * appCertPath        微信支付V3版本需要用到的证书（apiclient_cert.pem）配置示例："appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
    * appPrivateKeyPath  微信支付V3版本需要用到的证书（apiclient_key.pem）配置示例："appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+   * wxpayPublicKeyPath 微信支付V3版本需要用到的证书（pub_key.pem）配置示例："wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数），详情查看文档 https://vkdoc.fsq.pub/vk-uni-pay/config.html#wxpaypublickeypath
    * version            启用支付的版本 2代表v2版本 3 代表v3版本，默认是2
    * 特别注意：          因node18不支持v2版本的.p12证书，故建议使用v3版本
    */
@@ -66,6 +67,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - APP支付（微信支付申请APP支付）
@@ -78,6 +80,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - H5电脑网站二维码支付（微信支付申请Native支付）
@@ -90,6 +93,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - 公众号支付（微信支付申请JSAPI支付）
@@ -102,6 +106,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - 手机外部浏览器H5支付（微信支付申请H5支付）
@@ -114,6 +119,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       // 场景信息，必填
       "sceneInfo": {
         "h5_info": {
@@ -131,6 +137,7 @@ module.exports = {
       "v3Key": "", // api v3密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 商家应用证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 商家私钥证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
     },
     // 微信 - 付款码支付
     "codepay": {
@@ -141,6 +148,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     }
   },
@@ -392,6 +400,7 @@ module.exports = {
    * v3Key              微信支付V3版本的api密钥
    * appCertPath        微信支付V3版本需要用到的证书（apiclient_cert.pem）配置示例："appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
    * appPrivateKeyPath  微信支付V3版本需要用到的证书（apiclient_key.pem）配置示例："appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+   * wxpayPublicKeyPath 微信支付V3版本需要用到的证书（pub_key.pem）配置示例："wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数），详情查看文档 https://vkdoc.fsq.pub/vk-uni-pay/config.html#wxpaypublickeypath
    * version            启用支付的版本 2代表v2版本 3 代表v3版本，默认是2
    * 特别注意：          因node18不支持v2版本的.p12证书，故建议使用v3版本
    */
@@ -406,6 +415,7 @@ module.exports = {
       "v3Key": "", // 微信支付V3版本的api密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - APP支付
@@ -418,6 +428,7 @@ module.exports = {
       "v3Key": "", // 微信支付V3版本的api密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - H5网站二维码支付
@@ -430,6 +441,7 @@ module.exports = {
       "v3Key": "", // 微信支付V3版本的api密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - 公众号支付
@@ -442,6 +454,7 @@ module.exports = {
       "v3Key": "", // 微信支付V3版本的api密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     },
     // 微信 - 手机外部浏览器H5支付
@@ -454,6 +467,7 @@ module.exports = {
       "v3Key": "", // 微信支付V3版本的api密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       // 场景信息，必填
       "sceneInfo": {
         "h5_info": {
@@ -471,6 +485,7 @@ module.exports = {
       "v3Key": "", // 微信支付V3版本的api密钥
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // 微信支付V3版本需要用到的证书（apiclient_cert.pem）
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // 微信支付V3版本需要用到的证书（apiclient_key.pem）
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
     },
     // 微信 - 付款码支付
     "codepay": {
@@ -481,6 +496,7 @@ module.exports = {
       "v3Key": "", // v3的api key
       "appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
       "appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
+      "wxpayPublicKeyPath": path.join(__dirname, 'wxpay/pub_key.pem'), // v3需要用到的证书 - 微信支付公钥证书（仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数）
       "version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本（因node18不支持v2版本的.p12证书，故建议使用v3版本）
     }
   }
@@ -767,6 +783,25 @@ module.exports = {
   },
 }
 ```
+## 为什么突然多了一个微信支付公钥？@wxpaypublickeypath
+
+微信支付官方在2024年12月左右升级了Ta的验签证书模式，原来的微信支付平台证书，证书是通过API下载的，现在改成了微信支付公钥，证书是在网页端直接下载的。
+
+老的商户只能选微信支付平台证书，此时配置里的 wxpayPublicKeyPath 参数可以无视
+
+新的商户只能选择微信支付公钥模式，此时配置里的 wxpayPublicKeyPath 参数指向微信支付公钥证书地址，默认为 `wxpay/pub_key.pem`
+
+插件目前同时支持这两种证书模式，会根据 wxpayPublicKeyPath 指向的地址的证书是否有内容来判断使用哪种模式验签。
+
+**如何判断新老商户?**
+
+老商户显示的是平台证书，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/115e2f45-3e1f-455d-a689-8e0f39287a2a.png)
+
+新商户显示的是微信支付公钥，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/4cb2f3c3-0ea1-4b79-a8ce-4ffa656ae194.png)
 
 ## 特别注意@tips
 
