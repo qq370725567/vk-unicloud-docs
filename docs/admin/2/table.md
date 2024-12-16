@@ -765,6 +765,26 @@ show是一个字符串数组，columns 数组内每一个元素都可以单独�
 
 * 如果数组只有 ["none"] ，则代表都不显示
 
+**举例**
+
+**只在详情弹窗时显示**
+
+```js
+{ key: "nickname", title: "昵称", type: "text",  show: ["detail"] },
+```
+
+**只在表格行内显示**
+
+```js
+{ key: "nickname", title: "昵称", type: "text",  show: ["row"] },
+```
+
+**都不显示**
+
+```js
+{ key: "nickname", title: "昵称", type: "text",  show: ["none"] },
+```
+
 ### 动态控制字段显示和隐藏
 
 ```js
