@@ -1621,8 +1621,9 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 注意：
 
+1. 此接口需要去华为开放平台申请（申请秒通过），申请地址：[点击查看](https://developer.huawei.com/consumer/cn/console/api/scopeManage)
 
-1. 此接口需要去华为开放平台申请（申请秒通过）
+![](https://cdn.fsq.pub/vkdoc/vk-client/b1a0fbcf-3594-4966-8e43-79eac8300599.png)
 
 2. 鸿蒙App内使用华为登录的配置
 
@@ -1664,7 +1665,9 @@ vk.userCenter.loginByHuawei({
 
 注意事项：
 
-1. 此接口需要去华为开放平台申请（需要审核的，个人认证的账号大概率审核不通过）
+1. 此接口需要去华为开放平台申请（需要审核的，个人认证的账号大概率审核不通过），申请地址：[点击查看](https://developer.huawei.com/consumer/cn/console/api/scopeManage)
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/9bb19f46-e608-4fae-992a-c932965762b5.png)
 
 ```html
 <button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByHuaweiPhoneNumber">使用华为账号绑定的手机号登录/注册</button>
