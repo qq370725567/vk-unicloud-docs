@@ -1669,6 +1669,8 @@ vk.userCenter.loginByHuawei({
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/9bb19f46-e608-4fae-992a-c932965762b5.png)
 
+2. 当前的HBuilderX仅支持鸿蒙元服务内使用手机号一键登录
+
 ```html
 <button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByHuaweiPhoneNumber">使用华为账号绑定的手机号登录/注册</button>
 ```
