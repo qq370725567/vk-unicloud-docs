@@ -1051,7 +1051,7 @@ loginByWeixinPhoneNumber(e) {
 ```
 
 
-### vk.userCenter.getPhoneNumber（获取微信绑定的手机号）@getPhoneNumber
+### vk.userCenter.getPhoneNumber（获取微信绑定的手机号）@getPhoneNumberByWeixin
 
 注意事项：
 
@@ -1088,7 +1088,7 @@ getPhoneNumber(e) {
       encryptedKey: this.encryptedKey
     },
     success: (data) => {
-      vk.alert("手机号:" + data.phone);
+      vk.alert("手机号:" + data.mobile);
     }
   });
 },
@@ -1501,7 +1501,7 @@ loginByDouyinPhoneNumber(e) {
 },
 ```
 
-### vk.userCenter.getPhoneNumber（获取抖音绑定的手机号）@getPhoneNumber
+### vk.userCenter.getPhoneNumber（获取抖音绑定的手机号）@getPhoneNumberByDouyin
 
 > vk-unicloud版本需 ≥ 2.18.8
 
@@ -1540,7 +1540,7 @@ getPhoneNumber(e) {
       encryptedKey: this.encryptedKey
     },
     success: (data) => {
-      vk.alert("手机号:" + data.phone);
+      vk.alert("手机号:" + data.mobile);
     }
   });
 },
@@ -1601,6 +1601,169 @@ let sessionKey = decryptedRes.sessionKey;
  * @param {String} encryptedKey 加密信息
  */
 vk.userCenter.code2SessionDouyin({
+  success: (data) => {
+    // 成功后的逻辑
+
+  }
+});
+```
+
+
+## 华为鸿蒙@huawei
+
+### vk.userCenter.loginByHuawei（华为登录）@loginByHuawei
+
+> vk-unicloud版本需 ≥ 2.19.0
+
+___框架会自动保存 `token`，无需你再手动去保存。___
+
+[查看token介绍](#token介绍) 
+
+注意：
+
+
+1. 此接口需要去华为开放平台申请（申请秒通过）
+
+2. 鸿蒙App内使用华为登录的配置
+
+* 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.huawei` 的 `clientId` 和 `clientSecret`（注意clientId是鸿蒙应用的clientId而非鸿蒙项目的clientId，clientSecret同理）
+* 在 `manifest.json` 内配置鸿蒙App的 `包名`
+
+3. 鸿蒙元服务内使用华为登录的配置
+
+* 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-harmony.oauth.huawei` 的 `clientId` 和 `clientSecret`（注意clientId是鸿蒙应用的clientId而非鸿蒙项目的clientId，clientSecret同理）
+* 在 `manifest.json` 内配置鸿蒙元服务的 `包名`
+
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+
+```js
+/**
+ * 华为账号登录
+ * data 请求参数 说明
+ * @param {String} type 可传login或register，若为login：则不存在不会自动注册，若为register，则用户存在会报错，不传，则存在自动登录，不存在，则注册。
+ * @param {String} nickname 用户昵称（仅注册时生效）
+ * @param {String} avatar 用户头像（仅注册时生效）其他参数需要在修改云函数 user/pub/loginByDouyin 内的 customData 字段
+ * res 返回参数说明
+ * @param {String} token 登录成功之后返回的token信息
+ * @param {String} tokenExpired token过期时间
+ */
+vk.userCenter.loginByHuawei({
+  data: {
+    type: ""
+  },
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+### vk.userCenter.loginByHuaweiPhoneNumber（华为手机号授权登录）@loginByHuaweiPhoneNumber
+
+> vk-unicloud版本需 ≥ 2.19.0
+
+注意事项：
+
+1. 此接口需要去华为开放平台申请（需要审核的，个人认证的账号大概率审核不通过）
+
+```html
+<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByHuaweiPhoneNumber">使用华为账号绑定的手机号登录/注册</button>
+```
+        
+```js
+// 使用华为账号绑定的手机号登录/注册
+loginByHuaweiPhoneNumber(e) {
+  let { code } = e.detail;
+  if (!code) {
+    return false;
+  }
+  vk.userCenter.loginByHuaweiPhoneNumber({
+    data: {
+      code,
+    },
+    success: (data) => {
+      // 成功后的逻辑
+
+    }
+  });
+},
+```
+
+### vk.userCenter.getPhoneNumber（获取华为账号绑定的手机号）@getPhoneNumberByHuawei
+
+> vk-unicloud版本需 ≥ 2.19.0
+
+注意事项：
+
+1. 此接口需要去华为开放平台申请（需要审核的，个人认证的账号大概率审核不通过）
+
+```html
+<button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取华为账号绑定的手机号</button>
+```
+  
+```js
+// 获取华为账号绑定的手机号
+getPhoneNumber(e) {
+  let { code } = e.detail;
+  if (!code) {
+    return false;
+  }
+  vk.userCenter.getPhoneNumber({
+    data: {
+      code,
+    },
+    success: (data) => {
+      vk.alert("手机号:" + data.mobile);
+    }
+  });
+},
+```
+
+### vk.userCenter.bindHuawei（绑定华为账号）@bindHuawei
+
+> vk-unicloud版本需 ≥ 2.19.0
+
+```js
+/**
+ * 绑定华为账号
+ */
+vk.userCenter.bindHuawei({
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+### vk.userCenter.unbindHuawei（解绑华为账号）@unbindHuawei
+
+> vk-unicloud版本需 ≥ 2.19.0
+
+```js
+/**
+ * 解绑华为账号
+ */
+vk.userCenter.unbindHuawei({
+  success: (data) => {
+    // 成功后的逻辑
+    
+  }
+});
+```
+
+### vk.userCenter.code2SessionHuawei（获取抖音openid）@code2SessionHuawei
+
+> vk-unicloud版本需 ≥ 2.19.0
+
+```js
+/**
+ * 获取华为openid
+ * res 返回参数说明
+ * @param {String} openid 用户openid
+ * @param {String} unionid 用户unionid，可以取到此值时返回
+ * @param {String} encryptedKey 加密信息
+ */
+vk.userCenter.code2SessionHuawei({
   success: (data) => {
     // 成功后的逻辑
 
