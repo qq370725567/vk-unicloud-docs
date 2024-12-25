@@ -38,6 +38,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
+      "wxpayPublicKeyContent": "",
       "version": 3
     },
     "app-plus": {
@@ -49,6 +50,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
+      "wxpayPublicKeyContent": "",
       "version": 3
     },
     "h5": {
@@ -60,6 +62,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
+      "wxpayPublicKeyContent": "",
       "version": 3
     },
     "h5-weixin": {
@@ -71,6 +74,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
+      "wxpayPublicKeyContent": "",
       "version": 3
     },
     "mweb": {
@@ -82,6 +86,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
+      "wxpayPublicKeyContent": "",
       "version": 3,
       "sceneInfo": {
         "h5_info": {
@@ -97,6 +102,7 @@ sidebarDepth: 0
       "v3Key": "",
       "appCertContent": "",
       "appPrivateKeyContent": "",
+      "wxpayPublicKeyContent": "",
     }
   },
   "alipay": {
@@ -195,6 +201,7 @@ sidebarDepth: 0
 | v3Key								|  string	| 是	|				| 微信支付V3版本的api密钥																																							|
 | appCertContent			|  string	| 是	|				| 微信支付V3版本需要用到的证书<br/>apiclient_cert.pem 文件内的字符串的值（变成一行，且换行处需要加\n）|
 | appPrivateKeyContent|  string	| 是	|				| 微信支付V3版本需要用到的证书<br/>apiclient_key.pem 文件内的字符串的值（变成一行，且换行处需要加\n）	|
+| wxpayPublicKeyContent|  string	| 特殊	|				|微信支付V3需要用到的证书<br/>pub_key.pem 文件内的字符串的值（变成一行，且换行处需要加\n）<br/>仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数或注释掉此参数	|
 | version							|  number	| 是	|   3		| 启用支付的版本 2代表v2版本 3 代表v3版本																															|
 
 ## alipay字段（支付宝配置说明）
@@ -213,6 +220,7 @@ sidebarDepth: 0
 * 微信V2版本的 `pfx` 的值是 `apiclient_cert.p12` 证书文件转 `base64` 后的值
 * 微信V3版本的 `appCertContent` 的值是 `apiclient_cert.pem` 证书文件内的字符串的值（变成一行，且换行处需要加\n）
 * 微信V3版本的 `appPrivateKeyContent` 的值是 `apiclient_key.pem` 证书文件内的字符串的值（变成一行，且换行处需要加\n）
+* 微信V3版本的 `wxpayPublicKeyContent` 的值是 `pub_key.pem` 证书文件内的字符串的值（变成一行，且换行处需要加\n）仅限开启了微信支付公钥的商户，若已开通微信支付平台证书的商户可无视此参数或注释掉此参数，[详情查看](https://vkdoc.fsq.pub/vk-uni-pay/config.html#wxpaypublickeypath)
 * 支付宝的 `alipayPublicCertContent` 的值是 `alipayCertPublicKey_RSA2.crt` 证书文件内的字符串的值（变成一行，且换行处需要加\n）
 * 支付宝的 `alipayRootCertContent` 的值是 `alipayRootCert.crt` 证书文件内的字符串的值（变成一行，且换行处需要加\n）
 * 支付宝的 `appCertContent` 的值是 `appCertPublicKey.crt` 证书文件内的字符串的值（变成一行，且换行处需要加\n）
