@@ -1256,6 +1256,8 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/8a6fdf61-0b34-4a12-b3aa-8bdb646f035a.png)
 
+![](https://cdn.fsq.pub/vkdoc/vk-client/b3ca531f-0ec3-4051-98d4-6ab1faa8f732.png)
+
 ```js
 /**
  * 支付宝登录

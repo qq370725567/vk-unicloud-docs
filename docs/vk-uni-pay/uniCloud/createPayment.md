@@ -288,6 +288,8 @@ exports.main = async (event, context) => {
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/8a6fdf61-0b34-4a12-b3aa-8bdb646f035a.png)
 
+![](https://cdn.fsq.pub/vkdoc/vk-client/b3ca531f-0ec3-4051-98d4-6ab1faa8f732.png)
+
 ### 商家扫用户付款码支付
 
 > vk-pay的版本需 >= 1.14.0
