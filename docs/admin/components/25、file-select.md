@@ -28,6 +28,8 @@
 | updateCategory		| 是否允许编辑分类																																		| Boolean	| true		| false																	|
 | imageFit					| 图片显示模式 [详细介绍](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)| String	| cover		| fill、contain、cover、none、scale-dow	|
 | cloudDirectory    | 上传至指定的云端目录（默认会以年月日为目录）  | String  | - | - |
+| fileSize         | 限制文件大小  | Number  | - | - |
+| sizeUnit         | 文件的单位  | String  | MB | KB、MB、GB |
 
 ### 万能表格使用方式
 
