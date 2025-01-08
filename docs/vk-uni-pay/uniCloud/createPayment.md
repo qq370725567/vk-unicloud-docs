@@ -278,13 +278,15 @@ exports.main = async (event, context) => {
 
 ### 支付宝小程序支付失败，报获取支付宝账号失败
 
-因uni-id只支持userid模式，不支持openid模式，故需要前往支付宝开放平台，小程序应用-开发设置-openid配置管理-申诉为userid模式，操作步骤如下，操作完后需等待支付宝审核通过才能使用。
+因uni-id只支持userid模式，不支持openid模式，故需要前往支付宝开放平台，小程序应用-开发设置-openid配置管理-申诉为userid模式，操作步骤如下，操作完后需等待支付宝审核通过，并点击切换到uid作为用户标识后才能正常使用。
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/4ea34ab1-a274-4a11-8f07-b14c7e46365f.png)
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/20f0215c-8462-4dc0-8e4f-58fbb3a8503b.png)
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/6237e551-7e95-4d4e-8f08-807837392788.png)
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/8a6fdf61-0b34-4a12-b3aa-8bdb646f035a.png)
 
 ### 商家扫用户付款码支付
 
