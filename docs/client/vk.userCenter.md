@@ -1246,7 +1246,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 **特别注意**
 
-需要前往支付宝开放平台，小程序应用-开发设置-openid配置管理-申诉为userid模式，操作步骤如下，操作完后需等待支付宝审核通过，并点击切换到uid作为用户标识后才能正常使用。
+需要前往支付宝开放平台，小程序应用-开发设置-openid配置管理-设置-申诉为userid模式，操作步骤如下，操作完后需等待支付宝审核通过，并点击切换到uid作为用户标识后才能正常使用。
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/4ea34ab1-a274-4a11-8f07-b14c7e46365f.png)
 
@@ -1254,9 +1254,13 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/6237e551-7e95-4d4e-8f08-807837392788.png)
 
+申诉通过后，还需要再次点下-开发设置-openid配置管理-设置-切换到uid作为用户标识
+
 ![](https://cdn.fsq.pub/vkdoc/vk-client/8a6fdf61-0b34-4a12-b3aa-8bdb646f035a.png)
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/b3ca531f-0ec3-4051-98d4-6ab1faa8f732.png)
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/379a5b81-3479-469c-9d3b-266a5c650692.png)
 
 ```js
 /**
