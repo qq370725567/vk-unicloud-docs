@@ -294,6 +294,14 @@ exports.main = async (event, context) => {
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/379a5b81-3479-469c-9d3b-266a5c650692.png)
 
+### 支付宝小程序支付失败，报请开启 API 代理
+
+点击IDE，这里把代理开起来，会弹出一个二维码，手机扫码后 IDE上点击支付手机上就会弹支付弹窗了，或者直接用真机调试即可。
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/c92c4298-5d0a-475e-bd8f-8f9e1ee78115.png)
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/6e4360f1-693d-446e-aded-37fdae3de501.png)
+
 ### 商家扫用户付款码支付
 
 > vk-pay的版本需 >= 1.14.0
