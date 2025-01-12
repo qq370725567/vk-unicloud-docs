@@ -73,6 +73,8 @@ ___该表为插件支付专用表，正常你自己业务的订单还应有一�
 | vkspay_app-plus					|  VksPay - APP						|		VksPay个人支付		|
 | wxpay-virtual_mp-weixin	|  微信虚拟支付 - 微信小程序	|		微信小程序虚拟支付	|
 | douyin_mp-toutiao				|  抖音支付 - 抖音小程序		|		抖音支付					|
+| huawei_app-plus				|  华为支付 - App		|		华为支付					|
+| huawei_mp-harmony				|  华为支付 - 元服务		|		华为支付					|
 
 ### refund_list
 
