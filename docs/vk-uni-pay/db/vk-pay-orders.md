@@ -57,32 +57,43 @@ ___该表为插件支付专用表，正常你自己业务的订单还应有一�
 
 如 wxpay_mp-weixin _ 左边是支付供应商（wxpay） _ 右边是支付类型（mp-weixin）
 
-|         值							|     说明									|    对应支付产品			|
-|--------------------			|---------------					|---------------		|
-| wxpay_mp-weixin					|  微信 - 小程序						|		微信小程序支付		|
-| wxpay_app-plus					|  微信 - APP							|		微信APP支付			|
-| wxpay_h5								|  微信 - 网站二维码				|		微信Native支付		|
-| wxpay_h5-weixin					|  微信 - 公众号						|		微信JSAPI支付		|
-| wxpay_mweb							|  微信 - 手机外部浏览器H5		|		微信H5支付				|
-| alipay_mp-alipay				|  支付宝 - 小程序					|		支付宝JSAPI支付		|
-| alipay_app-plus					|  支付宝 - APP						|		支付宝APP支付			|
-| alipay_h5								|  支付宝 - H5							|		支付宝当面付			|
-| appleiap_app-plus				|  iOS内购 - APP						|		苹果应用内购			|
-| vkspay_h5								|  VksPay - H5						|		VksPay个人支付		|
-| vkspay_mp-weixin				|  VksPay - 微信小程序			|		VksPay个人支付		|
-| vkspay_app-plus					|  VksPay - APP						|		VksPay个人支付		|
+|         值							|     说明										|    对应支付产品				|
+|--------------------			|---------------						|---------------			|
+| wxpay_mp-weixin					|  微信 - 小程序							|		微信小程序支付			|
+| wxpay_app-plus					|  微信 - APP								|		微信APP支付				|
+| wxpay_h5								|  微信 - 网站二维码					|		微信Native支付			|
+| wxpay_h5-weixin					|  微信 - 公众号							|		微信JSAPI支付			|
+| wxpay_mweb							|  微信 - 手机外部浏览器H5		|		微信H5支付					|
+| alipay_mp-alipay				|  支付宝 - 小程序						|		支付宝JSAPI支付		|
+| alipay_app-plus					|  支付宝 - APP							|		支付宝APP支付			|
+| alipay_h5								|  支付宝 - H5								|		支付宝当面付				|
+| appleiap_app-plus				|  iOS内购 - APP							|		苹果应用内购				|
+| vkspay_h5								|  VksPay - H5							|		VksPay个人支付			|
+| vkspay_mp-weixin				|  VksPay - 微信小程序				|		VksPay个人支付			|
+| vkspay_app-plus					|  VksPay - APP							|		VksPay个人支付			|
 | wxpay-virtual_mp-weixin	|  微信虚拟支付 - 微信小程序	|		微信小程序虚拟支付	|
-| douyin_mp-toutiao				|  抖音支付 - 抖音小程序		|		抖音支付					|
-| huawei_app-plus				|  华为支付 - App		|		华为支付					|
-| huawei_mp-harmony				|  华为支付 - 元服务		|		华为支付					|
+| douyin_mp-toutiao				|  抖音支付 - 抖音小程序			|		抖音支付						|
+| huawei_app-plus					|  华为支付 - App						|		华为支付						|
+| huawei_mp-harmony				|  华为支付 - 元服务					|		华为支付						|
+
+### provider_pay_method
+
+字段 `provider_pay_method` 的作用：
+
+代表自定义渠道支付时选择的子支付方式，如使用抖音支付时，在抖音的支付收银台里还能选择用微信支付还是支付宝支付
+
+|         值					|     说明				|
+|--------------------	|---------------|
+| wxpay								|  微信支付			|
+| alipay							|  支付宝支付		|
 
 ### refund_list
 
 **退款详情**
 
-| 字段名称         | 字段类型    |    说明     |
-|---------------- |------------|-------------|
-| refund_date     |  timestamp | 退款时间 |
-| refund_fee      |  money     | 退款金额，单位为分，100等于1元 |
-| out_refund_no   |  String    | 退款单号 |
-| refund_desc     |  String    | 退款理由 |
+| 字段名称				| 字段类型			|    说明											|
+|----------------	|------------	|-------------								|
+| refund_date			|  timestamp	| 退款时间											|
+| refund_fee			|  money			| 退款金额，单位为分，100等于1元	|
+| out_refund_no		|  String			| 退款单号											|
+| refund_desc			|  String			| 退款理由											|
