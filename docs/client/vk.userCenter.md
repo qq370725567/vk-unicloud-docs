@@ -1626,7 +1626,6 @@ vk.userCenter.code2SessionDouyin({
 });
 ```
 
-
 ## 华为鸿蒙@huawei
 
 ### vk.userCenter.loginByHuawei（华为登录）@loginByHuawei
@@ -1790,6 +1789,44 @@ vk.userCenter.code2SessionHuawei({
   success: (data) => {
     // 成功后的逻辑
 
+  }
+});
+```
+
+## 苹果@apple
+
+### vk.userCenter.loginByApple（苹果登录）@loginByApple
+
+> vk-unicloud版本需 ≥ 2.19.2
+
+___框架会自动保存 `token`，无需你再手动去保存。___
+
+[查看token介绍](#token介绍) 
+
+注意：
+
+* 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.apple` 的 `bundleId` 即你苹果应用的包名
+* 需要打自定义基座，包名必须和uni-id配置内的 `bundleId` 一致
+
+**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+
+```js
+/**
+ * 苹果账号登录
+ * data 请求参数 说明
+ * @param {String} type 可传login或register，若为login：则不存在不会自动注册，若为register，则用户存在会报错，不传，则存在自动登录，不存在，则注册。
+ * @param {String} nickname 用户昵称（仅注册时生效）
+ * res 返回参数说明
+ * @param {String} token 登录成功之后返回的token信息
+ * @param {String} tokenExpired token过期时间
+ */
+vk.userCenter.loginByApple({
+  data: {
+    type: ""
+  },
+  success: (data) => {
+    // 成功后的逻辑
+    
   }
 });
 ```
