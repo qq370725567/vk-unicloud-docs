@@ -527,7 +527,7 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 
 > vk-unicloud版本 ≥ 2.19.2
 
-微信小程序自营类目的商家需要统一接入微信平台的发货管理，否则微信会限制支付接口的调用。
+微信小程序自营类目的商家需要统一接入微信平台的发货管理，否则微信会限制支付接口的调用，同时还可能需要商家缴纳保证金。
 
 整个流程为：
 
