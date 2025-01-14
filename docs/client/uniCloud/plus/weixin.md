@@ -523,6 +523,358 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 });
 ```
 
+## 发货管理@order
+
+> vk-unicloud版本 ≥ 2.19.2
+
+微信小程序自营类目的商家需要统一接入微信平台的发货管理，否则微信会限制支付接口的调用。
+
+整个流程为：
+
+1. 用户在你微信小程序下单
+2. 用户支付成功
+3. 后台发货，同时调用下面的[【发货信息录入接口】](#order-upload-shipping-info)，向微信平台发送支付订单信息，如果是实物商品，还可以再调用[【传运单接口】](#logistics-trace-waybill)，上报微信快递物流信息，这样再通过[【查运单接口】](#logistics-query-follow-trace)即可查询快递物流轨迹信息
+4. 微信会给支付者发送服务消息，用户点击后会进入确认收货页面，只有用户点了确认收货或订单到期自动确认收货后，商家才能收到资金，否则资金处于冻结状态
+5. 完成
+
+### 发货信息录入接口@order-upload-shipping-info
+
+`vk.openapi.weixin.order.uploadShippingInfo`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping.html#%E4%B8%80%E3%80%81%E5%8F%91%E8%B4%A7%E4%BF%A1%E6%81%AF%E5%BD%95%E5%85%A5%E6%8E%A5%E5%8F%A3)
+
+```js
+/**
+ * 发货信息录入接口
+ * @param {object} order_key             订单，需要上传物流信息的订单
+ * @param {number} logistics_type        物流模式，发货方式枚举值：1、实体物流配送采用快递公司进行实体物流配送形式 2、同城配送 3、虚拟商品，虚拟商品，例如话费充值，点卡等，无实体配送形式 4、用户自提
+ * @param {number} delivery_mode         发货模式，发货模式枚举值：1、UNIFIED_DELIVERY（统一发货）2、SPLIT_DELIVERY（分拆发货） 示例值: UNIFIED_DELIVERY
+ * @param {boolean} is_all_delivered     分拆发货模式时必填，用于标识分拆发货模式下是否已全部发货完成，只有全部发货完成的情况下才会向用户推送发货完成通知。示例值: true/false
+ * @param {array<object>} shipping_list  物流信息列表，发货物流单列表，支持统一发货（单个物流单）和分拆发货（多个物流单）两种模式，多重性: [1, 10]
+ * @param {string} upload_time           上传时间，用于标识请求的先后顺序 示例值: `2022-12-15T13:29:35.120+08:00`
+ * @param {object} payer                 支付者，支付者信息
+ */
+let uploadRes = await vk.openapi.weixin.order.uploadShippingInfo({
+	"order_key": {
+		"order_number_type": 2,
+		"transaction_id": "4200002504202501085353055271"
+	},
+	"logistics_type": 1,
+	"delivery_mode": 1,
+	"is_all_delivered": true,
+	"shipping_list": [
+		{
+			"tracking_no": "78869806474031", // 物流单号，物流快递发货时必填，示例值: 323244567777 字符字节限制: [1, 128]
+			"express_company": "ZTO", // 物流公司编码，快递公司ID，参见「查询物流公司编码列表」，物流快递发货时必填， 示例值: DHL 字符字节限制: [1, 128]
+			"item_desc": "测试商品1号*1,测试商品2号*2", // 商品信息
+			"contact": {
+				"consignor_contact": "177****1234"
+			}
+		}
+	],
+	"upload_time": vk.pubfn.timeFormat(new Date(), "yyyy-MM-ddThh:mm:ss.S+08:00", 8),
+	"payer": {
+		"openid": "oRrtV7FOndtawDfZ2Ut3ehqFkWKI"
+	}
+});
+```
+
+### 发货信息合单录入接口@order-uploadCombinedShippingInfo
+
+`vk.openapi.weixin.order.uploadCombinedShippingInfo`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping.html#%E4%BA%8C%E3%80%81%E5%8F%91%E8%B4%A7%E4%BF%A1%E6%81%AF%E5%90%88%E5%8D%95%E5%BD%95%E5%85%A5%E6%8E%A5%E5%8F%A3)
+
+```js
+/**
+ * 发货信息合单录入接口
+ * @param {object} order_key             订单，需要上传物流信息的订单
+ * @param {array<object>} sub_orders     子单物流详情
+ * @param {string} upload_time           上传时间，用于标识请求的先后顺序 示例值: `2022-12-15T13:29:35.120+08:00`
+ * @param {object} payer                 支付者，支付者信息
+ */
+let uploadRes = await vk.openapi.weixin.order.uploadCombinedShippingInfo({
+	"order_key": {
+		"order_number_type": 1,
+		"mchid": "fake-mchid-123",
+		"out_trade_no": "fake-tradeno-20221214190427-0"
+	},
+	"sub_orders": [
+		{
+			"order_key": {
+				"order_number_type": 1,
+				"mchid": "fake-mchid-123",
+				"out_trade_no": "fake-tradeno-20221214190427-01"
+			},
+			"delivery_mode": 2,
+			"logistics_type": 1,
+			"is_all_delivered": true,
+			"shipping_list": [
+				{
+					"tracking_no": "fake-trackingno-202212141904271",
+					"express_company": "YD",
+					"item_desc": "微信气泡狗零钱包*1",
+					"contact": {
+						"consignor_contact": "021-**34-12"
+					}
+				},
+				{
+					"tracking_no": "fake-trackingno-202212141904272",
+					"express_company": "DHL",
+					"item_desc": "微信黄脸布艺胸针*1；微信气泡狗零钱包*1",
+					"contact": {
+						"consignor_contact": "021-**34-12"
+					}
+				}
+			]
+		},
+		{
+			"order_key": {
+				"order_number_type": 1,
+				"mchid": "fake-mchid-321",
+				"out_trade_no": "fake-tradeno-20221214190427-02"
+			},
+			"delivery_mode": 1,
+			"logistics_type": 1,
+			"shipping_list": [
+				{
+					"tracking_no": "fake-trackingno-202212141904273",
+					"express_company": "YTO",
+					"item_desc": "微信气泡狗双面钥匙扣*1",
+					"contact": {
+						"receiver_contact": "+86-123****4321"
+					}
+				}
+			]
+		}
+	],
+	"upload_time": "2022-12-15T13:29:35.120+08:00",
+	"payer": {
+		"openid": "ogqztkPsejM9MQAFfwCQSCi4oNg3"
+	}
+});
+```
+
+### 查询订单发货状态@order-getOrder
+
+`vk.openapi.weixin.order.getOrder`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping.html#%E4%B8%89%E3%80%81%E6%9F%A5%E8%AF%A2%E8%AE%A2%E5%8D%95%E5%8F%91%E8%B4%A7%E7%8A%B6%E6%80%81)
+
+```js
+/**
+ * 查询订单发货状态
+ */
+let getOrderRes = await vk.openapi.weixin.order.getOrder({
+	transaction_id: "",
+	merchant_id: "",
+	sub_merchant_id: "",
+	merchant_trade_no: ""
+});
+```
+
+### 查询订单列表@order-getOrderList
+
+`vk.openapi.weixin.order.getOrderList`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping.html#%E5%9B%9B%E3%80%81%E6%9F%A5%E8%AF%A2%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8)
+
+```js
+/**
+ * 查询订单列表
+ */
+let getOrderRes = await vk.openapi.weixin.order.getOrderList({
+  page_size: 100
+});
+```
+
+### 确认收货提醒接口@order-notifyConfirmReceive
+
+`vk.openapi.weixin.order.notifyConfirmReceive`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping.html#%E4%BA%94%E3%80%81%E7%A1%AE%E8%AE%A4%E6%94%B6%E8%B4%A7%E6%8F%90%E9%86%92%E6%8E%A5%E5%8F%A3)
+
+```js
+/**
+ * 确认收货提醒接口
+ */
+let getOrderRes = await vk.openapi.weixin.order.notifyConfirmReceive({
+	transaction_id: "fake-transid-20221209132531-44",
+	merchant_id: "fake-mchid-123",
+	merchant_trade_no: "fake-tradeno-20221209132531-44",
+	received_time: 1670829139
+});
+```
+
+### 消息跳转路径设置接口@order-setMsgJumpPath
+
+`vk.openapi.weixin.order.setMsgJumpPath`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping.html#%E5%85%AD%E3%80%81%E6%B6%88%E6%81%AF%E8%B7%B3%E8%BD%AC%E8%B7%AF%E5%BE%84%E8%AE%BE%E7%BD%AE%E6%8E%A5%E5%8F%A3)
+
+```js
+/**
+ * 消息跳转路径设置接口
+ */
+let setRes = await vk.openapi.weixin.order.setMsgJumpPath({
+	path: "pages/order/info"
+});
+```
+
+### 查询小程序是否已开通发货信息管理服务@order-isTradeManaged
+
+`vk.openapi.weixin.order.isTradeManaged`
+
+本接口无请求参数
+
+```js
+/**
+ * 查询小程序是否已开通发货信息管理服务
+ */
+let checkRes = await vk.openapi.weixin.order.isTradeManaged();
+if (checkRes.is_trade_managed) {
+	res.msg = '已开通小程序发货信息管理服务';
+} else {
+	res.msg = '未开通小程序发货信息管理服务';
+}
+```
+
+### 查询小程序是否已完成交易结算管理确认@order-isTradeManagementConfirmationCompleted
+
+`vk.openapi.weixin.order.isTradeManagementConfirmationCompleted`
+
+本接口无请求参数
+
+```js
+/**
+ * 查询小程序是否已完成交易结算管理确认
+ */
+let checkRes = await vk.openapi.weixin.order.isTradeManagementConfirmationCompleted();
+if (checkRes.completed) {
+	res.msg = '已完成交易结算管理确认';
+} else {
+	res.msg = '未完成交易结算管理确认';
+}
+```
+
+### 特殊发货报备@order-opspecialorder
+
+`vk.openapi.weixin.order.opspecialorder`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping.html#%E5%8D%81%E3%80%81%E7%89%B9%E6%AE%8A%E5%8F%91%E8%B4%A7%E6%8A%A5%E5%A4%87)
+
+```js
+/**
+ * 特殊发货报备
+ */
+let opspecialorderRes = await vk.openapi.weixin.order.opspecialorder({
+	order_id: "123456",
+	type: 1,
+	delay_to: 1752035828
+});
+```
+
+## 物流接口@logistics
+
+> vk-unicloud版本 ≥ 2.19.2
+
+### 获取支持的快递公司列表@logistics-getAllDelivery
+
+`vk.openapi.weixin.logistics.getAllDelivery`
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/express/express-by-business/getAllDelivery.html)
+
+```js
+/**
+ * 获取支持的快递公司列表
+ */
+let getAllDeliveryRes = await vk.openapi.weixin.logistics.getAllDelivery();
+```
+
+### 传运单接口@logistics-trace-waybill
+
+`vk.openapi.weixin.logistics.traceWaybill`
+
+介绍：该接口可以上报物流快递信息，然后配合[【查运单接口】](#logistics-query-follow-trace)可以查询快递物流配送轨迹信息。
+
+此接口需要开通【物流消息】
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/da9009b2-9878-4f3a-97cb-1ce901494f86.png)
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/express/business/express_open_msg.html#_4-1%E3%80%81%E4%BC%A0%E8%BF%90%E5%8D%95%E6%8E%A5%E5%8F%A3-follow-waybill)
+
+```js
+/**
+ * 传运单接口
+ */
+let traceWaybillRes = await vk.openapi.weixin.logistics.traceWaybill({
+	"openid":"ovtZW4yB7DIj3CxOb6ii-nk4HhFo",
+	"waybill_id":"WXTESTEXPRESS0000014",
+	"sender_phone":"12345678901" ,
+	"receiver_phone":"123456566" ,
+	"delivery_id":"KYSY",
+	"goods_info":{
+		"detail_list":[
+		 {
+			 "goods_name":"测试名字",
+			 "goods_img_url":"www.qq.com"
+		 },
+		 {
+			 "goods_name":"测试名字2",
+			 "goods_img_url":"www.qq.com"
+		 }
+		]
+	}
+});
+```
+
+### 查运单接口@logistics-query-follow-trace
+
+`vk.openapi.weixin.logistics.queryFollowTrace`
+
+介绍：该接口可以查询通过[【传运单接口】](#logistics-trace-waybill)上报的快递物流配送轨迹信息
+
+此接口需要开通【物流消息】
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/da9009b2-9878-4f3a-97cb-1ce901494f86.png)
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/express/business/express_open_msg.html#_4-2%E3%80%81%E6%9F%A5%E8%BF%90%E5%8D%95%E6%8E%A5%E5%8F%A3-query-follow-trace)
+
+```js
+/**
+ * 查运单接口
+ */
+let queryFollowTraceRes = await vk.openapi.weixin.logistics.queryFollowTrace({
+	waybill_token
+});
+```
+
+### 更新物品信息接口@logistics-updateFollowWaybillGoods
+
+`vk.openapi.weixin.logistics.updateFollowWaybillGoods`
+
+此接口需要开通【物流消息】
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/da9009b2-9878-4f3a-97cb-1ce901494f86.png)
+
+请求参数请查看[微信官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/express/business/express_open_msg.html#_4-3%E3%80%81%E6%9B%B4%E6%96%B0%E7%89%A9%E5%93%81%E4%BF%A1%E6%81%AF%E6%8E%A5%E5%8F%A3-update-follow-waybill-goods)
+
+```js
+/**
+ * 更新物品信息接口
+ */
+let updateFollowWaybillGoodsRes = await vk.openapi.weixin.logistics.updateFollowWaybillGoods({
+	"waybill_token":"o_ARWHaxIxzWHmdui-AIw8SuE1QtaUZK8aUnZguAn1nsZ72ZjWlq8btV8j-wAc94",
+	"goods_info":{
+		"detail_list":[
+			{
+			 "goods_name":"测试更新商品" ,
+			 "goods_img_url":"www.qq.com"
+			}
+		]
+	}
+});
+```
 
 ## 微信小程序万能API调用接口@generalapi
 
