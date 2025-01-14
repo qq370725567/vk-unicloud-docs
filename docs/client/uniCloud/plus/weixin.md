@@ -527,7 +527,7 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 
 > vk-unicloud版本 ≥ 2.19.2
 
-微信小程序自营类目的商家需要统一接入微信平台的发货管理，否则微信会限制支付接口的调用，同时还可能需要商家缴纳保证金。
+微信小程序自营类目的商家需要统一接入微信平台的发货管理，否则微信会限制支付接口的调用。
 
 整个流程为：
 
@@ -536,6 +536,12 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 3. 后台发货，同时调用下面的[【发货信息录入接口】](#order-upload-shipping-info)，向微信平台发送支付订单信息，如果是实物商品，还可以再调用[【传运单接口】](#logistics-trace-waybill)，上报微信快递物流信息，这样再通过[【查运单接口】](#logistics-query-follow-trace)即可查询快递物流轨迹信息
 4. 微信会给支付者发送服务消息，用户点击后会进入确认收货页面，只有用户点了确认收货或订单到期自动确认收货后，商家才能收到资金，否则资金处于冻结状态
 5. 完成
+
+同时还可能需要商家缴纳保证金，金额不一定是10万，可能是几千，也可能是几万，反正很坑，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/f505118a-b444-439c-9f88-d62c9a08b77c.png)
+
+[小程序交易保证金管理规定](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/ministore/minishopopencomponent2/baozhengjin.html)
 
 ### 发货信息录入接口@order-upload-shipping-info
 
