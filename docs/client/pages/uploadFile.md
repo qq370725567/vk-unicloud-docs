@@ -129,34 +129,67 @@ service: {
 
 **配置步骤**
 
-1. 在 `app.config.js` 中配置 `cloudStorage.defaultProvider` 值为 `extStorage`
-2. 修改 `cloudStorage.extStorage` 中的 `domain` 为你开通扩展存储时绑定的域名
+1. 打开文件 `cloudfunctions/common/uni-config-center/vk-unicloud/index.js`，修改 `vk.service.cloudStorage.defaultProvider` 值为 `extStorage`，再修改 `domain` 为你开通扩展存储时绑定的域名，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/1e8b5e37-9edb-452f-ac2c-149e10ecebfa.png)
+
+**具体配置如下**
+
+```js
+// 第三方服务配置
+"service": {
+  // 云储存相关配置
+  "cloudStorage": {
+  	/**
+  	 * vk.uploadFile 接口默认使用哪个存储
+  	 * unicloud 空间内置存储（默认）
+  	 * extStorage 扩展存储
+  	 */
+  	"defaultProvider": "extStorage",
+  	// 扩展存储配置
+  	"extStorage": {
+  		"provider": "qiniu", // qiniu: 扩展存储-七牛云
+  		"domain": "", // 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名）
+  		"bucketName": "", // 存储空间名称，可不填，不填则使用当前空间绑定的存储空间
+  		"bucketSecret": "", // 存储空间密钥，可不填，不填则使用当前空间绑定的存储空间
+  		"endpoint": {
+  			"upload": "", // 上传接口的代理地址，在国内上传无需填写
+  		}
+  	}
+  }
+},
+```
+
+2. 打开文件 `项目根目录/app.config.js`，修改 `service.cloudStorage.defaultProvider` 值为 `extStorage`，再修改 `domain` 为你开通扩展存储时绑定的域名，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/0f8e0706-d731-491c-a5b0-0b09000f188b.png)
+
+**具体配置如下**
 
 ```js
 // 第三方服务配置
 service: {
-  // 云储存相关配置
-  cloudStorage: {
-    /**
-     * vk.uploadFile 接口默认使用哪个存储
-     * unicloud 空间内置存储（默认）
-     * extStorage 扩展存储
-     * aliyun 阿里云oss 
-     */
-    defaultProvider: "extStorage", // 这里若设置 extStorage 则 vk.uploadFile默认会上传至 扩展存储
-    // 扩展存储配置
-    extStorage: {
-      provider: "qiniu", // qiniu: 扩展存储-七牛云
-      // 根目录名称（如果改了这里的dirname，则云函数user/pub/getUploadFileOptionsForExtStorage内判断的目录权限也要改，否则无法上传）
-      dirname: "public",
-      // 用于鉴权的云函数地址（一般不需要改这个参数）
-      authAction: "user/pub/getUploadFileOptionsForExtStorage",
-      // 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名）
-      domain: "cdn.example.com",
-      // 上传时，是否按用户id进行分组储存
-      groupUserId: false,
-    }
-  }
+	// 云储存相关配置
+	cloudStorage: {
+		/**
+		 * vk.uploadFile 接口默认使用哪个存储
+		 * unicloud 空间内置存储（默认）
+		 * extStorage 扩展存储
+		 */
+		defaultProvider: "extStorage",
+		// 扩展存储配置
+		extStorage: {
+			provider: "qiniu", // qiniu: 扩展存储-七牛云
+			// 根目录名称（如果改了这里的dirname，则云函数user/pub/getUploadFileOptionsForExtStorage内判断的目录权限也要改，否则无法上传）
+			dirname: "public",
+			// 用于鉴权的云函数地址（一般不需要改这个参数）
+			authAction: "user/pub/getUploadFileOptionsForExtStorage",
+			// 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名，若云端已设置 uni-config-center/vk-unicloud/index.js 内的 vk.service.cloudStorage.extStorage.domain 则此处可不填）
+			domain: "",
+			// 上传时，是否按用户id进行分组储存
+			groupUserId: false,
+		}
+	}
 },
 ```
 
