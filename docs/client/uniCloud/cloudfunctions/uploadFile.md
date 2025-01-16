@@ -81,6 +81,8 @@ console.log('uploadFileRes: ', uploadFileRes);
 
 **具体配置如下**
 
+修改后需要重新上传 `uni-config-center` 公共模块才会生效
+
 ```js
 // 第三方服务配置
 "service": {
