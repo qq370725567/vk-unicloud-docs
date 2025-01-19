@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 过滤器
 
-## middleware（又名中间件）
+## middleware（又名中间件）@middleware
 
 ## 什么是过滤器?
 
@@ -21,7 +21,7 @@ sidebarDepth: 0
  * 3、如有权限，则同时将店铺信息直接回传给业务云函数
  * 4、在业务云函数的内置变量 `filterResponse` 中可直接获得当前操作的店铺的信息
 
-## 框架内置的过滤器
+## 框架内置的过滤器@built-in
 
 无需配置，已自动生效，编写同ID的过滤器可以覆盖内置过滤器（层级index比内置的小1即可）
 
@@ -31,19 +31,61 @@ sidebarDepth: 0
 |   kh		| /kh/			|   200		| onActionExecuting	|  用户token过滤器，检测用户是否已登录											|
 |   sys		| /sys/			|   300		| onActionExecuting	|  云函数层的权限过滤器，检测用户是否有此业务云函数的执行权限	|
 
-## 中间件参数说明
+## 中间件参数说明@params
 
-| 参数							| 说明																			| 类型																| 默认值							| 可选值							|
-|------------------	|-------------------------------					|---------													|--------						|-------						|
+| 参数							| 说明																				| 类型																| 默认值							| 可选值							|
+|------------------	|-------------------------------						|---------													|--------						|-------						|
 | id								| 中间件ID，全局必须唯一，相同中间件ID会被覆盖	| String														| -									| -									|
-| regExp						| 中间件的正则匹配规则(支持数组)							| String Array											| 无									| -									|
-| description				| 中间件的描述															| String														| -									| -									|
-| index							| 中间件的执行顺序，值越小越先执行						| Number														| -									| -									|
-| mode							| 中间件的模式，详情见下方										| String														| onActionExecuting	| 见下方mode参数说明	|
-| enable						| 是否启动该中间件													| Boolean														| false							| true							|
-| main							| 执行的函数																| async function(event, serviceRes)	| -									| -									|
+| regExp						| 中间件的正则匹配规则（支持数组）							| String Array											| 无									| -									|
+| description				| 中间件的描述，仅方便自己查看									| String														| -									| -									|
+| index							| 中间件的执行顺序，值越小越先执行							| Number														| -									| -									|
+| mode							| 中间件的模式 [详情](#mode)									| String														| onActionExecuting	| 见下方mode参数说明	|
+| enable						| 是否启动该中间件														| Boolean														| false							| true							|
+| main							| 执行的函数																	| async function(event, serviceRes)	| -									| -									|
+| returnMode				| 返回值模式，仅mode为onActionExecuted时生效 [详情](#return-mode)	| Number														| 0									| 1									|
 
-### mode参数说明
+### regExp参数说明@regExp
+
+regExp 的值如果是字符串，代表只有一个匹配条件，如果是数组，代表多个匹配条件
+
+**如果是数组的情况下，只需要数组内任意一条规则匹配到就会运行该中间件**
+
+常用正则示例
+
+匹配所有
+
+```js
+regExp: "(.*)",
+```
+
+匹配 `xxx/kh` 开头的
+
+```js
+regExp: "^xxx/kh",
+```
+
+匹配 `xxx` 结尾的
+
+```js
+regExp: "xxx$",
+```
+
+精确匹配 `xxx/kh/getList`
+
+```js
+regExp: "^xxx/kh/getList$",
+```
+
+多个精确匹配 `xxx/kh/getList` 和 `xxx/kh/add`
+
+```js
+regExp: [
+  "^xxx/kh/getList$",
+  "^xxx/kh/add$",
+]
+```
+
+### mode参数说明@mode
 
 |         类型          | 说明                |
 |-----------------------|--------------------|
@@ -52,9 +94,18 @@ sidebarDepth: 0
 |   onActionIntercepted | 在action被其他中间件拦截后执行 |
 |   onActionError       | 在action执行异常时执行        |
 
-## 自定义过滤器代码示例
+### returnMode参数说明@return-mode
 
-### 单店版
+返回值模式，仅mode为onActionExecuted时生效
+
+|         值						| 说明										|
+|-----------------------|--------------------		|
+|   0										| 使用Object.assign合并	|
+|   1										| 完全替换								|
+
+## 自定义过滤器代码示例@demo
+
+### 单店版@demo1
 
 ```js
 /**
@@ -89,7 +140,7 @@ module.exports = [
 ]
 ```
 
-### 多店版（多商家版本）
+### 多店版（多商家版本）@demo2
 
 即用户A只能操作自己的店铺A，不可以操作店铺B
 ```js
@@ -135,9 +186,9 @@ module.exports = [
 
 ```
 
-## 常见问题
+## 常见问题@question
 
-### 过滤器可以有很多种用途，权限判断只是其中一种用途，还可以
+### 过滤器可以有很多种用途，权限判断只是其中一种用途，还可以@q1
 
 ```js
 1、权限校验
@@ -148,7 +199,7 @@ module.exports = [
 6、等等
 ```
 
-### 如何在业务函数获得过滤器传给业务函数的数据？
+### 如何在业务函数获得过滤器传给业务函数的数据？@q2
 
 ```js
 
@@ -174,7 +225,7 @@ module.exports = {
 }
 ```
 
-### 如何在onActionExecuted类型的过滤器中获取云函数返回的数据?
+### 如何在onActionExecuted类型的过滤器中获取云函数返回的数据?@q3
 
 ```js
 /**
