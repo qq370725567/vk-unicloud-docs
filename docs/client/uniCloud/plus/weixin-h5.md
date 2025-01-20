@@ -4,6 +4,8 @@ sidebarDepth: 0
 
 # 微信公众号API
 
+必须是已认证的微信服务号，服务号只有企业才可以认证
+
 ## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
