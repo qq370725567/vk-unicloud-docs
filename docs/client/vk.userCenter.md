@@ -869,7 +869,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 **注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
 
-**注意1：h5的路由模式必须配置为 `history`，因为微信公众号登录的回调地址不支持 `hash` 模式。**
+**注意1：h5的路由模式必须配置为 `history`，因为微信公众号登录的回调地址不支持 `hash` 模式。注意支付宝云不支持 `history`**
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/c3b343cd-0058-46db-86f4-64ae46fdf2fb.png)
 
@@ -878,6 +878,10 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/0a79aeb8-33d6-4c7e-bc08-f0aa7d7ab4fd.png)
 
 **注意3：网页授权时拼接的scope参数的值必须是snsapi_userinfo，同时再绑定开放平台，才能获取到unionid**
+
+**注意4：还需要去微信公众号后台配置下网页授权域名，如下图所示。**
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/2ba5566f-744b-4d05-a3f4-f538b1a9d4e9.png)
 
 #### 微信PC网站扫码登录@loginByWeixinPC
 
