@@ -67,6 +67,60 @@ let sendSmsVerifyCodeRes = await vk.system.smsUtil.sendSmsVerifyCode({
 console.log('sendSmsVerifyCodeRes: ', sendSmsVerifyCodeRes);
 ```
 
+#### 自定义校验type@@sendSmsVerifyCode-type
+
+如果业务不是上面4种（手机号登录、绑定手机、解绑手机、重置账号密码），那么type可以自己自定义，比如操作 “其他重要操作” 时的手机号验证码校验，type可以写为 type: "verify"，此时可以手动校验验证码是否正确，校验验证码可通过uni-id模块自带的API实现，代码如下：
+
+**云函数调用示例**
+
+```js
+'use strict';
+module.exports = {
+  main: async (event) => {
+    let { data = {}, userInfo, util, filterResponse, originalParam } = event;
+    let { customUtil, uniID, config, pubFun, vk, db, _, $ } = util;
+    let { uid } = data;
+    let res = { code: 0, msg: "" };
+    // 业务逻辑开始-----------------------------------------------------------
+    let verifyCodeRes = await uniID.verifyCode({
+      mobile: "15200000001", // 手机号
+      code: "123456", // 验证码
+      type: 'verify', // 此处的type的值需和你发送验证码时传的type一致
+    });
+    if (verifyCodeRes.code !== 0) {
+      // 校验失败
+      return {
+        code: -1,
+        msg: "短信验证码错误"
+      }
+    } 
+    // 校验成功，继续执行其他逻辑
+    
+    // 业务逻辑结束-----------------------------------------------------------
+    return res;
+  }
+}
+```
+
+**云对象调用示例**
+
+```js
+let { uniID } = this.getUtil();
+let verifyCodeRes = await uniID.verifyCode({
+  mobile: "15200000001", // 手机号
+  code: "123456", // 验证码
+  type: 'verify', // 此处的type的值需和你发送验证码时传的type一致
+});
+if (verifyCodeRes.code !== 0) {
+  // 校验失败
+  return {
+    code: -1,
+    msg: "短信验证码错误"
+  }
+} 
+// 校验成功，继续执行其他逻辑
+```
+
 ## 配置unicloud短信@unicloud
 
 定位到文件 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 的 `service.sms`
