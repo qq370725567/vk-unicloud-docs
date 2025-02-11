@@ -19,7 +19,6 @@ module.exports = [{
       'uniCloud/queryPayment',
       'uniCloud/queryRefund',
       'uniCloud/transfer',
-      'uniCloud/transfer3',
       'uniCloud/queryAccountBalance'
     ]
   },
