@@ -159,7 +159,7 @@ if (transferRes.code === 0) {
 
 ```js
 uni.requestMerchantTransfer({
-	...options, // 变量 options 就是 vkPay.transfer 接口的返回值options
+	...options, // 变量 options 就是 vkPay.transfer 接口的返回值中的 options 参数
 	success: (res) => { 
 		// 确认收款成功
 	},
@@ -179,6 +179,7 @@ uni.requestMerchantTransfer({
 - 如果你有使用vk框架开发，则可参考vk文档：[传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin-h5-jsapi.html)
 
 ```js
+// 变量 options 就是 vkPay.transfer 接口的返回值中的 options 参数
 WeixinJSBridge.invoke('requestMerchantTransfer', options,
 	(res) => {
 		if (res.err_msg === 'requestMerchantTransfer:ok') {
