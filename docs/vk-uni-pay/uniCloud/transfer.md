@@ -153,7 +153,7 @@ if (transferRes.code === 0) {
 
 云函数调用转账接口成功后，客户端还需要调用API requestMerchantTransfer 来让用户点击确认收款，只有用户点了确认收款按钮后，转账才算完成。
 
-#### 微信小程序
+#### 微信小程序@wxpay-user-confirm-mp
 
 微信小程序执行 uni.requestMerchantTransfer 接口即可，代码如下
 
@@ -169,7 +169,7 @@ uni.requestMerchantTransfer({
 });
 ```
 
-#### 微信公众号
+#### 微信公众号@wxpay-user-confirm-h5
 
 微信公众号需要执行 WeixinJSBridge 内的 requestMerchantTransfer 接口，代码如下
 
@@ -190,7 +190,7 @@ WeixinJSBridge.invoke('requestMerchantTransfer', options,
 );
 ```
 
-#### App
+#### App@wxpay-user-confirm-app
 
 :::warning 提示
 
