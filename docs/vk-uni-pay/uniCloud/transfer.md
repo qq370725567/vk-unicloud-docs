@@ -93,7 +93,7 @@ const vkPay = require("vk-uni-pay");
 
 let transferRes = await vkPay.transfer({
   provider: "wxpay", // 固定值wxpay
-  out_bill_no, // 商户系统内部的转账单号
+  out_bill_no: "test" + Date.now(), // 商户系统内部的商家单号，要求此参数只能由数字、大小写字母组成，在商户系统内部唯一
   transfer_amount: 30, // 转账金额 100=1元（单位分）
   openid: "ogtX061Da3Azw7fUZm-zNBYmbt0U", // 用户的openid
   user_name: "真实姓名", // 收款方真实姓名，转账金额 >= 2000元时必填
