@@ -112,6 +112,7 @@ let transferRes = await vkPay.transfer({
 });
 if (transferRes.code === 0) {
   // 转账成功后的逻辑
+  // 注意：微信转账接口调用成功后，用户还需要点击确认收款按钮才算转账完成，确认收款按钮是前端API requestMerchantTransfer，其请求参数可在 transferRes.options 的返回值中获取
 
 } else {
   // 转账失败后的逻辑
@@ -140,11 +141,63 @@ if (transferRes.code === 0) {
 
 ### 返回值@wxpay-return
 
-| 参数	| 说明																																														|
-|-------|-----------																																										|
-| code	|  0 接口请求成功 其他均为接口请求失败																															|
-| msg		|  请求接口失败后的失败原因																																				|
-| result|  微信支付官方原始返回值 [微信支付官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012716434)	|
+| 参数		| 说明																																													|
+|-------	|-----------																																									|
+| code		|  0 接口请求成功 其他均为接口请求失败																														|
+| msg			|  请求接口失败后的失败原因																																			|
+| result	|  微信支付官方原始返回值 [微信支付官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012716434)	|
+| options	|  微信支付用户确认收款接口 requestMerchantTransfer 所需要的参数																		|
+
+
+### 用户确认收款@wxpay-user-confirm
+
+云函数调用转账接口成功后，客户端还需要调用API requestMerchantTransfer 来让用户点击确认收款，只有用户点了确认收款按钮后，转账才算完成。
+
+#### 微信小程序
+
+微信小程序执行 uni.requestMerchantTransfer 接口即可，代码如下
+
+```js
+uni.requestMerchantTransfer({
+	...options, // 变量 options 就是 vkPay.transfer 接口的返回值options
+	success: (res) => { 
+		// 确认收款成功
+	},
+	fail: (res) => {
+		// 确认收款失败
+	},
+});
+```
+
+#### 微信公众号
+
+微信公众号需要执行 WeixinJSBridge 内的 requestMerchantTransfer 接口，代码如下
+
+**注意：**
+
+- WeixinJSBridge 内的API需要执行过 wx.config 才可以调用，具体查看微信官方文档：[传送门](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html)
+- 如果你有使用vk框架开发，则可参考vk文档：[传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin-h5-jsapi.html)
+
+```js
+WeixinJSBridge.invoke('requestMerchantTransfer', options,
+	(res) => {
+		if (res.err_msg === 'requestMerchantTransfer:ok') {
+			// 确认收款成功
+		} else {
+			// 确认收款失败
+		}
+	}
+);
+```
+
+#### App
+
+:::warning 提示
+
+因 uni-app 暂未支持 App 端的 uni.requestMerchantTransfer 接口，故 App 端暂不支持确认收款。
+
+:::
+
 
 ### 开通教程@wxpay-open
 
