@@ -22,7 +22,7 @@ sidebarDepth: 0
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/424.png)
 
-### 调用示例
+### 调用示例@alipay-demo
 
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
@@ -84,7 +84,7 @@ if (transferRes.code === 0) {
 
 ![](https://cdn.fsq.pub/vkdoc/vk-pay/1820a4da-b42b-4152-b80f-0715fe8ac196.png)
 
-### 调用示例
+### 调用示例@wxpay-demo
 
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
@@ -226,7 +226,7 @@ WeixinJSBridge.invoke('requestMerchantTransfer', options,
 
 ![](https://cdn.fsq.pub/vkdoc/vk-pay/570112db-f5fe-43bb-8b4d-b22af42caaec.png)
 
-## 转账单号说明
+## 转账单号说明@out-bill-no
 
 **out_bill_no**
 
@@ -236,7 +236,80 @@ WeixinJSBridge.invoke('requestMerchantTransfer', options,
  * 一个商户转账单号对应一笔转账请求，假设转账接口请求失败或其他原因未成功，不要更换商户转账单号，应该用原单号进行重试。否则会有重复转账的资金风险。
  * 如用户未确认收款，请勿在撤销或者等待单据关闭前，又发起一笔新的转账，避免重复出资带来资损。
 
-## 注意事项
+## 转账回调通知@notice
+
+:::warning 注意
+
+1. 暂只支持微信的转账回调通知，目前支付宝的转账接口是实时的，不需要回调通知。
+2. 同样的通知可能会多次发送给商户系统。商户系统需要重视对重复通知的正确处理。 当商户系统收到通知时，先检查对应业务数据状态，如果未处理，进行处理; 如果已处理，则直接 `return true;` 即可。
+3. 在对业务数据进行状态检查和处理之前，要采用数据锁进行并发控制，以避免函数重入造成的数据混乱。
+:::
+
+**相关代码**
+
+在云函数 `vk-pay` 的 `service/pay-notify` 目录创建1个文件，文件名固定为 `transfer.js`，文件内容如下：
+
+```js
+'use strict';
+/**
+ * 要求：只改下订单状态，保证能及时返回给第三方支付服务器成功状态（必须要在5秒内返回）
+ */
+
+var db = uniCloud.database(); // 全局数据库引用
+var _ = db.command; // 数据库操作符
+var $ = _.aggregate; // 聚合查询操作符
+
+module.exports = async (obj) => {
+	let user_order_success = true;
+	let { data = {} } = obj;
+	let {
+		appid, // appid
+		create_time, // 创建时间
+		mch_id, // 商户号
+		openid, // 用户openid
+		out_bill_no, // 商户转账单号
+		state, // 状态：SUCCES
+		transfer_amount, // 转账金额
+		transfer_bill_no, // 微信转账单号
+		transfer_remark, // 转账备注
+		update_time, // 更新时间
+	} = data;
+
+	/**
+	 * state: 转账状态（只有 state 为 SUCCESS 或者 FAIL 或者 CANCELLED 的时候才会回调到这里）
+	 * SUCCESS: 转账成功
+	 * FAIL: 转账失败
+	 * CANCELLED: 转账撤销完成
+	 */
+
+	// data内的其他参数详见文档：https://pay.weixin.qq.com/doc/v3/merchant/4012716437 中的应答参数
+
+	console.log("在这里写自己的转账回调逻辑处理");
+
+	if (state === "SUCCESS") {
+		// 转账成功
+	} else if (state === "FAIL") {
+		// 转账失败
+	} else if (state === "CANCELLED") {
+		// 转账撤销完成
+	}
+
+
+	// 此处写你自己的支付成功逻辑开始-----------------------------------------------------------
+	// 有三种方式
+	// 方式一：直接写数据库操作（原生数据库语句）
+	// 方式二：使用 await uniCloud.callFunction 调用其他云函数
+	// 方式三：使用 await uniCloud.httpclient.request 调用http接口地址
+
+	// 注意：如果使用方式二和方式三时，为了安全起见，请带上请求密钥（密钥自己传一个固定的32位字符串即可），然后在你请求的接口中判断密钥是否一致，可以有效的防止伪造请求。（因为密钥只有你自己知道）
+
+	// 此处写你自己的支付成功逻辑结束-----------------------------------------------------------
+	// user_order_success =  true 代表你自己的逻辑处理成功 返回 false 代表你自己的处理逻辑失败。
+	return user_order_success;
+};
+```
+
+## 注意事项@tips
 
 * 新注册的企业支付宝账号，转账接口的申请直接在支付宝官网申请，如果无法申请（申请条件以支付宝支付官网为准），可以联系支付宝商务人员，进行人工申请。
 * 新注册的微信商户号，可能无法申请转账接口，申请条件以微信支付官网为准
