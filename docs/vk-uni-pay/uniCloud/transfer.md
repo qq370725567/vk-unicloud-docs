@@ -201,6 +201,48 @@ WeixinJSBridge.invoke('requestMerchantTransfer', options,
 
 :::
 
+### 撤销转账@cancelTransfer
+
+商户通过转账接口发起付款后，在用户确认收款之前可以通过该接口撤销付款。该接口返回成功仅表示撤销请求已受理，系统会异步处理退款等操作，以最终查询单据返回状态为准。
+
+**调用示例**
+
+```js
+const vkPay = require("vk-uni-pay");
+
+let cancelTransferRes = await vkPay.cancelTransfer({
+	provider: "wxpay", // 固定值wxpay
+	platform: "mp-weixin", // 平台类型：app-plus、mp-weixin，用于获取对应平台的支付配置信息
+	out_bill_no: "商户转账单号", // 商户转账单号
+});
+if (cancelTransferRes === 0) {
+  // 撤销成功
+} else {
+  // 撤销失败
+}
+```
+
+返回值可查看[微信文档-撤销转账](https://pay.weixin.qq.com/doc/v3/merchant/4012716458)
+
+### 查询转账单@queryTransfer
+
+商户通过转账接口发起付款后，在用户确认收款之前可以通过该接口撤销付款。该接口返回成功仅表示撤销请求已受理，系统会异步处理退款等操作，以最终查询单据返回状态为准。
+
+**调用示例**
+
+```js
+const vkPay = require("vk-uni-pay");
+
+let queryTransferRes = await vkPay.queryTransfer({
+	provider: "wxpay", // 固定值wxpay
+	platform: "mp-weixin", // 平台类型：app-plus、mp-weixin，用于获取对应平台的支付配置信息
+	out_bill_no: "商户转账单号", // 商户转账单号，与 transfer_bill_no 二选一即可
+  // transfer_bill_no: "微信转账单号", // 微信转账单号，与 out_bill_no 二选一即可
+});
+console.log('queryTransferRes: ', queryTransferRes);
+```
+
+返回值可查看[微信文档-查询转账单](https://pay.weixin.qq.com/doc/v3/merchant/4012716437)
 
 ### 开通教程@wxpay-open
 
