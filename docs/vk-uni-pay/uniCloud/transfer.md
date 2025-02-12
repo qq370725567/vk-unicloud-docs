@@ -224,6 +224,15 @@ WeixinJSBridge.invoke('requestMerchantTransfer', options,
 
 ![](https://cdn.fsq.pub/vkdoc/vk-pay/570112db-f5fe-43bb-8b4d-b22af42caaec.png)
 
+## 转账单号说明
+
+**out_bill_no**
+
+商户转账单号out_bill_no参数说明：
+
+ * 需自行保证全局唯一。
+ * 一个商户转账单号对应一笔转账请求，假设转账接口请求失败或其他原因未成功，不要更换商户转账单号，应该用原单号进行重试。否则会有重复转账的资金风险。
+
 ## 注意事项
 
 * 新注册的企业支付宝账号，转账接口的申请直接在支付宝官网申请，如果无法申请（申请条件以支付宝支付官网为准），可以联系支付宝商务人员，进行人工申请。
