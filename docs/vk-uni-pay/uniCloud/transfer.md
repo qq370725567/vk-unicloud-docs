@@ -111,11 +111,11 @@ let transferRes = await vkPay.transfer({
   ]
 });
 if (transferRes.code === 0) {
-  // 转账成功后的逻辑
+  // 转账申请提交成功后的逻辑
   // 注意：微信转账接口调用成功后，用户还需要点击确认收款按钮才算转账完成，确认收款按钮是前端API requestMerchantTransfer，其请求参数可在 transferRes.options 的返回值中获取
 
 } else {
-  // 转账失败后的逻辑
+  // 转账申请提交失败后的逻辑
 
 }
 ```
