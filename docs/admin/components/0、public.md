@@ -23,8 +23,9 @@
 
 **万能表格专用公共属性**
 
-|---------------|------------------	|--------	|-------|-------|
-| defaultValue	| 当该行的该字段为空时的默认值		| any			| -			| -			|
+| 参数					| 说明												| 类型			| 默认值	| 可选值	|
+|---------------|------------------					|--------	|-------|-------|
+| defaultValue	| 当该行的该字段为空时的默认值	| any			| -			| -			|
 
 ## key（字段名）
 
@@ -104,22 +105,22 @@
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
 },
 {
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+  key: "mode", title: "模式", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  showRule:"login_appid_type==1",
+  showRule: "login_appid_type==1",
 },
 ```
 
@@ -127,23 +128,23 @@
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
 },
 {
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+  key: "mode", title: "模式", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  showRule:(formData)=>{
-    if (formData.login_appid_type == 1){
+  showRule: (formData) => {
+    if (formData.login_appid_type === 1){
       return true;
     } else{
       return false;
@@ -162,22 +163,22 @@
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
 },
 {
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+  key: "mode", title: "模式", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  disabled:"login_appid_type==0",
+  disabled: "login_appid_type==0",
 },
 ```
 
@@ -185,23 +186,23 @@
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
 },
 {
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+  key: "mode", title: "模式", type: "radio",
+  optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  disabled:(formData)=>{
-    if (formData.login_appid_type === 0){
+  disabled: (formData) => {
+    if (formData.login_appid_type === 0) {
       return true;
     } else {
       return false;
