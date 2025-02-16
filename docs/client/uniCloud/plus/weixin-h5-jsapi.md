@@ -4,7 +4,12 @@ sidebarDepth: 0
 
 # 微信公众号JSAPI
 
-> 以下API需要vk-unicloud核心库版本 >= 2.16.0
+:::warning 注意
+
+1. 以下API需要vk-unicloud核心库版本 >= 2.16.0
+2. 此为前端API
+:::
+
 
 ## 介绍@introduce
 

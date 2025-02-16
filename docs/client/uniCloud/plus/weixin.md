@@ -4,6 +4,11 @@ sidebarDepth: 0
 
 # 微信小程序API
 
+:::warning 注意
+
+此非前端API，请在云函数内调用。
+:::
+
 ## 配置文件@config
 
 打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
