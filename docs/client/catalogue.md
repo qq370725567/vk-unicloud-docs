@@ -4,4 +4,6 @@ sidebarDepth: 0
 
 # 更新日志
 
-[点击查看](https://ext.dcloud.net.cn/plugin?id=2204&update_log)
+<iframe src="https://ext.dcloud.net.cn/plugin?id=2204&update_log" width="100%" height="800"></iframe>
+
+[查看原文](https://ext.dcloud.net.cn/plugin?id=2204&update_log)

@@ -6,6 +6,8 @@ module.exports = [{
       'quickstart',
       'config',
       'example',
+      'catalogue',
+      'changeGuide',
       'question/question'
     ]
   },
