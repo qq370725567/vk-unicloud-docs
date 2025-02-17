@@ -202,3 +202,9 @@ axios({
   console.log("catch", err);
 });
 ```
+
+## 常见问题@question
+
+### PC扫码支付成功后，页面上如何知道用户支付成功了？
+
+需要写轮询，每隔2秒请求一次查询支付状态的接口，action地址是 `pay/queryPayment`，[请求参数](https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/queryPayment.html#params)

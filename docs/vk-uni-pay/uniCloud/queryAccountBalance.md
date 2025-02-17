@@ -10,7 +10,7 @@ sidebarDepth: 0
 
 仅支持查询商家支付宝账户的余额，此接口一般用于商家支付宝转账给用户前查询商家账户余额是否充足
 
-## 示例代码
+## 示例代码@demo
 
 ```js
 const vkPay = require("vk-uni-pay");
@@ -28,7 +28,7 @@ if (queryAccountBalanceRes.code === 0) {
 }
 ```
 
-## 请求参数
+## 请求参数@params
 
 | 参数名     | 说明       | 类型    | 默认值  | 可选值 |
 |-------    |-----------|---------|-------|-------|
@@ -36,7 +36,7 @@ if (queryAccountBalanceRes.code === 0) {
 | platform  |  平台类型：app-plus、mp-weixin，用于获取对应平台的支付配置信息     | String  | -    | app-plus、mp-weixin、h5  |
 | pid       |  多商户模式下的自定义商户id（等于vk-pay-config表的_id） [查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)   | String  | -    | -  |
 
-## 返回值
+## 返回值@return
 
 **注意：1.13.0之前的版本此处返回的是蛇形，1.13.0之后返回的是驼峰格式**
 
