@@ -727,6 +727,43 @@ let newInfo = await vk.baseDao.updateAndReturn({
 console.log("自增后的值：", newInfo.money);
 ```
 
+## 如何实现自增id
+
+需要先创建一个存储当前表id的自增值，比如表名叫：`id-inc`
+
+创建表后，立即新增一条数据，值如下，下面的值不要改，就这样创建。
+
+```js
+{
+  "_id": "001"
+}
+```
+
+然后假设你现在需要实现自增id的表名为 `my-orders`，则在执行 `vk.baseDao.add` 前，你需要先执行 `vk.baseDao.updateAndReturn`，代码如下
+
+```js
+let newInfo = await vk.baseDao.updateAndReturn({
+  dbName: "id-inc",
+  whereJson: {
+    _id: "001"
+  },
+  dataJson: {
+    "my-orders": _.inc(1)
+  }
+});
+let newId = newInfo['my-orders'];
+
+await vk.baseDao.add({
+  dbName: "my-orders",
+  dataJson: { 
+    id: newId, // 注意：这里最好用id，不要用_id，这样_id依然是数据库默认的，然后多了一个叫id的自增id字段，这样兼容性最高
+    // ...其他字段的值
+    // a: 1,
+    // b: "2"
+  }
+});
+```
+
 ## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$
 
 以下是 _ 和 $ 变量实际代表的含义
