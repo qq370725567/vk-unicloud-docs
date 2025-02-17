@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 1、vk-uni-pay统一支付组件
+# vk-uni-pay 统一支付组件
 
 **使用 `vk-uni-pay` 组件的优势**
 

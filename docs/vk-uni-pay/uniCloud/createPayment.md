@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 1、获取支付参数
+# 获取支付参数
 
 ## vkPay.createPayment
 

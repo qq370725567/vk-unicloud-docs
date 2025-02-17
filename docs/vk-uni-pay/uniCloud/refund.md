@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 3、发起退款
+# 发起退款
 
 ## vkPay.refund
 

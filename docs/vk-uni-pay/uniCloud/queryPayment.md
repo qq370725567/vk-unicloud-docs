@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 4、查询付款状态
+# 查询付款状态
 
 ## vkPay.queryPayment
 

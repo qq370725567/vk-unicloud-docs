@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 5、查询退款状态
+# 查询退款状态
 
 ## vkPay.queryRefund
 

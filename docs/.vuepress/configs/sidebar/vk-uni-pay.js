@@ -29,7 +29,8 @@ module.exports = [{
     collapsable: false,
     children: [
       'page/vk-uni-pay',
-      'page/createPayment'
+      'page/createPayment',
+      'page/url'
     ]
   },
   {
