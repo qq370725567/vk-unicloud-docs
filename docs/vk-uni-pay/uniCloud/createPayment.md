@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 ## vkPay.createPayment
 
-## 示例代码
+## 示例代码@demo
 
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
@@ -40,7 +40,7 @@ exports.main = async (event, context) => {
 };
 ```
  
-## 请求参数
+## 请求参数@params
 
 | 参数			| 说明																																																																																												| 类型		| 默认值| 可选值								|
 |-------		|-----------																																																																																									|---------|-------|-------								|
@@ -50,7 +50,7 @@ exports.main = async (event, context) => {
 | needQRcode|  是否强制使用二维码支付（让顾客扫码支付，一般用于物联网，如按摩椅上的扫码支付） [详情](#needqrcode-强制使用二维码支付模式)																															| Boolean	| false	| true									|
 | data			|  订单数据 [详情](#data-参数)																																																																														| Object	| -			|												|
 
-### data 参数
+### data 参数@params-data
 
 | 参数				| 说明																																																															| 类型			| 默认值	| 可选值	|
 |-------			|-----------																																																											|---------|-------|-------|
@@ -94,7 +94,7 @@ time_expire的值是时间戳，如 `time_expire: Date.now() + 1000*60` 代表60
 3. provider=appleiap时，不支持此参数
 4. provider=vkspay时，不支持此参数
 
-### context 参数
+### context 参数@params-context
 
 1. VK云函数传 `originalParam.context` 
 2. VK云对象传 `this.getClientInfo()` 
@@ -113,7 +113,7 @@ context: {
 }
 ```
 
-## 返回值
+## 返回值@return
 
 |参数名				|类型		|说明																																								|
 |:-:					|:-:		|:-:																																								|
@@ -126,9 +126,9 @@ context: {
 |total_fee		|Number	|本次交易的付款金额（单位分 100 = 1元）（新增于 1.11.3）														|
 |platform			|String	|发起支付时的客户端运行环境（新增于 1.11.3）																				|
 
-## 常见问题
+## 常见问题@question
 
-### 推荐支付交互流程
+### 推荐支付交互流程@q1
 
 以电商下单为例
 
@@ -139,7 +139,7 @@ context: {
 5. 【前端】vk-uni-pay组件会自动响应支付信息并唤起支付
 6. 【云端】用户支付成功后，接收异步回调，执行自定义回调逻辑
 
-### pid（多商户模式）
+### pid（多商户模式）@q2
 
 ```js
 const vkPay = require("vk-uni-pay");
@@ -172,7 +172,7 @@ exports.main = async (event, context) => {
 };
 ```
  
-### needQRcode（强制使用二维码支付模式）
+### needQRcode（强制使用二维码支付模式）@q3
 
 给vue页面使用时，传 `needQRcode:true`
  
@@ -240,7 +240,7 @@ exports.main = async (event, context) => {
  };
 ```
 
-### 支付宝小程序支付使用新版JSAPI接口
+### 支付宝小程序支付使用新版JSAPI接口@q4
 
 支付宝官方公告：2024年4月1日起，小程序必须使用专用支付产品（JSAPI支付），否则可能影响支付功能。
 
@@ -276,7 +276,7 @@ exports.main = async (event, context) => {
 };
 ```
 
-### 支付宝小程序支付失败，报获取支付宝账号失败
+### 支付宝小程序支付失败，报获取支付宝账号失败@q5
 
 因uni-id只支持userid模式，不支持openid模式，故需要前往支付宝开放平台，小程序应用-开发设置-openid配置管理-设置-申诉为userid模式，操作步骤如下，操作完后需等待支付宝审核通过，并点击切换到uid作为用户标识后才能正常使用。
 
@@ -294,7 +294,7 @@ exports.main = async (event, context) => {
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/379a5b81-3479-469c-9d3b-266a5c650692.png)
 
-### 支付宝小程序支付失败，报请开启 API 代理
+### 支付宝小程序支付失败，报请开启 API 代理@q6
 
 点击IDE，这里把代理开起来，会弹出一个二维码，手机扫码后 IDE上点击支付手机上就会弹支付弹窗了，或者直接用真机调试即可。
 
@@ -302,7 +302,7 @@ exports.main = async (event, context) => {
 
 ![](https://cdn.fsq.pub/vkdoc/vk-pay/6e4360f1-693d-446e-aded-37fdae3de501.png)
 
-### 商家扫用户付款码支付
+### 商家扫用户付款码支付@q7
 
 > vk-pay的版本需 >= 1.14.0
 

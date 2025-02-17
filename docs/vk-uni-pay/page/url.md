@@ -39,7 +39,7 @@ $.ajax({
       vk_platform: "h5", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
       isPC: true, // 是否是电脑扫码支付
       needQRcode: "image", // "image" 代表直接返回二维码图片，true代表返回二维码链接地址
-      provider: "alipay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
+      provider: "alipay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
@@ -66,7 +66,7 @@ $.ajax({
     action: "pay/createPayment",
     data: {
       vk_platform: "mp-weixin", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
-      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
+      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
@@ -93,7 +93,7 @@ $.ajax({
     action: "pay/createPayment",
     data: {
       vk_platform: "app-plus", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
-      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
+      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
@@ -129,7 +129,7 @@ axios({
       vk_platform: "h5", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
       isPC: true, // 是否是电脑扫码支付
       needQRcode: "image", // "image" 代表直接返回二维码图片，true代表返回二维码链接地址
-      provider: "alipay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
+      provider: "alipay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
@@ -158,7 +158,7 @@ axios({
     action: "pay/createPayment",
     data: {
       vk_platform: "mp-weixin", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
-      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
+      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
@@ -187,7 +187,7 @@ axios({
     action: "pay/createPayment",
     data: {
       vk_platform: "app-plus", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
-      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
+      provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
