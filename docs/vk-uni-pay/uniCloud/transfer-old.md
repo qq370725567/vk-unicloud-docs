@@ -110,6 +110,14 @@ if (transferRes.code === 0) {
 
 ## 微信v3
 
+> vk-pay的版本需 >= 1.14.1
+
+**注意**
+
+需要申请开通微信支付的【商家转账到零钱】接口，如下图所示
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/422.png)
+
 ### 单笔模式
 
 ```js
