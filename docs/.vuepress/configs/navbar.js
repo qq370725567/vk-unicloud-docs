@@ -43,7 +43,8 @@ module.exports = [
     ariaLabel: 'AI小助手',
     items: [
       { text: 'VK小助手之云开发', link: 'https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c?lang=zh' },
-      { text: 'VK小助手之前端开发', link: 'https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a?lang=zh' }
+      { text: 'VK小助手之前端开发', link: 'https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a?lang=zh' },
+      { text: 'VK小助手之uni-app专题', link: 'https://chatglm.cn/main/gdetail/67b6a3a1b75c98fc90327f59?lang=zh' },
     ]
   },
   {
