@@ -49,4 +49,4 @@ sidebarDepth: 0
 | 华为支付（新增于1.15.0）								|  支持		|当前只支持在鸿蒙元服务内发起华为支付																								|			华为支付										|
 
 
-微信支付API均支持V2版本和V3版本，详情请看[支付配置](https://vkdoc.fsq.pub/vk-uni-pay/config.html)
+微信支付API支持V2版本和V3版本，详情请看[支付配置](https://vkdoc.fsq.pub/vk-uni-pay/config.html)
