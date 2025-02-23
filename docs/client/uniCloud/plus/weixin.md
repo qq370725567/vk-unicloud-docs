@@ -285,33 +285,44 @@ let imgSecCheckRes = await vk.openapi.weixin.security.imgSecCheck({
  * @param {String} miniprogram_state  跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版
  */
 let sendRes = await vk.openapi.weixin.subscribeMessage.send({
-  touser : openid,
-  template_id : "订阅模板ID",
-  page : "pages/index/index",
-  data : {
-    character_string1:{
-      value:"202103040830158485629163994677"
+  touser: openid,
+  template_id: "订阅模板ID",
+  page: "pages/index/index",
+  data: {
+    character_string1: {
+      value: "202103040830158485629163994677"
     },
-    name2:{
-      value:"中通快递"
+    name2: {
+      value: "中通快递"
     },
-    character_string3:{
-      value:"ZT2015215125352511"
+    character_string3: {
+      value: "ZT2015215125352511"
     },
-    thing6:{
-      value:"雪花秀滋盈生人生焕颜精华露"
+    thing6: {
+      value: "雪花秀滋盈生人生焕颜精华露"
     },
-    thing8:{
-      value:"杭州市xxxxxxxxx号"
+    thing8: {
+      value: "杭州市xxxxxxxxx号"
     }
   },
-  miniprogram_state : "formal",
+  miniprogram_state: "formal",
 });
+if (sendRes.code === 0) {
+  // 发送成功
+} else {
+  // 发送失败
+}
 
-// 注意
-// 发送订阅消息需要用户先在小程序前端点击订阅，且订阅是一次性的，发第二次消息需要再次订阅。
+```
+
+**前端**
+
+注意：发送订阅消息需要用户先在小程序前端点击订阅，且订阅是一次性的，发第二次消息需要再次订阅。
+
+```js
+// 前端订阅消息
 uni.requestSubscribeMessage({
-  tmplIds: ['订阅模板ID'],
+  tmplIds: ['订阅模板ID']
 });
 ```
 
