@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 6、单笔转账到支付宝或微信（旧版）
+# 单笔转账到支付宝或微信（旧版）
 
 :::warning 重要通知
 
@@ -109,6 +109,14 @@ if (transferRes.code === 0) {
 | payer_use_alias  |  支付宝专用 - 是否展示付款方别名，为true将展示商家支付宝在商家中心 商户信息 > 商户基本信息 页面配置的 商户别名   | Boolean  | false    | true  |
 
 ## 微信v3
+
+> vk-pay的版本需 >= 1.14.1
+
+**注意**
+
+需要申请开通微信支付的【商家转账到零钱】接口，如下图所示
+
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/422.png)
 
 ### 单笔模式
 

@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 6、商家转账到支付宝或微信（最新版）
+# 商家转账到支付宝或微信（最新版）
 
 :::warning 重要通知
 
@@ -167,7 +167,7 @@ uni.requestMerchantTransfer({
 	},
 	fail: (res) => {
 		// 确认收款失败
-	},
+	}
 });
 ```
 
@@ -195,11 +195,21 @@ WeixinJSBridge.invoke('requestMerchantTransfer', options,
 
 #### App@wxpay-user-confirm-app
 
-:::warning 提示
+App端需要导入 requestMerchantTransfer uts插件（即将支持）
 
-因 uni-app 暂未支持 App 端的 uni.requestMerchantTransfer 接口，故 App 端暂不支持确认收款。
+导入后uts插件后，执行 uni.requestMerchantTransfer 接口即可，代码如下
 
-:::
+```js
+uni.requestMerchantTransfer({
+	...options, // 变量 options 就是 vkPay.transfer 接口的返回值中的 options 参数
+	success: (res) => { 
+		// 确认收款成功
+	},
+	fail: (res) => {
+		// 确认收款失败
+	}
+});
+```
 
 ### 撤销转账@cancelTransfer
 

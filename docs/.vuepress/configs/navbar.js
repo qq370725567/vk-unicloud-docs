@@ -27,7 +27,7 @@ module.exports = [
   {
     text: '关联技术文档',
     link: '',
-    ariaLabel: 'DCloud插件市场',
+    ariaLabel: '关联技术文档',
     items: [
       { text: 'uni-app', link: 'https://uniapp.dcloud.io/' },
       { text: 'uniCloud', link: 'https://uniapp.dcloud.io/uniCloud/' },
@@ -37,14 +37,23 @@ module.exports = [
       { text: 'vkmall', link: 'https://vkmalldocs.fsq.pub' }
     ]
   },
-  //{ text: '成品项目', link: '/product/' },
+  {
+    text: 'AI小助手',
+    link: '',
+    ariaLabel: 'AI小助手',
+    items: [
+      { text: 'VK小助手之云开发', link: 'https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c?lang=zh' },
+      { text: 'VK小助手之前端开发', link: 'https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a?lang=zh' },
+      { text: 'VK小助手之uni-app专题', link: 'https://chatglm.cn/main/gdetail/67b6a3a1b75c98fc90327f59?lang=zh' },
+    ]
+  },
   {
     text: 'Gitee',
     ariaLabel: 'Gitee',
     items: [
       { text: 'vk-unicloud-router（client端）', link: 'https://gitee.com/vk-uni/vk-uni-cloud-router' },
       { text: 'vk-unicloud-admin（admin端）', link: 'https://gitee.com/vk-uni/vk-unicloud-admin' },
-     // { text: 'vk-unicloud-docs（文档仓库）', link: 'https://gitee.com/vk-uni/vk-unicloud-docs.git' }
+      { text: 'vk-unicloud-docs（文档仓库）', link: 'https://gitee.com/vk-uni/vk-unicloud-docs.git' }
     ]
   }
 ]

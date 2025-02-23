@@ -2,11 +2,11 @@
 sidebarDepth: 0
 ---
 
-# 4、查询付款状态
+# 查询付款状态
 
 ## vkPay.queryPayment
 
-## 示例代码
+## 示例代码@demo
 
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
@@ -25,7 +25,7 @@ exports.main = async (event, context) => {
 };
 ```
 
-## 请求参数
+## 请求参数@params
 
 | 参数   | 说明       | 类型    | 默认值  | 可选值 |
 |------- |-----------|---------|-------|-------|
@@ -34,7 +34,7 @@ exports.main = async (event, context) => {
 | await_max_time  |   最大等待时长，默认20秒（单位秒）   | Number  | 20  | 范围 5-40  |
 | pay_order_info  |   是否需要返回支付订单信息  | Boolean  | false  | true  |
 
-### 主动执行回调函数
+### 主动执行回调函数@params-await_notify
 
 > vk-pay的版本需 >= 1.14.0
 
@@ -56,7 +56,7 @@ exports.main = async (event, context) => {
 
 但是如果你想让前端更快的获得结果（比如不管异步回调执行是否完成，前端都显示支付成功，则设置 `await_notify` 为 `false` 可以加快响应速度，但此时自定义回调函数只依赖异步回调执行）
 
-## 返回值
+## 返回值@return
 
 |参数名							|类型		|说明																																																																						|
 |:-:								|:-:		|:-:																																																																						|
