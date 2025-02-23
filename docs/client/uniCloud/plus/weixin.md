@@ -830,23 +830,22 @@ let getAllDeliveryRes = await vk.openapi.weixin.logistics.getAllDelivery();
  * 传运单接口
  */
 let traceWaybillRes = await vk.openapi.weixin.logistics.traceWaybill({
-	"openid":"ovtZW4yB7DIj3CxOb6ii-nk4HhFo",
-	"waybill_id":"WXTESTEXPRESS0000014",
-	"sender_phone":"12345678901" ,
-	"receiver_phone":"123456566" ,
-	"delivery_id":"KYSY",
-	"goods_info":{
-		"detail_list":[
-		 {
-			 "goods_name":"测试名字",
-			 "goods_img_url":"www.qq.com"
-		 },
-		 {
-			 "goods_name":"测试名字2",
-			 "goods_img_url":"www.qq.com"
-		 }
-		]
-	}
+  "openid": "ovtZW4yB7DIj3CxOb6ii-nk4HhFo",
+  "waybill_id": "WXTESTEXPRESS0000014",
+  "sender_phone": "12345678901",
+  "receiver_phone": "123456566",
+  "delivery_id": "KYSY",
+  "goods_info": {
+    "detail_list": [{
+        "goods_name": "测试名字",
+        "goods_img_url": "www.qq.com"
+      },
+      {
+        "goods_name": "测试名字2",
+        "goods_img_url": "www.qq.com"
+      }
+    ]
+  }
 });
 ```
 
@@ -886,15 +885,13 @@ let queryFollowTraceRes = await vk.openapi.weixin.logistics.queryFollowTrace({
  * 更新物品信息接口
  */
 let updateFollowWaybillGoodsRes = await vk.openapi.weixin.logistics.updateFollowWaybillGoods({
-	"waybill_token":"o_ARWHaxIxzWHmdui-AIw8SuE1QtaUZK8aUnZguAn1nsZ72ZjWlq8btV8j-wAc94",
-	"goods_info":{
-		"detail_list":[
-			{
-			 "goods_name":"测试更新商品" ,
-			 "goods_img_url":"www.qq.com"
-			}
-		]
-	}
+  "waybill_token": "o_ARWHaxIxzWHmdui-AIw8SuE1QtaUZK8aUnZguAn1nsZ72ZjWlq8btV8j-wAc94",
+  "goods_info": {
+    "detail_list": [{
+      "goods_name": "测试更新商品",
+      "goods_img_url": "www.qq.com"
+    }]
+  }
 });
 ```
 

@@ -153,10 +153,10 @@ let imgSecCheckRes = await vk.openapi.qq.security.imgSecCheck({
  * @param {Number} use_robot          若希望通过客服机器人下发，则在该字段填
  */
 let sendRes = await vk.openapi.qq.subscribeMessage.send({
-  touser : "9D26812AF23D9B2743235C4E3F3353E8",							// 接收者（用户）的 openid
-  template_id : "789697983d789c9257b7745470442be4",							// 所需下发的订阅模板id
-  page : "pages/index/index",		// 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
-  data : {
+  touser: "9D26812AF23D9B2743235C4E3F3353E8", // 接收者（用户）的 openid
+  template_id: "789697983d789c9257b7745470442be4", // 所需下发的订阅模板id
+  page: "pages/index/index", // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
+  data: {
     "keyword1": {
       "value": "339208499"
     },
@@ -180,7 +180,7 @@ console.log('sendRes: ', sendRes);
 
 ```js
 uni.subscribeAppMsg({
-  tmplIds:["271167b4691a07becf2ac115a896ebd6"], // 模板id
+  tmplIds: ["271167b4691a07becf2ac115a896ebd6"], // 模板id
   subscribe: true,
   success(res) {
     console.log("----subscribeAppMsg----success", res);

@@ -12,11 +12,11 @@ sidebarDepth: 0
 
 ```js
 // 开放平台api
-"openapi":{
+"openapi": {
   // 百度开放平台 (主要用于身份证识别,营业执照识别等API)
-  "baidu":{
-    "appid" : "",     // 对应的API Key
-    "appsecret" : ""  // 对应的Secret Key
+  "baidu": {
+    "appid": "", // 对应的API Key
+    "appsecret": "" // 对应的Secret Key
   }
 }
 ```
@@ -46,10 +46,10 @@ sidebarDepth: 0
  * 示例
  */
 let requestRes = await vk.openapi.baidu.open.request({
-  action:"ocr/v1/idcard",
+  action: "ocr/v1/idcard",
   actionVersion: "2.0",
-  data:{
-    image:base64
+  data: {
+    image: base64
   }
 });
 ```
@@ -202,14 +202,14 @@ return {
  */
 vk.openapi.baidu.request({
   action: 'ocr/v1/business_license',
-  actionVersion:"2.0",
-  title:"识别中...",
+  actionVersion: "2.0",
+  title: "识别中...",
   data: {
-    image:base64
+    image: base64
   },
   success: (data) => {
     this.data = data;
-  },
+  }
 });
 ```
 

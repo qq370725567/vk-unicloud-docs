@@ -168,10 +168,10 @@ let imgSecCheckRes = await vk.openapi.douyin.security.imgSecCheck({
  * @param {Object} data               模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
  */
 let sendRes = await vk.openapi.douyin.subscribeMessage.send({
-  touser : "9D26812AF23D9B2743235C4E3F3353E8",							// 接收者（用户）的 openid
-  template_id : "789697983d789c9257b7745470442be4",							// 所需下发的订阅模板id
-  page : "pages/index/index",		// 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
-  data : {
+  touser: "9D26812AF23D9B2743235C4E3F3353E8", // 接收者（用户）的 openid
+  template_id: "789697983d789c9257b7745470442be4", // 所需下发的订阅模板id
+  page: "pages/index/index", // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
+  data: {
     "物品名称": "测试值0",
     "购买金额": "测试值1"
   }
@@ -187,11 +187,11 @@ console.log('sendRes: ', sendRes);
 
 ```js
 uni.requestSubscribeMessage({
-  tmplIds:["271167b4691a07becf2ac115a896ebd6"], // 模板id
-  success(res) {
+  tmplIds: ["271167b4691a07becf2ac115a896ebd6"], // 模板id
+  success: (res) => {
     console.log("----subscribeAppMsg----success", res);
   },
-  fail(res) {
+  fail: (res) => {
     console.log("----subscribeAppMsg----fail", res);
   }
 });
