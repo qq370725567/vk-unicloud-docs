@@ -287,7 +287,7 @@ let imgSecCheckRes = await vk.openapi.weixin.security.imgSecCheck({
 let sendRes = await vk.openapi.weixin.subscribeMessage.send({
   touser: openid,
   template_id: "订阅模板ID",
-  page: "pages/index/index",
+  page: "pages/index/index", // 注意：此处的page地址不要/开头
   data: {
     character_string1: {
       value: "202103040830158485629163994677"
