@@ -324,15 +324,15 @@ service: {
       // 密钥和签名信息
       uploadData: {
         OSSAccessKeyId: "",
-        policy:"",
-        signature:"",
+        policy: "",
+        signature: "",
       },
       // oss上传地址
-      action:"https://xxxxxxxx.oss-cn-hangzhou.aliyuncs.com",
+      action: "https://xxxxxxxx.oss-cn-hangzhou.aliyuncs.com",
       // 根目录名称
       dirname: "public",
       // oss外网访问地址，也可以是阿里云cdn地址
-      host:"https://xxx.xxx.com",
+      host: "https://xxx.xxx.com",
       // 上传时，是否按用户id进行分组储存
       groupUserId: false,
     }
@@ -356,7 +356,7 @@ uni.chooseImage({
       title: "上传中...",
       file: res.tempFiles[0],
       needSave: true,
-      success:(res) => {
+      success: (res) => {
        // 上传成功
 
       },
@@ -385,7 +385,7 @@ uni.chooseImage({
       file: res.tempFiles[0],
       needSave: true,
       category_id: "001",
-      success :(res) => {
+      success: (res) => {
        // 上传成功
 
       },
@@ -414,7 +414,7 @@ uni.chooseImage({
       title: "上传中...",
       file: res.tempFiles[0],
       cloudPath: "myPath/aa.png",
-      success:(res) => {
+      success: (res) => {
        // 上传成功
 
       },
