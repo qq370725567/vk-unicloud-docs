@@ -1116,9 +1116,9 @@ userList: [
 </style>
 ```
 
-## 注意事项
+## 注意事项@q
 
-### 数据库报表vk-ws-connection不存在
+### 数据库报表vk-ws-connection不存在@q1
 
 请在 `database` 目录新建索引文件 `vk-ws-connection.index.json`，文件内容如下
 
@@ -1165,10 +1165,25 @@ userList: [
 
 然后右键 `database` 目录，初始化数据库，即可自动创建表和索引（注意：如果弹窗问你是否需要覆盖之前老的表的数据，千万别把老的表打勾）
 
-### 报错，类型错误：Invalid URL
+### 报错，类型错误：Invalid URL@q2
 
 WebSocket 目前只能连接云端运行，无法本地运行。
 
-### 报错，权限不足？
+### 报错，权限不足？@q3
 
 连接 WebSocket 的时候，`onWebsocketConnection`、`onWebsocketMessage`、`onWebsocketDisConnection`、`onWebsocketError` 这4个触发事件同样也会经过中间件过滤，如内置的pub、kh、sys这3个过滤器
+
+### 非uniapp客户端连接注意事项@q4
+
+通过 ws.signedURL 得到连接地址，并通过websocket连接后，需要马上发送一次消息，消息的格式固定如下
+
+```json
+{
+  "vkWebSocket": {
+    "type": "connect",
+    "data": {
+      // 这里可以写你自己的其他参数
+    }
+  }
+}
+```
