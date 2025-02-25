@@ -723,7 +723,46 @@ await vk.pubfn.sleep(100);
 ```
 
 
+## 如何设置云函数请求超时时间?@q122
 
+**设置最大超时时间**
+
+云函数根目录下的package.json文件内修改，即 `router/package.json`，里面的timeout代表超时时间，这个超时时间有大小上限
+
+**上限**
+
+- 腾讯云：30秒
+- 阿里云：120秒
+- 支付宝云：180秒
+
+```json
+"cloudfunction-config": {
+  "concurrency": 1,
+  "memorySize": 512,
+  "path": "/http/router",
+  "timeout": 180,
+  "triggers": [],
+  "runtime": "Nodejs18",
+	"keepRunningAfterReturn": false
+}
+```
+
+前端执行 `vk.callFunction` 的时候，可以加一个参数 `timeout` 来指定本次请求的超时时间，如下
+
+```js
+vk.callFunction({
+  url: '云函数地址',
+  title: '请求中...',
+  data: {
+    a: 1,
+    b: "2"
+  },
+  timeout: 5000, // 单位毫秒，1000 = 1秒
+  success: (res) => {
+    console.log('res: ', res);
+  }
+});
+```
 
 
 
