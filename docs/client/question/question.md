@@ -747,7 +747,9 @@ await vk.pubfn.sleep(100);
 }
 ```
 
-前端执行 `vk.callFunction` 的时候，可以加一个参数 `timeout` 来指定本次请求的超时时间，如下
+_注意：修改完 `router/package.json` 需要重新上传云函数才能生效。_
+
+前端执行 `vk.callFunction` 的时候，还可以加一个参数 `timeout` 来指定本次请求的超时时间，如下
 
 ```js
 vk.callFunction({
