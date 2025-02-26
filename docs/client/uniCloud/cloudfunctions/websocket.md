@@ -1179,12 +1179,61 @@ WebSocket 目前只能连接云端运行，无法本地运行。
 
 ```json
 {
-  "vkWebSocket": {
-    "type": "connect",
+  "data": {
+    "url": "template/web-socket/pub.web-socket",
+    "channel": "default",
+    "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
+    "clientInfo": {
+      "appid": "__UNI__1333698",
+      "platform": "web",
+      "locale": "zh-CN",
+      "os": "ios",
+      "deviceId": "17401305494337804487",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+    },
     "data": {
-      // 这里可以写你自己的其他参数
+      "vkWebSocket": {
+        "type": "connect",
+        "data": {
+          
+        }
+      }
     }
-  }
+  },
+  "deviceId": "17401305494337804487"
+}
+```
+
+下面是各参数介绍
+
+```json
+{
+  "data": {
+    "url": "template/web-socket/pub.web-socket", // websocket 云对象地址
+    "channel": "default", // 消息渠道，可自定义任意字符串
+    // 用户的token，如果云对象不是pub类型，就需要带上这个参数
+    "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
+    // 客户端信息
+    "clientInfo": {
+      "appid": "__UNI__1333698", // DCloud应用的appid
+      "platform": "web", // 条件编译的平台，如 web、mp-weixin、mp-alipay、app等
+      "locale": "zh-CN", // 语言
+      "os": "ios", // 操作系统，ios android 等
+      "deviceId": "17401305494337804487", // 设备id
+      // 浏览器UA
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+    },
+    // 下面是固定的值
+    "data": {
+      "vkWebSocket": {
+        "type": "connect",
+        "data": {
+          // 这里可以自定义任意参数
+        }
+      }
+    }
+  },
+  "deviceId": "17401305494337804487" // 设备id，一般情况下与clientInfo.deviceId一致即可
 }
 ```
 
