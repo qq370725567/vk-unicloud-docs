@@ -1179,6 +1179,7 @@ WebSocket 目前只能连接云端运行，无法本地运行。
 
 ```json
 {
+  "deviceId": "17401305494337804487",
   "data": {
     "url": "template/web-socket/pub.web-socket",
     "channel": "default",
@@ -1199,8 +1200,7 @@ WebSocket 目前只能连接云端运行，无法本地运行。
         }
       }
     }
-  },
-  "deviceId": "17401305494337804487"
+  }
 }
 ```
 
@@ -1208,6 +1208,7 @@ WebSocket 目前只能连接云端运行，无法本地运行。
 
 ```json
 {
+  "deviceId": "17401305494337804487", // 设备id，一般情况下与下面的clientInfo.deviceId一致即可
   "data": {
     "url": "template/web-socket/pub.web-socket", // websocket 云对象地址
     "channel": "default", // 消息渠道，可自定义任意字符串
@@ -1232,8 +1233,7 @@ WebSocket 目前只能连接云端运行，无法本地运行。
         }
       }
     }
-  },
-  "deviceId": "17401305494337804487" // 设备id，一般情况下与clientInfo.deviceId一致即可
+  }
 }
 ```
 
