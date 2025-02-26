@@ -14,7 +14,7 @@ sidebarDepth: 0
 > 
 > WebSocket VK版目前只支持在云对象中使用
 
-## 介绍
+## 介绍@introduce
 
 WebSocket 是一种协议，可通过单个 TCP 连接在网络客户端与网络服务器之间提供全双工通信通道。
 
@@ -35,7 +35,7 @@ WebSocket 是一种协议，可通过单个 TCP 连接在网络客户端与网�
 2. 适配VK框架，支持通过user_id发送消息，支持强制用户断开连接，强制用户退出登录等
 3. 可以查看在线（与WebSocket建立连接未断开）的用户
 
-## 云端router添加WebSocket依赖代码
+## 云端router添加WebSocket依赖代码@router
 
 打开 `router/index.js` 文件，替换代码如下
 
@@ -56,9 +56,9 @@ exports.onWebsocketDisConnection = ws.onWebsocketDisConnection;
 exports.onWebsocketError = ws.onWebsocketError;
 ```
 
-## 云端（云对象） WebSocket 事件
+## 云端（云对象） WebSocket 事件@cloud-event
 
-### onWebsocketConnection（连接时触发）
+### onWebsocketConnection（连接时触发）@onWebsocketConnection
 
 > 当有客户端进行连接时触发
 
@@ -85,7 +85,7 @@ module.exports = {
 
 data为前端执行 [vk.connectWebSocket](#vk-connectwebsocket-建立连接) 时传的data
 
-### onWebsocketMessage（收到消息时触发）
+### onWebsocketMessage（收到消息时触发）@onWebsocketMessage
 
 > 接收到客户端消息时触发
 
@@ -112,7 +112,7 @@ module.exports = {
 
 data：值为 [webSocket.send](#websocket-send-发送消息) 发送的 data 的值
 
-### onWebsocketDisConnection（连接断开时触发）
+### onWebsocketDisConnection（连接断开时触发）@onWebsocketDisConnection
 
 > 连接断开时触发
 
@@ -139,7 +139,7 @@ module.exports = {
 |---	|---		|---		|
 |cid	| String	|连接ID		|
 
-### onWebsocketError（连接错误时触发）
+### onWebsocketError（连接错误时触发）@onWebsocketError
 
 > 触发其他事件时失败后触发
 
@@ -169,13 +169,13 @@ module.exports = {
 |cid	| String	|连接ID		|
 |errMsg	|String	|错误信息	|
 
-## 云端（云对象） API
+## 云端（云对象） API@cloud-api
 
 用法：`const ws = this.getWebSocketManage()`
 
 返回值: `WebSocket` 对象实例
 
-### ws.send（发送消息）
+### ws.send（发送消息）@cloud-send
 
 > 从云对象中向客户端发送消息
 
@@ -274,7 +274,7 @@ module.exports = {
 }
 ```
 
-### ws.close（关闭连接）
+### ws.close（关闭连接）@cloud-close
 
 > 在云对象中关闭连接
 
@@ -320,7 +320,7 @@ module.exports = {
 }
 ```
 
-### ws.signedURL（生成外部连接地址）
+### ws.signedURL（生成外部连接地址）@cloud-signed-url
 
 > 在云对象中生成WebSocket连接地址（可以给其他非uniapp客户端连接）
 
@@ -362,7 +362,7 @@ module.exports = {
 }
 ```
 
-### ws.forceLogout（强制用户退出登录）
+### ws.forceLogout（强制用户退出登录）@cloud-force-logout
 
 > 在云端强制通知客户端退出登录
 
@@ -415,7 +415,7 @@ this.webSocket.onVkMessage(data => {
 });
 ```
 
-## 前端（客户端） API
+## 前端（客户端） API@client-api
 
 :::warning uni-app-x 连接 WebSocket 说明
 
@@ -424,7 +424,7 @@ uni-app-x WebSocket API 暂未实现，仅影响客户端无法生成WebSocket�
 
 :::
 
-### vk.connectWebSocket（建立连接）
+### vk.connectWebSocket（建立连接）@client-connectWebSocket
 
 快速连接 WebSocket 服务
 
@@ -507,7 +507,7 @@ onLoad(options = {}) {
 },
 ```
 
-### webSocket.send（发送消息）
+### webSocket.send（发送消息）@client-send
 
 `this.webSocket` 通过执行 [vk.connectWebSocket](#vk-connectwebsocket-建立连接) 获得
 
@@ -520,7 +520,7 @@ this.webSocket.send({
 });
 ```
 
-### webSocket.close（关闭连接）
+### webSocket.close（关闭连接）@client-close
 
 `this.webSocket` 通过执行 [vk.connectWebSocket](#vk-connectwebsocket-建立连接) 获得
 
@@ -531,7 +531,7 @@ this.webSocket.close({
 });
 ```
 
-## 关联的数据表
+## 关联的数据表@db
 
 ### vk-ws-connection
 
@@ -595,9 +595,9 @@ this.webSocket.close({
 
 再右键 database 目录，初始化数据库，出现弹窗后，所有已存在的表都不要打勾，直接点覆盖选中的表（因为没打勾，只会初始化不存在的表）
 
-## 完整示例
+## 完整示例@demo
 
-**云端代码**
+### 云端代码@cloud-demo
 
 ```js
 'use strict';
@@ -774,7 +774,7 @@ var cloudObject = {
 module.exports = cloudObject;
 ```
 
-**前端代码**
+### 前端代码@client-demo
 
 注意下方的代码需要改下这2个变量的值为你的
 
@@ -1173,9 +1173,9 @@ WebSocket 目前只能连接云端运行，无法本地运行。
 
 连接 WebSocket 的时候，`onWebsocketConnection`、`onWebsocketMessage`、`onWebsocketDisConnection`、`onWebsocketError` 这4个触发事件同样也会经过中间件过滤，如内置的pub、kh、sys这3个过滤器
 
-### 非uniapp客户端连接注意事项@q4
+### 非uniapp客户端连接websocket注意事项@q4
 
-通过 ws.signedURL 得到连接地址，并通过websocket连接后，需要马上发送一次消息，消息的格式固定如下
+通过 [ws.signedURL](#cloud-signed-url) 得到连接地址，并通过websocket连接后，需要马上发送一次消息，消息的格式固定如下
 
 ```json
 {
