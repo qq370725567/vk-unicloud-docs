@@ -1185,11 +1185,11 @@ WebSocket 目前只能连接云端运行，无法本地运行。
     "channel": "default",
     "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
     "clientInfo": {
+      "deviceId": "17401305494337804487",
       "appid": "__UNI__1333698",
       "platform": "web",
       "locale": "zh-CN",
       "os": "ios",
-      "deviceId": "17401305494337804487",
       "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
     },
     "data": {
@@ -1216,11 +1216,11 @@ WebSocket 目前只能连接云端运行，无法本地运行。
     "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
     // 客户端信息
     "clientInfo": {
+      "deviceId": "17401305494337804487", // 设备id（必填）
       "appid": "__UNI__1333698", // DCloud应用的appid（必填）
       "platform": "web", // 条件编译的平台，如 web、mp-weixin、mp-alipay、app等（选填）
       "locale": "zh-CN", // 语言（选填）
       "os": "ios", // 操作系统，ios android 等（选填）
-      "deviceId": "17401305494337804487", // 设备id（必填）
       // 浏览器UA（选填）
       "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
     },
@@ -1249,11 +1249,11 @@ WebSocket 目前只能连接云端运行，无法本地运行。
     "channel": "default",
     "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
     "clientInfo": {
+      "deviceId": "17401305494337804487",
       "appid": "__UNI__1333698",
       "platform": "web",
       "locale": "zh-CN",
       "os": "ios",
-      "deviceId": "17401305494337804487",
       "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
     },
     "data": {
@@ -1279,11 +1279,11 @@ WebSocket 目前只能连接云端运行，无法本地运行。
     "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
     // 客户端信息
     "clientInfo": {
+      "deviceId": "17401305494337804487", // 设备id（必填）
       "appid": "__UNI__1333698", // DCloud应用的appid（必填）
       "platform": "web", // 条件编译的平台，如 web、mp-weixin、mp-alipay、app等（选填）
       "locale": "zh-CN", // 语言（选填）
       "os": "ios", // 操作系统，ios android 等（选填）
-      "deviceId": "17401305494337804487", // 设备id（必填）
       // 浏览器UA（选填）
       "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
     },
