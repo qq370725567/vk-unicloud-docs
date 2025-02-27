@@ -157,10 +157,17 @@ res = await vk.baseDao.selects({
   // 副表列表
   foreignDB: [
     {
-      dbName: "副表表名",
+      dbName: "副表1表名",
       localKey: "主表外键名",
-      foreignKey: "副表外键名",
-      as: "副表as字段",
+      foreignKey: "副表1外键名",
+      as: "副表1as字段",
+      limit: 1
+    },
+    {
+      dbName: "副表2表名",
+      localKey: "主表外键名",
+      foreignKey: "副表2外键名",
+      as: "副表2as字段",
       limit: 1
     }
   ]
