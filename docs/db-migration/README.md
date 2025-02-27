@@ -66,24 +66,26 @@ export default {
 	// 旧环境
 	"oldEnv": {
 		"cloud": "uniCloud", // 通用参数 固定为 uniCloud
-		"platform": "aliyun", // 通用参数 阿里云：aliyun 腾讯云：tencent 支付宝云：alipay
+		"platform": "aliyun", // 通用参数 阿里云：aliyun 腾讯云：tencent 支付宝云：alipay 私有云：dcloud
 		"spaceId": "mp-9dd9a70d-0000-6666-a520-105287d47ff4", // 通用参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceId参数
 		"clientSecret": "阿里云专属参数", // 阿里云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应ClientSecret参数
 		"spaceAppId": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceAppId参数
 		"accessKey": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应AK参数 
 		"secretKey": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SK参数
 		"actionsecret": "5d44a032652974c3e53644945a95b126", // 通用参数 请求密钥，从 uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js 获取（两者保持一样即可）
+		"endpoint": "私有云专属参数", // 私有云专属参数 从 https://unicloud.dcloud.net.cn/pages/private-cloud/cluster-list 获取 ApiEndpoint
 	},
 	// 新环境
 	"newEnv": {
 		"cloud": "uniCloud", // 通用参数 固定为 uniCloud
-		"platform": "alipay", // 通用参数 阿里云：aliyun 腾讯云：tencent 支付宝云：alipay
+		"platform": "alipay", // 通用参数 阿里云：aliyun 腾讯云：tencent 支付宝云：alipay 私有云：dcloud
 		"spaceId": "env-00jx6s6j6mnt", // 通用参数 空间id 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceId参数
 		"clientSecret": "阿里云专属参数", // 阿里云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应ClientSecret参数
 		"spaceAppId": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceAppId参数
 		"accessKey": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应AK参数 
 		"secretKey": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SK参数
 		"actionsecret": "5d44a032652974c3e53644945a95b126", // 通用参数 请求密钥，从 uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js 获取（两者保持一样即可）
+		"endpoint": "私有云专属参数", // 私有云专属参数 从 https://unicloud.dcloud.net.cn/pages/private-cloud/cluster-list 获取 ApiEndpoint
 	},
 	"maxPageSize": 500, // 数据库单次请求获取数量，默认500，如果前端报内存超出大小限制的错误，可以尝试调小此值来解决。如设置为100或50或更小的值，最小为1，最大1000
 	"concurrencyImport": false, // 是否并发导入？设置为true可以提高性能，但无法保证迁移后的数据与原始顺序一致（一般业务进行查询时都会加排序条件，此时基本无影响），设置为false则可保证迁移后的数据与原始数据顺序一致
