@@ -1208,23 +1208,23 @@ WebSocket 目前只能连接云端运行，无法本地运行。
 
 ```json
 {
-  "deviceId": "17401305494337804487", // 设备id，一般情况下与下面的clientInfo.deviceId一致即可
+  "deviceId": "17401305494337804487", // 设备id，一般情况下与下面的clientInfo.deviceId一致即可（必填）
   "data": {
-    "url": "template/web-socket/pub.web-socket", // websocket 云对象地址
-    "channel": "default", // 消息渠道，可自定义任意字符串
-    // 用户的token，如果云对象不是pub类型，就需要带上这个参数
+    "url": "template/web-socket/pub.web-socket", // websocket 云对象地址（必填）
+    "channel": "default", // 消息渠道，可自定义任意字符串（选填）
+    // 用户的token，如果云对象不是pub类型，就需要带上这个参数（选填）
     "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
     // 客户端信息
     "clientInfo": {
-      "appid": "__UNI__1333698", // DCloud应用的appid
-      "platform": "web", // 条件编译的平台，如 web、mp-weixin、mp-alipay、app等
-      "locale": "zh-CN", // 语言
-      "os": "ios", // 操作系统，ios android 等
-      "deviceId": "17401305494337804487", // 设备id
-      // 浏览器UA
+      "appid": "__UNI__1333698", // DCloud应用的appid（必填）
+      "platform": "web", // 条件编译的平台，如 web、mp-weixin、mp-alipay、app等（选填）
+      "locale": "zh-CN", // 语言（选填）
+      "os": "ios", // 操作系统，ios android 等（选填）
+      "deviceId": "17401305494337804487", // 设备id（必填）
+      // 浏览器UA（选填）
       "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
     },
-    // 下面是固定的值
+    // 下面是固定的值（必填）
     "data": {
       "vkWebSocket": {
         "type": "connect",
@@ -1238,3 +1238,63 @@ WebSocket 目前只能连接云端运行，无法本地运行。
 ```
 
 成功发送这条消息后，vk框架才能识别为连接成功。
+
+连接成功后，给云对象发送消息的格式如下
+
+```js
+{
+  "deviceId": "17401305494337804487",
+  "data": {
+    "url": "template/web-socket/pub.web-socket",
+    "channel": "default",
+    "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
+    "clientInfo": {
+      "appid": "__UNI__1333698",
+      "platform": "web",
+      "locale": "zh-CN",
+      "os": "ios",
+      "deviceId": "17401305494337804487",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+    },
+    "data": {
+      "a": 1,
+      "b": "222",
+      "c": {
+        "a": 1
+      }
+    }
+  }
+}
+```
+
+下面是各参数介绍
+
+```js
+{
+  "deviceId": "17401305494337804487", // 设备id，一般情况下与下面的clientInfo.deviceId一致即可（必填）
+  "data": {
+    "url": "template/web-socket/pub.web-socket", // websocket 云对象地址（必填）
+    "channel": "default", // 消息渠道，可自定义任意字符串（选填）
+    // 用户的token，如果云对象不是pub类型，就需要带上这个参数（选填）
+    "uniIdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMDEiLCJyb2xlIjpbImFkbWluIl0sInBlcm1pc3Npb24iOltdLCJpYXQiOjE3NDAzODkyMzQsImV4cCI6MTc0MDk5NDAzNH0.wmW5tWfOhznFbGDZGlbZJwtwRXEtwJcqOhZZ1t2U3jY",
+    // 客户端信息
+    "clientInfo": {
+      "appid": "__UNI__1333698", // DCloud应用的appid（必填）
+      "platform": "web", // 条件编译的平台，如 web、mp-weixin、mp-alipay、app等（选填）
+      "locale": "zh-CN", // 语言（选填）
+      "os": "ios", // 操作系统，ios android 等（选填）
+      "deviceId": "17401305494337804487", // 设备id（必填）
+      // 浏览器UA（选填）
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
+    },
+    // 此data内的数据是你实际要发的数据（必填）
+    "data": {
+      "a": 1,
+      "b": "222",
+      "c": {
+        "a": 1
+      }
+    }
+  }
+}
+```
