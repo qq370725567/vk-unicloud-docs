@@ -4,7 +4,9 @@ sidebarDepth: 0
 
 # 查询返回树状结构
 
-## 代码示例
+## 代码示例@demo
+
+### 树状结构@demo1
 
 以下语句效果是：查询已启用的菜单，并自动将子菜单合并到父菜单的children字段下
 
@@ -34,9 +36,11 @@ res = await vk.baseDao.selects({
 });
 ```
 
+### 树状结构+or查询条件@demo2
+
 **注意：**
 
-1. `treeProps` 内的 `whereJson` 若需要用到 `or` 和 `and` 则
+`treeProps` 内的 `whereJson` 若需要用到 `or` 和 `and` 则
 
 `_.or` 需写成 `$.or`
 
@@ -75,7 +79,17 @@ let selectsRes = await vk.baseDao.selects({
 });
 ```
 
-and 和 or 嵌套
+### 树状结构+and+or查询条件@demo3
+
+**注意：**
+
+`treeProps` 内的 `whereJson` 若需要用到 `or` 和 `and` 则
+
+`_.or` 需写成 `$.or`
+
+`_.and` 需写成 `$.and`
+
+同时不支持流式语法，只支持如下写法。
 
 ```js
 let selectsRes = await vk.baseDao.selects({
@@ -113,7 +127,7 @@ let selectsRes = await vk.baseDao.selects({
 });
 ```
 
-## treeProps+foreignDB连表
+### 树状结构+连表@demo4
 
 连表时，`foreignDB` 属性只需写在主表下，无需写在 `treeProps` 内。（子表会继承主表的 `foreignDB` 属性)
 
@@ -177,14 +191,14 @@ res = await vk.baseDao.selects({
 });
 ```
 
-## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$
+## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$@tips
 
 以下是 _ 和 $ 变量实际代表的含义
 
 ```javascript
-var db = uniCloud.database(); // 全局数据库引用
-var _ = db.command; // 数据库操作符
-var $ = _.aggregate; // 聚合查询操作符
+const db = uniCloud.database(); // 全局数据库引用
+const _ = db.command; // 数据库操作符
+const $ = _.aggregate; // 聚合查询操作符
 ```
 
 
