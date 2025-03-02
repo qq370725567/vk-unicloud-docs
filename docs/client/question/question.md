@@ -722,7 +722,6 @@ vk.callFunction({
 await vk.pubfn.sleep(100);
 ```
 
-
 ## 如何设置云函数请求超时时间?@q122
 
 **设置最大超时时间**
@@ -765,6 +764,57 @@ vk.callFunction({
   }
 });
 ```
+
+## 如何修改云函数的node版本?@q123
+
+云函数根目录下的package.json文件内修改，即 `router/package.json`，里面的runtime代表node版本
+
+**各云厂商支持的版本如下**
+
+| 云厂商			| 默认值				| 可选项					| 推荐值		|
+|------------	|-------------|---------			|--------	|
+| 支付宝云		|node18				|node18、node16	|node18		|
+| 阿里云			|node16				|node18、node16	|node18		|
+| 腾讯云			|node16				|node18、node16	|node18		|
+| 本地运行		|node18				|node18					|node18		|
+
+**由于本地运行只支持node18，故为了和云端环境一致，因此推荐设置成node18**
+
+```json
+"cloudfunction-config": {
+  "concurrency": 1,
+  "memorySize": 512,
+  "path": "/http/router",
+  "timeout": 180,
+  "triggers": [],
+  "runtime": "Nodejs18",
+	"keepRunningAfterReturn": false
+}
+```
+
+_注意：修改完 `router/package.json` 需要重新上传云函数才能生效。_
+
+前端执行 `vk.callFunction` 的时候，还可以加一个参数 `timeout` 来指定本次请求的超时时间，如下
+
+```js
+vk.callFunction({
+  url: '云函数地址',
+  title: '请求中...',
+  data: {
+    a: 1,
+    b: "2"
+  },
+  timeout: 5000, // 单位毫秒，1000 = 1秒
+  success: (res) => {
+    console.log('res: ', res);
+  }
+});
+```
+
+
+
+
+
 
 
 
