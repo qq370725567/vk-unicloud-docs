@@ -742,7 +742,7 @@ await vk.pubfn.sleep(100);
   "timeout": 180,
   "triggers": [],
   "runtime": "Nodejs18",
-	"keepRunningAfterReturn": false
+  "keepRunningAfterReturn": false
 }
 ```
 
@@ -788,29 +788,11 @@ vk.callFunction({
   "timeout": 180,
   "triggers": [],
   "runtime": "Nodejs18",
-	"keepRunningAfterReturn": false
+  "keepRunningAfterReturn": false
 }
 ```
 
 _注意：修改完 `router/package.json` 需要重新上传云函数才能生效。_
-
-前端执行 `vk.callFunction` 的时候，还可以加一个参数 `timeout` 来指定本次请求的超时时间，如下
-
-```js
-vk.callFunction({
-  url: '云函数地址',
-  title: '请求中...',
-  data: {
-    a: 1,
-    b: "2"
-  },
-  timeout: 5000, // 单位毫秒，1000 = 1秒
-  success: (res) => {
-    console.log('res: ', res);
-  }
-});
-```
-
 
 
 
