@@ -726,7 +726,9 @@ await vk.pubfn.sleep(100);
 
 **设置最大超时时间**
 
-云函数根目录下的package.json文件内修改，即 `router/package.json`，里面的timeout代表超时时间，这个超时时间有大小上限
+云函数根目录下的package.json文件内修改，即 `router/package.json`，里面的timeout代表超时时间（这个超时时间有大小上限），如下图所示。
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/dcfee1ef-645a-404f-869c-f496cb7549b7.png)
 
 **上限**
 
@@ -748,6 +750,8 @@ await vk.pubfn.sleep(100);
 
 _注意：修改完 `router/package.json` 需要重新上传云函数才能生效。_
 
+![](https://cdn.fsq.pub/vkdoc/vk-client/49f59f37-6a0c-4645-9d39-0254e5789471.png)
+
 前端执行 `vk.callFunction` 的时候，还可以加一个参数 `timeout` 来指定本次请求的超时时间，如下
 
 ```js
@@ -767,7 +771,9 @@ vk.callFunction({
 
 ## 如何修改云函数的node版本?@q123
 
-云函数根目录下的package.json文件内修改，即 `router/package.json`，里面的runtime代表node版本
+云函数根目录下的package.json文件内修改，即 `router/package.json`，里面的runtime代表node版本，如下图所示。
+
+![](https://cdn.fsq.pub/vkdoc/vk-client/5b690ac4-7092-4fca-b164-74ad54b4772e.png)
 
 **各云厂商支持的版本如下**
 
@@ -794,6 +800,7 @@ vk.callFunction({
 
 _注意：修改完 `router/package.json` 需要重新上传云函数才能生效。_
 
+![](https://cdn.fsq.pub/vkdoc/vk-client/49f59f37-6a0c-4645-9d39-0254e5789471.png)
 
 
 
