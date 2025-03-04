@@ -139,6 +139,25 @@ getClientInfo().source，返回云函数调用来源，它的值域为：
 |windowTop		|可使用窗口的顶部位置	|-|
 |windowWidth		|可使用窗口宽度		|-|
 
+### this.getCustomClientInfo（获取自定义客户端信息）
+
+> vk-unicloud版本 ≥ 2.19.4
+
+需要先在前端调用 [vk.setCustomClientInfo](https://vkdoc.fsq.pub/client/pages/updateRequestGlobalParam.html#set-custom-client-info) 设置自定义客户端信息，才能在云对象内获取到数据
+
+**接口形式**
+
+`this.getCustomClientInfo()`
+
+**示例**
+
+```js
+module.exports = {
+  add: function(){
+    const customClientInfo = this.getCustomClientInfo();
+  }
+}
+```
 
 ### this.getUserInfo（获取当前登录用户信息）
 
