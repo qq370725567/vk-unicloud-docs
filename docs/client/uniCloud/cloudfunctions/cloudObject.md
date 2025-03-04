@@ -139,7 +139,7 @@ getClientInfo().source，返回云函数调用来源，它的值域为：
 |windowTop		|可使用窗口的顶部位置	|-|
 |windowWidth		|可使用窗口宽度		|-|
 
-### this.getCustomClientInfo（获取自定义客户端信息）@getCustomClientInfo
+### this.getCustomClientInfo（获取自定义客户端信息）@get-custom-client-info
 
 > vk-unicloud版本 ≥ 2.19.4
 
