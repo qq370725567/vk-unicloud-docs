@@ -6,7 +6,9 @@ sidebarDepth: 0
 
 > 新增于 vk-unicloud 2.8.0（于 2022-04-01 发布）
 
-## 云对象是什么？
+## 介绍@introduce
+
+### 云对象是什么？@introduce-1
 
 云对象是云函数的集合，即N个函数写在同一个xx.js文件里。
 
@@ -22,7 +24,7 @@ ___在VK框架中，可以做到云对象和云函数同时存在。___
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/1f4c0851-99e9-4fe1-8ab9-cbedee407002.png)
 
-## 云对象能带来什么，优势是？
+### 云对象能带来什么，优势是？@introduce-2
 
 **云对象与之前的单文件云函数模式相比有什么优势？**
 
@@ -32,19 +34,19 @@ ___在VK框架中，可以做到云对象和云函数同时存在。___
 
 - 3、云对象作为业务逻辑相对独立的个体，自带 _before 和 _after 两个过滤器，逻辑更清晰。
 
-## 从单文件云函数模式迁移到云对象复杂吗？
+### 从单文件云函数模式迁移到云对象复杂吗？@introduce-3
 
 - 无需迁移，在VK框架中，可以做到云对象和云函数同时存在。
 
-## 有了云对象是否可以放弃云函数？
+### 有了云对象是否可以放弃云函数？@introduce-4
 
 这里说的云函数非uniCloud官方传统云函数，而是VK框架下的单文件云函数路由模式。（传统云函数模式早就可以放弃了）
 
 看个人编码喜好，有人喜欢云函数路由模式，也有人喜欢云对象路由模式，两者各有风格和优势。
 
-## 云对象内置API
+## 云对象内置API@api
 
-### this.getClientInfo（获取客户端信息）
+### this.getClientInfo（获取客户端信息）@get-client-info
 
 **接口形式**
 
@@ -70,8 +72,6 @@ module.exports = {
   }
 }
 ```
-
-
 
 **返回值**
 
@@ -139,7 +139,7 @@ getClientInfo().source，返回云函数调用来源，它的值域为：
 |windowTop		|可使用窗口的顶部位置	|-|
 |windowWidth		|可使用窗口宽度		|-|
 
-### this.getCustomClientInfo（获取自定义客户端信息）
+### this.getCustomClientInfo（获取自定义客户端信息）@getCustomClientInfo
 
 > vk-unicloud版本 ≥ 2.19.4
 
@@ -159,7 +159,7 @@ module.exports = {
 }
 ```
 
-### this.getUserInfo（获取当前登录用户信息）
+### this.getUserInfo（获取当前登录用户信息）@getUserInfo
 
 **接口形式**
 
@@ -209,7 +209,7 @@ let newUserInfo = await vk.baseDao.updateAndReturn({
 });
 ```
 
-### this.getCloudInfo（获取云端信息）
+### this.getCloudInfo（获取云端信息）@getCloudInfo
 
 **接口形式**
 
@@ -234,7 +234,7 @@ module.exports = {
 |functionName	|string	|是		|云对象名称，新增于`HBuilderX 3.5.1`		|
 |functionType	|string	|是		|云对象此值固定为`cloudobject`，新增于`HBuilderX 3.5.1`	|
 
-### this.getUniIdToken（获取客户端token）
+### this.getUniIdToken（获取客户端token）@getUniIdToken
 
 **接口形式**
 
@@ -251,7 +251,7 @@ module.exports = {
 ```
 
 
-### this.getMethodName（获取当前调用的方法名）
+### this.getMethodName（获取当前调用的方法名）@getMethodName
 
 本方法主要用于在 `_before` 等拦截器方法里，判断客户端上传的信息进行处理，比如发现客户端调用的是a方法时，执行一段特殊逻辑。详见下文
 
@@ -269,7 +269,7 @@ module.exports = {
 }
 ```
 
-### this.getParams（获取当前参数列表）
+### this.getParams（获取当前参数列表）@getParams
 
 在云对象的普通方法里，参数可以直接获取。本方法主要用于在 `_before` 等拦截器方法里，判断客户端上传的信息进行处理。详见下文
 
@@ -287,7 +287,7 @@ module.exports = {
 }
 ```
 
-### this.getUniCloudRequestId（获取当前请求id）
+### this.getUniCloudRequestId（获取当前请求id）@getUniCloudRequestId
 
 **接口形式**
 
@@ -308,7 +308,7 @@ module.exports = {
 ```
 
 
-### this.getHttpInfo（获取url化时的http信息）
+### this.getHttpInfo（获取url化时的http信息）@getHttpInfo
 
 仅可在云对象url化时使用，如何使用云对象的url化请参考：[云对象url化](https://vkdoc.fsq.pub/client/question/q2.html)
 
@@ -326,7 +326,7 @@ module.exports = {
 }
 ```
 
-### this.getUtil（获取util工具包）
+### this.getUtil（获取util工具包）@getUtil
 
 **接口形式**
 
@@ -356,9 +356,9 @@ module.exports = {
 |$	|object	|是		| 聚合查询操作符 = _.aggregate	|
 
 
-## 预处理与后处理
+## 预处理与后处理@intercept
 
-### _before（预处理）
+### _before（预处理）@intercept-before
 
 云对象内可以创建一个特殊的方法_before，用来在调用常规方法之前进行预处理，一般用于拦截器、统一的身份验证、参数校验等。
 
@@ -396,7 +396,7 @@ module.exports = {
 
 判断用户是否登录框架已经内置，无需再写代码判断用户是否登录。[查看内置权限](#内置权限)
 
-### _after（后处理）
+### _after（后处理）@intercept-after
 
 与预处理 `_before` 对应的是后处理 `_after`。云对象内可以创建一个特殊的方法 `_after` 用来再加工处理本次调用方法的返回结果或者抛出的错误
 
@@ -423,11 +423,11 @@ module.exports = {
 }
 ```
 
-## 内置权限
+## 内置权限@permissions
 
 云对象已内置以下权限类型。
 
-### pub（无需登录即可访问的函数）
+### pub（无需登录即可访问的函数）@permissions-pub
 
 **满足以下任意一条规则，即为 `pub` 类型函数**
 
@@ -435,7 +435,7 @@ module.exports = {
 - 2、云对象以 `pub.js` 命名 或以 `pub.xxx.js` 命名（xxx可以是任意字符串，如：`pub.user.js`）（权重2）
 - 3、云对象写在 `pub` 目录下，如：`pub/user.js`（权重1）
 
-### kh（需要登录才能访问的函数）
+### kh（需要登录才能访问的函数）@permissions-kh
 
 **满足以下任意一条规则，即为 `kh` 类型函数**
 
@@ -444,7 +444,7 @@ module.exports = {
 - 3、云对象以 `kh.js` 命名 或以 `kh.xxx.js` 命名（xxx可以是任意字符串，如 `kh.user.js`）（权重2）
 - 4、云对象写在 `kh` 目录下，如：`kh/user.js`（权重1）
 
-### sys（需要角色授权才能访问的函数）
+### sys（需要角色授权才能访问的函数）@permissions-sys
 
 **满足以下任意一条规则，即为 `sys` 类型函数**
 
@@ -464,13 +464,13 @@ sys类型的函数通常用于admin端，如商城系统角色分为
 
 **拦截原理：通过admin端权限管理（设置某权限可以执行哪些云函数）、角色管理（角色赋予权限）、用户管理（用户赋予角色）完成。**
 
-### _（禁止访问，私有函数类型）
+### _（禁止访问，私有函数类型）@permissions-private
 
 **满足以下任意一条规则，即为 `私有` 类型函数**
 
 - 1、云对象内的函数名称以 `_` 开头则禁止前端访问 如：`_before` `_after` `_aaa`（权重99）
 
-### 特殊（同时满足多个类型时）
+### 特殊（同时满足多个类型时）@permissions-special
 
 当云对象内某一个函数同时满足 `kh` 和 `pub` 类型时，通过权重值来决定属于哪一种类型。
 
@@ -480,9 +480,9 @@ sys类型的函数通常用于admin端，如商城系统角色分为
 
 - 2、云对象名为 `user.js`（满足kh权重0） 函数名为 `pub_getList`（满足pub权重3），则属于 `pub` 类型函数（取权重大的一方）。
 
-## 快速上手 - 如何使用云对象？
+## 快速上手 - 如何使用云对象？@tutorial
 
-### 如何编写云对象？
+### 如何编写云对象？@tutorial-1
 
 以创建 client 端 用户业务为例。
 
@@ -502,7 +502,7 @@ sys类型的函数通常用于admin端，如商城系统角色分为
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/613e4fb9-c562-46b4-8426-411797d218a6.png)
 
-### 云对象模板代码
+### 云对象模板代码@tutorial-2
 
 以下是一个完整的云对象代码，里面包含了 `getInfo` 、 `getList` 两个函数，以及 两个内置函数 `_before` 和 `_after`
 
@@ -576,7 +576,7 @@ var cloudObject = {
 module.exports = cloudObject;
 ```
 
-### 前端如何调用云对象？
+### 前端如何调用云对象？@tutorial-3
 
 调用云对象有两种方式。
 
@@ -804,7 +804,7 @@ let res = await pubObject.getList({
 });
 ```
 
-## 本地运行
+## 本地运行@run-locally
 
 **VK框架下的云对象是支持本地运行的**
 
@@ -837,13 +837,13 @@ let res = await pubObject.getList({
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/e647fdbb-dedb-433e-b5c9-1f15b9349a1c.png)
 
-## 云对象URL化
+## 云对象URL化@url
 
 与云函数基本一致
 
 [点击查看](https://vkdoc.fsq.pub/client/question/q2.html)
 
-## 云对象URL化之URL重写
+## 云对象URL化之URL重写@urlrewrite
 
 云对象的URL会带. 如：`https://www.aaa.com/http/router/client/user.getInfo`
 
@@ -883,29 +883,29 @@ module.exports = {
 
 [点击查看详细说明](https://vkdoc.fsq.pub/client/question/q2.html)
 
-## 访问HTTP服务
+## 访问HTTP服务@http
 
 与云函数一致
 
 [点击查看](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/http.html)
 
-## 定时器
+## 定时器@triggers
 
 与云函数一致，定时器是需要额外创建传统云函数的。
 
 [点击查看](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/timer.html)
 
-## 使用crypto进行加密解密
+## 使用crypto进行加密解密@crypto
 
 与云函数一致，crypto 是 Nodejs 的内置模块，提供了加密功能，包括对 OpenSSL 的哈希、HMAC、加密、解密、签名、以及验证功能的一整套封装。
 
 [点击查看](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/crypto.html)
 
-## 同一个云对象内A函数调用B函数
+## 同一个云对象内A函数调用B函数@q1
 
 在同一个云对象内，可以通过 `await this.xxx()` 来调用其他函数，xxx为函数名。
 
-## A云对象内的函数调用B云对象的函数
+## A云对象内的函数调用B云对象的函数@q2
 
 **不建议**
 
@@ -929,7 +929,7 @@ let xxxRes = await pubFun.xxx();
 
 **我就要互相调用，应该怎么写？**
 
-#### 方式一（推荐）
+### 方式一（推荐）
 
 > vk-unicloud版本需>=2.9.0
 
@@ -948,7 +948,7 @@ let callRes = await vk.callFunction({
 console.log(callRes)
 ```
 
-#### 方式二（通用）
+### 方式二（通用）
 
 ```js
 let callFunctionRes = await uniCloud.callFunction({
@@ -964,7 +964,7 @@ let callFunctionRes = await uniCloud.callFunction({
 console.log(callFunctionRes.result)
 ```
 
-## 云对象操作常见问题
+## 云对象操作常见问题@q
 
 与云函数一致
 
