@@ -14,7 +14,10 @@ sidebarDepth: 0
 
 > vk-unicloud版本 ≥ 2.19.4
 
-_由于方式一的实现逻辑更方便新手开发者理解，因此建议使用方式一来实现全局请求参数_
+**特点**
+
+1. 全局参数与用户请求参数隔离存储，互不干扰，确保业务参数完整性
+2. 云函数和云对象的获取方式有一定区别
 
 ### 前端设置方式@mode1-client
 
@@ -66,6 +69,12 @@ console.log('当前店铺ID:', customClientInfo.shop_id);
 
 ## 方式二：updateRequestGlobalParam 形式@update-request-global-param
 
+**特点**
+
+1. 基于正则表达式实现URL路由匹配，支持为不同接口路径动态配置差异化全局参数
+2. 注入参数显式追加至data，请求日志完整记录参数明细，确保传输过程可观测、可追溯
+3. 云端获取参数的方式一致，均在 data 中获取
+
 ### 前端设置方式@mode2-client
 
 先在页面中通过 `vk.callFunctionUtil.updateRequestGlobalParam` 设置自定义参数，代码如下：
@@ -82,10 +91,11 @@ vk.callFunctionUtil.updateRequestGlobalParam({
 });
 ```
 
+执行完上面的代码后，之后执行 vk.callFunction 时，如果 url 满足上面的正则表达式，则这些请求会自动带上 shop_id 参数。
+
 **上面的方法需要写在那里？**
 
 写哪都可以，主要能执行就行
-
 
 #### 参数说明@mode2-client-params
 
