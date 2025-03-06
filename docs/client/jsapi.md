@@ -1434,6 +1434,7 @@ await vk.request({
 |writeStream				|WriteStream																																	|-				|-			|接受响应数据的可写数据流																																																																									|
 |streaming					|Boolean																																			|-				|false	|是否直接返回响应流，开启 streaming 之后，HttpClient 会在拿到响应对象 res 之后马上返回， 此时 result.headers 和 result.status 已经可以读取到，只是没有读取 data 数据而已。|
 |encrypt		|Boolean											|否		|false	|此参数为vk新增，是否加密通信 [详情](#encrypt)																												|																																								|
+|useProxy		|Boolean											|否		|false	|此参数为vk新增，是否使用代理请求，仅阿里云空间生效																										|																																								|
 
 **注意**
 
