@@ -375,7 +375,7 @@ module.exports = async (obj) => {
 
 在转账配置中设置下 `"version": 3` 如下图所示
 
-![](https://cdn.fsq.pub/vkdoc/vk-pay/b999975e-8e75-475c-b6be-352a213d4b0c.png)
+![](https://cdn.fsq.pub/vkdoc/vk-pay/af4b7b8e-44c3-4ae0-b6e1-16f7623b7d6d.png)
 
 配置好后，需要重新上传公共模块 `uni-config-center` 才会生效（因为回调是强制请求云端的）
 
