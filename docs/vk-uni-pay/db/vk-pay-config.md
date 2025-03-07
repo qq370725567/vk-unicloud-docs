@@ -108,7 +108,8 @@ sidebarDepth: 0
       "appCertContent": "",
       "appPrivateKeyContent": "",
       "wxpayPublicKeyContent": "",
-      "wxpayPublicKeyId": ""
+      "wxpayPublicKeyId": "",
+      "version": 3
     }
   },
   "alipay": {
