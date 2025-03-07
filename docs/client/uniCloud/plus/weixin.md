@@ -553,11 +553,13 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 4. 微信会给支付者发送服务消息，用户点击后会进入确认收货页面，只有用户点了确认收货或订单到期自动确认收货后，商家才能收到资金，否则资金处于冻结状态
 5. 完成
 
-同时还可能需要商家缴纳保证金，金额不一定是10万，可能是几千，也可能是几万，反正很坑，如下图所示
+同时还可能需要商家缴纳保证金，其金额不一定是10万，可能是几千，也可能是几万，反正很坑，如下图所示
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/f505118a-b444-439c-9f88-d62c9a08b77c.png)
 
 [小程序交易保证金管理规定](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/ministore/minishopopencomponent2/baozhengjin.html)
+
+不过这个保证金是可以不缴纳的，只是不缴纳会影响其他小程序跳转到你的小程序的能力（不影响登录、支付等其他功能），[查看实物交易类小程序跳转规范](https://mp.weixin.qq.com/cgi-bin/announce?token=1559487538&action=getannouncement&key=11736404407Ko3H2&version=1&lang=zh_CN&platform=2)
 
 ### 发货信息录入接口@order-upload-shipping-info
 
