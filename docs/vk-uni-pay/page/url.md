@@ -36,7 +36,7 @@ $.ajax({
   data: JSON.stringify({
     action: "pay/createPayment",
     data: {
-      vk_platform: "h5", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
+      vk_platform: "h5", // 这里固定 h5
       isPC: true, // 是否是电脑扫码支付
       needQRcode: "image", // "image" 代表直接返回二维码图片，true代表返回二维码链接地址
       provider: "alipay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
@@ -65,7 +65,7 @@ $.ajax({
   data: JSON.stringify({
     action: "pay/createPayment",
     data: {
-      vk_platform: "mp-weixin", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
+      vk_platform: "mp-weixin", // 这里固定 mp-weixin
       provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
@@ -73,9 +73,65 @@ $.ajax({
       type: "recharge" // 支付回调类型
     }
   }),
-  success: (data) => {
-    // 拿到支付参数后自行根据参数发起支付
-    console.log("data", data);
+  success: (res) => {
+    // 拿到支付参数后发起微信小程序支付
+    console.log("res", res);
+    wx.requestPayment({
+      ...res.orderInfo,
+      success: () => {
+        // 支付成功
+        console.log('支付成功');
+        // 注意：因为支付成功到支付回调有延迟，可以考虑延迟下再跳转页面等
+      },
+      fail: (err) => {
+        console.log('err: ', err);
+        if (err.errMsg.indexOf("fail cancel") == -1) {
+          // 支付失败
+        } else {
+          // 取消支付
+        }
+      }
+    });
+  }
+});
+```
+
+### 微信公众号支付@jquery-h5-weixin
+
+```js
+$.ajax({
+  type: 'POST',
+  url: "https://xxx.com/http/vk-pay",
+  headers:{ 
+    'content-type': 'application/json;charset=utf8',
+  },
+  data: JSON.stringify({
+    action: "pay/createPayment",
+    data: {
+      vk_platform: "h5-weixin", // 这里固定 h5-weixin
+      provider: "wxpay", // 这里固定 wxpay
+      out_trade_no: "test202405230001", // 订单号
+      total_fee: 1, // 支付金额，单位是分，100 = 1元
+      subject: "订单标题", // 订单标题
+      type: "recharge" // 支付回调类型
+    }
+  }),
+  success: (res) => {
+    console.log("res", res);
+    // 拿到支付参数后，发起公众号支付
+    WeixinJSBridge.invoke("getBrandWCPayRequest", res.orderInfo, res => {
+      if (res.err_msg == "get_brand_wcpay_request:ok") {
+        // 用户支付成功回调
+        // 注意：因为支付成功到支付回调有延迟，可以考虑延迟下再跳转页面等
+       
+      } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+        // 用户取消支付回调
+        
+      } else if (res.err_msg == "get_brand_wcpay_request:fail") {
+        // 用户支付失败回调
+      
+      }
+    });
   }
 });
 ```
@@ -92,7 +148,7 @@ $.ajax({
   data: JSON.stringify({
     action: "pay/createPayment",
     data: {
-      vk_platform: "app-plus", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
+      vk_platform: "app-plus", // 这里固定 app-plus
       provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
@@ -106,7 +162,6 @@ $.ajax({
   }
 });
 ```
-
 
 ## axios请求@axios
 
@@ -126,7 +181,7 @@ axios({
   data: {
     action: "pay/createPayment",
     data: {
-      vk_platform: "h5", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
+      vk_platform: "h5", // 这里固定 h5
       isPC: true, // 是否是电脑扫码支付
       needQRcode: "image", // "image" 代表直接返回二维码图片，true代表返回二维码链接地址
       provider: "alipay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
@@ -157,7 +212,7 @@ axios({
   data: {
     action: "pay/createPayment",
     data: {
-      vk_platform: "mp-weixin", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
+      vk_platform: "mp-weixin", // 这里固定 mp-weixin
       provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
@@ -166,10 +221,69 @@ axios({
     }
   }
 }).then((res) => {
-  // 拿到支付参数后自行根据参数发起支付
-  console.log("then", res);
+  // 拿到支付参数后发起微信小程序支付
+  console.log("res", res);
+  wx.requestPayment({
+    ...res.orderInfo,
+    success: () => {
+      // 支付成功
+      console.log('支付成功');
+      // 注意：因为支付成功到支付回调有延迟，可以考虑延迟下再跳转页面等
+    },
+    fail: (err) => {
+      console.log('err: ', err);
+      if (err.errMsg.indexOf("fail cancel") == -1) {
+        // 支付失败
+      } else {
+        // 取消支付
+      }
+    }
+  });
 })
 .catch((err) => {
+  console.log("catch", err);
+});
+```
+
+### 微信公众号支付@axios-h5-weixin
+
+```js
+axios({
+  method: 'POST',
+  url: "https://xxx.com/http/vk-pay",
+  headers:{ 
+    'content-type': 'application/json;charset=utf8',
+  },
+  data: {
+    action: "pay/createPayment",
+    data: {
+      vk_platform: "h5-weixin", // 这里固定 h5-weixin
+      provider: "wxpay", // 这里固定 wxpay
+      out_trade_no: "test202405230001", // 订单号
+      total_fee: 1, // 支付金额，单位是分，100 = 1元
+      subject: "订单标题", // 订单标题
+      type: "recharge" // 支付回调类型
+    }
+  }
+}).then((res) => {
+  console.log("res", res);
+  // 拿到支付参数后，发起公众号支付
+  WeixinJSBridge.invoke("getBrandWCPayRequest", res.orderInfo, res => {
+    if (res.err_msg == "get_brand_wcpay_request:ok") {
+      // 用户支付成功回调
+      // 注意：因为支付成功到支付回调有延迟，可以考虑延迟下再跳转页面等
+     
+    } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+      // 用户取消支付回调
+      
+    } else if (res.err_msg == "get_brand_wcpay_request:fail") {
+      // 用户支付失败回调
+    
+    }
+  });
+})
+.catch((err) => {
+  // 请求异常
   console.log("catch", err);
 });
 ```
@@ -186,7 +300,7 @@ axios({
   data: {
     action: "pay/createPayment",
     data: {
-      vk_platform: "app-plus", // 对应uniapp编译的平台，如 h5 mp-weixin app-plus等
+      vk_platform: "app-plus", // 这里固定 app-plus
       provider: "wxpay", // wxpay 微信支付 alipay 支付宝支付，其他值见文档：https://vkdoc.fsq.pub/vk-uni-pay/uniCloud/createPayment.html#params
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
