@@ -777,14 +777,14 @@ vk.callFunction({
 
 **各云厂商支持的版本如下**
 
-| 云厂商			| 默认值				| 可选项					| 推荐值		|
-|------------	|-------------|---------			|--------	|
-| 支付宝云		|node18				|node18、node16	|node18		|
-| 阿里云			|node16				|node18、node16	|node18		|
-| 腾讯云			|node16				|node18、node16	|node18		|
-| 本地运行		|node18				|node18					|node18		|
+| 云厂商		| 默认值			| 可选项																						| 推荐值		|
+|---------|----------	|---------																				|--------	|
+| 支付宝云	|Nodejs18		|Nodejs16、Nodejs18																|Nodejs18	|
+| 阿里云		|Nodejs16		|Nodejs12、Nodejs14、Nodejs16、Nodejs18、Nodejs20	|Nodejs18	|
+| 腾讯云		|Nodejs16		|Nodejs12、Nodejs16、Nodejs18											|Nodejs18	|
+| 本地运行	|Nodejs18		|Nodejs18																					|Nodejs18	|
 
-**由于本地运行只支持node18，故为了和云端环境一致，因此推荐设置成node18**
+**由于本地运行只支持Nodejs18，故为了和云端环境一致，因此推荐设置成Nodejs18**
 
 ```json
 "cloudfunction-config": {
