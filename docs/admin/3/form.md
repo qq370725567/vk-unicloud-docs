@@ -137,7 +137,6 @@ export default {
 | submit-text				| 确定按钮的文字																																																								| String					| 确 定			| -							|
 | submit-disabled		| 确定按钮是否禁用																																																							| Boolean					| false			| true					|
 | auto-close				| 表单请求成功后自动关闭																																																				| Boolean					| true			| false					|
-| auto-reset				| 自动重置表单			| String																																																												| Boolean					| true			| false					|
 | label-position		| 对齐方式																																																											| String					| right			| right left top|
 | max-height				| 表单最大高度																																																									| String					| 无				| -							|
 | size							| 表单内组件的size																																																							| String					| 无				| -							|
