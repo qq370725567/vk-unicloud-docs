@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# 云端操作常见问题@cloud
+# 云端操作常见问题
 
 [点击查看更多问题解答](https://vkdoc.fsq.pub/client/question/question.html)
 
