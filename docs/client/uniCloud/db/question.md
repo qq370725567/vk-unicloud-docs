@@ -466,10 +466,9 @@ let selectRes = await vk.baseDao.select({
   pageIndex: 1,
   pageSize: 20,
   whereJson: _.expr($.and([
-    $.eq(['$a', '$b'])
+    $.eq(['$a', '$b']), // $.eq 等于 $.gt 大于 $.gte 大于等于 lt小于 lte 小于等于
   ]))
 });
-
 ```
 
 ## 如何查询数组字段内包含某个值的数据
