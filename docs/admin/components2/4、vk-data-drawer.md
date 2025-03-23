@@ -20,8 +20,8 @@
 |------------------|-------------------------------|---------|--------|-------|
 | v-model            | 双向绑定一个变量,当变量为true: 弹窗显示 false: 弹窗关闭 | Boolean  | - | -  |
 | title          | 弹窗标题 | String  | - | - |
-| width          | 弹窗宽度  | Number|  rtl | rtl / ltr / ttb / btt |
-| direction          | Drawer 打开的方向| String  | - | - |
+| width          | 弹窗宽度  | Number| - | - |
+| direction          | Drawer 打开的方向| String  | rtl | rtl / ltr / ttb / btt |
 | close-on-click-modal          | 是否可以通过点击 modal 关闭 Drawer  | Boolean  | false | true  |
 | close-on-press-escape          | 是否可以通过按下 ESC 关闭 Drawer  | Boolean  | true | false  |
 | show-close          | 是否显示关闭按钮  | Boolean  | true | false  |
