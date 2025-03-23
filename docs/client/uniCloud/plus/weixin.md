@@ -238,7 +238,7 @@ let generateRes = await vk.openapi.weixin.urllink.generate({
 let msgSecCheckRes = await vk.openapi.weixin.security.msgSecCheck({
   content: '', // 文本内容，不可超过500KB
   openid: '', // 用户的小程序openid
-  scene: 2, // 场景值（建议为2或3）
+  scene: 3, // 场景值（建议为2或3）
   version: 2, // 接口版本号（建议为2）
 });
 ```
@@ -260,8 +260,8 @@ let msgSecCheckRes = await vk.openapi.weixin.security.msgSecCheck({
 let imgSecCheckRes = await vk.openapi.weixin.security.imgSecCheck({
   base64: base64,
   openid: '', // 用户的openid
-	scene: 2, // 场景值（建议为2或3）
-	version: 2 // 接口版本号（建议为2）
+  scene: 3, // 场景值（建议为2或3）
+  version: 2 // 接口版本号（建议为2）
 });
 ```
 
