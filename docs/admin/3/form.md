@@ -11,17 +11,17 @@ sidebarDepth: 1
 如：渲染一个input输入框,只需要如下代码
 
  ```js
-{ key:"nickname", title:"昵称", type:"text" }
+{ key: "nickname", title: "昵称", type: "text" }
 ```
 
 渲染一个单选框组,只需要如下代码
 
  ```js
 {
-  key:"gender", title:"性别", type:"radio",
-  data:[
-    { value:1, label:"男" },
-    { value:2, label:"女" }
+  key: "gender", title: "性别", type: "radio",
+  data: [
+    { value: 1, label: "男" },
+    { value: 2, label: "女" }
   ]
 }
 ```
@@ -173,7 +173,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 字段名，如下方代码中，`key` 为 `nickname`，代表绑定 `nickname` 字段
 
 ```js
-{ key: "nickname", title:"昵称", type:"text", },
+{ key: "nickname", title: "昵称", type: "text" },
 ```
 
 ### title（标题）@columns-title
@@ -181,7 +181,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 字段显示的名称，如下方代码中，`title` 为 `昵称`，代表该字段以别名 `昵称` 显示在页面上。
 
 ```js
-{ key: "nickname", title:"昵称", type:"text", },
+{ key: "nickname", title: "昵称", type: "text" },
 ```
 
 ### type（组件类型）@columns-type
@@ -189,7 +189,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 页面需要渲染的组件类型，如下方代码中，`type` 为 `text`，在 `万能表格` 中渲染为 `字符串`，在 `万能表单` 中渲染为 `input输入框`
 
 ```js
-{ key: "nickname", title:"昵称", type:"text", },
+{ key: "nickname", title: "昵称", type: "text" },
 ```
 
 ### width（宽度）@columns-width
@@ -197,7 +197,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 单位是px，只能是数字，如下
 
 ```js
-{ key: "nickname", title:"昵称", type:"text", width: 200 },
+{ key: "nickname", title: "昵称", type: "text", width: 200 },
 ```
 
 ### placeholder（占位符）@columns-placeholder
@@ -216,29 +216,29 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ```js
 // 增加详情按钮 跳新窗口打开新页面
-{ key: "text1", title:"text类型字段", type:"text", tips:`<text>这里使其他文字介绍</text><a href="#/pages/order/list" target="_blank">详情</a>`, width:600 },
+{ key: "text1", title: "text类型字段", type: "text", tips: `<text>这里使其他文字介绍</text><a href="#/pages/order/list" target="_blank">详情</a>`, width: 600 },
 // 增加详情按钮 关闭当前页面，跳新页面
-{ key: "text2", title:"text类型字段", type:"text", tips:`<text>这里使其他文字介绍</text><a href="javascript:void(0);" onClick="vk.navigateTo('/pages_template/components/form/form-basic');">详情</a>`, width:600 },
+{ key: "text2", title: "text类型字段", type: "text", tips: `<text>这里使其他文字介绍</text><a href="javascript:void(0);" onClick="vk.navigateTo('/pages_template/components/form/form-basic');">详情</a>`, width: 600 },
 // 增加详情按钮 跳https外部页面
-{ key: "text3", title:"text类型字段", type:"text", tips:`<text>这里使其他文字介绍</text><a href="https://www.baidu.com" target="_blank">跳百度</a>`, width:600 },
+{ key: "text3", title: "text类型字段", type: "text", tips: `<text>这里使其他文字介绍</text><a href="https://www.baidu.com" target="_blank">跳百度</a>`, width: 600 },
 ```
 
 **tips还支持解析对象数组，如下所示**
 
 ```js
-{ 
-  key:"text1", title:"选择快递公司", type:"text",
-  tips:[
-    { text:"查不到快递公司？" },
+{
+  key: "text1", title: "选择快递公司", type: "text",
+  tips: [
+    { text: "查不到快递公司？" },
     {
-      text:"点击添加",
-      click:()=>{
+      text: "点击添加",
+      click: () => {
         console.log(1)
       },
     },
     {
-      text:"刷新",
-      click:()=>{
+      text: "刷新",
+      click: () => {
         console.log(1)
       },
     }
@@ -276,57 +276,52 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
-},
-{
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+}, {
+  key: "mode", title: "模式", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  showRule:"login_appid_type==1",
+  showRule: "login_appid_type==1",
 },
 ```
 
 **{in}和{nin}的用法**
 
 ```js
-{ key:"arr", title:"arr", type:"array<string>" },
-{ key:"text", title:"text", type:"text" },
-{ key:"text1", title:"arr包含1则显示", type:"text", showRule:"arr{in}1" },
-{ key:"text2", title:"arr不包含2则显示", type:"text", showRule:"arr{nin}2" },
+{ key: "arr", title: "arr", type: "array<string>" },
+{ key: "text", title: "text", type: "text" },
+{ key: "text1", title: "arr包含1则显示", type: "text", showRule: "arr{in}1" },
+{ key: "text2", title: "arr不包含2则显示", type: "text", showRule: "arr{nin}2" },
 ```
 
 同时 showRule 还支持函数形式
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
 },
 {
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+  key: "mode", title: "模式", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  showRule:(formData)=>{
-    if(formData.login_appid_type == 1){
+  showRule: (formData) => {
+    if (formData.login_appid_type == 1) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
@@ -343,22 +338,20 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
 },
 {
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+  key: "mode", title: "模式", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  disabled:"login_appid_type==0",
+  disabled: "login_appid_type==0",
 },
 ```
 
@@ -366,25 +359,23 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ```js
 {
-  key:"login_appid_type", title:"登录权限", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"部分应用" },
-    { value:0, label:"全部应用" }
+  key: "login_appid_type", title: "登录权限", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "部分应用" },
+    { value: 0, label: "全部应用" }
   ]
 },
 {
-  key:"mode", title:"模式", type:"radio",
-  optionType:"button",
-  data:[
-    { value:1, label:"覆盖" },
-    { value:2, label:"新增" },
-    { value:3, label:"移除" }
+  key: "mode", title: "模式", type: "radio", optionType: "button",
+  data: [
+    { value: 1, label: "覆盖" },
+    { value: 2, label: "新增" },
+    { value: 3, label: "移除" }
   ],
-  disabled:(formData)=>{
-    if(formData.login_appid_type === 0){
+  disabled: (formData) => {
+    if (formData.login_appid_type === 0) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
@@ -399,7 +390,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ```js
 {
-  key: "text", title:"text类型字段", type:"text",
+  key: "text", title: "text类型字段", type: "text",
   watch: (res) => {
     console.log("watch", res)
   }
@@ -419,11 +410,11 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 **行内表单中columns若设置oneLine:true可强制单独一行**
 
 ```js
-columns:[
-  { key: "text1", title:"text类型字段", type:"text" },
-  { key: "text2", title:"text类型字段", type:"text" },
-  { key: "text3", title:"text类型字段", type:"text", oneLine:true }, // 单独一行
-  { key: "text4", title:"text类型字段", type:"text", oneLine:true, width: 500 }, // 单独一行，并设置input的宽度
+columns: [
+  { key: "text1", title: "text类型字段", type: "text" },
+  { key: "text2", title: "text类型字段", type: "text" },
+  { key: "text3", title: "text类型字段", type: "text", oneLine: true }, // 单独一行
+  { key: "text4", title: "text类型字段", type: "text", oneLine: true, width: 500 }, // 单独一行，并设置input的宽度
 ]
 ```
 
@@ -431,185 +422,185 @@ columns:[
 type类型（更多请见：`/pages_template/components/form/form-pro`）
 
 ```js
-form1:{
+form1: {
   // 表单请求数据，此处可以设置默认值
   data: {
-    
+
   },
   // 表单属性
-  props:[
-    { key:"", title:"基础字段", type:"bar-title" },
-    { key:"text", title:"单行文本", type:"text" },
+  props: [
+    { key: "", title: "基础字段", type: "bar-title" },
+    { key: "text", title: "单行文本", type: "text" },
     {
-      key:"textarea", title:"多行文本", type:"textarea",
-      autosize:{ minRows:4, maxRows:10 },
-      maxlength:200,
-      showWordLimit:true,
+      key: "textarea", title: "多行文本", type: "textarea",
+      autosize: { minRows: 4, maxRows: 10 },
+      maxlength: 200,
+      showWordLimit: true,
     },
-    { key:"money", title:"money类型", type:"money", tips:"100 = 1元。页面显示的是1，实际的值是100，请看右上角表单数据的值。" },
-    { key:"number", title:"number类型", type:"number", precision:2, tips:"number类型值会转为数字，可以指定小数位数" },
-    { key:"number2", title:"计数器类型", type:"number", controls:true, precision:0, min:5, max:100, placeholder:"请输入数字" },
-    { key:"percentage", title:"百分比类型", type:"percentage", precision:0, tips:"页面显示的是1，实际的值是0.01，请看右上角表单数据的值。" },
-    { key:"discount", title:"折扣类型", type:"discount", tips:"页面显示的是1，实际的值是0.1，请看右上角表单数据的值。" },
-    { key:"text2", title:"文本2", type:"text",prepend:"前置文字",append:"后置文字",prefixIcon:"el-icon-user" },
+    { key: "money", title: "money类型", type: "money", tips: "100 = 1元。页面显示的是1，实际的值是100，请看右上角表单数据的值。" },
+    { key: "number", title: "number类型", type: "number", precision: 2, tips: "number类型值会转为数字，可以指定小数位数" },
+    { key: "number2", title: "计数器类型", type: "number", controls: true, precision: 0, min: 5, max: 100, placeholder: "请输入数字" },
+    { key: "percentage", title: "百分比类型", type: "percentage", precision: 0, tips: "页面显示的是1，实际的值是0.01，请看右上角表单数据的值。" },
+    { key: "discount", title: "折扣类型", type: "discount", tips: "页面显示的是1，实际的值是0.1，请看右上角表单数据的值。" },
+    { key: "text2", title: "文本2", type: "text", prepend: "前置文字", append: "后置文字", prefixIcon: "el-icon-user" },
     // 选择型字段
-    { key:"", title:"选择型字段", type:"bar-title" },
+    { key: "", title: "选择型字段", type: "bar-title" },
     {
-      key:"radio1", title:"radio类型1", type:"radio",
-      data:[
-        { value:1, label:"选项一" },
-        { value:2, label:"选项二" }
+      key: "radio1", title: "radio类型1", type: "radio",
+      data: [
+        { value: 1, label: "选项一" },
+        { value: 2, label: "选项二" }
       ]
     },
     {
-      key:"checkbox1", title:"checkbox类型1", type:"checkbox",
-      data:[
-        { value:1, label:"选项一" },
-        { value:2, label:"选项二" }
+      key: "checkbox1", title: "checkbox类型1", type: "checkbox",
+      data: [
+        { value: 1, label: "选项一" },
+        { value: 2, label: "选项二" }
       ]
     },
     {
-      key:"select1", title:"select类型1", type:"select",
-      data:[
-        { value:1, label:"选项一" },
-        { value:2, label:"选项二" }
+      key: "select1", title: "select类型1", type: "select",
+      data: [
+        { value: 1, label: "选项一" },
+        { value: 2, label: "选项二" }
       ]
     },
-    { key:"address", title:"address类型", type:"address" },
-    { key:"cascader2", title:"云端数据级联", type:"cascader",
-      action:"admin/system/permission/sys/getAll",
-      props:{
-        list:"rows",
-        value:"permission_id",
-        label:"label",
-        children:"children",
-        multiple:true
-      }
+    { key: "address", title: "address类型", type: "address" },
+    {
+      key: "cascader2", title: "云端数据级联", type: "cascader",
+      action: "admin/system/permission/sys/getAll",
+      props: { list: "rows", value: "permission_id", label: "label", children: "children", multiple: true }
     },
-    { key:"switch", title:"switch类型", type:"switch" },
-    { key:"rate", title:"评分类型", type:"rate", allowHalf:false },
-    { key:"slider", title:"滑块类型", type:"slider" },
-    { key:"color1", title:"颜色类型1", type:"color" },
-    { key:"color2", title:"颜色类型2", type:"color", showAlpha:true },
+    { key: "switch", title: "switch类型", type: "switch" },
+    { key: "rate", title: "评分类型", type: "rate", allowHalf: false },
+    { key: "slider", title: "滑块类型", type: "slider" },
+    { key: "color1", title: "颜色类型1", type: "color" },
+    { key: "color2", title: "颜色类型2", type: "color", showAlpha: true },
     // 文件上传
-    { key:"", title:"文件上传", type:"bar-title" },
-    { key:"image1", title:"image类型", type:"image", limit:6 },
+    { key: "", title: "文件上传", type: "bar-title" },
+    { key: "image1", title: "image类型", type: "image", limit: 6 },
     // 日期型字段
-    { key:"", title:"日期型字段", type:"bar-title" },
-    { key:"date", title:"date类型", type:"date", dateType:"date", tips:"可选择年月日" },
-    { key:"dateTime", title:"dataTime类型", type:"date", dateType:"datetime", tips:"可选择年月日时分秒" },
-    { key:"dateArr", title:"date类型范围", type:"date", dateType:"daterange" },
-    { key:"dataTimeArr", title:"dataTime类型范围", type:"date", dateType:"datetimerange" },
+    { key: "", title: "日期型字段", type: "bar-title" },
+    { key: "date", title: "date类型", type: "date", dateType: "date", tips: "可选择年月日" },
+    { key: "dateTime", title: "dataTime类型", type: "date", dateType: "datetime", tips: "可选择年月日时分秒" },
+    { key: "dateArr", title: "date类型范围", type: "date", dateType: "daterange" },
+    { key: "dataTimeArr", title: "dataTime类型范围", type: "date", dateType: "datetimerange" },
     // 时间型字段
-    { key:"", title:"时间型字段", type:"bar-title" },
-    { key:"time1", title:"time类型1", type:"time" },
-    { key:"timeArr1", title:"time类型范围1", type:"time", isRange:true },
+    { key: "", title: "时间型字段", type: "bar-title" },
+    { key: "time1", title: "time类型1", type: "time" },
+    { key: "timeArr1", title: "time类型范围1", type: "time", isRange: true },
     // 数据库联动字段
-    { key:"", title:"数据库联动字段", type:"bar-title" },
+    { key: "", title: "数据库联动字段", type: "bar-title" },
+    { key: "user_id", title: "用户选择器", type: "remote-select", placeholder: "请输入用户账号/昵称", action: "admin/select/kh/user" },
     {
-      key:"user_id", title:"用户选择器", type:"remote-select", placeholder:"请输入用户账号/昵称",
-      action:"admin/select/kh/user",
-    },
-    {
-      key: "user_id", title: "选择用户", type: "table-select", placeholder:"选择",
-      action:"admin/system/user/sys/getList",
-      columns:[
-        { key:"nickname", title:"用户昵称", type:"text", nameKey:true },
-        { key:"_id", title:"用户标识", type:"text", idKey:true },
-        { key:"mobile", title:"手机号", type:"text" },
+      key: "user_id", title: "选择用户", type: "table-select", placeholder: "选择",
+      action: "admin/system/user/sys/getList",
+      columns: [
+        { key: "nickname", title: "用户昵称", type: "text", nameKey: true },
+        { key: "_id", title: "用户标识", type: "text", idKey: true },
+        { key: "mobile", title: "手机号", type: "text" },
       ]
     },
     {
-      key: "role1", title: "通过表格选择(单选)", type: "table-select", placeholder:"请选择角色",
-      action:"admin/system/role/sys/getList",
-      columns:[
-        { key:"role_name", title:"角色昵称", type:"text", nameKey:true },
-        { key:"role_id", title:"角色标识", type:"text", idKey:true }
+      key: "role1", title: "通过表格选择(单选)", type: "table-select", placeholder: "请选择角色",
+      action: "admin/system/role/sys/getList",
+      columns: [
+        { key: "role_name", title: "角色昵称", type: "text", nameKey: true },
+        { key: "role_id", title: "角色标识", type: "text", idKey: true }
       ],
     },
     {
-      key: "role2", title: "通过表格选择(多选)", type: "table-select", placeholder:"请选择角色",
-      action:"admin/system/role/sys/getList",
-      columns:[
-        { key:"role_name", title:"角色昵称", type:"text", nameKey:true },
-        { key:"role_id", title:"角色标识", type:"text", idKey:true }
+      key: "role2", title: "通过表格选择(多选)", type: "table-select", placeholder: "请选择角色",
+      action: "admin/system/role/sys/getList",
+      columns: [
+        { key: "role_name", title: "角色昵称", type: "text", nameKey: true },
+        { key: "role_id", title: "角色标识", type: "text", idKey: true }
       ],
-      multiple:true
+      multiple: true
     },
     // 布局
-    { key:"", title:"横向布局", type:"bar-title" },
-    { key:"", title:"", type:"group", justify:"start",
-      columns:[
-        { key:"text1", title:"单行文本1", type:"text" },
-        { key:"text2", title:"单行文本2", type:"text" },
-        { key:"text3", title:"单行文本3", type:"text" },
-        { key:"text4", title:"单行文本4", type:"text" },
+    { key: "", title: "横向布局", type: "bar-title" },
+    {
+      key: "", title: "", type: "group", justify: "start",
+      columns: [
+        { key: "text1", title: "单行文本1", type: "text" },
+        { key: "text2", title: "单行文本2", type: "text" },
+        { key: "text3", title: "单行文本3", type: "text" },
+        { key: "text4", title: "单行文本4", type: "text" },
       ]
     },
-    { key:"", title:"", type:"group", justify:"start",
-      columns:[
-        { key:"text5", title:"单行文本5", type:"text" },
-        { key:"text6", title:"单行文本6", type:"text" },
-        { key:"text7", title:"单行文本7", type:"text" },
-        { key:"text8", title:"单行文本8", type:"text" },
+    {
+      key: "", title: "", type: "group", justify: "start",
+      columns: [
+        { key: "text5", title: "单行文本5", type: "text" },
+        { key: "text6", title: "单行文本6", type: "text" },
+        { key: "text7", title: "单行文本7", type: "text" },
+        { key: "text8", title: "单行文本8", type: "text" },
       ]
     },
-    { key:"", title:"", type:"group", justify:"end",
-      columns:[
-        { key:"text11", title:"单行文本11", type:"text", col:{ span: 6 } },
-        { key:"text12", title:"单行文本12", type:"text", col:{ span: 6 } },
+    {
+      key: "", title: "", type: "group", justify: "end",
+      columns: [
+        { key: "text11", title: "单行文本11", type: "text", col: { span: 6 } },
+        { key: "text12", title: "单行文本12", type: "text", col: { span: 6 } },
       ]
     },
-    { key:"", title:"", type:"group", justify:"start",
-      columns:[
-        { key:"text13", title:"单行文本13", type:"text" },
-        { key:"text14", title:"单行文本14", type:"text" },
+    {
+      key: "", title: "", type: "group", justify: "start",
+      columns: [
+        { key: "text13", title: "单行文本13", type: "text" },
+        { key: "text14", title: "单行文本14", type: "text" },
       ]
     },
-    { key:"", title:"", type:"group", justify:"start",
-      columns:[
-        { key:"text21", title:"单行文本21", type:"text", col:{ span:16 } },
-        { key:"text22", title:"单行文本22", type:"text", col:{ span:24 } },
-        { key:"text23", title:"单行文本23", type:"text", col:{ span:16 } },
-        { key:"text24", title:"单行文本24", type:"text", col:{ span:24 } },
+    {
+      key: "", title: "", type: "group", justify: "start",
+      columns: [
+        { key: "text21", title: "单行文本21", type: "text", col: { span: 16 } },
+        { key: "text22", title: "单行文本22", type: "text", col: { span: 24 } },
+        { key: "text23", title: "单行文本23", type: "text", col: { span: 16 } },
+        { key: "text24", title: "单行文本24", type: "text", col: { span: 24 } },
       ]
     },
     // 对象类型
-    { key:"", title:"对象类型", type:"bar-title" },
-    { key:"object1", title:"对象类型1", type:"object",
-      columns:[
-        { key:"a", title:"对象内属性a", type:"text" },
-        { key:"b", title:"对象内属性b", type:"text" },
+    { key: "", title: "对象类型", type: "bar-title" },
+    {
+      key: "object1", title: "对象类型1", type: "object",
+      columns: [
+        { key: "a", title: "对象内属性a", type: "text" },
+        { key: "b", title: "对象内属性b", type: "text" },
       ]
     },
     // 可以通过设置showLabel:false, 隐藏左侧的label
-    { key:"object2", title:"对象类型2", type:"object", showLabel:false,
-      columns:[
-        { key:"a", title:"对象内属性a", type:"text" },
-        { key:"b", title:"对象内属性b", type:"text" },
+    {
+      key: "object2", title: "对象类型2", type: "object", showLabel: false,
+      columns: [
+        { key: "a", title: "对象内属性a", type: "text" },
+        { key: "b", title: "对象内属性b", type: "text" },
       ]
     },
     // 多层嵌套object
-    { key:"object3", title:"对象类型3", type:"object", showLabel:true,
-      columns:[
-        { key:"a", title:"对象内属性a", type:"text" },
-        { key:"b", title:"嵌套对象b", type:"object", showLabel:true, 
-          columns:[
-            { key:"b1", title:"嵌套对象b内属性b1", type:"text" },
-            { key:"b2", title:"嵌套对象b内属性b2", type:"text" },
+    {
+      key: "object3", title: "对象类型3", type: "object", showLabel: true,
+      columns: [
+        { key: "a", title: "对象内属性a", type: "text" },
+        {
+          key: "b", title: "嵌套对象b", type: "object", showLabel: true,
+          columns: [
+            { key: "b1", title: "嵌套对象b内属性b1", type: "text" },
+            { key: "b2", title: "嵌套对象b内属性b2", type: "text" },
           ]
         },
       ]
     },
     // 特殊类型
-    { key:"", title:"特殊类型", type:"bar-title" },
-    { key:"editor", title:"富文本类型", type:"editor" },
+    { key: "", title: "特殊类型", type: "bar-title" },
+    { key: "editor", title: "富文本类型", type: "editor" },
     // 纯展示类型
-    { key:"", title:"纯展示类型", type:"bar-title" },
-    { key:"text100", title:"文本展示类型", type:"text-view" },
-    { key:"text101", title:"金额展示类型", type:"money-view" },
-    { key:"html102", title:"html展示类型", type:"html" },
-    
+    { key: "", title: "纯展示类型", type: "bar-title" },
+    { key: "text100", title: "文本展示类型", type: "text-view" },
+    { key: "text101", title: "金额展示类型", type: "money-view" },
+    { key: "html102", title: "html展示类型", type: "html" },
   ]
 }
 ```
@@ -629,12 +620,12 @@ data: function() {
     form1: {
       // 表单属性
       props: {
-        
-        beforeAction:(formData)=>{
+
+        beforeAction: (formData) => {
           // 可在此处修改 formData 后返回 formData，若在此处return false，则表单不触发提交请求。
           return formData;
         },
-        
+
       }
     }
   }
@@ -656,8 +647,8 @@ data: function() {
   // 组件创建时,进行数据初始化
   return {
     form1: {
-      data:{
-        
+      data: {
+
       },
       // 表单属性
       props: {
@@ -665,133 +656,136 @@ data: function() {
         rules: {
           user_id: [
             // 必填
-            { required: true, message: "用户ID不能为空", trigger: ['blur','change'] }
+            { required: true, message: "用户ID不能为空", trigger: ['blur', 'change'] }
           ],
           money: [
             // 必填
-            { required: true, message: "金额不能为空", trigger: ['blur','change'] },
+            { required: true, message: "金额不能为空", trigger: ['blur', 'change'] },
             // 必须是数字
-            { type: "number", message: "金额必须是数字", trigger: ['blur','change'] }
+            { type: "number", message: "金额必须是数字", trigger: ['blur', 'change'] }
           ],
           mobile: [
             // 必填
-            { required: true, message: '提现人手机号不能为空', trigger: ['blur','change'] },
+            { required: true, message: '提现人手机号不能为空', trigger: ['blur', 'change'] },
             // 必须是手机号格式
-            { validator: vk.pubfn.validator("mobile"),  message: '手机号格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("mobile"), message: '手机号格式错误', trigger: 'blur' }
           ],
           mobileCode: [
             // 必填
-            { required: true, message: '验证码不能为空', trigger: ['blur','change'] },
+            { required: true, message: '验证码不能为空', trigger: ['blur', 'change'] },
             // 6位数数字验证码
-            { validator: vk.pubfn.validator("mobileCode"),  message: '验证码格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("mobileCode"), message: '验证码格式错误', trigger: 'blur' }
           ],
-          username:[
+          username: [
             // 必填
-            { required: true, message: '用户名不能为空', trigger: ['blur','change'] },
+            { required: true, message: '用户名不能为空', trigger: ['blur', 'change'] },
             // 满足用户名格式
-            { 
-              validator:vk.pubfn.validator("username"), 
-              message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线', 
+            {
+              validator: vk.pubfn.validator("username"),
+              message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线',
               trigger: 'blur'
             }
           ],
           password: [
             // 必填
-            { required: true, message: '密码不能为空', trigger: ['blur','change'] },
+            { required: true, message: '密码不能为空', trigger: ['blur', 'change'] },
             // 满足密码格式
-            { 
-              validator: vk.pubfn.validator("password"), 
-              message: '密码长度在6~18之间，只能包含字母、数字和下划线', 
-              trigger: 'blur' 
+            {
+              validator: vk.pubfn.validator("password"),
+              message: '密码长度在6~18之间，只能包含字母、数字和下划线',
+              trigger: 'blur'
             }
           ],
           password2: [
             // 必填
-            { required: true, message: '密码不能为空', trigger: ['blur','change'] },
+            { required: true, message: '密码不能为空', trigger: ['blur', 'change'] },
             // 自定义
-            { validator: (rule, value, callback)=>{
-              if (value === '') {
-                callback(new Error('请再次输入密码'));
-              } else if (value !== that.form1.data.password) {
-                callback(new Error('两次输入密码不一致!'));
-              } else {
-                callback();
-              }
-            }, trigger: ['blur','change'] }
+            {
+              validator: (rule, value, callback) => {
+                if (value === '') {
+                  callback(new Error('请再次输入密码'));
+                } else if (value !== that.form1.data.password) {
+                  callback(new Error('两次输入密码不一致!'));
+                } else {
+                  callback();
+                }
+              },
+              trigger: ['blur', 'change']
+            }
           ],
           nickname: [
             // 必填
-            { required: true, message: '昵称为必填字段', trigger: ['blur','change'] },
+            { required: true, message: '昵称为必填字段', trigger: ['blur', 'change'] },
             // 长度在 2-20 个字
             { min: 2, max: 20, message: '昵称长度在 2 到 20 之间', trigger: 'blur' }
           ],
           card: [
             // 身份证
-            { validator: vk.pubfn.validator("card"),  message: '身份证格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("card"), message: '身份证格式错误', trigger: 'blur' }
           ],
           payPwd: [
             // 支付密码
-            { validator: vk.pubfn.validator("payPwd"),  message: '支付密码必须为 6位纯数字', trigger: 'blur' }
+            { validator: vk.pubfn.validator("payPwd"), message: '支付密码必须为 6位纯数字', trigger: 'blur' }
           ],
           postal: [
             // 邮政编码
-            { validator: vk.pubfn.validator("postal"),  message: '邮政编码格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("postal"), message: '邮政编码格式错误', trigger: 'blur' }
           ],
           email: [
             // 邮箱
-            { validator: vk.pubfn.validator("email"),  message: '邮箱格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("email"), message: '邮箱格式错误', trigger: 'blur' }
           ],
           QQ: [
             // qq
-            { validator: vk.pubfn.validator("QQ"),  message: 'QQ号格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("QQ"), message: 'QQ号格式错误', trigger: 'blur' }
           ],
           URL: [
             // URL
-            { validator: vk.pubfn.validator("URL"),  message: 'URL格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("URL"), message: 'URL格式错误', trigger: 'blur' }
           ],
           IP: [
             // IP
-            { validator: vk.pubfn.validator("IP"),  message: 'IP格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("IP"), message: 'IP格式错误', trigger: 'blur' }
           ],
           date: [
             // 日期 2014-01-01（字符串）
-            { validator: vk.pubfn.validator("date"),  message: 'date格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("date"), message: 'date格式错误', trigger: 'blur' }
           ],
           time: [
             // 时间 12:00:00（字符串）
-            { validator: vk.pubfn.validator("time"),  message: 'time格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("time"), message: 'time格式错误', trigger: 'blur' }
           ],
           dateTime: [
             // 日期+时间 2014-01-01 12:00:00（字符串）
-            { validator: vk.pubfn.validator("dateTime"),  message: 'dateTime格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("dateTime"), message: 'dateTime格式错误', trigger: 'blur' }
           ],
           english: [
             // 英文
-            { validator: vk.pubfn.validator("english"),  message: '只能输入英文', trigger: 'blur' }
+            { validator: vk.pubfn.validator("english"), message: '只能输入英文', trigger: 'blur' }
           ],
           englishnumber: [
             // 只能是英文或数字
-            { validator: vk.pubfn.validator("english+number"),  message: '只能输入英文或数字', trigger: 'blur' }
+            { validator: vk.pubfn.validator("english+number"), message: '只能输入英文或数字', trigger: 'blur' }
           ],
           englishnumber2: [
             // 只能是英文、数字、下划线
-            { validator: vk.pubfn.validator("english+number+_"),  message: '只能输入英文、数字、下划线', trigger: 'blur' }
+            { validator: vk.pubfn.validator("english+number+_"), message: '只能输入英文、数字、下划线', trigger: 'blur' }
           ],
           chinese: [
             // 中文
-            { validator: vk.pubfn.validator("chinese"),  message: '只能输入中文', trigger: 'blur' }
+            { validator: vk.pubfn.validator("chinese"), message: '只能输入中文', trigger: 'blur' }
           ],
           lower: [
             // 小写字母
-            { validator: vk.pubfn.validator("lower"),  message: '只能输入小写字母', trigger: 'blur' }
+            { validator: vk.pubfn.validator("lower"), message: '只能输入小写字母', trigger: 'blur' }
           ],
           upper: [
             // 大写字母
-            { validator: vk.pubfn.validator("upper"),  message: '只能输入大写字母', trigger: 'blur' }
+            { validator: vk.pubfn.validator("upper"), message: '只能输入大写字母', trigger: 'blur' }
           ],
           HTML: [
             // HTML
-            { validator: vk.pubfn.validator("HTML"),  message: 'html格式错误', trigger: 'blur' }
+            { validator: vk.pubfn.validator("HTML"), message: 'html格式错误', trigger: 'blur' }
           ]
         }
       }
@@ -927,8 +921,8 @@ this.$refs.form1.resetForm();
 adopt(status){
   that.$refs.form1.submitForm({
     // data为额外提交的参数，真正提交的参数为form1.data+这里的data
-    data:{
-      status:status
+    data: {
+      status: status
     },
     success: (data) => {
       // 提交成功
@@ -982,12 +976,12 @@ adopt(status){
 export default {
   data() {
     return {
-      form1:{
+      form1: {
         // 表单属性
         props: {
-          
-          
-          action: (obj={})=>{
+
+
+          action: (obj = {}) => {
             let {
               data, // 请求数据
               success, // 成功回调
@@ -1012,8 +1006,8 @@ export default {
               }
             });
           },
-              
-          
+
+
         }
       }
     }
@@ -1035,12 +1029,12 @@ export default {
 export default {
   data() {
     return {
-      form1:{
+      form1: {
         // 表单属性
         props: {
-          
-          
-          action: (obj={})=>{
+
+
+          action: (obj = {}) => {
             let {
               data, // 请求数据
               success, // 成功回调
@@ -1061,8 +1055,8 @@ export default {
               }
             });
           },
-              
-          
+
+
         }
       }
     }
@@ -1083,7 +1077,7 @@ export default {
 ```js
 vk.pubfn.openForm(name, value, this);
 
-vk.pubfn.openForm('bindRole',{ item:  }); // 来源页面 /pages_plugs/system/user/list
+vk.pubfn.openForm('bindRole',{ item: {} }); // 来源页面 /pages_plugs/system/user/list
 ```
 
 **参数**
@@ -1141,122 +1135,125 @@ vk.pubfn.openForm('bindRole',{ item:  }); // 来源页面 /pages_plugs/system/us
 </template>
 
 <script>
-var that; // 当前页面对象
-var vk = uni.vk; // vk实例
+let that; // 当前页面对象
+let vk = uni.vk; // vk实例
 export default {
-	props: {
-		value: {
-			Type: Object,
-			default: function() {
-				return {
-					show: false,
-					mode: "",
-					item: ""
-				};
-			}
-		}
-	},
-	data: function() {
-		// 组件创建时,进行数据初始化
-		return {
-			// 页面基础数据
-			page: {
-				title: "角色绑定",
-				submitText: "绑定",
-				cancelText: "关闭",
-				showCancel: true,
-				top: "7vh",
-				width:"820px",
-				loading: false
-			},
-			data:{
+  props: {
+    value: {
+      Type: Object,
+      default: function() {
+        return {
+          show: false,
+          mode: "",
+          item: ""
+        };
+      }
+    }
+  },
+  data: function() {
+    // 组件创建时,进行数据初始化
+    return {
+      // 页面基础数据
+      page: {
+        title: "角色绑定",
+        submitText: "绑定",
+        cancelText: "关闭",
+        showCancel: true,
+        top: "7vh",
+        width: "820px",
+        loading: false
+      },
+      data: {
 
-			},
-			form1: {
-				// 表单请求数据，此处可以设置默认值
-				data: {
-					user_id: "",
-					roleList: [],
-					reset: true
-				},
-				// 表单属性
-				props: {
-					// 表单请求地址
-					action: "admin/system/user/sys/bindRole",
-					// 表单字段显示规则
-					columns: [
-						{ key:"user_id", title:"用户", type:"text" },
-						{
-							key: "roleList", title: "角色列表", type: "table-select", placeholder:"选择角色",
-							action:"admin/system/role/sys/getList",
-							columns:[
-								{ key:"role_name", title:"角色昵称", type:"text", nameKey:true },
-								{ key:"role_id", title:"角色标识", type:"text", idKey:true },
-								{ key:"comment", title:"备注", type:"text" },
-							],
-							formData:{
-								enable:true
-							},
-							queryColumns:[
-								{ key: "role_name", title: "角色昵称", type: "text", width: 150, mode: "%%" },
-								{ key: "role_id", title: "角色标识", type: "text", width: 150, mode: "%%" },
-								{ key: "enable", type: "text", mode: "=", hidden:true }
-							],
-							multiple:true,
-							pageSize:10, // 只有5和10可以选
-						},
-					],
-					// 表单验证规则
-					rules: {
-						user_id: [
-							{ "required": true, "message": "user_id不能为空", "trigger": "change" }
-						]
-					},
-					// label宽度
-					labelWidth:"100px",
-					// label对其方式
-					labelPosition:"left",
-				}
-			}
-		};
-	},
-	mounted() {
-		that = this;
-		that.init();
-	},
-	methods: {
-		// 初始化
-		init() {
-			let { value } = that;
-			that.$emit("input", value);
-		},
-		// 监听 - 页面打开
-		onOpen() {
-			that = this;
-			let { value } = that;
-			let { role = [], _id } = value.item;
-			that.data = value.item;
-			that.form1.props.show = true;
-			that.form1.data.user_id = _id;
-			that.form1.data.roleList = role;
-		},
-		// 监听 - 页面关闭
-		onClose() {
-			that.$refs.form1.resetForm(); // 关闭时，重置表单
-		},
-		// 表单提交成功后
-		onFormSuccess() {
-			that.$set(that.value.item, "role", that.form1.data.roleList);
-			that.value.show = false; // 关闭页面
-			that.$emit("success");
-		}
-	},
-	// 监听属性
-	watch: {
+      },
+      form1: {
+        // 表单请求数据，此处可以设置默认值
+        data: {
+          user_id: "",
+          roleList: [],
+          reset: true
+        },
+        // 表单属性
+        props: {
+          // 表单请求地址
+          action: "admin/system/user/sys/bindRole",
+          // 表单字段显示规则
+          columns: [
+            { key: "user_id", title: "用户", type: "text" },
+            {
+              key: "roleList",
+              title: "角色列表",
+              type: "table-select",
+              placeholder: "选择角色",
+              action: "admin/system/role/sys/getList",
+              columns: [
+                { key: "role_name", title: "角色昵称", type: "text", nameKey: true },
+                { key: "role_id", title: "角色标识", type: "text", idKey: true },
+                { key: "comment", title: "备注", type: "text" },
+              ],
+              formData: {
+                enable: true
+              },
+              queryColumns: [
+                { key: "role_name", title: "角色昵称", type: "text", width: 150, mode: "%%" },
+                { key: "role_id", title: "角色标识", type: "text", width: 150, mode: "%%" },
+                { key: "enable", type: "text", mode: "=", hidden: true }
+              ],
+              multiple: true,
+              pageSize: 10, // 只有5和10可以选
+            },
+          ],
+          // 表单验证规则
+          rules: {
+            user_id: [
+              { "required": true, "message": "user_id不能为空", "trigger": "change" }
+            ]
+          },
+          // label宽度
+          labelWidth: "100px",
+          // label对其方式
+          labelPosition: "left",
+        }
+      }
+    };
+  },
+  mounted() {
+    that = this;
+    that.init();
+  },
+  methods: {
+    // 初始化
+    init() {
+      let { value } = that;
+      that.$emit("input", value);
+    },
+    // 监听 - 页面打开
+    onOpen() {
+      that = this;
+      let { value } = that;
+      let { role = [], _id } = value.item;
+      that.data = value.item;
+      that.form1.props.show = true;
+      that.form1.data.user_id = _id;
+      that.form1.data.roleList = role;
+    },
+    // 监听 - 页面关闭
+    onClose() {
+      that.$refs.form1.resetForm(); // 关闭时，重置表单
+    },
+    // 表单提交成功后
+    onFormSuccess() {
+      that.$set(that.value.item, "role", that.form1.data.roleList);
+      that.value.show = false; // 关闭页面
+      that.$emit("success");
+    }
+  },
+  // 监听属性
+  watch: {
 
-	},
-	// 计算属性
-	computed: {}
+  },
+  // 计算属性
+  computed: {}
 };
 </script>
 
@@ -1281,26 +1278,25 @@ export default {
 import bindRole from './form/bindRole'
 
 export default {
-  components:{
+  components: {
     bindRole,
   },
-  data(){
+  data() {
     return {
-      formDatas:{}, // 在此处定义下formDatas（无论该页面有几个弹窗表单，只需要定义这一个空对象即可）
+      formDatas: {}, // 在此处定义下formDatas（无论该页面有几个弹窗表单，只需要定义这一个空对象即可）
     }
   },
-  methods:{
+  methods: {
     // 角色绑定按钮
-    bindRoleBtn(){
-    	let item = this.getCurrentRow(true);
-    	vk.pubfn.openForm('bindRole',{ item });
+    bindRoleBtn() {
+      let item = this.getCurrentRow(true);
+      vk.pubfn.openForm('bindRole', { item });
     },
   }
 }
 ```
 
 - 4、完成，此时点击【角色绑定】按钮即可弹出表单【角色绑定】
-
 
 ## 表单可视化拖拽工具@visualizer
 

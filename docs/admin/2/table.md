@@ -18,16 +18,16 @@ export default {
   data() {
     // 页面数据变量
     return {
-      table1:{
+      table1: {
         // 表格数据
-        data:[],
+        data: [],
         // 表格字段显示规则
-        columns:[
-          { key:"_id" , title:"用户ID" , type:"text" , width:200 },
-          { key:"username" , title:"用户名" , type:"text" , width:200 },
-          { key:"nickname" , title:"用户昵称" , type:"text" , width:200 },
-          { key:"mobile" , title:"手机号" , type:"text" , width:200 },
-          { key:"comment" , title:"备注" , type:"text" , minWidth:200 },
+        columns: [
+          { key: "_id", title: "用户ID", type: "text", width: 200 },
+          { key: "username", title: "用户名", type: "text", width: 200 },
+          { key: "nickname", title: "用户昵称", type: "text", width: 200 },
+          { key: "mobile", title: "手机号", type: "text", width: 200 },
+          { key: "comment", title: "备注", type: "text", minWidth: 200 },
         ]
       }
     };
@@ -144,8 +144,8 @@ columns 是一个数组，数组内每个元素有以下属性
 `columns` 中的 `key` 也要写 `_add_time`，同时加上属性 `sortable:"custom"`
 
 ```js
-columns:[
-  { key:"_add_time", title:"添加时间", type:"time", width:160, sortable:"custom"  },
+columns: [
+  { key: "_add_time", title: "添加时间", type: "time", width: 160, sortable: "custom" },
 ],
 ```
 
@@ -179,29 +179,29 @@ columns:[
 ```js
 data() {
   return {
-    table1:{
-      
-      rightBtns:[
+    table1: {
+
+      rightBtns: [
         'detail_auto',
         {
-          mode:'update',
-          title:'编辑',
-          plain:true,
-          round:true,
-          disabled: (item)=>{
+          mode: 'update',
+          title: '编辑',
+          plain: true,
+          round: true,
+          disabled: (item) => {
             return item._id == '002'
           }
         },
         {
-          mode:'delete',
-          title:'删除',
-          show: (item)=>{
+          mode: 'delete',
+          title: '删除',
+          show: (item) => {
             return item._id != '002'
           }
         },
         'more'
       ],
-      
+
     }
   }
 }
@@ -219,27 +219,27 @@ data() {
 ```js
 data() {
   return {
-    table1:{
-      
-      rightBtns:[
+    table1: {
+
+      rightBtns: [
         'detail_auto',
         {
-          mode:'update',
-          title:'编辑',
-          disabled: (item)=>{
+          mode: 'update',
+          title: '编辑',
+          disabled: (item) => {
             return !this.$hasRole("admin") && !this.$hasPermission("user-delete"); // 代表不是admin角色也没有user-delete权限的用户则按钮置灰禁用
           }
         },
         {
-          mode:'delete',
-          title:'删除',
-          show: (item)=>{
+          mode: 'delete',
+          title: '删除',
+          show: (item) => {
             return this.$hasRole("admin") || this.$hasPermission("user-delete"); // 代表只有admin角色或拥有user-delete权限的用户才能看到删除按钮
           }
         },
         'more'
       ],
-      
+
     }
   }
 }
@@ -273,43 +273,43 @@ right-btns-more（右侧更多按钮点击后显示的按钮列表）
 ```js
 data() {
   return {
-    table1:{
-      
-      rightBtnsMore:[
+    table1: {
+
+      rightBtnsMore: [
         {
           title: '按钮1',
-          disabled: (item)=>{
+          disabled: (item) => {
             return item._id == '002'
           },
-          onClick: (item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮1`);
           }
         },
         {
           title: '按钮2',
-          show: (item)=>{
+          show: (item) => {
             return item._id != '002'
           },
-          onClick: (item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮2`);
           }
         },
         {
           title: '按钮3',
           disabled: '_id==002',
-          onClick: (item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮3`);
           }
         },
         {
           title: '按钮4',
           disabled: '_id!=002',
-          onClick: (item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮4`);
           }
         }
       ]
-      
+
     }
   }
 }
@@ -327,29 +327,29 @@ data() {
 ```js
 data() {
   return {
-    table1:{
-      
-      rightBtnsMore:[
+    table1: {
+
+      rightBtnsMore: [
         {
           title: '按钮1',
-          disabled: (item)=>{
+          disabled: (item) => {
             return !this.$hasRole("admin") && !this.$hasPermission("user-delete"); // 代表不是admin角色也没有user-delete权限的用户则按钮置灰禁用
           },
-          onClick: (item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮1`);
           }
         },
         {
           title: '按钮2',
-          show: (item)=>{
+          show: (item) => {
             return this.$hasRole("admin") || this.$hasPermission("user-delete"); // 代表只有admin角色或拥有user-delete权限的用户才能看到删除按钮
           },
-          onClick: (item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮2`);
           }
         }
       ]
-      
+
     }
   }
 }
@@ -372,42 +372,42 @@ data() {
 data() {
   return {
     table1: {
-      
+
       customRightBtns: [
         {
           title: '按钮1', type: 'primary', icon: 'el-icon-edit',
-          disabled:(item)=>{
+          disabled: (item) => {
             return item._id == '002'
           },
-          onClick:(item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮1`);
           }
         },
         {
           title: '按钮2', type: 'success', icon: 'el-icon-edit',
-          show:(item)=>{
+          show: (item) => {
             return item._id != '002'
           },
-          onClick:(item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮2`);
           }
         },
         {
           title: '按钮3', type: 'warning', icon: 'el-icon-edit',
           disabled: '_id==002',
-          onClick:(item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮3`);
           }
         },
         {
           title: '按钮4', type: 'danger', icon: 'el-icon-edit',
           disabled: '_id!=002',
-          onClick:(item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮4`);
           }
         }
       ],
-      
+
     }
   }
 }
@@ -428,28 +428,28 @@ data() {
 data() {
   return {
     table1: {
-      
+
       customRightBtns: [
         {
           title: '按钮1', type: 'primary', icon: 'el-icon-edit',
-          disabled: (item)=>{
+          disabled: (item) => {
             return !this.$hasRole("admin") && !this.$hasPermission("user-delete"); // 代表不是admin角色也没有user-delete权限的用户则按钮置灰禁用
           },
-          onClick:(item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮1`);
           }
         },
         {
           title: '按钮2', type: 'success', icon: 'el-icon-edit',
-          show: (item)=>{
+          show: (item) => {
             return this.$hasRole("admin") || this.$hasPermission("user-delete"); // 代表只有admin角色或拥有user-delete权限的用户才能看到删除按钮
           },
-          onClick:(item)=>{
+          onClick: (item) => {
             vk.toast(`${item._id}-按钮2`);
           }
         }
       ],
-      
+
     }
   }
 }
@@ -544,10 +544,10 @@ data() {
 export default {
   data() {
     return {
-      table1:{
-        
-        
-        action: (obj={})=>{
+      table1: {
+
+
+        action: (obj = {}) => {
           let {
             data, // 请求数据
             success, // 成功回调
@@ -580,8 +580,8 @@ export default {
             }
           });
         },
-        
-        
+
+
       }
     }
   }
@@ -602,10 +602,10 @@ export default {
 export default {
   data() {
     return {
-      table1:{
-        
-        
-        action: (obj={})=>{
+      table1: {
+
+
+        action: (obj = {}) => {
           let {
             data, // 请求数据
             success, // 成功回调
@@ -634,8 +634,8 @@ export default {
             }
           });
         },
-        
-        
+
+
       }
     }
   }
@@ -654,21 +654,20 @@ export default {
 export default {
   data() {
     return {
-      table1:{
-        
-        dataPreprocess : (list) => {
+      table1: {
+
+        dataPreprocess: (list) => {
           // 这里写自己的处理逻辑，最终返回处理完的list即可。
           list.map((item, index) => {
             item.a = 1;
           });
           return list;
         }
-        
+
       }
     }
   }
 }
-  
 ```
 
 ### 展开行@expand
@@ -702,9 +701,9 @@ export default {
 export default {
   data() {
     return {
-      table1:{
-        
-        selectable:(row,index)=>{
+      table1: {
+
+        selectable: (row, index) => {
           // 返回true,代表可以多选,返回false代表该行的多选框禁用。
           if (index == 1) {
             return false;
@@ -712,12 +711,11 @@ export default {
             return true;
           }
         }
-        
+
       }
     }
   }
 }
-  
 ```
 
 ### 异常重试机制@retry-count
@@ -789,14 +787,14 @@ show是一个字符串数组，columns 数组内每一个元素都可以单独�
 
 ```js
 // 隐藏第1个字段
-this.$set(this.table1.columns[0], "show", ["none"] );
+this.$set(this.table1.columns[0], "show", ["none"]);
 // 显示第1个字段
-this.$set(this.table1.columns[0], "show", ["detail","row","expand"]);
+this.$set(this.table1.columns[0], "show", ["detail", "row", "expand"]);
 
 // 隐藏第3个字段
-this.$set(this.table1.columns[2], "show", ["none"] );
+this.$set(this.table1.columns[2], "show", ["none"]);
 // 显示第3个字段
-this.$set(this.table1.columns[2], "show", ["detail","row","expand"]);
+this.$set(this.table1.columns[2], "show", ["detail", "row", "expand"]);
 ```
 
 [返回展开行](#展开行)
@@ -804,33 +802,33 @@ this.$set(this.table1.columns[2], "show", ["detail","row","expand"]);
 ### type（字段类型）@columns-type
 
 ```js
-table1:{
-  columns:[
-    { key: "nickname", title: "昵称", type: "text", width: 120, defaultValue:"未设置昵称", },
-    { key: "avatar", title: "头像", type: "avatar", width: 80, imageWidth:40, shape:"circle" }, // circle 圆形 square 方形
-    { key: "images", title: "图片", type: "image", width: 120, imageWidth:60 },
+table1: {
+  columns: [
+    { key: "nickname", title: "昵称", type: "text", width: 120, defaultValue: "未设置昵称", },
+    { key: "avatar", title: "头像", type: "avatar", width: 80, imageWidth: 40, shape: "circle" }, // circle 圆形 square 方形
+    { key: "images", title: "图片", type: "image", width: 120, imageWidth: 60 },
     { key: "rate", title: "评分", type: "rate", width: 120 },
-    { key: "switch", title: "开关", type: "switch", width: 120, activeValue:true, inactiveValue:false },
+    { key: "switch", title: "开关", type: "switch", width: 120, activeValue: true, inactiveValue: false },
     { key: "icon1", title: "图标", type: "icon", width: 120 },
-    { 
+    {
       key: "icon2", title: "图标", type: "icon", width: 120,
       // 当 icon2 值为1时，显示vk-icon-activityfill图标，2时，显示vk-icon-crownfill图标
-      data:[
-        { value:1, icon:"vk-icon-activityfill"},
-        { value:2, icon:"vk-icon-crownfill"}
+      data: [
+        { value: 1, icon: "vk-icon-activityfill" },
+        { value: 2, icon: "vk-icon-crownfill" }
       ]
     },
-    { 
+    {
       key: "type", title: "类型", type: "tag", width: 120, size: "small",
-      data:[
-        { value:1, label:"收入", tagType:"success" },
-        { value:2, label:"支出", tagType:"danger" }
+      data: [
+        { value: 1, label: "收入", tagType: "success" },
+        { value: 2, label: "支出", tagType: "danger" }
       ]
     },
-    { key: "_add_time", title: "添加时间", type: "time", width: 160, valueFormat:"yyyy-MM-dd hh:mm:ss" },
+    { key: "_add_time", title: "添加时间", type: "time", width: 160, valueFormat: "yyyy-MM-dd hh:mm:ss" },
     { key: "_add_time", title: "距离现在", type: "dateDiff", width: 120 },
-    { key:"exp_time", title:"到期剩", type:"dateDiff2", endText:"已到期", width:80, defaultValue: "永久", sortable:"custom" },
-    { 
+    { key: "exp_time", title: "到期剩", type: "dateDiff2", endText: "已到期", width: 80, defaultValue: "永久", sortable: "custom" },
+    {
       key: "nickname", title: "html渲染", type: "html",
       formatter: (val, row, column, index) => {
         let str = `<text>${val}</text>（审核通过）`;
@@ -843,55 +841,56 @@ table1:{
     // 方便连表查询时快速将userInfo的头像和昵称展示出来（值需有avatar和nickname字段）
     { key: "userInfo", title: "用户", type: "userInfo", width: 120 },
     // group 是将多个字段显示在一个单元格内
-    { 
-      key: "", title: "分组显示", type: "group", minWidth: 290, align:"left",
-      columns:[
+    {
+      key: "", title: "分组显示", type: "group", minWidth: 290, align: "left",
+      columns: [
         { key: "_id", title: "ID", type: "text" },
         { key: "avatar", title: "头像", type: "avatar" },
         { key: "nickname", title: "昵称", type: "text" },
       ],
     },
     // object 是解析对象类型的字段
-    { 
-      key: "object1", title: "对象字段", type: "object", width: 180, align:"left",
-      columns:[
+    {
+      key: "object1", title: "对象字段", type: "object", width: 180, align: "left",
+      columns: [
         { key: "key1", title: "对象内字段1", type: "text" },
         { key: "key2", title: "对象内字段2", type: "text" },
       ],
     },
     // table 是解析对象数组类型的字段，建议只在详情页内展示.
-    { 
-      key: "arr1", title: "对象数组字段", type: "table", width: 200, show: ["detail"],
-      rowHeight:50, // 行高
+    {
+      key: "arr1", title: "对象数组字段", type: "table", width: 200,
+      show: ["detail"],
+      rowHeight: 50, // 行高
       columns: [
-        { key: "key1",title: "对象的字段1",type: "text",width: 120 },
-        { key: "key2",title: "对象内字段2",type: "text",width: 120 }
+        { key: "key1", title: "对象的字段1", type: "text", width: 120 },
+        { key: "key2", title: "对象内字段2", type: "text", width: 120 }
       ]
     },
-    { 
-      key: "gender", title: "性别", type: "radio", width: 120, defaultValue:0,
-      data:[
-        { value:1, label:"男" },
-        { value:2, label:"女" },
-        { value:0, label:"保密" },
+    {
+      key: "gender", title: "性别", type: "radio", width: 120, defaultValue: 0,
+      data: [
+        { value: 1, label: "男" },
+        { value: 2, label: "女" },
+        { value: 0, label: "保密" },
       ]
     },
-    { 
-      key: "gender", title: "性别", type: "select", width: 120, defaultValue:0,
-      data:[
-        { value:1, label:"男" },
-        { value:2, label:"女" },
-        { value:0, label:"保密" },
+    {
+      key: "gender", title: "性别", type: "select", width: 120, defaultValue: 0,
+      data: [
+        { value: 1, label: "男" },
+        { value: 2, label: "女" },
+        { value: 0, label: "保密" },
       ]
     },
-    { 
-      key: "checkbox", title: "多选字段", type: "checkbox", width: 120, defaultValue:1,
-      data:[
+    {
+      key: "checkbox", title: "多选字段", type: "checkbox", width: 120, defaultValue: 1,
+      data: [
         { value: 1, label: "选项一" },
         { value: 2, label: "选项二" },
       ]
     },
-    { key: "json", title: "json字段", type: "json", width: 120, maxHeight:300 }
+    { key: "json", title: "json字段", type: "json", width: 120, maxHeight: 300 }
   ]
 }
 ```
@@ -922,8 +921,11 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 ```js
 {
-  key: "key1", title: "标题", type: "text", width: 200,
-  buttonsPosition:"right", // 支持 left right bottom top
+  key: "key1",
+  title: "标题",
+  type: "text",
+  width: 200,
+  buttonsPosition: "right", // 支持 left right bottom top
   buttons: [
     {
       title: "修改",
@@ -956,14 +958,17 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 
 ```js
 {
-  key: "key1", title: "标题", type: "text", width: 200,
-  buttonsPosition:"right", // 支持 left right bottom top
+  key: "key1",
+  title: "标题",
+  type: "text",
+  width: 200,
+  buttonsPosition: "right", // 支持 left right bottom top
   buttons: [
     {
       title: "复制",
       type: "text", // 文字形式按钮 可选：primary / success / warning / danger / info / text
       mode: "default", // 模式 可选：update（通用修改模式） / default（自定义模式）
-      show: ["row","detail"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
+      show: ["row", "detail"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
       click: (options) => {
         uni.setClipboardData({
           data: options.value,
@@ -1023,18 +1028,19 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 ### filter（本地数据过滤器）@columns-filter
 
 ```js
-{ key:"remark", title:"备注", type:"text", width:200,
+{
+  key: "remark", title: "备注", type: "text", width: 200,
   // 本地数据过滤器
-  filter:{
-    data:[
+  filter: {
+    data: [
       { text: '备注1', value: '备注1' },
-      { text: '备注2', value:'备注2' },
+      { text: '备注2', value: '备注2' },
     ],
-    multiple:true, // 是否可多选
-    method:(value, row, column)=>{
+    multiple: true, // 是否可多选
+    method: (value, row, column) => {
       return value === row.remark;
     },
-    defaultValue:[], // 过滤器默认值 如：["备注1"]
+    defaultValue: [], // 过滤器默认值 如：["备注1"]
   }
 },
 ```
@@ -1293,9 +1299,9 @@ this.$refs.table1.showDetail(item); // item是该条记录的数据源
 
 ```js
 this.$refs.table1.deleteRows({
-  ids:["60acf6248a69dc00018d8520"],
-  success:()=>{
-    
+  ids: ["60acf6248a69dc00018d8520"],
+  success: () => {
+
   }
 });
 ```
@@ -1304,12 +1310,12 @@ this.$refs.table1.deleteRows({
 
 ```js
 this.$refs.table1.updateRows({
-  mode:"update", // update 局部字段更新 set 覆盖字段更新
-  rows:[
-    { _id:"60acf6248a69dc00018d8520", remark:"被修改了", money:10000 }
+  mode: "update", // update 局部字段更新 set 覆盖字段更新
+  rows: [
+    { _id: "60acf6248a69dc00018d8520", remark: "被修改了", money: 10000 }
   ],
-  success:()=>{
-    
+  success: () => {
+
   }
 });
 ```
@@ -1332,11 +1338,11 @@ this.$refs.table1.exportExcel({
 
 ```js
 this.$refs.table1.exportExcel({
-  fileName : "表格数据",
-  original : false,
+  fileName: "表格数据",
+  original: false,
   columns: [
-    { key:"_id", title:"id", type:"text" },
-    { key:"money", title:"金额", type:"money" },
+    { key: "_id", title: "id", type: "text" },
+    { key: "money", title: "金额", type: "money" },
   ]
 });
 ```
@@ -1356,14 +1362,14 @@ this.$refs.table1.exportExcel({
 
 ```js
 this.$refs.table1.exportExcel({
-  fileName:"文件名称",
-  data:[
-    { a:1,b:2},
-    { a:11,b:22}
+  fileName: "文件名称",
+  data: [
+    { a: 1, b: 2 },
+    { a: 11, b: 22 }
   ],
-  columns:[
-    { key:"a", title:"标题a", type:"text" },
-    { key:"b", title:"标题b", type:"text" },
+  columns: [
+    { key: "a", title: "标题a", type: "text" },
+    { key: "b", title: "标题b", type: "text" },
   ]
 });
 ```
@@ -1603,18 +1609,17 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 ```
 
 ```js
-queryForm1:{
+queryForm1: {
   // 查询表单数据源，可在此设置默认值
-  formData:{
+  formData: {
 
   },
   // 查询表单的字段规则 fieldName:指定数据库字段名,不填默认等于key
-  columns:[
-    { key:"nickname", title:"昵称", type:"text", width:160, mode:"%%" },
-    { key:"_add_time", title:"添加时间", type:"datetimerange", width:400, mode:"[]" },
+  columns: [
+    { key: "nickname", title: "昵称", type: "text", width: 160, mode: "%%" },
+    { key: "_add_time", title: "添加时间", type: "datetimerange", width: 400, mode: "[]" },
   ]
 }
-
 ```
 
 ### 组件属性@query-props
@@ -1659,14 +1664,16 @@ columns属性的写法与万能表单相似(但部分表单组件搜索不支持
 ##### 如余额按金额范围查询
 
 ```js
-columns:[
-  { 
-    key:"balance1", title:"金额范围", type:"money", width:160, placeholder:"请输入最小金额", 
-    mode:">=", fieldName:"balance", 
+columns: [
+  {
+    key: "balance1", title: "金额范围", type: "money", width: 160, placeholder: "请输入最小金额",
+    mode: ">=",
+    fieldName: "balance",
   },
-  { 
-    key:"balance2", title:"-", type:"money", width:160, placeholder:"请输入最大金额", 
-    mode:"<=", fieldName:"balance", 
+  {
+    key: "balance2", title: "-", type: "money", width: 160, placeholder: "请输入最大金额",
+    mode: "<=",
+    fieldName: "balance",
   }
 ]
 ```
@@ -1676,11 +1683,8 @@ columns:[
 **如userInfo是连表字段的as的值，想要根据 userInfo.mobile 进行查询**
 
 ```js
-columns:[
-  { 
-    key:"mobile", title:"手机号", type:"text", width:160,
-    mode:"=", fieldName:"userInfo.mobile", lastWhereJson:true
-  }
+columns: [
+  { key: "mobile", title: "手机号", type: "text", width: 160, mode: "=", fieldName: "userInfo.mobile", lastWhereJson: true }
 ]
 ```
 
@@ -1776,23 +1780,23 @@ vk.baseDao.getTableData({
   // 强制where条件，比如这里设置了只能查询当前登录用户的数据
   whereJson: {
     user_id: uid
-  }, 
+  },
   // 强制字段显示规则
   fieldJson: {
-    
-  }, 
+
+  },
   // 默认排序规则
   sortArr: [
-    
-  ], 
+
+  ],
   // 副表列表
-  foreignDB:[
-    
-  ], 
+  foreignDB: [
+
+  ],
   // 聚合结束后的where条件
   lastWhereJson: {
-    
-  } 
+
+  }
 });
 ```
 
@@ -1803,13 +1807,13 @@ vk.baseDao.getTableData({
 配置 `vk.db.unicloud.getTableData.sortArr`，可以设置 `vk.baseDao.getTableData` 全局默认排序规则
 
 ```js
-"vk":{
-  "db":{
-    "unicloud":{
-      "getTableData":{
+"vk": {
+  "db": {
+    "unicloud": {
+      "getTableData": {
         // vk.baseDao.getTableData 默认排序规则
-        "sortArr":[
-          {"name":"_add_time","type":"desc"}
+        "sortArr": [
+          { "name": "_add_time", "type": "desc" }
         ]
       }
     }
@@ -1861,15 +1865,15 @@ summaryMethod({ columns, data }) {
   const means = ['']; // 合计
   // 需要进行合计的字段
   let totalOption = [
-    { key: 'money', 'unit': '元', type:"money" },
+    { key: 'money', 'unit': '元', type: "money" },
   ];
-  for(let columnIndex=0; columnIndex<columns.length; columnIndex++){
+  for (let columnIndex = 0; columnIndex < columns.length; columnIndex++) {
     let column = columns[columnIndex];
     if (columnIndex === 0) {
       means.push('合计');
     } else {
       let columnItem = vk.pubfn.getListItem(totalOption, "key", column.property);
-      if(!columnItem){
+      if (!columnItem) {
         continue;
       }
       let {
@@ -1887,11 +1891,11 @@ summaryMethod({ columns, data }) {
           }
         }, 0);
         means[columnIndex] = vk.pubfn.toDecimal(means[columnIndex], precision);
-        if(columnItem.type === "money"){
+        if (columnItem.type === "money") {
           // 金额字段的特殊处理
           let money = vk.pubfn.priceFilter(means[columnIndex]);
           means[columnIndex] = `<span style="color: red">${money}${columnItem.unit}</span>`;
-        }else{
+        } else {
           means[columnIndex] = `<span style="color: red">${means[columnIndex]}${columnItem.unit}</span>`;
         }
       } else {
