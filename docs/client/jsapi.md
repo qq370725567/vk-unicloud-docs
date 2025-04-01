@@ -2265,7 +2265,7 @@ let randomStr = await vk.pubfn.randomAsync(6, "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
     whereJson:{
       my_invite_code: val
     }
-  }, 10); // 最大重试10次
+  });
   return num === 0 ? true : false;
-});
+}, 10); // 最大重试10次
 ```
