@@ -43,37 +43,37 @@ export default {
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
-| action           | 动态模式 - 支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#自定义function请求模式)  | String、Function | 无      | - |
+| action           | 动态模式 - 支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#function)  | String、Function | 无      | - |
 | auto-action       | 动态模式 - 是否组件加载完毕后自动运行action | Boolean  | 无 | -  |
 | query-form-param   | 动态模式 - 请求参数（表格查询参数） | Object  | {} | -  |
-| data-preprocess          | 动态模式 - 云函数返回的数据进行预处理 [查看数据预处理](#数据预处理)  | function(list)  | - | -  |
-| is-request    | 动态模式 - 是否是http请求模式 [查看http请求模式](#http请求模式) | Boolean  | false | true |
+| data-preprocess          | 动态模式 - 云函数返回的数据进行预处理 [查看数据预处理](#data-preprocess)  | function(list)  | - | -  |
+| is-request    | 动态模式 - 是否是http请求模式 [查看http请求模式](#http) | Boolean  | false | true |
 | request-header    | 动态模式 - http请求头 | Object  | - | - |
-| props    | 动态模式 - 渲染数据的配置选项 [查看http请求模式](#http请求模式) | Object  | - | - |
-| retry-count    | 动态模式 - 请求最大重试次数 [查看异常重试机制](#异常重试机制) | Number  | 0 | - |
+| props    | 动态模式 - 渲染数据的配置选项 [查看http请求模式](#http) | Object  | - | - |
+| retry-count    | 动态模式 - 请求最大重试次数 [查看异常重试机制](#retry-count) | Number  | 0 | - |
 | retry-interval    | 动态模式 - 每次重试间隔，单位毫秒 | Number  | 0 | - |
 | data             | 静态模式 - 列表数据 | Array  | 无 | -  |
 | total            | 静态模式 - 总记录数 | Number  | 无 | -  |
-| columns          | 通用 - 字段显示规则 [查看columns](#columns-字段列表)| Array  | [] | -   |
+| columns          | 通用 - 字段显示规则 [查看columns](#columns)| Array  | [] | -   |
 | height           | 通用 - table的高度 | Number  | 无 | -  |
 | max-height        | 通用 - table的最大高度 | Number  | 无 | -  |
 | row-height        | 通用 - 行高 | Number  | 无 | -  |
 | row-key      | 通用 - 行数据的 Key （重要：值必须唯一，默认是_id） | String  | "_id" | - |
 | top          | 通用 - margin-top的高度 | Number  | 10 | -  |
 | selection          | 通用 - 显示多选框 | Boolean  | false | true |
-| selectable          | 通用 - 搭配selection=true时使用，返回值用来决定这一行的 CheckBox 是否可以勾选 [查看用法](#表格自带的多选框禁用规则)  | Function(row,index)  | - | - |
+| selectable          | 通用 - 搭配selection=true时使用，返回值用来决定这一行的 CheckBox 是否可以勾选 [查看用法](#selection)  | Function(row,index)  | - | - |
 | rowNo          | 通用 - 显示序号 | Boolean  | false | true |
 | pagination     | 通用 - 显示分页器 | Boolean  | false | true |
 | page-size       | 通用 - 每页显示数量 | Number  | 10 | - |
 | page-sizes      | 通用 - 每页显示数量选择列表 | Array  | [1, 5, 10, 20, 50, 100, 1000] | - |
 | get-count      |  [1.18.0新增] 通用 - 执行count请求的模式 <br/>与vk.baseDao.getTableData配合使用才有效果，可选<br/>auto：自动判断<br/>true：总是执行<br/>false：从不执行 | String、Boolean  | auto | auto、true、false |
 | max-page-count		| [1.18.0新增] 通用 - 最大可显示的页数																																																								| Number	|-															|-|
-| right-btns      | 通用 - 右侧显示的按钮列表 [查看right-btns](#right-btns-右侧固定按钮列表) | Array  | [] | - |
+| right-btns      | 通用 - 右侧显示的按钮列表 [查看right-btns](#right-btns) | Array  | [] | - |
 | right-btns-type      | 通用 - 右侧显示的按钮类型 | String  | button | text |
 | right-btns-align     | 通用 - 右侧显示的按钮对齐方式 | String  | center | left right |
-| right-btns-more      | 通用 - 右侧更多按钮 [查看right-btns-more](#right-btns-more-更多按钮列表)| Array  | [] | - |
+| right-btns-more      | 通用 - 右侧更多按钮 [查看right-btns-more](#right-btns-more)| Array  | [] | - |
 | right-btns-width | 通用 - 右侧按钮宽度，单位px，不传会根据按钮数量自动计算宽度 |Number  | - | - |
-| custom-right-btns      | 通用 - 自定义右侧按钮 [查看custom-right-btns](#custom-right-btns-自定义右侧固定按钮)| Array  | [] | - |
+| custom-right-btns      | 通用 - 自定义右侧按钮 [查看custom-right-btns](#custom-right-btns)| Array  | [] | - |
 | empty-text      | 通用 - 空数据时显示的文本内容 | String  | "暂无数据" | - |
 | default-expand-all      | 通用 - 是否默认展开所有行，当 Table 包含展开行存在或者为树形表格时有效 | Boolean  | false | true |
 | tree-props      | 通用 - 渲染嵌套数据的配置选项 | Object  | {children: 'children', hasChildren: 'hasChildren'} | - |
@@ -81,14 +81,14 @@ export default {
 | stripe     | 通用 - 是否为斑马纹 | Boolean  | false | true |
 | size     | 通用 - Table 的尺寸 | String  | 无 | medium / small / mini |
 | show-header     | 通用 - 是否显示表头 | Boolean  | true | false |
-| highlight-current-row     | 通用 - 是否要高亮当前行 [查看高亮行处理](#高亮行处理) | Boolean  | true | false |
+| highlight-current-row     | 通用 - 是否要高亮当前行 [查看高亮行处理](#highlight-current-row) | Boolean  | true | false |
 | detail-dialog-width     | 通用 - 详情弹窗的宽度 | Number,String  | "830px" | - |
 | multiple     | 通用 - 可多选 |Boolean  | true | false |
-| default-sort     | 默认排序规则 [查看default-sort](#default-sort-默认排序)|Object  | - | -  |
+| default-sort     | 默认排序规则 [查看default-sort](#default-sort)|Object  | - | -  |
 | show-summary     | 通用 - 是否需要显示合计行 |Boolean  | false | true |
 | summary-method     | 通用 - 自定义合计的计算函数（详情见下方） [查看summary-method](#summary-method) |Function  | - |-  |
 | total-option     | 通用 - 需要自动统计的行（详情见下方） |Array  | - | - |
-| expand     | 通用 - 是否开启点击可以展开行 [查看展开行](#展开行)|Boolean  | false | true |
+| expand     | 通用 - 是否开启点击可以展开行 [查看展开行](#expand)|Boolean  | false | true |
 | left-fixed     | 通用 - 序号、多选框是否固定在左侧 |Boolean  | true | false |
 | right-fixed     | 通用 - 操作按钮是否固定在右侧 |Boolean  | true | false |
 | searched-clean-selection     | 通用 - 表格搜索后是否清空多选框选中的值 |Boolean  | true | false |
@@ -102,17 +102,17 @@ columns 是一个数组，数组内每个元素有以下属性
 |------- |-----------|---------|-------|-------|
 | key    |   键名    | String  | 无    | - |
 | title  |   标题    | String  | 无    | -  |
-| type   |   类型    | String  | 无    | [查看type](#type-字段类型)   |
+| type   |   类型    | String  | 无    | [查看type](#columns-type)   |
 | width  |   宽度    | Number  | 无    | -  |
 | minWidth  | 最小宽度（设置此值会自动填充宽度） | Number  | 无    | -  |
 | align  |  对其方式 | String  | center    | left 、right  |
 | headerAlign  |  表头对其方式 | String  | center    | left 、right  |
 | sortable  |  是否是排序字段 | String  | custom  | true 、false  |
 | fixed  | 列是否固定在左侧或者右侧，true 表示固定在左侧 | string, boolean  | 无  | true、left、right  |
-| show  | 显示规则，[查看show](#show-字段显示规则)  | string 、 array | ["detail","row","expand"]  | "detail"、"row"、"expand"、 "none"  |
+| show  | 显示规则，[查看show](#columns-show)  | string 、 array | ["detail","row","expand"]  | "detail"、"row"、"expand"、 "none"  |
 | defaultValue  |   默认值  | String  | 无  | -  |
 | formatter  | 自定义格式化函数 | function(val, row, column, index)  | -  | -  |
-| buttons  | 扩展按钮列表 [查看buttons](#buttons-字段扩展按钮列表)| Array | -  | -  |
+| buttons  | 扩展按钮列表 [查看buttons](#columns-buttons)| Array | -  | -  |
 
 ### default-sort（默认排序）@default-sort
 
@@ -255,7 +255,7 @@ data() {
 | delete     | 点击后触发delete事件 |
 | more     | 与 rightBtnsMore 搭配使用|
 
-### right-btns-more（更多按钮列表）
+### right-btns-more（更多按钮列表）@right-btns-more
 
 right-btns-more（右侧更多按钮点击后显示的按钮列表）
 
@@ -480,7 +480,7 @@ data() {
 ></vk-data-table>
 ```
 
-### 高亮行处理
+### 高亮行处理@highlight-current-row
 
 通过设置
 ```html
@@ -797,7 +797,7 @@ this.$set(this.table1.columns[2], "show", ["none"]);
 this.$set(this.table1.columns[2], "show", ["detail", "row", "expand"]);
 ```
 
-[返回展开行](#展开行)
+[返回展开行](#expand)
 
 ### type（字段类型）@columns-type
 
@@ -1574,7 +1574,7 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 ```
 
 
-[返回展开行](#展开行)
+[返回展开行](#expand)
 
 ## 万能表格搜索组件 @query
 

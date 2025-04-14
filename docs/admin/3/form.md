@@ -121,12 +121,12 @@ export default {
 | 参数							| 说明																																																													| 类型						| 默认值		| 可选值				|
 |------------------	|-----------------------																																																				|---------				|--------		|-------				|
 | v-model						| 表单数据源																																																										| Object					| {}				| -							|
-| rules							| 表单验证规则 [查看规则](#rules-表单验证)																																											| Object					| 无				| -							|
-| action						| 表单提交地址，支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#自定义function请求模式)| String、Function| 无				| -							|
-| before-action			| action请求前拦截器 [查看示例代码](#before-action-请求前拦截)																																	| Function				| 无				| -							|
-| is-request				| 是否是http请求模式 [查看http请求模式](#http请求模式)																																					| Boolean					| false			| true					|
-| form-type					| 表单类型，用于复用表单 [查看表单复用](#show-复用时的显示规则)																																	| String					| 无				| -							|
-| columns						| 通用 - 字段规则 [查看columns](#columns-字段渲染规则)																																					| Array						| []				| -							|
+| rules							| 表单验证规则 [查看规则](#rules)																																											| Object					| 无				| -							|
+| action						| 表单提交地址，支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#function)| String、Function| 无				| -							|
+| before-action			| action请求前拦截器 [查看示例代码](#before-action)																																	| Function				| 无				| -							|
+| is-request				| 是否是http请求模式 [查看http请求模式](#http)																																					| Boolean					| false			| true					|
+| form-type					| 表单类型，用于复用表单 [查看表单复用](#columns-show)																																	| String					| 无				| -							|
+| columns						| 通用 - 字段规则 [查看columns](#columns)																																					| Array						| []				| -							|
 | loading						| 表单是否在请求中																																																							| Boolean					| false			| true					|
 | label-width				| 左侧label宽度																																																									| String,Number		| "80px"		| -							|
 | width							| 表单宽度																																																											| Number,String		| 无				| -							|
@@ -154,18 +154,18 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 | 参数				| 说明																																							| 类型											| 默认值| 可选值|
 |-------			|-----------																																				|---------									|-------|-------|
-| key					| 字段名  [查看](#key-字段名)																												| String										| -			| -			|
-| title				| 字段显示的名称  [查看](#title-标题)																								| String										| -			| -			|
-| type				| 组件类型    [查看](#type-组件类型)																								| String										| -			| -			|
-| width				| 宽度      [查看](#width-宽度)																											| Number										| -			| -			|
-| placeholder	| 占位符  [查看](#placeholder-占位符)																								| String										| -			| -			|
-| tips				| 下方的提示  [查看](#tips-下方的固定提示)																					| String										| 无		| -			|
-| labelWidth	| 单独设置该字段的左侧label宽度，单位px [查看](#labelWidth-单独设置左侧label宽度)		| Number										| -			| -			|
-| showLabel		|  是否显示左侧label文字 [查看](#showLabel-是否显示label)														| Boolean										| true	| false	|
-| show				| 表单复用时的显示规则 [查看](#show-复用时的显示规则)																| array											| -			| -			|
-| showRule		|  是否显示该字段  [查看](#showrule-自定义显示规则)																	| String、Function					| -			| -			|
-| disabled		|  是否禁用 [查看](#disabled-自定义禁用规则)																				| Boolean、String、Function	| false	| true	|
-| watch				| 监听key对应的值的改变（只监听组件内部造成的值的改变） [查看](#watch-监听)					| Function									| -			| -			|
+| key					| 字段名  [查看](#columns-key)																												| String										| -			| -			|
+| title				| 字段显示的名称  [查看](#columns-title)																								| String										| -			| -			|
+| type				| 组件类型    [查看](#columns-type)																								| String										| -			| -			|
+| width				| 宽度      [查看](#columns-width)																											| Number										| -			| -			|
+| placeholder	| 占位符  [查看](#columns-placeholder)																								| String										| -			| -			|
+| tips				| 下方的提示  [查看](#columns-tips)																					| String										| 无		| -			|
+| labelWidth	| 单独设置该字段的左侧label宽度，单位px [查看](#columns-label-width)		| Number										| -			| -			|
+| showLabel		|  是否显示左侧label文字 [查看](#columns-show-label)														| Boolean										| true	| false	|
+| show				| 表单复用时的显示规则 [查看](#columns-show)																| array											| -			| -			|
+| showRule		|  是否显示该字段  [查看](#columns-show-rule)																	| String、Function					| -			| -			|
+| disabled		|  是否禁用 [查看](#columns-disabled)																				| Boolean、String、Function	| false	| true	|
+| watch				| 监听key对应的值的改变（只监听组件内部造成的值的改变） [查看](#columns-watch)					| Function									| -			| -			|
 
 
 ### key（字段名）@columns-key
@@ -246,11 +246,11 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 },
 ```
 
-### labelWidth（单独设置label宽度）@columns-labelWidth
+### labelWidth（单独设置label宽度）@columns-label-width
 
 默认在万能表单的属性上设置统一的labelWidth，如果在columns内设置了labelWidth，则此为准
 
-### showLabel（是否显示label）@columns-showLabel
+### showLabel（是否显示label）@columns-show-label
 
 默认为true，当设置为false时，对应的title不显示。
 
@@ -266,7 +266,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 * 如果 show 的某元素中包含 `form-type`的值，则代表显示。
 * 如果 show 的某元素中不包含 `form-type`的值，则不显示。
 
-### showRule（自定义显示规则）@columns-showRule
+### showRule（自定义显示规则）@columns-show-rule
 
 与 show 不同，showRule 更灵活。
 
