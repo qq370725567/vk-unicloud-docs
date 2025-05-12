@@ -63,6 +63,21 @@ sidebarDepth: 0
 ></vk-uni-pay>
 ```
 
+**Vue3 setup 内写法**
+
+由于 setup 内没有this，故写法稍微变一下，代码如下：
+
+```js
+import { ref } from 'vue'
+  
+const vkPay = ref(null); // 这里的 vkPay 变量名必须和组件写的ref的值一致
+
+// this.$refs.vkPay.createPayment 改成 vkPay.value.createPayment
+vkPay.value.createPayment({
+  // 参数
+});
+```
+
 ## createPayment 示例
 
 ```js
