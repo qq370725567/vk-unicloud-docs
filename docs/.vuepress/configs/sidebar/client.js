@@ -85,7 +85,8 @@ module.exports = [{
           'uniCloud/db/question',
           'uniCloud/db/dao',
           'uniCloud/db/transaction',
-          'uniCloud/db/schema'
+          'uniCloud/db/schema',
+          'uniCloud/db/ext-database'
         ]
       },
       {
