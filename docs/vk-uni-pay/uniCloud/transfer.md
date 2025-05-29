@@ -195,9 +195,9 @@ WeixinJSBridge.invoke('requestMerchantTransfer', options,
 
 #### App@wxpay-user-confirm-app
 
-App端需要导入 requestMerchantTransfer uts插件（即将支持）
+App端需要导入 requestMerchantTransfer uts插件 [传送门](https://ext.dcloud.net.cn/plugin?id=22283)
 
-导入后uts插件后，执行 uni.requestMerchantTransfer 接口即可，代码如下
+导入该插件后，再执行 uni.requestMerchantTransfer 接口即可，代码如下
 
 ```js
 uni.requestMerchantTransfer({
