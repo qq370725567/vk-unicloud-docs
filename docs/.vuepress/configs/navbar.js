@@ -46,6 +46,7 @@ module.exports = [
       { text: 'VK小助手之前端开发', link: 'https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a?lang=zh' },
       { text: '腾讯元宝', link: 'https://yuanbao.tencent.com/chat/naQivTmsDa' },
       { text: 'DeepSeek', link: 'https://chat.deepseek.com' },
+      { text: 'Copilot GTP-4o', link: 'https://github.com/copilot' },
     ]
   },
   {
