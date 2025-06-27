@@ -104,7 +104,9 @@
 
 ### 获取activity_id@get-activity-id
 
-- 方法一：可通过抽奖活动小助手内的活动分享按钮查看
+- 方法一：可直接进入抽奖活动小助手内的活动详情页，点击复制活动id，如下图所示
+
+![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/image/a5148a4e-e21a-4662-8641-9225ce4ffcba.png)
 
 - 方法二：通过[云端API](#api-cloud)来获取活动id
 
