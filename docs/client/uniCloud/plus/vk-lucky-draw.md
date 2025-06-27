@@ -9,14 +9,10 @@
 
 抽奖活动小助手是一款任何人都可以免费自助发起抽奖活动的工具型软件，无需开发，可直接使用。
 
-如果你的系统需要集成抽奖功能，且抽奖功能可以和你系统完全解耦，则通过对接抽奖活动小助手是最佳解决方案。
+详见：
 
-​​实施步骤​​：
-
-1. 在抽奖活动小助手中创建抽奖活动
-2. 进入活动详情页 →【邀请好友参加】→【文本形式】→【复制活动id】，拿到activity_id
-3. 在你的前端系统添加抽奖按钮，点击时调用[打开抽奖页面API](#page-activity-detail)
-4. 用户在打开的抽奖活动页点击"立即抽奖"即可参与
+- [创建抽奖活动](#add-activity)
+- [抽奖活动小助手使用教程](#use-help)
 
 ### 有哪些抽奖形式？@mode
 
@@ -98,9 +94,46 @@
 - 实时开奖
 - 可设置分享增加转盘次数
 
-## 客户端API@api-client
+## 使用教程@use-help
 
-### vk.navigateToLuckyDraw（打开抽奖小助手指定页面）@navigateToLuckyDraw
+### 创建抽奖活动@add-activity
+
+扫一扫下方小程序码即可创建抽奖活动
+
+![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/add.png)
+
+### 获取activity_id@get-activity-id
+
+- 方法一：可通过抽奖活动小助手内的活动分享按钮查看
+
+- 方法二：通过[云端API](#api-cloud)来获取活动id
+
+### 获取API Key@get-api-key
+
+扫一扫下方小程序码即可创建API Key
+
+![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/apikey.png)
+
+### 更多使用教程@more-help
+
+扫一扫下方小程序码即可查看更多使用教程
+
+![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/help.png)
+
+## API对接
+
+如果你的系统需要集成抽奖功能，且抽奖功能可以和你系统完全解耦，则通过对接抽奖活动小助手是最佳解决方案。
+
+​​实施步骤​​：
+
+1. 在抽奖活动小助手中创建抽奖活动
+2. 进入活动详情页 →【邀请好友参加】→【文本形式】→【复制活动id】，拿到activity_id
+3. 在你的前端系统添加抽奖按钮，点击时调用[打开抽奖页面API](#page-activity-detail)
+4. 用户在打开的抽奖活动页点击"立即抽奖"即可参与
+
+### 客户端API@api-client
+
+接口名：`vk.navigateToLuckyDraw`
 
 注意：仅支持在微信小程序、微信公众号、App、浏览器（若是PC浏览器需先登录PC版微信）中使用，其他平台暂不支持。
 
@@ -206,21 +239,7 @@ vk.navigateToLuckyDraw({
 });
 ```
 
-## 创建抽奖活动@add-activity
-
-抽奖活动需要扫下方小程序码进行创建
-
-
-## 获取activity_id@get-activity-id
-
-### 方法一@get-activity-id-1
-
-可通过抽奖活动小助手内的活动分享按钮查看
-
-### 方法二@get-activity-id-2
-
-
-## 云端API@api-cloud
+### 云端API@api-cloud
 
 云端API已集成到 vk-admin 项目中（vk-admin的版本需 ≥ 1.21.0），打开页面 `/pages_plugs/system_uni/lucky-draw/list.vue` 体验
 
