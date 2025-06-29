@@ -47,7 +47,7 @@ module.exports = [{
   },
   {
     title: '后端（云端）',
-    collapsable: false,
+    collapsable: true,
     initialOpenGroupIndex: -1,
     children: [
       'uniCloud/cloudfunctions/resformat',

@@ -4,7 +4,11 @@ sidebarDepth: 0
 
 # 云端数据缓存（新版）
 
-> vk-unicloud版本需 ≥ 2.18.1
+:::warning
+
+vk-unicloud版本需 ≥ 2.18.1，低版本请查看 [老版本文档](./oldCache.md)
+
+:::
 
 ## 介绍@intro
 
