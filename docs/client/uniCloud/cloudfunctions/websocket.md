@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # WebSocket
 
-> vk-unicloud版本 ≥ 2.18.13
+> vk-unicloud 版本 ≥ 2.18.13
 > 
 > 仅支付宝云（云端）支持
 > 

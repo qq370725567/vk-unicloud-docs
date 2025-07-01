@@ -3,10 +3,11 @@ module.exports = [
   { text: 'client端框架', link: '/client/' },
   { text: 'admin端框架', link: '/admin/' },
   { text: 'vk-uni-pay（统一支付）', link: '/vk-uni-pay/' },
-  { text: 'Redis扩展', link: '/vk-redis/' },
-  { text: '数据库一键搬家', link: '/db-migration/' },
+  { text: 'Redis', link: '/vk-redis/' },
+  { text: '抽奖活动助手', link: '/vk-lucky-draw/' },
+  { text: '数据库搬家', link: '/db-migration/' },
   {
-    text: 'DCloud插件市场',
+    text: '插件市场',
     link: 'https://ext.dcloud.net.cn/publisher?id=1804602',
     ariaLabel: 'DCloud插件市场',
     items: [
@@ -25,7 +26,7 @@ module.exports = [
     ]
   },
   {
-    text: '关联技术文档',
+    text: '关联文档',
     link: '',
     ariaLabel: '关联技术文档',
     items: [
@@ -38,7 +39,7 @@ module.exports = [
     ]
   },
   {
-    text: 'AI小助手',
+    text: 'AI',
     link: '',
     ariaLabel: 'AI小助手',
     items: [
@@ -50,7 +51,7 @@ module.exports = [
     ]
   },
   {
-    text: 'Gitee',
+    text: '代码仓库',
     ariaLabel: 'Gitee',
     items: [
       { text: 'vk-unicloud-router（client端）', link: 'https://gitee.com/vk-uni/vk-uni-cloud-router' },

@@ -1,24 +1,37 @@
+# 抽奖活动小助手
 
-# 对接抽奖活动小助手
+## 介绍@introduce
 
-## 前言@foreword
-
-### 介绍@introduce
-
-**什么是抽奖活动小助手？**
+### 什么是抽奖活动小助手？@what
 
 抽奖活动小助手是一款任何人都可以免费自助发起抽奖活动的工具型软件，无需开发，可直接使用。
 
-详见：
+**详见**
 
-- [创建抽奖活动](#add-activity)
+- [抽奖形式](#mode)
 - [抽奖活动小助手使用教程](#use-help)
 
-### 有哪些抽奖形式？@mode
+### 抽奖体验@demo
 
-#### 定时开奖@mode-1
+打开微信扫一扫下方小程序码即可体验
 
-**机制​​**：设定固定开奖时间，到期后系统自动从参与者中随机抽取中奖者
+![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/demo.jpg)
+
+## 抽奖形式@mode
+
+### 定时开奖@mode-1
+
+**机制​​**
+
+- 设定固定开奖时间，到期后系统自动从参与者中随机抽取中奖者
+
+**特点**
+
+- 营造开奖期待感
+- 所有奖品统一时间一起开奖，不会因高价值奖品被提前抽中而导致后续参与者力度减少
+- 如果参与人数 ≥ 奖品数量，则奖品一定能全部发完
+- 如果参与人数 ≤ 奖品数量，则参与人100%中奖
+- 自动推送中奖通知
 
 **适用场景，包括但不限于：**
 
@@ -42,15 +55,18 @@
   - 暑期阅读挑战（7-8月参与，9月1日开学开奖）
   - 在线课程结业（报名参与，课程结束自动开奖）
 
+### 人数达标自动开奖@mode-2
+
+**机制**​​
+
+设定目标参与人数，达标后系统立即自动开奖
+
 **特点**
 
-- 营造开奖期待感
-- 所有奖品统一时间一起开奖，不会导致因高价值奖品被提前抽中而导致后续参与者力度减少
+- 人数不达标不会开奖，激发用户转发分享
+- 如果参与人数 ≥ 奖品数量，则奖品一定能全部发完
+- 如果参与人数 ≤ 奖品数量，则参与人100%中奖
 - 自动推送中奖通知
-
-#### 人数达标自动开奖@mode-2
-
-**机制**​​：设定目标参与人数，达标后系统立即自动开奖
 
 **适用场景，包括但不限于：**
 
@@ -60,14 +76,16 @@
   - 预售蓄水："万人预约解锁专享价"（如手机厂商：预约满10000人抽100台1元购资格）
   - 清库存活动："千人参与即打折"（服装品牌：羊毛大衣库存清仓，达标自动开5折券）
 
+### 大转盘实时抽奖@mode-3
+
+**机制**​​
+
+用户点击即实时抽奖，转盘动画+即时结果显示
+
 **特点**
 
-- 人数不达标不会开奖，激发用户转发分享
-- 自动推送中奖通知
-
-#### 大转盘实时抽奖@mode-3
-
-**机制**​​：用户点击即实时抽奖，转盘动画+即时结果显示
+- 实时开奖
+- 可设置分享增加转盘次数
 
 ​​**适用场景​​，包括但不限于：**
 
@@ -89,11 +107,6 @@
   - 连续签到第7天触发幸运星转盘
   - 流失用户回归时推送老友专属转盘
 
-**特点**
-
-- 实时开奖
-- 可设置分享增加转盘次数
-
 ## 使用教程@use-help
 
 ### 创建抽奖活动@add-activity
@@ -102,7 +115,26 @@
 
 ![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/add.png)
 
-### 获取activity_id@get-activity-id
+### 更多使用教程@more-help
+
+扫一扫下方小程序码即可查看更多使用教程
+
+![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/help.png)
+
+## API对接@api
+
+抽奖活动小助手提供了API对接的方式，如果你的系统需要集成抽奖功能，且抽奖功能可以和你系统完全解耦，则通过对接抽奖活动小助手是最佳解决方案。
+
+### 具体实施步骤@use-step
+
+1. **创建抽奖活动**：在抽奖活动小助手中 [创建抽奖活动](#add-activity)
+2. **获取活动 id**：进入活动详情页 →【复制活动id】，[获取活动id](#get-activity-id)
+3. **打开抽奖页面**：在你的前端系统添加抽奖按钮，点击时调用 [打开抽奖页面API](#page-activity-detail)
+4. **用户参与抽奖**：用户在打开的抽奖活动页点击"立即抽奖"即可参与
+
+用户中奖后，支持回跳到你的小程序领奖（暂只支持跳转到小程序，后续会支持跳转到H5和App）
+
+### 获取activity_id（活动id）@get-activity-id
 
 - 方法一：可直接进入抽奖活动小助手内的活动详情页，点击复制活动id，如下图所示
 
@@ -116,33 +148,24 @@
 
 ![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/apikey.png)
 
-### 更多使用教程@more-help
-
-扫一扫下方小程序码即可查看更多使用教程
-
-![](https://cdn.fsq.pub/vkdoc/vk-lucky-draw/qrcode/help.png)
-
-## API对接
-
-如果你的系统需要集成抽奖功能，且抽奖功能可以和你系统完全解耦，则通过对接抽奖活动小助手是最佳解决方案。
-
-​​实施步骤​​：
-
-1. 在抽奖活动小助手中创建抽奖活动
-2. 进入活动详情页 →【邀请好友参加】→【文本形式】→【复制活动id】，拿到activity_id
-3. 在你的前端系统添加抽奖按钮，点击时调用[打开抽奖页面API](#page-activity-detail)
-4. 用户在打开的抽奖活动页点击"立即抽奖"即可参与
-
 ### 客户端API@api-client
+
+:::warning 注意
+
+vk-unicloud 版本需 ≥ 2.19.9
+
+:::
 
 接口名：`vk.navigateToLuckyDraw`
 
 注意：仅支持在微信小程序、微信公众号、App、浏览器（若是PC浏览器需先登录PC版微信）中使用，其他平台暂不支持。
 
+[查看活动id获取教程](#get-activity-id)
+
 #### 打开抽奖页面@page-activity-detail
 
 ```js
-let activity_id = "685b95a6e9f982fde4835c85"; // 活动ID，具体活动ID请在vk-admin后台-系统设置-抽奖活动中查看，如有疑问，可联系QQ：370725567
+let activity_id = "685b95a6e9f982fde4835c85"; // 活动id
 vk.navigateToLuckyDraw({
 	path: `pages/activity/detail/detail?_id=${activity_id}`
 });
@@ -151,7 +174,7 @@ vk.navigateToLuckyDraw({
 #### 查看指定活动的参与人员列表@page-activity-user-list
 
 ```js
-let activity_id = "685b95a6e9f982fde4835c85"; // 活动ID，具体活动ID请在vk-admin后台-系统设置-抽奖活动中查看，如有疑问，可联系QQ：370725567
+let activity_id = "685b95a6e9f982fde4835c85"; // 活动id
 vk.navigateToLuckyDraw({
 	path: `pages/activity/user-list/user-list?_id=${activity_id}`
 });
@@ -160,7 +183,7 @@ vk.navigateToLuckyDraw({
 #### 查看指定活动的中奖人员列表@page-activity-win-user-list
 
 ```js
-let activity_id = "685b95a6e9f982fde4835c85"; // 活动ID，具体活动ID请在vk-admin后台-系统设置-抽奖活动中查看，如有疑问，可联系QQ：370725567
+let activity_id = "685b95a6e9f982fde4835c85"; // 活动id
 vk.navigateToLuckyDraw({
 	path: `pages/activity/win-user-list/win-user-list?_id=${activity_id}`
 });
@@ -169,7 +192,7 @@ vk.navigateToLuckyDraw({
 #### 生成指定活动分享海报@page-activity-share
 
 ```js
-let activity_id = "685b95a6e9f982fde4835c85"; // 活动ID，具体活动ID请在vk-admin后台-系统设置-抽奖活动中查看，如有疑问，可联系QQ：370725567
+let activity_id = "685b95a6e9f982fde4835c85"; // 活动id
 vk.navigateToLuckyDraw({
 	path: `pages/activity/share/share?_id=${activity_id}`
 });
@@ -231,7 +254,7 @@ vk.navigateToLuckyDraw({
 });
 ```
 
-#### 生成API key@page-user-api-key
+#### 前往生成API key页面@page-user-api-key
 
 生成的API Key主要用于在 vk-admin 中进行活动管理
 
@@ -243,8 +266,16 @@ vk.navigateToLuckyDraw({
 
 ### 云端API@api-cloud
 
-云端API已集成到 vk-admin 项目中（vk-admin的版本需 ≥ 1.21.0），打开页面 `/pages_plugs/system_uni/lucky-draw/list.vue` 体验
+云端API已集成到 [vk-admin 框架](https://ext.dcloud.net.cn/plugin?id=5043) 中（vk-admin的版本需 ≥ 1.21.0），打开页面 `/pages_plugs/system_uni/lucky-draw/list.vue` 体验
 
 如果未使用 vk-admin，也可以通过http接口对接，[http接口文档](https://osxlqv0f4c.apifox.cn/314777965e0)
 
+## 常见问题？@q
 
+### 使用要收费吗？@q1
+
+软件可免费使用，不收费。
+
+### 通过API对接要收费吗？@q2
+
+免费使用，不收费。

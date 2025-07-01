@@ -141,7 +141,7 @@ getClientInfo().source，返回云函数调用来源，它的值域为：
 
 ### this.getCustomClientInfo（获取自定义客户端信息）@get-custom-client-info
 
-> vk-unicloud版本 ≥ 2.19.4
+> vk-unicloud 版本 ≥ 2.19.4
 
 需要先在前端调用 [vk.setCustomClientInfo](https://vkdoc.fsq.pub/client/pages/updateRequestGlobalParam.html#set-custom-client-info) 设置自定义客户端信息，才能在云对象内获取到数据
 
@@ -931,7 +931,7 @@ let xxxRes = await pubFun.xxx();
 
 ### 方式一（推荐）
 
-> vk-unicloud版本需>=2.9.0
+> vk-unicloud 版本需>=2.9.0
 
 **注意：方式一只支持符合VK框架路由规则的云函数或云对象**
 

@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 云端文件上传
 
-> vk-unicloud版本需 ≥ 2.18.6
+> vk-unicloud 版本需 ≥ 2.18.6
 
 注意：前端文件上传文档 [https://vkdoc.fsq.pub/client/pages/uploadFile.html](https://vkdoc.fsq.pub/client/pages/uploadFile.html)
 

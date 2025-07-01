@@ -137,7 +137,7 @@ let base64 = "data:image/png;base64," + imageBuffer.toString('base64');
 
 ## 云函数（云对象）中如何调用另一个云函数（云对象）@q107
 
-#### 方式一（推荐，vk-unicloud版本需>=2.9.0）
+#### 方式一（推荐，vk-unicloud 版本需>=2.9.0）
 **注意：方式一只支持符合VK框架路由规则的云函数或云对象**
 
 优势：完美契合VK框架，且拥有继承当前用户token、ip等功能。

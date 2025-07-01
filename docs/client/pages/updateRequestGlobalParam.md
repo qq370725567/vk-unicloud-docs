@@ -12,7 +12,7 @@ sidebarDepth: 0
 
 ## 方式一：setCustomClientInfo 形式@set-custom-client-info
 
-> vk-unicloud版本 ≥ 2.19.4
+> vk-unicloud 版本 ≥ 2.19.4
 
 **特点**
 

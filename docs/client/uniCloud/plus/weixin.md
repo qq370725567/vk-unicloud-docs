@@ -541,7 +541,7 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 
 ## 发货管理@order
 
-> vk-unicloud版本 ≥ 2.19.2
+> vk-unicloud 版本 ≥ 2.19.2
 
 微信小程序自营类目的商家需要统一接入微信平台的发货管理，否则微信会限制支付接口的调用。
 
@@ -800,7 +800,7 @@ let opspecialorderRes = await vk.openapi.weixin.order.opspecialorder({
 
 ## 物流接口@logistics
 
-> vk-unicloud版本 ≥ 2.19.2
+> vk-unicloud 版本 ≥ 2.19.2
 
 ### 获取支持的快递公司列表@logistics-getAllDelivery
 

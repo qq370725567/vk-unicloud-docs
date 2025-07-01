@@ -375,7 +375,7 @@ vk.userCenter.getCurrentUserInfo({
 
 ### vk.userCenter.loginByToken（刷新token）@loginByToken
 
-> vk-unicloud版本需 ≥ 2.18.7
+> vk-unicloud 版本需 ≥ 2.18.7
 
 当token有效期大于1天时，做用户每日登录统计时就会有问题，因为用户可能好几天只需要登录一次，但此用户可能每天都在线，导致每日登录用户数量不准确，因此可以在 App.vue 的 onLaunch 函数中执行 vk.userCenter.loginByToken()
 
@@ -1438,7 +1438,7 @@ vk.userCenter.unbindQQ({
 
 ### vk.userCenter.loginByDouyin（抖音登录）@loginByDouyin
 
-> vk-unicloud版本需 ≥ 2.18.8
+> vk-unicloud 版本需 ≥ 2.18.8
 
 目前仅支持抖音小程序登录
 
@@ -1479,7 +1479,7 @@ vk.userCenter.loginByDouyin({
 
 ### vk.userCenter.loginByDouyinPhoneNumber（抖音手机号授权登录）@loginByDouyinPhoneNumber
 
-> vk-unicloud版本需 ≥ 2.18.8
+> vk-unicloud 版本需 ≥ 2.18.8
 
 注意事项：
 
@@ -1525,7 +1525,7 @@ loginByDouyinPhoneNumber(e) {
 
 ### vk.userCenter.getPhoneNumber（获取抖音绑定的手机号）@getPhoneNumberByDouyin
 
-> vk-unicloud版本需 ≥ 2.18.8
+> vk-unicloud 版本需 ≥ 2.18.8
 
 注意事项：
 
@@ -1570,7 +1570,7 @@ getPhoneNumber(e) {
 
 ### vk.userCenter.bindDouyin（绑定抖音）@bindDouyin
 
-> vk-unicloud版本需 ≥ 2.18.8
+> vk-unicloud 版本需 ≥ 2.18.8
 
 ```js
 /**
@@ -1586,7 +1586,7 @@ vk.userCenter.bindDouyin({
 
 ### vk.userCenter.unbindDouyin（解绑抖音）@unbindDouyin
 
-> vk-unicloud版本需 ≥ 2.18.8
+> vk-unicloud 版本需 ≥ 2.18.8
 
 ```js
 /**
@@ -1612,7 +1612,7 @@ let sessionKey = decryptedRes.sessionKey;
 
 ### vk.userCenter.code2SessionDouyin（获取抖音openid）@code2SessionDouyin
 
-> vk-unicloud版本需 ≥ 2.18.8
+> vk-unicloud 版本需 ≥ 2.18.8
 
 ```js
 /**
@@ -1634,7 +1634,7 @@ vk.userCenter.code2SessionDouyin({
 
 ### vk.userCenter.loginByHuawei（华为登录）@loginByHuawei
 
-> vk-unicloud版本需 ≥ 2.19.0
+> vk-unicloud 版本需 ≥ 2.19.0
 
 ___框架会自动保存 `token`，无需你再手动去保存。___
 
@@ -1682,7 +1682,7 @@ vk.userCenter.loginByHuawei({
 
 ### vk.userCenter.loginByHuaweiPhoneNumber（华为手机号授权登录）@loginByHuaweiPhoneNumber
 
-> vk-unicloud版本需 ≥ 2.19.0
+> vk-unicloud 版本需 ≥ 2.19.0
 
 注意事项：
 
@@ -1717,7 +1717,7 @@ loginByHuaweiPhoneNumber(e) {
 
 ### vk.userCenter.getPhoneNumber（获取华为账号绑定的手机号）@getPhoneNumberByHuawei
 
-> vk-unicloud版本需 ≥ 2.19.0
+> vk-unicloud 版本需 ≥ 2.19.0
 
 注意事项：
 
@@ -1747,7 +1747,7 @@ getPhoneNumber(e) {
 
 ### vk.userCenter.bindHuawei（绑定华为账号）@bindHuawei
 
-> vk-unicloud版本需 ≥ 2.19.0
+> vk-unicloud 版本需 ≥ 2.19.0
 
 ```js
 /**
@@ -1763,7 +1763,7 @@ vk.userCenter.bindHuawei({
 
 ### vk.userCenter.unbindHuawei（解绑华为账号）@unbindHuawei
 
-> vk-unicloud版本需 ≥ 2.19.0
+> vk-unicloud 版本需 ≥ 2.19.0
 
 ```js
 /**
@@ -1779,7 +1779,7 @@ vk.userCenter.unbindHuawei({
 
 ### vk.userCenter.code2SessionHuawei（获取抖音openid）@code2SessionHuawei
 
-> vk-unicloud版本需 ≥ 2.19.0
+> vk-unicloud 版本需 ≥ 2.19.0
 
 ```js
 /**
@@ -1801,7 +1801,7 @@ vk.userCenter.code2SessionHuawei({
 
 ### vk.userCenter.loginByApple（苹果登录）@loginByApple
 
-> vk-unicloud版本需 ≥ 2.19.2
+> vk-unicloud 版本需 ≥ 2.19.2
 
 ___框架会自动保存 `token`，无需你再手动去保存。___
 

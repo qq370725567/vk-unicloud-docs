@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 海外全球加速方案
 
-> vk-unicloud版本需 ≥ 2.18.6
+> vk-unicloud 版本需 ≥ 2.18.6
 
 ## 介绍
 

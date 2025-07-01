@@ -561,7 +561,7 @@ let { startTime, endTime } = vk.pubfn.getYearOffsetStartAndEnd(0, new Date());
  * 检测文本是否满足指定格式
  * @param {String} str 需要检测的文本
  * @param {String} type 检测类型（忽略大小写）
- * @param {Boolean} allowEmpty 是否允许为空，默认false（vk-unicloud版本需≥2.15.2）
+ * @param {Boolean} allowEmpty 是否允许为空，默认false（vk-unicloud 版本需≥2.15.2）
  * 包含
  * mobile 手机号码
  * tel 座机
@@ -611,7 +611,7 @@ if (testRes) {
 
 如检测手机号（允许为空）
 
-> vk-unicloud版本需≥2.15.2
+> vk-unicloud 版本需≥2.15.2
 
 ```js
 let mobile = "";

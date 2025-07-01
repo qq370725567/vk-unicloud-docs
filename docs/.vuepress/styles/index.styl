@@ -150,6 +150,17 @@ body::-webkit-scrollbar-thumb {
   overflow-y: auto;
 }
 
+/* 子标题加粗 */
+
+#app .sidebar-group.is-sub-group .sidebar-heading span,
+#app .sidebar-sub-header:has(> .sidebar-sub-headers) > .sidebar-link {
+  font-weight: bold;
+}
+
+// #app .sidebar-links > li > .sidebar-sub-headers > .sidebar-sub-header > .sidebar-link {
+//   font-weight: bold;
+// }
+
 @media (max-width: 1200px) {
   #app .ra-wrapper{
     display: none;
