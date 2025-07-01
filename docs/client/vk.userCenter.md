@@ -564,7 +564,7 @@ vk.userCenter.loginBySms({
 });
 ```
 
-### vk.userCenter.sendSmsCode（发送手机号验证码）@sendSmsCode
+### vk.userCenter.sendSmsCode（发送验证码）@sendSmsCode
 
 ```js
 /**
@@ -775,7 +775,7 @@ vk.userCenter.loginByEmail({
 });
 ```
 
-### vk.userCenter.sendEmailCode（发送邮件验证码）@sendEmailCode
+### vk.userCenter.sendEmailCode（发送验证码）@sendEmailCode
 
 ```js
 /**

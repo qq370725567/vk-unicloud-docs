@@ -1861,7 +1861,6 @@ vk.navigateToLogin({
 });
 ```
 
-
 ### vk.pubfn.checkLogin
 
 检测是否需要登录，根据 `app.config.js` 配置文件的 `checkTokenPages` 参数判断
@@ -1873,6 +1872,17 @@ vk.navigateToLogin({
 setTimeout(() => {
   vk.pubfn.checkLogin(); // 检测是否需要登录
 }, 0);
+```
+
+### vk.navigateToLuckyDraw
+
+跳转到抽奖活动小助手的页面，[查看详情](../vk-lucky-draw/#api-client)
+
+```js
+let activity_id = "685b95a6e9f982fde4835c85"; // 活动id
+vk.navigateToLuckyDraw({
+  path: `pages/activity/detail/detail?_id=${activity_id}` // 页面地址
+});
 ```
 
 ### vk.navigateTo（页面间通信）@navigateTo
