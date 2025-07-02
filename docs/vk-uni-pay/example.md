@@ -3,7 +3,7 @@
 ## 1、下载安装
 
 * 1、从插件市场下载 `vk-uni-pay` 插件示例项目到你的hbx中。[插件市场传送门](https://ext.dcloud.net.cn/plugin?id=5642)
-* 2、配置支付参数文件地址: `uniCloud/cloudfunctions/common/uni-config-center/uni-pay/config.js`(没有则新建) [查看支付参数](#支付参数)
+* 2、配置支付参数文件地址: `uniCloud/cloudfunctions/common/uni-config-center/uni-pay/config.js`(没有则新建) [查看支付参数](https://vkdoc.fsq.pub/vk-uni-pay/config.html)
 * 3、复制 `使用帮助/vk-pay云函数示例代码/service/` 目录内的所有文件粘贴到 `vk-uni-pay/uniCloud/cloudfunctions/vk-pay/service/` 目录(没有目录则新建)
 * 注意：测试完记得删除 `vk-uni-pay/uniCloud/cloudfunctions/vk-pay/service/pay/`目录下的这两个文件（`refund.js`和`transfer.js`）（因为涉及资金退款和转账）
 * 4、右键 `uniCloud` 点击 `运行云服务空间初始化向导`
