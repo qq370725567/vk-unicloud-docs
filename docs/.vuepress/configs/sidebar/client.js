@@ -69,6 +69,7 @@ module.exports = [{
           'uniCloud/cloudfunctions/formRules',
           'uniCloud/cloudfunctions/sseChannel',
           'uniCloud/cloudfunctions/reentrantLock',
+          'uniCloud/cloudfunctions/rateLimit',
           'uniCloud/cloudfunctions/uploadFile',
           'uniCloud/cloudfunctions/websocket',
           'uniCloud/cloudfunctions/question'
