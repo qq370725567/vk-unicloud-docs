@@ -35,7 +35,7 @@ module.exports = [
       { text: 'Vue2', link: 'https://cn.vuejs.org/index.html' },
       { text: 'Vue3', link: 'https://staging-cn.vuejs.org/' },
       { text: 'vk-uview', link: 'https://vkuviewdoc.fsq.pub' },
-      { text: 'vkmall', link: 'https://vkmalldocs.fsq.pub' }
+      { text: 'vkmall', link: 'https://vkmalldocs.vk168.top' }
     ]
   },
   {
