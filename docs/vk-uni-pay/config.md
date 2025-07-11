@@ -680,7 +680,7 @@ module.exports = {
 :::warning 提示
 
 - 鸿蒙元服务支付：HBuilderX需4.41+ [鸿蒙元服务运行教程](https://uniapp.dcloud.net.cn/tutorial/mp-harmony/intro.html)
-- 鸿蒙APP支付：暂无HBuilderX版本支持 [鸿蒙APP运行教程](https://uniapp.dcloud.net.cn/tutorial/harmony/intro.html)
+- 鸿蒙APP支付：HBuilderX需4.75+ [鸿蒙APP运行教程](https://uniapp.dcloud.net.cn/tutorial/harmony/intro.html)
 
 :::
 
