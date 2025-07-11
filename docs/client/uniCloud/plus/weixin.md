@@ -69,7 +69,7 @@ let access_token = await vk.openapi.weixin.auth.getAccessToken();
  * @param {String} js_code 登录时获取的 code
  */
 let code2SessionRes = await vk.openapi.weixin.auth.code2Session({
-  js_code : js_code
+  js_code: js_code
 });
 ```
 
