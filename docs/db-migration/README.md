@@ -67,6 +67,7 @@ export default {
 	"oldEnv": {
 		"cloud": "uniCloud", // 通用参数 固定为 uniCloud
 		"platform": "aliyun", // 通用参数 阿里云：aliyun 腾讯云：tencent 支付宝云：alipay 私有云：dcloud
+		"dbType": "", // 数据库类型 不填代表内置数据库，ext-db 代表扩展数据库
 		"spaceId": "mp-9dd9a70d-0000-6666-a520-105287d47ff4", // 通用参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceId参数
 		"clientSecret": "阿里云专属参数", // 阿里云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应ClientSecret参数
 		"spaceAppId": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceAppId参数
@@ -78,7 +79,8 @@ export default {
 	// 新环境
 	"newEnv": {
 		"cloud": "uniCloud", // 通用参数 固定为 uniCloud
-		"platform": "alipay", // 通用参数 阿里云：aliyun 腾讯云：tencent 支付宝云：alipay 私有云：dcloud
+		"platform": "aliyun", // 通用参数 阿里云：aliyun 腾讯云：tencent 支付宝云：alipay 私有云：dcloud
+		"dbType": "", // 数据库类型 不填代表内置数据库，ext-db 代表扩展数据库
 		"spaceId": "env-00jx6s6j6mnt", // 通用参数 空间id 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceId参数
 		"clientSecret": "阿里云专属参数", // 阿里云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应ClientSecret参数
 		"spaceAppId": "支付宝云专属参数", // 支付宝云专属参数 从 https://unicloud.dcloud.net.cn/home 获取 对应SpaceAppId参数
@@ -90,7 +92,7 @@ export default {
 	"maxPageSize": 500, // 数据库单次请求获取数量，默认500，如果前端报内存超出大小限制的错误，可以尝试调小此值来解决。如设置为100或50或更小的值，最小为1，最大1000
 	"concurrencyImport": false, // 是否并发导入？设置为true可以提高性能，但无法保证迁移后的数据与原始顺序一致（一般业务进行查询时都会加排序条件，此时基本无影响），设置为false则可保证迁移后的数据与原始数据顺序一致
 	"debug": false, // 浏览器控制台是否打印请求日志，设置为 false 可以提升性能
-	"errorReconnectionCount": 20, // 数据库连接失败后重新连接次数，默认20次，一般无需修改
+	"errorReconnectionCount": 10, // 数据库连接失败后重新连接次数，默认10次，一般无需修改
 	"maxImportQueueCount": 10, // 最大等待的导入队列数，默认10，一般无需修改（太大会影响前端性能）最小为1，最大为20
 	"maxLogCount": 200, // 控制台显示的最大日志数量，默认200，一般无需修改（太大会影响前端性能）
 	"handleObjectKeyName": true, // 是否需要同时处理满足阿里云_id格式的字段名，一般无需修改（true：同时处理字段名和字段值 false：只处理字段值，默认true）
@@ -106,7 +108,7 @@ export default {
 		{ "name": "uni-id-roles" },
 		{ "name": "uni-id-permissions" },
 		{ "name": "opendb-admin-menus" },
-		{ "name": "opendb-app-list" },
+		{ "name": "opendb-app-list" }
 	]
 };
 ```
@@ -145,11 +147,11 @@ export default {
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/4ee5f06a-4665-450e-8d8f-00825a8801ea.png)
 
-- 4、【一键搬家】项目绑定 `旧空间`，并上传云函数 `vk-db-migration`
+- 4、【一键搬家】项目绑定 `旧空间`，并上传云函数 `vk-db-migration` 和 `vk-db-migration-ext-db`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/14fe3965-8268-4ab0-9dd4-6361451d0885.png)
 
-- 5、【一键搬家】项目切换到 `新空间` ，在 `新空间` 也上传云函数 `vk-db-migration`
+- 5、【一键搬家】项目切换到 `新空间` ，在 `新空间` 也上传云函数 `vk-db-migration` 和 `vk-db-migration-ext-db`
 
 **如何切换空间?**
 
@@ -175,7 +177,7 @@ ___注意：运行前先确认下，旧空间和新空间没有填错，否则�
 
 - 10、如不出意外，等待进度条到100%即可。如果出了意外（比如阿里云数据库不稳定导致连续20次数据库连接失败（目前会自动重试20次），则需要刷新页面并重新点击【开始一键搬家】按钮
 
-- 11、完成后请将 `uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js` 的 `runKey` 设置为false，再分别上传到 `旧空间` 和 `新空间`（这步很关键，防止后面误点导致数据被清空，也可以直接去web控制台删除云函数 `vk-db-migration`）
+- 11、完成后请将 `uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js` 和 `uniCloud/cloudfunctions/vk-db-migration-ext-db/vk.db.config.js` 的 `runKey` 设置为false，再分别上传到 `旧空间` 和 `新空间`（这步很关键，防止后面误点导致数据被清空，也可以直接去web控制台删除云函数 `vk-db-migration` 和 `vk-db-migration-ext-db`）
 
 - 12、完成。
 
@@ -242,7 +244,7 @@ console.log('endId: ', endId);
 
 ## 特别注意
 
-搬家完成后请将 `uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js` 的 `runKey` 设置为false，再分别上传到 `旧空间` 和 `新空间`（这步很关键，防止后面误点导致数据被清空，也可以直接去web控制台删除云函数 `vk-db-migration`）
+搬家完成后请将 `uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js` 和 `uniCloud/cloudfunctions/vk-db-migration-ext-db/vk.db.config.js`  的 `runKey` 设置为false，再分别上传到 `旧空间` 和 `新空间`（这步很关键，防止后面误点导致数据被清空，也可以直接去web控制台删除云函数 `vk-db-migration` 和 `vk-db-migration-ext-db`）
 
 
 
