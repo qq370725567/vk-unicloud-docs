@@ -1099,6 +1099,50 @@ console.log("result", result);
 | &emsp;&#124;-- endpoint		|String	|打车终点经纬度															|高德地图	|
 | &emsp;&#124;-- endname		|String	|打车终点名称																|高德地图	|
 
+### 通用请求接口@request
+
+**功能介绍**
+
+通过此接口可以调用未集成的 API
+
+**示例**
+
+以腾讯地图智能硬件定位为例
+
+```js
+// 初始化实例
+const uniMap = new vk.uniMap({
+	provider: "qqmap", // 指定使用哪家地图供应商
+	key: "xxxxxx",
+	needOriginalResult: true, // 此处必须设置为true
+});
+// 调用API（以智能硬件定位为例）
+let result = await uniMap.request({
+	url: "ws/location/v1/network",
+	method: "POST",
+	headers: {
+		"Content-Type": "application/json",
+	},
+	dataType: "json",
+	data: {
+		device_id: "11",
+		gpsinfo: {
+			longitude: 116.39747,
+			latitude: 39.908823,
+		}
+	}
+});
+console.log('result: ', result);
+```
+
+**请求参数**
+
+与地图开放平台接口参数一致
+
+**返回参数**
+
+与地图开放平台接口参数一致
+
 ## 全局错误码
 	
 | 错误模块				|    错误码	|             说明																																				|
