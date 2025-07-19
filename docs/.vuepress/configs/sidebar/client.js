@@ -6,6 +6,7 @@ module.exports = [{
       'vk-unicloud-router',
       '',
       'serverless',
+      'cloudSelect',
       'quickstart',
       'quickstartExample',
       'catalogue',
