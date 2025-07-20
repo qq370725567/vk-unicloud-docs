@@ -23,9 +23,8 @@ ___注意：此结论会随着云厂商更新和用户最新反馈而动态调�
 
 **相关文档**
 
-- [扩展数据库介绍](https://doc.dcloud.net.cn/uniCloud/ext-mongodb/intro.html)
-
 - [阿里云费用介绍](https://doc.dcloud.net.cn/uniCloud/price.html#aliyun-package)
+
 - [腾讯云费用介绍](https://doc.dcloud.net.cn/uniCloud/price.html#tencent)
 - [支付宝云费用介绍](https://doc.dcloud.net.cn/uniCloud/price.html#alipay)
-- [各云厂商之间的资源限制差异](https://doc.dcloud.net.cn/uniCloud/price.html#%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6%E5%B7%AE%E5%BC%82)
+- [扩展数据库介绍（含对比）](https://doc.dcloud.net.cn/uniCloud/ext-mongodb/intro.html)
