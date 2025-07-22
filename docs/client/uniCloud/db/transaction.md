@@ -113,6 +113,8 @@ try {
 5. vk.baseDao.updateAndReturn
 6. vk.baseDao.setById
 
+**提示**：若使用[扩展数据库](https://doc.dcloud.net.cn/uniCloud/ext-mongodb/intro.html)，则全部数据库API都能支持事务，包含批量新增、批量修改、批量删除都能支持事务。
+
 **事务隔离级别：**
 
 - 读：ReadConcern.SNAPSHOT
