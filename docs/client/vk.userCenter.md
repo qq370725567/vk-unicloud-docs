@@ -410,7 +410,7 @@ vk.userCenter.checkToken({
 });
 ```
 
-### vk.checkToken（token本地校验）@checkToken
+### vk.checkToken（token本地校验，前端判断登录，是否登录）@checkToken
 
 **此api无网络请求，无延迟**
 
@@ -422,29 +422,35 @@ vk.userCenter.checkToken({
 
 [查看token介绍](#token介绍) 
 
+**示例一**
+
 ```js
 if (!vk.checkToken()) {
-  // token无效
+  // token无效（未登录）
   
 } else {
-  // token有效
+  // token有效（已登录）
   
 }
 ```
+
+**示例二**
 
 ```js
 if (vk.checkToken()) {
-  // token有效
+  // token有效（已登录）
   
 }
 ```
 
+**示例三**
+
 ```js
 if (!vk.checkToken()) {
-  // token无效
+  // token无效（未登录）
   return false;
 }
-// token有效
+// token有效（已登录）
 
 ```
 
