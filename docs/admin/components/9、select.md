@@ -54,6 +54,21 @@
 },
 ```
 
+#### 选项右侧显示描述desc
+
+要点：设置属性 `showDesc: true`，同时数据源有属性 `desc`
+
+```js
+{
+  key: "select1", title: "select类型", type: "select", filterable: true, clearable: true,
+  showDesc: true,
+  data: [
+    { value: 1, label: "选项一", desc: "选项一的描述" },
+    { value: 2, label: "选项二", desc: "选项二的描述" }
+  ]
+},
+```
+
 #### 远程数据用法
 
 请直接查看 `remote-select` 远程下拉组件 [点击前往](https://vkdoc.fsq.pub/admin/components/10%E3%80%81remote-select.html)
@@ -69,18 +84,14 @@
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
 | data            | 数据源 | Array、Function  | - | -  |
-| props           | 数据源的属性匹配规则 | Object  | { value:'value', label:'label', children:'children' } | -  |
+| props           | 数据源的属性匹配规则 | Object  | { value:'value', label:'label', children:'children', desc: 'desc' } | -  |
 | multiple        | 是否允许多选 | Boolean  | false | true  |
 | multipleLimit   | 最多可选数量 | Number  | - | -  |
 | group          | 是否需要分组 | Boolean  | false| true  |
 | clearable          | 是否可以清空选项 | Boolean  | true| false  |
 | onChange          | function(val, formData, column, index, option) | Function  | -| -  |
 | defaultIndex          | 默认选择第几个，仅在万能表单的单选模式下生效 | Number  | - | -  |
-
-**以下属性需 `vk-unicloud-admin-ui` npm依赖 ≥ `1.17.30`
-
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
+| showDesc（新增于1.20.23）       | 选项右侧是否显示描述 | Boolean  | false | true |
 | collapseTags          | 多选时是否将选中值按文字的形式展示 | Boolean	| false	| true	|
 | filterable          | 是否可搜索 | Boolean	| false	| true	|
 | allowCreate          |是否允许用户创建新条目，需配合 `filterable` 使用 | Boolean	| false	| true	|

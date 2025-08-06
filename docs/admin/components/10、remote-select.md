@@ -102,6 +102,104 @@
 },
 ```
 
+#### 选项右侧显示描述desc
+
+要点：设置属性 `showDesc: true`，同时数据源返回以下格式
+
+```js
+[
+  { value: 1, label: "选项一", desc: "选项一的描述" },
+  { value: 2, label: "选项二", desc: "选项二的描述" }
+]
+```
+
+```js
+{
+  key: "category_ids1", title: "远程select（单选）", type: "remote-select", placeholder: "请选择分类",
+  action: "admin/system/user/sys/getList",
+  props: { list: "rows", value: "_id", label: "nickname", desc: "desc" },
+  showAll: true,
+  showDesc: true,
+  actionData: {
+    pageSize: 1000
+  }
+},
+```
+
+#### 分组显示
+
+要点：设置属性 `group:true`，同时数据源返回以下格式
+
+```js
+[
+  {
+    label: "分组1",
+    children: [
+      { value: 1, label: "选项一" },
+      { value: 2, label: "选项二" }
+    ]
+  },
+  {
+    label: "分组2",
+    children: [
+      { value: 3, label: "选项三" },
+      { value: 4, label: "选项四" }
+    ]
+  }
+]
+```
+
+```js
+{
+  key: "category_ids1", title: "远程select（单选）", type: "remote-select", placeholder: "请选择分类",
+  action: "admin/system/user/sys/getList",
+  props: { list: "rows", value: "_id", label: "nickname", desc: "desc" },
+  showAll: true,
+  showDesc: true,
+  actionData: {
+    pageSize: 1000
+  }
+},
+```
+
+#### 可以动态创建选项
+
+要点：设置属性 `allowCreate: true` 和 `filterable: true`
+
+```js
+{
+  key: "category_ids1", title: "远程select（单选）", type: "remote-select", placeholder: "请选择分类",
+  action: "admin/system/user/sys/getList",
+  props: { list: "rows", value: "_id", label: "nickname" },
+  showAll: true,
+  allowCreate: true,
+  filterable: true,
+  actionData: {
+    pageSize: 1000
+  }
+},
+```
+
+#### 默认选中第几项（仅单选时生效）
+
+要点：设置属性 `defaultIndex: 0` 
+
+```js
+{
+  key: "category_ids1", title: "远程select（单选）", type: "remote-select", placeholder: "请选择分类",
+  action: "admin/system/user/sys/getList",
+  props: { list: "rows", value: "_id", label: "nickname" },
+  showAll: true,
+  defaultIndex: 0,
+  actionData: {
+    pageSize: 1000
+  }
+},
+```
+
+
+
+
 
 ### API
 
@@ -116,7 +214,7 @@
 | data            | 静态模式数据源 | Array  | - | -  |
 | action           | 支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#自定义function请求模式)  | String、Function | 无      | - |
 | actionData          | 动态模式 - 远程请求的云函数时的额外参数 | Object、Function  | - | -  |
-| props          | 数据源的属性匹配规则 | Object  | { list:'list', value:'value', label:'label' } | - |
+| props          | 数据源的属性匹配规则 | Object  | { list:'list', value:'value', label:'label', desc: 'desc' } | - |
 | dataPreprocess          | 动态模式 - 云函数返回的数据进行预处理 | function(list)  | - | -  |
 | showAll           | 是否一开始就全部加载 | Boolean  | false | true  |
 | showRefresh           | 当showAll为true时，是否显示[刷新选项]按钮 | Boolean  | true | false  |
@@ -132,16 +230,17 @@
 | requestMethod    |  http请求method | String  | - | - |
 | onChange          | function(val, formData, column, index, option) | Function  | -| -  |
 | defaultIndex          | 默认选择第几个，仅在万能表单的单选模式下，且showAll为true时生效 | Number  | - | -  |
-
-**以下属性需 `vk-unicloud-admin-ui` npm依赖 ≥ `1.17.30`
-
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
+| showDesc（新增于1.20.23）       | 选项右侧是否显示描述 | Boolean  | false | true |
+| group（新增于1.20.23）          | 是否需要分组 | Boolean  | false| true  |
 | collapseTags          | 多选时是否将选中值按文字的形式展示 | Boolean	| false	| true	|
+| filterable          | 是否可搜索 | Boolean	| false	| true	|
 | allowCreate          |是否允许用户创建新条目，需配合 `filterable` 使用 | Boolean	| false	| true	|
 | popperClass          | Select 下拉框的类名 | String	| -	| -	|
 | reserveKeyword          | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词| Boolean	| false	| true	|
 | popperAppendToBody          | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | Boolean	| true	| false	|
+| loadingText          | 远程加载时显示的文字 | String	| 加载中	| -	|
+| noMatchText          | 搜索条件无匹配时显示的文字 | String	| 无匹配数据	| -	|
+| noDataText          | 选项为空时显示的文字 | String	| 无数据	| -	|
 
 #### onChange 使用示例
 
