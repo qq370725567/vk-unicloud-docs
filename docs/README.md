@@ -15,7 +15,7 @@ features:
   details: 【开箱即用】vk-uni-pay 是基于uniCloud量身定制的支付插件，兼容任何uniCloud框架。支持H5、PC、小程序、APP，为你支付业务扫平障碍。支持转账到支付宝和微信零钱。
 ---
 
-### 官方Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
+**官方Q群**：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
 
 <hero-ad></hero-ad>
 <footer-link></footer-link>

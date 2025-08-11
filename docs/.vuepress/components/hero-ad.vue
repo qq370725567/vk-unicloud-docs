@@ -32,7 +32,7 @@ export default {
   name: 'HeroAd',
   data() {
     return {
-      
+
     };
   }
 };
@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 .hero-ad {
-  margin: 2rem 0;
+  margin: 1rem 0;
   padding: 0 1rem;
 }
 
@@ -142,11 +142,11 @@ export default {
     gap: 1.5rem;
     padding: 1.5rem;
   }
-  
+
   .ad-features {
     justify-content: center;
   }
-  
+
   .ad-title {
     font-size: 1.25rem;
   }
