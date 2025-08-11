@@ -17,5 +17,6 @@ features:
 
 ### 官方Q群：[22466457](https://jq.qq.com/?_wv=1027&k=RTeqPXCZ) 
 
+<hero-ad></hero-ad>
 <footer-link></footer-link>
 
