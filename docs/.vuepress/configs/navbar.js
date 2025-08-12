@@ -4,7 +4,8 @@ module.exports = [
   { text: 'admin端框架', link: '/admin/' },
   { text: 'vk-uni-pay（统一支付）', link: '/vk-uni-pay/' },
   { text: 'Redis', link: '/vk-redis/' },
-  { text: '抽奖活动助手', link: '/vk-lucky-draw/' },
+  { text: '免费申请SSL证书', link: 'https://cert.vk168.top' },
+  { text: '抽奖助手', link: '/vk-lucky-draw/' },
   { text: '数据库搬家', link: '/db-migration/' },
   {
     text: '插件市场',
