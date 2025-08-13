@@ -33,9 +33,9 @@ function insertBannerToSidebar() {
       const bannerElement = document.createElement('div');
       bannerElement.className = 'sidebar-banner';
       bannerElement.innerHTML = `
-        <a href="https://cert.vk168.top/" target="_blank" class="banner-link">
+        <a href="https://cert.vk168.top" target="_blank" class="banner-link">
           <img
-            src="https://cert.vk168.top/manage/static/logo2.png"
+            src="https://cert-cdn.vk168.top/banner/wuyou-ssl.png"
             alt="无忧SSL证书平台"
             class="banner-image"
           />
