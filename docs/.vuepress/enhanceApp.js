@@ -1,22 +1,14 @@
-import SidebarBanner from './components/sidebar-banner.vue'
-
 export default ({ router, Vue }) => {
-  // 全局注册横幅广告组件
-  Vue.component('SidebarBanner', SidebarBanner)
-
   if (typeof process === 'undefined') {
     router.onReady(() => {
       const { app } = router;
       app.$once("hook:mounted", () => {
         // 插入横幅广告到左侧菜单
         insertBannerToSidebar();
-        
         setTimeout(() => {
           const { hash } = document.location;
           if (hash.length > 1) {
             const id = decodeURIComponent(hash.substring(1));
-            // const element = document.getElementById(id);
-            // if (element) element.scrollIntoView();
             // 获取a标签元素
             const anchor = document.querySelector(`#${id} .header-anchor`);
             // 模拟点击
@@ -42,14 +34,13 @@ function insertBannerToSidebar() {
       bannerElement.className = 'sidebar-banner';
       bannerElement.innerHTML = `
         <a href="https://cert.vk168.top/" target="_blank" class="banner-link">
-          <img 
-            src="https://cert.vk168.top/manage/static/logo2.png" 
-            alt="无忧SSL证书平台" 
+          <img
+            src="https://cert.vk168.top/manage/static/logo2.png"
+            alt="无忧SSL证书平台"
             class="banner-image"
           />
         </a>
       `;
-      
       // 插入到侧边栏的顶部
       sidebar.insertBefore(bannerElement, sidebar.firstChild);
     }
