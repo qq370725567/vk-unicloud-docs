@@ -36,6 +36,7 @@
 #app .sidebar > .sidebar-links > li > a.sidebar-link {
 	font-size: 1.02em;
 }
+
 #app blockquote{
   font-size: 0.94rem;
   color: #858585;
@@ -205,3 +206,38 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
+/* 左侧菜单横幅广告样式 */
+.sidebar-banner {
+  margin: 1rem 0;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.sidebar-banner .banner-link {
+  display: block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.sidebar-banner .banner-link:hover {
+  transform: translateY(-2px);
+}
+
+.sidebar-banner .banner-image {
+  width: 85%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.sidebar-banner .banner-link:hover .banner-image {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+#app .sidebar > .sidebar-links {
+  padding: 0;
+}
