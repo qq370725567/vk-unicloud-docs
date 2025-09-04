@@ -3,7 +3,7 @@
 ### 万能表单使用方式
 
 ```js
-{ key: "color", title: "颜色类型", type: "color" },
+{ key: "color", title: "颜色", type: "color" },
 ```
 
 ### API
@@ -37,7 +37,9 @@ ___通常我们常用的表示颜色的方式是 hex：#FFFFFF，如果带透明
 
 ### 万能表格使用方式
 
-暂无
+```js
+{ key: "color", title: "颜色", type: "color" },
+```
 
 ### template 使用方式
 
