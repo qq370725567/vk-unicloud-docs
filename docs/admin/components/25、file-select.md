@@ -34,64 +34,38 @@
 | sizeUnit         | 文件的单位  | String  | MB | KB、MB、GB |
 | returnType（1.21.0）  | 返回值类型  | String  | url | url、id |
 
-### 万能表格使用方式
+#### 设置双向绑定的值为file_id@fileid
+
+默认双向绑定的值为 url，若要设置为 file_id，则指定属性 returnType 的值 为 id 即可
+
+```js
+{ key: "image1", title: "多选图片", type: "file-select", placeholder: "请选择图片", fileType: "image", multiple: true, multipleLimit: 6, imageFit:"cover", returnType: "id" },
+```
+
+### 万能表格使用方式@table
 
 ```js
  { key: "image", title: "图片", type: "image", width: 120 },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-input-file-select v-model="image1" placeholder="请选择图片" multiple :multiple-limit="9" file-type="image" image-fit="cover"></vk-data-input-file-select>
 ```
 
-### 注意：
-### 需确保有以下云函数（如没有，则从新版本中拷贝）
+### 注意：@tips
+
+**需确保有以下云函数（如没有，则从新版本中拷贝）**
 
 1. admin/system_uni/uni-id-files/files/kh/delete
 2. admin/system_uni/uni-id-files/files/kh/getList
+4. admin/system_uni/uni-id-files/files/kh/getTempFileURL
 3. admin/system_uni/uni-id-files/files/kh/update
-4. admin/system_uni/uni-id-files/categories/kh/getList
-5. admin/system_uni/uni-id-files/categories/sys/add
-6. admin/system_uni/uni-id-files/categories/sys/delete
-7. admin/system_uni/uni-id-files/categories/sys/update
-8. user/kh/addUploadRecord
-
-### 若需要使用 `素材管理`，则还需要进行以下操作
-#### 1、拷贝目录 `/pages_plugs/system_uni/uni-id-files/`（如果没有，则从新版本中拷贝）
-
-#### 2、在`pages.json` 中的子包 `pages_plugs` 添加 `{ "path": "system_uni/uni-id-files/list" }`
-
-#### 3、`导入` 动态菜单
-
-* 1、打开admin后台，进入用户角色权限 - 菜单管理 
-
-* 2、点击 `通过json导入菜单` 选择
-
-* 3、粘贴下面的数组
-
-```js
-[
-  {
-    "menu_id": "system_uni",
-    "name": "系统设置",
-    "icon": "el-icon-s-tools",
-    "sort": 110,
-    "children": [{
-        "menu_id": "system-uni-uni-id-files",
-        "name": "素材管理",
-        "icon": "el-icon-folder-opened",
-        "url": "/pages_plugs/system_uni/uni-id-files/list",
-        "sort": 0
-      }
-    ]
-  }
-]
-```
-
-* 4、导入
-
-* 5、刷新页面，点击系统设置-素材管理（如果是非admin账号，则需要授权才能看到）
+5. admin/system_uni/uni-id-files/categories/kh/getList
+6. admin/system_uni/uni-id-files/categories/sys/add
+7. admin/system_uni/uni-id-files/categories/sys/delete
+8. admin/system_uni/uni-id-files/categories/sys/update
+9. user/kh/addUploadRecord
 
 **注意：前端 `vk.uploadFile` 带参数 `needSave: true` 时，上传的图片记录会保存到admin后台，可在 `素材管理` 中查看**
