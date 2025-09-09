@@ -28,8 +28,11 @@
 | updateCategory		| 是否允许编辑分类																																		| Boolean	| true		| false																	|
 | imageFit					| 图片显示模式 [详细介绍](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)| String	| cover		| fill、contain、cover、none、scale-dow	|
 | cloudDirectory    | 上传至指定的云端目录（默认会以年月日为目录）  | String  | - | - |
+| cloudPathRemoveChinese | 删除文件名中的中文（默认true） 		| Boolean	| true		| false	|
+| provider          | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	 | String  | - | - |
 | fileSize         | 限制文件大小  | Number  | - | - |
 | sizeUnit         | 文件的单位  | String  | MB | KB、MB、GB |
+| returnType（1.21.0）  | 返回值类型  | String  | url | url、id |
 
 ### 万能表格使用方式
 
