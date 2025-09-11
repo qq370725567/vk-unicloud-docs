@@ -30,6 +30,10 @@ sidebarDepth: 0
 
 ![](https://cdn.fsq.pub/vkdoc/vk-admin/c2cd7fb1-9630-4b2a-8008-8c2405fde341.png)
 
+## 并发上传文件@concurrency
+
+![](https://cdn.fsq.pub/vkdoc/vk-admin/3c00a977-5063-4b4b-87d8-388130f63e43.png)
+
 ## 素材选择组件@fileselect
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/0ca12bfc-703e-4662-98b8-068ed01e4fac.png)
