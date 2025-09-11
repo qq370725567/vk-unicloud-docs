@@ -42,7 +42,7 @@ sidebarDepth: 0
 
 注意：如果不勾选克隆图片，则对方如果有设置防盗链，则无法显示图片
 
-![](https://cdn.fsq.pub/vkdoc/vk-admin/dd7bd8ba-4fb8-48ff-b4f3-17ffef98b873.png)
+![](https://cdn.fsq.pub/vkdoc/vk-admin/49edf92b-5332-417f-a0e5-76fe91949173.png)
 
 ### 素材选择组件@fileselect
 
