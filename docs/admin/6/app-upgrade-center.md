@@ -84,18 +84,19 @@ App升级中心 uni-upgrade-center，提供了 App 的版本更新服务。包�
 
 `uni_modules/uni-upgrade-center-app/utils/call-check-version.js` 文件内的代码
 
+**uni-app版**
+
 ```js
 uniCloud.callFunction({
-  name: 'uni-upgrade-center',
-  data,
-  success: (e) => {
-    console.log("e: ", e);
-    resolve(e)
-  },
-  fail: (error) => {
-    reject(error)
-  }
-});
+	name: 'uni-upgrade-center',
+	data,
+	success: (e) => {
+		resolve(e.result as UniUpgradeCenterResult)
+	},
+	fail: (error) => {
+		reject(error)
+	}
+})
 ```
 
 替换为
@@ -108,13 +109,89 @@ uniCloud.callFunction({
     data
   },
   success: (e) => {
-    console.log("e: ", e);
-    resolve(e)
+    resolve(e.result as UniUpgradeCenterResult)
   },
   fail: (error) => {
     reject(error)
   }
 })
+```
+
+**uni-app x版**
+
+```js
+try {
+	uniCloud.callFunction({
+		name: 'uni-upgrade-center',
+		data: data
+	}).then(res => {
+		const code = res.result['code']
+		const codeIsNumber = ['Int', 'Long', 'number'].includes(typeof code)
+		if (codeIsNumber) {
+		  if ((code as number) == 0) {
+		    reject({
+		      code: res.result['code'],
+		      message: res.result['message']
+		    })
+		  } else if ((code as number) < 0) {
+		    reject({
+		      code: res.result['code'],
+		      message: res.result['message']
+		    })
+		  } else {
+        const result = JSON.parse<UniUpgradeCenterResult>(JSON.stringify(res.result)) as UniUpgradeCenterResult
+        resolve(result)
+      }
+		}
+	}).catch<void>((err : any | null) => {
+		const error = err as UniCloudError
+		if (error.errMsg == '未匹配到云函数[uni-upgrade-center]')
+			error.errMsg = '【uni-upgrade-center-app】未配置uni-upgrade-center，无法升级。参考: https://uniapp.dcloud.net.cn/uniCloud/upgrade-center.html'
+		reject(error.errMsg)
+	})
+} catch (e) {
+	reject(e.message)
+}
+```
+
+替换为
+
+```js
+try {
+	uniCloud.callFunction({
+		name: 'router',
+		data:{
+		  $url:"user/pub/checkVersion",
+		  data
+		},
+	}).then(res => {
+		const code = res.result['code']
+		const codeIsNumber = ['Int', 'Long', 'number'].includes(typeof code)
+		if (codeIsNumber) {
+		  if ((code as number) == 0) {
+		    reject({
+		      code: res.result['code'],
+		      message: res.result['message']
+		    })
+		  } else if ((code as number) < 0) {
+		    reject({
+		      code: res.result['code'],
+		      message: res.result['message']
+		    })
+		  } else {
+        const result = JSON.parse<UniUpgradeCenterResult>(JSON.stringify(res.result)) as UniUpgradeCenterResult
+        resolve(result)
+      }
+		}
+	}).catch<void>((err : any | null) => {
+		const error = err as UniCloudError
+		if (error.errMsg == '未匹配到云函数[uni-upgrade-center]')
+			error.errMsg = '【uni-upgrade-center-app】未配置uni-upgrade-center，无法升级。参考: https://uniapp.dcloud.net.cn/uniCloud/upgrade-center.html'
+		reject(error.errMsg)
+	})
+} catch (e) {
+	reject(e.message)
+}
 ```
 
 ### 测试时注意
@@ -128,7 +205,7 @@ uniCloud.callFunction({
 ```html
 <script>
   // 引入插件
-	import upAPP from '@/uni_modules/uni-upgrade-center-app/utils/check-update.js'
+	import upAPP from '@/uni_modules/uni-upgrade-center-app/utils/check-update.ts'
 	export default {
 		onLaunch: function() {
       // 执行更新
@@ -153,7 +230,7 @@ uniCloud.callFunction({
 </template>
 
 <script>
-	import upAPP from '@/uni_modules/uni-upgrade-center-app/utils/check-update.js'
+	import upAPP from '@/uni_modules/uni-upgrade-center-app/utils/check-update.ts'
 
 	export default {
 		data() {

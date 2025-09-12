@@ -45,7 +45,7 @@ sidebarDepth: 0
 
 - 4、提供丰富的 `云函数 API`，为您的业务扫平障碍，让您可以专注于自身业务开发。（例如微信登录、短信、验证码、缓存、生成小程序码等等）（持续增加中）[传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin.html)
 
-- 5、全面支持 `url化` 的云函数请求，您无需关心url化后参数的获取问题 [传送门](http://localhost:8080/client/uniCloud/cloudfunctions/cloudfunctionsForHttp.html)
+- 5、全面支持 `url化` 的云函数请求，您无需关心url化后参数的获取问题 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudfunctionsForHttp.html)
 
 - 6、已集成 `uni-id` 当前版本: `3.3.28`，它是一种用户系统，有了统一的账户规范，并且围绕这套账户规范，有各种各样的插件，开发者可以随意整合这些插件，让数据连同。同时方便其他用户使用 unicloud 插件发布者发布的前后端一体插件，只需要导入一个云函数即可，打通账号体系。
 
