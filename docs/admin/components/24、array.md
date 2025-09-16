@@ -66,6 +66,70 @@
 },
 ```
 
+##### 删除前拦截@beforeremove
+
+通过 `beforeRemove` 属性来控制删除前拦截
+
+```js
+{
+  key: "array", title: "数组<对象>类型", type: "array<object>", itemWidth: 260,
+  showAdd: true,
+  showClear: false,
+  showSort: true,
+  // 新增一行时,该行的默认值
+  defaultValue: {
+    
+  },
+  rightBtns: ['copy', 'delete'],
+  beforeRemove: ({ row, index, remove }) => {
+    // 方式一
+    this.$confirm('确认删除？', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }).then(() => {
+      remove();
+    }).catch(() => {
+      console.log("取消删除");
+    });
+    return false;
+
+    // 方式二
+    return new Promise((resolve, reject) => {
+      this.$confirm('确认删除？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        resolve(true);
+      }).catch(() => {
+        resolve(false);
+      });
+    });
+  },
+  // 每行每个字段对应的渲染规则
+  columns: [{
+      key: "text1",
+      title: "昵称",
+      type: "text",
+      isUnique: true,
+      rules: [
+        { required: true, message: "该项不能为空", trigger: ["change", "blur"] },
+        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: ["change", "blur"] }
+      ]
+    },
+    {
+      key: "number1",
+      title: "数字",
+      type: "number",
+      rules: [
+        { required: true, message: "该项不能为空", trigger: ["change", "blur"] },
+      ]
+    }
+  ]
+},
+```
+
 #### 数组<字符串>类型
 
 应用场景：数组内的元素是字符串类型，如`["1","2","3"]`
@@ -197,6 +261,7 @@
 | leftFixed     | 序号、多选框是否固定在左侧 |Boolean  | true | false |
 | rightFixed     | 操作按钮是否固定在右侧 |Boolean  | true | false |
 | maxlength     | 控制最大可添加的数量 |Number  | - | - |
+| beforeRemove（1.21.0）     | 删除前拦截，仅数组对象类型时生效 [传送门](#beforeremove) |Function  | - | - |
 
 ### columns 比万能表单新增的参数
 
