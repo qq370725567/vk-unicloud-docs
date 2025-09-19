@@ -1,6 +1,6 @@
 # 21、time 时间选择
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "time1", title: "time类型1", type: "time" },
@@ -34,11 +34,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -59,13 +59,13 @@
 [点击查看更多element 官方API](https://element.eleme.cn/#/zh-CN/component/time-picker)
 
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 ```js
 { key: "time", title: "添加时间", type: "text", width: 160 },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-input-time

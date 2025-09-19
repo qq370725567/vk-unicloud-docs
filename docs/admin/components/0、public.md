@@ -27,7 +27,7 @@
 |---------------|------------------					|--------	|-------|-------|
 | defaultValue	| 当该行的该字段为空时的默认值	| any			| -			| -			|
 
-## key（字段名）
+## key（字段名）@key
 
 字段名，如下方代码中，`key` 为 `nickname`，代表绑定 `nickname` 字段
 
@@ -35,7 +35,7 @@
 { key: "nickname", title: "昵称", type: "text" },
 ```
 
-## title（标题）
+## title（标题）@title
 
 字段显示的名称，如下方代码中，`title` 为 `昵称`，代表该字段以别名 `昵称` 显示在页面上。
 
@@ -43,7 +43,7 @@
 { key: "nickname", title: "昵称", type: "text" },
 ```
 
-## type（组件类型）
+## type（组件类型）@type
 
 页面需要渲染的组件类型，如下方代码中，`type` 为 `text`，在 `万能表格` 中渲染为 `字符串`，在 `万能表单` 中渲染为 `input输入框`
 
@@ -51,7 +51,7 @@
 { key: "nickname", title: "昵称", type: "text" },
 ```
 
-## width（宽度）
+## width（宽度）@width
 
 单位是px，只能是数字，如下
 
@@ -59,7 +59,7 @@
 { key: "nickname", title: "昵称", type: "text", width: 200 },
 ```
 
-## labelWidth（label宽度）
+## labelWidth（label宽度）@label-width
 
 单位是px，只能是数字，如下
 
@@ -67,23 +67,23 @@
 { key: "nickname", title: "昵称", type: "text", labelWidth: 120 },
 ```
 
-## placeholder（占位符）
+## placeholder（占位符）@placeholder
 
 占位符，类似 `input` 组件中的 `placeholder` （即用户还未输入任何内容时输入框内的提示）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/8ccbc513-8bad-4a8f-903e-e745dfdecdfd.png)
 
-## tips（下方的固定提示）
+## tips（下方的固定提示）@tips
 
 下方的固定提示，与 `placeholder` 不同的是：不管用户是否输入信息，此提示一直都在。而 `placeholder` 是当用户输入内容后，提示就隐藏了。
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/82fe7344-1aa0-4e31-9c33-8232099b700f.png)
 
-## showLabel（是否显示label）
+## showLabel（是否显示label）@show-label
 
 默认为true，当设置为false时，对应的title不显示。
 
-## show（复用时的显示规则）
+## show（复用时的显示规则）@show
 
 表单组件的组件 `form-type` 可以动态复用同一个表单达到显示不同字段的功能。
 
@@ -95,7 +95,7 @@
 * 如果 show 的某元素中包含 `form-type`的值，则代表显示。
 * 如果 show 的某元素中不包含 `form-type`的值，则不显示。
 
-## showRule（自定义显示规则）
+## showRule（自定义显示规则）@show-rule
 
 与 show 不同，showRule 更灵活。
 
@@ -153,7 +153,7 @@
 },
 ```
 
-## disabled（自定义禁用规则）
+## disabled（自定义禁用规则）@disabled
 
 `disabled` 和 `showRule` 基本写法一致，功能区别是，`showRule` 是满足条件则显示，`disabled` 是满足条件则禁用。
 
@@ -211,11 +211,11 @@
 },
 ```
 
-## clearable（是否允许清空）
+## clearable（是否允许清空）@clearable
 
 是否可以清空输入的内容或选择的选项。（个别组件没有此属性）
 
-## watch（监听）
+## watch（监听）@watch
 
 用于监听key对应的值的改变（只监听组件内部造成的值的改变）
 
@@ -230,7 +230,6 @@
   }
 }
 ```
-
 
 ```js
 {
@@ -251,4 +250,3 @@
 | index					| 在columns数组中的索引位置								| number	| -			| -			|
 | option				| 部分组件有返回此值，代表当前选项的完整数据	| Object	| -			| -			|
 | $set					| 等于Vue的 this.$set 函数								|Function	| -			| -			|
-

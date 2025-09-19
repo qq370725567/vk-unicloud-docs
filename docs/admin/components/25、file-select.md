@@ -4,7 +4,7 @@
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/0ca12bfc-703e-4662-98b8-068ed01e4fac.png)
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "image1", title: "多选图片", type: "file-select", placeholder: "请选择图片", fileType: "image", multiple: true, multipleLimit: 6, imageFit:"cover" },
@@ -12,11 +12,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数							| 说明																																								| 类型		| 默认值	| 可选值																|
 |------------------	|-------------------------------																											|---------|--------	|-------																|
@@ -42,13 +42,13 @@
 { key: "image1", title: "多选图片", type: "file-select", placeholder: "请选择图片", fileType: "image", multiple: true, multipleLimit: 6, imageFit:"cover", returnType: "id" },
 ```
 
-### 万能表格使用方式@table
+### 万能表格使用方式@table@table
 
 ```js
  { key: "image", title: "图片", type: "image", width: 120 },
 ```
 
-### template 使用方式@template
+### template 使用方式@template@template
 
 ```html
 <vk-data-input-file-select v-model="image1" placeholder="请选择图片" multiple :multiple-limit="9" file-type="image" image-fit="cover"></vk-data-input-file-select>

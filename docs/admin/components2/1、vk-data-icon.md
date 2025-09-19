@@ -1,6 +1,6 @@
 # 1、icon 图标
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-icon name="vk-icon-full" size="16" color="rgba(0,0,0,.7)"></vk-data-icon>
@@ -53,7 +53,7 @@ Font Family：vk-aaa-icon
 * 4、在 `App.vue` 内引入图标
 
 ```scss
-<style lang="scss">@import "@/static/vk-custom-icon.css";
+<style lang="scss">@import "@/static/vk-custom-icon.css";
 </style>
 ```
 

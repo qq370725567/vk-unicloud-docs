@@ -1,6 +1,6 @@
 # 17、color 颜色选择
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "color", title: "颜色", type: "color" },
@@ -8,11 +8,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -35,13 +35,13 @@ rgb：不带透明度 rgb(255,255,255)  带透明度 rgba(255,255,255,0.8) [关�
 
 ___通常我们常用的表示颜色的方式是 hex：#FFFFFF，如果带透明度，则用rgb：rgba(255,255,255,0.8)___
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 ```js
 { key: "color", title: "颜色", type: "color" },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <el-color-picker v-model="color"></el-color-picker>

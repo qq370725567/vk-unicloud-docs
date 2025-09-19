@@ -1,6 +1,6 @@
 # 14、switch 开关
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 #### 开关形式
 
@@ -18,11 +18,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -36,7 +36,7 @@
 | switchType            | 开关的类型，设置成checkbox可以将开关显示成多选框形式  | String  | - | switch 、checkbox |
 | label            | checkbox - 多选框的label | String  | - | -  |
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 ```js
 { key: "switch", title: "switch类型", type: "switch", activeValue: true, inactiveValue: false, width: 100 },
@@ -67,7 +67,7 @@
 },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 #### 开关形式
 

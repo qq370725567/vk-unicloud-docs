@@ -1,6 +1,6 @@
 # 3、money 金额输入
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "balance", title: "金额类型", type: "money" },
@@ -8,11 +8,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -25,13 +25,13 @@
 
 如果需要大于2位数的小数点，建议直接用number组件，因为money组件在数据库中是以 100=1元 的形式储存（在js中，整数求和不会有误差，小数求和有误差），如果小数点超过2位，则100=1元无意义了
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 ```js
 { key:"balance" , title:"金额类型" , type:"money" , width:100 },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-input-money v-model="form1.balance" placeholder="请输入金额" width="300px"></vk-data-input-money>

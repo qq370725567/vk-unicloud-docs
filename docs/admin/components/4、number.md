@@ -1,6 +1,6 @@
 # 4、number 数字输入
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "number", title: "数字类型", type: "number" },
@@ -8,11 +8,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -27,14 +27,14 @@
 | readonly          | 原生属性，是否只读  | boolean|  false | true |
 
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 ```js
 { key:"number" , title:"数字类型" , type:"number" , width:100 },
 ```
 
 
-### template 使用方式
+### template 使用方式@template
 
 #### 普通模式 
 

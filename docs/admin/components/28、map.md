@@ -1,6 +1,6 @@
 # 28、map 地图选址选择
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "position", title: "地图位置", type: "map", width: 600, height: 300, defaultLocation: { latitude: 30.224781, longitude: 120.12438 } },
@@ -14,11 +14,11 @@ key的申请地址：[腾讯地图](https://lbs.qq.com) [高德](https://lbs.ama
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -53,13 +53,13 @@ key的申请地址：[腾讯地图](https://lbs.qq.com) [高德](https://lbs.ama
 
 **推荐使用 `watch` 代替 `onChange`** [传送门 - watch](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html#watch-%E7%9B%91%E5%90%AC)
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 ```js
 { key: "position", title: "地图位置", type: "map", width: 400 },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-input-map v-model="value" placeholder="请选择地图" :width="600" :height="300"></vk-data-input-map>

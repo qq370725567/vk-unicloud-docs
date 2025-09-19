@@ -1,6 +1,6 @@
 # 12、table-select 通过表格选择
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 #### 不带请求参数
 
@@ -46,11 +46,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明               | 类型    | 默认值  | 可选值 |
 |------------------|-------------------|---------|--------|-------|
@@ -342,11 +342,11 @@ props 对象属性
 | (]          | 范围 arr[0] <  x <= arr[1] |
 | ()          | 范围 arr[0] <  x <  arr[1] |
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 无
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-input-table-select

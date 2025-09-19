@@ -46,7 +46,7 @@ custom-editor-tinymce 是基于 tinymce 实现的多功能富文本编辑器组�
 <custom-editor-tinymce ref="editorTinymce1" v-model="content" scene="form" placeholder="开始输入..." width="100%" :height="500"></custom-editor-tinymce>
 ```
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 show:["detail"] 是为了控制只在点击详情时显示
 

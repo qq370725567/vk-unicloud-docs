@@ -1,6 +1,6 @@
 # 15、rate 评分
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "rate", title: "评分类型", type: "rate", allowHalf: false },
@@ -8,11 +8,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -28,13 +28,13 @@
 | texts            | 辅助文字数组 | Array  | ['极差', '失望', '一般', '满意', '惊喜'] | -  |
 | scoreTemplate            | 分数显示模板 | String  | {value} | -  |
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 ```js
 { key: "rate", title: "评分", type: "rate", width: 120 },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <el-rate v-model="rate"></el-rate>

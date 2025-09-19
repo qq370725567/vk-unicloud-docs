@@ -1,6 +1,6 @@
 # 3、dialog 弹窗
 
-### template 使用方式
+### template 使用方式@template
 
 #### 普通弹窗 
 

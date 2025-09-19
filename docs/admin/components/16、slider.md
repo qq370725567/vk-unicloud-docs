@@ -1,6 +1,6 @@
 # 16、slider 滑块
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "slider", title: "滑块类型", type: "slider" },
@@ -8,11 +8,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -32,11 +32,11 @@
 | debounce            | 输入时的去抖延迟，毫秒，仅在show-input等于true时有效 | Number  | 300 | -  |
 | marks            | 标记， key 的类型必须为 number 且取值在闭区间 [min, max] 内，每个标记可以单独设置样式 | Object  | - | -  |
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 暂无
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <el-slider v-model="value1"></el-slider>

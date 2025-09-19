@@ -1,6 +1,6 @@
 # 19、file 文件上传
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 **文件**
 
@@ -16,11 +16,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -170,11 +170,11 @@
 },
 ```
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 暂无
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-upload v-model="image1" :limit="9" upload-type="file" list-type="text" button-text="点击上传"></vk-data-upload>

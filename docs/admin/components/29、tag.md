@@ -1,6 +1,6 @@
 # 29、tag 标签
 
-### 万能表单使用方式
+### 万能表单使用方式@form
 
 ```js
 { key: "goods_tags", title: "商品标签", type: "tag" },
@@ -8,11 +8,11 @@
 
 ### API
 
-### 公共属性
+### 公共属性@public
 
 [点击查看『公共属性』](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html)
 
-### 组件属性
+### 组件属性@props
 
 | 参数             | 说明                           | 类型    | 默认值  | 可选值 |
 |------------------|-------------------------------|---------|--------|-------|
@@ -24,7 +24,7 @@
 | addButtonText      | 添加按钮的标题 | String  | + 添加 | -  |
 | maxlength      | 字符串输入最大长度 | Number  | - | -  |
 
-### 万能表格使用方式
+### 万能表格使用方式@table
 
 **方式一**
 
@@ -53,7 +53,7 @@
 },
 ```
 
-### template 使用方式
+### template 使用方式@template
 
 ```html
 <vk-data-input-tag v-model="value" :limit="5"></vk-data-input-tag>
