@@ -79,7 +79,7 @@ sidebarDepth: 0
 ### vk框架下router函数内
 
 ```js
-var vkmail;
+let vkmail;
 try {
   vkmail = require('vk-mail');
 } catch (err) {
@@ -164,7 +164,7 @@ vk.init({
   requireFn: require
 });
 
-var vkmail;
+let vkmail;
 try {
   vkmail = require('vk-mail');
 } catch (err) {
@@ -219,7 +219,7 @@ exports.main = async (event, context) => {
 ```js
 'use strict';
 
-var vkmail;
+let vkmail;
 try {
   vkmail = require('vk-mail');
 } catch (err) {

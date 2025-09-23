@@ -601,21 +601,21 @@ this.webSocket.close({
 
 ```js
 'use strict';
-var vk = uniCloud.vk; // 全局vk实例
+let vk = uniCloud.vk; // 全局vk实例
 // 涉及的表名
 const dbName = {
 	//test: "vk-test", // 测试表
 };
 
-var db = uniCloud.database(); // 全局数据库引用
-var _ = db.command; // 数据库操作符
-var $ = _.aggregate; // 聚合查询操作符
+const db = uniCloud.database(); // 全局数据库引用
+const _ = db.command; // 数据库操作符
+const $ = _.aggregate; // 聚合查询操作符
 
 /**
  * 权限注意：访问以下链接查看
  * 文档地址：https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#内置权限
  */
-var cloudObject = {
+const cloudObject = {
 	isCloudObject: true, // 标记为云对象模式
 	/**
 	 * 请求前处理，主要用于调用方法之前进行预处理，一般用于拦截器、统一的身份验证、参数校验、定义全局对象等。

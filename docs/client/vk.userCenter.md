@@ -8,7 +8,7 @@
 
 ```vue
 <script>
-  var vk = uni.vk;
+  let vk = uni.vk;
   export default {
     data() {
       // 页面数据变量
@@ -912,7 +912,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 </template>
 
 <script>
-	var vk = uni.vk;
+	let vk = uni.vk;
 	export default {
 		data() {
 			return {
