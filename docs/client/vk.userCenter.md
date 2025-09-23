@@ -466,6 +466,8 @@ let token = vk.getToken();
 
 ### vk.userCenter.closeAccount（账号注销）@closeAccount
 
+> vk-unicloud 版本需 ≥ 2.21.0
+
 **注意：**
 
 1. 每个账号首次请求注销接口后，会有7天注销冷静期，此时账号状态已经变更为已注销状态，但用户可以执行[恢复账号](#openaccount)API来恢复账号。
@@ -483,6 +485,8 @@ vk.userCenter.closeAccount({
 
 ### vk.userCenter.openAccount（恢复账号）@openAccount
 
+> vk-unicloud 版本需 ≥ 2.21.0
+
 **注意：**
 
 1. 无论账号是否已过注销冷静期，只要未二次执行[账号注销](#closeaccount)API，都可以通过恢复账号API来恢复账号。
@@ -498,6 +502,8 @@ vk.userCenter.openAccount({
 ```
 
 ### vk.userCenter.getCoolingStatus（获取注销冷静期状态）@getCoolingStatus
+
+> vk-unicloud 版本需 ≥ 2.21.0
 
 当用户申请注销后，可调用此接口获取冷静期剩余时长等信息
 
