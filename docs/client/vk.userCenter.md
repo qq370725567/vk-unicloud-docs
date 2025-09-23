@@ -464,6 +464,62 @@ if (!vk.checkToken()) {
 let token = vk.getToken();
 ```
 
+### vk.userCenter.closeAccount（账号注销）@closeAccount
+
+**注意：**
+
+1. 每个账号首次请求注销接口后，会有7天注销冷静期，此时账号状态已经变更为已注销状态，但用户可以执行[恢复账号](#openaccount)API来恢复账号。
+2. 当已过注销冷静期时，通过再次调用账号注销接口后，账号将会真正注销，此时用户可以重新注册新账号
+
+框架已内置完整的注销账号、恢复账号、冷静期显示等功能的页面：`/pages_template/uni-id/closeAccount/closeAccount`
+
+```js
+vk.userCenter.closeAccount({
+  success: (res) => {
+    
+  }
+});
+```
+
+### vk.userCenter.openAccount（恢复账号）@openAccount
+
+**注意：**
+
+1. 无论账号是否已过注销冷静期，只要未二次执行[账号注销](#closeaccount)API，都可以通过恢复账号API来恢复账号。
+
+框架已内置完整的注销账号、恢复账号、冷静期显示等功能的页面：`/pages_template/uni-id/closeAccount/closeAccount`
+
+```js
+vk.userCenter.openAccount({
+  success: (res) => {
+    
+  }
+});
+```
+
+### vk.userCenter.getCoolingStatus（获取注销冷静期状态）@getCoolingStatus
+
+当用户申请注销后，可调用此接口获取冷静期剩余时长等信息
+
+框架已内置完整的注销账号、恢复账号、冷静期显示等功能的页面：`/pages_template/uni-id/closeAccount/closeAccount`
+
+```js
+vk.userCenter.getCoolingStatus({
+  success: (res) => {
+    console.log("status", res.status); // 当前账号状态，4代表已注销（也包含在冷静期），其他均为未注销
+    console.log("nickname", res.nickname); // 昵称
+    console.log("avatar", res.avatar); // 头像
+    if (res.close_account) {
+      console.log("confirmed", res.close_account.confirmed); // 是否已二次确认注销
+      console.log("apply_time", res.close_account.apply_time); // 注销申请时间
+      console.log("close_time", res.close_account.close_time); // 注销冷静期最后时间
+      console.log("reason", res.close_account.reason); // 注销原因
+      console.log("duration", res.duration); // 注销冷静期剩余时长（单位：ms）
+    }
+  }
+});
+```
+
 ## 手机号@mobile
 
 ### vk.userCenter.bindMobile（绑定手机）@bindMobile
