@@ -94,17 +94,17 @@ HBuilderX内使用运行菜单运行到小程序时会连接本地调试服务�
 pages/user/order/list
 ```
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/92ffdec3-c90a-45ee-8112-2f5f54125886.png)
+![](https://cdn.fsq.pub/vkdoc/vk-mall/doc/a65a7de2-2ebd-4fae-8734-af85e8fc1735.png)
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/9d6597b9-fdcf-451a-9be4-ad5376c81c30.png)
+![](https://cdn.fsq.pub/vkdoc/vk-mall/doc/61426956-81b8-4b42-89d2-ead05818d372.png)
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/d34e1096-738a-469e-b683-888d6f71cdd2.png)
+![](https://cdn.fsq.pub/vkdoc/vk-mall/doc/910825c4-bf80-4b71-9764-13f548f24d1a.png)
 
 ## 设置隐私协议
 
 微信小程序必须设置【用户隐私保护指引设置】
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/e8602a24-6942-4c9b-97f4-f7514d3bf806.png)
+![](https://cdn.fsq.pub/vkdoc/vk-mall/doc/eb09b23e-ee53-45c4-83af-b9c7d9df9f29.png)
 
 ### 协议内的填空参考
 
@@ -132,14 +132,14 @@ pages/user/order/list
 
 ## 设置用户生成内容场景声明
 
-![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/510.png)
+![](https://cdn.fsq.pub/vkdoc/vk-mall/doc/118cd89f-f093-43a9-8a39-bea0e576666d.png)
 
 设置内容参考如下
 
-![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/511.png)
+![](https://cdn.fsq.pub/vkdoc/vk-mall/doc/34c7f5d6-5a1c-40bb-a9e4-97ffde7b5133.png)
 
 ## 发行后还需要做的事情
 
 1. 进行小程序备案（如果发行前已备案，则请无视）
 
-![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/0500/512.png)
+![](https://cdn.fsq.pub/vkdoc/vk-mall/doc/3236e519-d7f0-4170-975e-fac6e0abb9f4.png)
