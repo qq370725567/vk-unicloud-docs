@@ -466,7 +466,7 @@ let token = vk.getToken();
 
 ### vk.userCenter.closeAccount（账号注销）@closeAccount
 
-> vk-unicloud 版本需 ≥ 2.21.0
+> vk-unicloud 版本需 ≥ 2.20.0
 
 **注意：**
 
@@ -485,7 +485,7 @@ vk.userCenter.closeAccount({
 
 ### vk.userCenter.openAccount（恢复账号）@openAccount
 
-> vk-unicloud 版本需 ≥ 2.21.0
+> vk-unicloud 版本需 ≥ 2.20.0
 
 **注意：**
 
@@ -503,7 +503,7 @@ vk.userCenter.openAccount({
 
 ### vk.userCenter.getCoolingStatus（获取注销冷静期状态）@getCoolingStatus
 
-> vk-unicloud 版本需 ≥ 2.21.0
+> vk-unicloud 版本需 ≥ 2.20.0
 
 当用户申请注销后，可调用此接口获取冷静期剩余时长等信息
 
