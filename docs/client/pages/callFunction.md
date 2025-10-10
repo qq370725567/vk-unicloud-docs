@@ -19,10 +19,10 @@ vk.callFunction({
     
   },
   success: (data) => {
-    
+   
   },
   fail: (err) => {
-    
+   
   },
   complete: (res) => {
     
@@ -53,13 +53,17 @@ vk.callFunction({
 
 ```js
 // async/await方式
-let data = await vk.callFunction({
-  url: '云函数路径',
-  title:'请求中...',
-  data:{
-    
-  }
-});
+try {
+  let data = await vk.callFunction({
+    url: '云函数路径',
+    title:'请求中...',
+    data:{
+      
+    }
+  });
+} catch (err) {
+  console.log("失败", err);
+}
 ``` 
 
 ## 属性@props
@@ -75,6 +79,7 @@ let data = await vk.callFunction({
 | needAlert        | 为true代表请求错误时，会有alert弹窗提示 | Boolean  | true | false |
 | globalParamName  | 全局请求参数的名称， 如果设置了正则规则，则不需要此参数  [查看详情](#globalparamname)  | String  | - | - |
 | env              | 请求多服务空间的环境 [查看详情](https://vkdoc.fsq.pub/client/question/q9.html#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4)| String  | - | - |
+| timeout          | 请求超时时间 | Number  | - | - |
 | retryCount       | 系统异常重试机制（表单提交时慎用，建议只用在查询请求中，即无任何数据库修改的请求中） | Number  | 0 | - |
 | secretType       | 安全网络类型 [查看详情](#secrettype-uni官方版安全网络) | String  | none | - |
 | encrypt          | 是否加密通信（可以不开启安全网络实现加密通信） [查看详情](#encrypt-vk版双向加密通信) | Boolean  | none | - |
