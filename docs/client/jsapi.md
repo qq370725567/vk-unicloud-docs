@@ -1421,9 +1421,9 @@ await vk.request({
 |useContent					|Boolean																																			|-				|false	|是否将data的值转content，效果：content = JSON.stringify(data);																																																						|
 |content						|String、 Buffer																															|-				|-			|手动设置请求的payload，设置后会忽略data																																																																	|
 |timeout						|Number、 Array																																|-				|5000		|超时时间设置。设置为数组时第一项为请求超时，第二项为返回超时。设置为数字时相当于同时设置请求超时和返回超时，即timeout:3000效果等于timeouut:[3000,3000]										|
+|needOriginalRes		|Boolean						|否																																						|false		|此参数为vk新增，设置为true后，返回数据的格式是原始返回数据，里面有请求头等信息<br/>注意，此参数与前端调用时效果不一样<br/>前端是多返回一个originalRes参数<br/>云端是直接返回原始返回数据|																																																																																					|
 |files							|Array<ReadStream、Buffer、String> 、 Object 、 ReadStream 、 Buffer、 String	|-				|-			|上传的文件，设置后将会使用 multipart/form-data 格式。如果未设置method，将会自动将method设置为POST																																				|
 |nestedQuerystring	|Boolean																																			|-				|-			|转换data为queryString时默认不支持嵌套Object，此选项设置为true则支持转换嵌套Object																																												|
-|needOriginalRes		|Boolean						|否																																						|false		|此参数为vk新增，设置为true后，返回数据的格式是原始返回数据，里面有请求头等信息<br/>注意，此参数与前端调用时效果不一样<br/>前端是多返回一个originalRes参数<br/>云端是直接返回原始返回数据|																																																																																					|
 |consumeWriteStream	|Boolean																																			|-				|true		|是否等待 writeStream 完全写完才算响应全部接收完毕																																																												|
 |auth								|String																																				|-				|-			|简单登录授权（Basic Authentication）参数，必须按照 user:password 格式设置																																																|
 |ca									|String、Buffer、Array																												|-				|-			|证书内容																																																																																	|
