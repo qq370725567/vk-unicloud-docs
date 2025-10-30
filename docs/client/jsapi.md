@@ -1576,9 +1576,33 @@ vk.pubfn.base64ToFile({
 });
 ```
 
+### vk.pubfn.parseXlsxFile（解析Excel文件数据）@parseXlsxFile
+
+> vk-unicloud核心库版本 >= 2.20.2
+
+```js
+/**
+ * 解析Excel文件数据（只支持xlsx格式）仅h5支持
+ * @param {Object} file - Excel文件对象
+ * @param {Number} index - 工作表索引，默认0
+ * @param {Number} mode - 返回格式：1-返回对象数组，2-返回二维数组 默认 1
+ */
+vk.pubfn.parseXlsxFile({ 
+  file: file, 
+  mode: 1
+})
+.then((result) => {
+  console.log('result: ', result);
+})
+.catch((err) => {
+  console.error('err: ', err);
+});
+```
+
 ## 弹窗
 
 ### vk.alert
+
 ```js
 // 简写
 vk.alert("内容");
@@ -1594,6 +1618,7 @@ vk.alert('第一行内容\n第二行内容\n第三行内容');
 ```
 
 ### vk.confirm
+
 ```js
 // 简写
 vk.confirm("内容", (res) => {
@@ -1613,6 +1638,7 @@ vk.confirm("内容", "提示", "确定", "取消", (res) => {
 ```
 
 ### vk.prompt
+
 ```js
 // 简写
 vk.prompt("请输入", (res) => {
@@ -1630,6 +1656,7 @@ vk.prompt("请输入", "提示", "确定", "取消", (res) => {
 ```
 
 ### vk.toast
+
 ```js
 // 简写
 vk.toast("提示内容");
@@ -1650,6 +1677,7 @@ vk.toast("提示内容", "none", 1000, true, () => {
 ```
 
 ### vk.showActionSheet
+
 ```js
 vk.showActionSheet({
   title: "",
@@ -1666,11 +1694,13 @@ vk.showActionSheet({
 ```
 
 ### vk.showLoading
+
 ```js
 vk.showLoading("加载中...");
 ```
 
 ### vk.hideLoading
+
 ```js
 vk.hideLoading();
 ```
