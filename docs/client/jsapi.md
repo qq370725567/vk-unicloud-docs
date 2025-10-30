@@ -1576,7 +1576,7 @@ vk.pubfn.base64ToFile({
 });
 ```
 
-### vk.pubfn.parseXlsxFile（解析Excel文件数据）@parseXlsxFile
+### vk.pubfn.parseXlsxFile（前端解析Excel文件数据）@parseXlsxFile
 
 > vk-unicloud核心库版本 >= 2.20.2
 
