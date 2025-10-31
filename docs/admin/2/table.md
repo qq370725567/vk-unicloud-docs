@@ -1289,13 +1289,13 @@ ___如果扩展按钮列表无法满足你的需求，则可以用插槽来完�
 | toggleRowSelection		| 批量修改表格内的多选框选中状态					|
 | getRowIndex						| 获取指定行所在的index （新增于1.17.39）	|
 
-### showDetail（显示详情页）
+### showDetail（显示详情页）@show-detail
 
 ```js
 this.$refs.table1.showDetail(item); // item是该条记录的数据源
 ```
 
-### 删除指定的行（不删数据库数据）
+### 删除指定的行（不删数据库数据）@delete-rows
 
 ```js
 this.$refs.table1.deleteRows({
@@ -1306,7 +1306,7 @@ this.$refs.table1.deleteRows({
 });
 ```
 
-### 更新指定行数据（不更新据库）
+### 更新指定行数据（不更新据库）@update-rows
 
 ```js
 this.$refs.table1.updateRows({
@@ -1320,13 +1320,15 @@ this.$refs.table1.updateRows({
 });
 ```
 
-### 导出表格显示的数据
+### 导出表格数据@export-excel
+
+#### 导出当前页的数据（含序号）@export-excel-1
 
 ```js
 this.$refs.table1.exportExcel();
 ```
 
-### 导出表格显示的数据（不含序号）
+#### 导出当前页的数据（不含序号）@export-excel-2
 
 ```js
 this.$refs.table1.exportExcel({
@@ -1334,7 +1336,16 @@ this.$refs.table1.exportExcel({
 });
 ```
 
-### 自定义导出表格数据
+#### 表格文件首行锁定+可筛选@export-excel-3
+
+```js
+this.$refs.table1.exportExcel({
+  freezeHeader: true,
+  autoFilter: true
+});
+```
+
+#### 自定义导出表格数据@export-excel-4
 
 ```js
 this.$refs.table1.exportExcel({
@@ -1347,7 +1358,7 @@ this.$refs.table1.exportExcel({
 });
 ```
 
-### 导出满足表格查询条件的数据库内所有数据
+#### 导出满足表格查询条件的数据库内所有数据@export-excel-5
 
 ```js
 this.$refs.table1.exportExcel({
@@ -1358,7 +1369,7 @@ this.$refs.table1.exportExcel({
 });
 ```
 
-### 导出自定义数据
+#### 导出自定义数据@export-excel-6
 
 ```js
 this.$refs.table1.exportExcel({
@@ -1374,7 +1385,7 @@ this.$refs.table1.exportExcel({
 });
 ```
 
-### 获取选中行数据（原始数据）
+### 获取选中行数据（原始数据）@getCurrent-row-1
 
 如果此时修改info变量的值会改变表格数据
 
@@ -1383,7 +1394,7 @@ let info = this.$refs.table1.getCurrentRow(true);
 console.log(info);
 ```
 
-### 获取选中行数据（原始数据副本）
+### 获取选中行数据（原始数据副本）@getCurrent-row-2
 
 如果此时修改info变量的值不会改变表格数据
 
@@ -1392,14 +1403,14 @@ let info = this.$refs.table1.getCurrentRow();
 console.log(info);
 ```
 
-### 设置整个表格数据
+### 设置整个表格数据@set-table-data
 
 ```js
 let list = [{_id:"001", name:"测试"}];
 this.$refs.table1.setTableData(list);
 ```
 
-### 获取整个表格数据（原始数据）
+### 获取整个表格数据（原始数据）@get-table-data-1
 
 如果此时修改info变量的值会改变表格数据
 
@@ -1408,7 +1419,7 @@ let info = this.$refs.table1.getTableData();
 console.log(info);
 ```
 
-### 获取整个表格数据（数据副本）
+### 获取整个表格数据（数据副本）@get-table-data-2
 
 如果此时修改info变量的值不会改变表格数据
 
@@ -1417,14 +1428,14 @@ let info = vk.pubfn.copyObject(this.$refs.table1.getTableData());
 console.log(info);
 ```
 
-### 获取整个表格数据（格式化数据）
+### 获取整个表格数据（格式化数据）@get-table-formatter-data-1
 
 ```js
 let info = this.$refs.table1.getTableFormatterData();
 console.log(info);
 ```
 
-### 获取整个表格数据（格式化数据,key为中文）
+### 获取整个表格数据（格式化数据,key为中文）@get-table-formatter-data-2
 
 ```js
 let info = this.$refs.table1.getTableFormatterData({
@@ -1433,7 +1444,7 @@ let info = this.$refs.table1.getTableFormatterData({
 console.log(info);
 ```
 
-### 批量修改表格内的多选框选中状态
+### 批量修改表格内的多选框选中状态@toggle-row-selection
 
 ```js
 let arr = [];
@@ -1449,7 +1460,7 @@ arr.push({
 this.$refs.table1.toggleRowSelection(arr);
 ```
 
-### getRowIndex（获取指定行所在的index）
+### getRowIndex（获取指定行所在的index）@get-row-index
 
 > 新增于1.17.39
 
@@ -1461,7 +1472,7 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 
 ### columns中每一个key都是插槽名称
 
-### 重写`gender`字段的渲染示例
+### 重写`gender`字段的渲染示例@slot-demo-1
 
 * 注意: 只需要把下方`<template></template>`标签和标签内的代码复制到你页面上的`<vk-data-table></vk-data-table>`标签内即可
 
@@ -1476,7 +1487,7 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 </vk-data-table>
 ```
 
-### 展开行插槽示例
+### 展开行插槽示例@slot-demo-2
 
 ```html
 <vk-data-table>
@@ -1489,7 +1500,7 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 </vk-data-table>
 ```
 
-### 表头插槽
+### 表头插槽@slot-demo-3
 
 每个字段的表头插槽名：`v-slot:header_字段名`
 
