@@ -9,7 +9,7 @@ module.exports = [
   { text: '数据库搬家', link: '/db-migration/' },
   {
     text: '插件市场',
-    link: 'https://ext.dcloud.net.cn/publisher?id=1804602',
+    link: 'https://ext.dcloud.net.cn/publisher?id=2190580',
     ariaLabel: 'DCloud插件市场',
     items: [
       { text: 'vk-unicloud-router（client端）', link: 'https://ext.dcloud.net.cn/plugin?id=2204' },
@@ -23,7 +23,7 @@ module.exports = [
       { text: 'vk-mall（vk商城client端）', link: 'https://ext.dcloud.net.cn/plugin?id=9502' },
       { text: 'vk-mall-admin（vk商城admin端）', link: 'https://ext.dcloud.net.cn/plugin?id=9504' },
       { text: 'vk框架成品项目（含群内成员作品）', link: 'https://ext.dcloud.net.cn/search?q=vk&orderBy=HotList&cat1=7&cat2=72' },
-      { text: '查看更多', link: 'https://ext.dcloud.net.cn/publisher?id=1804602' }
+      { text: '查看更多', link: 'https://ext.dcloud.net.cn/publisher?id=2190580' }
     ]
   },
   {
