@@ -40,7 +40,7 @@ let bucket_id = "001"; // 桶的id，可以是用户id也可以是ip等
 // 下方实际功能是：3 秒内请求超过 3 次，则封禁10秒，10秒后自动解除封禁
 const rateLimitManage = vk.getRateLimitManage({
 	mode: "redis", //  db：MongoDB数据库 redis：Redis数据库（不推荐用db做限流，推荐使用redis，性能高，限流精准）
-	id: user_id, // 桶的id，不同的id独立计算限流次数
+	id: bucket_id, // 桶的id，不同的id独立计算限流次数
 	maxBucket: 3, // 桶的最大容量（最大令牌数）
 	duration: 3, // 恢复满桶需要多少秒
 	enableBlackList: true, // 是否启用黑名单机制
