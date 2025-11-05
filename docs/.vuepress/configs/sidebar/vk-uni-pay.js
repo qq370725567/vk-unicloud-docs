@@ -51,6 +51,5 @@ module.exports = [{
   },
   "iosiap",
   "wxpay-virtual",
-  "vkspay",
   "error"
 ]
