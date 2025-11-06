@@ -2,10 +2,22 @@
 
 ### 万能表单使用方式@form
 
-#### 开关形式
+#### 常规模式
 
 ```js
 { key: "switch", title: "switch类型", type: "switch", activeValue: true, inactiveValue: false },
+```
+
+#### 显示文字（左右两侧）
+
+```js
+{ key: "switch", title: "switch类型", type: "switch", activeValue: true, inactiveValue: false, activeText: "开启", inactiveText: "关闭" },
+```
+
+#### 显示文字（在开关内）
+
+```js
+{ key: "switch", title: "switch类型", type: "switch", activeValue: true, inactiveValue: false, activeText: "开启", inactiveText: "关闭", inlinePrompt: true },
 ```
 
 #### 多选框形式
@@ -35,6 +47,7 @@
 | validateEvent            | switch - 状态改变时是否触发表单的校验 | Boolean  | true | false |
 | switchType            | 开关的类型，设置成checkbox可以将开关显示成多选框形式  | String  | - | switch 、checkbox |
 | label            | checkbox - 多选框的label | String  | - | -  |
+| inlinePrompt（1.21.7）            | 文字是否显示在按钮内部（仅限1-2个字） | Boolean  | false | true |
 
 ### 万能表格使用方式@table
 
@@ -72,7 +85,7 @@
 #### 开关形式
 
 ```html
-<el-switch v-model="switch" :active-value="1" :inactive-value="0"></el-switch>
+<vk-data-input-switch v-model="switch" :active-value="1" :inactive-value="0"></vk-data-input-switch>
 ```
 
 #### 多选框形式
@@ -80,5 +93,5 @@
 注意：多选框形式下，`activeValue` 和 `inactiveValue` 只能是 `number` 或 `string`，不可以是 `boolean`
 
 ```html
-<el-checkbox v-model="switch" :true-label="1" :false-label="0">允许为空</el-checkbox>
+<vk-data-input-switch v-model="switch" switch-type="checkbox" :true-label="1" :false-label="0">允许为空</vk-data-input-switch>
 ```
