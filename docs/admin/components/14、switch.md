@@ -2,25 +2,25 @@
 
 ### 万能表单使用方式@form
 
-#### 常规模式
+#### 常规模式@demo1
 
 ```js
 { key: "switch", title: "switch类型", type: "switch", activeValue: true, inactiveValue: false },
 ```
 
-#### 显示文字（左右两侧）
+#### 显示文字（左右两侧）@demo2
 
 ```js
 { key: "switch", title: "switch类型", type: "switch", activeValue: true, inactiveValue: false, activeText: "开启", inactiveText: "关闭" },
 ```
 
-#### 显示文字（在开关内）
+#### 显示文字（在开关内）@demo3
 
 ```js
 { key: "switch", title: "switch类型", type: "switch", activeValue: true, inactiveValue: false, activeText: "开启", inactiveText: "关闭", inlinePrompt: true },
 ```
 
-#### 多选框形式
+#### 多选框形式@demo4
 
 注意：多选框形式下，`activeValue` 和 `inactiveValue` 只能是 `number` 或 `string`，不可以是 `boolean`
 
