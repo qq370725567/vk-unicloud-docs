@@ -37,6 +37,7 @@ module.exports = [{
       'pages/localStorage',
       'pages/sessionStorage',
       'pages/isQingming',
+      'pages/darkTheme',
       'pages/icon',
       {
         title: '组件',
