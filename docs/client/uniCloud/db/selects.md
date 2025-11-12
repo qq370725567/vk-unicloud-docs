@@ -166,18 +166,21 @@ foreignDB:[
 
 ### foreignDB（参数说明）@foreignDB-param
 
-|    参数名		|   类型			| 必填		|    说明																															|
-|------------	|----------	|------	|-----------																													|
-|   dbName		|  String		|  是		|   副表表名																														|
-|   localKey	|  String		|  是		|   主表外键名																													|
-|   foreignKey|  String		|  是		|   副表外键名																													|
-|   as				|  String		|  是		|   副表连表结果的别名																										|
-|   whereJson	|  Object		|  否		|   副表 where 条件																										|
-|   sortArr		|  Array		|  否		|   副表排序规则																												|
-|   limit			|  Number		|  否		|   副表限制取多少条数据，当limit = 1时，以对象形式返回，否则以数组形式返回	|
-|   foreignDB	|  Array		|  否		|   副表连表规则																												|
-|   addFields	|  Object		|  否		|   副表添加自定义字段规则																								|
-|   fieldJson	|  Object		|  否		|   副表字段显示规则																										|
+|    参数名				|   类型			| 必填		|    说明																																		|
+|------------			|----------	|------	|-----------																																|
+|   dbName				|  String		|  是		|   副表表名																																	|
+|   localKey			|  String		|  是		|   主表外键名																																|
+|   foreignKey		|  String		|  是		|   副表外键名																																|
+|   as						|  String		|  是		|   副表连表结果的别名																													|
+|   localKeyType	|  String		|  否		|   主表外键类型 可选：array（代表主表外键是数组类型） 不填（代表非数组类型）				|
+|   foreignKeyType|  String		|  否		|   副表外键类型 可选：array（代表副表外键是数组类型） 不填（代表非数组类型）				|
+|   localKeyIndex	|  String		|  否		|   当 localKeyType 为 array 时有效，输出副表记录在主表外键数组字段中索引的字段名	|
+|   whereJson			|  Object		|  否		|   副表 where 条件																													|
+|   sortArr				|  Array		|  否		|   副表排序规则																															|
+|   limit					|  Number		|  否		|   副表限制取多少条数据，当limit = 1时，以对象形式返回，否则以数组形式返回				|
+|   foreignDB			|  Array		|  否		|   副表连表规则																															|
+|   addFields			|  Object		|  否		|   副表添加自定义字段规则																											|
+|   fieldJson			|  Object		|  否		|   副表字段显示规则																													|
 
 ### getCount
 
@@ -486,6 +489,37 @@ res = await vk.baseDao.selects({
     as: "roleList",
     limit: 1000
   }]
+});
+```
+
+**按主表外键的索引顺序排序**
+
+```js
+res = await vk.baseDao.selects({
+	dbName: "vk-test",
+	getCount: true,
+	pageIndex: 1,
+	pageSize: 10,
+	// 主表where条件
+	whereJson: {
+
+	},
+	// 副表列表
+	foreignDB: [{
+		dbName: "uni-id-users",
+		localKey: "user_ids",
+		localKeyType: "array",
+		localKeyIndex: "index", // 数组索引以index字段显示
+		foreignKey: "_id",
+		as: "userList",
+		limit: 1000,
+		sortArr: [
+			{ name: "index", type: "asc" }, // 按主表的数组字段索引顺序升序
+		],
+		fieldJson: {
+			index: false, // 最终结果去除索引字段
+		}
+	}]
 });
 ```
 
