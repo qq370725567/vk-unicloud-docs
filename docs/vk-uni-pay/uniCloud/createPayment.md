@@ -61,7 +61,8 @@ exports.main = async (event, context) => {
 | type				| 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等。																																	| String	| -			| -			|
 | custom			| 自定义数据，不可与外部已有字段重名（custom内的参数不会发送给微信、支付宝）																															| Object	| -			| -			|
 | other				| 微信、支付宝文档上的其他选填参数（other内的参数会原样发送给微信、支付宝）																																| Object	| -			| -			|
-| pid					| 多商户模式下的自定义商户id（等于vk-pay-config表的_id）[查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)	| String	| -			| -			|
+| pid					| 多商户模式下的自定义商户id（等于vk-pay-config表的_id）[查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)，与 `config_directory` 二选一	| String	| -			| -			|
+| `config_directory`	| 多商户模式下的配置所在目录，与pid二选一 | String	| -			| -			|
 | user_id			| 用户id（选填）																																																										| String	| -			| -			|
 | nickname		| 用户昵称（选填）																																																									| String	| -			| -			|
 | return_url	| 手机端同步回调地址，仅`provider=vkspay`时生效（选填）																																								| String	| -			| -			|
@@ -141,6 +142,8 @@ context: {
 
 ### pid（多商户模式）@q2
 
+通过 pid 指定使用表 vk-pay-config 的哪个 _id 配置
+
 ```js
 const vkPay = require("vk-uni-pay");
 
@@ -150,7 +153,7 @@ exports.main = async (event, context) => {
     context,
     provider: "alipay",
     data: {
-      pid: "001", // 使用_id为001的商户配置
+      pid: "001", // 使用vk-pay-config表_id为001的商户配置
       openid: "用户openid，小程序支付时必传",
       out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
       total_fee: 1, // 订单金额（单位分 100 = 1元）
@@ -171,6 +174,43 @@ exports.main = async (event, context) => {
   
 };
 ```
+
+### config_directory（多商户模式）@q8
+
+通过 config_directory 指定配置所在目录
+
+```js
+const vkPay = require("vk-uni-pay");
+
+exports.main = async (event, context) => {
+  
+  let res = await vkPay.createPayment({
+    context,
+    provider: "alipay",
+    data: {
+      config_directory: "xxx", // 使用 uni-config-center/uni-pay/${config_directory}/config.js 的配置
+      openid: "用户openid，小程序支付时必传",
+      out_trade_no: "必填项，商户支付订单号，需自行保证全局唯一",
+      total_fee: 1, // 订单金额（单位分 100 = 1元）
+      subject: "订单标题",
+      type: "recharge", // 订单类型如recharge（充值订单）、goods（商品订单）、vip（会员订单）等，此处type的值如果是recharge，则回调时就会执行 pay-notify 目录下的 recharge.js 内的逻辑
+      // 自定义回调数据，能在回调事件获取到以下数据，回调函数中通过 let { out_trade_no, user_id, recharge_balance } = data;方式获取（不可与data内的一级属性名重复）
+      custom:{
+        
+      },
+      // 微信、支付宝文档上的其他选填参数（other内的参数会原样发送给微信、支付宝）
+      other:{
+      
+      }
+    }
+  });
+
+  return res;
+  
+};
+```
+
+
  
 ### needQRcode（强制使用二维码支付模式）@q3
 
