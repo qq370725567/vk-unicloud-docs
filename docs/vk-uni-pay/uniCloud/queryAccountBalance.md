@@ -35,6 +35,8 @@ if (queryAccountBalanceRes.code === 0) {
 | provider	|  支付供应商：alipay：支付宝支付官方 | String	| -			| alipay	|
 | platform  |  平台类型：app-plus、mp-weixin，用于获取对应平台的支付配置信息     | String  | -    | app-plus、mp-weixin、h5  |
 | pid       |  多商户模式下的自定义商户id（等于vk-pay-config表的_id） [查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)   | String  | -    | -  |
+| `config_directory`	| 多商户模式下的配置所在目录，与pid二选一 | String	| -			| -			|
+
 
 ## 返回值@return
 

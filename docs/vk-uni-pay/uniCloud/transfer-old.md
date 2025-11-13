@@ -56,6 +56,7 @@ if (transferRes.code === 0) {
 | out_biz_no  |  转账单号  | String  | -    | -  |
 | check_name  |  是否需要检测真实姓名  | Boolean  | true    | false  |
 | pid  |  多商户模式下的自定义商户id（等于vk-pay-config表的_id） [查看vk-pay-config表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)   | String  | -    | -  |
+| `config_directory`	| 多商户模式下的配置所在目录，与pid二选一 | String	| -			| -			|
 | payer_use_alias  |  是否展示付款方别名，为true将展示商家支付宝在商家中心 商户信息 > 商户基本信息 页面配置的 商户别名   | Boolean  | false    | true  |
 
 ## 微信v2
