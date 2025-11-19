@@ -61,7 +61,7 @@ let requestRes = await vk.openapi.baidu.open.request({
 #### 文本合成语音示例代码
 
 ```js
-// 获取tokne
+// 获取token
 let access_token = await vk.openapi.baidu.open.auth.getAccessToken();
 // 发起请求
 let buffer = await vk.request({

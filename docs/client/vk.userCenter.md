@@ -389,7 +389,7 @@ vk.userCenter.loginByToken();
 
 ### vk.userCenter.checkToken（token云端校验）@checkTokenforcloud
 
-**注意：实际开发过程中，无需你主动执行这个api来判断用户tokne是否有效**
+**注意：实际开发过程中，无需你主动执行这个api来判断用户token是否有效**
 
 [查看token介绍](#token介绍) 
 
