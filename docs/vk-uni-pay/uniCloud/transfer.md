@@ -99,8 +99,9 @@ let transferRes = await vkPay.transfer({
   openid: "ogtX061Da3Azw7fUZm-zNBYmbt0U", // 用户的openid
   user_name: "真实姓名", // 收款方真实姓名，转账金额 >= 2000元时必填
   transfer_remark: "转账备注", // 转账备注
-  transfer_scene_id: "1000",
-  user_recv_perception: "现金奖励",
+  transfer_scene_id: "1000", // 必填，该笔转账使用的转账场景，可前往“商户平台-产品中心-商家转账”中申请。如：1000 代表 现金营销场景	
+  user_recv_perception: "现金奖励", // 用户收款感知，不同的transfer_scene_id对应不同的值，请查看 https://pay.weixin.qq.com/doc/v3/merchant/4013774588
+  // 为转账场景报备信息，也需要根据不同的transfer_scene_id对应不同的值，请查看 https://pay.weixin.qq.com/doc/v3/merchant/4013774588
   transfer_scene_report_infos: [{
       info_type: "活动名称",
       info_content: "新会员有礼"
