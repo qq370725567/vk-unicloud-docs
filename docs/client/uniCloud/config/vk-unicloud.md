@@ -5,8 +5,8 @@ sidebarDepth: 0
 # vk-unicloud配置
 ### 配置文件所在文件位置：`uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js`
 ```js
-var uniIdConfig;
-var uniPayConfig;
+let uniIdConfig;
+let uniPayConfig;
 try {
   uniIdConfig = require('../uni-id/config.json');
 } catch(err) {
@@ -33,13 +33,13 @@ module.exports = {
       // 云函数默认时区（中国为8）
       "targetTimezone": 8
     },
-    // 加密的密钥
+    // 服务端加密的密钥
     "crypto": {
       "aes": "dad4c0cb88c7d005bc5e844b8e79a9f0", // 对称加密的密钥，长度固定32位（此处建议修改成自己的密钥）
     },
     // 客户端加密通信配置
     "clientCrypto": {
-      "expTime": 10, // 同一个请求过期时间，单位秒（可防止重放攻击）取值范围：5 ~ 3600（特别注意：此值如果设置太小，可能会影响正常用户的请求）
+      "expTime": 60, // 同一个请求过期时间，单位秒（可防止重放攻击）取值范围：5 ~ 3600（特别注意：此值如果设置太小，可能会影响正常用户的请求）
     },
     // 当 context 内的下面值为空时，赋予默认的值（主要用于解决云函数 URL 后的默认 APPID 问题。
     "context": {
@@ -118,6 +118,8 @@ module.exports = {
         "extStorage": {
           "provider": "qiniu", // qiniu: 扩展存储-七牛云
           "domain": "", // 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名）
+          "bucketName": "", // 存储空间名称，可不填，不填则使用当前空间绑定的存储空间
+          "bucketSecret": "", // 存储空间密钥，可不填，不填则使用当前空间绑定的存储空间
           "endpoint": {
             "upload": "", // 上传接口的代理地址，在国内上传无需填写
           }
@@ -134,9 +136,17 @@ module.exports = {
         }
       }
     },
-    // 其他小程序的密钥 当需要多个小程序绑定同一服务空间,并调用小程序服务端API时需要填写 暂只支持微信小程序
+    "cacheManage": {
+      /**
+       * 可选 db、redis
+       * db 使用空间内置数据库作为缓存
+       * redis 使用Redis数据库作为缓存
+       */
+      "mode": "db",
+    },
+    // 其他小程序的密钥 当需要多个小程序绑定同一服务空间，并调用小程序服务端API时需要填写
     "oauth": {
-      // 微信小程序
+      // 微信（含小程序\公众号\APP）
       "weixin": {
         // 密钥列表
         "list": [
