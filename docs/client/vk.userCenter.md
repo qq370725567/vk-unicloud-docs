@@ -1758,22 +1758,37 @@ vk.userCenter.loginByHuawei({
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/9bb19f46-e608-4fae-992a-c932965762b5.png)
 
-2. 当前的HBuilderX仅支持鸿蒙元服务内使用手机号一键登录
+2. 鸿蒙App端的button组件不支持getPhoneNumber，需要下载安装插件：[鸿蒙App实现华为账号一键登录](https://ext.dcloud.net.cn/plugin?id=26106)
 
-```html
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByHuaweiPhoneNumber">使用华为账号绑定的手机号登录/注册</button>
+**鸿蒙App**
+
+通过设置 `:need-user-info="true"` 可实现同时获取昵称和头像
+
+注意：鸿蒙App下按钮名称固定是华为账号一键登录，不可修改
+
+```vue
+<vk-get-phone-number :need-user-info="true" @getphonenumber="loginByHuaweiPhoneNumber" />
+```
+
+**元服务**
+
+```vue
+<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByHuaweiPhoneNumber">华为账号一键登录</button>
 ```
         
 ```js
 // 使用华为账号绑定的手机号登录/注册
 loginByHuaweiPhoneNumber(e) {
-  let { code } = e.detail;
+  // 仅鸿蒙App可获取到nickname和avatar
+  let { code, nickname, avatar } = e.detail;
   if (!code) {
     return false;
   }
   vk.userCenter.loginByHuaweiPhoneNumber({
     data: {
       code,
+      nickname,
+      avatar
     },
     success: (data) => {
       // 成功后的逻辑
@@ -1791,10 +1806,20 @@ loginByHuaweiPhoneNumber(e) {
 
 1. 此接口需要去华为开放平台申请（需要审核的，个人认证的账号大概率审核不通过）
 
-```html
+**鸿蒙App**
+
+注意：鸿蒙App下按钮名称固定是华为账号一键登录，不可修改
+
+```vue
+<vk-get-phone-number @getphonenumber="getPhoneNumber" />
+```
+
+**元服务**
+
+```vue
 <button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取华为账号绑定的手机号</button>
 ```
-  
+
 ```js
 // 获取华为账号绑定的手机号
 getPhoneNumber(e) {
