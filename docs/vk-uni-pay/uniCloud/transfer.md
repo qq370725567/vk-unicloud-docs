@@ -45,8 +45,17 @@ let transferRes = await vkPay.transfer({
   transfer_amount: 10, // 转账金额 100=1元（单位分）
   order_title: "转账", // 转账标题
   transfer_remark: "转账备注", // 转账备注
-  payer_use_alias: true
+  payer_use_alias: true, // 是否展示付款方别名，为 true 将展示商家支付宝在商家中心 商户信息 > 商户基本信息 页面配置的 商户别名
+  // 如果转账失败，提示转账场景名称为空，则需要多传下面2个参数
+  transfer_scene_name: "佣金报酬", // 该笔转账使用的转账场景，商户可前往 https://b.alipay.com/page/bizfund/transferScene/list 中查看/申明转账场景。
+  transfer_scene_report_infos: [
+    {
+      info_type: "佣金报酬说明", // 转账场景信息类型，即商户所属转账场景下的信息类型。此字段内容为固定值，需严格按照 https://opendocs.alipay.com/open/0iaxid 传参。
+      info_content: "8月家政服务报酬", // 转账场景信息描述，即商户所属转账场景下的信息内容。商户可按实际业务场景自定义传参，需严格按照 https://opendocs.alipay.com/open/0iaxid 传参。
+    }
+  ]
 });
+
 if (transferRes.code === 0) {
   // 转账成功后的逻辑
 
