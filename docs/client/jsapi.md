@@ -84,7 +84,6 @@ vk.pubfn.debounce(() => {
 ### vk.pubfn.throttle（节流函数）@throttle
 
 ```js
-
 /**
  * 节流函数
  * 节流原理：在一定时间内，只能触发一次
@@ -818,7 +817,7 @@ let { item, index } = vk.pubfn.getListItemIndex(list, "_id", "001");
  * 数组转对象 - 将对象数组转成json
  * 如[{"_id":"001","name":"name1","sex":1},{"_id":"002","name":"name2","sex":2}]
  * 转成
- * {"001",{"_id":"001","name":"name1","sex":1},"002":{"_id":"002","name":"name2","sex":2}}
+ * {"001":{"_id":"001","name":"name1","sex":1},"002":{"_id":"002","name":"name2","sex":2}}
  * @param	{Array}  list 数据源
  * @param	{String} key 键名
  */
@@ -1096,7 +1095,7 @@ let newVal = vk.pubfn.toDecimal(1.56555, 2);
 金额显示过滤器（以分为单位，将 100 转成 1）
 ```js
 /**
- * 金额显示过滤器（已分为单位，将100 转成 1
+ * 金额显示过滤器（以分为单位，将100 转成 1
  * @param {Number} money 金额
  * @return {Number} newVal 转换后的值
  */
@@ -1109,7 +1108,7 @@ let newVal = vk.pubfn.priceFilter(100); // 1
 百分比过滤器 将 0.01 显示成 1%  1 显示成 100%
 ```js
 /**
- * 百分比过显示滤器
+ * 百分比显示过滤器
  * @param {Number} value 百分比值
  * @param {Boolean} needShowSymbol 显示 % 这个符号
  * @param {String | Number} defaultValue value为空时的默认值
