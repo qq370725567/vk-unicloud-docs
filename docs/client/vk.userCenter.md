@@ -233,7 +233,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ```js
 /**
- * 用户登陆(用户名+密码)
+ * 用户登录(用户名+密码)
  * data 请求参数 说明
  * @param {String} username 用户名
  * @param {String} password 密码
@@ -553,7 +553,7 @@ vk.userCenter.bindMobile({
 
 ```js
 /**
- * 绑定手机号
+ * 解绑手机号
  * data 请求参数 说明
  * @param {String} mobile 手机号
  * @param {String} code 手机收到的验证码
@@ -791,9 +791,9 @@ vk.userCenter.unbindEmail({
 ```js
 /**
  * 绑定新的邮箱（换绑邮箱）
- * @param {String} oldEmail 旧邮箱码
+ * @param {String} oldEmail 旧邮箱
  * @param {String} oldEmailCode 旧邮箱收到的验证码
- * @param {String} email 新邮箱码
+ * @param {String} email 新邮箱
  * @param {String} code 新邮箱收到的验证码
  */
 vk.userCenter.bindNewEmail({
@@ -869,11 +869,11 @@ vk.userCenter.sendEmailCode({
 });
 ```
 
-### vk.userCenter.resetPasswordByEmail（根据邮箱证码重置账号密码）@resetPasswordByEmail
+### vk.userCenter.resetPasswordByEmail（根据邮箱验证码重置账号密码）@resetPasswordByEmail
 
 ```js
 /**
- * 根据邮箱证码重置账号密码
+ * 根据邮箱验证码重置账号密码
  * data 请求参数 说明
  * @param {String} password 重置后的密码
  * @param {String} code 验证码
@@ -1000,7 +1000,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 				let url = `https://open.weixin.qq.com/connect/qrconnect?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect`;
 				window.location.href = url;
 			},
-			// 微信登陆
+			// 微信登录
 			loginByWeixin(type) {
 				if (!this.options.code) {
 					vk.toast("请先获取code");
@@ -1870,7 +1870,7 @@ vk.userCenter.unbindHuawei({
 });
 ```
 
-### vk.userCenter.code2SessionHuawei（获取抖音openid）@code2SessionHuawei
+### vk.userCenter.code2SessionHuawei（获取华为openid）@code2SessionHuawei
 
 > vk-unicloud 版本需 ≥ 2.19.0
 
