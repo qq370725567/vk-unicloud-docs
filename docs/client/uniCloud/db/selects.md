@@ -3,11 +3,10 @@ sidebarDepth: 0
 ---
 
 # 万能连表 selects（连表、聚合、分组）
- 
+
 ## 目录@directory
 
 - 1、[1张主表多张副表](#scene1)
-
 - 2、[1张主表多张副表，同时副表也有多张副表](#scene2)
 - 3、[需要查询同时满足主表和副表的条件，即副表不满足条件，则主表记录也不获取](#scene3)
 - 4、[连表查询时需要按照离给定点从近到远输出（地理位置经纬度）](#scene4)
@@ -60,7 +59,7 @@ let res = await vk.baseDao.selects({
 });
 ```
 
-### 请求参数@parame
+### 请求参数@params
 
 |    参数名				|   类型			| 必填		|    说明																																						|
 |------------			|----------	|------	|-----------																																				|
@@ -303,7 +302,6 @@ res = await vk.baseDao.selects({
 以下代码作用是：用一条聚合查询语句，查询前10个用户的信息，并查询他们的最新10个订单记录表，再查询他们的VIP信息
 
 ```js
-
 res = await vk.baseDao.selects({
   dbName: "uni-id-users",// 主表名
   getCount: false, // 是否需要同时查询满足条件的记录总数量，默认false
@@ -707,15 +705,15 @@ res = await vk.baseDao.selects({
     
   },
   groupJson: {
-    _id: "$key1", // _id是分组id（_id:为固定写法，必填属性） $ 后面接字段名，如user_id字段进行分组
-    key1: $.first("$key1"), // $ 后面接字段名，如把user_id原样输出
-    key2: $.first("$key2"), // $ 后面接字段名，如把user_id原样输出
-    key3: $.first("$key3"), // $ 后面接字段名，如把user_id原样输出
-    key4: $.first("$key4"), // $ 后面接字段名，如把user_id原样输出
-    count: $.sum(1), // 代表每组各有多少条记录总量
+    _id: "$key1", // _id是分组id（固定写法，必填），$key1表示按key1字段分组
+    key1: $.first("$key1"), // 显示该组第一条数据的key1字段值
+    key2: $.first("$key2"),
+    key3: $.first("$key3"),
+    key4: $.first("$key4"),
+    count: $.sum(1), // 统计每组记录条数
   },
-  sortArr: [{ name: "count",type: "desc" }], // 对分组后的结果进行排序
-  // 最后的where，（分组后的筛选）主要用于对分组后的结果再进行筛选 如：筛选金额大于1000才能上榜（这里的lastWhereJson在数据量大的情况下是有性能问题的，（建议主表的where条件中先进行筛选，如只查本季度数据，只要主表过滤完后数据量不大，则没有性能问题。）
+  sortArr: [{ name: "count",type: "desc" }],
+  // lastWhereJson 用于分组后的筛选，数据量大时有性能问题，建议先用whereJson过滤
   // lastWhereJson:{
   //   count:_.gte(10)
   // }
@@ -731,21 +729,21 @@ res = await vk.baseDao.selects({
   pageSize: 10,
   // 主表where条件（分组前的筛选）
   whereJson: {
-    
+
   },
   groupJson: {
     _id: {
       key1:"$key1",
       key2:"$key2",
-    }, // _id是分组id（_id:为固定写法，必填属性）， $ 后面接字段名，如user_id字段进行分组
-    key1: $.first("$key1"), // $ 后面接字段名，如把user_id原样输出
-    key2: $.first("$key2"), // $ 后面接字段名，如把user_id原样输出
-    key3: $.first("$key3"), // $ 后面接字段名，如把user_id原样输出
-    key4: $.first("$key4"), // $ 后面接字段名，如把user_id原样输出
-    count: $.sum(1), // 代表每组各有多少条记录总量
+    }, // 多字段组合分组
+    key1: $.first("$key1"),
+    key2: $.first("$key2"),
+    key3: $.first("$key3"),
+    key4: $.first("$key4"),
+    count: $.sum(1),
   },
-  sortArr: [{ name: "count",type: "desc" }], // 对分组后的结果进行排序
-  // 最后的where，（分组后的筛选）主要用于对分组后的结果再进行筛选 如：筛选金额大于1000才能上榜（这里的lastWhereJson在数据量大的情况下是有性能问题的，（建议主表的where条件中先进行筛选，如只查本季度数据，只要主表过滤完后数据量不大，则没有性能问题。）
+  sortArr: [{ name: "count",type: "desc" }],
+  // lastWhereJson 用于分组后的筛选
   // lastWhereJson:{
   //   count:_.gte(10)
   // }
@@ -946,7 +944,9 @@ res = await vk.baseDao.selects({
 |%%			|百分号作为字符										|%					|
 
 
-## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$@tips
+## 注意@tips
+
+文档中出现的 `$` 在云函数若不可用，则可写成 `_.$`
 
 以下是 _ 和 $ 变量实际代表的含义
 

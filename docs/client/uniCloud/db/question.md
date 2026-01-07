@@ -27,7 +27,8 @@ sidebarDepth: 0
 18. [删除某个字段](#删除某个字段)
 19. [vk.baseDao.findById和vk.baseDao.findByWhereJson如何连表](#findbyid如何连表)
 20. [如何更改字段名](#如何更改字段名)
-20. [字段如何自增](#字段如何自增)
+21. [字段如何自增](#字段如何自增)
+22. [如何实现自增id](#如何实现自增id)
 
 ## and
 
@@ -223,7 +224,7 @@ if (andArr.length > 0) {
 ```js
 // 等价于 _id = "1" or _id = "2" or _id =  "3"
 _id : _.in(["1","2","3"])
-// 等价于 _id != "1" and _id !== "2" and _id != "3"
+// 等价于 _id != "1" and _id != "2" and _id != "3"
 _id : _.nin(["1","2","3"])
 
 ```

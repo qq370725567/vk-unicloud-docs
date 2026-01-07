@@ -17,14 +17,6 @@ vk框架已支持扩展数据库，且不需要改动代码，只需要右键rou
 - [开发文档](https://doc.dcloud.net.cn/uniCloud/ext-mongodb/dev.html)
 - [控制台地址](https://unicloud.dcloud.net.cn/pages/ext-mongodb/home)
 
-**特别注意：**
-
-因依赖的 HBuilderX 版本未发版，故需要手动升级 HBuilderX，步骤如下：
-
-- 1. 下载压缩包 [unicloud.zip](https://web-ext-storage.dcloud.net.cn/doc/unicloud/ext-mongodb/zip/unicloud.zip)
-- 2. 复制 unicloud.zip 到 `{{HBuilderX安装目录}}/HBuilderX/plugins` 目录下
-- 3. 右键 unicloud.zip，提取到当前位置，当出现弹窗是否需要替换文件时，点全部替换
-
 ## API
 
 ### 切换数据库实例@switch-database-instance
@@ -58,7 +50,7 @@ let info = await vk.baseDao.findById({
 });
 ```
 
-### 切换数据库实例和库@switch-database
+### 切换数据库实例和库@switch-database-instance-and-database
 
 ```js
 // 返回的newDb对象就是连接指定数据库实例且指定了库名的db对象

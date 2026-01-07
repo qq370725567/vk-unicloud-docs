@@ -8,8 +8,6 @@ sidebarDepth: 0
 
 演示页面在`pages/db-test/db-test`
 
-以下是vk.baseDao数据库API部分调用示例展示
-
 ## 增
 
 ### vk.baseDao.add（单条记录增加）@add
@@ -285,12 +283,12 @@ let newInfo = await vk.baseDao.updateAndReturn({
 
 **请求参数**
 
-|    参数名		|   类型			| 必填		|    说明																					|
-|------------	|----------	|------	|-----------																			|
-|   dbName		|  String		|  是		|   表名																						|
-|   whereJson	|  Object		|  是		|   where 条件																			|
-|   dataJson	|  Object		|  是		|   需要修改的数据																	|
-|   db				|  DB				|  否		|   指定数据库实例 const db = uniCloud.database();	|
+|    参数名   |   类型   | 必填 |    说明    |
+|------------|----------|------|-----------|
+|   dbName   |  String  |  是  |   表名    |
+|   whereJson |  Object  |  是  |   where 条件  |
+|   dataJson |  Object  |  是  |   需要修改的数据  |
+|   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
 
 **返回值**
 
@@ -309,15 +307,15 @@ vk.baseDao.updateAndReturn 可以实现什么功能？
 
 ### vk.baseDao.setById（根据ID判断存在则替换，不存在则添加）@setById
 
+**接口名**
+
+`vk.baseDao.setById`
+
 优势：此为原子操作，并不是先判断是否存在，再进行替换或新增。只计一次写操作。（原子操作）（支持事务）
 
 注意：若id存在，则会用传的数据进行替换，即未写在 dataJson 内的字段会被删除
 
 > VK框架核心库版本需 >= 2.15.1
-
-**接口名**
-
-`vk.baseDao.setById`
 
 **调用示例**
 
@@ -342,10 +340,10 @@ let setRes = await vk.baseDao.setById({
 
 **返回值**
 
-|    参数名		|   类型		| 必填	|    说明																						|
-|------------	|----------	|------	|-----------																				|
-|   type			|  String		|  是		|  add 添加 update 修改（替换）															|
-|   id				|  String		|  是		|   若返回的type=add，则会额外返回当前新增的记录的id|
+|    参数名   |   类型   | 必填 |    说明    |
+|------------|----------|------|-----------|
+|   type   |  String  |  是  |  add 添加 update 修改（替换）  |
+|   id   |  String  |  是  |   若返回的type=add，则会额外返回当前新增的记录的id |
 
 ## 查
 ### vk.baseDao.findById（根据id获取单条记录）@findById
@@ -418,7 +416,7 @@ let info = await vk.baseDao.findByWhereJson({
 
 `vk.baseDao.select`
 
-查多条记录（具有分页功能） 对应的传统sql语句: `select * from vk-test where money>=0 limit 1,20
+查多条记录（具有分页功能） 对应的传统sql语句: `select * from vk-test where money>=0 limit 1,20`
 
 云开发数据库最大支持查询1000条数据，而此API可以达到1万条数据，通过设置 `pageSize: 10000`，最大极限要看你返回的数据量大小。（建议控制在1万以内）
 
@@ -562,7 +560,7 @@ if(num>0){
 在设置了昵称唯一时，判断此昵称是否允许修改
 
 ```js
-// 判断用户名是否存在
+// 判断昵称是否已被其他用户使用
 let uid = "当前要修改的用户的_id";
 let num = await vk.baseDao.count({
   dbName: "uni-id-users",// 表名
@@ -572,7 +570,7 @@ let num = await vk.baseDao.count({
   }
 });
 if(num>0){
-  // 用户名存在
+  // 昵称已被其他用户使用
 }
 ```
 
@@ -742,6 +740,4 @@ let list = await vk.baseDao.sample({
 
 **返回值**
 
-返回值是平均值
-
-**...更多其他可以下载插件体验**
+返回值是随机获取的记录数组
