@@ -15,7 +15,7 @@ sidebarDepth: 0
 
 "mp-weixin" 微信小程序
 
-app-plus" APP（需要用到APP登录才需要配置）
+"app-plus" APP（需要用到APP登录才需要配置）
 
 "h5-weixin" （需要用到公众号登录才需要配置）
 
@@ -188,7 +188,7 @@ let generateRes = await vk.openapi.weixin.urlscheme.generate({
     env_version: "develop", // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
   },
   is_expire: true,
-  iexpire_type: 1,
+  expire_type: 1,
   expire_interval: 30, // 有效期30天（最大30天）
 });
 ```
