@@ -244,6 +244,10 @@ module.exports = {
     // server   由管理端调用，HBuilderX里上传并运行，仅阿里云支持，腾讯云这种方式调用也是client
     // function 由其他云函数callFunction调用，仅阿里云支持，腾讯云这种方式调用也是client
     "SOURCE": "client",
+    // 运行环境
+    // local    本地运行
+    // cloud    云端运行
+    "RUNTIME_ENV": "local",
     // IP
     "CLIENTIP": "127.0.0.1",
     // UA

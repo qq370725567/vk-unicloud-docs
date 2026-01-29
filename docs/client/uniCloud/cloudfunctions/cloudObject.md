@@ -233,6 +233,7 @@ module.exports = {
 |spaceId	|string	|是		|服务空间Id		|
 |functionName	|string	|是		|云对象名称，新增于`HBuilderX 3.5.1`		|
 |functionType	|string	|是		|云对象此值固定为`cloudobject`，新增于`HBuilderX 3.5.1`	|
+|runtimeEnv	|string	|是		|运行环境，取值为local(本地运行)或cloud(云端运行)，新增于`HBuilderX 4.25`|
 
 ### this.getUniIdToken（获取客户端token）@getUniIdToken
 
