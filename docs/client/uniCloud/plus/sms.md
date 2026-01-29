@@ -20,8 +20,8 @@ sidebarDepth: 0
  * @param {object} data       短信模板内的参数数据
  */
 
-// unicloud调用示例
-let sendSmsRes = await vk.system.smsUtil.sendSms({
+// unicloud调用示例（小于 2.21.0 版本时，需使用vk.system.smsUtil.sendSms 代替 vk.sendSms）
+let sendSmsRes = await vk.sendSms({
   provider: "unicloud",
   phone: "15200000001",
   templateId: "11558",
@@ -32,8 +32,8 @@ let sendSmsRes = await vk.system.smsUtil.sendSms({
   }
 });
 
-// 阿里云调用示例
-let sendSmsRes = await vk.system.smsUtil.sendSms({
+// 阿里云调用示例（小于 2.21.0 版本时，需使用vk.system.smsUtil.sendSms 代替 vk.sendSms）
+let sendSmsRes = await vk.sendSms({
   provider: "aliyun",
   phone: "15200000001",
   templateId: "SMS_202470413",
