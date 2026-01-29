@@ -3,24 +3,34 @@ sidebarDepth: 0
 ---
 
 # 短信发送（聚合版）
- 
+
+支持 uniCloud 内置短信与阿里云短信，可发送通知类短信（如物流、订单）和验证码短信。
+
 ## 调用示例@demo
 
 ### 发送通知类短信（非验证码）@sendSms
 
-```js
-/**
- * 发送短信(聚合版)
- * @param {String} provider   服务供应商
- * @param {String} smsKey     密钥ID，若不传，则自动从config公共模块中获取
- * @param {String} smsSecret  密钥密码，若不传，则自动从config公共模块中获取
- * @param {String} signName   短信签名，若不传，则自动从config公共模块中获取
- * @param {String} phone      多个手机号用,号隔开 目前unicloud不支持多个手机号，阿里云支持
- * @param {String} templateId 发送的短信模板ID
- * @param {object} data       短信模板内的参数数据
- */
+`vk.sendSms`（≥2.21.0）或 `vk.system.smsUtil.sendSms`（<2.21.0）
 
-// unicloud调用示例（小于 2.21.0 版本时，需使用vk.system.smsUtil.sendSms 代替 vk.sendSms）
+**请求参数**
+
+| 参数			| 类型									| 必填		| 说明																																		|
+|------			|------								|------	|------																																	|
+| provider	| String							| 是			| 服务供应商：`unicloud`（uniCloud 内置）、`aliyun`（阿里云）								|
+| phone			| String							| 否			| 单个手机号，与 phoneList 二选一																					|
+| phoneList	| Array&lt;String&gt;	| 否			| 批量发送手机号，与 phone 二选一																					|
+| templateId| String							| 是			| 短信模板 ID（unicloud 为数字如 11558，阿里云为如 SMS_xxx）								|
+| data			| Object							| 是			| 模板变量，key 与模板中占位符一致，如 `{ orderNo, expressCom, expressNo }`	|
+| smsKey		| String							| 否			| 密钥 ID，不传则从 config 公共模块读取																		|
+| smsSecret	| String							| 否			| 密钥密码，不传则从 config 读取																						|
+| signName	| String							| 否			| 短信签名，不传则从 config 读取（阿里云必填签名时需配置或传入）								|
+
+**返回说明**
+
+返回值为 `{ code, msg }`。`code` 为 `0` 表示成功，其他值均为失败；`msg` 为失败时的原因说明。
+
+```js
+// 单个手机号 - uniCloud
 let sendSmsRes = await vk.sendSms({
   provider: "unicloud",
   phone: "15200000001",
@@ -32,11 +42,35 @@ let sendSmsRes = await vk.sendSms({
   }
 });
 
-// 阿里云调用示例（小于 2.21.0 版本时，需使用vk.system.smsUtil.sendSms 代替 vk.sendSms）
-let sendSmsRes = await vk.sendSms({
+// 多个手机号 - uniCloud
+let sendSmsBatchRes = await vk.sendSms({
+  provider: "unicloud",
+  phoneList: ["15200000001", "15200000002"],
+  templateId: "11558",
+  data: {
+    orderNo: "DD8888888888",
+    expressCom: "顺丰快递",
+    expressNo: "SF88888888"
+  }
+});
+
+// 单个手机号 - 阿里云
+let sendSmsResAliyun = await vk.sendSms({
   provider: "aliyun",
   phone: "15200000001",
   templateId: "SMS_202470413",
+  data: {
+    orderNo: "DD8888888888",
+    expressCom: "顺丰快递",
+    expressNo: "SF88888888"
+  }
+});
+
+// 多个手机号 - 阿里云
+let sendSmsResAliyun = await vk.sendSms({
+  provider: "aliyun",
+  phoneList: ["15200000001", "15200000002"],
+  templateId: "11558",
   data: {
     orderNo: "DD8888888888",
     expressCom: "顺丰快递",
@@ -47,29 +81,98 @@ let sendSmsRes = await vk.sendSms({
 
 ### 发送短信验证码@sendSmsVerifyCode
 
-此写法会自动将验证码保存到数据库，可用于
+`vk.system.smsUtil.sendSmsVerifyCode`：发送验证码并自动写入数据库，供后续 `uniID.verifyCode` 等校验使用。
 
-1. 手机号登录 type: "login"
-2. 绑定手机 type: "bind"
-3. 解绑手机 type: "unbind"
-4. 重置账号密码 type: "reset-pwd"
+**适用 type**
 
-**调用示例**
+| type			| 说明																					|
+|------			|------																				|
+| login			| 手机号登录																		|
+| bind			| 绑定手机																			|
+| unbind		| 解绑手机																			|
+| reset-pwd	| 重置账号密码																	|
+| 自定义		| 如 verify，需自行调用 `uniID.verifyCode` 校验	|
+
+**请求参数**
+
+| 参数			| 类型		| 必填		| 说明																														|
+|------			|------	|------	|------																													|
+| provider	| String| 是			| 短信供应商：`unicloud`（内置验证码）、`aliyun`（阿里云验证码）			|
+| phone			| String| 是			| 手机号																													|
+| code			| String| 是			| 验证码内容（如 4～6 位数字）																			|
+| type			| String| 是			| 用途：`login` / `bind` / `unbind` / `reset-pwd` 或自定义				|
+| expiresIn	| Number| 否			| 有效时间（秒），须为 60 的倍数，不传则用 config 中的 codeExpiresIn	|
+| smsKey		| String| 否			| 密钥 ID，不传则从 config 读取																		|
+| smsSecret	| String| 否			| 密钥密码，不传则从 config 读取																		|
+| signName	| String| 否			| 短信签名，不传则从 config 读取																		|
+
+**返回说明**
+
+返回值为 `{ code, msg }`。`code` 为 `0` 表示成功，其他值均为失败；`msg` 为失败时的原因说明。
+
+**云函数内完整示例（发送验证码）**
 
 ```js
-let sendSmsVerifyCodeRes = await vk.system.smsUtil.sendSmsVerifyCode({
-	provider: "短信供应商", // unicloud 内置验证码; aliyun 阿里云验证码
-	code: "1234", // 验证码
-	type: "login", // login 手机号登录; bind 绑定手机; unbind 解绑手机; reset-pwd 重置账号密码;
-	phone: "15200000001",
-	expiresIn: 180, // 验证码实际有效时间，必须是60的倍数
-});
-console.log('sendSmsVerifyCodeRes: ', sendSmsVerifyCodeRes);
+'use strict';
+module.exports = {
+  main: async (event) => {
+    let { data = {}, util } = event;
+    let { vk } = util;
+    let { mobile, type = "login" } = data;
+    let res = { code: 0, msg: "" };
+
+    if (!mobile) return { code: -1, msg: "手机号不能为空" };
+
+    let code = vk.pubfn.random(6, "0123456789");
+    let sendSmsVerifyCodeRes = await vk.system.smsUtil.sendSmsVerifyCode({
+      provider: "unicloud",
+      phone: mobile,
+      code,
+      type,
+      expiresIn: 180
+    });
+
+    if (sendSmsVerifyCodeRes.code !== 0) {
+      return { code: -1, msg: sendSmsVerifyCodeRes.msg || "验证码发送失败" };
+    }
+    res.msg = "验证码已发送";
+    return res;
+  }
+};
+```
+
+**云对象内调用示例**
+
+```js
+async sendSmsCode(mobile, type = "login") {
+  let { vk } = this.getUtil();
+  let code = vk.pubfn.random(6, "0123456789");
+  let sendSmsVerifyCodeRes = await vk.system.smsUtil.sendSmsVerifyCode({
+    provider: "unicloud",
+    phone: mobile,
+    code,
+    type,
+    expiresIn: 180
+  });
+  return sendSmsVerifyCodeRes;
+}
 ```
 
 #### 自定义校验type@@sendSmsVerifyCode-type
 
-如果业务不是上面4种（手机号登录、绑定手机、解绑手机、重置账号密码），那么type可以自己自定义，比如操作 “其他重要操作” 时的手机号验证码校验，type可以写为 type: "verify"，此时可以手动校验验证码是否正确，校验验证码可通过uni-id模块自带的API实现，代码如下：
+如果业务不是上面4种（手机号登录、绑定手机、解绑手机、重置账号密码），那么 type 可以自己自定义，例如 type: "verify"。发送时仍用 `vk.system.smsUtil.sendSmsVerifyCode`，校验时需手动调用 `uniID.verifyCode`。
+
+**uniID.verifyCode 请求参数**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| mobile | String | 是 | 手机号 |
+| code | String | 是 | 用户输入的验证码 |
+| type | String | 是 | 须与发送验证码时传入的 type 一致（如 "verify"） |
+
+**返回说明**
+
+返回值为 `{ code, msg }`。`code` 为 `0` 表示校验成功，其他值均为失败；`msg` 为失败原因（如验证码错误或过期）。
 
 **云函数调用示例**
 
