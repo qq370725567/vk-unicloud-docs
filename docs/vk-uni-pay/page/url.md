@@ -99,7 +99,8 @@ $.ajax({
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
-      type: "recharge" // 支付回调类型
+      type: "recharge", // 支付回调类型
+      openid: "" // 微信小程序用户的openid
     }
   }),
   success: (res) => {
@@ -142,7 +143,8 @@ axios({
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
-      type: "recharge" // 支付回调类型
+      type: "recharge", // 支付回调类型
+      openid: "" // 微信小程序用户的openid
     }
   }
 }).then((res) => {
@@ -189,7 +191,8 @@ $.ajax({
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
-      type: "recharge" // 支付回调类型
+      type: "recharge", // 支付回调类型
+      openid: "" // 微信公众号用户的openid
     }
   }),
   success: (res) => {
@@ -229,7 +232,8 @@ axios({
       out_trade_no: "test202405230001", // 订单号
       total_fee: 1, // 支付金额，单位是分，100 = 1元
       subject: "订单标题", // 订单标题
-      type: "recharge" // 支付回调类型
+      type: "recharge", // 支付回调类型
+      openid: "" // 微信公众号用户的openid
     }
   }
 }).then((res) => {
