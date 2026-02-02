@@ -3,10 +3,9 @@ sidebarDepth: 0
 ---
 
 # 数据库API
- 
-调用示例在`router/service/db_test/pub/`目录下
 
-演示页面在`pages/db-test/db-test`
+- **调用示例**：`router/service/db_test/pub/` 目录下
+- **演示页面**：`pages/db-test/db-test`
 
 ## 增
 
@@ -77,7 +76,7 @@ let ids = await vk.baseDao.adds({
 1. 若 `needReturnIds` 为false，则返回的是空数组，设置为false可以减少内存占用，提升性能
 2. 若 `needReturnIds` 为true，则返回的所有添加数据的_id
 
-___注意: `add` 和 `adds` 默认会自动加上 `_add_time`字段，该字段表示该条记录的添加时间___
+> **注意：** `add` 和 `adds` 默认会自动加上 `_add_time` 字段，该字段表示该条记录的添加时间。
 
 可以通过参数 `cancelAddTime:true` 来取消 `_add_time` 字段的添加，如下
 
@@ -237,7 +236,7 @@ let newInfo = await vk.baseDao.updateById({
   dataJson: {
     money: 1
   },
-  getUpdateData: true, // 去掉getUpdateData，则不会返回修改后的数据对象
+  getUpdateData: true, // 不传或设为 false 时不返回修改后的数据对象
 });
 ```
 
@@ -340,10 +339,10 @@ let setRes = await vk.baseDao.setById({
 
 **返回值**
 
-|    参数名   |   类型   | 必填 |    说明    |
-|------------|----------|------|-----------|
-|   type   |  String  |  是  |  add 添加 update 修改（替换）  |
-|   id   |  String  |  是  |   若返回的type=add，则会额外返回当前新增的记录的id |
+| 返回值字段 | 类型 | 说明 |
+|------------|------|------|
+| type | String | add 添加；update 修改（替换） |
+| id | String | 当 type=add 时返回新增记录的 _id |
 
 ## 查
 ### vk.baseDao.findById（根据id获取单条记录）@findById
@@ -383,7 +382,7 @@ let info = await vk.baseDao.findById({
 
 `vk.baseDao.findByWhereJson`
 
-根据条件获取单条记录 对应的传统sql语句: `select * from vk-test where _id = "5f3a125b3d11c6000106d338"`
+根据条件获取单条记录（支持任意 where 条件及排序，取满足条件的第一条）。等价 SQL：`select * from vk-test where money >= 100 limit 1`
 
 **调用示例**
 
@@ -391,8 +390,9 @@ let info = await vk.baseDao.findById({
 let info = await vk.baseDao.findByWhereJson({
   dbName: "vk-test",
   whereJson: {
-    _id: "5f3a125b3d11c6000106d338",
-  }
+    money: _.gte(100)  // 金额大于等于 100 的第一条
+  },
+  sortArr: [{ name: "_id", type: "desc" }]
 });
 ```
 
@@ -429,7 +429,7 @@ let info = await vk.baseDao.findByWhereJson({
 ```js
 let res = await vk.baseDao.select({
   dbName: "vk-test", // 表名
-  getCount: false, // 是否需要同时查询满足条件的记录总数量，默认false
+  getCount: false, // 是否返回满足条件的记录总数，默认 false
   getMain: false, // 是否只返回rows数据，默认false
   pageIndex: 1, // 当前第几页
   pageSize: 20, // 每页条数
@@ -471,24 +471,24 @@ let res = await vk.baseDao.select({
 |   fieldJson |  Object  |  否  |   字段显示规则（用来控制只显示哪些字段或不显示哪些字段）（见上方调用示例）   |
 |   sortArr |  Array  |  否  |   排序规则（见上方调用示例）  |
 |   db   |  DB  |  否  |   指定数据库实例 const db = uniCloud.database(); |
-|   debug					|  Boolean	|  否		|   是否返回调试需要的参数，目前设置为true会返回数据库执行耗时 默认 false	|
+|   debug |  Boolean  |  否  |   是否返回调试信息，设为 true 会返回数据库执行耗时，默认 false |
 
 **返回值**
 
-|    参数名		|   类型			|     说明																																														|
-|------------	|----------	|-----------																																												|
-|   rows			|  Array		|  数据列表，没有数据时返回空数组																																											|
-|   total			|  Number		|  满足条件的记录总数（如果返回的getCount为false，则 total = (pageIndex - 1) * pageSize + rows.length）	|
-|   hasMore		|  Boolean	|  分页参数，true 还有下一页 false 没有下一页	[详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#hasmore) 																														|
-|   pagination|  Object		|  当前分页参数																																												|
-|   getCount	|  Boolean	|  是否有执行过getCount，true：有，false：无																														|
+| 参数名 | 类型 | 说明 |
+|--------|------|------|
+| rows | Array | 数据列表，没有数据时返回空数组 |
+| total | Number | 满足条件的记录总数（getCount 为 false 时，total = (pageIndex - 1) * pageSize + rows.length） |
+| hasMore | Boolean | 是否还有下一页，[详情](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#hasmore) |
+| pagination | Object | 当前分页参数 |
+| getCount | Boolean | 是否执行过 getCount，true：有，false：无 |
 
-**pagination对象的属性**
+**pagination 对象的属性**
 
-|    参数名		|   类型			|     说明					|
-|------------	|----------	|-----------			|
-|   pageIndex	|  Number		|  当前分页的页码	|
-|   pageSize	|  Number		|  每页显示的大小	|
+| 参数名 | 类型 | 说明 |
+|--------|------|------|
+| pageIndex | Number | 当前分页的页码 |
+| pageSize | Number | 每页显示的大小 |
 
 ### vk.baseDao.count（获取记录总条数）@count
 
@@ -508,13 +508,13 @@ let num = await vk.baseDao.count({
 });
 ```
 
-带条件count
+带条件 count
 
 ```js
 let num = await vk.baseDao.count({
-  dbName: "vk-test",// 表名
-  whereJson: { // 条件
-    
+  dbName: "vk-test", // 表名
+  whereJson: {       // 条件
+    money: _.gte(0)  // 如：金额大于等于 0 的记录数
   }
 });
 ```
