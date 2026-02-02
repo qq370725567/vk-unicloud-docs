@@ -2,135 +2,422 @@
 sidebarDepth: 0
 ---
 
-# dao层的作用以及方法命名规范
- 
-## dao层的作用@introduce
+# Dao 层（2.0版本）
 
-* 1、复用数据库API，减少重复代码，同时可以达到即使后面修改了数据库字段或数据库名称，也只需要修改少量 `dao` 层的代码即可。
-* 2、`dao` 层是积木，而 `service` 层是利用这些积木来搭建你想要的乐园。
-* 3、理论上 `dao` 层的代码开发是可以脱离业务的，即使业务需求还不是很明确，只要数据库表名已确定，即可编写 `dao` 层。`dao` 层提供的是数据库原子性操作。
+:::warning 注意
 
-> [点击安装自动生成Dao层基础代码插件](https://ext.dcloud.net.cn/plugin?id=6663)
+vk-unicloud 版本需 ≥ 2.21.1，低版本请查看 [老版本文档](./dao1.md)
 
-## 注意事项@tips
+:::
 
-* Dao层代码默认写在 `router/dao/modules/` 目录 [查看自定义dao层目录](#custom-directory)
+## 概述
 
-* 文件名必须以 `xxxDao.js` 这样的格式命名(即必须Dao.js结尾)
+Dao 2.0 采用**类继承**方式：每个 Dao 继承 `BaseDao`，在构造函数中指定表名即可获得完整的 CRUD 及聚合能力。基本方法由基类实现，无需重复编写；仅在有特殊业务时再重写或新增方法。
 
-* 最终通过 `await vk.daoCenter.xxxDao.xxxx();` 形式进行调用
+## 注意事项
 
-* 尽量只写跟数据库交互的代码，少写业务逻辑代码，业务逻辑应写在 `service` 层
+* Dao 层代码默认写在 `router/dao/modules/` 目录下
+* 文件名必须以 `xxxDao.js` 结尾
+* 调用方式：`await vk.daoCenter.xxxDao.xxx()`
+* 尽量只写与数据库交互的代码，业务逻辑放在 service 层
+* 新建 Dao 后若提示不存在，重新运行项目即可
 
-* 如果新建dao层代码后运行提示dao不存在，则重新运行项目即可
+## 表名配置
 
-## dao层与baseDao的区别@contrast
-
-* `baseDao`相当于 `万能dao`，他是最基础的零件，而 `dao` 层是利用零件组装不同形状和规则的积木，供 `service` 层使用。
-
-## 命名规范（参考）@standard
-
-* `查单条记录`: 获取单条记录的方法用 `find` 或 `get` 作为前缀
-* `查多条记录`: 获取多个对象的方法用 `list` 作为前缀
-* `统计记录数量`: 获取统计行数的方法用 `count` 作为前缀
-* `新增` : 新增数据的方法用 `add` 或 `save` 作为前缀
-* `删除` : 删除数据的方法用 `delete` 或 `remove` 作为前缀
-* `修改` : 修改的方法用 `update` 作为前缀
-
-
-**前缀 + 条件类型（适用于1个dao只操作1张表的情况）**
-
-如：
-
-* 根据 `ID` 获取一条信息 `findById`
-* 根据 `手机号` 获取一条信息 `findByMobile`
-* 根据 `不定性条件` 获取一条信息 `findByWhereJson`
-
-* 根据 `用户状态` 获取多条信息 `listByStatus`
-* 根据 `不定性条件` 获取多条信息 `listByWhereJson`
-
-* 添加 `add`
-* 删除，根据ID `deleteById`
-* 修改，根据ID `updateById`
-* 批量修改，根据自定义条件 `updateByWhereJson`
-* 批量删除，根据自定义条件 `deleteByWhereJson`
-
-**前缀 + 表名 + 条件类型（适用于1个dao可能操作多张表的情况）**
-
-如：
-
-* 根据 `用户ID` 获取用户信息 `findUserById`
-* 根据 `用户手机号` 获取用户信息 `findUserByMobile`
-* 根据 `不定性条件` 获取用户信息 `findUserByWhereJson`
-
-* 根据 `用户状态` 获取用户列表 `listUserByStatus`
-* 根据 `不定性条件` 获取用户列表 `listUserByWhereJson`
-
-* 添加用户 `addUser`
-* 删除用户，根据用户ID `deleteUserById`
-* 修改用户，根据用户ID `updateUserById`
-* 批量修改用户，根据自定义条件 `updateUserByWhereJson`
-* 批量删除用户，根据自定义条件 `deleteUserByWhereJson`
-
-## Dao文件代码生成工具@tool
-
-> [点击安装自动生成Dao层基础代码插件](https://ext.dcloud.net.cn/plugin?id=6663)
-
-## 自定义dao层目录@custom-directory
-
-如果你的项目除了 `router` 函数外，还有其他函数也需要用到 dao 层，此时 dao 层目录需要写在 `公共模块` 那，而不是写在 `router/dao/modules/` 目录，具体操作如下：
-
-1. 右键 `cloudfunctions/common` 目录，新建公共模块，输入名字 `router-common`
-2. 将原本的在 router 内的 `dao` 目录剪切到刚新建的公共模块 `router-common` 下
-3. 替换 `router-common` 根目录的 `index.js` 文件，文件内容如下：
+表名统一在 `dao/config.js` 中配置，通过 `Tables` 引用：
 
 ```js
+// dao/config.js
 module.exports = {
-  daoCenter: require('./dao/index.js'), // dao层入口文件
-}
-```
-
-4. 修改 `router/config.js` 文件，文件内容如下：
-
-```js
-const routeCommon = require('router-common');
-const requireFn = function(path) {
-  return require(path);
-}
-const initConfig = {
-  baseDir: __dirname, // 云函数根目录地址
-  requireFn,
-  daoCenter: routeCommon.daoCenter, // dao层入口文件
-  customUtil: {
-    
-  }
+  test: "vk-test",
+  user: "uni-id-users",
+  // ...
 };
-module.exports = initConfig;
 ```
- 
-即 `initConfig` 增加了 `daoCenter` 配置
 
-5. 完成
-
-在其他函数引入 vk 的时候，需要这样写
+在 Dao 中从 `base.js` 引入：
 
 ```js
-// 引入 vk-unicloud
-const vkCloud = require('vk-unicloud');
-// 引入 routeCommon 公共模块
-const routeCommon = require('router-common');
-// 通过 vkCloud.createInstance 创建 vk 实例
-const vk = vkCloud.createInstance({
-  baseDir: __dirname, // 云函数根目录地址
-  requireFn: require,
-  daoCenter: routeCommon.daoCenter, // dao层入口文件
-}); 
+const { BaseDao, Tables } = require('../base.js');
 ```
 
-**注意：云函数至少需要添加的公共模块依赖有**
+## 编写一个 Dao
 
-1. uni-config-center
-2. vk-unicloud
-3. router-common
+1. 引入 `BaseDao` 和 `Tables`
+2. 声明类并继承 `BaseDao`
+3. 在 `constructor` 里调用 `super(obj)` 并设置 `this.tableName`
 
-操作完成后，就可以在任意云函数中直接调用 `vk.daoCenter.xxxDao.xxx()` API 了
+示例：
+
+```js
+const { BaseDao, Tables } = require('../base.js');
+
+class DemoDao extends BaseDao {
+  constructor(obj) {
+    super(obj);
+    this.tableName = Tables.test;  // 指定当前 Dao 操作的表
+  }
+}
+
+module.exports = DemoDao;
+```
+
+保存为 `router/dao/modules/demoDao.js` 后，即可通过 `vk.daoCenter.demoDao` 调用下方所有方法。
+
+## BaseDao 提供的方法
+
+以下方法均由 BaseDao 实现，子类无需重写即可使用。多数接口支持**简易调用**（直接传业务参数）和**完整调用**（传入 `db` 等以支持事务）。
+
+### 查询单条
+
+**findById** — 按 ID 查单条
+
+```js
+// 简易版
+let info = await vk.daoCenter.demoDao.findById(id);
+
+// 完整版（支持事务、指定字段）
+let info = await vk.daoCenter.demoDao.findById({
+  db,
+  id: id,
+  fieldJson: { 
+    name: 1, 
+    status: 1 
+  }
+});
+```
+
+**findByWhereJson** — 按条件查单条
+
+```js
+// 简易版
+let info = await vk.daoCenter.demoDao.findByWhereJson({ status: 1 });
+
+// 完整版
+let info = await vk.daoCenter.demoDao.findByWhereJson({
+  db,
+  whereJson: { 
+    status: 1
+  },
+  fieldJson: { 
+    name: 1
+  }
+});
+```
+
+### 新增
+
+**add** — 新增一条
+
+```js
+// 简易版
+let res = await vk.daoCenter.demoDao.add({ name: "测试", status: 1 });
+
+// 支持事务：第二参数传 db，或使用对象形式
+let res = await vk.daoCenter.demoDao.add({ name: "测试" }, db);
+let res = await vk.daoCenter.demoDao.add({
+  db,
+  dataJson: { 
+    name: "测试", 
+    status: 1 
+  }
+});
+```
+
+**adds** — 批量新增
+
+```js
+// 简易版
+let res = await vk.daoCenter.demoDao.adds([
+  { name: "测试1", status: 1 },
+  { name: "测试2", status: 1 }
+]);
+
+// 完整版
+let res = await vk.daoCenter.demoDao.adds({
+  db,
+  dataJson: [
+    { name: "测试1" }, 
+    { name: "测试2" }
+  ]
+});
+```
+
+### 修改
+
+**updateById** — 按 ID 更新
+
+```js
+let res = await vk.daoCenter.demoDao.updateById({
+  id: id,
+  dataJson: { 
+    name: "新名称"
+  }
+});
+
+// 支持事务
+let res = await vk.daoCenter.demoDao.updateById({
+  db,
+  id: id,
+  dataJson: { 
+    name: "新名称" 
+  }
+});
+```
+
+**update** — 按条件批量更新
+
+```js
+let res = await vk.daoCenter.demoDao.update({
+  whereJson: { 
+    status: 1
+  },
+  dataJson: {
+    status: 2
+  }
+});
+```
+
+**updateAndReturn** — 更新并返回更新后的那条数据（只更新匹配的第一条）
+
+```js
+let res = await vk.daoCenter.demoDao.updateAndReturn({
+  whereJson: {
+    status: 0 
+  },
+  dataJson: { 
+    status: 1 
+  }
+});
+
+// 支持事务
+let res = await vk.daoCenter.demoDao.updateAndReturn({
+  db,
+  whereJson: {
+    status: 0 
+  },
+  dataJson: { 
+    status: 1 
+  }
+});
+```
+
+**setById** — 有则更新，无则插入（以 dataJson 中的 _id 或传入的 id 为准）
+
+```js
+let res = await vk.daoCenter.demoDao.setById({
+  dataJson: {
+    _id: 'xxx', 
+    name: 'test'
+  }
+});
+
+// 支持事务
+let res = await vk.daoCenter.demoDao.setById({
+  db,
+  dataJson: {
+    _id: 'xxx', 
+    name: 'test'
+  }
+});
+```
+
+### 删除
+
+**deleteById** — 按 ID 删一条
+
+```js
+let res = await vk.daoCenter.demoDao.deleteById(id);
+// 支持事务
+let res = await vk.daoCenter.demoDao.deleteById(id, db);
+```
+
+**del** — 按条件删多条
+
+```js
+let res = await vk.daoCenter.demoDao.del(whereJson);
+let res = await vk.daoCenter.demoDao.del(whereJson, db);
+```
+
+### 统计与聚合
+
+**count** — 条件计数
+
+```js
+let count = await vk.daoCenter.demoDao.count(whereJson);
+let count = await vk.daoCenter.demoDao.count(whereJson, db);
+```
+
+**sum / max / min / avg** — 求和、最大值、最小值、平均值
+
+```js
+let sum = await vk.daoCenter.demoDao.sum({ fieldName: "amount", whereJson: { status: 1 } });
+let max = await vk.daoCenter.demoDao.max({ fieldName: "amount", whereJson: { status: 1 } });
+let min = await vk.daoCenter.demoDao.min({ fieldName: "amount", whereJson: { status: 1 } });
+let avg = await vk.daoCenter.demoDao.avg({ fieldName: "amount", whereJson: { status: 1 } });
+```
+
+均支持在参数中传入 `db` 以配合事务。
+
+### 列表查询
+
+**select** — 分页列表（不联表，性能更好）
+
+```js
+let res = await vk.daoCenter.demoDao.select({
+  pageIndex: 1,
+  pageSize: 20,
+  getCount: true,
+  whereJson: { status: 1 },
+  fieldJson: { name: 1, status: 1 },
+  sortArr: [{ name: "_id", type: "desc" ]
+});
+// res.rows / res.total / res.hasMore / res.pagination 等
+```
+
+**selects** — 分页列表（支持联表）
+
+```js
+let res = await vk.daoCenter.demoDao.selects({
+  pageIndex: 1,
+  pageSize: 20,
+  getCount: true,
+  whereJson: { status: 1 },
+  fieldJson: { name: 1, status: 1 },
+  sortArr: [{ name: "_id", type: "desc" }],
+  foreignDB: [{
+    dbName: "vk-test-2",       // 副表表名
+    localKey: "user_id",      // 主表外键
+    foreignKey: "_id",        // 副表外键
+    as: "userInfo",           // 连表结果别名
+    limit: 1,                 // 1 条则以对象返回，否则数组
+    whereJson: { deleted: false },
+    fieldJson: { name: 1, age: 1 }
+  }]
+});
+```
+
+**foreignDB** 支持多级嵌套
+
+**getTableData** — 表格数据（参数同 selects，默认 `getCount: true`）
+
+```js
+let res = await vk.daoCenter.demoDao.getTableData({
+  data   // vk-admin 万能表格传入的 data
+});
+
+// 强制追加 where 条件
+let res = await vk.daoCenter.demoDao.getTableData({
+  data,
+  whereJson: { status: 1 }
+});
+```
+
+## 自定义与重写
+
+* **只加表名**：只写 `constructor` + `this.tableName`，即可使用上述全部方法。
+* **重写方法**：在子类中写同名方法，实现自定义。
+* **新增方法**：在子类中直接写新方法，需要时使用 `this.collection` 或调用 `this.findByWhereJson`、`this.dao.xxx` 等。
+
+### 重写示例
+
+```js
+/**
+ * 获取用户信息（重写父类方法，增加默认字段过滤）
+ * 调用示例
+ * await vk.daoCenter.userDao.findById(user_id);
+ * data 请求参数说明
+ * @param {String|Object} condition - 用户ID或包含db、id、fieldJson的对象
+ * @param {Object} [fieldJson] - 字段显示规则，默认不显示 token 和 password
+ * @returns {Promise<Object>} 返回用户信息对象，默认不包含 token 和 password 字段
+ */
+async findById(condition, fieldJson = userFieldJson) {
+	let res = {};
+	// 数据库操作开始-----------------------------------------------------------
+	if (typeof condition === "object") {
+		// 支持事务和指定db对象（此处要用 this.dao.findById，等价于 vk.baseDao.findById）
+		res = await this.dao.findById({
+			...condition,
+			dbName: this.tableName,
+			fieldJson: condition.fieldJson || fieldJson
+		});
+	} else {
+		// 不支持事务（此处要用 this.dao.findById，等价于 vk.baseDao.findById）
+		res = await this.dao.findById({
+			dbName: this.tableName,
+			id: condition,
+			fieldJson
+		});
+	}
+	// 数据库操作结束-----------------------------------------------------------
+	return res;
+}
+```
+
+### 自定义示例
+
+```js
+/**
+ * 获取一个未被使用的7位数分享码（此函数请勿删除）
+ * @param {Object} [data={}] 参数对象
+ * @param {String} [data.my_invite_code] 自定义邀请码（可选）
+ * @returns {Promise<String>} 返回一个未被使用的7位数邀请码字符串
+ * 调用示例
+await vk.daoCenter.userDao.getValidInviteCode();
+ */
+async getValidInviteCode(data = {}) {
+	// 数据库操作开始-----------------------------------------------------------
+	let {
+		my_invite_code
+	} = data;
+	if (my_invite_code) {
+		// 如果用户传了自定义的分享码，也需要判断下是否存在
+		let num = await this.count({
+			my_invite_code
+		});
+		if (num === 0) {
+			return my_invite_code;
+		}
+	}
+	let inviteCode = await this.vk.pubfn.randomAsync(7, "23456789ABCDEFGHJKLMNPQRSTUVWXYZ", async (val) => {
+		let num = await this.count({
+			my_invite_code: val
+		});
+		return num === 0 ? true : false;
+	}, 10); // 最大重试10次
+	// 数据库操作结束-----------------------------------------------------------
+	return inviteCode;
+}
+```
+
+### 使用传统语句示例
+
+```js
+/**
+ * 对记录进行分组
+ * 调用示例，将 [0, 50) 分为一组，[50, 100) 分为一组，其他分为一组
+await vk.daoCenter.userDao.getPriceBucket([0, 50, 100]);
+ */
+async getPriceBucket(boundaries) {
+  const { _, $ } = this;
+  let { data: list } = await this.collection(this.tableName).aggregate()
+    .bucket({
+      groupBy: '$price',
+      boundaries: boundaries,
+      default: 'other',
+      output: {
+        count: $.sum(1),
+        ids: $.push('$_id')
+      }
+    })
+    .end();
+  return list;
+}
+```
+
+## 与 BaseDao 的关系
+
+* **BaseDao**：通用底层封装，不绑定具体表，需要每次传入 `dbName`。
+* **Dao 2.0**：继承 BaseDao，在子类中绑定 `this.tableName`，调用时不再传表名，代码更简洁、表名集中配置，便于维护。
+
+表名统一在 `dao/config.js` 维护
