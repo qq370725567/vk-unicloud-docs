@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 :::warning 注意
 
-vk-unicloud 版本需 ≥ 2.21.1，低版本请查看 [老版本文档](./dao1.md)
+vk-unicloud 版本需 ≥ 2.22.0，低版本请查看 [老版本文档](./dao1.md)
 
 :::
 
