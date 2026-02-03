@@ -2,7 +2,9 @@
 sidebarDepth: 0
 ---
 
-# 发送邮箱验证码
+# 邮件发送
+
+`vk-mail` 支持发送纯文本、HTML邮件、附件、嵌入图片等功能。
 
 ## 配置@config
 
@@ -17,6 +19,33 @@ sidebarDepth: 0
 然后打勾 `vk-mail` 模块。
 
 最后还需要重新上传公共模块 `vk-mail` 和云函数 `router`（本地运行则需要重启项目）
+
+### 配置163邮箱教程
+
+* 1、登录163邮箱
+* 2、`邮箱首页` | `设置` - `POP3/SMTP服务` - 开启 `POP3/SMTP服务`
+* 3、复制授权码
+* 4、粘贴到 `uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js` 配置文件中
+```js
+"vk":{
+  "service": {
+    "email": {
+      "codeExpiresIn": 180, // 邮件验证码有效期（单位秒）
+      "163": {
+        "host": "smtp.163.com",
+        "port": 465,
+        "secure": true,
+        "auth": {
+          "user": "你的邮箱@163.com",
+          "pass": "邮箱授权码"
+        }
+      }
+    }
+  }
+}
+```
+
+配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
 ### 配置QQ邮箱教程
 
@@ -37,33 +66,6 @@ sidebarDepth: 0
         "secure": true,
         "auth": {
           "user": "你的邮箱@qq.com",
-          "pass": "邮箱授权码"
-        }
-      }
-    }
-  }
-}
-```
-
-配置完需要上传 `uni-config-center` 这个公共模块才会生效
-
-### 配置163邮箱教程
-
-* 1、登录163邮箱
-* 2、`邮箱首页` | `设置` - `POP3/SMTP服务` - 开启 `POP3/SMTP服务`
-* 3、复制授权码
-* 4、粘贴到 `uniCloud/cloudfunctions/common/uni-config-center/vk-unicloud/index.js` 配置文件中
-```js
-"vk":{
-  "service": {
-    "email": {
-      "codeExpiresIn": 180, // 邮件验证码有效期（单位秒）
-      "163": {
-        "host": "smtp.163.com",
-        "port": 465,
-        "secure": true,
-        "auth": {
-          "user": "你的邮箱@163.com",
           "pass": "邮箱授权码"
         }
       }
@@ -97,7 +99,7 @@ module.exports = {
    * res 返回参数说明
    * @param {Number} code 错误码，0表示成功
    * @param {String} msg 详细信息
-   * @param {String} email 手机号  
+   * @param {String} email 邮箱  
    * @param {String} verifyCode 验证码
    */
   main: async (event) => {
@@ -195,7 +197,7 @@ exports.main = async (event, context) => {
     res.sendMailRes = await emailService.sendMail({
       "from": emailConfig[serviceType].auth.user, // 邮件的发送者
       "to": email, // 邮件的接收者
-      "cc": emailConfig[serviceType].auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把右键抄送给自己一份，就不会被当成垃圾邮件。
+      "cc": emailConfig[serviceType].auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
       "subject": subject, // 邮件的标题
       "text": text, // 邮件的内容
     });
@@ -266,7 +268,7 @@ exports.main = async (event, context) => {
     res.sendMailRes = await emailService.sendMail({
       "from": emailConfig.auth.user, // 邮件的发送者
       "to": email, // 邮件的接收者
-      "cc": emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把右键抄送给自己一份，就不会被当成垃圾邮件。
+      "cc": emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
       "subject": subject, // 邮件的标题
       "text": text, // 邮件的内容
     });
@@ -280,6 +282,290 @@ exports.main = async (event, context) => {
     res.msg = "邮件发送失败";
     res.err = err;
   }
+  return res;
+};
+```
+
+## sendMail 参数说明@params
+
+`sendMail` 方法支持以下参数：
+
+| 参数名        | 类型                | 必填 | 说明                                           |
+|--------------|---------------------|------|------------------------------------------------|
+| subject      | String              | 是   | 邮件标题                                        |
+| from         | String              | 是   | 发件人邮箱地址                                  |
+| to           | String/Array        | 是   | 收件人邮箱，多个用逗号分隔或使用数组             |
+| cc           | String/Array        | 否   | 抄送人邮箱                                      |
+| bcc          | String/Array        | 否   | 密送人邮箱                                      |
+| text         | String              | 否   | 纯文本内容                                      |
+| html         | String              | 否   | HTML 内容                                       |
+| attachments  | Array               | 否   | 附件列表                                        |
+| replyTo      | String              | 否   | 回复地址                                        |
+| priority     | String              | 否   | 优先级：high、normal、low                       |
+| headers      | Object              | 否   | 自定义邮件头                                    |
+
+## 发送 HTML 邮件@html
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "receiver@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "欢迎注册",
+  html: `
+    <div style="padding: 20px; background: #f5f5f5;">
+      <h1 style="color: #333;">欢迎加入我们</h1>
+      <p>您的账号已创建成功。</p>
+      <a href="https://example.com" style="
+        display: inline-block;
+        padding: 10px 20px;
+        background: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+      ">立即访问</a>
+    </div>
+  `
+});
+```
+
+## 发送附件@attachments
+
+### attachments 参数说明
+
+| 参数名      | 类型          | 说明                                           |
+|------------|---------------|------------------------------------------------|
+| filename   | String        | 附件显示的文件名                                |
+| content    | String/Buffer | 附件内容（字符串或 Buffer）                     |
+| path       | String        | 文件路径（与 content 二选一）                   |
+| href       | String        | URL 地址，从网络获取附件                        |
+| contentType| String        | MIME 类型，如 application/pdf                  |
+| encoding   | String        | 编码方式，如 base64                            |
+
+### 发送文本附件
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "receiver@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "附件测试",
+  text: "请查收附件",
+  attachments: [
+    {
+      filename: "hello.txt",
+      content: "Hello World!"
+    }
+  ]
+});
+```
+
+### 发送 Base64 附件
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "receiver@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "图片附件",
+  text: "请查收图片",
+  attachments: [
+    {
+      filename: "image.png",
+      content: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+      encoding: "base64"
+    }
+  ]
+});
+```
+
+### 从 URL 获取附件
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "receiver@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "网络附件",
+  text: "请查收附件",
+  attachments: [
+    {
+      filename: "report.pdf",
+      href: "https://example.com/files/report.pdf"
+    }
+  ]
+});
+```
+
+### 发送多个附件
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "receiver@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "多附件测试",
+  text: "请查收以下附件",
+  attachments: [
+    {
+      filename: "readme.txt",
+      content: "这是说明文档"
+    },
+    {
+      filename: "data.json",
+      content: JSON.stringify({ name: "test", value: 123 }),
+      contentType: "application/json"
+    }
+  ]
+});
+```
+
+## 嵌入图片到 HTML@embedded-images
+
+通过 `cid` 可以在 HTML 中嵌入图片，图片会直接显示在邮件正文中，而不是作为附件。
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "receiver@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "嵌入图片示例",
+  html: `
+    <div>
+      <h1>产品展示</h1>
+      <img src="cid:logo" style="width: 200px;" />
+      <p>这是我们的 Logo</p>
+    </div>
+  `,
+  attachments: [
+    {
+      filename: "logo.png",
+      content: "base64编码的图片内容...",
+      encoding: "base64",
+      cid: "logo"  // 在 HTML 中通过 cid:logo 引用
+    }
+  ]
+});
+```
+
+## 多收件人@multiple-recipients
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  // 多个收件人，用逗号分隔
+  to: "user1@example.com, user2@example.com",
+  // 抄送
+  cc: "manager@example.com",
+  // 密送（收件人看不到其他密送人）
+  bcc: "admin@example.com",
+  subject: "团队通知",
+  text: "这是一封群发邮件"
+});
+```
+
+## 自定义发件人名称@sender-name
+
+```js
+await emailService.sendMail({
+  // 格式："显示名称" <邮箱地址>
+  from: '"客服中心" <service@example.com>',
+  to: "user@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "您的订单已发货",
+  text: "订单详情..."
+});
+```
+
+## 设置邮件优先级@priority
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "user@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  subject: "紧急通知",
+  text: "请立即处理",
+  priority: "high"  // high、normal、low
+});
+```
+
+## 设置回复地址@reply-to
+
+```js
+await emailService.sendMail({
+  from: emailConfig.auth.user,
+  to: "user@example.com",
+  cc: emailConfig.auth.user, // 由于邮件可能会被当成垃圾邮件，但只要把邮件抄送给自己一份，就不会被当成垃圾邮件。
+  replyTo: "support@example.com",  // 用户回复时发送到此地址
+  subject: "系统通知",
+  text: "如有问题请直接回复此邮件"
+});
+```
+
+## 完整示例@full-example
+
+以下是一个包含多种功能的完整示例：
+
+```js
+'use strict';
+
+let vkmail;
+try {
+  vkmail = require('vk-mail');
+} catch (err) {
+  console.error("请先添加公共模块：vk-mail");
+}
+
+exports.main = async (event, context) => {
+  let res = { code: 0, msg: "" };
+
+  let emailConfig = {
+    host: "smtp.qq.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: "your@qq.com",
+      pass: "授权码"
+    }
+  };
+
+  let emailService = vkmail.createTransport(emailConfig);
+
+  try {
+    await emailService.sendMail({
+      from: '"系统通知" <your@qq.com>',
+      to: "receiver@example.com",
+      cc: "copy@example.com",
+      subject: "订单确认",
+      html: `
+        <div style="padding: 20px;">
+          <img src="cid:logo" style="width: 100px;" />
+          <h2>订单已确认</h2>
+          <p>详情请查看附件</p>
+        </div>
+      `,
+      attachments: [
+        {
+          filename: "logo.png",
+          content: "base64内容...",
+          encoding: "base64",
+          cid: "logo"
+        },
+        {
+          filename: "order.pdf",
+          href: "https://example.com/order.pdf"
+        }
+      ],
+      priority: "high"
+    });
+    res.msg = "发送成功";
+  } catch (err) {
+    res.code = -1;
+    res.msg = "发送失败";
+    res.err = err;
+  }
+
   return res;
 };
 ```
