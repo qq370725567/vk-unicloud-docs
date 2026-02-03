@@ -18,7 +18,7 @@ Dao 2.0 采用**类继承**方式：每个 Dao 继承 `BaseDao`，在构造函�
 
 * Dao 层代码默认写在 `router/dao/modules/` 目录下
 * 文件名必须以 `xxxDao.js` 结尾
-* 调用方式：`await vk.daoCenter.xxxDao.xxx()`
+* Dao 2.0 最终调用代码和 Dao 1.0 是完全一致的，均通过 `await vk.daoCenter.xxxDao.xxx()` 调用
 * 尽量只写与数据库交互的代码，业务逻辑放在 service 层
 * 新建 Dao 后若提示不存在，重新运行项目即可
 
