@@ -320,6 +320,80 @@ module.exports = {
 }
 ```
 
+### ws.isAlive（检测连接是否存活）@cloud-is-alive
+
+> vk-unicloud 版本 ≥ 2.22.0
+> 
+> 在云对象中检测指定连接是否仍处于连接状态
+
+**参数说明**
+
+|参数|类型|说明|
+|---|---|---|
+|cid		|String、Array	|【特殊必填】连接id，支持单个或批量检测，`cid` 和 `user_id` 二选一传即可	|
+|user_id|String、Array	|【特殊必填】用户id，支持单个或批量检测，`cid` 和 `user_id` 二选一传即可	|
+|url		|String				| 【选填】云对象url路径，默认不需要传，会自动使用当前云对象										|
+|appid	|String、Array	|【选填】dcloud_appid																		|
+|channel|String、Array	|【选填】渠道																							|
+
+**说明**
+
+- `cid` 和 `user_id` 不能均为空，二选一传即可
+- 通过 `user_id` 查询时会根据该用户当前存在的连接进行存活检测
+
+**云对象示例**
+
+```javascript
+module.exports = {
+ 
+  checkAlive: async function(data) {
+    const ws = this.getWebSocketManage();
+    
+    // 根据 cid 检测单个连接是否存活
+    let res = await ws.isAlive({
+      cid: cid,
+    });
+    
+    // 根据 cid 检测多个连接是否存活
+    res = await ws.isAlive({
+      cid: [cid1, cid2],
+    });
+    
+    // 根据 user_id 检测单个用户连接是否存活
+    res = await ws.isAlive({
+      user_id: uid,
+    });
+
+	 // 根据 user_id 检测多个用户连接是否存活
+    res = await ws.isAlive({
+      user_id: [uid1, uid2],
+    });
+    
+    
+    return res;
+  },
+}
+```
+
+**返回值**
+
+**单个连接检测结果**
+
+|参数|类型|说明|
+|---|---|---|
+|isAlive|Boolean|是否存活|
+|requestID|String|请求ID|
+
+**批量连接检测结果**
+
+|参数|类型|说明|
+|---|---|---|
+|aliveCount|Number|存活连接数|
+|allCount|Number|检测连接总数|
+|aliveConnIds|Array|存活连接ID列表|
+|deadConnIds|Array|不存活连接ID列表|
+|requestID|String|请求ID|
+
 ### ws.signedURL（生成外部连接地址）@cloud-signed-url
 
 > 在云对象中生成WebSocket连接地址（可以给其他非uniapp客户端连接）
