@@ -464,6 +464,90 @@ if (!vk.checkToken()) {
 let token = vk.getToken();
 ```
 
+### vk.saveToken（保存本地token）@saveToken
+
+将新的 token 及过期时间写入本地缓存，并触发 token 刷新事件。若传入的 token 与当前已保存的 token 相同，则不会更新。
+
+**参数**
+
+| 参数名 | 类型   | 必填 | 说明           |
+|--------|--------|------|----------------|
+| options    | Object | 是   | 要保存的 token 信息 |
+| options.token | String | 是 | 登录凭证 token |
+| options.tokenExpired | Number | 否 | token 过期时间戳（毫秒），不传则依赖业务默认 |
+
+注意：tokenExpired值仅作为本地判断token有效期时使用，最终token的过期时间是以云端解密token内容后得到的过期时间为准。
+
+**返回值**
+
+- `true`：已更新本地 token
+- `false`：传入的 token 与当前一致，未更新
+
+**监听 token 变更**
+
+可在页面中监听 token 变化（如用于同步登录态、刷新界面等）：
+
+```js
+vk.$on('onRefreshToken', (data) => {
+  console.log('token 已更新：', data);
+});
+```
+
+**示例**
+
+```js
+vk.saveToken({
+  token: 'xxx',
+  tokenExpired: tokenExpired
+});
+```
+
+### vk.deleteToken（删除本地token）@deleteToken
+
+清除本地保存的 token、token 过期时间以及当前用户信息缓存，并触发 token 刷新事件。常用于退出登录。
+
+注意：`vk.deleteToken` 不会删除云端token，故应使用 `vk.userCenter.logout` 函数来实现登出功能（`vk.userCenter.logout` 会同时删除本地和云端token，无需你手动执行 `vk.deleteToken`）
+
+**无参数**
+
+**示例**
+
+```js
+// 退出登录时调用
+vk.deleteToken();
+```
+
+### vk.handleAutoLoginToken（自动登录）@handleAutoLoginToken
+
+**介绍**
+
+该函数用于接收页面 URL 查询参数中携带的登录 token，自动保存 token 并完成自动登录初始化，通常用于**跨应用跳转无感登录**场景。
+
+**使用要求**
+
+必须书写在 `App.vue` 的 `onLaunch` 生命周期函数的第一行（确保优先执行）
+
+**代码示例**
+
+```js
+// App.vue 中的配置
+export default {
+  onLaunch: function(options) {
+    // 接收页面token参数，用于实现自动登录（优先执行，放置在第一行）
+    uni.vk.handleAutoLoginToken(options);
+    
+    // 后续其他业务逻辑（示例）
+    console.log("App 已启动");
+  }
+}
+```
+
+**效果说明**
+
+- 当 App 从携带 token 参数的 URL 跳转启动时，会自动提取并保存 token，完成无感自动登录。
+- 后续接口请求可直接使用已保存的 token 进行身份验证。
+- 若 URL 未携带 token 参数，该函数不执行任何操作，不会影响其他业务流程。
+
 ### vk.userCenter.closeAccount（账号注销）@closeAccount
 
 > vk-unicloud 版本需 ≥ 2.20.0
