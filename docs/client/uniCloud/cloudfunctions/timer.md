@@ -86,20 +86,36 @@ sidebarDepth: 0
 示例：
 
 ```js
-// taskConfig.js
 module.exports = {
-  main: 60, // 与触发器 0 * * * * * * 一致，每 1 分钟触发一次
+  // 主函数间隔：5秒（需与云函数触发器配置匹配）
+  // 1秒对应的触发器配置是：* * * * * * *（注意：阿里云不支持秒级触发器）
+  // 5秒对应的触发器配置是：*/5 * * * * * *（注意：阿里云不支持秒级触发器）
+  // 1分钟对应的触发器配置是：0 * * * * * *
+  main: 60, // 阿里云此处最小为60，支付宝云和腾讯云此处最小值为1
+  // 任务并发执行数：1 代表按顺序执行，大于 1 代表并发执行数，建议在 5 以内
+  concurrency: 1,
+  // 任务列表
   tasks: {
-    timer1: '60s',              // 每 60 秒执行
-    timer2: ['1h', '12:30:00'], // 每小时 + 每天 12:30
-    // timer3: '2h',
-    // timer4: { daily: '12:00:00', desc: '每天中午' },
-  },
+    timer1: '60s', // 每60秒执行（此处写60s和1m表现一致）
+    timer2: ['1h', '12:30:00'], // 每小时和每天12点30执行
+    // 更多示例：
+    // timer3: '2h',                                       // 每2小时
+    // timer4: '00:00:00',                                 // 每天0点
+    // timer5: { minutes: 5, desc: '每5分钟的任务' },        // 每5分钟带描述
+    // timer6: { daily: '12:00:00', desc: '每天中午' },     // 每天12点
+    // timer7: { times: ['10s', '1m', '1h'], desc: '多时间任务' },  // 多个时间点（每10秒、1分钟、1小时）
+    // timer8: [30, 60, 120],                              // 每30秒、1分钟、2分钟执行
+    // timer9: { hours: 1, enabled: false },               // 已禁用
+  }
 };
 ```
 
+提示：当 `concurrency` 设置为 1 时，定时任务会按 `tasks` 内的顺序执行，当大于 1 时，会并发执行，此时云函数的日志打印是**无序**的。
+
 3. **编写具体任务**  
-   在 `service/crontab/tasks/xxx.js` 中实现业务逻辑。文件名为任务名（如 `timer1.js`），需在 `taskConfig.js` 的 `tasks` 中有同名 key。导出为一个 `async function`，可使用全局 `uniCloud.vk`、`uniCloud.database()` 等。示例：
+   在 `service/crontab/tasks/xxx.js` 中实现业务逻辑。文件名为任务名（如 `timer1.js`），需在 `taskConfig.js` 的 `tasks` 中有同名 key。导出为一个 `async function`，可使用全局 `vk` 和 云对象的 `this` 等。示例：
+   
+   注意：这里的 `this` 指向云对象 `crontab/pub`
 
 ```js
 // tasks/timer1.js
