@@ -2191,7 +2191,31 @@ let url = vk.getConfig("login.url");
 
 ### vk.pubfn.batchRun（并发执行）@batchRun
 
-批量循环并发执行异步函数（使用场景: 批量发送短信、邮件、消息通知等。）
+并发执行异步函数（使用场景: 批量发送短信、邮件、消息通知等。）
+
+```js
+/**
+ * 并发执行函数
+ * 
+ * @typedef {Object} BatchRunResult
+ * @property {Array} stack - 执行结果数组（按任务顺序排列）
+ * @property {number} total - 总任务数
+ * @property {number} concurrency - 实际使用的并发数
+ * @description BatchRunResult 说明：
+ *   - stack 项规则：任务成功时为 main 函数返回值；任务失败时为 { code: err.code, msg: err.message }
+ * 
+ * @param {Object} options - 配置项
+ * @param {Function|Array<Function>} options.main - 主执行函数
+ * @param {Array} [options.data=[]] - 单函数模式的数据源（函数数组模式下无效）
+ * @param {number} [options.concurrency=50] - 最大并发量（设为 1 则串行执行，实际并发数取 min(配置值, 任务总数)）
+ * @description 执行模式说明：
+ *   1. 单函数模式：main 为单个 async 函数，接收 (item, index) 参数，遍历 data 逐项执行
+ *   2. 函数数组模式：main 为 async 函数数组（每个函数无参数），此时 data 参数无效
+ * 
+ * @returns {Promise<BatchRunResult>} 执行结果
+ */
+await vk.pubfn.batchRun(options);
+```
 
 注意：`concurrency` 并不是越大越好，太大可能会卡死（一次性并发太多请求可能反而会卡死，且大部分三方api其实是有并发限制的）。
 
@@ -2223,7 +2247,6 @@ let batchRunRes = await vk.pubfn.batchRun({
   ],
 });
 ```
-
 
 **无数据源形式**
 
