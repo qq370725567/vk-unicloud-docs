@@ -4,9 +4,15 @@ sidebarDepth: 0
 
 # vk.callFunction（请求云函数）
 
-`vk.callFunction` 用来请求云函数
+## 说明
 
-如果该请求是点击按钮进行的表单提交请求，建议加上参数 `title:'请求中...'` 具有遮罩功能，可以有效防止同一时间重复点击。
+在前端页面需要调用云函数时，使用 `vk.callFunction` 调用，不使用 `uniCloud.callFunction`
+
+**注意事项**
+
+- 在页面上调用时，优先使用回调形式
+- 表单提交请求必须加 `title` 或 `loading` 参数防止重复点击，如果页面上按钮支持 `loading` 和 `disabled` 属性或有loading遮罩组件，则优先使用 `loading` 参数控制重复点击，达到更好的交互体验。
+- 默认情况下，当返回结果 `code` 不为 `0` 时，会进 `fail` 回调，并自动弹窗 `err.msg`，但若写了 `fail` 回调后，则不会自动弹窗，此时如需弹窗，需手动写 `vk.alert(err.msg);`
 
 ## 回调形式 @callback
 
