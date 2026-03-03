@@ -26,7 +26,7 @@ sidebarDepth: 0
 假设加速域名是 `api.example.com`
 
 1. 进入ECS的宝塔页面，安装nginx
-2. 新建网站，网站域名填 `api.example.com`，并设置反向代理，如果是阿里云空间，填 `https://api.bspapp.com` ，如果是支付宝云空间填 `https://{spaceId}.api-hz.cloudbasefunction.cn` (其中{spaceId}替换成你的支付宝云空间id)
+2. 新建网站，网站域名填 `api.example.com`，并设置反向代理，如果是阿里云空间，填 `https://api.next.bspapp.com` ，如果是支付宝云空间填 `https://{spaceId}.api-hz.cloudbasefunction.cn` (其中{spaceId}替换成你的支付宝云空间id)
 3. 设置全球加速，选https并监听443端口（你的 `api.example.com` 必须要有ssl证书），其中后端服务选你搭建了nginx并反向代理的那台ECS，加速地区选你需要加速的地区，源站区域选杭州
 4. 去域名解析后台配置cname解析 `api.example.com` 到全球加速的 cname 地址
 5. 等待10-20分钟，等全球加速配置全部生效后，此时访问 `api.example.com` 如果能正常访问，代表全球加速配置成功了
