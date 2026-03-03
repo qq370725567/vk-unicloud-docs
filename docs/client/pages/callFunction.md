@@ -11,7 +11,7 @@ sidebarDepth: 0
 **注意事项**
 
 - 在页面上调用时，优先使用回调形式
-- 表单提交请求必须加 `title` 或 `loading` 参数防止重复点击，如果页面上按钮支持 `loading` 和 `disabled` 属性或有loading遮罩组件，则优先使用 `loading` 参数控制重复点击，达到更好的交互体验。
+- 表单提交请求必须加 `title` 或 `loading` 参数防止重复点击，如果页面上按钮支持 `loading` 和 `disabled` 属性或有loading遮罩组件，则优先使用 `loading` 参数控制重复点击，达到更好的交互体验（`title` 或 `loading`是二选一，请勿同时使用）
 - 默认情况下，当返回结果 `code` 不为 `0` 时，会进 `fail` 回调，并自动弹窗 `err.msg`，但若写了 `fail` 回调后，则不会自动弹窗，此时如需弹窗，需手动写 `vk.alert(err.msg);`
 - 如果 `fail` 回调内只写 `vk.alert(err.msg);`，没有其他逻辑，则不需要专门写 `fail` 回调，框架会自动执行 `vk.alert(err.msg);`
 
