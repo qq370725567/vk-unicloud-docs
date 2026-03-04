@@ -43,7 +43,7 @@ vk.callFunction({
 // promise方式
 vk.callFunction({
   url: '云函数路径',
-  title:'请求中...',
+  title: '请求中...',
   data:{
     
   }
@@ -63,8 +63,8 @@ vk.callFunction({
 try {
   let data = await vk.callFunction({
     url: '云函数路径',
-    title:'请求中...',
-    data:{
+    title: '请求中...',
+    data: {
       
     }
   });
@@ -105,13 +105,13 @@ loading 参数说明
 * 若 `loading` 的值类型为 `Object`，如下方代码效果是：请求时，会自动执行 `this.loading2=true` ，请求完成时，会自动执行 `this.loading2=false`
 
 ```js
-loading:{ that: this, name:"loading2"}
+loading: { that: this, name: "loading2" }
 ```
 
 * name 支持. 如下方代码效果是：请求时，会自动执行 `this.page.loading=true` ，请求完成时，会自动执行 `this.page.loading=false`
 
 ```js
-loading:{ that: this, name:"page.loading"}
+loading: { that: this, name: "page.loading" }
 ```
 
 **Vue3 setup 用法示例**
@@ -162,10 +162,10 @@ globalParamName 参数说明
  * 若把shop-manage改成*则代表全局
  */
 vk.callFunctionUtil.updateRequestGlobalParam({
-  "shop-manage":{
-    regExp:"^xxx/kh/",
-    data:{
-      shop_id : shop_id
+  "shop-manage": {
+    regExp: "^xxx/kh/",
+    data: {
+      shop_id: shop_id
     }
   }
 });
@@ -174,7 +174,7 @@ vk.callFunctionUtil.updateRequestGlobalParam({
 vk.callFunction({
   url: 'xxx/xxxxxx',
   title: '请求中...',
-  globalParamName:"shop-manage",// 如果设置了正则规则,则不需要此参数
+  globalParamName: "shop-manage",// 如果设置了正则规则,则不需要此参数
   data: {},
   success: (data) => {
     
@@ -358,7 +358,7 @@ module.exports = [{
 ```js
 // 客户端加密通信配置
 "clientCrypto": {
-  "expTime": 10, // 同一个请求过期时间，单位秒（可防止重放攻击）取值范围：5 ~ 3600（特别注意：此值如果设置太小，可能会影响正常用户的请求）
+  "expTime": 60, // 同一个请求过期时间，单位秒（可防止重放攻击）取值范围：5 ~ 3600（特别注意：此值如果设置太小，可能会影响正常用户的请求）
 },
 ```
 
