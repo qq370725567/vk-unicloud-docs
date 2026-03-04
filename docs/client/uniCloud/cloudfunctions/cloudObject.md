@@ -511,7 +511,7 @@ sys类型的函数通常用于admin端，如商城系统角色分为
 
 ```js
 'use strict';
-let vk; // 全局vk实例
+let vk = uniCloud.vk; // 全局vk实例
 // 涉及的表名
 const dbName = {
   //test: "vk-test", // 测试表
@@ -531,7 +531,7 @@ const cloudObject = {
    * 文档地址：https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#before-预处理
    */
   _before: async function() {
-    vk = this.vk; // 将vk定义为全局对象
+    vk = uniCloud.vk; // 将vk定义为全局对象
     // let { customUtil, uniID, config, pubFun } = this.getUtil(); // 获取工具包
   },
   /**
@@ -541,39 +541,39 @@ const cloudObject = {
   _after: async function(options) {
     let { err, res } = options;
     if (err) {
-      return; // 如果方法抛出错误，直接return;不处理
+      if (err instanceof Error) {
+        return; // 如果是Error类型，直接return;不处理
+      }
+      return err;
     }
     return res;
   },
   /**
-   * 模板函数
-   * @url client/muban.getInfo 前端调用的url参数地址
+   * 获取列表
+   * @url XXXpathXXX.getList 前端调用的url参数地址
    */
-  getInfo: async function(data) {
-    let { uid } = this.getClientInfo(); // 获取客户端信息
-    let userInfo = await this.getUserInfo(); // 获取当前登录的用户信息
+  getList: async function(data) {
     let res = { code: 0, msg: '' };
+    let { uid } = this.getClientInfo(); // 获取客户端信息
     // 业务逻辑开始-----------------------------------------------------------
-    console.log("请求参数", data);
-    res.userInfo = userInfo; // 返回前端当前登录的用户信息
-    
+
+
     // 业务逻辑结束-----------------------------------------------------------
     return res;
   },
   /**
    * 模板函数
-   * @url client/muban.getList 前端调用的url参数地址
+   * @url XXXpathXXX.test 前端调用的url参数地址
    */
-  getList: async function(data) {
-    let { uid, filterResponse, originalParam } = this.getClientInfo(); // 获取客户端信息
+  test: async function(data) {
     let res = { code: 0, msg: '' };
+    let { uid } = this.getClientInfo(); // 获取客户端信息
     // 业务逻辑开始-----------------------------------------------------------
-    console.log("请求参数", data);
 
 
     // 业务逻辑结束-----------------------------------------------------------
     return res;
-  }
+  },
 };
 
 module.exports = cloudObject;
