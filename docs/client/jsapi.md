@@ -1468,140 +1468,9 @@ let base64 = "data:image/png;base64," + imageBuffer.toString('base64');
 
 ## 前端专属
 
-### vk.pubfn.getListData（手机长列表分页加载数据）@getListData
+### 弹窗
 
-```js
-/**
- * 手机端长列表分页加载数据
- * @description 自动处理下一页。数据合并，更新数据源（会自动更新vue页面上的this.data变量的值）源码请看 uni_modules/vk-unicloud/vk_modules/vk-unicloud-page/libs/function/index.js 中的 getListData 内部实现
- * @param {Vue页面对象} that 页面数据对象this
- * @param {String} url 请求地址(云函数路径)
- * @param {String} listName 后端返回的list数组的字段名称,默认rows
- * @param {Object} data 额外数据
- * @param {function} dataPreprocess	数据预处理函数
- *
- * 代码示例
- */
-vk.pubfn.getListData({
-    that : this,
-    url : "db_test/pub/select",
-    listName : "rows",
-    data : {
-      a : 1
-    },
-    dataPreprocess: (list) => {
-      return list;
-    }
-});
-```
-
-### vk.pubfn.getComponentsDynamicData（动态组件数据获取）@getComponentsDynamicData
-
-```js
-/**
- * 动态组件数据获取
- * @description 主要用于动态组件的数据获取
- * @param {Vue页面对象} that 页面数据对象this
- * @param {String}     ids  动态数据组件的ID
- *
- */
-
- // 代码示例
- // 如:放置一个动态数据的 公告组件 和 一个轮播图组件
- // view  核心:自定义组件接收一个 Object 类型的属性 datas
-```
-
-```html
-  <vk-u-notice-bar :datas='componentsDynamic["notice-bar-01"]'></vk-u-notice-bar>
-  <vk-u-swiper :datas='componentsDynamic["index-swiper-01"]' :custom-datas='{
-    "height":600,
-  }'></vk-u-swiper>
-```
-
-```js
-// 在页面数据变量中新增 componentsDynamic
-  data() {
-    return {
-      // 动态组件数据集合
-      componentsDynamic:{}
-    }
-  }
-// 在页面初始化方法中执行下面的函数
-this.vk.pubfn.getComponentsDynamicData({
-  that : this,
-  ids : ["notice-bar-01","index-swiper-01"]
-});
-```
-
-### vk.pubfn.getCurrentPage（获取当前页面实例）@getCurrentPage
-
-```js
-/**
- * 获取当前页面实例
- * 返回数据
- * fullPath 当前打开页面的完整路径(带页面参数)
- * options  当前打开页面的参数
- * route    当前打开页面的路径(不含参数)
- * $vm      当前打开页面的vue实例
- */
-vk.pubfn.getCurrentPage();
-```
-
-### vk.pubfn.fileToBase64（文件转base64）@fileToBase64
-
-```js
-/**
- * 文件转base64
- */
-vk.pubfn.fileToBase64({
-  file:res.tempFiles[0],
-  success: (base64) => {
-
-  }
-});
-```
-
-### vk.pubfn.base64ToFile（base64转文件）@base64ToFile
-
-```js
-/**
- * base64转文件
- */
-vk.pubfn.base64ToFile({
-  base64: base64,
-  success: (file) => {
-
-  }
-});
-```
-
-### vk.pubfn.parseXlsxFile（前端解析Excel文件数据）@parseXlsxFile
-
-> vk-unicloud核心库版本 >= 2.20.2
-> 仅 vk-admin 端可用
-
-```js
-/**
- * 解析Excel文件数据（只支持xlsx格式）仅h5支持
- * @param {Object} file - Excel文件对象
- * @param {Number} index - 工作表索引，默认0
- * @param {Number} mode - 返回格式：1-返回对象数组，2-返回二维数组 默认 1
- */
-vk.pubfn.parseXlsxFile({ 
-  file: file, 
-  mode: 1
-})
-.then((result) => {
-  console.log('result: ', result);
-})
-.catch((err) => {
-  console.error('err: ', err);
-});
-```
-
-## 弹窗
-
-### vk.alert
+#### vk.alert
 
 ```js
 // 简写
@@ -1617,7 +1486,7 @@ vk.alert("内容", "提示", "确定", () => {
 vk.alert('第一行内容\n第二行内容\n第三行内容');
 ```
 
-### vk.confirm
+#### vk.confirm
 
 ```js
 // 简写
@@ -1637,7 +1506,7 @@ vk.confirm("内容", "提示", "确定", "取消", (res) => {
 });
 ```
 
-### vk.prompt
+#### vk.prompt
 
 ```js
 // 简写
@@ -1655,7 +1524,7 @@ vk.prompt("请输入", "提示", "确定", "取消", (res) => {
 },"输入框内初始内容");
 ```
 
-### vk.toast
+#### vk.toast
 
 ```js
 // 简写
@@ -1676,7 +1545,7 @@ vk.toast("提示内容", "none", 1000, true, () => {
 });
 ```
 
-### vk.showActionSheet
+#### vk.showActionSheet
 
 ```js
 vk.showActionSheet({
@@ -1693,22 +1562,22 @@ vk.showActionSheet({
 });
 ```
 
-### vk.showLoading
+#### vk.showLoading
 
 ```js
 vk.showLoading("加载中...");
 ```
 
-### vk.hideLoading
+#### vk.hideLoading
 
 ```js
 vk.hideLoading();
 ```
 
 
-## 页面跳转
+### 页面跳转
 
-### 与直接用 `uni.navigateTo` 的优势
+**与直接用 `uni.navigateTo` 的优势**
 
 使用下方的页面跳转API，框架会自动判断目标页面是否需要登录才能访问。
 
@@ -1760,7 +1629,7 @@ checkSharePages: {
 },
 ```
 
-### vk.navigateTo
+#### vk.navigateTo
 
 支持跳转到tab页
 
@@ -1768,7 +1637,7 @@ checkSharePages: {
 vk.navigateTo(url);
 ```
 
-### vk.redirectTo
+#### vk.redirectTo
 
 关闭当前页面，跳转到应用内的某个页面。
 
@@ -1776,7 +1645,7 @@ vk.navigateTo(url);
 vk.redirectTo(url);
 ```
 
-### vk.reLaunch
+#### vk.reLaunch
 
 关闭所有页面，打开到应用内的某个页面。
 
@@ -1784,7 +1653,7 @@ vk.redirectTo(url);
 vk.reLaunch(url);
 ```
 
-### vk.switchTab
+#### vk.switchTab
 
 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面。
 
@@ -1792,7 +1661,7 @@ vk.reLaunch(url);
 vk.switchTab(url);
 ```
 
-### vk.navigateBack
+#### vk.navigateBack
 
 关闭当前页面，返回上一页面，支持原生`uni.navigateBack(OBJECT)`中的属性。
 
@@ -1800,7 +1669,7 @@ vk.switchTab(url);
 vk.navigateBack();
 ```
 
-### vk.navigateToHome
+#### vk.navigateToHome
 
 关闭所有页面，并跳转到首页 （app.config.js 的 index.url）
 
@@ -1808,7 +1677,7 @@ vk.navigateBack();
 vk.navigateToHome();
 ```
 
-### vk.navigateToLogin
+#### vk.navigateToLogin
 
 登录页面即 app.config.js 的 login.url 的值
 
@@ -1891,7 +1760,7 @@ vk.navigateToLogin({
 });
 ```
 
-### vk.pubfn.checkLogin
+#### vk.pubfn.checkLogin
 
 检测是否需要登录，根据 `app.config.js` 配置文件的 `checkTokenPages` 参数判断
 
@@ -1904,7 +1773,7 @@ setTimeout(() => {
 }, 0);
 ```
 
-### vk.navigateToLuckyDraw
+#### vk.navigateToLuckyDraw
 
 跳转到抽奖活动小助手的页面，[查看详情](../vk-lucky-draw/#api-client)
 
@@ -1915,9 +1784,9 @@ vk.navigateToLuckyDraw({
 });
 ```
 
-### vk.navigateTo（页面间通信）@navigateTo
+#### vk.navigateTo（页面间通信）@navigateTo
 
-#### Vue2写法
+##### Vue2写法
 
 A 页面跳转 B 页面
 
@@ -1961,7 +1830,7 @@ if (eventChannel.emit) eventChannel.emit('update', { a:1 }); // 触发A页面 vk
 vk.navigateBack();
 ```
 
-#### Vue3写法
+##### Vue3写法
 
 A 页面跳转 B 页面（这步与Vue2一样）
 
@@ -2011,9 +1880,9 @@ B页面接收A页面传过来的数据，并在B页面返回时，触发A页面�
 </script>
 ```
 
-## 页面实例函数
+### 页面实例函数
 
-### $hasRole
+#### $hasRole
 
 判断当前登录的用户是否有此角色（此函数可在client端和admin端使用）
 
@@ -2055,7 +1924,7 @@ if (this.$hasRole('admin', 'user-manage', ['a', 'b'])) {
 </template>
 ```
 
-### $hasPermission
+#### $hasPermission
 
 判断当前登录的用户是否有此权限（此函数只有admin端可用）
 
@@ -2080,11 +1949,11 @@ if (this.$hasRole('admin') || this.$hasPermission('user-update')) {
 </template>
 ```
 
-## 事件函数
+### 事件函数
 
 > 事件函数API需要vk-unicloud核心库版本 >= 2.16.0
 
-### vk.notifyEventReady
+#### vk.notifyEventReady
 
 通知特定事件已准备就绪，并将数据传递给 `vk.awaitEventReady` 注册的回调函数。一定会在 `vk.awaitEventReady` 函数被调用之前触发。
 
@@ -2095,7 +1964,7 @@ vk.notifyEventReady("事件名", {
 });
 ```
 
-### vk.awaitEventReady
+#### vk.awaitEventReady
 
 等待特定事件执行后再执行相应的回调函数，如果事件已准备就绪，它会立即执行回调函数；否则，它将等待事件执行 `vk.notifyEventReady` 后再执行。
 
@@ -2151,7 +2020,7 @@ async onLoad(){
 },
 ```
 
-### vk.checkEventReady
+#### vk.checkEventReady
 
 检查事件是否已准备就绪，如果事件已准备就绪，它会返回true；否则，它将返回false
 
@@ -2163,7 +2032,7 @@ if (vk.checkEventReady("事件名")) {
 }
 ```
 
-### vk.getEventReadyData
+#### vk.getEventReadyData
 
 获取事件就绪时的参数（如果未就绪，会返回null，此API不会等待事件就绪）
 
@@ -2172,9 +2041,9 @@ let data = vk.getEventReadyData("事件名");
 console.log('data: ', data)
 ```
 
-## 全局配置
+### 全局配置
 
-### vk.getConfig
+#### vk.getConfig
 
 获取 `app.config.js` 内的配置信息（不包含函数）
 
@@ -2183,6 +2052,140 @@ console.log('data: ', data)
 let config = vk.getConfig();
 // 获取指定配置
 let url = vk.getConfig("login.url");
+```
+
+
+### 其他
+
+#### vk.pubfn.getListData（手机长列表分页加载数据）@getListData
+
+```js
+/**
+ * 手机端长列表分页加载数据
+ * @description 自动处理下一页。数据合并，更新数据源（会自动更新vue页面上的this.data变量的值）源码请看 uni_modules/vk-unicloud/vk_modules/vk-unicloud-page/libs/function/index.js 中的 getListData 内部实现
+ * @param {Vue页面对象} that 页面数据对象this
+ * @param {String} url 请求地址(云函数路径)
+ * @param {String} listName 后端返回的list数组的字段名称,默认rows
+ * @param {Object} data 额外数据
+ * @param {function} dataPreprocess	数据预处理函数
+ *
+ * 代码示例
+ */
+vk.pubfn.getListData({
+    that : this,
+    url : "db_test/pub/select",
+    listName : "rows",
+    data : {
+      a : 1
+    },
+    dataPreprocess: (list) => {
+      return list;
+    }
+});
+```
+
+#### vk.pubfn.getComponentsDynamicData（动态组件数据获取）@getComponentsDynamicData
+
+```js
+/**
+ * 动态组件数据获取
+ * @description 主要用于动态组件的数据获取
+ * @param {Vue页面对象} that 页面数据对象this
+ * @param {String}     ids  动态数据组件的ID
+ *
+ */
+
+ // 代码示例
+ // 如:放置一个动态数据的 公告组件 和 一个轮播图组件
+ // view  核心:自定义组件接收一个 Object 类型的属性 datas
+```
+
+```html
+  <vk-u-notice-bar :datas='componentsDynamic["notice-bar-01"]'></vk-u-notice-bar>
+  <vk-u-swiper :datas='componentsDynamic["index-swiper-01"]' :custom-datas='{
+    "height":600,
+  }'></vk-u-swiper>
+```
+
+```js
+// 在页面数据变量中新增 componentsDynamic
+  data() {
+    return {
+      // 动态组件数据集合
+      componentsDynamic:{}
+    }
+  }
+// 在页面初始化方法中执行下面的函数
+this.vk.pubfn.getComponentsDynamicData({
+  that : this,
+  ids : ["notice-bar-01","index-swiper-01"]
+});
+```
+
+#### vk.pubfn.getCurrentPage（获取当前页面实例）@getCurrentPage
+
+```js
+/**
+ * 获取当前页面实例
+ * 返回数据
+ * fullPath 当前打开页面的完整路径(带页面参数)
+ * options  当前打开页面的参数
+ * route    当前打开页面的路径(不含参数)
+ * $vm      当前打开页面的vue实例
+ */
+vk.pubfn.getCurrentPage();
+```
+
+#### vk.pubfn.fileToBase64（文件转base64）@fileToBase64
+
+```js
+/**
+ * 文件转base64
+ */
+vk.pubfn.fileToBase64({
+  file:res.tempFiles[0],
+  success: (base64) => {
+
+  }
+});
+```
+
+#### vk.pubfn.base64ToFile（base64转文件）@base64ToFile
+
+```js
+/**
+ * base64转文件
+ */
+vk.pubfn.base64ToFile({
+  base64: base64,
+  success: (file) => {
+
+  }
+});
+```
+
+#### vk.pubfn.parseXlsxFile（前端解析Excel文件数据）@parseXlsxFile
+
+> vk-unicloud核心库版本 >= 2.20.2
+> 仅 vk-admin 端可用
+
+```js
+/**
+ * 解析Excel文件数据（只支持xlsx格式）仅h5支持
+ * @param {Object} file - Excel文件对象
+ * @param {Number} index - 工作表索引，默认0
+ * @param {Number} mode - 返回格式：1-返回对象数组，2-返回二维数组 默认 1
+ */
+vk.pubfn.parseXlsxFile({ 
+  file: file, 
+  mode: 1
+})
+.then((result) => {
+  console.log('result: ', result);
+})
+.catch((err) => {
+  console.error('err: ', err);
+});
 ```
 
 ## 云函数专属
