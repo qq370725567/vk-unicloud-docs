@@ -74,6 +74,7 @@
 | requestMethod    |  http请求method | String  | - | - |
 | props    | 动态模式 - 渲染数据的配置选项 [查看http请求模式](#http请求模式) | Object  | - | - |
 | onChange          | function(val, formData, column, index, option) | Function  | -| -  |
+| encryptAction	| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
 
 #### onChange 使用示例
 

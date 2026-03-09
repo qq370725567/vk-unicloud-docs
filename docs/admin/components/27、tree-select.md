@@ -79,6 +79,7 @@
 | isRequest    | 是否是http请求模式 | Boolean  | false | true |
 | requestHeader    |  http请求头 | Object  | - | - |
 | requestMethod    |  http请求method | String  | - | - |
+| encryptAction	| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
 
 #### props
 

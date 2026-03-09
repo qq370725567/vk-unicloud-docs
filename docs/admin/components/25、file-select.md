@@ -32,7 +32,8 @@
 | provider          | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	 | String  | - | - |
 | fileSize         | 限制文件大小  | Number  | - | - |
 | sizeUnit         | 文件的单位  | String  | MB | KB、MB、GB |
-| returnType（1.21.0）  | 返回值类型  | String  | url | url、id |
+| returnType | 返回值类型  | String  | url | url、id |
+| encryptAction	| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
 
 #### 设置双向绑定的值为file_id@fileid
 

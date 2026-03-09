@@ -118,35 +118,36 @@ export default {
 
 ## 属性@props
 
-| 参数							| 说明																																																													| 类型						| 默认值		| 可选值				|
-|------------------	|-----------------------																																																				|---------				|--------		|-------				|
-| v-model						| 表单数据源																																																										| Object					| {}				| -							|
-| rules							| 表单验证规则 [查看规则](#rules)																																											| Object					| 无				| -							|
-| action						| 表单提交地址，支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#function)| String、Function| 无				| -							|
-| before-action			| action请求前拦截器 [查看示例代码](#before-action)																																	| Function				| 无				| -							|
-| is-request				| 是否是http请求模式 [查看http请求模式](#http)																																					| Boolean					| false			| true					|
-| form-type					| 表单类型，用于复用表单 [查看表单复用](#columns-show)																																	| String					| 无				| -							|
-| columns						| 通用 - 字段规则 [查看columns](#columns)																																					| Array						| []				| -							|
-| loading						| 表单是否在请求中																																																							| Boolean					| false			| true					|
-| label-width				| 左侧label宽度																																																									| String,Number		| "80px"		| -							|
-| width							| 表单宽度																																																											| Number,String		| 无				| -							|
-| footer-show				| 底部按钮是否显示																																																							| Boolean					| true			| false					|
-| footer-center			| 底部按钮是否居中																																																							| Boolean					| true			| false					|
-| show-cancel				| 是否显示取消按钮																																																							| Boolean					| true			| false					|
-| cancel-text				| 取消按钮的文字																																																								| String					| 关 闭			| -							|
-| submit-text				| 确定按钮的文字																																																								| String					| 确 定			| -							|
-| submit-disabled		| 确定按钮是否禁用																																																							| Boolean					| false			| true					|
-| auto-close				| 表单请求成功后自动关闭																																																				| Boolean					| true			| false					|
-| label-position		| 对齐方式																																																											| String					| right			| right left top|
-| max-height				| 表单最大高度																																																									| String					| 无				| -							|
-| size							| 表单内组件的size																																																							| String					| 无				| -							|
-| label-suffix			| label的后缀																																																										| String					| 无				| -							|
-| disabled					| 禁用表单																																																											| Boolean					| false			| true					|
-| clearable					| 表单内的组件有清空效果																																																				| Boolean					| true			| false					|
-| success-msg				| 表单提交成功后右上角的提示																																																		| String					| 操作成功！| -							|
-| inline						| 是否设置整个表单为横向表单																																																		| Boolean					| false			| true					|
-| columns-number		| 横向表单每行显示数量																																																					| Number					| 2					| -							|
-| need-alert				| 表单请求失败后，是否自动alert弹窗（若设为false，则可以通过监听fail事件自己处理错误）																					|Boolean					| true			| false					|
+| 参数							| 说明																																																				| 类型							| 默认值			| 可选值					|
+|------------------	|-----------------------																																										|---------				|--------		|-------				|
+| v-model						| 表单数据源																																																	| Object					| {}				| -							|
+| rules							| 表单验证规则 [查看规则](#rules)																																							| Object					| 无					| -							|
+| action						| 表单提交地址，支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#function)	| String、Function	| 无					| -							|
+| before-action			| action请求前拦截器 [查看示例代码](#before-action)																														| Function				| 无					| -							|
+| is-request				| 是否是http请求模式 [查看http请求模式](#http)																																	| Boolean					| false			| true					|
+| form-type					| 表单类型，用于复用表单 [查看表单复用](#columns-show)																													| String					| 无					| -							|
+| columns						| 通用 - 字段规则 [查看columns](#columns)																																			| Array						| []				| -							|
+| loading						| 表单是否在请求中																																														| Boolean					| false			| true					|
+| label-width				| 左侧label宽度																																															| String,Number		| "80px"		| -							|
+| width							| 表单宽度																																																		| Number,String		| 无					| -							|
+| footer-show				| 底部按钮是否显示																																														| Boolean					| true			| false					|
+| footer-center			| 底部按钮是否居中																																														| Boolean					| true			| false					|
+| show-cancel				| 是否显示取消按钮																																														| Boolean					| true			| false					|
+| cancel-text				| 取消按钮的文字																																															| String					| 关 闭			| -							|
+| submit-text				| 确定按钮的文字																																															| String					| 确 定			| -							|
+| submit-disabled		| 确定按钮是否禁用																																														| Boolean					| false			| true					|
+| auto-close				| 表单请求成功后自动关闭																																												| Boolean					| true			| false					|
+| label-position		| 对齐方式																																																		| String					| right			| right left top|
+| max-height				| 表单最大高度																																																| String					| 无					| -							|
+| size							| 表单内组件的size																																														| String					| 无					| -							|
+| label-suffix			| label的后缀																																																| String					| 无					| -							|
+| disabled					| 禁用表单																																																		| Boolean					| false			| true					|
+| clearable					| 表单内的组件有清空效果																																												| Boolean					| true			| false					|
+| success-msg				| 表单提交成功后右上角的提示																																										| String					| 操作成功！	| -							|
+| inline						| 是否设置整个表单为横向表单																																										| Boolean					| false			| true					|
+| columns-number		| 横向表单每行显示数量																																													| Number					| 2					| -							|
+| need-alert				| 表单请求失败后，是否自动alert弹窗（若设为false，则可以通过监听fail事件自己处理错误）															|Boolean					| true			| false					|
+| encrypt-action		| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
 
 ### columns（字段渲染规则）@columns
 

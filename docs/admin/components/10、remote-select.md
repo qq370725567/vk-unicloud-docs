@@ -226,8 +226,8 @@
 | requestMethod    |  http请求method | String  | - | - |
 | onChange          | function(val, formData, column, index, option) | Function  | -| -  |
 | defaultIndex          | 默认选择第几个，仅在万能表单的单选模式下，且showAll为true时生效 | Number  | - | -  |
-| showDesc（新增于1.20.23）       | 选项右侧是否显示描述 | Boolean  | false | true |
-| group（新增于1.20.23）          | 是否需要分组 | Boolean  | false| true  |
+| showDesc       | 选项右侧是否显示描述 | Boolean  | false | true |
+| group          | 是否需要分组 | Boolean  | false| true  |
 | collapseTags          | 多选时是否将选中值按文字的形式展示 | Boolean	| false	| true	|
 | filterable          | 是否可搜索 | Boolean	| false	| true	|
 | allowCreate          |是否允许用户创建新条目，需配合 `filterable` 使用 | Boolean	| false	| true	|
@@ -237,6 +237,7 @@
 | loadingText          | 远程加载时显示的文字 | String	| 加载中	| -	|
 | noMatchText          | 搜索条件无匹配时显示的文字 | String	| 无匹配数据	| -	|
 | noDataText          | 选项为空时显示的文字 | String	| 无数据	| -	|
+| encryptAction	| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
 
 #### onChange 使用示例
 

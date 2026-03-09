@@ -93,6 +93,8 @@ export default {
 | right-fixed     | 通用 - 操作按钮是否固定在右侧 |Boolean  | true | false |
 | searched-clean-selection     | 通用 - 表格搜索后是否清空多选框选中的值 |Boolean  | true | false |
 | need-alert | 通用 - 表格请求失败后，是否自动alert弹窗（若设为false，则可以通过监听fail事件自己处理错误） |Boolean  | true | false |
+| encrypt-action		| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
+
 
 ### columns（字段列表）@columns
 
