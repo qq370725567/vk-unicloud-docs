@@ -41,8 +41,7 @@
 			$route: {
 				immediate: true,
 				handler(newRoute, oldRoute) {
-					let that = this;
-					let { vk } = that;
+					let { vk } = this;
 					let { path , query } = newRoute;
 					let url = path + vk.pubfn.queryParams(query);
 					let route = { path, query, url };

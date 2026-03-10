@@ -136,8 +136,7 @@ export default {
 			// #ifndef APP-PLUS
 			this.toast("请在app环境内发起支付", "none");
 			// #endif
-			let that = this;
-			let { form1 } = that;
+			let { form1 } = this;
 			form1.out_trade_no = obj.out_trade_no || "test_" + Date.now();
 			// 发起支付
 			this.$refs.vkPay.createPayment({
@@ -160,25 +159,25 @@ export default {
 				// 成功回调
 				success: res => {
 					// 此处一般是写支付成功的提示或跳转到支付成功的页面。
-					that.toast("支付成功", "success");
+					this.toast("支付成功", "success");
 					console.log("paySuccess", res);
 				},
 				// 失败回调
 				fail: res => {
 					if (res.failType === "create") {
 						// 创建支付失败时提示
-						that.alert(res.msg);
+						this.alert(res.msg);
 					} else if (res.failType === "request") {
 						// 请求支付失败时提示
-						that.toast("请求支付失败");
+						this.toast("请求支付失败");
 					} else if (res.failType === "result") {
 						// 支付结果失败时提示
-						that.toast("支付失败");
+						this.toast("支付失败");
 					}
 				},
 				// 取消回调
 				cancel: res => {
-					that.toast("用户取消支付");
+					this.toast("用户取消支付");
 				}
 			});
 		},

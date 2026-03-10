@@ -38,7 +38,7 @@
   ],
   formData: () => {
     return {
-      a: "1", // 支持通过 this 或 that 获取到其他参数
+      a: "1", // 支持通过 this 获取到其他参数
     }
   }
 },
@@ -153,8 +153,8 @@ props 对象属性
   ],
   formData: () => {
     return {
-      nickname: that.form1.data.nickname,
-      mobile: that.form1.data.mobile,
+      nickname: this.form1.data.nickname,
+      mobile: this.form1.data.mobile,
     }
   }
 },

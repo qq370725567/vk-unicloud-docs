@@ -48,8 +48,8 @@
   // 此时的 onSuccess 需要自己实现
   onSuccess(data) {
     // 此处写上传成功后，把数据赋值到你的表单变量中，如下
-    // 多图上传 that.form1.data.image1.push(data.url);
-    // 单图上传 that.form1.data.image1 = data.url;
+    // 多图上传 this.form1.data.image1.push(data.url);
+    // 单图上传 this.form1.data.image1 = data.url;
   },
   httpRequest(obj) {
     let { action, file, filename, data, headers, onProgress, onSuccess, onError } = obj;
@@ -125,9 +125,8 @@
 ```js
 // 表单提交
 submitForm(){
-  let that = this;
   // 先执行表单验证
-  that.$refs.form1.validate(async (valid) => {
+  this.$refs.form1.validate(async (valid) => {
     if (valid){
       // 验证通过
       // 需要手动上传的字段名
@@ -138,7 +137,7 @@ submitForm(){
       vk.showLoading('上传中...');
       for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
-        let val = that.form1.data[key]; // 当前表单绑定的值
+        let val = this.form1.data[key]; // 当前表单绑定的值
         // 判断是否需要上传
         if (typeof val === "object" && val.url && val.url.indexOf("base64,") > -1) {
           if (key.indexOf("id_card") === -1) {
@@ -152,7 +151,7 @@ submitForm(){
               file: file
             });
             // 修改表单绑定的值为真实文件url地址
-            that.form1.data[key] = uploadRes.url;
+            this.form1.data[key] = uploadRes.url;
           } else {
             // 加密上传（是身份证则加密上传）
             let uploadRes = await vk.callFunction({
@@ -163,12 +162,12 @@ submitForm(){
               }
             });
             // 修改表单绑定的值为真实文件url地址
-            that.form1.data[key] = uploadRes.url;
+            this.form1.data[key] = uploadRes.url;
           }
         }
       }
       vk.hideLoading();
-      that.$refs.form1.submitForm();
+      this.$refs.form1.submitForm();
     }
   });
 },

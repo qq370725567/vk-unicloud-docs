@@ -2063,7 +2063,7 @@ let url = vk.getConfig("login.url");
 /**
  * 手机端长列表分页加载数据
  * @description 自动处理下一页。数据合并，更新数据源（会自动更新vue页面上的this.data变量的值）源码请看 uni_modules/vk-unicloud/vk_modules/vk-unicloud-page/libs/function/index.js 中的 getListData 内部实现
- * @param {Vue页面对象} that 页面数据对象this
+ * @param {Vue页面对象} that 页面数据对象 this
  * @param {String} url 请求地址(云函数路径)
  * @param {String} listName 后端返回的list数组的字段名称,默认rows
  * @param {Object} data 额外数据
@@ -2072,15 +2072,15 @@ let url = vk.getConfig("login.url");
  * 代码示例
  */
 vk.pubfn.getListData({
-    that : this,
-    url : "db_test/pub/select",
-    listName : "rows",
-    data : {
-      a : 1
-    },
-    dataPreprocess: (list) => {
-      return list;
-    }
+  that: this,
+  url: "db_test/pub/select",
+  listName: "rows",
+  data: {
+    a: 1
+  },
+  dataPreprocess: (list) => {
+    return list;
+  }
 });
 ```
 
@@ -2117,8 +2117,8 @@ vk.pubfn.getListData({
   }
 // 在页面初始化方法中执行下面的函数
 this.vk.pubfn.getComponentsDynamicData({
-  that : this,
-  ids : ["notice-bar-01","index-swiper-01"]
+  that: this,
+  ids: ["notice-bar-01", "index-swiper-01"]
 });
 ```
 

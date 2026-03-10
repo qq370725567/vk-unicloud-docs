@@ -55,8 +55,8 @@
   // 此时的 onSuccess 需要自己实现
   onSuccess(data) {
     // 此处写上传成功后，把数据赋值到你的表单变量中，如下
-    // 多图上传 that.form1.data.file.push(data.url);
-    // 单图上传 that.form1.data.file = data.url;
+    // 多图上传 this.form1.data.file.push(data.url);
+    // 单图上传 this.form1.data.file = data.url;
   },
   httpRequest(obj) {
     let { action, file, filename, data, headers, onProgress, onSuccess, onError } = obj;

@@ -8,30 +8,29 @@
 	export default {
 		name: 'footer-link',
 		props: {
-			
+
 		},
 		data() {
 			return {
-				
+
 			};
 		},
 		created(){
-			let that = this;
-			that.init();
+			this.init();
 		},
 		mounted() {
-			
+
 		},
 		methods: {
 			// 页面数据初始化函数
 			init(options = {}){
-				let that = this;
-				
+
+
 			}
 		},
 		// 计算属性
 		computed:{
-			
+
 		}
 	};
 </script>

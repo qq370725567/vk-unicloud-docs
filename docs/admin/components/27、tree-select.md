@@ -33,7 +33,7 @@
 {
   key: "tree1", title: "本地数据", type: "tree-select",
   data: () => {
-    let list = that.list;
+    let list = this.list;
     return list;
   }
 },

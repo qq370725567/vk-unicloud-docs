@@ -24,7 +24,7 @@
 {
   key: "select1", title: "select类型", type: "select", filterable: true, clearable: true,
   data: () => {
-    let list = that.list;
+    let list = this.list;
     return list;
   }
 },

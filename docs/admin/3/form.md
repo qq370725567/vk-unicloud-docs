@@ -705,7 +705,7 @@ data: function() {
               validator: (rule, value, callback) => {
                 if (value === '') {
                   callback(new Error('请再次输入密码'));
-                } else if (value !== that.form1.data.password) {
+                } else if (value !== this.form1.data.password) {
                   callback(new Error('两次输入密码不一致!'));
                 } else {
                   callback();
@@ -837,7 +837,7 @@ methods: {
 #### validate
 
 ```js
-that.$refs.form1.validate((valid) => {
+this.$refs.form1.validate((valid) => {
   if (valid){
     // 验证通过
     
@@ -848,7 +848,7 @@ that.$refs.form1.validate((valid) => {
 #### validateField
 
 ```js
-that.$refs.form1.validate("username",(errMsg, arr) => {
+this.$refs.form1.validate("username",(errMsg, arr) => {
   if (errMsg) {
     // 未验证通过
     
@@ -920,7 +920,7 @@ this.$refs.form1.resetForm();
 ```js
 // 审核通过执行的方法
 adopt(status){
-  that.$refs.form1.submitForm({
+  this.$refs.form1.submitForm({
     // data为额外提交的参数，真正提交的参数为form1.data+这里的data
     data: {
       status: status
@@ -1136,7 +1136,6 @@ vk.pubfn.openForm('bindRole',{ item: {} }); // 来源页面 /pages_plugs/system/
 </template>
 
 <script>
-let that; // 当前页面对象
 let vk = uni.vk; // vk实例
 export default {
   props: {
@@ -1219,34 +1218,32 @@ export default {
     };
   },
   mounted() {
-    that = this;
-    that.init();
+    this.init();
   },
   methods: {
     // 初始化
     init() {
-      let { value } = that;
-      that.$emit("input", value);
+      let { value } = this;
+      this.$emit("input", value);
     },
     // 监听 - 页面打开
     onOpen() {
-      that = this;
-      let { value } = that;
+      let { value } = this;
       let { role = [], _id } = value.item;
-      that.data = value.item;
-      that.form1.props.show = true;
-      that.form1.data.user_id = _id;
-      that.form1.data.roleList = role;
+      this.data = value.item;
+      this.form1.props.show = true;
+      this.form1.data.user_id = _id;
+      this.form1.data.roleList = role;
     },
     // 监听 - 页面关闭
     onClose() {
-      that.$refs.form1.resetForm(); // 关闭时，重置表单
+      this.$refs.form1.resetForm(); // 关闭时，重置表单
     },
     // 表单提交成功后
     onFormSuccess() {
-      that.$set(that.value.item, "role", that.form1.data.roleList);
-      that.value.show = false; // 关闭页面
-      that.$emit("success");
+      this.$set(this.value.item, "role", this.form1.data.roleList);
+      this.value.show = false; // 关闭页面
+      this.$emit("success");
     }
   },
   // 监听属性

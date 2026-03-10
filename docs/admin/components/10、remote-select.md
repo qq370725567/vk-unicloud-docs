@@ -51,7 +51,7 @@
   action: "admin/select/kh/user",
   actionData: () => {
     return {
-      a: that.form1.data.a
+      a: this.form1.data.a
     }
   }
 },

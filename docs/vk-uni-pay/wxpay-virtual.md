@@ -259,11 +259,10 @@ export default {
 			});
 			return;
 			// #endif
-			let that = this;
-			let { form1 } = that;
+			let { form1 } = this;
 			// 这里的订单号\金额等数据应该是从数据库里获取的,这里为演示需要,故直接本地生成.
 			form1.out_trade_no = obj.out_trade_no || "test_" + Date.now();
-			that.$refs.vkPay.createPayment({
+			this.$refs.vkPay.createPayment({
 				// 如果是非路由框架，则外层action不再是json，而为字符串，值为云函数名称，如 action: "你的云函数名称"
 				// 如果是路由框架，则按下方配置填写
 				// 如果云函数name为 vk-pay，则无需改动 action

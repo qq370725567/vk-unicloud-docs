@@ -40,7 +40,6 @@
 		methods: {
 			// 页面数据初始化函数
 			init(options = {}){
-				let that = this;
 
 			}
 		},

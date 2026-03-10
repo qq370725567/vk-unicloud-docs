@@ -7,7 +7,7 @@
 					<img :src="item.src"></img>
 				</a>
 			</div>
-		</div> 
+		</div>
 	</div>
 </template>
 
@@ -15,12 +15,12 @@
 	export default {
 		name: 'friend-link',
 		props: {
-			
+
 		},
 		data() {
 			return {
 				list:[
-					{ 
+					{
 						src:"image/ad/1.jpg",
 						href:"https://www.aliyun.com/minisite/goods?userCode=eeg47b5x"
 					},
@@ -36,22 +36,20 @@
 			};
 		},
 		created(){
-			let that = this;
-			that.init();
+			this.init();
 		},
 		mounted() {
-			
+
 		},
 		methods: {
 			// 页面数据初始化函数
 			init(options = {}){
-				let that = this;
-				
+
 			}
 		},
 		// 计算属性
 		computed:{
-			
+
 		}
 	};
 </script>
@@ -71,7 +69,7 @@
 		margin-right: -15px;
 		margin-left: -15px;
 	}
-	
+
 	.friend-link .friend-link .friend-link__wrap{
 		margin:8px 8px;
 	}

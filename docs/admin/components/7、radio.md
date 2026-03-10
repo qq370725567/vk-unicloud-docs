@@ -36,7 +36,7 @@
 {
   key: "radio1", title: "radio类型", type: "radio", itemWidth: 80,
   data: () => {
-    let list = that.list;
+    let list = this.list;
     return list;
   }
 },
@@ -81,7 +81,7 @@
   action: "admin/system/user/sys/getList",
   actionData: () => {
     return {
-      a: that.form1.data.a
+      a: this.form1.data.a
     }
   },
   props: { list: "rows", value: "_id", label: "nickname" },

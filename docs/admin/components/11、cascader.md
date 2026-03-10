@@ -40,7 +40,7 @@
 {
   key: "cascader1", title: "本地数据级联", type: "cascader",
   data: () => {
-    let list = that.list;
+    let list = this.list;
     return list;
   }
 },
@@ -97,7 +97,7 @@
   action: "admin/system/permission/sys/getAll",
   actionData: () => {
     return {
-      a: that.form1.data.a
+      a: this.form1.data.a
     }
   },
   props: {
