@@ -102,7 +102,7 @@ module.exports = {
 这里指定版本为 `2.8.4` 是为了和 `HBuilderX` 插件市场的版本对齐
 
 ```bash
-npm install -g prettier@2.8.4
+npm install -g prettier@2.8.4 --registry https://registry.npmmirror.com
 ```
 
 2. 添加格式化忽略文件
