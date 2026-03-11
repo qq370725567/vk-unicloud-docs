@@ -31,3 +31,4 @@ pnpm-lock.yaml
 *.min.css
 manifest.json
 static/
+changelog.md

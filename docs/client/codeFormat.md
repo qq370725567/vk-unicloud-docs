@@ -143,6 +143,7 @@ pnpm-lock.yaml
 *.min.css
 manifest.json
 static/
+changelog.md
 ```
 
 ::: tip 提示
