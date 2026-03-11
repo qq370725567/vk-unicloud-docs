@@ -142,6 +142,7 @@ pnpm-lock.yaml
 *.min.js
 *.min.css
 manifest.json
+static/
 ```
 
 ::: tip 提示
