@@ -125,6 +125,10 @@ uni_modules/
 .vscode/
 .hbuilderx/
 .idea/
+.prettierignore
+.editorconfig
+.gitattributes
+.gitignore
 
 # 缓存文件
 .vite/
