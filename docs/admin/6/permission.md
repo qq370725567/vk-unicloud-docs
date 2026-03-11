@@ -8,11 +8,11 @@ sidebarDepth: 0
 
 ## 页面路径
 
-* /pages_plugs/system/permission/list
+- /pages_plugs/system/permission/list
 
 ## 相关云函数路径
 
-* /router/service/admin/system/permission/
+- /router/service/admin/system/permission/
 
 ## 功能介绍
 

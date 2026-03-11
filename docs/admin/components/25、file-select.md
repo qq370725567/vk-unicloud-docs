@@ -18,24 +18,24 @@
 
 ### 组件属性@props
 
-| 参数							| 说明																																								| 类型		| 默认值	| 可选值																|
-|------------------	|-------------------------------																											|---------|--------	|-------																|
-| fileType					| 文件类型																																						| String	| image		| image、video、other										|
-| multiple					| 是否可多选																																					| Number	| -				| -																			|
-| multipleLimit			| 最大多选数量																																				| Number	| 9				| -																			|
-| defaultCategory		| 默认显示哪个分类下的素材（分类ID）																									| String	| -				| -																			|
-| upload						| 是否允许上传																																				| Boolean	| true		| false																	|
-| updateCategory		| 是否允许编辑分类																																		| Boolean	| true		| false																	|
-| imageFit					| 图片显示模式 [详细介绍](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)| String	| cover		| fill、contain、cover、none、scale-dow	|
-| cloudDirectory    | 上传至指定的云端目录（默认会以年月日为目录）  | String  | - | - |
-| cloudPathRemoveChinese | 删除文件名中的中文（默认true） 		| Boolean	| true		| false	|
-| provider          | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	 | String  | - | - |
-| fileSize         | 限制文件大小  | Number  | - | - |
-| sizeUnit         | 文件的单位  | String  | MB | KB、MB、GB |
-| returnType | 返回值类型  | String  | url | url、id |
-| encryptAction	| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
+| 参数                   | 说明                                                                                                           | 类型    | 默认值 | 可选值                                |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------------------------------------- |
+| fileType               | 文件类型                                                                                                       | String  | image  | image、video、other                   |
+| multiple               | 是否可多选                                                                                                     | Number  | -      | -                                     |
+| multipleLimit          | 最大多选数量                                                                                                   | Number  | 9      | -                                     |
+| defaultCategory        | 默认显示哪个分类下的素材（分类 ID）                                                                            | String  | -      | -                                     |
+| upload                 | 是否允许上传                                                                                                   | Boolean | true   | false                                 |
+| updateCategory         | 是否允许编辑分类                                                                                               | Boolean | true   | false                                 |
+| imageFit               | 图片显示模式 [详细介绍](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)                           | String  | cover  | fill、contain、cover、none、scale-dow |
+| cloudDirectory         | 上传至指定的云端目录（默认会以年月日为目录）                                                                   | String  | -      | -                                     |
+| cloudPathRemoveChinese | 删除文件名中的中文（默认 true）                                                                                | Boolean | true   | false                                 |
+| provider               | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云 oss | String  | -      | -                                     |
+| fileSize               | 限制文件大小                                                                                                   | Number  | -      | -                                     |
+| sizeUnit               | 文件的单位                                                                                                     | String  | MB     | KB、MB、GB                            |
+| returnType             | 返回值类型                                                                                                     | String  | url    | url、id                               |
+| encryptAction          | 是否加密请求 [查看 encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)                      | Boolean | false  | true                                  |
 
-#### 设置双向绑定的值为file_id@fileid
+#### 设置双向绑定的值为 file_id@fileid
 
 默认双向绑定的值为 url，若要设置为 file_id，则指定属性 returnType 的值 为 id 即可
 
@@ -61,12 +61,12 @@
 
 1. admin/system_uni/uni-id-files/files/kh/delete
 2. admin/system_uni/uni-id-files/files/kh/getList
-4. admin/system_uni/uni-id-files/files/kh/getTempFileURL
-3. admin/system_uni/uni-id-files/files/kh/update
+3. admin/system_uni/uni-id-files/files/kh/getTempFileURL
+4. admin/system_uni/uni-id-files/files/kh/update
 5. admin/system_uni/uni-id-files/categories/kh/getList
 6. admin/system_uni/uni-id-files/categories/sys/add
 7. admin/system_uni/uni-id-files/categories/sys/delete
 8. admin/system_uni/uni-id-files/categories/sys/update
 9. user/kh/addUploadRecord
 
-**注意：前端 `vk.uploadFile` 带参数 `needSave: true` 时，上传的图片记录会保存到admin后台，可在 `素材管理` 中查看**
+**注意：前端 `vk.uploadFile` 带参数 `needSave: true` 时，上传的图片记录会保存到 admin 后台，可在 `素材管理` 中查看**

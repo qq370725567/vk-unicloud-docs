@@ -36,18 +36,18 @@
 
 ### 组件属性@props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| activeText            | switch - 打开时的文字描述 | String  | - | -  |
-| inactiveText            | switch - 关闭时的文字描述 | String  | - | -  |
-| activeValue            | switch 打开时或checkbox选中时的值 | Boolean/Number/String  | true | -  |
-| inactiveValue            | switch 关闭时或checkbox未选中时的值 | Boolean/Number/String  | false | -  |
-| activeColor            | switch - 打开时的背景色 | String  | - | -  |
-| inactiveColor            | switch - 关闭时的背景色 | String  | - | -  |
-| validateEvent            | switch - 状态改变时是否触发表单的校验 | Boolean  | true | false |
-| switchType            | 开关的类型，设置成checkbox可以将开关显示成多选框形式  | String  | - | switch 、checkbox |
-| label            | checkbox - 多选框的label | String  | - | -  |
-| inlinePrompt（1.21.7）            | 文字是否显示在按钮内部（仅限1-2个字） | Boolean  | false | true |
+| 参数                   | 说明                                                   | 类型                  | 默认值 | 可选值            |
+| ---------------------- | ------------------------------------------------------ | --------------------- | ------ | ----------------- |
+| activeText             | switch - 打开时的文字描述                              | String                | -      | -                 |
+| inactiveText           | switch - 关闭时的文字描述                              | String                | -      | -                 |
+| activeValue            | switch 打开时或 checkbox 选中时的值                    | Boolean/Number/String | true   | -                 |
+| inactiveValue          | switch 关闭时或 checkbox 未选中时的值                  | Boolean/Number/String | false  | -                 |
+| activeColor            | switch - 打开时的背景色                                | String                | -      | -                 |
+| inactiveColor          | switch - 关闭时的背景色                                | String                | -      | -                 |
+| validateEvent          | switch - 状态改变时是否触发表单的校验                  | Boolean               | true   | false             |
+| switchType             | 开关的类型，设置成 checkbox 可以将开关显示成多选框形式 | String                | -      | switch 、checkbox |
+| label                  | checkbox - 多选框的 label                              | String                | -      | -                 |
+| inlinePrompt（1.21.7） | 文字是否显示在按钮内部（仅限 1-2 个字）                | Boolean               | false  | true              |
 
 ### 万能表格使用方式@table
 

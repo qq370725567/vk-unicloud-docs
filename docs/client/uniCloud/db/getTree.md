@@ -8,15 +8,15 @@ sidebarDepth: 0
 
 ### treeProps 参数说明
 
-| 参数名 | 类型 | 必填 | 默认值 | 说明 |
-|--------|------|------|--------|------|
-| id | String | 否 | `_id` | 唯一标识字段 |
-| parent_id | String | 否 | `parent_id` | 父级标识字段 |
-| children | String | 否 | `children` | 自定义返回的下级字段名 |
-| level | Number | 否 | 10 | 查询返回的树的最大层级。超过设定层级的节点不会返回。最大15,最小1 |
-| limit | Number | 否 | - | 每一级最大返回的数据量 |
-| sortArr | Array | 否 | - | 所有子节点的排序规则,格式同主查询的 sortArr |
-| whereJson | Object | 否 | - | 子节点的查询条件,格式同主查询的 whereJson |
+| 参数名    | 类型   | 必填 | 默认值      | 说明                                                               |
+| --------- | ------ | ---- | ----------- | ------------------------------------------------------------------ |
+| id        | String | 否   | `_id`       | 唯一标识字段                                                       |
+| parent_id | String | 否   | `parent_id` | 父级标识字段                                                       |
+| children  | String | 否   | `children`  | 自定义返回的下级字段名                                             |
+| level     | Number | 否   | 10          | 查询返回的树的最大层级。超过设定层级的节点不会返回。最大 15,最小 1 |
+| limit     | Number | 否   | -           | 每一级最大返回的数据量                                             |
+| sortArr   | Array  | 否   | -           | 所有子节点的排序规则,格式同主查询的 sortArr                        |
+| whereJson | Object | 否   | -           | 子节点的查询条件,格式同主查询的 whereJson                          |
 
 ### 注意事项
 
@@ -40,102 +40,102 @@ const $ = _.aggregate; // 聚合查询操作符
 
 ### 树状结构@demo1
 
-以下语句效果是：查询已启用的菜单，并自动将子菜单合并到父菜单的children字段下
+以下语句效果是：查询已启用的菜单，并自动将子菜单合并到父菜单的 children 字段下
 
 ```js
 res = await vk.baseDao.selects({
-  dbName: "opendb-admin-menus",
+  dbName: 'opendb-admin-menus',
   pageIndex: 1,
   pageSize: 500,
-  whereJson:{
+  whereJson: {
     enable: true,
-    parent_id: _.in([null, ""]),
-    menu_id: _.exists(true)
+    parent_id: _.in([null, '']),
+    menu_id: _.exists(true),
   },
-  sortArr: [{ name: "sort", type: "asc" }], // 主节点的排序规则
+  sortArr: [{ name: 'sort', type: 'asc' }], // 主节点的排序规则
   // 树状结构参数
   treeProps: {
-    id: "menu_id",          // 唯一标识字段，默认为 _id
-    parent_id: "parent_id", // 父级标识字段，默认为 parent_id
-    children: "children",   // 自定义返回的下级字段名，默认为 children
-    level: 3,               // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
-    limit: 500,             // 每一级最大返回的数据。
-    sortArr: [{ name: "sort", type: "asc" }], // 所有子节点的排序规则
+    id: 'menu_id', // 唯一标识字段，默认为 _id
+    parent_id: 'parent_id', // 父级标识字段，默认为 parent_id
+    children: 'children', // 自定义返回的下级字段名，默认为 children
+    level: 3, // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
+    limit: 500, // 每一级最大返回的数据。
+    sortArr: [{ name: 'sort', type: 'asc' }], // 所有子节点的排序规则
     whereJson: {
-      enable: true
-    }
-  }
+      enable: true,
+    },
+  },
 });
 ```
 
-### 树状结构+or查询条件@demo2
+### 树状结构+or 查询条件@demo2
 
 ```js
 let selectsRes = await vk.baseDao.selects({
-  dbName: "opendb-admin-menus",
+  dbName: 'opendb-admin-menus',
   pageIndex: 1,
   pageSize: 500,
-  whereJson:{
+  whereJson: {
     enable: true,
-    parent_id: _.in([null, ""]),
-    menu_id: _.exists(true)
+    parent_id: _.in([null, '']),
+    menu_id: _.exists(true),
   },
-  sortArr: [{ name: "sort", type: "asc" }], // 主节点的排序规则
+  sortArr: [{ name: 'sort', type: 'asc' }], // 主节点的排序规则
   // 树状结构参数
   treeProps: {
-    id: "menu_id",          // 唯一标识字段，默认为 _id
-    parent_id: "parent_id", // 父级标识字段，默认为 parent_id
-    children: "children",   // 自定义返回的下级字段名，默认为 children
-    level: 3,               // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
-    limit: 500,             // 每一级最大返回的数据。
-    sortArr: [{ name: "sort", type: "asc" }], // 所有子节点的排序规则
+    id: 'menu_id', // 唯一标识字段，默认为 _id
+    parent_id: 'parent_id', // 父级标识字段，默认为 parent_id
+    children: 'children', // 自定义返回的下级字段名，默认为 children
+    level: 3, // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
+    limit: 500, // 每一级最大返回的数据。
+    sortArr: [{ name: 'sort', type: 'asc' }], // 所有子节点的排序规则
     whereJson: $.or([
       {
-        menu_id: _.eq("sys-user-manage")
+        menu_id: _.eq('sys-user-manage'),
       },
       {
-        menu_id: _.exists(false)
-      }
-    ])
-  }
+        menu_id: _.exists(false),
+      },
+    ]),
+  },
 });
 ```
 
-### 树状结构+and+or查询条件@demo3
+### 树状结构+and+or 查询条件@demo3
 
 ```js
 let selectsRes = await vk.baseDao.selects({
-  dbName: "opendb-admin-menus",
+  dbName: 'opendb-admin-menus',
   pageIndex: 1,
   pageSize: 500,
-  whereJson:{
+  whereJson: {
     enable: true,
-    parent_id: _.in([null, ""]),
-    menu_id: _.exists(true)
+    parent_id: _.in([null, '']),
+    menu_id: _.exists(true),
   },
-  sortArr: [{ name: "sort", type: "asc" }], // 主节点的排序规则
+  sortArr: [{ name: 'sort', type: 'asc' }], // 主节点的排序规则
   // 树状结构参数
   treeProps: {
-    id: "menu_id",          // 唯一标识字段，默认为 _id
-    parent_id: "parent_id", // 父级标识字段，默认为 parent_id
-    children: "children",   // 自定义返回的下级字段名，默认为 children
-    level: 3,               // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
-    limit: 500,             // 每一级最大返回的数据。
-    sortArr: [{ name: "sort", type: "asc" }], // 所有子节点的排序规则
+    id: 'menu_id', // 唯一标识字段，默认为 _id
+    parent_id: 'parent_id', // 父级标识字段，默认为 parent_id
+    children: 'children', // 自定义返回的下级字段名，默认为 children
+    level: 3, // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级，最大15，最小1
+    limit: 500, // 每一级最大返回的数据。
+    sortArr: [{ name: 'sort', type: 'asc' }], // 所有子节点的排序规则
     whereJson: $.and([
       {
-        menu_id: _.eq("sys-user-manage")
+        menu_id: _.eq('sys-user-manage'),
       },
       $.or([
         {
-          menu_id: _.eq("sys-user-manage2")
+          menu_id: _.eq('sys-user-manage2'),
         },
         {
-          menu_id: _.exists(true)
-        }
-      ])
-    ])
-  }
+          menu_id: _.exists(true),
+        },
+      ]),
+    ]),
+  },
 });
 ```
 
@@ -145,44 +145,44 @@ let selectsRes = await vk.baseDao.selects({
 
 ```js
 res = await vk.baseDao.selects({
-  dbName: "opendb-admin-menus",
+  dbName: 'opendb-admin-menus',
   pageIndex: 1,
   pageSize: 500,
-  whereJson:{
+  whereJson: {
     enable: true,
-    parent_id: _.in([null, ""]),
-    menu_id: _.exists(true)
+    parent_id: _.in([null, '']),
+    menu_id: _.exists(true),
   },
-  sortArr: [{ name: "sort", type: "asc" }], // 主节点的排序规则
+  sortArr: [{ name: 'sort', type: 'asc' }], // 主节点的排序规则
   // 树状结构参数
   treeProps: {
-    id: "menu_id",          // 唯一标识字段,默认为 _id
-    parent_id: "parent_id", // 父级标识字段,默认为 parent_id
-    children: "children",   // 自定义返回的下级字段名,默认为 children
-    level: 3,               // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级,最大15,最小1
-    limit: 500,             // 每一级最大返回的数据
-    sortArr: [{ name: "sort", type: "asc" }], // 所有子节点的排序规则
+    id: 'menu_id', // 唯一标识字段,默认为 _id
+    parent_id: 'parent_id', // 父级标识字段,默认为 parent_id
+    children: 'children', // 自定义返回的下级字段名,默认为 children
+    level: 3, // 查询返回的树的最大层级。超过设定层级的节点不会返回。默认10级,最大15,最小1
+    limit: 500, // 每一级最大返回的数据
+    sortArr: [{ name: 'sort', type: 'asc' }], // 所有子节点的排序规则
     whereJson: {
-      enable: true
-    }
+      enable: true,
+    },
   },
   // 副表列表
   foreignDB: [
     {
-      dbName: "opendb-admin-roles",  // 关联角色表
-      localKey: "role_id",           // 菜单表的角色ID字段
-      foreignKey: "role_id",         // 角色表的ID字段
-      as: "role_info",               // 返回字段名
-      limit: 1
+      dbName: 'opendb-admin-roles', // 关联角色表
+      localKey: 'role_id', // 菜单表的角色ID字段
+      foreignKey: 'role_id', // 角色表的ID字段
+      as: 'role_info', // 返回字段名
+      limit: 1,
     },
     {
-      dbName: "uni-id-users",        // 关联用户表
-      localKey: "create_user_id",    // 菜单表的创建者ID字段
-      foreignKey: "_id",             // 用户表的ID字段
-      as: "create_user_info",        // 返回字段名
-      limit: 1
-    }
-  ]
+      dbName: 'uni-id-users', // 关联用户表
+      localKey: 'create_user_id', // 菜单表的创建者ID字段
+      foreignKey: '_id', // 用户表的ID字段
+      as: 'create_user_info', // 返回字段名
+      limit: 1,
+    },
+  ],
 });
 ```
 
@@ -192,24 +192,24 @@ res = await vk.baseDao.selects({
 
 ```js
 res = await vk.baseDao.selects({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 1000,
-  whereJson:{
+  whereJson: {
     inviter_uid: _.exists(false), // 查询顶级推广用户(没有上级的用户)
   },
   // 树状结构参数
   treeProps: {
-    id: "_id",
+    id: '_id',
     parent_id: $.arrayElemAt(['$inviter_uid', 0]), // 从数组中取出推广人ID
-    children: "children",
-    level: 2,               // 最多查2层推广关系
+    children: 'children',
+    level: 2, // 最多查2层推广关系
     limit: 1000,
     whereJson: {
       // 这里可以添加子节点的筛选条件,例如只查询已激活的用户
       // status: 1
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -270,5 +270,4 @@ res = await vk.baseDao.selects({
   ],
   "total": 2
 }
-
-
+```

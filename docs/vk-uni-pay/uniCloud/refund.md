@@ -11,13 +11,13 @@ sidebarDepth: 0
 无框架下的云函数代码示例（该写法同时也适用于任何框架）
 
 ```js
-const vkPay = require("vk-uni-pay");
+const vkPay = require('vk-uni-pay');
 
 exports.main = async (event, context) => {
   let refundRes = await vkPay.refund({
-    out_trade_no: "商户支付订单号",
-    refund_desc: "退款说明",
-    refund_fee: "退款金额100=1元（单位分）如不填，则全额退款"
+    out_trade_no: '商户支付订单号',
+    refund_desc: '退款说明',
+    refund_fee: '退款金额100=1元（单位分）如不填，则全额退款',
   });
   if (refundRes.code !== 0) {
     return refundRes;
@@ -31,17 +31,16 @@ exports.main = async (event, context) => {
    */
   return res;
 };
-
 ```
 
 ## 请求参数@params
 
-| 参数   | 说明       | 类型    | 默认值  | 可选值 |
-|------- |-----------|---------|-------|-------|
-| out_trade_no  |   必填项，商户支付订单号，需自行保证全局唯一    | String  | -    | -  |
-| out_refund_no  |  商户退款订单号（不填会自动生成），需自行保证全局唯一    | String  | -    | -  |
-| refund_desc  |  退款说明  | String  | -    | -  |
-| refund_fee  |  退款金额，100=1元（单位分）如不填，则全额退款  | Number  | -   | - |
+| 参数          | 说明                                                 | 类型   | 默认值 | 可选值 |
+| ------------- | ---------------------------------------------------- | ------ | ------ | ------ |
+| out_trade_no  | 必填项，商户支付订单号，需自行保证全局唯一           | String | -      | -      |
+| out_refund_no | 商户退款订单号（不填会自动生成），需自行保证全局唯一 | String | -      | -      |
+| refund_desc   | 退款说明                                             | String | -      | -      |
+| refund_fee    | 退款金额，100=1 元（单位分）如不填，则全额退款       | Number | -      | -      |
 
 ### out_refund_no
 
@@ -53,17 +52,15 @@ exports.main = async (event, context) => {
 
 ## 返回值@return
 
-|参数名				|类型		|说明					|支持平台	|
-|:-:					|:-:		|:-:					|:-:			|
-|outTradeNo		|String	|商户订单号		|-				|
-|transactionId|String	|平台订单号		|-				|
-|outRefundNo	|String	|商户退款单号	|微信支付	|
-|refundId			|String	|平台退款单号	|-				|
-|refundFee		|Number	|退款总金额		|-				|
-|cashRefundFee|Number	|现金退款金额	|-				|
+|    参数名     |  类型  |     说明     | 支持平台 |
+| :-----------: | :----: | :----------: | :------: |
+|  outTradeNo   | String |  商户订单号  |    -     |
+| transactionId | String |  平台订单号  |    -     |
+|  outRefundNo  | String | 商户退款单号 | 微信支付 |
+|   refundId    | String | 平台退款单号 |    -     |
+|   refundFee   | Number |  退款总金额  |    -     |
+| cashRefundFee | Number | 现金退款金额 |    -     |
 
-## 微信支付v2退款报错说明@q1
+## 微信支付 v2 退款报错说明@q1
 
-目前hbx本地调试和支付宝云云端均为node18，而node18已废弃微信支付v2的p12证书，故建议改为微信支付v3版本，不要使用微信支付v2版本，详见配置 [传送门](https://vkdoc.fsq.pub/vk-uni-pay/config.html#%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98)
-
-
+目前 hbx 本地调试和支付宝云云端均为 node18，而 node18 已废弃微信支付 v2 的 p12 证书，故建议改为微信支付 v3 版本，不要使用微信支付 v2 版本，详见配置 [传送门](https://vkdoc.fsq.pub/vk-uni-pay/config.html#%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98)

@@ -14,15 +14,15 @@
 
 ### 组件属性@props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| limit      | 最大可以输入多少项 | number  | - | - |
-| inputType        | 输入框类型 | String  | text | number、money、percentage、discount |
-| precision      | 数值精度 小数点位数 | number  | 2 | -  |
-| closable      | 是否可以删除 | Boolean  | true | false  |
-| showAdd      | 是否显示添加按钮 | Boolean  | true | false  |
-| addButtonText      | 添加按钮的标题 | String  | + 添加 | -  |
-| maxlength      | 字符串输入最大长度 | Number  | - | -  |
+| 参数          | 说明                | 类型    | 默认值 | 可选值                              |
+| ------------- | ------------------- | ------- | ------ | ----------------------------------- |
+| limit         | 最大可以输入多少项  | number  | -      | -                                   |
+| inputType     | 输入框类型          | String  | text   | number、money、percentage、discount |
+| precision     | 数值精度 小数点位数 | number  | 2      | -                                   |
+| closable      | 是否可以删除        | Boolean | true   | false                               |
+| showAdd       | 是否显示添加按钮    | Boolean | true   | false                               |
+| addButtonText | 添加按钮的标题      | String  | + 添加 | -                                   |
+| maxlength     | 字符串输入最大长度  | Number  | -      | -                                   |
 
 ### 万能表格使用方式@table
 
@@ -30,7 +30,7 @@
 
 **值的类型是数组，输出的是数组内每一项的文本**
 
-如：输出商品标签 `goods_tags:["标签1","标签2"]`，最长显示的是 标签1 标签2
+如：输出商品标签 `goods_tags:["标签1","标签2"]`，最长显示的是 标签 1 标签 2
 
 ```js
 { key: "goods_tags", title: "商品标签", type: "tag", width: 200 },
@@ -38,8 +38,7 @@
 
 **方式二**
 
-**值的类型是数字或字符串或布尔，用值去匹配data内的value，输出label**
-
+**值的类型是数字或字符串或布尔，用值去匹配 data 内的 value，输出 label**
 
 如：输出类型 `type:1` 最终显示的是 `收入`
 

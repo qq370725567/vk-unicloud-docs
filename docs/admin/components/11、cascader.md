@@ -1,6 +1,7 @@
 # 11、cascader 级联选择
 
 ### 万能表单使用方式@form
+
 #### 静态数据方式
 
 应用场景：选项数据为静态数据的情况。
@@ -30,7 +31,8 @@
   ]
 },
 ```
-#### 静态数据方式2
+
+#### 静态数据方式 2
 
 应用场景：选项数据需要通过函数计算
 
@@ -66,7 +68,7 @@
 },
 ```
 
-#### 远程搜索带参数方式1
+#### 远程搜索带参数方式 1
 
 **示例**
 
@@ -87,7 +89,7 @@
 },
 ```
 
-#### 远程搜索带参数方式2
+#### 远程搜索带参数方式 2
 
 **示例**
 
@@ -132,16 +134,15 @@
 },
 ```
 
-
 #### 遵守父子节点不互相关联
 
 应用场景：选商品分类的时候，可以选择子分类，也可以直接选父分类
 
 **参数**
 
-`checkStrictly:true`（设置为true让所有节点都可以被直接选择）
+`checkStrictly:true`（设置为 true 让所有节点都可以被直接选择）
 
-`emitPath:false`（设置为false只返回被选中节点的值）
+`emitPath:false`（设置为 false 只返回被选中节点的值）
 
 **示例**
 
@@ -162,7 +163,6 @@
 },
 ```
 
-
 ### API
 
 ### 公共属性@public
@@ -171,39 +171,39 @@
 
 ### 组件属性@props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| data            | 静态模式数据源 | Array、Function  | - | -  |
-| action           | 支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#自定义function请求模式)  | String、Function | 无      | - |
-| props          | 数据源的属性匹配规则 | Object  | [查看props](#props)  | -  |
-| showAllLevels      | 输入框中是否显示选中值的完整路径 | Boolean  | true | false  |
-| collapseTags      | 多选模式下是否折叠Tag | Boolean  | false | true  |
-| separator        | 选项分隔符 | String  | 斜杠' / ' | -  |
-| clearable          | 是否可以清空选项 | Boolean  | true| false  |
-| filterable        | 是否可搜索选项 | Boolean  | - | -  |
-| filterMethod          | 自定义搜索逻辑，filterable:true时生效 | function(node, keyword)  | -| - |
-| debounce          | 搜索关键词输入的去抖延迟，毫秒，filterable:true时生效  | Number  | 300 | -  |
-| beforeFilter          | 筛选之前的钩子，若返回 false 或者返回 Promise 且被 reject，则停止筛选，filterable:true时生效  | function(value)  | -| - |
-| isRequest    | 是否是http请求模式 | Boolean  | false | true |
-| requestHeader    |  http请求头 | Object  | - | - |
-| requestMethod    |  http请求method | String  | - | - |
-| encryptAction	| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
+| 参数          | 说明                                                                                                                 | 类型                    | 默认值               | 可选值 |
+| ------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- | ------ |
+| data          | 静态模式数据源                                                                                                       | Array、Function         | -                    | -      |
+| action        | 支持：<br/>1、vk 框架下的云函数地址 <br/>2、http 请求地址<br/>3、[自定义 function 请求模式](#自定义function请求模式) | String、Function        | 无                   | -      |
+| props         | 数据源的属性匹配规则                                                                                                 | Object                  | [查看 props](#props) | -      |
+| showAllLevels | 输入框中是否显示选中值的完整路径                                                                                     | Boolean                 | true                 | false  |
+| collapseTags  | 多选模式下是否折叠 Tag                                                                                               | Boolean                 | false                | true   |
+| separator     | 选项分隔符                                                                                                           | String                  | 斜杠' / '            | -      |
+| clearable     | 是否可以清空选项                                                                                                     | Boolean                 | true                 | false  |
+| filterable    | 是否可搜索选项                                                                                                       | Boolean                 | -                    | -      |
+| filterMethod  | 自定义搜索逻辑，filterable:true 时生效                                                                               | function(node, keyword) | -                    | -      |
+| debounce      | 搜索关键词输入的去抖延迟，毫秒，filterable:true 时生效                                                               | Number                  | 300                  | -      |
+| beforeFilter  | 筛选之前的钩子，若返回 false 或者返回 Promise 且被 reject，则停止筛选，filterable:true 时生效                        | function(value)         | -                    | -      |
+| isRequest     | 是否是 http 请求模式                                                                                                 | Boolean                 | false                | true   |
+| requestHeader | http 请求头                                                                                                          | Object                  | -                    | -      |
+| requestMethod | http 请求 method                                                                                                     | String                  | -                    | -      |
+| encryptAction | 是否加密请求 [查看 encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)                            | Boolean                 | false                | true   |
 
 #### props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| expandTrigger    | 次级菜单的展开方式 | String  | click | hover  |
-| multiple         | 是否多选 | Boolean  | false | true |
-| checkStrictly    | 是否严格的遵守父子节点不互相关联 | Boolean  | false | true |
-| emitPath         | 在选中节点改变时，是否返回由该节点所在的各级菜单的值所组成的数组，若设置 false，则只返回该节点的值 | Boolean  | true | false |
-| lazy             | 是否动态加载子节点，需与 lazyLoad 方法结合使用  | Boolean  | false | true |
-| lazyLoad         | 加载动态数据的方法，仅在 lazy 为 true 时有效 function(node, resolve)，node为当前点击的节点，resolve为数据加载完成的回调(必须调用) | function(node, resolve)  | - | - |
-| value            | 指定选项的值为选项对象的某个属性值 | String  | value | - |
-| label            | 指定选项标签为选项对象的某个属性值 | String  | label | - |
-| children         | 指定选项的子选项为选项对象的某个属性值 | String  | children | - |
-| disabled         | 指定选项的禁用为选项对象的某个属性值 | String  | disabled | - |
-| leaf             | 指定选项的叶子节点的标志位为选项对象的某个属性值，当 lazy = true 时生效  | String  | leaf | - |
+| 参数          | 说明                                                                                                                                | 类型                    | 默认值   | 可选值 |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------- | ------ |
+| expandTrigger | 次级菜单的展开方式                                                                                                                  | String                  | click    | hover  |
+| multiple      | 是否多选                                                                                                                            | Boolean                 | false    | true   |
+| checkStrictly | 是否严格的遵守父子节点不互相关联                                                                                                    | Boolean                 | false    | true   |
+| emitPath      | 在选中节点改变时，是否返回由该节点所在的各级菜单的值所组成的数组，若设置 false，则只返回该节点的值                                  | Boolean                 | true     | false  |
+| lazy          | 是否动态加载子节点，需与 lazyLoad 方法结合使用                                                                                      | Boolean                 | false    | true   |
+| lazyLoad      | 加载动态数据的方法，仅在 lazy 为 true 时有效 function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) | function(node, resolve) | -        | -      |
+| value         | 指定选项的值为选项对象的某个属性值                                                                                                  | String                  | value    | -      |
+| label         | 指定选项标签为选项对象的某个属性值                                                                                                  | String                  | label    | -      |
+| children      | 指定选项的子选项为选项对象的某个属性值                                                                                              | String                  | children | -      |
+| disabled      | 指定选项的禁用为选项对象的某个属性值                                                                                                | String                  | disabled | -      |
+| leaf          | 指定选项的叶子节点的标志位为选项对象的某个属性值，当 lazy = true 时生效                                                             | String                  | leaf     | -      |
 
 #### onChange 使用示例
 
@@ -236,17 +236,17 @@
 
 **推荐使用 `watch` 代替 `onChange`** [传送门 - watch](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html#watch-%E7%9B%91%E5%90%AC)
 
-#### 自定义function请求模式
+#### 自定义 function 请求模式
 
-> vk-unicloud-admin-ui 的npm依赖版本需 >= 1.17.17
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.17.17
 
-此方式同样支持http，且更自由化，比如可以在发起请求前处理请求参数，在请求成功后，处理返回参数等等。
+此方式同样支持 http，且更自由化，比如可以在发起请求前处理请求参数，在请求成功后，处理返回参数等等。
 
 优势：更自由化、基本可以满足所有需求场景
 
 劣势：代码量较多
 
-##### 自定义function-http请求模式示例
+##### 自定义 function-http 请求模式示例
 
 ```js
 {
@@ -291,7 +291,7 @@
 },
 ```
 
-##### 自定义function-云函数请求模式示例
+##### 自定义 function-云函数请求模式示例
 
 ```js
 {
@@ -336,11 +336,9 @@
 
 无
 
-
 ### template 使用方式@template
 
 #### 静态数据方式
-
 
 应用场景：选项数据为静态数据的情况。
 
@@ -406,31 +404,33 @@ module.exports = {
     let { data = {}, userInfo, util, filterResponse, originalParam } = event;
     let { customUtil, uniID, config, pubFun, vk, db, _ } = util;
     let { uid } = data;
-    let res = { code: 0, msg: "" };
+    let res = { code: 0, msg: '' };
     // 业务逻辑开始-----------------------------------------------------------
     let { node = {} } = data;
     let whereJson = {
-      enable: true
+      enable: true,
     };
     if (node.root) {
-      whereJson["parent_id"] = null;
+      whereJson['parent_id'] = null;
     } else {
-      whereJson["parent_id"] = node.value;
+      whereJson['parent_id'] = node.value;
     }
     res = await vk.baseDao.selects({
-      dbName: "opendb-admin-menus",
+      dbName: 'opendb-admin-menus',
       pageIndex: 1,
       pageSize: 500,
       whereJson,
-      sortArr: [{ name: "sort", type: "asc" }],
+      sortArr: [{ name: 'sort', type: 'asc' }],
       // 副表列表
-      foreignDB: [{
-        dbName: "opendb-admin-menus",
-        localKey: "menu_id",
-        foreignKey: "parent_id",
-        as: "hasChildren",
-        limit: 1, // 避免浪费查询,这里设置limit:1
-      }]
+      foreignDB: [
+        {
+          dbName: 'opendb-admin-menus',
+          localKey: 'menu_id',
+          foreignKey: 'parent_id',
+          as: 'hasChildren',
+          limit: 1, // 避免浪费查询,这里设置limit:1
+        },
+      ],
     });
     // 数据预处理
     let rows = res.rows;
@@ -444,6 +444,6 @@ module.exports = {
     res.rows = rows;
     // 业务逻辑结束-----------------------------------------------------------
     return res;
-  }
-}
+  },
+};
 ```

@@ -4,7 +4,7 @@
 
 **注意事项**
 
-* 对于 `nvue` 页面、`支付宝小程序`、`百度小程序`，需要在 `js` 中使用 `uni.vk` 替代 `vk`，或者在页面 `<script>` 标签的第一行增加代码 `var vk = uni.vk;`
+- 对于 `nvue` 页面、`支付宝小程序`、`百度小程序`，需要在 `js` 中使用 `uni.vk` 替代 `vk`，或者在页面 `<script>` 标签的第一行增加代码 `var vk = uni.vk;`
 
 ```vue
 <script>
@@ -12,44 +12,42 @@
   export default {
     data() {
       // 页面数据变量
-      return {
-
-      }
+      return {};
     },
     // 其他代码
-  }
+  };
 </script>
 ```
 
 ## 公共请求参数@publicparame
 
-|参数				|说明																																																																																									|类型						|
-|:-:				|:-:																																																																																									|:-:						|
-| data			| 发送到云函数的参数数据																																																																																	|Object					|
-| title			| 遮罩层提示语的文本																																																																																			|String					|
-| loading		| 自定义loading，设置为false则关闭遮罩层提示语 [查看详情](#loading)																																																												|Boolean、Object	|
-| needAlert	| 请求错误时是否弹窗提示，默认true																																																																												|Boolean				|
-| env				| 请求多服务空间的环境 [查看详情](https://vkdoc.fsq.pub/client/question/q9.html#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4)												| String				| -		| -	|
-| encrypt		| 是否加密通信（可以不开启安全网络实现加密通信） [查看详情](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt-vk%E7%89%88%E5%8F%8C%E5%90%91%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1)	| Boolean				| none| -	|
-| success		| 请求成功时的回调函数																																																																																		|Function				|
-| fail			| 请求失败时的回调函数																																																																																		|Function				|
-| complete	| 请求完成时的回调函数																																																																																		|Function				|
+|   参数    |                                                                                           说明                                                                                            |      类型       |
+| :-------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------: | ---- | --- |
+|   data    |                                                                                  发送到云函数的参数数据                                                                                   |     Object      |
+|   title   |                                                                                    遮罩层提示语的文本                                                                                     |     String      |
+|  loading  |                                                           自定义 loading，设置为 false 则关闭遮罩层提示语 [查看详情](#loading)                                                            | Boolean、Object |
+| needAlert |                                                                             请求错误时是否弹窗提示，默认 true                                                                             |     Boolean     |
+|    env    |             请求多服务空间的环境 [查看详情](https://vkdoc.fsq.pub/client/question/q9.html#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%A9%BA%E9%97%B4)              |     String      | -    | -   |
+|  encrypt  | 是否加密通信（可以不开启安全网络实现加密通信） [查看详情](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt-vk%E7%89%88%E5%8F%8C%E5%90%91%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1) |     Boolean     | none | -   |
+|  success  |                                                                                   请求成功时的回调函数                                                                                    |    Function     |
+|   fail    |                                                                                   请求失败时的回调函数                                                                                    |    Function     |
+| complete  |                                                                                   请求完成时的回调函数                                                                                    |    Function     |
 
 ### loading
 
 loading 参数详细说明
 
-* 若 `loading` 的值为 `false`，则不显示默认遮罩层提示语
+- 若 `loading` 的值为 `false`，则不显示默认遮罩层提示语
 
-* 若 `loading` 的值为 `true` ，则不显示默认遮罩层提示语，同时在请求时，会自动设置页面变量 `loading=true` ，请求完成时，自动设置页面变量 `loading=false`
+- 若 `loading` 的值为 `true` ，则不显示默认遮罩层提示语，同时在请求时，会自动设置页面变量 `loading=true` ，请求完成时，自动设置页面变量 `loading=false`
 
-* 若 `loading` 的值类型为 `Object`，如下方代码效果是：请求时，会自动执行 `this.loading2=true` ，请求完成时，会自动执行 `this.loading2=false`
+- 若 `loading` 的值类型为 `Object`，如下方代码效果是：请求时，会自动执行 `this.loading2=true` ，请求完成时，会自动执行 `this.loading2=false`
 
 ```js
 loading: { that: this, name: "loading2" }
 ```
 
-* name 属性支持使用 `.` 表示嵌套变量，如下方代码效果是：请求时，会自动执行 `this.page.loading=true` ，请求完成时，会自动执行 `this.page.loading=false`
+- name 属性支持使用 `.` 表示嵌套变量，如下方代码效果是：请求时，会自动执行 `this.page.loading=true` ，请求完成时，会自动执行 `this.page.loading=false`
 
 ```js
 loading: { that: this, name: "page.loading" }
@@ -57,53 +55,49 @@ loading: { that: this, name: "page.loading" }
 
 **Vue3 setup 用法示例**
 
-因为Vue3的setup模式下没有this，但 that 属性的本质其实就是一个对象，因此我们直接传一个对象给Ta就可以了，代码如下
+因为 Vue3 的 setup 模式下没有 this，但 that 属性的本质其实就是一个对象，因此我们直接传一个对象给 Ta 就可以了，代码如下
 
 ```vue
 <template>
-	<view class="app">
-		{{ loading }}
-	</view>
+  <view class="app">
+    {{ loading }}
+  </view>
 </template>
 
 <script setup>
-	import { onLoad } from '@dcloudio/uni-app';
-	import { ref, reactive } from 'vue';
+  import { onLoad } from '@dcloudio/uni-app';
+  import { ref, reactive } from 'vue';
 
-	const vk = uni.vk;
+  const vk = uni.vk;
 
-	const loading = reactive({
-		a: false,
-		b: false
-	});
+  const loading = reactive({
+    a: false,
+    b: false,
+  });
 
-	onLoad((options) => {
-		vk.callFunction({
-			url: 'template/pub.test.test500',
-			loading: { that: loading, name: "a" },
-			data: {
-
-			},
-			success: (data) => {
-
-			}
-		});
-	});
+  onLoad((options) => {
+    vk.callFunction({
+      url: 'template/pub.test.test500',
+      loading: { that: loading, name: 'a' },
+      data: {},
+      success: (data) => {},
+    });
+  });
 </script>
 ```
 
 ## 公共返回信息@publicreturn
 
-| 参数   | 说明       | 类型    | 
-|------- |-----------|---------|
-| code    |  错误码    | Number  |
-| msg  |   错误提示    | String  |
+| 参数 | 说明     | 类型   |
+| ---- | -------- | ------ |
+| code | 错误码   | Number |
+| msg  | 错误提示 | String |
 
 ## 监听@watch
 
-### vk.onRefreshToken（监听token更新事件）@onRefreshToken
+### vk.onRefreshToken（监听 token 更新事件）@onRefreshToken
 
-**在App.vue里全局监听示例：**
+**在 App.vue 里全局监听示例：**
 
 ```js
 onLaunch: function() {
@@ -133,13 +127,13 @@ export default {
     uni.vk.onRefreshToken(this.onRefreshToken);
   },
   // 监听 - 页面每次【卸载时】（一般用于取消页面上的监听器）
-  onUnload(){
+  onUnload() {
     // 页面卸载时需要手动移除监听
     uni.vk.offRefreshToken(this.onRefreshToken);
   },
   // 函数
   methods: {
-    onRefreshToken(data){
+    onRefreshToken(data) {
       if (data.token) {
         // 有新的token
         console.log('token更新监听：', data);
@@ -147,12 +141,12 @@ export default {
         // token失效或过期
         console.log('token失效监听：', data);
       }
-    }
-  }
-}
+    },
+  },
+};
 ```
 
-### vk.offRefreshToken（移除监听token更新事件）@offRefreshToken
+### vk.offRefreshToken（移除监听 token 更新事件）@offRefreshToken
 
 **一般只有在某个页面里局部监听时才需要用到**
 
@@ -166,13 +160,13 @@ export default {
     uni.vk.onRefreshToken(this.onRefreshToken);
   },
   // 监听 - 页面每次【卸载时】（一般用于取消页面上的监听器）
-  onUnload(){
+  onUnload() {
     // 页面卸载时需要手动移除监听
     uni.vk.offRefreshToken(this.onRefreshToken);
   },
   // 函数
   methods: {
-    onRefreshToken(data){
+    onRefreshToken(data) {
       if (data.token) {
         // 有新的token
         console.log('token更新监听：', data);
@@ -180,9 +174,9 @@ export default {
         // token失效或过期
         console.log('token失效监听：', data);
       }
-    }
-  }
-}
+    },
+  },
+};
 ```
 
 ## 通用@common
@@ -191,14 +185,14 @@ export default {
 
 通过用户名+密码方式进行注册，注册成功则自动登录。
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 ```js
 /**
  * 用户注册(用户名+密码)
- * @param {Object} data 请求参数 
+ * @param {Object} data 请求参数
  * @param {String} data.username 用户名
  * @param {String} data.password 密码
  * @param {Function} success 成功回调函数，参数为请求成功后的数据
@@ -212,24 +206,22 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  */
 vk.userCenter.register({
   data: {
-    username: "",
-    password: ""
+    username: '',
+    password: '',
   },
   success: (data) => {
     // 注册成功后的逻辑
-
-  }
+  },
 });
 ```
-
 
 ### vk.userCenter.login（登录）@login
 
 用户名+密码
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 ```js
 /**
@@ -245,13 +237,12 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  */
 vk.userCenter.login({
   data: {
-    username: "",
-    password: ""
+    username: '',
+    password: '',
   },
   success: (data) => {
     // 登录成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -267,14 +258,13 @@ vk.userCenter.login({
  */
 vk.userCenter.updatePwd({
   data: {
-    oldPassword: "123456",
-    newPassword: "654321",
-    password_confirmation: "654321"
+    oldPassword: '123456',
+    newPassword: '654321',
+    password_confirmation: '654321',
   },
   success: (data) => {
     // 修改成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -287,11 +277,9 @@ vk.userCenter.updatePwd({
 vk.userCenter.logout({
   success: (data) => {
     // 退出登录成功后的逻辑
-
-  }
+  },
 });
 ```
-
 
 ### vk.userCenter.resetPwd（重置密码）@resetPwd
 
@@ -303,12 +291,11 @@ vk.userCenter.logout({
  */
 vk.userCenter.resetPwd({
   data: {
-    password: "123456"
+    password: '123456',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -323,13 +310,12 @@ vk.userCenter.resetPwd({
  */
 vk.userCenter.setAvatar({
   data: {
-    avatar: "https://www.aa.com/1.jpg",
+    avatar: 'https://www.aa.com/1.jpg',
     deleteOldFile: false, // 是否同时删除云储存内的旧头像文件，true代表是
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -345,18 +331,17 @@ vk.userCenter.setAvatar({
  */
 vk.userCenter.updateUser({
   data: {
-    nickname: "剑圣李白",
+    nickname: '剑圣李白',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
 ### vk.userCenter.getCurrentUserInfo（取用户信息）@getCurrentUserInfo
 
-调用此接口会自动更新本地vuex里的用户信息
+调用此接口会自动更新本地 vuex 里的用户信息
 
 ```js
 /**
@@ -368,18 +353,17 @@ vk.userCenter.getCurrentUserInfo({
   loading: false,
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
-### vk.userCenter.loginByToken（刷新token）@loginByToken
+### vk.userCenter.loginByToken（刷新 token）@loginByToken
 
 > vk-unicloud 版本需 ≥ 2.18.7
 
-当token有效期大于1天时，做用户每日登录统计时就会有问题，因为用户可能好几天只需要登录一次，但此用户可能每天都在线，导致每日登录用户数量不准确，因此可以在 App.vue 的 onLaunch 函数中执行 vk.userCenter.loginByToken()
+当 token 有效期大于 1 天时，做用户每日登录统计时就会有问题，因为用户可能好几天只需要登录一次，但此用户可能每天都在线，导致每日登录用户数量不准确，因此可以在 App.vue 的 onLaunch 函数中执行 vk.userCenter.loginByToken()
 
-作用：调用此接口后，会使用当前token进行登录（token需在有效期内），并获得新的token，同时增加登录日志，方便做每日登录统计。
+作用：调用此接口后，会使用当前 token 进行登录（token 需在有效期内），并获得新的 token，同时增加登录日志，方便做每日登录统计。
 
 注意：此接口一天内重复调用多次时，只有每日的第一次调用生效。
 
@@ -387,11 +371,11 @@ vk.userCenter.getCurrentUserInfo({
 vk.userCenter.loginByToken();
 ```
 
-### vk.userCenter.checkToken（token云端校验）@checkTokenforcloud
+### vk.userCenter.checkToken（token 云端校验）@checkTokenforcloud
 
-**注意：实际开发过程中，无需你主动执行这个api来判断用户token是否有效**
+**注意：实际开发过程中，无需你主动执行这个 api 来判断用户 token 是否有效**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 ```js
 /**
@@ -405,32 +389,29 @@ vk.userCenter.loginByToken();
 vk.userCenter.checkToken({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
-### vk.checkToken（token本地校验，前端判断登录，是否登录）@checkToken
+### vk.checkToken（token 本地校验，前端判断登录，是否登录）@checkToken
 
-**此api无网络请求，无延迟**
+**此 api 无网络请求，无延迟**
 
-前端校验原理（宽松模式）：只判断token是否存在，且未过期（不解密token内容）（对前端来说，token存在且未过期，就代表用户已经登录）
+前端校验原理（宽松模式）：只判断 token 是否存在，且未过期（不解密 token 内容）（对前端来说，token 存在且未过期，就代表用户已经登录）
 
-云端校验原理（严格模式）：解密token内容，判断token真实性，获得uid，并判断是否过期
+云端校验原理（严格模式）：解密 token 内容，判断 token 真实性，获得 uid，并判断是否过期
 
 **你无需担心本地校验用户会伪造的可能，因为用户只要请求云函数，云端最终还会再校验一遍的**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 **示例一**
 
 ```js
 if (!vk.checkToken()) {
   // token无效（未登录）
-  
 } else {
   // token有效（已登录）
-  
 }
 ```
 
@@ -439,7 +420,6 @@ if (!vk.checkToken()) {
 ```js
 if (vk.checkToken()) {
   // token有效（已登录）
-  
 }
 ```
 
@@ -451,32 +431,31 @@ if (!vk.checkToken()) {
   return false;
 }
 // token有效（已登录）
-
 ```
 
-### vk.getToken（获取本地token）@getToken
+### vk.getToken（获取本地 token）@getToken
 
-注意：token会自动传给云函数，云函数也会自动解析token，故一般情况下，无需调用此api，如真需要，可使用此api获取。
+注意：token 会自动传给云函数，云函数也会自动解析 token，故一般情况下，无需调用此 api，如真需要，可使用此 api 获取。
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 ```js
 let token = vk.getToken();
 ```
 
-### vk.saveToken（保存本地token）@saveToken
+### vk.saveToken（保存本地 token）@saveToken
 
 将新的 token 及过期时间写入本地缓存，并触发 token 刷新事件。若传入的 token 与当前已保存的 token 相同，则不会更新。
 
 **参数**
 
-| 参数名 | 类型   | 必填 | 说明           |
-|--------|--------|------|----------------|
-| options    | Object | 是   | 要保存的 token 信息 |
-| options.token | String | 是 | 登录凭证 token |
-| options.tokenExpired | Number | 否 | token 过期时间戳（毫秒），不传则依赖业务默认 |
+| 参数名               | 类型   | 必填 | 说明                                         |
+| -------------------- | ------ | ---- | -------------------------------------------- |
+| options              | Object | 是   | 要保存的 token 信息                          |
+| options.token        | String | 是   | 登录凭证 token                               |
+| options.tokenExpired | Number | 否   | token 过期时间戳（毫秒），不传则依赖业务默认 |
 
-注意：tokenExpired值仅作为本地判断token有效期时使用，最终token的过期时间是以云端解密token内容后得到的过期时间为准。
+注意：tokenExpired 值仅作为本地判断 token 有效期时使用，最终 token 的过期时间是以云端解密 token 内容后得到的过期时间为准。
 
 **返回值**
 
@@ -498,15 +477,15 @@ vk.$on('onRefreshToken', (data) => {
 ```js
 vk.saveToken({
   token: 'xxx',
-  tokenExpired: tokenExpired
+  tokenExpired: tokenExpired,
 });
 ```
 
-### vk.deleteToken（删除本地token）@deleteToken
+### vk.deleteToken（删除本地 token）@deleteToken
 
 清除本地保存的 token、token 过期时间以及当前用户信息缓存，并触发 token 刷新事件。常用于退出登录。
 
-注意：`vk.deleteToken` 不会删除云端token，故应使用 `vk.userCenter.logout` 函数来实现登出功能（`vk.userCenter.logout` 会同时删除本地和云端token，无需你手动执行 `vk.deleteToken`）
+注意：`vk.deleteToken` 不会删除云端 token，故应使用 `vk.userCenter.logout` 函数来实现登出功能（`vk.userCenter.logout` 会同时删除本地和云端 token，无需你手动执行 `vk.deleteToken`）
 
 **无参数**
 
@@ -532,14 +511,14 @@ vk.deleteToken();
 ```js
 // App.vue 中的配置
 export default {
-  onLaunch: function(options) {
+  onLaunch: function (options) {
     // 接收页面token参数，用于实现自动登录（优先执行，放置在第一行）
     uni.vk.handleAutoLoginToken(options);
-    
+
     // 后续其他业务逻辑（示例）
-    console.log("App 已启动");
-  }
-}
+    console.log('App 已启动');
+  },
+};
 ```
 
 **效果说明**
@@ -554,16 +533,14 @@ export default {
 
 **注意：**
 
-1. 每个账号首次请求注销接口后，会有7天注销冷静期，此时账号状态已经变更为已注销状态，但用户可以执行[恢复账号](#openaccount)API来恢复账号。
+1. 每个账号首次请求注销接口后，会有 7 天注销冷静期，此时账号状态已经变更为已注销状态，但用户可以执行[恢复账号](#openaccount)API 来恢复账号。
 2. 当已过注销冷静期时，通过再次调用账号注销接口后，账号将会真正注销，此时用户可以重新注册新账号
 
 框架已内置完整的注销账号、恢复账号、冷静期显示等功能的页面：`/pages_template/uni-id/closeAccount/closeAccount`
 
 ```js
 vk.userCenter.closeAccount({
-  success: (res) => {
-    
-  }
+  success: (res) => {},
 });
 ```
 
@@ -573,15 +550,13 @@ vk.userCenter.closeAccount({
 
 **注意：**
 
-1. 无论账号是否已过注销冷静期，只要未二次执行[账号注销](#closeaccount)API，都可以通过恢复账号API来恢复账号。
+1. 无论账号是否已过注销冷静期，只要未二次执行[账号注销](#closeaccount)API，都可以通过恢复账号 API 来恢复账号。
 
 框架已内置完整的注销账号、恢复账号、冷静期显示等功能的页面：`/pages_template/uni-id/closeAccount/closeAccount`
 
 ```js
 vk.userCenter.openAccount({
-  success: (res) => {
-    
-  }
+  success: (res) => {},
 });
 ```
 
@@ -596,24 +571,24 @@ vk.userCenter.openAccount({
 ```js
 vk.userCenter.getCoolingStatus({
   success: (res) => {
-    console.log("status", res.status); // 当前账号状态，4代表已注销（也包含在冷静期），其他均为未注销
-    console.log("nickname", res.nickname); // 昵称
-    console.log("avatar", res.avatar); // 头像
+    console.log('status', res.status); // 当前账号状态，4代表已注销（也包含在冷静期），其他均为未注销
+    console.log('nickname', res.nickname); // 昵称
+    console.log('avatar', res.avatar); // 头像
     if (res.close_account) {
-      console.log("confirmed", res.close_account.confirmed); // 是否已二次确认注销
-      console.log("apply_time", res.close_account.apply_time); // 注销申请时间
-      console.log("close_time", res.close_account.close_time); // 注销冷静期最后时间
-      console.log("reason", res.close_account.reason); // 注销原因
-      console.log("duration", res.duration); // 注销冷静期剩余时长（单位：ms）
+      console.log('confirmed', res.close_account.confirmed); // 是否已二次确认注销
+      console.log('apply_time', res.close_account.apply_time); // 注销申请时间
+      console.log('close_time', res.close_account.close_time); // 注销冷静期最后时间
+      console.log('reason', res.close_account.reason); // 注销原因
+      console.log('duration', res.duration); // 注销冷静期剩余时长（单位：ms）
     }
-  }
+  },
 });
 ```
 
 ## 手机号@mobile
 
 ### vk.userCenter.bindMobile（绑定手机）@bindMobile
- 
+
 ```js
 /**
  * 绑定手机号
@@ -628,8 +603,7 @@ vk.userCenter.bindMobile({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -649,8 +623,7 @@ vk.userCenter.unbindMobile({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -677,16 +650,15 @@ vk.userCenter.bindNewMobile({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
 ### vk.userCenter.loginBySms（手机号登录）@loginBySms
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 ```js
 /**
@@ -694,7 +666,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  * data 请求参数 说明
  * @param {String} mobile 手机号（必填）
  * @param {String} code 验证码（必填）
- * @param {String} type 指定操作类型，不传：存在则登录不存在则注册 login：只能登录 register：只能注册 
+ * @param {String} type 指定操作类型，不传：存在则登录不存在则注册 login：只能登录 register：只能注册
  * @param {String} password 密码，当前用户为新注册时生效
  * @param {String} inviteCode 邀请人的邀请码，当前用户为新注册时生效
  * @param {String} myInviteCode 设置当前注册用户自己的邀请码，当前用户为新注册时生效（不传会自动生成）
@@ -711,8 +683,7 @@ vk.userCenter.loginBySms({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -732,12 +703,11 @@ vk.userCenter.loginBySms({
 vk.userCenter.sendSmsCode({
   data: {
     mobile: '',
-    type: 'login'
+    type: 'login',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -753,28 +723,27 @@ vk.userCenter.sendSmsCode({
  */
 vk.userCenter.resetPasswordByMobile({
   data: {
-    password: "123456",
-    code: "",
-    mobile: ""
+    password: '123456',
+    code: '',
+    mobile: '',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
 **注意**
 
-* 对应发送短信验证码接口 `type` 为 `reset-pwd`
+- 对应发送短信验证码接口 `type` 为 `reset-pwd`
 
 ### vk.userCenter.loginByUniverify（手机一键登录）@loginByUniverify
 
 只有 `APP` 端可以用
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 ```js
 /**
@@ -799,23 +768,21 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 vk.userCenter.loginByUniverify({
   // 更多配置请查看 https://uniapp.dcloud.io/univerify
   univerifyStyle: {
-    "fullScreen": true, // 是否全屏显示(hbx3.1.5起支持全屏)，true表示全屏模式，false表示非全屏模式，默认值为false。
-    "backgroundColor": "#f5f5f5", // 授权页面背景颜色，默认值：#ffffff
-    "authButton": {
-      "normalColor": "#19be6b", // 授权按钮正常状态背景颜色 默认值：#3479f5
-      "highlightColor": "#18b566", // 授权按钮按下状态背景颜色 默认值：#2861c5（仅ios支持）
-      "disabledColor": "#71d5a1", // 授权按钮不可点击时背景颜色 默认值：#73aaf5（仅ios支持）
-      "textColor": "#ffffff", // 授权按钮文字颜色 默认值：#ffffff
-      "title": "本机号码一键登录" // 授权按钮文案 默认值：“本机号码一键登录”
+    fullScreen: true, // 是否全屏显示(hbx3.1.5起支持全屏)，true表示全屏模式，false表示非全屏模式，默认值为false。
+    backgroundColor: '#f5f5f5', // 授权页面背景颜色，默认值：#ffffff
+    authButton: {
+      normalColor: '#19be6b', // 授权按钮正常状态背景颜色 默认值：#3479f5
+      highlightColor: '#18b566', // 授权按钮按下状态背景颜色 默认值：#2861c5（仅ios支持）
+      disabledColor: '#71d5a1', // 授权按钮不可点击时背景颜色 默认值：#73aaf5（仅ios支持）
+      textColor: '#ffffff', // 授权按钮文字颜色 默认值：#ffffff
+      title: '本机号码一键登录', // 授权按钮文案 默认值：“本机号码一键登录”
     },
-    "privacyTerms": {
-      "suffix": "使用本机号码登录", // 条款后的文案 默认值：“并使用本机号码登录”
-      "termsColor": "#555555"
-    }
+    privacyTerms: {
+      suffix: '使用本机号码登录', // 条款后的文案 默认值：“并使用本机号码登录”
+      termsColor: '#555555',
+    },
   },
-  data: {
-
-  },
+  data: {},
   success: (data) => {
     uni.closeAuthView();
     setTimeout(() => {
@@ -824,7 +791,7 @@ vk.userCenter.loginByUniverify({
   },
   fail: (res) => {
     uni.closeAuthView();
-  }
+  },
 });
 ```
 
@@ -846,8 +813,7 @@ vk.userCenter.bindEmail({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -866,8 +832,7 @@ vk.userCenter.unbindEmail({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -890,16 +855,15 @@ vk.userCenter.bindNewEmail({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
 ### vk.userCenter.loginByEmail（邮箱登录）@loginByEmail
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 ```js
 /**
@@ -907,7 +871,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  * data 请求参数 说明
  * @param {String} email 邮箱
  * @param {String} code  邮箱收到的验证码
- * @param {String} type 指定操作类型，不传：存在则登录不存在则注册 login：只能登录 register：只能注册 
+ * @param {String} type 指定操作类型，不传：存在则登录不存在则注册 login：只能登录 register：只能注册
  * @param {String} password 密码，当前用户为新注册时生效
  * @param {String} myInviteCode 设置当前注册用户自己的邀请码，当前用户为新注册时生效（不传会自动生成）
  * @param {Boolean} needPermission 设置为true时会在checkToken时返回用户权限（permission），如果是在admin端，需传true
@@ -923,8 +887,7 @@ vk.userCenter.loginByEmail({
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -946,12 +909,11 @@ vk.userCenter.sendEmailCode({
   data: {
     email: '',
     type: 'login',
-    serviceType: 'qq'
+    serviceType: 'qq',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -967,168 +929,167 @@ vk.userCenter.sendEmailCode({
  */
 vk.userCenter.resetPasswordByEmail({
   data: {
-    password: "123456",
-    code: "",
-    email: ""
+    password: '123456',
+    code: '',
+    email: '',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
 **注意**
 
-* 对应发送邮件验证码接口 `type` 为 `reset-pwd`
+- 对应发送邮件验证码接口 `type` 为 `reset-pwd`
 
 ## 微信@weixin
 
 ### vk.userCenter.loginByWeixin（微信登录）@loginByWeixin
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 #### 微信小程序登录@loginByWeixinMp
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-weixin` 的 `appid` 和 `appsecret`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-weixin` 的 `appid` 和 `appsecret`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/abf6f55a-7262-47d7-91ef-9a8958b9aeb0.png)
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
-* 在 `manifest.json` 内配置微信小程序的 `appid`
+- 在 `manifest.json` 内配置微信小程序的 `appid`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/3f52a650-759d-4c21-a526-7041d4bcbca7.png)
 
-#### 微信APP登录@loginByWeixinApp
+#### 微信 APP 登录@loginByWeixinApp
 
-* 在 `manifest.json` 的APP模块配置微信登录用 `appid`
+- 在 `manifest.json` 的 APP 模块配置微信登录用 `appid`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/65e17cdf-006e-462e-b471-cee8df59d11c.png)
 
-* 打包并使用自定义基座（注意一定要在 `manifest.json` 填写微信 `appid` 后再制作自定义基座）[自定义基座使用说明](https://ask.dcloud.net.cn/article/35115)
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.weixin` 的 `appid` 和 `appsecret`
+- 打包并使用自定义基座（注意一定要在 `manifest.json` 填写微信 `appid` 后再制作自定义基座）[自定义基座使用说明](https://ask.dcloud.net.cn/article/35115)
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.weixin` 的 `appid` 和 `appsecret`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/9464eee0-cfd8-4517-acbd-dfa07763aef0.png)
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
 #### 微信公众号登录@loginByWeixinH5
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `h5-weixin` 的 `appid` 和 `appsecret`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `h5-weixin` 的 `appid` 和 `appsecret`
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/1944c923-65d7-47ed-a34c-0f8862225ac3.png)
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
-**注意1：h5的路由模式必须配置为 `history`，因为微信公众号登录的回调地址不支持 `hash` 模式。注意支付宝云不支持 `history`**
+**注意 1：h5 的路由模式必须配置为 `history`，因为微信公众号登录的回调地址不支持 `hash` 模式。注意支付宝云不支持 `history`**
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/c3b343cd-0058-46db-86f4-64ae46fdf2fb.png)
 
-**注意2：你的前端托管那需要设置404指向的页面为index.html**
+**注意 2：你的前端托管那需要设置 404 指向的页面为 index.html**
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/0a79aeb8-33d6-4c7e-bc08-f0aa7d7ab4fd.png)
 
-**注意3：网页授权时拼接的scope参数的值必须是snsapi_userinfo，同时再绑定开放平台，才能获取到unionid**
+**注意 3：网页授权时拼接的 scope 参数的值必须是 snsapi_userinfo，同时再绑定开放平台，才能获取到 unionid**
 
-**注意4：还需要去微信公众号后台配置下网页授权域名，如下图所示。**
+**注意 4：还需要去微信公众号后台配置下网页授权域名，如下图所示。**
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/2ba5566f-744b-4d05-a3f4-f538b1a9d4e9.png)
 
-#### 微信PC网站扫码登录@loginByWeixinPC
+#### 微信 PC 网站扫码登录@loginByWeixinPC
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `h5` 的 `appid` 和 `appsecret`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `h5` 的 `appid` 和 `appsecret`
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/0dcff7ef-e503-4941-8f2c-19c1c0ca01fb.png)
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
 1. 需要前往微信开放平台申请，类型为网站应用
-2. 先拼接微信扫码授权的url，然后跳转，进入微信的扫码授权页面，扫码完成后会自动跳转到你指定的redirect_uri页面，然后页面onLoad内获得code参数，再调用 vk.userCenter.loginByWeixin 登录
-3. redirect_uri必须是线上域名，且是网站应用绑定的域名
+2. 先拼接微信扫码授权的 url，然后跳转，进入微信的扫码授权页面，扫码完成后会自动跳转到你指定的 redirect_uri 页面，然后页面 onLoad 内获得 code 参数，再调用 vk.userCenter.loginByWeixin 登录
+3. redirect_uri 必须是线上域名，且是网站应用绑定的域名
 
 具体代码如下
 
 ```vue
 <template>
-	<view class="content">
-		<button type="default" @click="getWeixinCode()">扫码授权获取code</button>
-		<button type="default" @click="loginByWeixin()">微信登录(不存在自动注册)</button>
-	</view>
+  <view class="content">
+    <button type="default" @click="getWeixinCode()">扫码授权获取code</button>
+    <button type="default" @click="loginByWeixin()">微信登录(不存在自动注册)</button>
+  </view>
 </template>
 
 <script>
-	let vk = uni.vk;
-	export default {
-		data() {
-			return {
-				options: {}
-			};
-		},
-		onLoad(options) {
-			vk = uni.vk;
-			this.options = options || {};
-			this.init(options);
-		},
-		methods: {
-			// 初始化
-			init(options) {
-				if (this.options.code) {
-					vk.toast("已获取到code，请点击相应操作。");
-					return false;
-				}
-			},
-			getWeixinCode() {
-				let appid = ""; // 填写公众号的appid
-				let redirect_uri = window.location.href.split("?")[0];
-				let url = `https://open.weixin.qq.com/connect/qrconnect?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect`;
-				window.location.href = url;
-			},
-			// 微信登录
-			loginByWeixin(type) {
-				if (!this.options.code) {
-					vk.toast("请先获取code");
-					return false;
-				}
-				vk.userCenter.loginByWeixin({
-					data: {
-						code: this.options.code,
-						state: this.options.state,
-						type
-					},
-					success: (data) => {
-						vk.alert(data.msg);
-						this.data = data;
-					}
-				});
-			}
-		}
-	};
+  let vk = uni.vk;
+  export default {
+    data() {
+      return {
+        options: {},
+      };
+    },
+    onLoad(options) {
+      vk = uni.vk;
+      this.options = options || {};
+      this.init(options);
+    },
+    methods: {
+      // 初始化
+      init(options) {
+        if (this.options.code) {
+          vk.toast('已获取到code，请点击相应操作。');
+          return false;
+        }
+      },
+      getWeixinCode() {
+        let appid = ''; // 填写公众号的appid
+        let redirect_uri = window.location.href.split('?')[0];
+        let url = `https://open.weixin.qq.com/connect/qrconnect?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect`;
+        window.location.href = url;
+      },
+      // 微信登录
+      loginByWeixin(type) {
+        if (!this.options.code) {
+          vk.toast('请先获取code');
+          return false;
+        }
+        vk.userCenter.loginByWeixin({
+          data: {
+            code: this.options.code,
+            state: this.options.state,
+            type,
+          },
+          success: (data) => {
+            vk.alert(data.msg);
+            this.data = data;
+          },
+        });
+      },
+    },
+  };
 </script>
 
 <style lang="scss" scoped>
-	.content {
-		padding: 30rpx;
-	}
+  .content {
+    padding: 30rpx;
+  }
 
-	.content button {
-		margin-bottom: 30rpx;
-	}
+  .content button {
+    margin-bottom: 30rpx;
+  }
 
-	.tips {
-		font-size: 28rpx;
-		color: #999999;
-		margin-bottom: 32rpx;
-	}
+  .tips {
+    font-size: 28rpx;
+    color: #999999;
+    margin-bottom: 32rpx;
+  }
 </style>
 ```
 
 **注意**
 
 自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
- 
+
 不要将 sessionKey 和 accessToken 暴露给前端，否则会有安全隐患
 
 ```js
@@ -1145,16 +1106,15 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  */
 vk.userCenter.loginByWeixin({
   data: {
-    type: ""
+    type: '',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
-云函数端解密 `encryptedKey` 
+云函数端解密 `encryptedKey`
 
 ```js
 // 解密 sessionKey 示例
@@ -1172,21 +1132,21 @@ let sessionKey = decryptedRes.sessionKey;
 2. 需要已微信认证的企业小程序（含个体户）
 
 ```html
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByWeixinPhoneNumber">使用微信绑定的手机号登录/注册</button>
+<button type="default" open-type="getPhoneNumber" @getphonenumber="loginByWeixinPhoneNumber">使用微信绑定的手机号登录/注册</button>
 ```
 
 ```js
 // 需要先在onLoad内执行此函数
 vk.userCenter.code2SessionWeixin({
   data: {
-    needCache: true
+    needCache: true,
   },
   success: (data) => {
     this.encryptedKey = data.encryptedKey;
-  }
+  },
 });
 ```
-        
+
 ```js
 // 使用微信绑定的手机号登录/注册
 loginByWeixinPhoneNumber(e) {
@@ -1208,7 +1168,6 @@ loginByWeixinPhoneNumber(e) {
 },
 ```
 
-
 ### vk.userCenter.getPhoneNumber（获取微信绑定的手机号）@getPhoneNumberByWeixin
 
 注意事项：
@@ -1217,21 +1176,21 @@ loginByWeixinPhoneNumber(e) {
 2. 需要已微信认证的企业小程序（含个体户）
 
 ```html
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取微信绑定的手机号</button>
+<button type="default" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取微信绑定的手机号</button>
 ```
 
 ```js
 // 需要先在onLoad内执行此函数
 vk.userCenter.code2SessionWeixin({
   data: {
-    needCache: true
+    needCache: true,
   },
   success: (data) => {
     this.encryptedKey = data.encryptedKey;
-  }
+  },
 });
 ```
-        
+
 ```js
 // 获取微信绑定的手机号码
 getPhoneNumber(e) {
@@ -1261,8 +1220,7 @@ getPhoneNumber(e) {
 vk.userCenter.bindWeixin({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1275,16 +1233,14 @@ vk.userCenter.bindWeixin({
 vk.userCenter.unbindWeixin({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
-
-### vk.userCenter.code2SessionWeixin（获取微信openid）@code2SessionWeixin
+### vk.userCenter.code2SessionWeixin（获取微信 openid）@code2SessionWeixin
 
 注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
- 
+
 不要将 sessionKey 和 accessToken 暴露给前端，否则会有安全隐患
 
 ```js
@@ -1294,17 +1250,16 @@ vk.userCenter.unbindWeixin({
  * @param {String} openid 用户openid
  * @param {String} unionid 用户unionid，可以取到此值时返回
  * @param {String} encryptedKey 密钥的加密数据
- * 
+ *
  */
 vk.userCenter.code2SessionWeixin({
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
-云函数端解密 `encryptedKey` 
+云函数端解密 `encryptedKey`
 
 ```js
 // 解密 sessionKey 示例
@@ -1330,18 +1285,18 @@ let sessionKey = decryptedRes.sessionKey;
  */
 vk.userCenter.getWeixinMPqrcode({
   data: {
-    page: "pages/index/index",
-    scene: "a=1&b=2",
+    page: 'pages/index/index',
+    scene: 'a=1&b=2',
     check_path: false,
-    env_version: "release", // 默认值"release"。要打开的小程序版本。正式版为 "release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
+    env_version: 'release', // 默认值"release"。要打开的小程序版本。正式版为 "release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
   },
-  success:(data) =>{
-    console.log("imageUrl", data.base64)
-  }
+  success: (data) => {
+    console.log('imageUrl', data.base64);
+  },
 });
 ```
 
-### vk.userCenter.getWeixinMPscheme（生成微信小程序scheme码）@getWeixinMPscheme
+### vk.userCenter.getWeixinMPscheme（生成微信小程序 scheme 码）@getWeixinMPscheme
 
 ```js
 /**
@@ -1352,18 +1307,17 @@ vk.userCenter.getWeixinMPqrcode({
  */
 vk.userCenter.getWeixinMPscheme({
   data: {
-    query: "a=1&b=2",
-    path: "pages/index/index",
-    env_version: "release", // 默认值"release"。要打开的小程序版本。正式版为 "release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
+    query: 'a=1&b=2',
+    path: 'pages/index/index',
+    env_version: 'release', // 默认值"release"。要打开的小程序版本。正式版为 "release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
   },
   success: (data) => {
-    console.log("url", data.openlink)
-  }
+    console.log('url', data.openlink);
+  },
 });
 ```
 
-
-### vk.userCenter.getWeixinMPurl（生成微信小程序url链接）@getWeixinMPurl
+### vk.userCenter.getWeixinMPurl（生成微信小程序 url 链接）@getWeixinMPurl
 
 ```js
 /**
@@ -1374,13 +1328,13 @@ vk.userCenter.getWeixinMPscheme({
  */
 vk.userCenter.getWeixinMPurl({
   data: {
-    path: "pages/index/index",
-    query: "a=1&b=2",
-    env_version: "release", // 默认值"release"。要打开的小程序版本。正式版为 "release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
+    path: 'pages/index/index',
+    query: 'a=1&b=2',
+    env_version: 'release', // 默认值"release"。要打开的小程序版本。正式版为 "release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
   },
-  success:(data) =>{
-    console.log("url", data.url_link)
-  }
+  success: (data) => {
+    console.log('url', data.url_link);
+  },
 });
 ```
 
@@ -1388,23 +1342,23 @@ vk.userCenter.getWeixinMPurl({
 
 ### vk.userCenter.loginByAlipay（支付宝登录）@loginByAlipay
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 注意：
 
-* 需要在 `common/uni-config-center/uni-id/config.json` 内支付宝平台下配置 `appid`和 `privateKey`（应用私钥）
+- 需要在 `common/uni-config-center/uni-id/config.json` 内支付宝平台下配置 `appid`和 `privateKey`（应用私钥）
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
 #### 支付宝小程序登录@loginByAlipayMp
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-alipay` 的 `appid` 和 `privateKey`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-alipay` 的 `appid` 和 `privateKey`
 
 **特别注意**
 
-需要前往支付宝开放平台，小程序应用-开发设置-openid配置管理-设置-申诉为userid模式，操作步骤如下，操作完后需等待支付宝审核通过，并点击切换到uid作为用户标识后才能正常使用。
+需要前往支付宝开放平台，小程序应用-开发设置-openid 配置管理-设置-申诉为 userid 模式，操作步骤如下，操作完后需等待支付宝审核通过，并点击切换到 uid 作为用户标识后才能正常使用。
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/4ea34ab1-a274-4a11-8f07-b14c7e46365f.png)
 
@@ -1412,7 +1366,7 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/6237e551-7e95-4d4e-8f08-807837392788.png)
 
-申诉通过后，还需要再次点下-开发设置-openid配置管理-设置-切换到uid作为用户标识
+申诉通过后，还需要再次点下-开发设置-openid 配置管理-设置-切换到 uid 作为用户标识
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/8a6fdf61-0b34-4a12-b3aa-8bdb646f035a.png)
 
@@ -1431,17 +1385,16 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  */
 vk.userCenter.loginByAlipay({
   data: {
-    type: ""
+    type: '',
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
+云函数端解密 `encryptedKey`
 
-云函数端解密 `encryptedKey` 
 ```js
 // 解密 sessionKey 示例
 let decryptedRes = vk.crypto.aes.decrypt({
@@ -1459,8 +1412,7 @@ let sessionKey = decryptedRes.sessionKey;
 vk.userCenter.bindAlipay({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1473,17 +1425,14 @@ vk.userCenter.bindAlipay({
 vk.userCenter.unbindAlipay({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
-
-
-### vk.userCenter.code2SessionAlipay（获取支付宝openid）@code2SessionAlipay
+### vk.userCenter.code2SessionAlipay（获取支付宝 openid）@code2SessionAlipay
 
 注意：自 2.11.0（2022-08-22）版本起，不再返回 sessionKey 和 accessToken 取而代之的是返回 `encryptedKey`（加密后的数据，云函数解密后可获得 `sessionKey`）
- 
+
 不要将 sessionKey 和 accessToken 暴露给前端，否则会有安全隐患
 
 ```js
@@ -1499,12 +1448,12 @@ vk.userCenter.unbindAlipay({
 vk.userCenter.code2SessionAlipay({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
-云函数端解密 `encryptedKey` 
+云函数端解密 `encryptedKey`
+
 ```js
 // 解密 sessionKey 示例
 let decryptedRes = vk.crypto.aes.decrypt({
@@ -1515,30 +1464,30 @@ let sessionKey = decryptedRes.sessionKey;
 
 ## QQ
 
-### vk.userCenter.loginByQQ（QQ登录）@loginByQQ
+### vk.userCenter.loginByQQ（QQ 登录）@loginByQQ
 
-目前仅支持app和小程序的qq登录
+目前仅支持 app 和小程序的 qq 登录
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 注意：
 
-QQ小程序登录配置
+QQ 小程序登录配置
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-qq` 的 `appid` 和 `appsecret`
-* 在 `manifest.json` 内配置QQ小程序的 `appid`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-qq` 的 `appid` 和 `appsecret`
+- 在 `manifest.json` 内配置 QQ 小程序的 `appid`
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
-APP登录配置
+APP 登录配置
 
-* 在 `manifest.json` 的APP模块配置QQ登录用 `appid`
-* 打包并使用自定义基座（注意一定要在 `manifest.json` 填写QQ `appid` 后再制作自定义基座）[自定义基座使用说明](https://ask.dcloud.net.cn/article/35115)
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.qq` 的 `appid` 和 `appsecret`
+- 在 `manifest.json` 的 APP 模块配置 QQ 登录用 `appid`
+- 打包并使用自定义基座（注意一定要在 `manifest.json` 填写 QQ `appid` 后再制作自定义基座）[自定义基座使用说明](https://ask.dcloud.net.cn/article/35115)
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.qq` 的 `appid` 和 `appsecret`
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
 ```js
 /**
@@ -1551,16 +1500,15 @@ APP登录配置
  */
 vk.userCenter.loginByQQ({
   data: {
-    type: ""
+    type: '',
   },
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
-### vk.userCenter.bindQQ（绑定QQ）@bindQQ
+### vk.userCenter.bindQQ（绑定 QQ）@bindQQ
 
 ```js
 /**
@@ -1569,12 +1517,11 @@ vk.userCenter.loginByQQ({
 vk.userCenter.bindQQ({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
-### vk.userCenter.unbindQQ（解绑QQ）@unbindQQ
+### vk.userCenter.unbindQQ（解绑 QQ）@unbindQQ
 
 ```js
 /**
@@ -1583,8 +1530,7 @@ vk.userCenter.bindQQ({
 vk.userCenter.unbindQQ({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1596,18 +1542,18 @@ vk.userCenter.unbindQQ({
 
 目前仅支持抖音小程序登录
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 注意：
 
 抖音小程序登录配置
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-toutiao` 的 `appid` 和 `appsecret`
-* 在 `manifest.json` 内配置抖音小程序的 `appid`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-toutiao` 的 `appid` 和 `appsecret`
+- 在 `manifest.json` 内配置抖音小程序的 `appid`
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
 ```js
 /**
@@ -1622,12 +1568,11 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  */
 vk.userCenter.loginByDouyin({
   data: {
-    type: ""
+    type: '',
   },
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1641,21 +1586,21 @@ vk.userCenter.loginByDouyin({
 2. 需要单独申请接口权限 [申请教程](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/operation/management/specification/account-login-standard)
 
 ```html
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByDouyinPhoneNumber">使用抖音绑定的手机号登录/注册</button>
+<button type="default" open-type="getPhoneNumber" @getphonenumber="loginByDouyinPhoneNumber">使用抖音绑定的手机号登录/注册</button>
 ```
 
 ```js
 // 需要先在onLoad内执行此函数
 vk.userCenter.code2SessionDouyin({
   data: {
-    needCache: true
+    needCache: true,
   },
   success: (data) => {
     this.encryptedKey = data.encryptedKey;
-  }
+  },
 });
 ```
-        
+
 ```js
 // 使用抖音绑定的手机号登录/注册
 loginByDouyinPhoneNumber(e) {
@@ -1687,21 +1632,21 @@ loginByDouyinPhoneNumber(e) {
 2. 需要单独申请接口权限 [申请教程](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/operation/management/specification/account-login-standard)
 
 ```html
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取抖音绑定的手机号</button>
+<button type="default" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取抖音绑定的手机号</button>
 ```
 
 ```js
 // 需要先在onLoad内执行此函数
 vk.userCenter.code2SessionDouyin({
   data: {
-    needCache: true
+    needCache: true,
   },
   success: (data) => {
     this.encryptedKey = data.encryptedKey;
-  }
+  },
 });
 ```
-        
+
 ```js
 // 获取抖音绑定的手机号码
 getPhoneNumber(e) {
@@ -1733,8 +1678,7 @@ getPhoneNumber(e) {
 vk.userCenter.bindDouyin({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1749,8 +1693,7 @@ vk.userCenter.bindDouyin({
 vk.userCenter.unbindDouyin({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1764,7 +1707,7 @@ let decryptedRes = vk.crypto.aes.decrypt({
 let sessionKey = decryptedRes.sessionKey;
 ```
 
-### vk.userCenter.code2SessionDouyin（获取抖音openid）@code2SessionDouyin
+### vk.userCenter.code2SessionDouyin（获取抖音 openid）@code2SessionDouyin
 
 > vk-unicloud 版本需 ≥ 2.18.8
 
@@ -1779,8 +1722,7 @@ let sessionKey = decryptedRes.sessionKey;
 vk.userCenter.code2SessionDouyin({
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -1790,9 +1732,9 @@ vk.userCenter.code2SessionDouyin({
 
 > vk-unicloud 版本需 ≥ 2.19.0
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 注意：
 
@@ -1800,17 +1742,17 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/b1a0fbcf-3594-4966-8e43-79eac8300599.png)
 
-2. 鸿蒙App内使用华为登录的配置
+2. 鸿蒙 App 内使用华为登录的配置
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.huawei` 的 `clientId` 和 `clientSecret`（注意clientId是鸿蒙应用的clientId而非鸿蒙项目的clientId，clientSecret同理）
-* 在 `manifest.json` 内配置鸿蒙App的 `包名`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.huawei` 的 `clientId` 和 `clientSecret`（注意 clientId 是鸿蒙应用的 clientId 而非鸿蒙项目的 clientId，clientSecret 同理）
+- 在 `manifest.json` 内配置鸿蒙 App 的 `包名`
 
 3. 鸿蒙元服务内使用华为登录的配置
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-harmony.oauth.huawei` 的 `clientId` 和 `clientSecret`（注意clientId是鸿蒙应用的clientId而非鸿蒙项目的clientId，clientSecret同理）
-* 在 `manifest.json` 内配置鸿蒙元服务的 `包名`
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `mp-harmony.oauth.huawei` 的 `clientId` 和 `clientSecret`（注意 clientId 是鸿蒙应用的 clientId 而非鸿蒙项目的 clientId，clientSecret 同理）
+- 在 `manifest.json` 内配置鸿蒙元服务的 `包名`
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
 ```js
 /**
@@ -1825,12 +1767,11 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  */
 vk.userCenter.loginByHuawei({
   data: {
-    type: ""
+    type: '',
   },
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1844,13 +1785,13 @@ vk.userCenter.loginByHuawei({
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/9bb19f46-e608-4fae-992a-c932965762b5.png)
 
-2. 鸿蒙App端的button组件不支持getPhoneNumber，需要下载安装插件：[鸿蒙App实现华为账号一键登录](https://ext.dcloud.net.cn/plugin?id=26106)
+2. 鸿蒙 App 端的 button 组件不支持 getPhoneNumber，需要下载安装插件：[鸿蒙 App 实现华为账号一键登录](https://ext.dcloud.net.cn/plugin?id=26106)
 
-**鸿蒙App**
+**鸿蒙 App**
 
 通过设置 `:need-user-info="true"` 可实现同时获取昵称和头像
 
-注意：鸿蒙App下按钮名称固定是华为账号一键登录，不可修改
+注意：鸿蒙 App 下按钮名称固定是华为账号一键登录，不可修改
 
 ```vue
 <vk-get-phone-number :need-user-info="true" @getphonenumber="loginByHuaweiPhoneNumber" />
@@ -1859,9 +1800,9 @@ vk.userCenter.loginByHuawei({
 **元服务**
 
 ```vue
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="loginByHuaweiPhoneNumber">华为账号一键登录</button>
+<button type="default" open-type="getPhoneNumber" @getphonenumber="loginByHuaweiPhoneNumber">华为账号一键登录</button>
 ```
-        
+
 ```js
 // 使用华为账号绑定的手机号登录/注册
 loginByHuaweiPhoneNumber(e) {
@@ -1892,9 +1833,9 @@ loginByHuaweiPhoneNumber(e) {
 
 1. 此接口需要去华为开放平台申请（需要审核的，个人认证的账号大概率审核不通过）
 
-**鸿蒙App**
+**鸿蒙 App**
 
-注意：鸿蒙App下按钮名称固定是华为账号一键登录，不可修改
+注意：鸿蒙 App 下按钮名称固定是华为账号一键登录，不可修改
 
 ```vue
 <vk-get-phone-number @getphonenumber="getPhoneNumber" />
@@ -1903,7 +1844,7 @@ loginByHuaweiPhoneNumber(e) {
 **元服务**
 
 ```vue
-<button type="default" open-type="getPhoneNumber"  @getphonenumber="getPhoneNumber">获取华为账号绑定的手机号</button>
+<button type="default" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取华为账号绑定的手机号</button>
 ```
 
 ```js
@@ -1935,8 +1876,7 @@ getPhoneNumber(e) {
 vk.userCenter.bindHuawei({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -1951,12 +1891,11 @@ vk.userCenter.bindHuawei({
 vk.userCenter.unbindHuawei({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
-### vk.userCenter.code2SessionHuawei（获取华为openid）@code2SessionHuawei
+### vk.userCenter.code2SessionHuawei（获取华为 openid）@code2SessionHuawei
 
 > vk-unicloud 版本需 ≥ 2.19.0
 
@@ -1971,8 +1910,7 @@ vk.userCenter.unbindHuawei({
 vk.userCenter.code2SessionHuawei({
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
@@ -1982,16 +1920,16 @@ vk.userCenter.code2SessionHuawei({
 
 > vk-unicloud 版本需 ≥ 2.19.2
 
-___框架会自动保存 `token`，无需你再手动去保存。___
+**_框架会自动保存 `token`，无需你再手动去保存。_**
 
-[查看token介绍](#token介绍) 
+[查看 token 介绍](#token介绍)
 
 注意：
 
-* 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.apple` 的 `bundleId` 即你苹果应用的包名
-* 需要打自定义基座，包名必须和uni-id配置内的 `bundleId` 一致
+- 配置 `common/uni-config-center/uni-id/config.json` 内 `app-plus.oauth.apple` 的 `bundleId` 即你苹果应用的包名
+- 需要打自定义基座，包名必须和 uni-id 配置内的 `bundleId` 一致
 
-**注意每次修改uni-config-center后都要右键上传此公共模块才会生效**
+**注意每次修改 uni-config-center 后都要右键上传此公共模块才会生效**
 
 ```js
 /**
@@ -2005,12 +1943,11 @@ ___框架会自动保存 `token`，无需你再手动去保存。___
  */
 vk.userCenter.loginByApple({
   data: {
-    type: ""
+    type: '',
   },
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -2028,8 +1965,7 @@ vk.userCenter.loginByApple({
 vk.userCenter.setUserInviteCode({
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -2044,12 +1980,11 @@ vk.userCenter.setUserInviteCode({
  */
 vk.userCenter.acceptInvite({
   data: {
-    inviteCode :""
+    inviteCode: '',
   },
   success: (data) => {
     // 成功后的逻辑
-    
-  }
+  },
 });
 ```
 
@@ -2068,31 +2003,30 @@ vk.userCenter.acceptInvite({
 vk.userCenter.getInvitedUser({
   data: {
     pageIndex: 1,
-    pageSize: 100
+    pageSize: 100,
   },
   success: (data) => {
     // 成功后的逻辑
-
-  }
+  },
 });
 ```
 
-### token介绍@token
+### token 介绍@token
 
 以下仅为介绍 `token`，实际开发过程中，即使你不了解 `token` 的实现逻辑，也不影响你开发项目（框架已经处理完 `token` 的逻辑）。
 
-* `token` 是云函数用来识别用户身份的令牌。
+- `token` 是云函数用来识别用户身份的令牌。
 
-* 用户登录成功后，云函数会返回 `token` 给前端，前端会自动将 `token` 保存到本地缓存。
+- 用户登录成功后，云函数会返回 `token` 给前端，前端会自动将 `token` 保存到本地缓存。
 
-* 在客户端，`token` 的值存在 `localStorage` 的 `uni_id_token` 键值中，`token` 的过期时间存在 `uni_id_token_expired` 键值中。
+- 在客户端，`token` 的值存在 `localStorage` 的 `uni_id_token` 键值中，`token` 的过期时间存在 `uni_id_token_expired` 键值中。
 
-* 在云函数端，`token` 存在 `uni-id-users` 表的 `token` 字段中，云函数端解密 `token` 可以获得用户ID和过期时间
+- 在云函数端，`token` 存在 `uni-id-users` 表的 `token` 字段中，云函数端解密 `token` 可以获得用户 ID 和过期时间
 
-* 当你访问需要登录的云函数时，框架会自动检测 `token` 是否有效，有效则放行，无效则拦截，无需手动传递和验证 `token`
+- 当你访问需要登录的云函数时，框架会自动检测 `token` 是否有效，有效则放行，无效则拦截，无需手动传递和验证 `token`
 
-* `uni-id` 配置中， `tokenExpiresIn` 参数代表新生成的 `token` 有效期，单位为秒
+- `uni-id` 配置中， `tokenExpiresIn` 参数代表新生成的 `token` 有效期，单位为秒
 
-* `uni-id` 配置中，`tokenExpiresThreshold` 参数代表 `token` 在满足条件的情况下会自动续期，前端也会自动更新 `token` 到本地缓存。
+- `uni-id` 配置中，`tokenExpiresThreshold` 参数代表 `token` 在满足条件的情况下会自动续期，前端也会自动更新 `token` 到本地缓存。
 
-* `uni-id` 配置中，`tokenMaxLimit` 参数代表单一用户最大 `token` 数量。当该用户 `token` 数量达到此值时，会淘汰旧的 `token`，即使未过期也会淘汰。
+- `uni-id` 配置中，`tokenMaxLimit` 参数代表单一用户最大 `token` 数量。当该用户 `token` 数量达到此值时，会淘汰旧的 `token`，即使未过期也会淘汰。

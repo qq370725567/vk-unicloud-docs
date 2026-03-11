@@ -12,9 +12,9 @@ sidebarDepth: 0
 <template>
   <view class="app" :class="classCom">
     <!-- 页面内容开始 -->
-    
+
     这里是页面内容。。。
-    
+
     <!-- 页面内容结束 -->
   </view>
 </template>
@@ -23,32 +23,29 @@ sidebarDepth: 0
   export default {
     data() {
       // 页面数据变量
-      return {
-        
-      }
+      return {};
     },
     // 计算属性
-    computed:{
-      classCom(){
-        let classStr = "";
-        if(this.vk.pubfn.timeUtil.isQingming()){
-          classStr = "gray-view";
+    computed: {
+      classCom() {
+        let classStr = '';
+        if (this.vk.pubfn.timeUtil.isQingming()) {
+          classStr = 'gray-view';
         }
         return classStr;
-      }		
-    }
-  }
+      },
+    },
+  };
 </script>
 <style lang="scss" scoped>
-  .gray-view{
+  .gray-view {
     filter: grayscale(100%);
-  }		
+  }
 </style>
-
 ```
 
 此方案优点：简单
 
 此方案缺点：每个页面都要加上 `:class="classCom"` ，但一般就首页和个别页面需要灰色，故此方案还是可行的。
 
-如你有更好的方案，欢迎来群内讨论。Q群：22466457
+如你有更好的方案，欢迎来群内讨论。Q 群：22466457

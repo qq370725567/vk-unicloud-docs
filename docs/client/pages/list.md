@@ -4,11 +4,11 @@ sidebarDepth: 0
 
 # 列表渲染前后端一体模板
 
-页面地址 `pages_template/db-test/list/list` 
+页面地址 `pages_template/db-test/list/list`
 
 ## 核心点
 
-前端只需要更改v-for循环内的样式和请求的云函数地址即可快速开发一个列表渲染功能
+前端只需要更改 v-for 循环内的样式和请求的云函数地址即可快速开发一个列表渲染功能
 
 ## 客户端（前端）功能介绍
 
@@ -18,7 +18,7 @@ sidebarDepth: 0
 4. 下拉底部加载下一页
 5. 加载过程底部状态提示（加载更多、正在加载、没有更多了）
 
-熟练后只需要5分钟即可开发一个钱包余额收支列表功能（其中4分钟时间还是用在写样式上）
+熟练后只需要 5 分钟即可开发一个钱包余额收支列表功能（其中 4 分钟时间还是用在写样式上）
 
 ```js
 export default {
@@ -39,7 +39,7 @@ export default {
 
 ## 云函数端（后端）功能介绍
 
-根据where条件获取对应的数据表的数据（支持分页、排序、字段筛选、连表查询等）
+根据 where 条件获取对应的数据表的数据（支持分页、排序、字段筛选、连表查询等）
 
 云函数路径：`template/db_api/pub/getList`
 
@@ -60,9 +60,8 @@ export default {
 
 ## 列表渲染模板体验地址
 
-![列表渲染体验地址](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/522060bb-089a-4e9b-9da0-72c070f4eb00.png?x-oss-process=image/resize,h_250 "列表渲染体验地址")
+![列表渲染体验地址](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/522060bb-089a-4e9b-9da0-72c070f4eb00.png?x-oss-process=image/resize,h_250 '列表渲染体验地址')
 
 ## 插件首页体验地址
 
-![插件首页体验地址](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-vk-cloud-router-test/51de83e0-e9ae-11ea-81ea-f115fe74321c.png?x-oss-process=image/resize,h_250 "插件首页体验地址")
- 
+![插件首页体验地址](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-vk-cloud-router-test/51de83e0-e9ae-11ea-81ea-f115fe74321c.png?x-oss-process=image/resize,h_250 '插件首页体验地址')

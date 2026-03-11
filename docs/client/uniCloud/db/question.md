@@ -3,14 +3,14 @@ sidebarDepth: 0
 ---
 
 # 数据库操作常见问题
- 
+
 ## 目录
 
-1. [and、or、in、nin、neq用法](#and)
+1. [and、or、in、nin、neq 用法](#and)
 
-2. [针对同一个字段的and和or](#针对同一个字段的and和or)
-3. [跨字段的and和or](#跨字段的and和or)
-4. [多字段模糊搜索or](#多字段模糊搜索or)
+2. [针对同一个字段的 and 和 or](#针对同一个字段的and和or)
+3. [跨字段的 and 和 or](#跨字段的and和or)
+4. [多字段模糊搜索 or](#多字段模糊搜索or)
 5. [in （包含其中）nin（都不包含）](#in)
 6. [大于小于](#大于小于)
 7. [获取今日注册的用户列表](#如何获取今日注册的用户列表)
@@ -20,107 +20,108 @@ sidebarDepth: 0
 11. [模糊查询](#模糊查询)
 12. [如判断字段是否存在](#如何判断字段是否存在)
 13. [返回字段别名](#返回字段别名)
-14. [查出表中字段a等于字段b的数据](#查出表中字段a等于字段b的数据)
+14. [查出表中字段 a 等于字段 b 的数据](#查出表中字段a等于字段b的数据)
 15. [如何查询数组字段内包含某个值的数据](#如何查询数组字段内包含某个值的数据)
-16. [分组count](#分组count)
+16. [分组 count](#分组count)
 17. [用户表按注册日期分组统计](#用户表按注册日期分组统计)
 18. [删除某个字段](#删除某个字段)
-19. [vk.baseDao.findById和vk.baseDao.findByWhereJson如何连表](#findbyid如何连表)
+19. [vk.baseDao.findById 和 vk.baseDao.findByWhereJson 如何连表](#findbyid如何连表)
 20. [如何更改字段名](#如何更改字段名)
 21. [字段如何自增](#字段如何自增)
-22. [如何实现自增id](#如何实现自增id)
+22. [如何实现自增 id](#如何实现自增id)
 
 ## and
 
 `and` 、`or`、`in`、`nin`、`neq`的用法
 
-### 针对同一个字段的and和or
+### 针对同一个字段的 and 和 or
 
 ```js
 // num >=0 and num <= 10
 // 流式简写法
-num : _.gte(0).lte(10)
+num: _.gte(0).lte(10);
 // 流式完整写法
-num : _.gte(0).and(_.lte(10))
+num: _.gte(0).and(_.lte(10));
 // 前置写法
-num : _.and(_.gte(0), _.lte(10))
+num: _.and(_.gte(0), _.lte(10));
 
 // num <=0 or num >= 10
 // 前置写法
-num : _.or(_.lte(0), _.gte(10))
+num: _.or(_.lte(0), _.gte(10));
 // 流式写法
-num : _.lte(0).or(_.gte(10))
+num: _.lte(0).or(_.gte(10));
 
 // num <=0 or (num > 10 and num <20)
 // 流式写法(复式)
-num : _.lte(0).or(_.gt(10).and(_.lt(20)))
-
+num: _.lte(0).or(_.gt(10).and(_.lt(20)));
 ```
 
-### 跨字段的and和or
+### 跨字段的 and 和 or
 
 **and**
+
 ```js
 // num >50 and name = 'test'
 whereJson: _.and([
   {
-    num: _.gt(50)
+    num: _.gt(50),
   },
   {
-    name: 'test'
-  }
-])
+    name: 'test',
+  },
+]);
 ```
 
 **or**
+
 ```js
 // num >50 or name = 'test'
 whereJson: _.or([
   {
-    num: _.gt(50)
+    num: _.gt(50),
   },
   {
-    name: 'test'
-  }
-])
+    name: 'test',
+  },
+]);
 ```
 
-**and嵌套or**
+**and 嵌套 or**
 
 ```js
 // num >50 and (name = 'test' or sex = 1)
 whereJson: _.and([
   {
-    num: _.gt(50)
+    num: _.gt(50),
   },
   _.or([
     {
-      name: 'test'
+      name: 'test',
     },
     {
-      sex: 1
-    }
-  ])
-])
+      sex: 1,
+    },
+  ]),
+]);
 ```
 
-**or嵌套and**
+**or 嵌套 and**
 
 ```js
 // num >50 or (name = 'test' and sex = 1)
 whereJson: _.or([
   {
-    num: _.gt(50)
+    num: _.gt(50),
   },
   _.and([
     {
-      name: 'test'
+      name: 'test',
     },
     {
-      sex: 1
-    }
-  ])
-])
+      sex: 1,
+    },
+  ]),
+]);
 ```
 
 **多个嵌套**
@@ -129,25 +130,25 @@ whereJson: _.or([
 // num >50 and (name = 'test' or sex = 1) and (name2 = 'test' or sex2 = 1)
 whereJson: _.and([
   {
-    num: _.gt(50)
+    num: _.gt(50),
   },
   _.or([
     {
-      name: 'test'
+      name: 'test',
     },
     {
-      sex: 1
-    }
+      sex: 1,
+    },
   ]),
   _.or([
     {
-      name2: 'test'
+      name2: 'test',
     },
     {
-      sex2: 1
-    }
-  ])
-])
+      sex2: 1,
+    },
+  ]),
+]);
 ```
 
 **多层嵌套**
@@ -156,35 +157,35 @@ whereJson: _.and([
 // num >50 and (num>50 and (name = 'test' or sex = 1)) and (name2 = 'test' or sex2 = 1)
 whereJson: _.and([
   {
-    num: _.gt(50)
+    num: _.gt(50),
   },
   _.and([
     {
-      num: _.gt(50)
+      num: _.gt(50),
     },
     _.or([
       {
-        name: 'test'
+        name: 'test',
       },
       {
-        sex: 1
-      }
-    ])
+        sex: 1,
+      },
+    ]),
   ]),
   _.or([
     {
-      name2: 'test'
+      name2: 'test',
     },
     {
-      sex2: 1
-    }
-  ])
-])
+      sex2: 1,
+    },
+  ]),
+]);
 ```
 
-## 多字段模糊搜索or
+## 多字段模糊搜索 or
 
-### 一个搜索value对应多个字段模糊搜索
+### 一个搜索 value 对应多个字段模糊搜索
 
 ```js
 let whereJson = {};
@@ -195,17 +196,17 @@ if (searchvalue) {
     let regExp = new RegExp(searchvalue);
     let orObj = _.or([
       {
-        "username": regExp
+        username: regExp,
       },
       {
-        "nickname": regExp
+        nickname: regExp,
       },
       {
-        "mobile": regExp
+        mobile: regExp,
       },
       {
-        "_id": searchvalue
-      }
+        _id: searchvalue,
+      },
     ]);
     andArr.push(orObj);
   } catch (err) {
@@ -223,51 +224,53 @@ if (andArr.length > 0) {
 
 ```js
 // 等价于 _id = "1" or _id = "2" or _id =  "3"
-_id : _.in(["1","2","3"])
+_id: _.in(['1', '2', '3']);
 // 等价于 _id != "1" and _id != "2" and _id != "3"
-_id : _.nin(["1","2","3"])
-
+_id: _.nin(['1', '2', '3']);
 ```
 
 ## `neq` (不等于）
+
 ```js
 // num != 1
-num : _.neq(1)
+num: _.neq(1);
 ```
 
 ## 大于小于
+
 ### `gt`(大于）
+
 ```js
 // num > 0
-num : _.gt(0)
+num: _.gt(0);
 ```
 
 ### `gte`(大于等于）
 
 ```js
 // num >= 0
-num : _.gte(0)
+num: _.gte(0);
 ```
 
 ### `lt`(小于）
 
 ```js
 // num < 0
-num : _.lt(0)
+num: _.lt(0);
 ```
 
 ### `lte`(小于等于）
 
 ```js
 // num <= 0
-num : _.lte(0)
+num: _.lte(0);
 ```
 
 ### 组合使用
 
 ```js
 // num >=0 and num <= 10
-num : _.gte(0).lte(10) 
+num: _.gte(0).lte(10);
 ```
 
 ## 如何获取今日注册的用户列表
@@ -275,14 +278,13 @@ num : _.gte(0).lte(10)
 ```js
 let { todayStart, todayEnd } = vk.pubfn.getCommonTime();
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
-    register_date: _.gte(todayStart).lte(todayEnd)  
-  }
+    register_date: _.gte(todayStart).lte(todayEnd),
+  },
 });
-
 ```
 
 ## 数组第一个字段是开始时间-第二个字段是结束时间-判断当前时间是否在范围内
@@ -290,13 +292,13 @@ let selectRes = await vk.baseDao.select({
 ```js
 let time = Date.now();
 let selectRes = await vk.baseDao.select({
-  dbName: "xxxx表",
+  dbName: 'xxxx表',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
-    "arr.0": _.lte(time),
-    "arr.1": _.gte(time)
-  }
+    'arr.0': _.lte(time),
+    'arr.1': _.gte(time),
+  },
 });
 ```
 
@@ -306,13 +308,13 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   fieldJson: {
-    username: true, 
-    nickname: true
-  }
+    username: true,
+    nickname: true,
+  },
 });
 ```
 
@@ -320,25 +322,27 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   fieldJson: {
-    token: false, 
-    password: false 
-  }
+    token: false,
+    password: false,
+  },
 });
 ```
 
 ## 排序
+
 ### 升序
+
 ```js
 // 按注册时间升序
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
-  sortArr: [{ "name":"register_date", "type":"asc" }]
+  sortArr: [{ name: 'register_date', type: 'asc' }],
 });
 ```
 
@@ -347,10 +351,10 @@ let selectRes = await vk.baseDao.select({
 ```js
 // 按注册时间降序
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
-  sortArr: [{ "name":"register_date", "type":"desc" }]
+  sortArr: [{ name: 'register_date', type: 'desc' }],
 });
 ```
 
@@ -359,13 +363,13 @@ let selectRes = await vk.baseDao.select({
 ```js
 // 按注册时间降序，时间相同者按_id 降序
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   sortArr: [
-    { "name":"register_date", "type":"desc" },
-    { "name":"_id", "type":"desc" }
-  ]
+    { name: 'register_date', type: 'desc' },
+    { name: '_id', type: 'desc' },
+  ],
 });
 ```
 
@@ -375,12 +379,12 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
-    nickname: new RegExp('^'+searchvalue)
-  }
+    nickname: new RegExp('^' + searchvalue),
+  },
 });
 ```
 
@@ -388,12 +392,12 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
-    nickname: new RegExp(searchvalue+'$')
-  }
+    nickname: new RegExp(searchvalue + '$'),
+  },
 });
 ```
 
@@ -401,12 +405,12 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
-    nickname: new RegExp(searchvalue)
-  }
+    nickname: new RegExp(searchvalue),
+  },
 });
 ```
 
@@ -414,12 +418,12 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
-    nickname: new RegExp(`xxxx|yyyy`)
-  }
+    nickname: new RegExp(`xxxx|yyyy`),
+  },
 });
 ```
 
@@ -427,48 +431,46 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
     nickname: _.exists(true), // true：存在 false：不存在
-  }
+  },
 });
-
 ```
 
 ## 返回字段别名
 
 如数据库中是`_id`，但想返回给前端是`user_id`
 
-**注意：select不支持字段别名，需要selects**
+**注意：select 不支持字段别名，需要 selects**
 
 ```js
 let selectRes = await vk.baseDao.selects({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 20,
   fieldJson: {
-    user_id: "$_id",
-    nickname: true
+    user_id: '$_id',
+    nickname: true,
   },
-  whereJson: {
-    
-  }
+  whereJson: {},
 });
-
 ```
 
-## 查出表中字段a等于字段b的数据
+## 查出表中字段 a 等于字段 b 的数据
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "表名",
+  dbName: '表名',
   pageIndex: 1,
   pageSize: 20,
-  whereJson: _.expr($.and([
-    $.eq(['$a', '$b']), // $.eq 等于 $.gt 大于 $.gte 大于等于 lt小于 lte 小于等于
-  ]))
+  whereJson: _.expr(
+    $.and([
+      $.eq(['$a', '$b']), // $.eq 等于 $.gt 大于 $.gte 大于等于 lt小于 lte 小于等于
+    ])
+  ),
 });
 ```
 
@@ -478,53 +480,50 @@ let selectRes = await vk.baseDao.select({
 
 ```js
 let selectRes = await vk.baseDao.select({
-  dbName: "表名",
+  dbName: '表名',
   pageIndex: 1,
   pageSize: 20,
   whereJson: {
     role: roleId, // role 在数据库中是数组形式字段，如["roleid1","roleid2","roleid3"]  而 roleId = "roleid1" 代表查询数组内有包含roleid1的数据
-  }
+  },
 });
-
 ```
 
-## 分组count
+## 分组 count
 
-### 最终返回的本月共有多少用户登录（去重后）。 
+### 最终返回的本月共有多少用户登录（去重后）。
 
 ```js
 let { monthStart, monthEnd } = vk.pubfn.getCommonTime(new Date());
 let selectRes = await vk.baseDao.count({
-  dbName: "登录日志表",
+  dbName: '登录日志表',
   // where条件
   whereJson: {
     _add_time: _.gte(monthStart).lte(monthEnd),
   },
   groupJson: {
-    _id: "$user_id", // _id是分组id， $ 后面接字段名
+    _id: '$user_id', // _id是分组id， $ 后面接字段名
   },
 });
 ```
 
-### 最终返回的是每个日期登录的用户数量分别有多少个。 
+### 最终返回的是每个日期登录的用户数量分别有多少个。
 
 ```js
 let selectRes = await vk.baseDao.selects({
-  dbName: "登录日志表",
+  dbName: '登录日志表',
   pageIndex: 1,
   pageSize: 10,
   // where条件
-  whereJson: {
-    
-  },
+  whereJson: {},
   groupJson: {
-    _id: "$date_str", // _id是分组id， $ 后面接字段名，如按date_str字段进行分组(date_str字段是2021-08-19这样的字符串)
-    count: $.addToSet("$user_id"), // $ 后面接字段名
+    _id: '$date_str', // _id是分组id， $ 后面接字段名，如按date_str字段进行分组(date_str字段是2021-08-19这样的字符串)
+    count: $.addToSet('$user_id'), // $ 后面接字段名
   },
-  sortArr: [{ name: "_id",type: "desc" }], // 对分组后的结果进行排序
+  sortArr: [{ name: '_id', type: 'desc' }], // 对分组后的结果进行排序
   addFields: {
-    count: $.size("$count")
-  }
+    count: $.size('$count'),
+  },
 });
 ```
 
@@ -535,23 +534,23 @@ let selectRes = await vk.baseDao.selects({
 ```js
 let { yearStart, yearEnd } = vk.pubfn.getCommonTime();
 res = await vk.baseDao.selects({
-  dbName: "uni-id-users",
+  dbName: 'uni-id-users',
   pageIndex: 1,
   pageSize: 1000,
   whereJson: {
-    register_date : _.gte(yearStart).lte(yearEnd), // 只查询本年，不加此条件则查全表
+    register_date: _.gte(yearStart).lte(yearEnd), // 只查询本年，不加此条件则查全表
   },
   groupJson: {
     // _id是分组id， 将$register_date转为date，然后将date转为需要分组的date格式，直接分组
     _id: $.dateToString({
-      date: $.add([new Date(0), "$register_date"]),
-      format: "%Y-%m",
-      timezone: "+08:00", // +08:00 代表北京时间（东八区）
+      date: $.add([new Date(0), '$register_date']),
+      format: '%Y-%m',
+      timezone: '+08:00', // +08:00 代表北京时间（东八区）
       onNull: null, // 可选。当 <日期表达式> 返回空或者不存在的时候，会返回此表达式指明的值。
     }),
     count: $.sum(1),
   },
-  sortArr: [{ "name": "_id", "type": "desc" }]
+  sortArr: [{ name: '_id', type: 'desc' }],
 });
 ```
 
@@ -559,46 +558,46 @@ res = await vk.baseDao.selects({
 
 **常用**
 
-|说明符	|描述														|合法值			|
-|:-:		|:-:														|:-:				|
-|%Y			|年份（4位数，0填充）						|0000 - 9999|
-|%m			|月份（2位数，0填充）						|01 - 12		|
-|%d			|月份的日期（2位数，0填充）			|01 - 31		|
-|%H			|小时（2位数，0填充，24小时制）	|00 - 23		|
-|%M			|分钟（2位数，0填充）						|00 - 59		|
-|%S			|秒（2位数，0填充）							|00 - 60		|
-|%L			|毫秒（3位数，0填充）						|000 - 999	|
-|%w			|星期几													|1 - 7			|
-|%j			|一年中的一天（3位数，0填充）		|001 - 366	|
-|%U			|一年中的一周（2位数，0填充）		|00 - 53		|
+| 说明符 |               描述                |   合法值    |
+| :----: | :-------------------------------: | :---------: |
+|   %Y   |      年份（4 位数，0 填充）       | 0000 - 9999 |
+|   %m   |      月份（2 位数，0 填充）       |   01 - 12   |
+|   %d   |   月份的日期（2 位数，0 填充）    |   01 - 31   |
+|   %H   | 小时（2 位数，0 填充，24 小时制） |   00 - 23   |
+|   %M   |      分钟（2 位数，0 填充）       |   00 - 59   |
+|   %S   |       秒（2 位数，0 填充）        |   00 - 60   |
+|   %L   |      毫秒（3 位数，0 填充）       |  000 - 999  |
+|   %w   |              星期几               |    1 - 7    |
+|   %j   |  一年中的一天（3 位数，0 填充）   |  001 - 366  |
+|   %U   |  一年中的一周（2 位数，0 填充）   |   00 - 53   |
 
 **不常用**
 
-|说明符	|描述															|合法值			|
-|:-:		|:-:															|:-:				|
-|%Z			|以分钟为单位，与 UTC 的时区偏移量|+/-mmm			|
-|%z			|与 UTC 的时区偏移量							|+/-[hh][mm]|
-|%G			|ISO 8601 格式的年份							|0000 - 9999|
-|%u			|ISO 8601 格式的星期几						|1 - 7			|
-|%V			|ISO 8601 格式的一年中的一周			|1 - 53			|
-|%%			|百分号作为字符										|%					|
-
+| 说明符 |               描述                |   合法值    |
+| :----: | :-------------------------------: | :---------: |
+|   %Z   | 以分钟为单位，与 UTC 的时区偏移量 |   +/-mmm    |
+|   %z   |        与 UTC 的时区偏移量        | +/-[hh][mm] |
+|   %G   |        ISO 8601 格式的年份        | 0000 - 9999 |
+|   %u   |       ISO 8601 格式的星期几       |    1 - 7    |
+|   %V   |    ISO 8601 格式的一年中的一周    |   1 - 53    |
+|   %%   |          百分号作为字符           |      %      |
 
 ## 删除某个字段
 
 ```js
 await vk.baseDao.update({
-  dbName: "vk-test", // 表名
-  whereJson: { // 条件
-    _id: "5f3a14823d11c6000106ff5c"
+  dbName: 'vk-test', // 表名
+  whereJson: {
+    // 条件
+    _id: '5f3a14823d11c6000106ff5c',
   },
-  dataJson: { 
+  dataJson: {
     money: _.remove(), // 代表删除money字段
-  }
+  },
 });
 ```
 
-## findById如何连表
+## findById 如何连表
 
 `findById` 和 `findByWhereJson` 不支持连表，可以用 `selects + getOne + getMain` 代替
 
@@ -606,43 +605,31 @@ await vk.baseDao.update({
 
 ```js
 let info = await vk.baseDao.selects({
-  dbName: "用户表",
+  dbName: '用户表',
   getOne: true,
   getMain: true,
   // 主表where条件
   whereJson: {
-    _id: "001"
+    _id: '001',
   },
   foreignDB: [
     {
-      dbName: "vip", // 副表名
-      localKey: "vip_id", // 主表外键字段名
-      foreignKey: "user_id", // 副表外键字段名
-      as: "vipInfo",
+      dbName: 'vip', // 副表名
+      localKey: 'vip_id', // 主表外键字段名
+      foreignKey: 'user_id', // 副表外键字段名
+      as: 'vipInfo',
       limit: 1, // 当limit = 1时，以对象形式返回，否则以数组形式返回
-    }
-  ]
+    },
+  ],
 });
 ```
 
 **参数解析**
 
-* getOne:true 代表只获取满足条件的第一条数据，并以对象形式返回。
-* getMain:true 代表返回的数据不包含code:0
+- getOne:true 代表只获取满足条件的第一条数据，并以对象形式返回。
+- getMain:true 代表返回的数据不包含 code:0
 
-**即原本selects返回的数据格式是这样的。**
-
-```json
-{
-  "code": 0,
-  "msg": "查询成功",
-  "total": 1,
-  "hasMore": false,
-  "rows": [{"_id":"001","name":"xxx"}]
-}
-```
-
-**getOne:true 后 返回的数据格式是这样的（rows从数组变成了对象）**
+**即原本 selects 返回的数据格式是这样的。**
 
 ```json
 {
@@ -650,20 +637,32 @@ let info = await vk.baseDao.selects({
   "msg": "查询成功",
   "total": 1,
   "hasMore": false,
-  "rows": {"_id":"001","name":"xxx"}
+  "rows": [{ "_id": "001", "name": "xxx" }]
 }
 ```
 
-**getMain:true 后 返回的数据格式是这样的（直接返回rows的值）**
+**getOne:true 后 返回的数据格式是这样的（rows 从数组变成了对象）**
 
 ```json
-[{"_id":"001","name":"xxx"}]
+{
+  "code": 0,
+  "msg": "查询成功",
+  "total": 1,
+  "hasMore": false,
+  "rows": { "_id": "001", "name": "xxx" }
+}
 ```
 
-**getMain:true + getOne:true 后 返回的数据格式是这样的（等于findByWhereJson的效果，但具有连表功能）**
+**getMain:true 后 返回的数据格式是这样的（直接返回 rows 的值）**
 
 ```json
-{"_id":"001","name":"xxx"}
+[{ "_id": "001", "name": "xxx" }]
+```
+
+**getMain:true + getOne:true 后 返回的数据格式是这样的（等于 findByWhereJson 的效果，但具有连表功能）**
+
+```json
+{ "_id": "001", "name": "xxx" }
 ```
 
 ## 如何更改字段名
@@ -678,10 +677,10 @@ let info = await vk.baseDao.selects({
 
 ```js
 await vk.baseDao.update({
-  dbName: "vk-test",
+  dbName: 'vk-test',
   dataJson: {
-    money: _.rename('money2')
-  }
+    money: _.rename('money2'),
+  },
 });
 ```
 
@@ -689,10 +688,10 @@ await vk.baseDao.update({
 
 ```js
 await vk.baseDao.update({
-  dbName: "vk-test",
+  dbName: 'vk-test',
   dataJson: {
-    'someObject.someField': _.rename('someObject.renamedField')
-  }
+    'someObject.someField': _.rename('someObject.renamedField'),
+  },
 });
 ```
 
@@ -700,11 +699,11 @@ await vk.baseDao.update({
 
 ```js
 await vk.baseDao.update({
-  dbName: "vk-test",
+  dbName: 'vk-test',
   dataJson: {
-     money: _.rename('money2'),
-    'someObject.someField': _.rename('someObject.renamedField')
-  }
+    money: _.rename('money2'),
+    'someObject.someField': _.rename('someObject.renamedField'),
+  },
 });
 ```
 
@@ -716,20 +715,20 @@ await vk.baseDao.update({
 
 ```js
 let newInfo = await vk.baseDao.updateAndReturn({
-  dbName: "vk-test",
+  dbName: 'vk-test',
   whereJson: {
-    _id: _id
+    _id: _id,
   },
   dataJson: {
-    money: _.inc(1)
-  }
+    money: _.inc(1),
+  },
 });
-console.log("自增后的值：", newInfo.money);
+console.log('自增后的值：', newInfo.money);
 ```
 
-## 如何实现自增id
+## 如何实现自增 id
 
-需要先创建一个存储当前表id的自增值，比如表名叫：`id-inc`
+需要先创建一个存储当前表 id 的自增值，比如表名叫：`id-inc`
 
 创建表后，立即新增一条数据，值如下，下面的值不要改，就这样创建。
 
@@ -739,34 +738,34 @@ console.log("自增后的值：", newInfo.money);
 }
 ```
 
-然后假设你现在需要实现自增id的表名为 `my-orders`，则在执行 `vk.baseDao.add` 前，你需要先执行 `vk.baseDao.updateAndReturn`，代码如下
+然后假设你现在需要实现自增 id 的表名为 `my-orders`，则在执行 `vk.baseDao.add` 前，你需要先执行 `vk.baseDao.updateAndReturn`，代码如下
 
 ```js
 let newInfo = await vk.baseDao.updateAndReturn({
-  dbName: "id-inc",
+  dbName: 'id-inc',
   whereJson: {
-    _id: "001"
+    _id: '001',
   },
   dataJson: {
-    "my-orders": _.inc(1)
-  }
+    'my-orders': _.inc(1),
+  },
 });
 let newId = newInfo['my-orders'];
 
 await vk.baseDao.add({
-  dbName: "my-orders",
-  dataJson: { 
+  dbName: 'my-orders',
+  dataJson: {
     id: newId, // 注意：这里最好用id，不要用_id，这样_id依然是数据库默认的，然后多了一个叫id的自增id字段，这样兼容性最高
     // ...其他字段的值
     // a: 1,
     // b: "2"
-  }
+  },
 });
 ```
 
-## 注意：文档中出现的 $ 在云函数若不可用，则可写成 _.$
+## 注意：文档中出现的 $ 在云函数若不可用，则可写成 \_.$
 
-以下是 _ 和 $ 变量实际代表的含义
+以下是 \_ 和 $ 变量实际代表的含义
 
 ```javascript
 var db = uniCloud.database(); // 全局数据库引用

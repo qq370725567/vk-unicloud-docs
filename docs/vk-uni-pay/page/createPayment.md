@@ -6,11 +6,11 @@ sidebarDepth: 0
 
 **使用 `vk-uni-pay` 组件的优势**
 
-* 1、自动请求云函数
-* 2、自动识别H5、小程序、APP，抹平不同平台的代码差异
-* 3、H5扫码支付自动获取二维码地址vkPay.codeUrl，支持自动轮询获取支付状态
-* 4、可实时监听支付状态vkPay.status 0：待支付 1：支付中 2：已支付
-* 5、支付成功的判断是直接查你数据库的订单状态是否已支付，安全可靠。
+- 1、自动请求云函数
+- 2、自动识别 H5、小程序、APP，抹平不同平台的代码差异
+- 3、H5 扫码支付自动获取二维码地址 vkPay.codeUrl，支持自动轮询获取支付状态
+- 4、可实时监听支付状态 vkPay.status 0：待支付 1：支付中 2：已支付
+- 5、支付成功的判断是直接查你数据库的订单状态是否已支付，安全可靠。
 
 ## template
 
@@ -31,39 +31,39 @@ sidebarDepth: 0
 export default {
   data() {
     return {
-      vkPay:{
+      vkPay: {
         /**
          * 查询支付状态的云函数配置
          * 如果是非路由框架，则action为字符串，值为云函数名称
          * 如果是路由框架，则按下方配置填写
          */
-        queryPaymentAction:{
-          name:"vk-pay", // 云函数名称
-          action:"pay/queryPayment", // 路由模式下云函数地址
-          actionKey:"action", // 路由模式下云函数地址的识别key
-          dataKey:"data" // 路由模式下云函数请求参数的识别key
+        queryPaymentAction: {
+          name: 'vk-pay', // 云函数名称
+          action: 'pay/queryPayment', // 路由模式下云函数地址
+          actionKey: 'action', // 路由模式下云函数地址的识别key
+          dataKey: 'data', // 路由模式下云函数请求参数的识别key
         },
         // PC支付的付款二维码地址 渲染二维码需要自己写，可以参考示例中的二维码组件 vk-uni-qrcode
-        codeUrl:"",
+        codeUrl: '',
         // 当前支付状态 0:等待发起支付 1:支付中 2:已支付
-        status:0,
+        status: 0,
         // 当前页面是否显示
-        pageShow:true,
+        pageShow: true,
         // 启用轮询检测订单支付状态（仅h5支付有效）
-        polling:true,
+        polling: true,
       },
       // 表单请求数据
-      form1:{
-        provider:"wxpay",
-        totalFee:1,
-        outTradeNo:"",
-        subject:"测试订单标题",
-        body:"测试订单详情",
-        type: "recharge"
+      form1: {
+        provider: 'wxpay',
+        totalFee: 1,
+        outTradeNo: '',
+        subject: '测试订单标题',
+        body: '测试订单详情',
+        type: 'recharge',
       },
-    }
-  }
-}
+    };
+  },
+};
 ```
 
 ## methods
@@ -136,11 +136,11 @@ methods: {
 
 ## Vue3 setup 内写法
 
-由于 setup 内没有this，故写法稍微变一下，代码如下：
+由于 setup 内没有 this，故写法稍微变一下，代码如下：
 
 ```js
-import { ref } from 'vue'
-  
+import { ref } from 'vue';
+
 const vkPay = ref(null); // 这里的 vkPay 变量名必须和组件写的ref的值一致
 
 // this.$refs.vkPay.createPayment 改成 vkPay.value.createPayment

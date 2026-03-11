@@ -189,6 +189,8 @@ module.exports = {
 
 4. 执行格式化命令
 
+在项目根目录下执行下方命令
+
 ```bash
 npx prettier "**/*" --write --ignore-unknown
 ```

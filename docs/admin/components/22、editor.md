@@ -23,5 +23,5 @@ show:["detail"] 是为了控制只在点击详情时显示
 ### template 使用方式@template
 
 ```html
-<vk-data-input-editor v-model="value1"  width="750px"></vk-data-input-editor>
+<vk-data-input-editor v-model="value1" width="750px"></vk-data-input-editor>
 ```

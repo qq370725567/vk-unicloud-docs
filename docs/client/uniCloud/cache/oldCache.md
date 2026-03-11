@@ -10,7 +10,7 @@ sidebarDepth: 0
 
 云端数据缓存是通过`key`，`value`键值对的形式进行数据的储存，通过`key`对数据进行读取
 
-`vk.globalDataCache` 有以下API
+`vk.globalDataCache` 有以下 API
 
 ## API
 
@@ -34,16 +34,13 @@ await vk.globalDataCache.get(key);
  * @param {number} second   过期时间(单位:秒) 0或不传代表不自动过期
  * @param {function} fn     缓存无值执行的函数
  */
-let requestRes = await vk.globalDataCache.get(key, second,
-  async function() {
-    // 若无缓存时，发起http请求，这里也可以写查数据库等操作
-    return await vk.request({
-      url: `xxxxxxxxx`,
-      method: "GET",
-      data: {
-     
-      }
-    });
+let requestRes = await vk.globalDataCache.get(key, second, async function () {
+  // 若无缓存时，发起http请求，这里也可以写查数据库等操作
+  return await vk.request({
+    url: `xxxxxxxxx`,
+    method: 'GET',
+    data: {},
+  });
 });
 ```
 
@@ -90,10 +87,10 @@ await vk.globalDataCache.clear(key);
  * @param {array}  sortArr   排序规则
  */
 await vk.globalDataCache.list({
-  pageIndex:pageIndex,
-  pageSize:pageSize,
-  whereJson:whereJson,
-  sortArr:sortArr
+  pageIndex: pageIndex,
+  pageSize: pageSize,
+  whereJson: whereJson,
+  sortArr: sortArr,
 });
 ```
 
@@ -122,11 +119,11 @@ await vk.globalDataCache.deleteExpired();
 
 ### 表名：vk-global-data
 
-| 字段名             | 字段类型                           | 必填    | 默认值  | 说明 |
-|------------------|-------------------------------|---------|--------|-------|
-| _id            | string | 是  | - | 记录ID，同时=键名key |
-| _add_time      | time | 是  | - | 本条记录添加时间（时间戳形式） |
-| key            | string | 是  | - | 键名，和_id保持一致 |
-| value          | any | 是 | - | 键值 |
-| comment        | string |   | - | 备注 |
-| expired_at     | time |   | - | 过期时间（0代表永不过期） |
+| 字段名     | 字段类型 | 必填 | 默认值 | 说明                           |
+| ---------- | -------- | ---- | ------ | ------------------------------ |
+| \_id       | string   | 是   | -      | 记录 ID，同时=键名 key         |
+| \_add_time | time     | 是   | -      | 本条记录添加时间（时间戳形式） |
+| key        | string   | 是   | -      | 键名，和\_id 保持一致          |
+| value      | any      | 是   | -      | 键值                           |
+| comment    | string   |      | -      | 备注                           |
+| expired_at | time     |      | -      | 过期时间（0 代表永不过期）     |

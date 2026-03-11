@@ -4,15 +4,14 @@ sidebarDepth: 0
 
 # 云端优雅的写表单验证
 
-
 当表单参数不多时，这样写并无不雅的地方。
 
 ```js
-if (!data.username) return { code:-1, msg:"用户名不能为空" }
-if (!data.password) return { code:-1, msg:"密码不能为空" }
+if (!data.username) return { code: -1, msg: '用户名不能为空' };
+if (!data.password) return { code: -1, msg: '密码不能为空' };
 ```
 
-但是如果参数有10个以上呢？还这样写吗？
+但是如果参数有 10 个以上呢？还这样写吗？
 
 ```js
 if (!data.param1) return { code:-1, msg:"XXX不能为空" }
@@ -32,11 +31,12 @@ if (!data.param9) return { code:-1, msg:"XXX不能为空" }
 ## 如何优化？
 
 **优化思路：**
-* 首先，前端一般都会写一下vue表单验证，毕竟前端的验证是没有网络请求，及时响应的
-* 但是后端经验告诉我们，不可信任前端传过来的参数，因此后端也需要表单验证。
-* 那么既然前端已经写好了，如果后端代码能直接复用前端代码是不是在一定程度上简化了后端工作量？
 
-* 为此，VK框架云函数中实现了跟前端表单验证参数一模一样的功能函数 `vk.pubfn.formValidate`。
+- 首先，前端一般都会写一下 vue 表单验证，毕竟前端的验证是没有网络请求，及时响应的
+- 但是后端经验告诉我们，不可信任前端传过来的参数，因此后端也需要表单验证。
+- 那么既然前端已经写好了，如果后端代码能直接复用前端代码是不是在一定程度上简化了后端工作量？
+
+- 为此，VK 框架云函数中实现了跟前端表单验证参数一模一样的功能函数 `vk.pubfn.formValidate`。
 
 **接下来重点介绍 `vk.pubfn.formValidate`**
 
@@ -55,30 +55,48 @@ module.exports = {
     let { data = {}, userInfo, util, originalParam } = event;
     let { customUtil, config, pubFun, vk, db, _ } = util;
     let { uid } = data;
-    let res = { code: 0, msg: "" };
+    let res = { code: 0, msg: '' };
     // 业务逻辑开始-----------------------------------------------------------
-    
+
     // 验证规则开始 -----------------------------------------------------------
     let rules = {
       username: [
-        { required: true, validator: vk.pubfn.validator("username"), message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线', trigger: ['blur','change'] }
+        {
+          required: true,
+          validator: vk.pubfn.validator('username'),
+          message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线',
+          trigger: ['blur', 'change'],
+        },
       ],
       nickname: [
         { required: true, message: '昵称为必填字段', trigger: 'blur' },
-        { min: 2, max: 20, message: '昵称长度在 2 到 20 个字符', trigger: 'blur' }
+        {
+          min: 2,
+          max: 20,
+          message: '昵称长度在 2 到 20 个字符',
+          trigger: 'blur',
+        },
       ],
       password: [
-        { validator:vk.pubfn.validator("password"), message: '密码长度在6~18之间，只能包含字母、数字和下划线', trigger: 'blur' }
+        {
+          validator: vk.pubfn.validator('password'),
+          message: '密码长度在6~18之间，只能包含字母、数字和下划线',
+          trigger: 'blur',
+        },
       ],
       mobile: [
-        { validator: vk.pubfn.validator("mobile"), message: '手机号格式错误', trigger: 'blur' }
-      ]
+        {
+          validator: vk.pubfn.validator('mobile'),
+          message: '手机号格式错误',
+          trigger: 'blur',
+        },
+      ],
     };
     // 验证规则结束 -----------------------------------------------------------
     // 开始进行验证
     let formRulesRes = vk.pubfn.formValidate({
       data: data,
-      rules: rules
+      rules: rules,
     });
     if (formRulesRes.code !== 0) {
       // 表单验证未通过
@@ -86,25 +104,23 @@ module.exports = {
     }
     // 表单验证通过，下面写自己的业务逻辑
 
-
-
     // 业务逻辑结束-----------------------------------------------------------
     return res;
-  }
-}
+  },
+};
 ```
 
 **同时为了让表单验证和业务逻辑代码独立，可以参考 `router/service/admin/system/role/sys/add.js` 此云函数内的写法。**
 **最终代码效果**
+
 ```js
-const formRules = require("../util/formRules.js");
+const formRules = require('../util/formRules.js');
 let formRulesRes = await formRules.add(event);
 if (formRulesRes.code !== 0) {
   // 表单验证未通过
   return formRulesRes;
 }
 // 表单验证通过，下面写自己的业务逻辑
-
 ```
 
 ## 云对象
@@ -128,43 +144,60 @@ var cloudObject = {
    * 模板函数
    * @url client/muban.test 前端调用的url参数地址
    */
-  test: async function(data) {
+  test: async function (data) {
     let { uid } = this.getClientInfo(); // 获取客户端信息
     let res = { code: 0, msg: '' };
     // 业务逻辑开始-----------------------------------------------------------
-    
+
     // 验证规则开始 -----------------------------------------------------------
     let rules = {
       username: [
-        { required: true, validator: vk.pubfn.validator("username"), message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线', trigger: 'blur' }
+        {
+          required: true,
+          validator: vk.pubfn.validator('username'),
+          message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线',
+          trigger: 'blur',
+        },
       ],
       nickname: [
         { required: true, message: '昵称为必填字段', trigger: 'blur' },
-        { min: 2, max: 20, message: '昵称长度在 2 到 20 个字符', trigger: 'blur' }
+        {
+          min: 2,
+          max: 20,
+          message: '昵称长度在 2 到 20 个字符',
+          trigger: 'blur',
+        },
       ],
       password: [
-        { validator:vk.pubfn.validator("password"), message: '密码长度在6~18之间，只能包含字母、数字和下划线', trigger: 'blur' }
+        {
+          validator: vk.pubfn.validator('password'),
+          message: '密码长度在6~18之间，只能包含字母、数字和下划线',
+          trigger: 'blur',
+        },
       ],
       mobile: [
-        { validator: vk.pubfn.validator("mobile"), message: '手机号格式错误', trigger: 'blur' }
-      ]
+        {
+          validator: vk.pubfn.validator('mobile'),
+          message: '手机号格式错误',
+          trigger: 'blur',
+        },
+      ],
     };
     // 验证规则结束 -----------------------------------------------------------
     // 开始进行验证
     let formRulesRes = vk.pubfn.formValidate({
       data: data,
-      rules: rules
+      rules: rules,
     });
     if (formRulesRes.code !== 0) {
       // 表单验证未通过
       return formRulesRes;
     }
     // 表单验证通过，下面写自己的业务逻辑
-    
-    
+
     // 业务逻辑结束-----------------------------------------------------------
     return res;
-  }
+  },
 };
 
 module.exports = cloudObject;
@@ -189,22 +222,21 @@ var cloudObject = {
    * 模板函数
    * @url client/muban.test 前端调用的url参数地址
    */
-  test: async function(data) {
+  test: async function (data) {
     let { uid } = this.getClientInfo(); // 获取客户端信息
     let res = { code: 0, msg: '' };
     // 业务逻辑开始-----------------------------------------------------------
-    const formRules = require("./util/formRules.js"); // 基于该云对象文件所在路径的相对路径
+    const formRules = require('./util/formRules.js'); // 基于该云对象文件所在路径的相对路径
     let formRulesRes = await formRules.add(data);
     if (formRulesRes.code !== 0) {
       // 表单验证未通过
       return formRulesRes;
     }
     // 表单验证通过，下面写自己的业务逻辑
-    
-    
+
     // 业务逻辑结束-----------------------------------------------------------
     return res;
-  }
+  },
 };
 
 module.exports = cloudObject;
@@ -222,26 +254,47 @@ class Util {
   /**
    * 添加
    */
-  async add(data={}) {
+  async add(data = {}) {
     let res = { code: 0, msg: '' };
     // 验证规则开始 -----------------------------------------------------------
     let rules = {
       username: [
-        { required: true, validator: vk.pubfn.validator("username"),
-          message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线', trigger: ['blur','change'] }
+        {
+          required: true,
+          validator: vk.pubfn.validator('username'),
+          message: '用户名以字母开头，长度在3~32之间，只能包含字母、数字和下划线',
+          trigger: ['blur', 'change'],
+        },
       ],
       nickname: [
         { required: true, message: '昵称为必填字段', trigger: 'blur' },
-        { min: 2, max: 20, message: '昵称长度在 2 到 20 个字符', trigger: 'blur' }
+        {
+          min: 2,
+          max: 20,
+          message: '昵称长度在 2 到 20 个字符',
+          trigger: 'blur',
+        },
       ],
       password: [
-        { validator:vk.pubfn.validator("password"), message: '密码长度在6~18之间，只能包含字母、数字和下划线', trigger: 'blur' }
+        {
+          validator: vk.pubfn.validator('password'),
+          message: '密码长度在6~18之间，只能包含字母、数字和下划线',
+          trigger: 'blur',
+        },
       ],
       mobile: [
-        { validator: vk.pubfn.validator("mobile"), message: '手机号格式错误', trigger: 'blur' }
+        {
+          validator: vk.pubfn.validator('mobile'),
+          message: '手机号格式错误',
+          trigger: 'blur',
+        },
       ],
       email: [
-        { validator: vk.pubfn.validator("email"), message: '邮箱格式错误', trigger: 'blur' }
+        {
+          validator: vk.pubfn.validator('email'),
+          message: '邮箱格式错误',
+          trigger: 'blur',
+        },
       ],
     };
     // 验证规则结束 -----------------------------------------------------------
@@ -249,16 +302,16 @@ class Util {
     // 开始进行验证
     res = vk.pubfn.formValidate({
       data: data,
-      rules: rules
+      rules: rules,
     });
     // 返回验证结果
     return res;
   }
 }
-module.exports = new Util
+module.exports = new Util();
 ```
 
-### 云对象-利用_before实现表单验证
+### 云对象-利用\_before 实现表单验证
 
 ```js
 'use strict';
@@ -278,32 +331,30 @@ const cloudObject = {
    * 请求前处理，主要用于调用方法之前进行预处理，一般用于拦截器、统一的身份验证、参数校验、定义全局对象等。
    * 文档地址：https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#before-预处理
    */
-  _before: async function() {
-  	vk = this.vk; // 将vk定义为全局对象
-  	// 引入表单验证
-  	const formRules = require("./util/formRules.js"); // 基于该云对象文件所在路径的相对路径
-  	// 获取当前运行的函数
-  	const methodName = this.getMethodName();
-  	// 如果该函数有表单验证的方法，则进行验证
-  	if (typeof formRules[methodName] === "function") {
-  		// 进行表单验证
-  		let formRulesRes = await formRules[methodName].call(this);
-  		if (formRulesRes.code !== 0) {
-  			// 表单验证未通过
-  			return formRulesRes;
-  		}
-  	}
+  _before: async function () {
+    vk = this.vk; // 将vk定义为全局对象
+    // 引入表单验证
+    const formRules = require('./util/formRules.js'); // 基于该云对象文件所在路径的相对路径
+    // 获取当前运行的函数
+    const methodName = this.getMethodName();
+    // 如果该函数有表单验证的方法，则进行验证
+    if (typeof formRules[methodName] === 'function') {
+      // 进行表单验证
+      let formRulesRes = await formRules[methodName].call(this);
+      if (formRulesRes.code !== 0) {
+        // 表单验证未通过
+        return formRulesRes;
+      }
+    }
   },
   /**
    * 模板函数
    * @url client/muban.add 前端调用的url参数地址
    */
-  test: async function(data) {
+  test: async function (data) {
     let { uid } = this.getClientInfo(); // 获取客户端信息
     let res = { code: 0, msg: '' };
-   
-    
-    
+
     // 业务逻辑结束-----------------------------------------------------------
     return res;
   },
@@ -311,15 +362,13 @@ const cloudObject = {
    * 模板函数
    * @url client/muban.add 前端调用的url参数地址
    */
-  add: async function(data) {
+  add: async function (data) {
     let { uid } = this.getClientInfo(); // 获取客户端信息
     let res = { code: 0, msg: '' };
-   
-    
-    
+
     // 业务逻辑结束-----------------------------------------------------------
     return res;
-  }
+  },
 };
 
 module.exports = cloudObject;
@@ -377,7 +426,7 @@ class Util {
   		]
   	};
   	// 验证规则结束 -----------------------------------------------------------
-  
+
   	// 开始进行验证
   	res = vk.pubfn.formValidate({
   		data: data,
@@ -390,13 +439,13 @@ class Util {
 module.exports = new Util
 ```
 
-## rules详解
+## rules 详解
 
-**rules跟前端vue表单验证写法是完全一样的**
+**rules 跟前端 vue 表单验证写法是完全一样的**
 
 以下是常用的几个表单验证示例。
 
-注意：trigger 属性不写也可以，trigger只在前端生效。（不过一般都是先把前端验证写完，云函数直接复制前端的验证）
+注意：trigger 属性不写也可以，trigger 只在前端生效。（不过一般都是先把前端验证写完，云函数直接复制前端的验证）
 
 ```js
 {
@@ -478,4 +527,3 @@ module.exports = new Util
   ]
 }
 ```
- 

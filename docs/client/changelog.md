@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# client框架目录结构
+# client 框架目录结构
 
 ## 前端（页面）目录结构@client
 
@@ -35,8 +35,8 @@ sidebarDepth: 0
 
 [点击查看](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/catalogue.html)
 
-建议 
+建议
 
-* `client端` 的云函数全部写在 `service/client` 目录内
-* 只需要登录即可请求的云函数写在 `kh` 目录内 如：`client/user/kh/setAvatar` 
-* 任何人都可以请求的云函数写在 `pub` 目录内 如：`client/user/pub/login`
+- `client端` 的云函数全部写在 `service/client` 目录内
+- 只需要登录即可请求的云函数写在 `kh` 目录内 如：`client/user/kh/setAvatar`
+- 任何人都可以请求的云函数写在 `pub` 目录内 如：`client/user/pub/login`

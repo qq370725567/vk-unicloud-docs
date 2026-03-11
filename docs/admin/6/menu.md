@@ -8,11 +8,11 @@ sidebarDepth: 0
 
 ## 页面路径
 
-* /pages_plugs/system/menu/list
+- /pages_plugs/system/menu/list
 
 ## 相关云函数路径
 
-* /router/service/admin/system/menu/
+- /router/service/admin/system/menu/
 
 ## 功能介绍
 

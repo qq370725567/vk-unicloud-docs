@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 ## 失败返回值
 
-只要 `code` 不为0，都属于失败，前端 `vk.callFunction` 会走 `fail` 回调，并自动执行 `vk.alert(msg);`
+只要 `code` 不为 0，都属于失败，前端 `vk.callFunction` 会走 `fail` 回调，并自动执行 `vk.alert(msg);`
 
 ```json
 {
@@ -17,8 +17,8 @@ sidebarDepth: 0
 
 ## 成功返回值
 
-只有 `code` 为0，才代表成功，前端 `vk.callFunction` 才会走 `success` 回调
- 
+只有 `code` 为 0，才代表成功，前端 `vk.callFunction` 才会走 `success` 回调
+
 ```json
 {
   "code": 0,
@@ -28,10 +28,10 @@ sidebarDepth: 0
 
 ## 特殊意义的返回值
 
-### 自动更新vuex内的userInfo缓存
+### 自动更新 vuex 内的 userInfo 缓存
 
-当 `needUpdateUserInfo` 为true，同时 `userInfo` 不为空，则自动更新vuex内的userInfo缓存
- 
+当 `needUpdateUserInfo` 为 true，同时 `userInfo` 不为空，则自动更新 vuex 内的 userInfo 缓存
+
 ```json
 {
   "code": 0,
@@ -43,16 +43,16 @@ sidebarDepth: 0
 }
 ```
 
-### 自动更新前端token
+### 自动更新前端 token
 
-当 `vk_uni_token` 有值，且满足以下格式时，自动更新前端token
- 
+当 `vk_uni_token` 有值，且满足以下格式时，自动更新前端 token
+
 ```json
 {
   "code": 0,
   "vk_uni_token": {
-    "token":"xxxxxx", // token的值
-    "tokenExpired": 1681818627000, // token的过期时间（时间戳）
+    "token": "xxxxxx", // token的值
+    "tokenExpired": 1681818627000 // token的过期时间（时间戳）
   }
 }
 ```

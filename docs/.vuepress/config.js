@@ -1,5 +1,5 @@
-const navbar = require("./configs/navbar.js"); // 顶部导航
-const sidebar = require("./configs/sidebar.js"); // 左侧菜单
+const navbar = require('./configs/navbar.js'); // 顶部导航
+const sidebar = require('./configs/sidebar.js'); // 左侧菜单
 const { slugify } = require('@vuepress/shared-utils'); // 用于处理标题的插件
 const headerPlugin = require('./markdown/header'); // 用于处理标题的插件
 
@@ -16,19 +16,16 @@ function simplifySlugText(text) {
 }
 
 module.exports = {
-  base: "/", // 部署站点的基础路径
+  base: '/', // 部署站点的基础路径
   title: 'vk-unicloud 快速开发框架', // 网站的标题
   description: 'VK云开发：多平台全栈快速开发框架。vk-unicloud-router、vk-unicloud-admin、vk-uni-pay', // 网站的描述
   // 额外的需要被注入到当前页面的 HTML <head> 中的标签
   head: [
+    ['link', { rel: 'icon', href: '/image/logo.png' }],
+    ['link', { rel: 'stylesheet', href: '/css/index.css' }],
     [
-      'link', { rel: 'icon', href: '/image/logo.png' },
-    ],
-    [
-      'link', { rel: 'stylesheet', href: '/css/index.css' },
-    ],
-    [
-      'script', {},
+      'script',
+      {},
       `
       var _hmt = _hmt || [];
       (function() {
@@ -37,10 +34,10 @@ module.exports = {
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();
-      `
-    ]
+      `,
+    ],
   ],
-  dest: "dist", // 指定 vuepress build 的输出目录
+  dest: 'dist', // 指定 vuepress build 的输出目录
   themeConfig: {
     // 显示所有页面的标题链接
     //displayAllHeaders: true,
@@ -48,7 +45,7 @@ module.exports = {
     searchMaxSuggestions: 1000,
     // 网站logo
     logo: '/image/logo.png',
-    lastUpdated: "最后修改时间",
+    lastUpdated: '最后修改时间',
     // 头部 tabs
     nav: navbar,
     // 左侧菜单嵌套最大深度，最大值为2
@@ -57,14 +54,14 @@ module.exports = {
     sidebar: sidebar,
     resolve: {
       alias: {
-        '@alias': 'path/to/some/dir'
-      }
+        '@alias': 'path/to/some/dir',
+      },
     },
     editLinks: true,
     editLinkText: '编辑此页（一起来纠错与优化，方便你我Ta）',
     docsRepo: 'https://gitee.com/vk-uni/vk-unicloud-docs.git', // 文档源文件的仓库 URL 。
     docsBranch: 'master', // 文档源文件的仓库分支。
-    docsDir: "docs", // 文档源文件存放在仓库中的目录名。
+    docsDir: 'docs', // 文档源文件存放在仓库中的目录名。
     searchPlaceholder: '搜索文档...',
     // algolia 全文搜索
     // algolia: {
@@ -74,28 +71,26 @@ module.exports = {
     // }
   },
   markdown: {
-    slugify (str) {
-      if (typeof str !== 'string') return ''
-      let slug = str
+    slugify(str) {
+      if (typeof str !== 'string') return '';
+      let slug = str;
       if (slug.includes('@')) {
-        let array = slug.split('@')
-        slug = array.length > 1 ? array[array.length - 1] : str
+        let array = slug.split('@');
+        slug = array.length > 1 ? array[array.length - 1] : str;
       } else {
-        slug = simplifySlugText(slug.toLowerCase()).trim()
+        slug = simplifySlugText(slug.toLowerCase()).trim();
       }
-      return slugify(slug)
+      return slugify(slug);
     },
     lineNumbers: true, // 是否在每个代码块的左侧显示行号。
     externalLinks: {
       target: '_blank',
-      rel: 'noopener noreferrer'
+      rel: 'noopener noreferrer',
     },
-    extractHeaders: [ 'h1', 'h2', 'h3', 'h4' ],
-    chainMarkdown (config) {
-      config
-        .plugin('convert-header')
-        .use(headerPlugin)
-    }
+    extractHeaders: ['h1', 'h2', 'h3', 'h4'],
+    chainMarkdown(config) {
+      config.plugin('convert-header').use(headerPlugin);
+    },
   },
   plugins: [
     '@vuepress/back-to-top',
@@ -106,42 +101,39 @@ module.exports = {
       {
         selector: 'img.preview',
         options: {
-          margin: 16
-        }
-      }
+          margin: 16,
+        },
+      },
     ],
     [
       '@vuepress/last-updated',
       {
         dateOptions: {
           hour12: false,
-          timeZone: "Asia/Shanghai"
-        }
-      }
+          timeZone: 'Asia/Shanghai',
+        },
+      },
     ],
     [
-      "vuepress-plugin-juejin-style-copy",
+      'vuepress-plugin-juejin-style-copy',
       {
         copyText: '复制代码',
-        tip: { content: "复制成功", title: "" },
+        tip: { content: '复制成功', title: '' },
         visibleTip: true,
-      }
+      },
     ],
     [
       'vuepress-plugin-right-anchor',
       {
         showDepth: 3,
-        ignore: [
-          "/",
-          "/client/vk-unicloud-router.html"
-        ],
+        ignore: ['/', '/client/vk-unicloud-router.html'],
         expand: {
           trigger: 'click',
-          clickModeDefaultOpen: true
+          clickModeDefaultOpen: true,
         },
         customClass: 'vk-right-anchor',
-        disableGlobalUI: false
-      }
-    ]
-  ]
+        disableGlobalUI: false,
+      },
+    ],
+  ],
 };

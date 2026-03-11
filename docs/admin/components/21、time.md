@@ -40,24 +40,23 @@
 
 ### 组件属性@props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| align            | 对其方式 | String  | left | left, center, right  |
-| format          | 显示在输入框中的格式 | String  | yyyy-MM-dd HH:mm:ss | - |
-| startPlaceholder    | 范围选择时开始日期的占位内容 | String  | - | -  |
-| endPlaceholder    | 范围选择时结束日期的占位内容 | String  | - | -  |
-| rangeSeparator    | 选择范围时的分隔符 | String  | '-' | - |
-| pickerOptions    | 当前时间日期选择器特有的选项参考下表 | Object  | {} | - |
+| 参数             | 说明                                 | 类型   | 默认值              | 可选值              |
+| ---------------- | ------------------------------------ | ------ | ------------------- | ------------------- |
+| align            | 对其方式                             | String | left                | left, center, right |
+| format           | 显示在输入框中的格式                 | String | yyyy-MM-dd HH:mm:ss | -                   |
+| startPlaceholder | 范围选择时开始日期的占位内容         | String | -                   | -                   |
+| endPlaceholder   | 范围选择时结束日期的占位内容         | String | -                   | -                   |
+| rangeSeparator   | 选择范围时的分隔符                   | String | '-'                 | -                   |
+| pickerOptions    | 当前时间日期选择器特有的选项参考下表 | Object | {}                  | -                   |
 
 ### pickerOptions 详情说明
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| selectableRange            |可选时间段，例如'18:30:00 - 20:30:00'或者传入数组['09:30:00 - 12:00:00', '14:30:00 - 18:30:00'] | string / array  | - | - |
-| format            | 设置禁用状态，参数为当前日期，要求返回 Boolean| string  | 'HH:mm:ss' | 小时：HH，分：mm，秒：ss，AM/PM A |
+| 参数            | 说明                                                                                            | 类型           | 默认值     | 可选值                            |
+| --------------- | ----------------------------------------------------------------------------------------------- | -------------- | ---------- | --------------------------------- |
+| selectableRange | 可选时间段，例如'18:30:00 - 20:30:00'或者传入数组['09:30:00 - 12:00:00', '14:30:00 - 18:30:00'] | string / array | -          | -                                 |
+| format          | 设置禁用状态，参数为当前日期，要求返回 Boolean                                                  | string         | 'HH:mm:ss' | 小时：HH，分：mm，秒：ss，AM/PM A |
 
-[点击查看更多element 官方API](https://element.eleme.cn/#/zh-CN/component/time-picker)
-
+[点击查看更多 element 官方 API](https://element.eleme.cn/#/zh-CN/component/time-picker)
 
 ### 万能表格使用方式@table
 
@@ -79,4 +78,4 @@
 ></vk-data-input-time>
 ```
 
-[点击查看更多element 官方API](https://element.eleme.cn/#/zh-CN/component/time-picker)
+[点击查看更多 element 官方 API](https://element.eleme.cn/#/zh-CN/component/time-picker)

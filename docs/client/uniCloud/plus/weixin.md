@@ -2,20 +2,20 @@
 sidebarDepth: 0
 ---
 
-# 微信小程序API
+# 微信小程序 API
 
 :::warning 注意
 
-此非前端API，请在云函数内调用。
+此非前端 API，请在云函数内调用。
 :::
 
 ## 配置文件@config
 
-打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
+打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的
 
 "mp-weixin" 微信小程序
 
-"app-plus" APP（需要用到APP登录才需要配置）
+"app-plus" APP（需要用到 APP 登录才需要配置）
 
 "h5-weixin" （需要用到公众号登录才需要配置）
 
@@ -49,10 +49,12 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 授权相关API@auth
+## 授权相关 API@auth
 
-### 获取token@getAccessToken
-`vk.openapi.weixin.auth.getAccessToken` 
+### 获取 token@getAccessToken
+
+`vk.openapi.weixin.auth.getAccessToken`
+
 ```js
 /**
  * (带缓存,缓存1小时) 获取小程序全局唯一后台接口调用凭据（access_token）。调用绝大多数后台接口时都需使用 access_token，开发者需要进行妥善保存。
@@ -61,15 +63,17 @@ sidebarDepth: 0
 let access_token = await vk.openapi.weixin.auth.getAccessToken();
 ```
 
-### code换取openid@code2Session
+### code 换取 openid@code2Session
+
 `vk.openapi.weixin.auth.code2Session`
+
 ```js
 /**
  * 登录凭证校验。通过 wx.login 接口获得临时登录凭证 code 后传到开发者服务器调用此接口完成登录流程。
  * @param {String} js_code 登录时获取的 code
  */
 let code2SessionRes = await vk.openapi.weixin.auth.code2Session({
-  js_code: js_code
+  js_code: js_code,
 });
 ```
 
@@ -77,7 +81,7 @@ let code2SessionRes = await vk.openapi.weixin.auth.code2Session({
 
 `vk.openapi.weixin.decrypt.getPhoneNumber`
 
-**方式一：通过code**
+**方式一：通过 code**
 
 ```js
 /**
@@ -85,11 +89,11 @@ let code2SessionRes = await vk.openapi.weixin.auth.code2Session({
  * @param {String} code 通过前端button组件事件getphonenumber得到的 e.detail.code
  */
 let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
-  code
+  code,
 });
 ```
 
-**方式二：通过encryptedData+iv+sessionKey**
+**方式二：通过 encryptedData+iv+sessionKey**
 
 ```js
 /**
@@ -101,14 +105,15 @@ let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
 let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
   encryptedData,
   iv,
-  sessionKey
+  sessionKey,
 });
 ```
 
 ### 获取小程序码@wxacode-getUnlimited
-`vk.openapi.weixin.wxacode.getUnlimited`
-```js
 
+`vk.openapi.weixin.wxacode.getUnlimited`
+
+```js
 /**
  * 获取小程序码，适用于需要的码数量极多的业务场景。通过该接口生成的小程序码，永久有效，数量暂无限制。 更多用法详见 获取二维码。
  * @param {String} access_token 默认自动获取，不需要传
@@ -122,49 +127,49 @@ let getPhoneNumberRes = await vk.openapi.weixin.decrypt.getPhoneNumber({
  * @param {boolean} is_hyaline  默认是false，是否需要透明底色，为 true 时，生成透明底色的小程序
  */
 let getUnlimitedRes = await vk.openapi.weixin.wxacode.getUnlimited({
-  page: "pages/index/index",
-  scene: "",
+  page: 'pages/index/index',
+  scene: '',
   check_path: false,
-  env_version: "develop", // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
+  env_version: 'develop', // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
 });
-
 ```
 
-**注意：getUnlimited在执行成功后返回的是二进制，故在云函数中需要转换，完整代码如下**
+**注意：getUnlimited 在执行成功后返回的是二进制，故在云函数中需要转换，完整代码如下**
 
 ```js
 let getUnlimitedRes = await vk.openapi.weixin.wxacode.getUnlimited({
-  page: "pages/index/index",
-  scene: "",
+  page: 'pages/index/index',
+  scene: '',
   check_path: false,
-  env_version: "develop", // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
+  env_version: 'develop', // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
 });
-if (typeof getUnlimitedRes === "object" && getUnlimitedRes.code) {
+if (typeof getUnlimitedRes === 'object' && getUnlimitedRes.code) {
   return getUnlimitedRes;
 }
 try {
   // 二进制转base64
-  let base64 = Buffer.from(getUnlimitedRes, 'binary').toString('base64')
+  let base64 = Buffer.from(getUnlimitedRes, 'binary').toString('base64');
   return {
     code: 0,
-    base64: `data:image/png;base64,${base64}`
+    base64: `data:image/png;base64,${base64}`,
   };
 } catch (err) {
   // 转base64失败
   return {
     code: -1,
-    msg: "生成小程序码失败",
+    msg: '生成小程序码失败',
     err: {
       message: err.message,
-      stack: err.stack
-    }
+      stack: err.stack,
+    },
   };
 }
 ```
 
+### 获取 scheme 码@urlscheme-generate
 
-### 获取scheme码@urlscheme-generate
 `vk.openapi.weixin.urlscheme.generate`
+
 ```js
 /**
  * 获取小程序scheme码
@@ -179,13 +184,13 @@ try {
  * @param {string} query           通过 scheme 码进入小程序时的 query，最大1024个字符，只支持数字，大小写英文以及部分特殊字符：!#$&'()*+,/:;=?@-._~%`
  * @param {String} env_version     默认值"release"。要打开的小程序版本。正式版为"release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
  * 返回结果
- * @return {String} openlink 
+ * @return {String} openlink
  */
 let generateRes = await vk.openapi.weixin.urlscheme.generate({
-  jump_wxa:{
-    path: "pages/index/index",
-    query: "a=1",
-    env_version: "develop", // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
+  jump_wxa: {
+    path: 'pages/index/index',
+    query: 'a=1',
+    env_version: 'develop', // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
   },
   is_expire: true,
   expire_type: 1,
@@ -193,12 +198,13 @@ let generateRes = await vk.openapi.weixin.urlscheme.generate({
 });
 ```
 
+### 获取小程序 URL 链接@urllink-generate
 
-### 获取小程序URL链接@urllink-generate
 `vk.openapi.weixin.urllink.generate`
+
 ```js
 /**
-  * 获取小程序 URL Link，适用于短信、邮件、网页、微信内等拉起小程序的业务场景。通过该接口，可以选择生成到期失效和永久有效的小程序链接，有数量限制，目前仅针对国内非个人主体的小程序开放
+ * 获取小程序 URL Link，适用于短信、邮件、网页、微信内等拉起小程序的业务场景。通过该接口，可以选择生成到期失效和永久有效的小程序链接，有数量限制，目前仅针对国内非个人主体的小程序开放
  * @param {String} access_token      默认自动获取，不需要传
  * @param {String} path              通过 URL Link 进入的小程序页面路径，必须是已经发布的小程序存在的页面，不可携带 query 。path 为空时会跳转小程序主页
  * @param {string} query             通过 URL Link 进入小程序时的query，最大1024个字符，只支持数字，大小写英文以及部分特殊字符：!#$&'()*+,/:;=?@-._~%
@@ -208,19 +214,20 @@ let generateRes = await vk.openapi.weixin.urlscheme.generate({
  * @param {number} expire_interval   到期失效的URL Link的失效间隔天数。生成的到期失效URL Link在该间隔时间到达前有效。最长间隔天数为30天。expire_type 为 1 必填
  * @param {string} env_version       默认值"release"。要打开的小程序版本。正式版为 "release"，体验版为"trial"，开发版为"develop"，仅在微信外打开时生效。
  * 返回结果
- * @return {String} url_link 
+ * @return {String} url_link
  */
 let generateRes = await vk.openapi.weixin.urllink.generate({
-  path: "pages/index/index",
-  query: "a=1&b=2",
+  path: 'pages/index/index',
+  query: 'a=1&b=2',
   is_expire: true,
   expire_type: 1,
   expire_interval: 30, // 有效期30天（最大30天）
-  env_version: "develop", // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
+  env_version: 'develop', // 要打开的小程序版本。正式版为 "release"，体验版为 "trial"，开发版为 "develop"。默认是正式版。
 });
 ```
 
 ## 内容安全@security
+
 ### 检测文本是否违规@security-msgSecCheck
 
 `vk.openapi.weixin.security.msgSecCheck`
@@ -261,13 +268,13 @@ let imgSecCheckRes = await vk.openapi.weixin.security.imgSecCheck({
   base64: base64,
   openid: '', // 用户的openid
   scene: 3, // 场景值（建议为2或3）
-  version: 2 // 接口版本号（建议为2）
+  version: 2, // 接口版本号（建议为2）
 });
 ```
 
 **注意**
 
-- V2的检测结果是异步返回的，需要提前在微信公众平台「开发」-「开发设置」-「消息推送」开启消息服务，检测结果在 30 分钟内会推送到你的消息接收服务器。
+- V2 的检测结果是异步返回的，需要提前在微信公众平台「开发」-「开发设置」-「消息推送」开启消息服务，检测结果在 30 分钟内会推送到你的消息接收服务器。
 
 ## 发送消息@subscribeMessage
 
@@ -286,33 +293,32 @@ let imgSecCheckRes = await vk.openapi.weixin.security.imgSecCheck({
  */
 let sendRes = await vk.openapi.weixin.subscribeMessage.send({
   touser: openid,
-  template_id: "订阅模板ID",
-  page: "pages/index/index", // 注意：此处的page地址不要/开头
+  template_id: '订阅模板ID',
+  page: 'pages/index/index', // 注意：此处的page地址不要/开头
   data: {
     character_string1: {
-      value: "202103040830158485629163994677"
+      value: '202103040830158485629163994677',
     },
     name2: {
-      value: "中通快递"
+      value: '中通快递',
     },
     character_string3: {
-      value: "ZT2015215125352511"
+      value: 'ZT2015215125352511',
     },
     thing6: {
-      value: "雪花秀滋盈生人生焕颜精华露"
+      value: '雪花秀滋盈生人生焕颜精华露',
     },
     thing8: {
-      value: "杭州市xxxxxxxxx号"
-    }
+      value: '杭州市xxxxxxxxx号',
+    },
   },
-  miniprogram_state: "formal",
+  miniprogram_state: 'formal',
 });
 if (sendRes.code === 0) {
   // 发送成功
 } else {
   // 发送失败
 }
-
 ```
 
 **前端**
@@ -322,7 +328,7 @@ if (sendRes.code === 0) {
 ```js
 // 前端订阅消息
 uni.requestSubscribeMessage({
-  tmplIds: ['订阅模板ID']
+  tmplIds: ['订阅模板ID'],
 });
 ```
 
@@ -331,22 +337,21 @@ uni.requestSubscribeMessage({
 
 如果发送失败，可以在云函数内打印下 `sendRes` 的值，并根据返回的 `code` 进行判断错在哪里。
 
-
-| 值   | 说明                                    |
-|------- |---------------------------------------|
-| 40003  |   touser字段openid为空或者不正确    | 
-| 40037  |   订阅模板id为空不正确    |
-| 43101  |   用户拒绝接受消息，如果用户之前曾经订阅过，则表示用户取消了订阅关系    |
-| 47003  |   模板参数不准确，可能为空或者不满足规则，errmsg会提示具体是哪个字段出错	    |
-| 41030  |   page路径不正确，需要保证在现网版本小程序中存在，与app.json保持一致    |
+| 值    | 说明                                                                    |
+| ----- | ----------------------------------------------------------------------- |
+| 40003 | touser 字段 openid 为空或者不正确                                       |
+| 40037 | 订阅模板 id 为空不正确                                                  |
+| 43101 | 用户拒绝接受消息，如果用户之前曾经订阅过，则表示用户取消了订阅关系      |
+| 47003 | 模板参数不准确，可能为空或者不满足规则，errmsg 会提示具体是哪个字段出错 |
+| 41030 | page 路径不正确，需要保证在现网版本小程序中存在，与 app.json 保持一致   |
 
 ### 小程序转公众号模板消息@uniformMessage-send
 
 `vk.openapi.weixin.uniformMessage.send`
 
-**注意：此接口已被微信官方废弃，无法使用，即无法用微信小程序的openid来发送微信公众号的模板消息了**
+**注意：此接口已被微信官方废弃，无法使用，即无法用微信小程序的 openid 来发送微信公众号的模板消息了**
 
-<!-- 
+<!--
 **该接口亮点：可以用小程序的 openid 来发送公众号的模板消息（用户只需关注公众号，无需点击订阅消息）**
 
 **特别注意**
@@ -355,18 +360,18 @@ uni.requestSubscribeMessage({
 
 **同时微信官方出了 `类目模板`，但此接口不支持新出的 `类目模板`，只能用 `历史模板`**
 
-![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/cloudstorage/6c6145dc-daa0-4e18-a5b9-f2bf6e159e8d.png) 
+![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/cloudstorage/6c6145dc-daa0-4e18-a5b9-f2bf6e159e8d.png)
 -->
 
 **请求参数**
 
-| 参数   | 类型    |说明                                    |
-|------- |--------|------------------------------------|
-| touser  | String |  接收者（用户）的 openid（可以是小程序下的openid，也可以是公众号下的openid）   | 
-| template_id  |String |    所需下发的消息模板id    |
-| url  |  String |  跳转网页时填写 |
-| miniprogram  |Object |    跳转小程序时填写	    |
-| data  | Object |  模板内容    |
+| 参数        | 类型   | 说明                                                                          |
+| ----------- | ------ | ----------------------------------------------------------------------------- |
+| touser      | String | 接收者（用户）的 openid（可以是小程序下的 openid，也可以是公众号下的 openid） |
+| template_id | String | 所需下发的消息模板 id                                                         |
+| url         | String | 跳转网页时填写                                                                |
+| miniprogram | Object | 跳转小程序时填写                                                              |
+| data        | Object | 模板内容                                                                      |
 
 ```js
 /**
@@ -379,84 +384,84 @@ uni.requestSubscribeMessage({
  * @param {Object} data               模板内容
  */
 let sendRes = await vk.openapi.weixin.uniformMessage.send({
-  touser: "", // 接收者（用户）的 openid（可以是小程序下的openid，也可以是公众号下的openid）
-  template_id: "", // 所需下发的订阅模板id
-  url: "https://www.baidu.com", // 跳转网页时填写（如填了miniprogram参数则自动忽略url参数）
+  touser: '', // 接收者（用户）的 openid（可以是小程序下的openid，也可以是公众号下的openid）
+  template_id: '', // 所需下发的订阅模板id
+  url: 'https://www.baidu.com', // 跳转网页时填写（如填了miniprogram参数则自动忽略url参数）
   miniprogram: {
-    appid: "", // 需要跳转的小程序appid
-    pagepath: "pages/order/order?id=aaa", // 需要跳转的小程序页面
+    appid: '', // 需要跳转的小程序appid
+    pagepath: 'pages/order/order?id=aaa', // 需要跳转的小程序页面
   },
   data: {
-    "first": {
-      "value": "您购买的订单已经发货啦，正快马加鞭向您飞奔而去。",
-      "color": "#173177"
+    first: {
+      value: '您购买的订单已经发货啦，正快马加鞭向您飞奔而去。',
+      color: '#173177',
     },
-    "keyword1": {
-      "value": "D201803111235825",
-      "color": "#173177"
+    keyword1: {
+      value: 'D201803111235825',
+      color: '#173177',
     },
-    "keyword2": {
-      "value": "2018-03-11 19:56",
-      "color": "#173177"
+    keyword2: {
+      value: '2018-03-11 19:56',
+      color: '#173177',
     },
-    "keyword3": {
-      "value": "顺丰快递",
-      "color": "#173177"
+    keyword3: {
+      value: '顺丰快递',
+      color: '#173177',
     },
-    "keyword4": {
-      "value": "980456952123",
-      "color": "#173177"
+    keyword4: {
+      value: '980456952123',
+      color: '#173177',
     },
-    "keyword5": {
-      "value": "王先生 135xxxxxxxx 广东省深圳市龙华区建设东路",
-      "color": "#173177"
+    keyword5: {
+      value: '王先生 135xxxxxxxx 广东省深圳市龙华区建设东路',
+      color: '#173177',
     },
-    "remark": {
-      "value": "欢迎再次购买！",
-      "color": "#173177"
-    }
-  }
+    remark: {
+      value: '欢迎再次购买！',
+      color: '#173177',
+    },
+  },
 });
-
 ```
 
-**注意：公众号和小程序无需绑定在同一个开放平台下，但需要同时满足下面的4个要求。**
+**注意：公众号和小程序无需绑定在同一个开放平台下，但需要同时满足下面的 4 个要求。**
 
-* 1、公众号必须和小程序是同主体。
-* 2、公众号必须是已经认证的服务号（必须企业资质，每年300元认证费用）
-* 3、小程序关联了公众号。
-* 4、该用户关注了公众号。
+- 1、公众号必须和小程序是同主体。
+- 2、公众号必须是已经认证的服务号（必须企业资质，每年 300 元认证费用）
+- 3、小程序关联了公众号。
+- 4、该用户关注了公众号。
 
 如果发送失败，可以在云函数内打印下 `sendRes` 的值，并根据返回的 `code` 进行判断错在哪里。
 
-| 值   | 说明                                    |
-|------- |---------------------------------------|
-| 40003  |   touser字段openid为空或者不正确    | 
-| 40037  |   模板id不正确   |
-| 45009  |   接口调用超过限额  |
-| 40013  |   不符合绑定关系要求   |
+| 值    | 说明                              |
+| ----- | --------------------------------- |
+| 40003 | touser 字段 openid 为空或者不正确 |
+| 40037 | 模板 id 不正确                    |
+| 45009 | 接口调用超过限额                  |
+| 40013 | 不符合绑定关系要求                |
 
 ### 单独公众号模板消息@h5-templateMessage-send
+
 `vk.openapi.weixin.h5.templateMessage.send`
 
 该接口与 `vk.openapi.weixin.uniformMessage.send` 的区别是
 
-* 1、templateMessage 只需配置公众号的配置，而 uniformMessage 需要同时配置小程序+公众号的配置。（在uni-id的配置文件中配置）
-* 2、templateMessage 的 touser 参数只能是公众号下的openid，而 uniformMessage 可以是小程序下的openid，也可以是公众号下的openid）
+- 1、templateMessage 只需配置公众号的配置，而 uniformMessage 需要同时配置小程序+公众号的配置。（在 uni-id 的配置文件中配置）
+- 2、templateMessage 的 touser 参数只能是公众号下的 openid，而 uniformMessage 可以是小程序下的 openid，也可以是公众号下的 openid）
 
 **特别注意**
 
-2023年5月4日，微信官方限制了模板消息不再支持 `first` 和 `remark` 以及字体颜色，详情看 [微信公告](https://mp.weixin.qq.com/s?__biz=Mzg4NDYwOTcyNA==&mid=2247509160&idx=1&sn=d65ca01350c4e0aa5c2000a6388994fa&chksm=cfb7637bf8c0ea6d2c123321e88a586e8d03e01d976b6e79e7fb0480a6a6fe99be926de68e3b#rd)
+2023 年 5 月 4 日，微信官方限制了模板消息不再支持 `first` 和 `remark` 以及字体颜色，详情看 [微信公告](https://mp.weixin.qq.com/s?__biz=Mzg4NDYwOTcyNA==&mid=2247509160&idx=1&sn=d65ca01350c4e0aa5c2000a6388994fa&chksm=cfb7637bf8c0ea6d2c123321e88a586e8d03e01d976b6e79e7fb0480a6a6fe99be926de68e3b#rd)
 
 **请求参数**
 
-| 参数   | 类型    |说明                                    |
-|------- |--------|------------------------------------|
-| touser  | String |  接收者（用户）的 openid（只能是公众号下的openid）   | 
-| template_id  |String |    所需下发的消息模板id    |
-| url  |  String |  跳转网页时填写 |
-| miniprogram  |Object |    跳转小程序时填写	    |
-| data  | Object |  模板内容    |
+| 参数        | 类型   | 说明                                               |
+| ----------- | ------ | -------------------------------------------------- |
+| touser      | String | 接收者（用户）的 openid（只能是公众号下的 openid） |
+| template_id | String | 所需下发的消息模板 id                              |
+| url         | String | 跳转网页时填写                                     |
+| miniprogram | Object | 跳转小程序时填写                                   |
+| data        | Object | 模板内容                                           |
 
 ```js
 /**
@@ -468,65 +473,66 @@ let sendRes = await vk.openapi.weixin.uniformMessage.send({
  * @param {Object} data               模板内容
  */
 let sendRes = await vk.openapi.weixin.h5.templateMessage.send({
-  touser: "", // 接收者（用户）的 openid（只能是公众号下的openid）
-  template_id: "", // 所需下发的订阅模板id
-  url: "https://www.baidu.com", // 跳转网页时填写（如填了miniprogram参数则自动忽略url参数）
+  touser: '', // 接收者（用户）的 openid（只能是公众号下的openid）
+  template_id: '', // 所需下发的订阅模板id
+  url: 'https://www.baidu.com', // 跳转网页时填写（如填了miniprogram参数则自动忽略url参数）
   miniprogram: {
-    appid: "", // 需要跳转的小程序appid
-    pagepath: "pages/order/order?id=aaa", // 需要跳转的小程序页面
+    appid: '', // 需要跳转的小程序appid
+    pagepath: 'pages/order/order?id=aaa', // 需要跳转的小程序页面
   },
   data: {
-    "first": {
-      "value": "您购买的订单已经发货啦，正快马加鞭向您飞奔而去。",
-      "color": "#173177"
+    first: {
+      value: '您购买的订单已经发货啦，正快马加鞭向您飞奔而去。',
+      color: '#173177',
     },
-    "keyword1": {
-      "value": "D201803111235825",
-      "color": "#173177"
+    keyword1: {
+      value: 'D201803111235825',
+      color: '#173177',
     },
-    "keyword2": {
-      "value": "2018-03-11 19:56",
-      "color": "#173177"
+    keyword2: {
+      value: '2018-03-11 19:56',
+      color: '#173177',
     },
-    "keyword3": {
-      "value": "顺丰快递",
-      "color": "#173177"
+    keyword3: {
+      value: '顺丰快递',
+      color: '#173177',
     },
-    "keyword4": {
-      "value": "980456952123",
-      "color": "#173177"
+    keyword4: {
+      value: '980456952123',
+      color: '#173177',
     },
-    "keyword5": {
-      "value": "王先生 135xxxxxxxx 广东省深圳市龙华区建设东路",
-      "color": "#173177"
+    keyword5: {
+      value: '王先生 135xxxxxxxx 广东省深圳市龙华区建设东路',
+      color: '#173177',
     },
-    "remark": {
-      "value": "欢迎再次购买！",
-      "color": "#173177"
-    }
-  }
+    remark: {
+      value: '欢迎再次购买！',
+      color: '#173177',
+    },
+  },
 });
-
 ```
 
-**注意：公众号需要同时满足下面的2个要求。**
+**注意：公众号需要同时满足下面的 2 个要求。**
 
-* 1、公众号必须是已经认证的服务号（必须企业资质，每年300元认证费用）
-* 2、该用户关注了公众号。
+- 1、公众号必须是已经认证的服务号（必须企业资质，每年 300 元认证费用）
+- 2、该用户关注了公众号。
 
 如果发送失败，可以在云函数内打印下 `sendRes` 的值，并根据返回的 `code` 进行判断错在哪里。
 
-| 值   | 说明                                    |
-|------- |---------------------------------------|
-| 40003  |   touser字段openid为空或者不正确    | 
-| 40037  |   模板id不正确   |
-| 45009  |   接口调用超过限额  |
-| 40013  |   不符合绑定关系要求   |
+| 值    | 说明                              |
+| ----- | --------------------------------- |
+| 40003 | touser 字段 openid 为空或者不正确 |
+| 40037 | 模板 id 不正确                    |
+| 45009 | 接口调用超过限额                  |
+| 40013 | 不符合绑定关系要求                |
 
 ## 直播@livebroadcast
 
-### 获取直播间列表@livebroadcast-getLiveInfo 
+### 获取直播间列表@livebroadcast-getLiveInfo
+
 `vk.openapi.weixin.livebroadcast.getLiveInfo`
+
 ```js
 /**
  * 获取直播间列表
@@ -534,8 +540,8 @@ let sendRes = await vk.openapi.weixin.h5.templateMessage.send({
  * @params {Number} pageSize  每页显示数量
  */
 let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
-  pageIndex : 1,
-  pageSize : 100,
+  pageIndex: 1,
+  pageSize: 100,
 });
 ```
 
@@ -553,7 +559,7 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
 4. 微信会给支付者发送服务消息，用户点击后会进入确认收货页面，只有用户点了确认收货或订单到期自动确认收货后，商家才能收到资金，否则资金处于冻结状态
 5. 完成
 
-同时还可能需要商家缴纳保证金，其金额不一定是10万，可能是几千，也可能是几万，反正很坑，如下图所示
+同时还可能需要商家缴纳保证金，其金额不一定是 10 万，可能是几千，也可能是几万，反正很坑，如下图所示
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/f505118a-b444-439c-9f88-d62c9a08b77c.png)
 
@@ -579,27 +585,27 @@ let getLiveInfoRes = await vk.openapi.weixin.livebroadcast.getLiveInfo({
  * @param {object} payer                 支付者，支付者信息
  */
 let uploadRes = await vk.openapi.weixin.order.uploadShippingInfo({
-	"order_key": {
-		"order_number_type": 2,
-		"transaction_id": "4200002504202501085353055271"
-	},
-	"logistics_type": 1,
-	"delivery_mode": 1,
-	"is_all_delivered": true,
-	"shipping_list": [
-		{
-			"tracking_no": "78869806474031", // 物流单号，物流快递发货时必填，示例值: 323244567777 字符字节限制: [1, 128]
-			"express_company": "ZTO", // 物流公司编码，快递公司ID，参见「查询物流公司编码列表」，物流快递发货时必填， 示例值: DHL 字符字节限制: [1, 128]
-			"item_desc": "测试商品1号*1,测试商品2号*2", // 商品信息
-			"contact": {
-				"consignor_contact": "177****1234"
-			}
-		}
-	],
-	"upload_time": vk.pubfn.timeFormat(new Date(), "yyyy-MM-ddThh:mm:ss.S+08:00", 8),
-	"payer": {
-		"openid": "oRrtV7FOndtawDfZ2Ut3ehqFkWKI"
-	}
+  order_key: {
+    order_number_type: 2,
+    transaction_id: '4200002504202501085353055271',
+  },
+  logistics_type: 1,
+  delivery_mode: 1,
+  is_all_delivered: true,
+  shipping_list: [
+    {
+      tracking_no: '78869806474031', // 物流单号，物流快递发货时必填，示例值: 323244567777 字符字节限制: [1, 128]
+      express_company: 'ZTO', // 物流公司编码，快递公司ID，参见「查询物流公司编码列表」，物流快递发货时必填， 示例值: DHL 字符字节限制: [1, 128]
+      item_desc: '测试商品1号*1,测试商品2号*2', // 商品信息
+      contact: {
+        consignor_contact: '177****1234',
+      },
+    },
+  ],
+  upload_time: vk.pubfn.timeFormat(new Date(), 'yyyy-MM-ddThh:mm:ss.S+08:00', 8),
+  payer: {
+    openid: 'oRrtV7FOndtawDfZ2Ut3ehqFkWKI',
+  },
 });
 ```
 
@@ -618,64 +624,64 @@ let uploadRes = await vk.openapi.weixin.order.uploadShippingInfo({
  * @param {object} payer                 支付者，支付者信息
  */
 let uploadRes = await vk.openapi.weixin.order.uploadCombinedShippingInfo({
-	"order_key": {
-		"order_number_type": 1,
-		"mchid": "fake-mchid-123",
-		"out_trade_no": "fake-tradeno-20221214190427-0"
-	},
-	"sub_orders": [
-		{
-			"order_key": {
-				"order_number_type": 1,
-				"mchid": "fake-mchid-123",
-				"out_trade_no": "fake-tradeno-20221214190427-01"
-			},
-			"delivery_mode": 2,
-			"logistics_type": 1,
-			"is_all_delivered": true,
-			"shipping_list": [
-				{
-					"tracking_no": "fake-trackingno-202212141904271",
-					"express_company": "YD",
-					"item_desc": "微信气泡狗零钱包*1",
-					"contact": {
-						"consignor_contact": "021-**34-12"
-					}
-				},
-				{
-					"tracking_no": "fake-trackingno-202212141904272",
-					"express_company": "DHL",
-					"item_desc": "微信黄脸布艺胸针*1；微信气泡狗零钱包*1",
-					"contact": {
-						"consignor_contact": "021-**34-12"
-					}
-				}
-			]
-		},
-		{
-			"order_key": {
-				"order_number_type": 1,
-				"mchid": "fake-mchid-321",
-				"out_trade_no": "fake-tradeno-20221214190427-02"
-			},
-			"delivery_mode": 1,
-			"logistics_type": 1,
-			"shipping_list": [
-				{
-					"tracking_no": "fake-trackingno-202212141904273",
-					"express_company": "YTO",
-					"item_desc": "微信气泡狗双面钥匙扣*1",
-					"contact": {
-						"receiver_contact": "+86-123****4321"
-					}
-				}
-			]
-		}
-	],
-	"upload_time": "2022-12-15T13:29:35.120+08:00",
-	"payer": {
-		"openid": "ogqztkPsejM9MQAFfwCQSCi4oNg3"
-	}
+  order_key: {
+    order_number_type: 1,
+    mchid: 'fake-mchid-123',
+    out_trade_no: 'fake-tradeno-20221214190427-0',
+  },
+  sub_orders: [
+    {
+      order_key: {
+        order_number_type: 1,
+        mchid: 'fake-mchid-123',
+        out_trade_no: 'fake-tradeno-20221214190427-01',
+      },
+      delivery_mode: 2,
+      logistics_type: 1,
+      is_all_delivered: true,
+      shipping_list: [
+        {
+          tracking_no: 'fake-trackingno-202212141904271',
+          express_company: 'YD',
+          item_desc: '微信气泡狗零钱包*1',
+          contact: {
+            consignor_contact: '021-**34-12',
+          },
+        },
+        {
+          tracking_no: 'fake-trackingno-202212141904272',
+          express_company: 'DHL',
+          item_desc: '微信黄脸布艺胸针*1；微信气泡狗零钱包*1',
+          contact: {
+            consignor_contact: '021-**34-12',
+          },
+        },
+      ],
+    },
+    {
+      order_key: {
+        order_number_type: 1,
+        mchid: 'fake-mchid-321',
+        out_trade_no: 'fake-tradeno-20221214190427-02',
+      },
+      delivery_mode: 1,
+      logistics_type: 1,
+      shipping_list: [
+        {
+          tracking_no: 'fake-trackingno-202212141904273',
+          express_company: 'YTO',
+          item_desc: '微信气泡狗双面钥匙扣*1',
+          contact: {
+            receiver_contact: '+86-123****4321',
+          },
+        },
+      ],
+    },
+  ],
+  upload_time: '2022-12-15T13:29:35.120+08:00',
+  payer: {
+    openid: 'ogqztkPsejM9MQAFfwCQSCi4oNg3',
+  },
 });
 ```
 
@@ -690,10 +696,10 @@ let uploadRes = await vk.openapi.weixin.order.uploadCombinedShippingInfo({
  * 查询订单发货状态
  */
 let getOrderRes = await vk.openapi.weixin.order.getOrder({
-	transaction_id: "",
-	merchant_id: "",
-	sub_merchant_id: "",
-	merchant_trade_no: ""
+  transaction_id: '',
+  merchant_id: '',
+  sub_merchant_id: '',
+  merchant_trade_no: '',
 });
 ```
 
@@ -708,7 +714,7 @@ let getOrderRes = await vk.openapi.weixin.order.getOrder({
  * 查询订单列表
  */
 let getOrderRes = await vk.openapi.weixin.order.getOrderList({
-  page_size: 100
+  page_size: 100,
 });
 ```
 
@@ -723,10 +729,10 @@ let getOrderRes = await vk.openapi.weixin.order.getOrderList({
  * 确认收货提醒接口
  */
 let getOrderRes = await vk.openapi.weixin.order.notifyConfirmReceive({
-	transaction_id: "fake-transid-20221209132531-44",
-	merchant_id: "fake-mchid-123",
-	merchant_trade_no: "fake-tradeno-20221209132531-44",
-	received_time: 1670829139
+  transaction_id: 'fake-transid-20221209132531-44',
+  merchant_id: 'fake-mchid-123',
+  merchant_trade_no: 'fake-tradeno-20221209132531-44',
+  received_time: 1670829139,
 });
 ```
 
@@ -741,7 +747,7 @@ let getOrderRes = await vk.openapi.weixin.order.notifyConfirmReceive({
  * 消息跳转路径设置接口
  */
 let setRes = await vk.openapi.weixin.order.setMsgJumpPath({
-	path: "pages/order/info"
+  path: 'pages/order/info',
 });
 ```
 
@@ -757,9 +763,9 @@ let setRes = await vk.openapi.weixin.order.setMsgJumpPath({
  */
 let checkRes = await vk.openapi.weixin.order.isTradeManaged();
 if (checkRes.is_trade_managed) {
-	res.msg = '已开通小程序发货信息管理服务';
+  res.msg = '已开通小程序发货信息管理服务';
 } else {
-	res.msg = '未开通小程序发货信息管理服务';
+  res.msg = '未开通小程序发货信息管理服务';
 }
 ```
 
@@ -775,9 +781,9 @@ if (checkRes.is_trade_managed) {
  */
 let checkRes = await vk.openapi.weixin.order.isTradeManagementConfirmationCompleted();
 if (checkRes.completed) {
-	res.msg = '已完成交易结算管理确认';
+  res.msg = '已完成交易结算管理确认';
 } else {
-	res.msg = '未完成交易结算管理确认';
+  res.msg = '未完成交易结算管理确认';
 }
 ```
 
@@ -792,9 +798,9 @@ if (checkRes.completed) {
  * 特殊发货报备
  */
 let opspecialorderRes = await vk.openapi.weixin.order.opspecialorder({
-	order_id: "123456",
-	type: 1,
-	delay_to: 1752035828
+  order_id: '123456',
+  type: 1,
+  delay_to: 1752035828,
 });
 ```
 
@@ -832,22 +838,23 @@ let getAllDeliveryRes = await vk.openapi.weixin.logistics.getAllDelivery();
  * 传运单接口
  */
 let traceWaybillRes = await vk.openapi.weixin.logistics.traceWaybill({
-  "openid": "ovtZW4yB7DIj3CxOb6ii-nk4HhFo",
-  "waybill_id": "WXTESTEXPRESS0000014",
-  "sender_phone": "12345678901",
-  "receiver_phone": "123456566",
-  "delivery_id": "KYSY",
-  "goods_info": {
-    "detail_list": [{
-        "goods_name": "测试名字",
-        "goods_img_url": "www.qq.com"
+  openid: 'ovtZW4yB7DIj3CxOb6ii-nk4HhFo',
+  waybill_id: 'WXTESTEXPRESS0000014',
+  sender_phone: '12345678901',
+  receiver_phone: '123456566',
+  delivery_id: 'KYSY',
+  goods_info: {
+    detail_list: [
+      {
+        goods_name: '测试名字',
+        goods_img_url: 'www.qq.com',
       },
       {
-        "goods_name": "测试名字2",
-        "goods_img_url": "www.qq.com"
-      }
-    ]
-  }
+        goods_name: '测试名字2',
+        goods_img_url: 'www.qq.com',
+      },
+    ],
+  },
 });
 ```
 
@@ -868,7 +875,7 @@ let traceWaybillRes = await vk.openapi.weixin.logistics.traceWaybill({
  * 查运单接口
  */
 let queryFollowTraceRes = await vk.openapi.weixin.logistics.queryFollowTrace({
-	waybill_token
+  waybill_token,
 });
 ```
 
@@ -887,41 +894,41 @@ let queryFollowTraceRes = await vk.openapi.weixin.logistics.queryFollowTrace({
  * 更新物品信息接口
  */
 let updateFollowWaybillGoodsRes = await vk.openapi.weixin.logistics.updateFollowWaybillGoods({
-  "waybill_token": "o_ARWHaxIxzWHmdui-AIw8SuE1QtaUZK8aUnZguAn1nsZ72ZjWlq8btV8j-wAc94",
-  "goods_info": {
-    "detail_list": [{
-      "goods_name": "测试更新商品",
-      "goods_img_url": "www.qq.com"
-    }]
-  }
+  waybill_token: 'o_ARWHaxIxzWHmdui-AIw8SuE1QtaUZK8aUnZguAn1nsZ72ZjWlq8btV8j-wAc94',
+  goods_info: {
+    detail_list: [
+      {
+        goods_name: '测试更新商品',
+        goods_img_url: 'www.qq.com',
+      },
+    ],
+  },
 });
 ```
 
-## 微信小程序万能API调用接口@generalapi
+## 微信小程序万能 API 调用接口@generalapi
 
-**如果以上API不能满足你的需求，你可以使用这个万能API**
+**如果以上 API 不能满足你的需求，你可以使用这个万能 API**
 
 ```js
 let requestRes = await vk.openapi.weixin.request({
-  method: "GET",
-  url: "wxaapi/newtmpl/gettemplate",
-  data: {
-
-  }
+  method: 'GET',
+  url: 'wxaapi/newtmpl/gettemplate',
+  data: {},
 });
 ```
 
 **请求参数**
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| method           | 请求模式，分为GET和POST（不区分大小写）  | String | POST   | GET |
-| url           | 微信接口路径         | String | -   | - |
-| data           | 请求数据         | Object | -   | - |
-| appid           | 可不填，不填会自动从uni-id配置的mp-weixin节点里获取appid   | String | -   | - |
-| appsecret       | 可不填，不填会自动从uni-id配置的mp-weixin节点里获取appsecret    | String | -   | - |
+| 参数      | 说明                                                              | 类型   | 默认值 | 可选值 |
+| --------- | ----------------------------------------------------------------- | ------ | ------ | ------ |
+| method    | 请求模式，分为 GET 和 POST（不区分大小写）                        | String | POST   | GET    |
+| url       | 微信接口路径                                                      | String | -      | -      |
+| data      | 请求数据                                                          | Object | -      | -      |
+| appid     | 可不填，不填会自动从 uni-id 配置的 mp-weixin 节点里获取 appid     | String | -      | -      |
+| appsecret | 可不填，不填会自动从 uni-id 配置的 mp-weixin 节点里获取 appsecret | String | -      | -      |
 
-**url参数详解**
+**url 参数详解**
 
 以 `获取小程序 URL Link` 为例
 
@@ -937,35 +944,31 @@ let requestRes = await vk.openapi.weixin.request({
 
 ```js
 let requestRes = await vk.openapi.weixin.request({
-  method: "POST",
-  url: "wxa/generate_urllink",
+  method: 'POST',
+  url: 'wxa/generate_urllink',
   data: {
-    path: "pages/index/index"
-  }
+    path: 'pages/index/index',
+  },
 });
 ```
 
-
 **公共返回参数**
 
-| 参数             | 说明                           | 类型    | 
-|------------------|-------------------------------|---------|
-| code           | 0代表成功，其他均为失败           | Number | 
-| msg           | 失败时的提示内容           | String | 
+| 参数 | 说明                     | 类型   |
+| ---- | ------------------------ | ------ |
+| code | 0 代表成功，其他均为失败 | Number |
+| msg  | 失败时的提示内容         | String |
 
-其他返回参数参考微信小程序服务端API文档 [传送门](https://developers.weixin.qq.com/miniprogram/dev/api-backend/)
-
+其他返回参数参考微信小程序服务端 API 文档 [传送门](https://developers.weixin.qq.com/miniprogram/dev/api-backend/)
 
 ## 多小程序调用@many
 
-以上所有API均支持多加2个参数 
+以上所有 API 均支持多加 2 个参数
 
-| 参数							| 说明																												| 类型		|
-|------------------	|----------------------------------------------------------		|---------|
-| appid							| 可不填，不填会自动从uni-id配置的mp-weixin节点里获取appid		| String	|
-| appsecret					| 可不填，不填会自动从uni-id配置的mp-weixin节点里获取appsecret| String	|
+| 参数      | 说明                                                              | 类型   |
+| --------- | ----------------------------------------------------------------- | ------ |
+| appid     | 可不填，不填会自动从 uni-id 配置的 mp-weixin 节点里获取 appid     | String |
+| appsecret | 可不填，不填会自动从 uni-id 配置的 mp-weixin 节点里获取 appsecret | String |
 
-1. 如果 `appid` 和 `appsecret` 均不填，则自动从uni-id配置的mp-weixin节点里获取appid
+1. 如果 `appid` 和 `appsecret` 均不填，则自动从 uni-id 配置的 mp-weixin 节点里获取 appid
 2. 如果填了 `appid` 不填 `appsecret`，则 `appsecret` 会自动从这里找对应的值
-
-

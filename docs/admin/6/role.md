@@ -8,11 +8,11 @@ sidebarDepth: 0
 
 ## 页面路径
 
-* /pages_plugs/system/role/list
+- /pages_plugs/system/role/list
 
 ## 相关云函数路径
 
-* /router/service/admin/system/role/
+- /router/service/admin/system/role/
 
 ## 功能介绍
 

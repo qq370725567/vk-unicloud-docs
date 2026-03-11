@@ -2,81 +2,80 @@
 sidebarDepth: 0
 ---
 
-# dao层的作用以及方法命名规范
- 
-## dao层的作用@introduce
+# dao 层的作用以及方法命名规范
 
-* 1、复用数据库API，减少重复代码，同时可以达到即使后面修改了数据库字段或数据库名称，也只需要修改少量 `dao` 层的代码即可。
-* 2、`dao` 层是积木，而 `service` 层是利用这些积木来搭建你想要的乐园。
-* 3、理论上 `dao` 层的代码开发是可以脱离业务的，即使业务需求还不是很明确，只要数据库表名已确定，即可编写 `dao` 层。`dao` 层提供的是数据库原子性操作。
+## dao 层的作用@introduce
 
-> [点击安装自动生成Dao层基础代码插件](https://ext.dcloud.net.cn/plugin?id=6663)
+- 1、复用数据库 API，减少重复代码，同时可以达到即使后面修改了数据库字段或数据库名称，也只需要修改少量 `dao` 层的代码即可。
+- 2、`dao` 层是积木，而 `service` 层是利用这些积木来搭建你想要的乐园。
+- 3、理论上 `dao` 层的代码开发是可以脱离业务的，即使业务需求还不是很明确，只要数据库表名已确定，即可编写 `dao` 层。`dao` 层提供的是数据库原子性操作。
+
+> [点击安装自动生成 Dao 层基础代码插件](https://ext.dcloud.net.cn/plugin?id=6663)
 
 ## 注意事项@tips
 
-* Dao层代码默认写在 `router/dao/modules/` 目录 [查看自定义dao层目录](#custom-directory)
+- Dao 层代码默认写在 `router/dao/modules/` 目录 [查看自定义 dao 层目录](#custom-directory)
 
-* 文件名必须以 `xxxDao.js` 这样的格式命名(即必须Dao.js结尾)
+- 文件名必须以 `xxxDao.js` 这样的格式命名(即必须 Dao.js 结尾)
 
-* 最终通过 `await vk.daoCenter.xxxDao.xxxx();` 形式进行调用
+- 最终通过 `await vk.daoCenter.xxxDao.xxxx();` 形式进行调用
 
-* 尽量只写跟数据库交互的代码，少写业务逻辑代码，业务逻辑应写在 `service` 层
+- 尽量只写跟数据库交互的代码，少写业务逻辑代码，业务逻辑应写在 `service` 层
 
-* 如果新建dao层代码后运行提示dao不存在，则重新运行项目即可
+- 如果新建 dao 层代码后运行提示 dao 不存在，则重新运行项目即可
 
-## dao层与baseDao的区别@contrast
+## dao 层与 baseDao 的区别@contrast
 
-* `baseDao`相当于 `万能dao`，他是最基础的零件，而 `dao` 层是利用零件组装不同形状和规则的积木，供 `service` 层使用。
+- `baseDao`相当于 `万能dao`，他是最基础的零件，而 `dao` 层是利用零件组装不同形状和规则的积木，供 `service` 层使用。
 
 ## 命名规范（参考）@standard
 
-* `查单条记录`: 获取单条记录的方法用 `find` 或 `get` 作为前缀
-* `查多条记录`: 获取多个对象的方法用 `list` 作为前缀
-* `统计记录数量`: 获取统计行数的方法用 `count` 作为前缀
-* `新增` : 新增数据的方法用 `add` 或 `save` 作为前缀
-* `删除` : 删除数据的方法用 `delete` 或 `remove` 作为前缀
-* `修改` : 修改的方法用 `update` 作为前缀
+- `查单条记录`: 获取单条记录的方法用 `find` 或 `get` 作为前缀
+- `查多条记录`: 获取多个对象的方法用 `list` 作为前缀
+- `统计记录数量`: 获取统计行数的方法用 `count` 作为前缀
+- `新增` : 新增数据的方法用 `add` 或 `save` 作为前缀
+- `删除` : 删除数据的方法用 `delete` 或 `remove` 作为前缀
+- `修改` : 修改的方法用 `update` 作为前缀
 
-
-**前缀 + 条件类型（适用于1个dao只操作1张表的情况）**
-
-如：
-
-* 根据 `ID` 获取一条信息 `findById`
-* 根据 `手机号` 获取一条信息 `findByMobile`
-* 根据 `不定性条件` 获取一条信息 `findByWhereJson`
-
-* 根据 `用户状态` 获取多条信息 `listByStatus`
-* 根据 `不定性条件` 获取多条信息 `listByWhereJson`
-
-* 添加 `add`
-* 删除，根据ID `deleteById`
-* 修改，根据ID `updateById`
-* 批量修改，根据自定义条件 `updateByWhereJson`
-* 批量删除，根据自定义条件 `deleteByWhereJson`
-
-**前缀 + 表名 + 条件类型（适用于1个dao可能操作多张表的情况）**
+**前缀 + 条件类型（适用于 1 个 dao 只操作 1 张表的情况）**
 
 如：
 
-* 根据 `用户ID` 获取用户信息 `findUserById`
-* 根据 `用户手机号` 获取用户信息 `findUserByMobile`
-* 根据 `不定性条件` 获取用户信息 `findUserByWhereJson`
+- 根据 `ID` 获取一条信息 `findById`
+- 根据 `手机号` 获取一条信息 `findByMobile`
+- 根据 `不定性条件` 获取一条信息 `findByWhereJson`
 
-* 根据 `用户状态` 获取用户列表 `listUserByStatus`
-* 根据 `不定性条件` 获取用户列表 `listUserByWhereJson`
+- 根据 `用户状态` 获取多条信息 `listByStatus`
+- 根据 `不定性条件` 获取多条信息 `listByWhereJson`
 
-* 添加用户 `addUser`
-* 删除用户，根据用户ID `deleteUserById`
-* 修改用户，根据用户ID `updateUserById`
-* 批量修改用户，根据自定义条件 `updateUserByWhereJson`
-* 批量删除用户，根据自定义条件 `deleteUserByWhereJson`
+- 添加 `add`
+- 删除，根据 ID `deleteById`
+- 修改，根据 ID `updateById`
+- 批量修改，根据自定义条件 `updateByWhereJson`
+- 批量删除，根据自定义条件 `deleteByWhereJson`
 
-## Dao文件代码生成工具@tool
+**前缀 + 表名 + 条件类型（适用于 1 个 dao 可能操作多张表的情况）**
 
-> [点击安装自动生成Dao层基础代码插件](https://ext.dcloud.net.cn/plugin?id=6663)
+如：
 
-## 自定义dao层目录@custom-directory
+- 根据 `用户ID` 获取用户信息 `findUserById`
+- 根据 `用户手机号` 获取用户信息 `findUserByMobile`
+- 根据 `不定性条件` 获取用户信息 `findUserByWhereJson`
+
+- 根据 `用户状态` 获取用户列表 `listUserByStatus`
+- 根据 `不定性条件` 获取用户列表 `listUserByWhereJson`
+
+- 添加用户 `addUser`
+- 删除用户，根据用户 ID `deleteUserById`
+- 修改用户，根据用户 ID `updateUserById`
+- 批量修改用户，根据自定义条件 `updateUserByWhereJson`
+- 批量删除用户，根据自定义条件 `deleteUserByWhereJson`
+
+## Dao 文件代码生成工具@tool
+
+> [点击安装自动生成 Dao 层基础代码插件](https://ext.dcloud.net.cn/plugin?id=6663)
+
+## 自定义 dao 层目录@custom-directory
 
 如果你的项目除了 `router` 函数外，还有其他函数也需要用到 dao 层，此时 dao 层目录需要写在 `公共模块` 那，而不是写在 `router/dao/modules/` 目录，具体操作如下：
 
@@ -87,27 +86,25 @@ sidebarDepth: 0
 ```js
 module.exports = {
   daoCenter: require('./dao/index.js'), // dao层入口文件
-}
+};
 ```
 
 4. 修改 `router/config.js` 文件，文件内容如下：
 
 ```js
 const routeCommon = require('router-common');
-const requireFn = function(path) {
+const requireFn = function (path) {
   return require(path);
-}
+};
 const initConfig = {
   baseDir: __dirname, // 云函数根目录地址
   requireFn,
   daoCenter: routeCommon.daoCenter, // dao层入口文件
-  customUtil: {
-    
-  }
+  customUtil: {},
 };
 module.exports = initConfig;
 ```
- 
+
 即 `initConfig` 增加了 `daoCenter` 配置
 
 5. 完成
@@ -124,7 +121,7 @@ const vk = vkCloud.createInstance({
   baseDir: __dirname, // 云函数根目录地址
   requireFn: require,
   daoCenter: routeCommon.daoCenter, // dao层入口文件
-}); 
+});
 ```
 
 **注意：云函数至少需要添加的公共模块依赖有**

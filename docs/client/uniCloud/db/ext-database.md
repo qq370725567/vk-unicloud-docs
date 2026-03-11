@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 ## 说明@intro
 
-vk框架已支持扩展数据库，且不需要改动代码，只需要右键router云函数，添加管理依赖，勾选扩展数据库的扩展库即可。[传送门 - 在项目中启用扩展数据库](https://doc.dcloud.net.cn/uniCloud/ext-mongodb/dev.html#switch-database)
+vk 框架已支持扩展数据库，且不需要改动代码，只需要右键 router 云函数，添加管理依赖，勾选扩展数据库的扩展库即可。[传送门 - 在项目中启用扩展数据库](https://doc.dcloud.net.cn/uniCloud/ext-mongodb/dev.html#switch-database)
 
 **相关文档**
 
@@ -26,13 +26,13 @@ vk框架已支持扩展数据库，且不需要改动代码，只需要右键rou
 ```js
 // 返回的newDb对象就是连接指定数据库实例的db对象
 const newDb = uniCloud.database({
-	id: "数据库实例ID"
+  id: '数据库实例ID',
 });
 
 let info = await vk.baseDao.findById({
   db: newDb, // 这里多加一个参数db即可
-  dbName: "vk-test",
-  id: "5f3a125b3d11c6000106d338"
+  dbName: 'vk-test',
+  id: '5f3a125b3d11c6000106d338',
 });
 ```
 
@@ -41,12 +41,12 @@ let info = await vk.baseDao.findById({
 ```js
 // 返回的newDb对象就是连接指定库名的db对象
 const newDb = uniCloud.database({
-	database: "数据库实例下的数据库名称"
+  database: '数据库实例下的数据库名称',
 });
 let info = await vk.baseDao.findById({
   db: newDb, // 这里多加一个参数db即可
-  dbName: "vk-test",
-  id: "5f3a125b3d11c6000106d338"
+  dbName: 'vk-test',
+  id: '5f3a125b3d11c6000106d338',
 });
 ```
 
@@ -55,15 +55,12 @@ let info = await vk.baseDao.findById({
 ```js
 // 返回的newDb对象就是连接指定数据库实例且指定了库名的db对象
 const newDb = uniCloud.database({
-	id: "数据库实例ID",
-	database: "数据库实例下的数据库名称"
+  id: '数据库实例ID',
+  database: '数据库实例下的数据库名称',
 });
 let info = await vk.baseDao.findById({
   db: newDb, // 这里多加一个参数db即可
-  dbName: "vk-test",
-  id: "5f3a125b3d11c6000106d338"
+  dbName: 'vk-test',
+  id: '5f3a125b3d11c6000106d338',
 });
 ```
-
-
-

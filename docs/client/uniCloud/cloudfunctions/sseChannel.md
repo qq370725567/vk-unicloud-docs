@@ -4,16 +4,15 @@ sidebarDepth: 0
 
 # 云端请求中的中间状态通知通道
 
-> 新增于HBuilderX 3.8.0
+> 新增于 HBuilderX 3.8.0
 
 云函数在执行长时间任务时客户端无法获取云端任务执行状态，用户无法确定云函数是否还在正常执行，有些用户可能直接放弃等待刷新页面重新执行，从而导致浪费了更多的云函数资源。因此在此场景下需要一个云函数通知客户端发送执行状态或中间结果的通道。
 
-在常规web开发时可以使用server sent event将结果分段返回，客户端自行组装最终结果。但是小程序端并不支持server sent event，因此uniCloud基于uni-push实现了这个替代方案。
+在常规 web 开发时可以使用 server sent event 将结果分段返回，客户端自行组装最终结果。但是小程序端并不支持 server sent event，因此 uniCloud 基于 uni-push 实现了这个替代方案。
 
-使用此功能前需要先开通uni-push 2.0，参考文档：[uni-push 2.0](https://uniapp.dcloud.net.cn/unipush-v2.html#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%BC%80%E9%80%9A)
+使用此功能前需要先开通 uni-push 2.0，参考文档：[uni-push 2.0](https://uniapp.dcloud.net.cn/unipush-v2.html#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%BC%80%E9%80%9A)
 
-
-## 客户端API
+## 客户端 API
 
 [查看完整示例](#完整示例)
 
@@ -33,13 +32,13 @@ const channel = uniCloud.SSEChannel();
 await channel.open();
 ```
 
-注意通道一定要在open之后再传给云函数
+注意通道一定要在 open 之后再传给云函数
 
-此方法在HBuilderX 3.7.10版本及3.8.0版本使用时vue3版本发行时会报错`uni[e] is not a function`，如遇到此问题请升级HBuilderX版本
+此方法在 HBuilderX 3.7.10 版本及 3.8.0 版本使用时 vue3 版本发行时会报错`uni[e] is not a function`，如遇到此问题请升级 HBuilderX 版本
 
 ### 关闭通道
 
-用于关闭消息通道，关闭后将不会收到message和end事件（在接收到end事件后会自动关闭，无需手动执行close）
+用于关闭消息通道，关闭后将不会收到 message 和 end 事件（在接收到 end 事件后会自动关闭，无需手动执行 close）
 
 用法：
 
@@ -53,7 +52,7 @@ channel.close();
 
 ```js
 // 监听message事件
-channel.on('open', () => { 
+channel.on('open', () => {
   console.log('消息通道开启了');
 });
 ```
@@ -64,7 +63,7 @@ channel.on('open', () => {
 
 ```js
 // 监听message事件
-channel.on('message', (message) => { 
+channel.on('message', (message) => {
   console.log('on message', message);
 });
 ```
@@ -93,7 +92,7 @@ channel.on('error', (err) => {
 
 ### 通道关闭事件
 
-在收到消息结束事件、错误事件及开发者主动调用close方法后会触发close事件
+在收到消息结束事件、错误事件及开发者主动调用 close 方法后会触发 close 事件
 
 用法：
 
@@ -108,9 +107,8 @@ channel.on('close', () => {
 
 事件监听可以通过 `on` 或 `addListener` 方法，事件移除需要使用 `off` 或 `removeListener` 方法。另外还有 `removeAllListener` 方法用于移除指定事件的所有监听器。
 
-
 ```js
-function onMessage(message){
+function onMessage(message) {
   console.log('收到消息：', message);
 }
 channel.on('message', onMessage); // 为message事件增加监听器
@@ -124,7 +122,7 @@ channel.removeAllListener('message'); // 移除message事件的所有监听器
 
 ```js
 // 可以正常移除监听的示例
-function onMessage(message){
+function onMessage(message) {
   console.log('收到消息：', message);
 }
 channel.on('message', onMessage);
@@ -133,15 +131,15 @@ channel.off('message', onMessage);
 
 ```js
 // 无法正常移除监听的示例
-channel.on('message', function(message){
+channel.on('message', function (message) {
   console.log('收到消息：', message);
-})
-channel.off('message', function(message){
+});
+channel.off('message', function (message) {
   console.log('收到消息：', message);
-})
+});
 ```
 
-## 云函数API
+## 云函数 API
 
 [查看完整示例](#完整示例)
 
@@ -171,7 +169,7 @@ await channel.write(message);
 await channel.end(message);
 ```
 
-注意：message可以不传
+注意：message 可以不传
 
 ## 完整示例
 
@@ -187,7 +185,7 @@ export default {
       // 创建消息通道
       const channel = new uniCloud.SSEChannel();
       // 监听message事件
-      channel.on('message', (message) => { 
+      channel.on('message', (message) => {
         console.log('on message', message);
       });
       // 监听end事件，如果云端执行end时传了message，会在客户端end事件内收到传递的消息
@@ -198,17 +196,17 @@ export default {
       await channel.open();
       // 发送请求
       let res = await vk.callFunction({
-        name: "router",
+        name: 'router',
         url: '云函数地址或云对象地址',
         title: '请求中...',
         data: {
-          channel: channel
-        }
+          channel: channel,
+        },
       });
-      console.log('res: ', res)
-    }
-  }
-}
+      console.log('res: ', res);
+    },
+  },
+};
 ```
 
 ### 云函数代码示例
@@ -216,41 +214,41 @@ export default {
 ```js
 'use strict';
 module.exports = {
-	/**
-	 * 测试SSE
-	 * @url template/test/pub/testSSE 前端调用的url参数地址
-	 * data 请求参数
-	 * @param {String} params1  参数1
-	 */
-	main: async (event) => {
-		let { data = {}, userInfo, util, originalParam } = event;
-		let { config, pubFun, vk, db, _ } = util;
-		let { uid } = data;
-		let res = { code: 0, msg: "" };
-		// 业务逻辑开始-----------------------------------------------------------
+  /**
+   * 测试SSE
+   * @url template/test/pub/testSSE 前端调用的url参数地址
+   * data 请求参数
+   * @param {String} params1  参数1
+   */
+  main: async (event) => {
+    let { data = {}, userInfo, util, originalParam } = event;
+    let { config, pubFun, vk, db, _ } = util;
+    let { uid } = data;
+    let res = { code: 0, msg: '' };
+    // 业务逻辑开始-----------------------------------------------------------
 
-		const channel = uniCloud.deserializeSSEChannel(data.channel);
-    
-		await channel.write({
-			a: 1
-		});
-		await channel.write({
-			a: 2
-		});
-		await channel.write({
-			a: 3
-		});
-		await channel.write({
-			a: 4
-		});
-		await channel.end({
-			a: 5
-		});
+    const channel = uniCloud.deserializeSSEChannel(data.channel);
 
-		// 业务逻辑结束-----------------------------------------------------------
-		return res;
-	}
-}
+    await channel.write({
+      a: 1,
+    });
+    await channel.write({
+      a: 2,
+    });
+    await channel.write({
+      a: 3,
+    });
+    await channel.write({
+      a: 4,
+    });
+    await channel.end({
+      a: 5,
+    });
+
+    // 业务逻辑结束-----------------------------------------------------------
+    return res;
+  },
+};
 ```
 
 ### 云对象代码示例
@@ -258,41 +256,41 @@ module.exports = {
 ```js
 'use strict';
 var cloudObject = {
-	isCloudObject: true, // 标记为云对象模式
-	/**
-	 * 测试testSSE
-	 * @url template/pub.test.testSSE 前端调用的url参数地址
-	 */
-	testSSE: async function(data) {
-		let res = { code: 0, msg: '' };
-		// 业务逻辑开始-----------------------------------------------------------
-		const channel = uniCloud.deserializeSSEChannel(data.channel);
+  isCloudObject: true, // 标记为云对象模式
+  /**
+   * 测试testSSE
+   * @url template/pub.test.testSSE 前端调用的url参数地址
+   */
+  testSSE: async function (data) {
+    let res = { code: 0, msg: '' };
+    // 业务逻辑开始-----------------------------------------------------------
+    const channel = uniCloud.deserializeSSEChannel(data.channel);
 
-		await channel.write({
-			a: 1
-		});
-		await channel.write({
-			a: 2
-		});
-		await channel.write({
-			a: 3
-		});
-		await channel.write({
-			a: 4
-		});
-		await channel.end({
-			a: 5
-		});
-    
-		// 业务逻辑结束-----------------------------------------------------------
-		return res;
-	}
+    await channel.write({
+      a: 1,
+    });
+    await channel.write({
+      a: 2,
+    });
+    await channel.write({
+      a: 3,
+    });
+    await channel.write({
+      a: 4,
+    });
+    await channel.end({
+      a: 5,
+    });
+
+    // 业务逻辑结束-----------------------------------------------------------
+    return res;
+  },
 };
 
 module.exports = cloudObject;
 ```
 
-上述云函数/云对象示例客户端会依次收到message事件和end事件，客户端打印日志如下
+上述云函数/云对象示例客户端会依次收到 message 事件和 end 事件，客户端打印日志如下
 
 ```text
 on message {a: 1}
@@ -304,7 +302,7 @@ on end {a: 5}
 
 ## 注意事项
 
-> 云函数向客户端发送消息时会使用push发送如下格式数据，如果项目中有监听push消息请勿错误的处理此类消息。相关文档请参考：[客户端监听推送消息](https://uniapp.dcloud.net.cn/unipush-v2.html#listener)
+> 云函数向客户端发送消息时会使用 push 发送如下格式数据，如果项目中有监听 push 消息请勿错误的处理此类消息。相关文档请参考：[客户端监听推送消息](https://uniapp.dcloud.net.cn/unipush-v2.html#listener)
 
 ```js
 {
@@ -316,14 +314,14 @@ on end {a: 5}
 }
 ```
 
-开发者使用push时可以忽略此类型消息
+开发者使用 push 时可以忽略此类型消息
 
 ```js
 uni.onPushMessage((res) => {
   const payload = res && res.data && res.data.payload;
-  if (typeof payload === "object" && payload.channel === 'UNI_CLOUD_SSE'){
+  if (typeof payload === 'object' && payload.channel === 'UNI_CLOUD_SSE') {
     // 收到云函数请求中的中间状态通知通道消息，忽略处理此类消息
-    return
+    return;
   }
-})
+});
 ```

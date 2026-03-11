@@ -2,7 +2,7 @@
 
 ### 万能表单使用方式@form
 
-#### 静态数据方式1
+#### 静态数据方式 1
 
 应用场景：选项数据为静态数据的情况。
 
@@ -17,7 +17,7 @@
 },
 ```
 
-#### 静态数据方式2
+#### 静态数据方式 2
 
 应用场景：选项数据需要通过函数计算
 
@@ -46,7 +46,7 @@
 },
 ```
 
-#### 远程数据带参数方式1
+#### 远程数据带参数方式 1
 
 ```js
 {
@@ -61,7 +61,7 @@
 },
 ```
 
-#### 远程数据带参数方式2
+#### 远程数据带参数方式 2
 
 ```js
 {
@@ -104,23 +104,23 @@
 
 ### 组件属性@props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| data            | 静态模式数据源 | Array、Function  | - | -  |
-| action           | 支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#自定义function请求模式)  | String、Function | 无      | - |
-| actionData          | 动态模式 - 远程请求的云函数时的额外参数 | Object、Function  | - | -  |
-| props          | 数据源的属性匹配规则 | Object  | { list:'list', value:'value', label:'label' } | -  |
-| dataPreprocess          | 动态模式 - 云函数返回的数据进行预处理 | function(list)  | - | -  |
-| textColor      | 按钮形式的 Radio 激活时的文本颜色 | String  | #ffffff | -  |
-| fill      | 按钮形式的 Radio 激活时的填充色和边框色 | String  | #409EFF | -  |
-| optionType        | 选项形状类型 | String  | default | button  |
-| border          | 是否显示边框 | Boolean  | false| true |
-| itemWidth          | 选项的统一宽度（用于排版） | Number  | - | -  |
-| isRequest    | 是否是http请求模式 | Boolean  | false | true |
-| requestHeader    |  http请求头 | Object  | - | - |
-| requestMethod    |  http请求method | String  | - | - |
-| onChange          | function(val, formData, column, index, option) | Function  | -| -  |
-| encryptAction	| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
+| 参数           | 说明                                                                                                                 | 类型             | 默认值                                        | 可选值 |
+| -------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------- | --------------------------------------------- | ------ |
+| data           | 静态模式数据源                                                                                                       | Array、Function  | -                                             | -      |
+| action         | 支持：<br/>1、vk 框架下的云函数地址 <br/>2、http 请求地址<br/>3、[自定义 function 请求模式](#自定义function请求模式) | String、Function | 无                                            | -      |
+| actionData     | 动态模式 - 远程请求的云函数时的额外参数                                                                              | Object、Function | -                                             | -      |
+| props          | 数据源的属性匹配规则                                                                                                 | Object           | { list:'list', value:'value', label:'label' } | -      |
+| dataPreprocess | 动态模式 - 云函数返回的数据进行预处理                                                                                | function(list)   | -                                             | -      |
+| textColor      | 按钮形式的 Radio 激活时的文本颜色                                                                                    | String           | #ffffff                                       | -      |
+| fill           | 按钮形式的 Radio 激活时的填充色和边框色                                                                              | String           | #409EFF                                       | -      |
+| optionType     | 选项形状类型                                                                                                         | String           | default                                       | button |
+| border         | 是否显示边框                                                                                                         | Boolean          | false                                         | true   |
+| itemWidth      | 选项的统一宽度（用于排版）                                                                                           | Number           | -                                             | -      |
+| isRequest      | 是否是 http 请求模式                                                                                                 | Boolean          | false                                         | true   |
+| requestHeader  | http 请求头                                                                                                          | Object           | -                                             | -      |
+| requestMethod  | http 请求 method                                                                                                     | String           | -                                             | -      |
+| onChange       | function(val, formData, column, index, option)                                                                       | Function         | -                                             | -      |
+| encryptAction  | 是否加密请求 [查看 encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)                            | Boolean          | false                                         | true   |
 
 #### onChange 使用示例
 
@@ -139,18 +139,17 @@
 
 **推荐使用 `watch` 代替 `onChange`** [传送门 - watch](https://vkdoc.fsq.pub/admin/components/0%E3%80%81public.html#watch-%E7%9B%91%E5%90%AC)
 
+#### 自定义 function 请求模式
 
-#### 自定义function请求模式
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.17.17
 
-> vk-unicloud-admin-ui 的npm依赖版本需 >= 1.17.17
-
-此方式同样支持http，且更自由化，比如可以在发起请求前处理请求参数，在请求成功后，处理返回参数等等。
+此方式同样支持 http，且更自由化，比如可以在发起请求前处理请求参数，在请求成功后，处理返回参数等等。
 
 优势：更自由化、基本可以满足所有需求场景
 
 劣势：代码量较多
 
-##### 自定义function-http请求模式示例
+##### 自定义 function-http 请求模式示例
 
 ```js
 {
@@ -197,7 +196,7 @@
 },
 ```
 
-##### 自定义function-云函数请求模式示例
+##### 自定义 function-云函数请求模式示例
 
 ```js
 {
@@ -243,7 +242,7 @@
 ### 万能表格使用方式@table
 
 ```js
-{ 
+{
   key: "checkbox", title: "多选字段", type: "checkbox", width: 120, defaultValue: 1,
   data: [
     { value:1, label:"选项一" },

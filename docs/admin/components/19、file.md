@@ -22,32 +22,32 @@
 
 ### 组件属性@props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| limit            | 最大上传数量 | Number  | - | -  |
-| provider          | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云oss	 | String  | - | - |
-| needSave          | 是否需要将图片信息保存到admin素材库 | Boolean  | false | true  |
-| categoryId          | 素材库分类id，当needSave为true时生效				 | String  | - | -  |
-| cloudDirectory    | 上传至指定的云端目录（默认会以年月日为目录）  | String  | - | - |
-| cloudPathRemoveChinese | 删除文件名中的中文（默认true） 		| Boolean	| true		| false	|
-| httpRequest       | 覆盖默认的上传行为，可以自定义上传的实现（下方有详细说明） | function  | - | -  |
-| buttonText        | 上传按钮的文本  | String  | 点击上传 | - |
-| drag          | 是否开启拖拽上传  | Boolean  | false | true |
-| fileSize          | 限制文件大小  | Number  | - | - |
-| sizeUnit          | 文件的单位  | String  | MB | KB、MB、GB |
-| autoUpload       | 是否在选取文件后立即进行上传，默认为true<br/>如果为false，则提交表单前需主动调用vk.uploadFile来上传 [手动上传示例](#手动上传示例)  | Boolean  | true | false |
-| tempFileType     | 当autoUpload为false时，本地文件转为哪种类型<br/>tempPath 文件临时路径<br/>base64 文件base64编码后的值 [手动上传示例](#手动上传示例)  | Boolean  | true | false |
-| buttonText       | 当listType=picture或text时，上传按钮的文本 | String  | 点击上传 | - |
-| tipsImageText    | 右侧提示图的文本，一般配合drag=true时使用 如 示例图 | String  | - | - |
-| tipsImage        | 右侧提示图的图片地址，一般配合drag=true时使用 | String  | - | - |
-| tipsImageStyle   | 右侧提示图的图片样式，一般配合drag=true时使用 | String	| width: 200px| -													|
-| beforeRemove   |删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。[详情](#beforeRemove)  | function(file, fileList)	| -| -													|
-| onRemove   |文件列表移除文件时的事件 [详情](#onRemove)  | function(file, fileList)	| -| -													|
-| 其他              | 其他参数请查看element Upload 上传组件 https://element.eleme.cn/#/zh-CN/component/upload	| -				| -						| -													|
+| 参数                   | 说明                                                                                                                                      | 类型                     | 默认值       | 可选值     |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | ------------ | ---------- |
+| limit                  | 最大上传数量                                                                                                                              | Number                   | -            | -          |
+| provider               | 云存储供应商，可选：<br/>unicloud 上传至空间内置存储<br/>extStorage 上传至扩展存储<br/>aliyun 上传至阿里云 oss                            | String                   | -            | -          |
+| needSave               | 是否需要将图片信息保存到 admin 素材库                                                                                                     | Boolean                  | false        | true       |
+| categoryId             | 素材库分类 id，当 needSave 为 true 时生效                                                                                                 | String                   | -            | -          |
+| cloudDirectory         | 上传至指定的云端目录（默认会以年月日为目录）                                                                                              | String                   | -            | -          |
+| cloudPathRemoveChinese | 删除文件名中的中文（默认 true）                                                                                                           | Boolean                  | true         | false      |
+| httpRequest            | 覆盖默认的上传行为，可以自定义上传的实现（下方有详细说明）                                                                                | function                 | -            | -          |
+| buttonText             | 上传按钮的文本                                                                                                                            | String                   | 点击上传     | -          |
+| drag                   | 是否开启拖拽上传                                                                                                                          | Boolean                  | false        | true       |
+| fileSize               | 限制文件大小                                                                                                                              | Number                   | -            | -          |
+| sizeUnit               | 文件的单位                                                                                                                                | String                   | MB           | KB、MB、GB |
+| autoUpload             | 是否在选取文件后立即进行上传，默认为 true<br/>如果为 false，则提交表单前需主动调用 vk.uploadFile 来上传 [手动上传示例](#手动上传示例)     | Boolean                  | true         | false      |
+| tempFileType           | 当 autoUpload 为 false 时，本地文件转为哪种类型<br/>tempPath 文件临时路径<br/>base64 文件 base64 编码后的值 [手动上传示例](#手动上传示例) | Boolean                  | true         | false      |
+| buttonText             | 当 listType=picture 或 text 时，上传按钮的文本                                                                                            | String                   | 点击上传     | -          |
+| tipsImageText          | 右侧提示图的文本，一般配合 drag=true 时使用 如 示例图                                                                                     | String                   | -            | -          |
+| tipsImage              | 右侧提示图的图片地址，一般配合 drag=true 时使用                                                                                           | String                   | -            | -          |
+| tipsImageStyle         | 右侧提示图的图片样式，一般配合 drag=true 时使用                                                                                           | String                   | width: 200px | -          |
+| beforeRemove           | 删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。[详情](#beforeRemove)              | function(file, fileList) | -            | -          |
+| onRemove               | 文件列表移除文件时的事件 [详情](#onRemove)                                                                                                | function(file, fileList) | -            | -          |
+| 其他                   | 其他参数请查看 element Upload 上传组件 https://element.eleme.cn/#/zh-CN/component/upload                                                  | -                        | -            | -          |
 
 #### httpRequest 用法
 
-注意：如果是上传到unicloud云储存或阿里云OSS，无需写httpRequest，框架已集成。
+注意：如果是上传到 unicloud 云储存或阿里云 OSS，无需写 httpRequest，框架已集成。
 
 ```js
 {
@@ -63,14 +63,14 @@
     // 在此处写将 file 上传到你指定的地方
     // 上传成功后，需要执行 onSuccess(res);
     // 上传失败时，需要执行 onError(res);
-    // 正在上传时，可以监听上传过程，同时执行下方代码，达到显示上传过程进度条的功能 
-    /* 
+    // 正在上传时，可以监听上传过程，同时执行下方代码，达到显示上传过程进度条的功能
+    /*
     onProgress({
        percent:progress,
        isTrusted:progress >= 100 ? true:false,
        returnValue:progress >= 100 ? true:false,
        total:progressEvent.total
-     }); 
+     });
      */
     // 例如
     uni.uploadFile({
@@ -109,7 +109,7 @@
 
 #### 手动上传示例
 
-> vk-unicloud-admin-ui 的npm依赖需 >= 1.17.6
+> vk-unicloud-admin-ui 的 npm 依赖需 >= 1.17.6
 
 如果不希望选择图片马上就上传，则可以设置 `autoUpload: false`，设置后，表单双向绑定的值为图片的本地路径，在最终提交表单前，需要手动执行 `vk.uploadFile` 来上传。
 
@@ -134,7 +134,7 @@
 #### beforeRemove
 
 ```js
-{ 
+{
   key: "file", title: "文件类型", type: "file", buttonText: "点击上传", limit: 9, cloudPathRemoveChinese: true, accept: ".txt,.xls,.xlsx,.doc,.docx,.ppt,.pptx,.pdf",
   beforeRemove: (file, fileList) => {
     let url = file.url;
@@ -162,7 +162,7 @@
 #### onRemove
 
 ```js
-{ 
+{
   key: "file", title: "文件类型", type: "file", buttonText: "点击上传", limit: 9, cloudPathRemoveChinese: true, accept: ".txt,.xls,.xlsx,.doc,.docx,.ppt,.pptx,.pdf",
   onRemove: (file, fileList) => {
     console.log(file.url);

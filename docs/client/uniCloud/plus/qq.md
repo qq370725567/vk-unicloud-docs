@@ -2,13 +2,13 @@
 sidebarDepth: 0
 ---
 
-# QQ小程序API
+# QQ 小程序 API
 
-> 以下API需要vk-unicloud核心库版本 >= 2.14.1
+> 以下 API 需要 vk-unicloud 核心库版本 >= 2.14.1
 
 ## 配置文件@config
 
-打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
+打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的
 
 "mp-qq" 微信小程序
 
@@ -25,11 +25,11 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 授权相关API@auth
+## 授权相关 API@auth
 
-### 获取token@getAccessToken
+### 获取 token@getAccessToken
 
-`vk.openapi.qq.auth.getAccessToken` 
+`vk.openapi.qq.auth.getAccessToken`
 
 ```js
 /**
@@ -39,7 +39,7 @@ sidebarDepth: 0
 let access_token = await vk.openapi.qq.auth.getAccessToken();
 ```
 
-### code换取openid@code2Session
+### code 换取 openid@code2Session
 
 `vk.openapi.qq.auth.code2Session`
 
@@ -51,7 +51,7 @@ let access_token = await vk.openapi.qq.auth.getAccessToken();
  */
 let code2SessionRes = await vk.openapi.qq.auth.code2Session({
   code: code,
-  needKey: false
+  needKey: false,
 });
 ```
 
@@ -66,17 +66,17 @@ let code2SessionRes = await vk.openapi.qq.auth.code2Session({
  * @param {String} path 必须是已经发布的小程序存在的页面（否则报错），例如 pages/index/index 根路径前不要填加 / 可以携带参数 如 pages/index/index?a=1
  */
 let getMiniCodeRes = await vk.openapi.qq.acode.getMiniCode({
-  path: "pages/index/index?a=1&b=2",
+  path: 'pages/index/index?a=1&b=2',
 });
 ```
 
-**注意：getMiniCode在执行成功后返回的是二进制，故在云函数中需要转换，完整代码如下**
+**注意：getMiniCode 在执行成功后返回的是二进制，故在云函数中需要转换，完整代码如下**
 
 ```js
 let getMiniCodeRes = await vk.openapi.qq.acode.getMiniCode({
-  page: "pages/index/index",
+  page: 'pages/index/index',
 });
-if (typeof getMiniCodeRes === "object" && getMiniCodeRes.code) {
+if (typeof getMiniCodeRes === 'object' && getMiniCodeRes.code) {
   return getMiniCodeRes;
 }
 try {
@@ -84,22 +84,23 @@ try {
   let base64 = Buffer.from(getMiniCodeRes, 'binary').toString('base64');
   return {
     code: 0,
-    base64: `data:image/png;base64,${base64}`
+    base64: `data:image/png;base64,${base64}`,
   };
 } catch (err) {
   // 转base64失败
   return {
     code: -1,
-    msg: "生成小程序码失败",
+    msg: '生成小程序码失败',
     err: {
       message: err.message,
-      stack: err.stack
-    }
+      stack: err.stack,
+    },
   };
 }
 ```
 
 ## 内容安全@security
+
 ### 检测文本是否违规@security-msgSecCheck
 
 `vk.openapi.qq.security.msgSecCheck`
@@ -153,26 +154,26 @@ let imgSecCheckRes = await vk.openapi.qq.security.imgSecCheck({
  * @param {Number} use_robot          若希望通过客服机器人下发，则在该字段填
  */
 let sendRes = await vk.openapi.qq.subscribeMessage.send({
-  touser: "9D26812AF23D9B2743235C4E3F3353E8", // 接收者（用户）的 openid
-  template_id: "789697983d789c9257b7745470442be4", // 所需下发的订阅模板id
-  page: "pages/index/index", // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
+  touser: '9D26812AF23D9B2743235C4E3F3353E8', // 接收者（用户）的 openid
+  template_id: '789697983d789c9257b7745470442be4', // 所需下发的订阅模板id
+  page: 'pages/index/index', // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
   data: {
-    "keyword1": {
-      "value": "339208499"
+    keyword1: {
+      value: '339208499',
     },
-    "keyword2": {
-      "value": "2019年5月05日 12:30"
+    keyword2: {
+      value: '2019年5月05日 12:30',
     },
-    "keyword3": {
-      "value": "腾讯大厦"
+    keyword3: {
+      value: '腾讯大厦',
     },
   },
-  emphasis_keyword: "keyword1.DATA"
+  emphasis_keyword: 'keyword1.DATA',
 });
 console.log('sendRes: ', sendRes);
 ```
 
-如果发送失败，可以在云函数内打印下 `sendRes` 的值，并根据返回的 `code` 进行判断错在哪里。[传送门 - QQ官方文档](https://q.qq.com/wiki/develop/miniprogram/server/open_port/port_module.html#sendtemplatemessage)
+如果发送失败，可以在云函数内打印下 `sendRes` 的值，并根据返回的 `code` 进行判断错在哪里。[传送门 - QQ 官方文档](https://q.qq.com/wiki/develop/miniprogram/server/open_port/port_module.html#sendtemplatemessage)
 
 **前端订阅**
 
@@ -180,27 +181,25 @@ console.log('sendRes: ', sendRes);
 
 ```js
 uni.subscribeAppMsg({
-  tmplIds: ["271167b4691a07becf2ac115a896ebd6"], // 模板id
+  tmplIds: ['271167b4691a07becf2ac115a896ebd6'], // 模板id
   subscribe: true,
   success(res) {
-    console.log("----subscribeAppMsg----success", res);
+    console.log('----subscribeAppMsg----success', res);
   },
   fail(res) {
-    console.log("----subscribeAppMsg----fail", res);
-  }
+    console.log('----subscribeAppMsg----fail', res);
+  },
 });
 ```
 
 ## 多小程序调用@many
 
-以上所有API均支持多加2个参数 
+以上所有 API 均支持多加 2 个参数
 
-| 参数							| 说明																												| 类型		|
-|------------------	|----------------------------------------------------------		|---------|
-| appid							| 可不填，不填会自动从uni-id配置的mp-qq节点里获取appid		| String	|
-| appsecret					| 可不填，不填会自动从uni-id配置的mp-qq节点里获取appsecret| String	|
+| 参数      | 说明                                                          | 类型   |
+| --------- | ------------------------------------------------------------- | ------ |
+| appid     | 可不填，不填会自动从 uni-id 配置的 mp-qq 节点里获取 appid     | String |
+| appsecret | 可不填，不填会自动从 uni-id 配置的 mp-qq 节点里获取 appsecret | String |
 
-1. 如果 `appid` 和 `appsecret` 均不填，则自动从uni-id配置的mp-qq节点里获取appid
+1. 如果 `appid` 和 `appsecret` 均不填，则自动从 uni-id 配置的 mp-qq 节点里获取 appid
 2. 如果填了 `appid` 不填 `appsecret`，则 `appsecret` 会自动从 `uni-config-center/vk-unicloud/index.js 的QQ小程序配置（vk.oauth.qq.list）` 里找对应的值
-
-

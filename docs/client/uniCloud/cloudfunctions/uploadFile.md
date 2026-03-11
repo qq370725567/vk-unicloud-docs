@@ -12,32 +12,32 @@ sidebarDepth: 0
 
 ## 请求参数
 
-| 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
-|------------------	|-------------------------------																								|---------|--------	|-------							|
-| provider					| [查看provider](#provider)	| string	| -				| -			|
-| cloudPath					| 云端文件路径																																		| string	| -				| -										|
-| fileContent				| buffer 或要上传的文件可读流																											| -				| -				| -										|
-| isPrivate					| 是否是私有文件，仅扩展存储有效																										| boolean	| -				| -										|
+| 参数        | 说明                           | 类型    | 默认值 | 可选值 |
+| ----------- | ------------------------------ | ------- | ------ | ------ |
+| provider    | [查看 provider](#provider)     | string  | -      | -      |
+| cloudPath   | 云端文件路径                   | string  | -      | -      |
+| fileContent | buffer 或要上传的文件可读流    | -       | -      | -      |
+| isPrivate   | 是否是私有文件，仅扩展存储有效 | boolean | -      | -      |
 
 ## 返回值
 
-|参数名		|类型		|说明																|
-|:-:			|:-:		|:-:																|
-|provider	|string	|本次上传的存储供应商									|
-|cloudPath|string	|云端文件路径													|
-|fileID		|string	|云端文件ID													|
-|fileURL	|string	|云端文件URL													|
-|url			|string	|云端文件URL，与fileURL一致						|
-|isPrivate|boolean|是否是私有文件，仅扩展存储会返回此字段	|
+|  参数名   |  类型   |                  说明                  |
+| :-------: | :-----: | :------------------------------------: |
+| provider  | string  |          本次上传的存储供应商          |
+| cloudPath | string  |              云端文件路径              |
+|  fileID   | string  |              云端文件 ID               |
+|  fileURL  | string  |              云端文件 URL              |
+|    url    | string  |     云端文件 URL，与 fileURL 一致      |
+| isPrivate | boolean | 是否是私有文件，仅扩展存储会返回此字段 |
 
 ## provider
 
 `provider` 可指定云存储供应商，若 `provider` 不传，则自动从云端配置 `uni-config-center/vk-unicloud/index.js` 中获取 `vk.service.cloudStorage.defaultProvider` 的值
 
-| 可选项						| 说明														|
-|------------------	|-------------------------------|
-| unicloud					| 空间内置存储										|
-| extStorage				| 扩展存储												|
+| 可选项     | 说明         |
+| ---------- | ------------ |
+| unicloud   | 空间内置存储 |
+| extStorage | 扩展存储     |
 
 ## 上传文件示例代码
 
@@ -45,15 +45,15 @@ sidebarDepth: 0
 // 模拟一个1KB的文件
 const buffer = Buffer.alloc(1024); // 创建一个1KB的Buffer
 let uploadFileRes = await vk.uploadFile({
-  cloudPath: "public/test.txt",
-  fileContent: buffer
+  cloudPath: 'public/test.txt',
+  fileContent: buffer,
 });
 console.log('uploadFileRes: ', uploadFileRes);
 ```
 
 ## 配置默认云存储供应商
 
-### 默认上传至unicloud空间内置存储
+### 默认上传至 unicloud 空间内置存储
 
 在 `uni-config-center/vk-unicloud/index.js` 中配置 `vk.service.cloudStorage.defaultProvider` 值为 `unicloud`
 
@@ -147,7 +147,7 @@ service: {
 
 文件 `项目根目录/app.config.js`
 
-节点 `service.cloudStorage` 
+节点 `service.cloudStorage`
 
 ```js
 "service": {
@@ -181,7 +181,8 @@ service: {
 
 文件 `cloudfunctions/common/uni-config-center/vk-unicloud/index.js`
 
-节点 `vk.service.cloudStorage` 
+节点 `vk.service.cloudStorage`
+
 ```js
 // 第三方服务配置
 service: {
@@ -214,7 +215,7 @@ service: {
 },
 ```
 
-## 公共API
+## 公共 API
 
 ### vk.getTempFileURL（获取临时下载链接）
 
@@ -222,22 +223,22 @@ service: {
 
 ```js
 vk.getTempFileURL({
-  fileList: ["https://www.xxx.com/test.jpg"], // 文件地址列表
+  fileList: ['https://www.xxx.com/test.jpg'], // 文件地址列表
 });
 ```
 
 **请求参数**
 
-| 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
-|------------------	|-------------------------------																								|---------|--------	|-------							|
-| provider					| [查看provider](#provider)	| string	| -				| -			|
-| fileList					| 云端文件列表																																		| Array	| -				| -										|
+| 参数     | 说明                       | 类型   | 默认值 | 可选值 |
+| -------- | -------------------------- | ------ | ------ | ------ |
+| provider | [查看 provider](#provider) | string | -      | -      |
+| fileList | 云端文件列表               | Array  | -      | -      |
 
 **返回值**
 
-|参数名		|类型		|说明																|
-|:-:			|:-:		|:-:																|
-|fileList	|Array	|存储下载链接的数组。									|
+|  参数名  | 类型  |         说明         |
+| :------: | :---: | :------------------: |
+| fileList | Array | 存储下载链接的数组。 |
 
 ### vk.downloadFile（下载文件）
 
@@ -245,22 +246,22 @@ vk.getTempFileURL({
 
 ```js
 vk.downloadFile({
-  fileID: "https://www.xxx.com/test.jpg",
+  fileID: 'https://www.xxx.com/test.jpg',
 });
 ```
 
 **请求参数**
 
-| 参数							| 说明																																						| 类型			| 默认值		| 可选值								|
-|------------------	|-------------------------------																								|---------|--------	|-------							|
-| provider					| [查看provider](#provider)	| string	| -				| -			|
-| fileID					| 待下载的文件																																		| string	| -				| -										|
+| 参数     | 说明                       | 类型   | 默认值 | 可选值 |
+| -------- | -------------------------- | ------ | ------ | ------ |
+| provider | [查看 provider](#provider) | string | -      | -      |
+| fileID   | 待下载的文件               | string | -      | -      |
 
 **返回值**
 
-|参数名			|类型		|说明							|
-|:-:				|:-:		|:-:							|
-|fileContent|Buffer	|下载的文件的内容。	|
+|   参数名    |  类型  |        说明        |
+| :---------: | :----: | :----------------: |
+| fileContent | Buffer | 下载的文件的内容。 |
 
 ### vk.deleteFile（删除文件）
 
@@ -268,28 +269,28 @@ vk.downloadFile({
 
 ```js
 vk.deleteFile({
-  fileList: ["https://www.xxx.com/test.jpg"], // 文件地址列表
+  fileList: ['https://www.xxx.com/test.jpg'], // 文件地址列表
 });
 ```
 
 **请求参数**
 
-| 参数							| 说明															| 类型			| 默认值		| 可选值	|
-|------------------	|-------------------------------	|---------|--------	|-------|
-| provider					| [查看provider](#provider)	| string	| -				| -			|
-| fileList					| 云端文件列表											| Array		| -				| -			|
+| 参数     | 说明                       | 类型   | 默认值 | 可选值 |
+| -------- | -------------------------- | ------ | ------ | ------ |
+| provider | [查看 provider](#provider) | string | -      | -      |
+| fileList | 云端文件列表               | Array  | -      | -      |
 
 **返回值**
 
-|参数名		|类型		|说明																|
-|:-:			|:-:		|:-:																|
-|fileList	|Array	|删除结果组成的数组。									|
+|  参数名  | 类型  |         说明         |
+| :------: | :---: | :------------------: |
+| fileList | Array | 删除结果组成的数组。 |
 
-## 扩展存储专属API
+## 扩展存储专属 API
 
 ### 获取扩展存储管理对象
 
-扩展存储相比内置存储具有更多的云端API，在调用这些云端API前，需要先通过 `vk.getExtStorageManager` 获取 `extStorageManager` 对象实例，然后再通过 `extStorageManager.xxx` 调用对应的API
+扩展存储相比内置存储具有更多的云端 API，在调用这些云端 API 前，需要先通过 `vk.getExtStorageManager` 获取 `extStorageManager` 对象实例，然后再通过 `extStorageManager.xxx` 调用对应的 API
 
 **云端代码**
 
@@ -304,12 +305,12 @@ const extStorageManager = vk.getExtStorageManager();
 
 若传了参数，则 `provider` 和 `domain` 为必填参数
 
-|参数名				|类型		|必填	|默认值	|说明																								|
-|:-:					|:-:		|:-:	|:-:		|:-																									|
-|provider			|String	|否		|-			|必填，扩展存储供应商，可选<br/>qiniu 七牛云						|
-|domain				|String	|否		|-			|必填，扩展储存域名（域名地址）如：example.com					|
-|bucketName		|String	|否		|-			|选填，扩展储存的bucket名称，不填会自动从绑定的空间中获取（此参数当前仅云端运行时生效）	|
-|bucketSecret	|String	|否		|-			|选填，扩展储存的bucket密钥，不填会自动从绑定的空间中获取（此参数当前仅云端运行时生效）	|
+|    参数名    |  类型  | 必填 | 默认值 | 说明                                                                                     |
+| :----------: | :----: | :--: | :----: | :--------------------------------------------------------------------------------------- |
+|   provider   | String |  否  |   -    | 必填，扩展存储供应商，可选<br/>qiniu 七牛云                                              |
+|    domain    | String |  否  |   -    | 必填，扩展储存域名（域名地址）如：example.com                                            |
+|  bucketName  | String |  否  |   -    | 选填，扩展储存的 bucket 名称，不填会自动从绑定的空间中获取（此参数当前仅云端运行时生效） |
+| bucketSecret | String |  否  |   -    | 选填，扩展储存的 bucket 密钥，不填会自动从绑定的空间中获取（此参数当前仅云端运行时生效） |
 
 ### 修改文件状态
 
@@ -326,26 +327,25 @@ const extStorageManager = vk.getExtStorageManager();
 const extStorageManager = vk.getExtStorageManager();
 // 修改文件状态
 let updateFileStatus = await extStorageManager.updateFileStatus({
-	fileID: "qiniu://test.jpg", // 待修改的文件
-	isPrivate: true, // true 私有 false 公共
+  fileID: 'qiniu://test.jpg', // 待修改的文件
+  isPrivate: true, // true 私有 false 公共
 });
 console.log('updateFileStatus: ', updateFileStatus);
 ```
 
 **请求参数**
 
-|参数名		|类型		|必填	|默认值	|说明																							|
-|:-:			|:-:		|:-:	|:-:		|:-																							|
-|fileID		|String	|是		|-			|待修改的文件，该字段支持的值类型：fileID、cloudPath、fileURL <br/>如："qiniu://test.jpg" "test.jpg" "https://example.com/test.jpg" 均表示同一个文件	|
-|isPrivate|Boolean|是		|-			|true 设为私有权限 false 设为公共读权限						|
-
+|  参数名   |  类型   | 必填 | 默认值 | 说明                                                                                                                                                |
+| :-------: | :-----: | :--: | :----: | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  fileID   | String  |  是  |   -    | 待修改的文件，该字段支持的值类型：fileID、cloudPath、fileURL <br/>如："qiniu://test.jpg" "test.jpg" "https://example.com/test.jpg" 均表示同一个文件 |
+| isPrivate | Boolean |  是  |   -    | true 设为私有权限 false 设为公共读权限                                                                                                              |
 
 **响应参数**
 
-|字段		|类型		|说明								|
-|:-:		|:-:		|:-									|
-|errCode|Number	|0 成功 其他均为失败	|
-|errMsg	|String	|失败描述						|
+|  字段   |  类型  | 说明                |
+| :-----: | :----: | :------------------ |
+| errCode | Number | 0 成功 其他均为失败 |
+| errMsg  | String | 失败描述            |
 
 ### 获取域名列表
 
@@ -365,11 +365,11 @@ console.log('域名列表: ', domains);
 
 **响应参数**
 
-|字段		|类型	|说明			|
-|:-:		|:-:	|:-				|
-|domains|Array| 域名列表	|
+|  字段   | 类型  | 说明     |
+| :-----: | :---: | :------- |
+| domains | Array | 域名列表 |
 
-### 获取TOP100统计数据
+### 获取 TOP100 统计数据
 
 接口名：getCdnTop
 
@@ -383,33 +383,33 @@ const extStorageManager = vk.getExtStorageManager();
 // 获取域名列表
 let { domains = [] } = await extStorageManager.getDomains();
 // 查询 2024-05-12 日的TOP100统计数据
-let startDate = "2024-05-12";
-let endDate = "2024-05-12";
+let startDate = '2024-05-12';
+let endDate = '2024-05-12';
 // 获取TOP100统计数据
 let getCdnTopRes = await extStorageManager.getCdnTop({
-	type: 2, // 1 topURL 2 topIP
-	domains,
-	startDate,
-	endDate
+  type: 2, // 1 topURL 2 topIP
+  domains,
+  startDate,
+  endDate,
 });
-console.log("TOP100统计数据: ", getCdnTopRes.data);
+console.log('TOP100统计数据: ', getCdnTopRes.data);
 ```
 
 **请求参数**
 
-|参数名		|类型		|必填	|默认值	|说明																								|
-|:-:			|:-:		|:-:	|:-:		|:-																									|
-|type			|Number	|是		|-			| 必填，查询类型，值为1代表查询topURL 值为2代表查询topIP	|
-|domains	|Array	|是		|-			| 必填，域名列表，总数不超过100条												|
-|startDate|String	|是		|-			| 必填，开始时间，格式为：2006-01-02。起止最大间隔为31天	|
-|endDate	|String	|是		|-			| 必填，结束时间，格式为：2006-01-02。起止最大间隔为31天	|
+|  参数名   |  类型  | 必填 | 默认值 | 说明                                                         |
+| :-------: | :----: | :--: | :----: | :----------------------------------------------------------- |
+|   type    | Number |  是  |   -    | 必填，查询类型，值为 1 代表查询 topURL 值为 2 代表查询 topIP |
+|  domains  | Array  |  是  |   -    | 必填，域名列表，总数不超过 100 条                            |
+| startDate | String |  是  |   -    | 必填，开始时间，格式为：2006-01-02。起止最大间隔为 31 天     |
+|  endDate  | String |  是  |   -    | 必填，结束时间，格式为：2006-01-02。起止最大间隔为 31 天     |
 
 **响应参数**
 
-|字段	|类型	|说明			|
-|:-:	|:-:	|:-				|
-|data	|Array| TOP100统计数据	|
+| 字段 | 类型  | 说明            |
+| :--: | :---: | :-------------- |
+| data | Array | TOP100 统计数据 |
 
 ### 图片处理
 
-图片处理请参考[uniCloud官方文档](https://doc.dcloud.net.cn/uniCloud/ext-storage/dev.html#imageshandle)
+图片处理请参考[uniCloud 官方文档](https://doc.dcloud.net.cn/uniCloud/ext-storage/dev.html#imageshandle)

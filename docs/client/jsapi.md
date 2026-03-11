@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# JS API文档大全
+# JS API 文档大全
 
 `vk.pubfn.` 不仅可以在 `js` 中使用，也可以直接在 `template` 模板中使用（在 `template` 中也可以用简写法 `$fn` 代替 `vk.pubfn`）。如
 
@@ -10,27 +10,28 @@ sidebarDepth: 2
 
 ```vue
 <template>
-  <view>{{ vk.pubfn.hidden("15200000001", 3, 4) }}</view>
-  <view>{{ $fn.hidden("15200000001", 3, 4) }}</view>
+  <view>{{ vk.pubfn.hidden('15200000001', 3, 4) }}</view>
+  <view>{{ $fn.hidden('15200000001', 3, 4) }}</view>
 </template>
 ```
 
-**NVUE特别注意**
+**NVUE 特别注意**
 
 如果你的页面是 `nvue` 页面，则无法直接使用 `vk`，在 `js` 中需用 `uni.vk` 代替。
 
 同时因为 `nvue` 在 `template` 模板中，无法直接调用 `uni` 对象，故 `nvue` 想在 `template` 模板中调用 `vk的api`，则还需要写如下代码
 
-（以下代码非nvue无需写，只有nvue且需要在 `template` 模板中调用 `vk的api` 时才需要写下面的代码）
+（以下代码非 nvue 无需写，只有 nvue 且需要在 `template` 模板中调用 `vk的api` 时才需要写下面的代码）
+
 ```js
 export default {
   data() {
     // 页面数据变量
     return {
       vk: uni.vk, // 将vk变量赋值给 nvue 实例
-    }
-  }
-}
+    };
+  },
+};
 ```
 
 **支付宝小程序、百度小程序、抖音小程序特别注意**
@@ -39,27 +40,26 @@ export default {
 
 ```vue
 <script>
-	let vk = uni.vk;
-	export default {
-		data() {
-			// 页面数据变量
-			return {
-				
-			}
-		},
-		...其他代码
-	}
+  let vk = uni.vk;
+  export default {
+    data() {
+      // 页面数据变量
+      return {};
+    },
+    ...其他代码,
+  };
 </script>
 ```
 
 ## 前后端通用@common
+
 ### vk.pubfn.debounce（防抖函数）@debounce
 
 ```js
 /**
  * 防抖函数
  * 防抖原理：一定时间内，只有最后一次或第一次调用,回调函数才会执行
- * @param {Function}  fn 要执行的回调函数 
+ * @param {Function}  fn 要执行的回调函数
  * @param {Number}    time 延时的时间
  * @param {Boolean}   isImmediate 是否立即执行 默认true
  * @param {String}    timeoutName 定时器ID
@@ -75,10 +75,15 @@ vk.pubfn.debounce(() => {
 }, 1000);
 
 // 完整写法
-vk.pubfn.debounce(() => {
-  // 这里写你自己的逻辑
-  console.log(1);
-}, 1000, true, "id1");
+vk.pubfn.debounce(
+  () => {
+    // 这里写你自己的逻辑
+    console.log(1);
+  },
+  1000,
+  true,
+  'id1'
+);
 ```
 
 ### vk.pubfn.throttle（节流函数）@throttle
@@ -87,7 +92,7 @@ vk.pubfn.debounce(() => {
 /**
  * 节流函数
  * 节流原理：在一定时间内，只能触发一次
- * @param {Function} fn 要执行的回调函数 
+ * @param {Function} fn 要执行的回调函数
  * @param {Number} time 延时的时间
  * @param {Boolean} isImmediate 是否立即执行
  * @param {String} timeoutName 定时器ID
@@ -96,15 +101,18 @@ vk.pubfn.debounce(() => {
 vk.pubfn.throttle(fn, time, isImmediate, timeoutName);
 
 // 简写
-vk.pubfn.throttle(() => {
-  
-}, 1000);
+vk.pubfn.throttle(() => {}, 1000);
 
 // 完整写法
-vk.pubfn.throttle(() => {
-  // 这里写你自己的逻辑
-  console.log(1);
-}, 1000, true, "id1");
+vk.pubfn.throttle(
+  () => {
+    // 这里写你自己的逻辑
+    console.log(1);
+  },
+  1000,
+  true,
+  'id1'
+);
 ```
 
 ### vk.pubfn.arrayToTree（数组转树）@arrayToTree
@@ -118,24 +126,24 @@ vk.pubfn.throttle(() => {
  * @return {Array} treeData 树形结构
  */
 let arrayData = [
-  { _id:"001", name:"手机" },
-  { _id:"002", name:"华为", parent_id: "001" },
-  { _id:"003", name:"荣耀", parent_id: "002" },
-  { _id:"004", name:"苹果", parent_id: "001" },
-  { _id:"005", name:"电脑" },
-  { _id:"006", name:"联想", parent_id: "005" },
-  { _id:"007", name:"小米", parent_id: "005" },
+  { _id: '001', name: '手机' },
+  { _id: '002', name: '华为', parent_id: '001' },
+  { _id: '003', name: '荣耀', parent_id: '002' },
+  { _id: '004', name: '苹果', parent_id: '001' },
+  { _id: '005', name: '电脑' },
+  { _id: '006', name: '联想', parent_id: '005' },
+  { _id: '007', name: '小米', parent_id: '005' },
 ];
 let treeProps = {
-  id:"_id",
-  parent_id:"parent_id", 
-  children:"children"
+  id: '_id',
+  parent_id: 'parent_id',
+  children: 'children',
 };
 
 let treeData = vk.pubfn.arrayToTree(arrayData, treeProps);
 ```
 
-**返回的treeData**
+**返回的 treeData**
 
 ```json
 [
@@ -187,70 +195,70 @@ let treeData = vk.pubfn.arrayToTree(arrayData, treeProps);
 /**
  * 树形结构转数组结构
  * @param {Array} treeData  数据源
- * @param {Object} treeProps 树结构配置 
+ * @param {Object} treeProps 树结构配置
  * { id:"_id", parent_id:"parent_id", children:"children", deleteChildren:true }
  * @return {Array} arrayData 数组结构
  */
 let treeData = [
   {
-    "_id": "001",
-    "name": "手机",
-    "children": [
+    _id: '001',
+    name: '手机',
+    children: [
       {
-        "_id": "002",
-        "name": "华为",
-        "parent_id": "001",
-        "children": [
+        _id: '002',
+        name: '华为',
+        parent_id: '001',
+        children: [
           {
-            "_id": "003",
-            "name": "荣耀",
-            "parent_id": "002"
-          }
-        ]
+            _id: '003',
+            name: '荣耀',
+            parent_id: '002',
+          },
+        ],
       },
       {
-        "_id": "004",
-        "name": "苹果",
-        "parent_id": "001"
-      }
-    ]
+        _id: '004',
+        name: '苹果',
+        parent_id: '001',
+      },
+    ],
   },
   {
-    "_id": "005",
-    "name": "电脑",
-    "children": [
+    _id: '005',
+    name: '电脑',
+    children: [
       {
-        "_id": "006",
-        "name": "联想",
-        "parent_id": "005"
+        _id: '006',
+        name: '联想',
+        parent_id: '005',
       },
       {
-        "_id": "007",
-        "name": "小米",
-        "parent_id": "005"
-      }
-    ]
-  }
+        _id: '007',
+        name: '小米',
+        parent_id: '005',
+      },
+    ],
+  },
 ];
 let treeProps = {
-  id:"_id",
-  parent_id:"parent_id",
-  children:"children"
+  id: '_id',
+  parent_id: 'parent_id',
+  children: 'children',
 };
 let arrayData = vk.pubfn.treeToArray(treeData, treeProps);
 ```
 
-**返回的arrayData**
+**返回的 arrayData**
 
 ```json
 [
-  { _id:"001", name:"手机" },
-  { _id:"002", name:"华为", parent_id: "001" },
-  { _id:"003", name:"荣耀", parent_id: "002" },
-  { _id:"004", name:"苹果", parent_id: "001" },
-  { _id:"005", name:"电脑" },
-  { _id:"006", name:"联想", parent_id: "005" },
-  { _id:"007", name:"小米", parent_id: "005" },
+  { "_id": "001", "name": "手机" },
+  { "_id": "002", "name": "华为", "parent_id": "001" },
+  { "_id": "003", "name": "荣耀", "parent_id": "002" },
+  { "_id": "004", "name": "苹果", "parent_id": "001" },
+  { "_id": "005", "name": "电脑" },
+  { "_id": "006", "name": "联想", "parent_id": "005" },
+  { "_id": "007", "name": "小米", "parent_id": "005" }
 ]
 ```
 
@@ -278,17 +286,17 @@ let str = vk.pubfn.timeFormat(date, format, targetTimezone);
 // 不带毫秒简写（标准时间格式）返回值示例 2024-01-01 10:10:10
 let str = vk.pubfn.timeFormat(new Date());
 // 不带毫秒（标准时间格式）返回值示例 2024-01-01 10:10:10
-let str = vk.pubfn.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss");
+let str = vk.pubfn.timeFormat(new Date(), 'yyyy-MM-dd hh:mm:ss');
 // 不带毫秒（自定义时间格式）返回值示例 2024年01月01日 10时10分10秒
-let str = vk.pubfn.timeFormat(new Date(),"yyyy年MM月dd日 hh时mm分ss秒");
+let str = vk.pubfn.timeFormat(new Date(), 'yyyy年MM月dd日 hh时mm分ss秒');
 // 带毫秒 返回值示例 2024-01-01 10:10:10.900
-let str = vk.pubfn.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss.S");
+let str = vk.pubfn.timeFormat(new Date(), 'yyyy-MM-dd hh:mm:ss.S');
 // 带季度 返回值示例 2024-01-01 10:10:10（第1季度）
-let str = vk.pubfn.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss（第q季度）");
+let str = vk.pubfn.timeFormat(new Date(), 'yyyy-MM-dd hh:mm:ss（第q季度）');
 // 指定时区 返回值示例 2024-01-01 10:10:10
-let str = vk.pubfn.timeFormat(new Date(),"yyyy-MM-dd hh:mm:ss", 8); // 东8区
+let str = vk.pubfn.timeFormat(new Date(), 'yyyy-MM-dd hh:mm:ss', 8); // 东8区
 // 显示时区 返回值示例 2024-01-01T10:10:10+08:00
-let str = vk.pubfn.timeFormat(new Date(),"yyyy-MM-ddThh:mm:ssZ", 8); // 东8区
+let str = vk.pubfn.timeFormat(new Date(), 'yyyy-MM-ddThh:mm:ssZ', 8); // 东8区
 ```
 
 ### vk.pubfn.getDateInfo（解析日期对象属性）@getDateInfo
@@ -364,9 +372,9 @@ let { todayStart, todayEnd } = vk.pubfn.getCommonTime(new Date());
 let { monthStart, monthEnd } = vk.pubfn.getCommonTime(new Date());
 ```
 
-**同时该API可以配合vk.pubfn.getOffsetTime使用**
+**同时该 API 可以配合 vk.pubfn.getOffsetTime 使用**
 
-如：获取从今天开始向前推31天每天的时间戳的开始和结束
+如：获取从今天开始向前推 31 天每天的时间戳的开始和结束
 
 ```js
 let { todayStart, todayEnd } = vk.pubfn.getCommonTime();
@@ -375,54 +383,54 @@ let timeStart = [];
 for (let i = 0; i < 31; i++) {
   let start = vk.pubfn.getOffsetTime(todayStart, {
     day: i,
-    mode: "before", // after 之后 before 之前
+    mode: 'before', // after 之后 before 之前
   });
   let end = vk.pubfn.getOffsetTime(todayEnd, {
     day: i,
-    mode: "before", // after 之后 before 之前
+    mode: 'before', // after 之后 before 之前
   });
   timeStart.push({
     start,
-    end
+    end,
   });
 }
-console.log('timeStart: ', timeStart)
+console.log('timeStart: ', timeStart);
 ```
 
-### vk.pubfn.getOffsetTime（获得指定时间偏移 year年 month月 day天 hours时 minutes分 seconds秒前或后的时间戳）@getOffsetTime
+### vk.pubfn.getOffsetTime（获得指定时间偏移 year 年 month 月 day 天 hours 时 minutes 分 seconds 秒前或后的时间戳）@getOffsetTime
 
 ```js
 /**
  * 获得指定时间偏移 year年 month月 day天 hours时 minutes分 seconds秒前或后的时间戳
  * @param {Date} date 日期对象 可以指定时间计算节点，默认使用当前时间进行计算
  * @param {Object} offsetObj 偏移参数
- * @return {Number} timestamp 
+ * @return {Number} timestamp
  * 返回值：时间戳形式
  */
 let timestamp = vk.pubfn.getOffsetTime(date, offsetObj);
 
 // 获取当前时间1小时之后的时间
 let timestamp = vk.pubfn.getOffsetTime(new Date(), {
-  hour:1,
-  mode:"after", // after 之后 before 之前
+  hour: 1,
+  mode: 'after', // after 之后 before 之前
 });
 
 // 获取当前时间1小时30分钟之前的时间
 let timestamp = vk.pubfn.getOffsetTime(new Date(), {
-  hour:1,
-  minutes:30,
-  mode:"before", // after 之后 before 之前
+  hour: 1,
+  minutes: 30,
+  mode: 'before', // after 之后 before 之前
 });
 
 // 完整参数
 let timestamp = vk.pubfn.getOffsetTime(new Date(), {
-  year:0,
-  month:0,
-  day:0,
-  hours:0,
-  minutes:0,
-  seconds:0,
-  mode:"after", // after 之后 before 之前
+  year: 0,
+  month: 0,
+  day: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  mode: 'after', // after 之后 before 之前
 });
 ```
 
@@ -488,7 +496,6 @@ let timeObj = vk.pubfn.getWeekOffsetStartAndEnd(0);
 
 let { startTime, endTime } = vk.pubfn.getWeekOffsetStartAndEnd(0, new Date());
 ```
-
 
 ### vk.pubfn.getMonthOffsetStartAndEnd（获得相对当前时间的偏移 count 月的起止日期）@getMonthOffsetStartAndEnd
 
@@ -599,7 +606,7 @@ vk.pubfn.test(str, type, allowEmpty);
 如检测手机号（不允许为空）
 
 ```js
-let mobile = "15200000001";
+let mobile = '15200000001';
 let testRes = vk.pubfn.test(mobile, 'mobile');
 if (testRes) {
   // 是手机号
@@ -610,10 +617,10 @@ if (testRes) {
 
 如检测手机号（允许为空）
 
-> vk-unicloud 版本需≥2.15.2
+> vk-unicloud 版本需 ≥2.15.2
 
 ```js
-let mobile = "";
+let mobile = '';
 let testRes = vk.pubfn.test(mobile, 'mobile', true);
 if (testRes) {
   // 是手机号或者手机号是空
@@ -671,11 +678,12 @@ let newObj = vk.pubfn.deepClone(obj);
  */
 let arr = vk.pubfn.arr_concat(arr1, arr2, flag);
 
-let arr = vk.pubfn.arr_concat(arr1, arr2, "_id");
+let arr = vk.pubfn.arr_concat(arr1, arr2, '_id');
 ```
 
 ### vk.pubfn.getData（根据字符串路径获取对象的值）@getData
-支持.和[]，且任意一个值为undefined时，不会报错，会直接返回undefined
+
+支持.和[]，且任意一个值为 undefined 时，不会报错，会直接返回 undefined
 
 ```js
 /**
@@ -691,6 +699,7 @@ let value = vk.pubfn.getData(dataObj, name, defaultValue);
 ```
 
 ### vk.pubfn.setData（根据字符串路径设置对象的值）@setData
+
 支持.和[]
 
 ```js
@@ -704,7 +713,8 @@ vk.pubfn.setData(dataObj, name, value);
 ```
 
 ### vk.pubfn.isNull（参数是否为空）@isNull
-其中 undefined、null、{}、[]、"" 均为空值  true 空值  false 有值）
+
+其中 undefined、null、{}、[]、"" 均为空值 true 空值 false 有值）
 
 ```js
 /**
@@ -714,6 +724,7 @@ vk.pubfn.isNull(value);
 ```
 
 ### vk.pubfn.isNotNull（参数是否不为空）@isNotNull
+
 结果与 vk.pubfn.isNull 相反
 
 ```js
@@ -729,7 +740,7 @@ vk.pubfn.isNotNull(value);
 /**
  * 检测所有参数 - 是否至少有一个为空
  */
-vk.pubfn.isNullOne(value1,value2,value3);
+vk.pubfn.isNullOne(value1, value2, value3);
 ```
 
 ### vk.pubfn.isNullAll（是否全部为空）@isNullAll
@@ -738,7 +749,7 @@ vk.pubfn.isNullOne(value1,value2,value3);
 /**
  * 检测所有参数 - 是否全部为空
  */
-vk.pubfn.isNullAll(value1,value2,value3);
+vk.pubfn.isNullAll(value1, value2, value3);
 ```
 
 ### vk.pubfn.isNotNullAll（是否全部都不为空）@isNotNullAll
@@ -747,12 +758,12 @@ vk.pubfn.isNullAll(value1,value2,value3);
 /**
  * 检测所有参数 - 是否全部都不为空
  */
-vk.pubfn.isNotNullAll(value1,value2,value3);
+vk.pubfn.isNotNullAll(value1, value2, value3);
 ```
 
 ### vk.pubfn.isNullOneByObject（检测整个对象是否没有一个属性是空值）@isNullOneByObject
 
-如果有空值，则返回首个是空值的属性名，如果没有空值，则返回undefined
+如果有空值，则返回首个是空值的属性名，如果没有空值，则返回 undefined
 
 ```js
 /**
@@ -760,11 +771,12 @@ vk.pubfn.isNotNullAll(value1,value2,value3);
  */
 let nullKey = vk.pubfn.isNullOneByObject({ title, content, avatar });
 if (nullKey) return { code: -1, msg: `${nullKey}不能为空` };
-
 ```
 
 ### vk.pubfn.getListItem（从对象数组中获取某一个对象）@getListItem
-获取对象数组中的某一个item，根据指定的键名和键值
+
+获取对象数组中的某一个 item，根据指定的键名和键值
+
 ```js
 /**
  * 获取对象数组中的某一个item,根据指定的键名和键值
@@ -776,11 +788,13 @@ if (nullKey) return { code: -1, msg: `${nullKey}不能为空` };
  */
 let item = vk.pubfn.getListItem(list, key, value);
 
-let item = vk.pubfn.getListItem(list, "_id", "001");
+let item = vk.pubfn.getListItem(list, '_id', '001');
 ```
 
-### vk.pubfn.getListIndex（从对象数组中获取某个对象的index）@getListIndex
-获取对象数组中某个元素的index，根据指定的键名和键值
+### vk.pubfn.getListIndex（从对象数组中获取某个对象的 index）@getListIndex
+
+获取对象数组中某个元素的 index，根据指定的键名和键值
+
 ```js
 /**
  * 获取对象数组中某个元素的index,根据指定的键名和键值
@@ -792,11 +806,13 @@ let item = vk.pubfn.getListItem(list, "_id", "001");
  */
 let index = vk.pubfn.getListIndex(list, key, value);
 
-let index = vk.pubfn.getListIndex(list, "_id", "001");
+let index = vk.pubfn.getListIndex(list, '_id', '001');
 ```
 
-### vk.pubfn.getListItemIndex（从对象数组中获取某一个对象和index）@getListItemIndex
-获取对象数组中某个元素的index，根据指定的键名和键值
+### vk.pubfn.getListItemIndex（从对象数组中获取某一个对象和 index）@getListItemIndex
+
+获取对象数组中某个元素的 index，根据指定的键名和键值
+
 ```js
 /**
  * 获取对象数组中某个元素的index,根据指定的键名和键值
@@ -807,10 +823,10 @@ let index = vk.pubfn.getListIndex(list, "_id", "001");
  */
 let { item, index } = vk.pubfn.getListItemIndex(list, key, value);
 
-let { item, index } = vk.pubfn.getListItemIndex(list, "_id", "001");
+let { item, index } = vk.pubfn.getListItemIndex(list, '_id', '001');
 ```
 
-### vk.pubfn.arrayToJson（对象数组转JSON）@arrayToJson
+### vk.pubfn.arrayToJson（对象数组转 JSON）@arrayToJson
 
 ```js
 /**
@@ -823,7 +839,7 @@ let { item, index } = vk.pubfn.getListItemIndex(list, "_id", "001");
  */
 let obj = vk.pubfn.arrayToJson(list, key);
 
-let obj = vk.pubfn.arrayToJson(list, "_id");
+let obj = vk.pubfn.arrayToJson(list, '_id');
 ```
 
 ### vk.pubfn.arrayObjectGetArray（从数组中提取指定字段形式新的数组）@arrayObjectGetArray
@@ -840,10 +856,11 @@ let obj = vk.pubfn.arrayToJson(list, "_id");
  */
 let newList = vk.pubfn.arrayObjectGetArray(list, key);
 
-let newList = vk.pubfn.arrayObjectGetArray(list, "_id");
+let newList = vk.pubfn.arrayObjectGetArray(list, '_id');
 ```
 
 ### vk.pubfn.random（随机数）@random
+
 支持任意字符，默认纯数字
 
 ```js
@@ -857,8 +874,8 @@ let newList = vk.pubfn.arrayObjectGetArray(list, "_id");
 let n = vk.pubfn.random(length, range, arr);
 
 let n = vk.pubfn.random(6);
-let n = vk.pubfn.random(6, "abcdefghijklmnopqrstuvwxyz0123456789");
-let n = vk.pubfn.random(1,"123456789",["1","2","3"]);
+let n = vk.pubfn.random(6, 'abcdefghijklmnopqrstuvwxyz0123456789');
+let n = vk.pubfn.random(1, '123456789', ['1', '2', '3']);
 ```
 
 ### vk.pubfn.hidden（将手机号、账号等隐藏中间字段）@hidden
@@ -873,7 +890,7 @@ let n = vk.pubfn.random(1,"123456789",["1","2","3"]);
  */
 let newStr = vk.pubfn.hidden(str, first, last);
 
-let newStr = vk.pubfn.hidden("15200000001", 3, 4);
+let newStr = vk.pubfn.hidden('15200000001', 3, 4);
 ```
 
 ### vk.pubfn.checkArrayIntersection（两数组是否有交集)@checkArrayIntersection
@@ -886,7 +903,7 @@ let newStr = vk.pubfn.hidden("15200000001", 3, 4);
  */
 vk.pubfn.checkArrayIntersection(arr1, arr2);
 
-vk.pubfn.checkArrayIntersection([1,2,3], [3,4,5]);
+vk.pubfn.checkArrayIntersection([1, 2, 3], [3, 4, 5]);
 ```
 
 ### vk.pubfn.calcFreights（计算运费）@calcFreights
@@ -907,12 +924,15 @@ vk.pubfn.checkArrayIntersection([1,2,3], [3,4,5]);
  */
 vk.pubfn.calcFreights(freightsItem, weight);
 
-let freights = vk.pubfn.calcFreights({
-  first_weight: 1,
-  first_weight_price: 6,
-  continuous_weight: 1,
-  continuous_weight_price: 2
-}, 10);
+let freights = vk.pubfn.calcFreights(
+  {
+    first_weight: 1,
+    first_weight_price: 6,
+    continuous_weight: 1,
+    continuous_weight_price: 2,
+  },
+  10
+);
 ```
 
 ### vk.pubfn.getNewObject（从一个对象中取多个属性，并生成一个全新的对象）@getNewObject
@@ -955,7 +975,7 @@ vk.pubfn.timeUtil.isLeapYear(2021);
 ```js
 /**
  * 判断是否是清明节
- * @param {Object} date 时间对象 
+ * @param {Object} date 时间对象
  * @return {Boolean} true | false
  */
 vk.pubfn.timeUtil.isQingming(new Date());
@@ -974,7 +994,7 @@ vk.pubfn.timeUtil.isQingming(new Date());
  */
 let size = vk.pubfn.calcSize(length, arr, ary, precision);
 
-let size = vk.pubfn.calcSize(length, ["B","KB","MB","GB"], 1024, 3);
+let size = vk.pubfn.calcSize(length, ['B', 'KB', 'MB', 'GB'], 1024, 3);
 ```
 
 ### vk.pubfn.isArray（判断变量是否是数组）@isArray
@@ -1010,11 +1030,10 @@ vk.pubfn.isObject(obj);
  */
 let no = vk.pubfn.createOrderNo(prefix, count);
 
-let no = vk.pubfn.createOrderNo("NO");
+let no = vk.pubfn.createOrderNo('NO');
 
-let no = vk.pubfn.createOrderNo("NO", 25);
+let no = vk.pubfn.createOrderNo('NO', 25);
 ```
-
 
 ### vk.pubfn.snake2camelJson（对象内的属性名 - 蛇形转驼峰）@snake2camelJson
 
@@ -1090,9 +1109,10 @@ let newVal = vk.pubfn.toDecimal(val, precision);
 let newVal = vk.pubfn.toDecimal(1.56555, 2);
 ```
 
-
 ### vk.pubfn.priceFilter（金额显示过滤器）@priceFilter
+
 金额显示过滤器（以分为单位，将 100 转成 1）
+
 ```js
 /**
  * 金额显示过滤器（以分为单位，将100 转成 1
@@ -1105,7 +1125,9 @@ let newVal = vk.pubfn.priceFilter(100); // 1
 ```
 
 ### vk.pubfn.percentageFilter（百分比显示过滤器）@percentageFilter
-百分比过滤器 将 0.01 显示成 1%  1 显示成 100%
+
+百分比过滤器 将 0.01 显示成 1% 1 显示成 100%
+
 ```js
 /**
  * 百分比显示过滤器
@@ -1119,9 +1141,10 @@ let newVal = vk.pubfn.percentageFilter(value, needShowSymbol, defaultValue);
 let newVal = vk.pubfn.percentageFilter(0.1); // 10%
 ```
 
-
 ### vk.pubfn.discountFilter（折扣显示过滤器）@discountFilter
-折扣过滤器 将 0.1 显示成 1折 1 显示成 原价 0 显示成免费
+
+折扣过滤器 将 0.1 显示成 1 折 1 显示成 原价 0 显示成免费
+
 ```js
 /**
  * 折扣显示过滤器
@@ -1135,8 +1158,7 @@ let newVal = vk.pubfn.discountFilter(value, needShowSymbol, defaultValue);
 let newVal = vk.pubfn.discountFilter(0.7); // 7折
 ```
 
-
-### vk.pubfn.dateDiff（将时间显示成1秒前、1天前）@dateDiff
+### vk.pubfn.dateDiff（将时间显示成 1 秒前、1 天前）@dateDiff
 
 ```js
 /**
@@ -1148,10 +1170,10 @@ let newVal = vk.pubfn.discountFilter(0.7); // 7折
  */
 let newStr = vk.pubfn.dateDiff(startTime, suffix);
 
-let newStr = vk.pubfn.dateDiff(Date.now()-1000*3600*24); // 1天前
+let newStr = vk.pubfn.dateDiff(Date.now() - 1000 * 3600 * 24); // 1天前
 ```
 
-### vk.pubfn.dateDiff2（将时间显示成1秒、1天）@dateDiff2
+### vk.pubfn.dateDiff2（将时间显示成 1 秒、1 天）@dateDiff2
 
 ```js
 /**
@@ -1163,7 +1185,7 @@ let newStr = vk.pubfn.dateDiff(Date.now()-1000*3600*24); // 1天前
  */
 let newStr = vk.pubfn.dateDiff2(endTime, endText);
 
-let newStr = vk.pubfn.dateDiff2(Date.now()+1000*3600*24); // 23小时
+let newStr = vk.pubfn.dateDiff2(Date.now() + 1000 * 3600 * 24); // 23小时
 ```
 
 ### vk.pubfn.numStr（将大数字转中文）@numStr
@@ -1188,7 +1210,6 @@ let newStr = vk.pubfn.numStr(1523412); // 1百万
 ### vk.pubfn.splitArray（分割数组）@splitArray
 
 ```js
-
 /**
  * 将一个大数组拆分成N个小数组（分割数组）
  * @param {Array} array 大数组
@@ -1197,23 +1218,22 @@ let newStr = vk.pubfn.numStr(1523412); // 1百万
  */
 vk.pubfn.splitArray(array, size);
 
-let newArray = vk.pubfn.splitArray([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], 6);
+let newArray = vk.pubfn.splitArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 6);
 ```
 
-**返回的newArray**
+**返回的 newArray**
 
 ```json
 [
-  [1,2,3,4,5,6],
-  [7,8,9,10,11,12],
-  [13,14,15,16]
+  [1, 2, 3, 4, 5, 6],
+  [7, 8, 9, 10, 11, 12],
+  [13, 14, 15, 16]
 ]
 ```
 
 ### vk.pubfn.objectKeySort（对象属性排序）@objectKeySort
 
 ```js
-
 /**
  * 将对象内的属性按照ASCII字符顺序进行排序，返回排序后的对象
  * @param {Object} obj 需要排序对象
@@ -1222,13 +1242,14 @@ let newArray = vk.pubfn.splitArray([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], 6);
 vk.pubfn.objectKeySort(obj);
 
 let newObj = vk.pubfn.objectKeySort({
-  c:1,
-  a:2,
-  b:3
+  c: 1,
+  a: 2,
+  b: 3,
 });
 ```
 
-**返回的newObj**
+**返回的 newObj**
+
 ```json
 {
   "a": 2,
@@ -1237,67 +1258,61 @@ let newObj = vk.pubfn.objectKeySort({
 }
 ```
 
-### vk.request（请求http接口）@request
+### vk.request（请求 http 接口）@request
 
-前端调用时文档看这里：[传送门 - 前端request](https://uniapp.dcloud.net.cn/api/request/request.html)
+前端调用时文档看这里：[传送门 - 前端 request](https://uniapp.dcloud.net.cn/api/request/request.html)
 
-前端调用时文档看这里：[传送门 - 云端request](https://uniapp.dcloud.net.cn/uniCloud/cf-functions.html#httpclient)
+前端调用时文档看这里：[传送门 - 云端 request](https://uniapp.dcloud.net.cn/uniCloud/cf-functions.html#httpclient)
 
-vk.request 就是通过上面2个API封装的，参数跟上面的基本一致
+vk.request 就是通过上面 2 个 API 封装的，参数跟上面的基本一致
 
 #### vk.request（前端调用）@requestclient
 
 ```js
 vk.request({
-	url: `https://www.xxx.com/api/xxxx`,
-	method: "POST",
-	header: {
-		"content-type": "application/json; charset=utf-8",
-	},
-	data:{
-
-	},
-	success: (data) => {
-
-	},
-	fail: (err) => {
-
-	}
+  url: `https://www.xxx.com/api/xxxx`,
+  method: 'POST',
+  header: {
+    'content-type': 'application/json; charset=utf-8',
+  },
+  data: {},
+  success: (data) => {},
+  fail: (err) => {},
 });
 ```
 
 **前端调用常用参数列表**
 
-|参数名					|类型												|必填	|默认值	|说明																																										|平台差异说明																																		|
-|:-							|:-													|:-		|:-			|:-																																											|:-																																							|
-|url						|String											|是		|				|开发者服务器接口地址																																		|																																								|
-|data						|Object、String、ArrayBuffer|否		|				|请求的参数																																							|App 3.3.7 以下不支持 ArrayBuffer 类型																					|
-|header					|Object											|否		|				|设置请求的 header，header 中不能设置 Referer																						|App、H5端会自动带上cookie，且H5端不可手动修改																	|
-|method					|String											|否		|POST		|注意，vk.request默认是POST请求，其他有效值详见下方说明																	|																																								|
-|timeout				|Number											|否		|60000	|超时时间，单位 ms																																			|H5(HBuilderX 2.9.9+)、APP(HBuilderX 2.9.9+)、微信小程序（2.10.0）、支付宝小程序|
-|dataType				|String											|否		|json		|可选值为<br/> json 会对返回的数据进行一次 JSON.parse <br/> default 不会进行 JSON.parse	|																																								|
-|responseType		|String											|否		|text		|设置响应的数据类型。合法值：text、arraybuffer																					|支付宝小程序不支持																															|
-|needOriginalRes|Boolean										|否		|false	|此参数为vk新增，设置为true后，返回数据会多一个originalRes参数，里面有请求头等信息			|																																								|
-|interceptor		|Object											|否		|false	|此参数为vk新增，请求拦截器[详情](#interceptor)																														|																																								|
-|encrypt		|Boolean											|否		|false	|此参数为vk新增，是否加密通信 [详情](#encrypt)																												|																																								|
-|success				|Function										|否		|				|收到开发者服务器成功返回的回调函数																											|																																								|
-|fail						|Function										|否		|				|接口调用失败的回调函数																																	|																																								|
-|complete				|Function										|否		|				|接口调用结束的回调函数（调用成功、失败都会执行）																				|&nbsp;																																					|
+| 参数名          | 类型                        | 必填 | 默认值 | 说明                                                                                    | 平台差异说明                                                                    |
+| :-------------- | :-------------------------- | :--- | :----- | :-------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| url             | String                      | 是   |        | 开发者服务器接口地址                                                                    |                                                                                 |
+| data            | Object、String、ArrayBuffer | 否   |        | 请求的参数                                                                              | App 3.3.7 以下不支持 ArrayBuffer 类型                                           |
+| header          | Object                      | 否   |        | 设置请求的 header，header 中不能设置 Referer                                            | App、H5 端会自动带上 cookie，且 H5 端不可手动修改                               |
+| method          | String                      | 否   | POST   | 注意，vk.request 默认是 POST 请求，其他有效值详见下方说明                               |                                                                                 |
+| timeout         | Number                      | 否   | 60000  | 超时时间，单位 ms                                                                       | H5(HBuilderX 2.9.9+)、APP(HBuilderX 2.9.9+)、微信小程序（2.10.0）、支付宝小程序 |
+| dataType        | String                      | 否   | json   | 可选值为<br/> json 会对返回的数据进行一次 JSON.parse <br/> default 不会进行 JSON.parse  |                                                                                 |
+| responseType    | String                      | 否   | text   | 设置响应的数据类型。合法值：text、arraybuffer                                           | 支付宝小程序不支持                                                              |
+| needOriginalRes | Boolean                     | 否   | false  | 此参数为 vk 新增，设置为 true 后，返回数据会多一个 originalRes 参数，里面有请求头等信息 |                                                                                 |
+| interceptor     | Object                      | 否   | false  | 此参数为 vk 新增，请求拦截器[详情](#interceptor)                                        |                                                                                 |
+| encrypt         | Boolean                     | 否   | false  | 此参数为 vk 新增，是否加密通信 [详情](#encrypt)                                         |                                                                                 |
+| success         | Function                    | 否   |        | 收到开发者服务器成功返回的回调函数                                                      |                                                                                 |
+| fail            | Function                    | 否   |        | 接口调用失败的回调函数                                                                  |                                                                                 |
+| complete        | Function                    | 否   |        | 接口调用结束的回调函数（调用成功、失败都会执行）                                        | &nbsp;                                                                          |
 
 **method 有效值**
 
-注意：method有效值必须大写，每个平台支持的method有效值不同，详细见下表。
+注意：method 有效值必须大写，每个平台支持的 method 有效值不同，详细见下表。
 
-|method	|App|H5	|微信小程序	|支付宝小程序	|百度小程序	|抖音小程序、飞书小程序	|快手小程序	|京东小程序	|
-|:-:		|:-:|:-:|:-:				|:-:					|:-:				|:-:										|:-:				|:-:				|
-|GET		|√	|√	|√					|√						|√					|√											|√					|√					|
-|POST		|√	|√	|√					|√						|√					|√											|√					|√					|
-|PUT		|√	|√	|√					|x						|√					|√											|x					|x					|
-|DELETE	|√	|√	|√					|x						|√					|x											|x					|x					|
-|CONNECT|x	|√	|√					|x						|x					|x											|x					|x					|
-|HEAD		|√	|√	|√					|x						|√					|x											|x					|x					|
-|OPTIONS|√	|√	|√					|x						|√					|x											|x					|x					|
-|TRACE	|x	|√	|√					|x						|x					|x											|x					|x					|
+| method  | App | H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 抖音小程序、飞书小程序 | 快手小程序 | 京东小程序 |
+| :-----: | :-: | :-: | :--------: | :----------: | :--------: | :--------------------: | :--------: | :--------: |
+|   GET   |  √  |  √  |     √      |      √       |     √      |           √            |     √      |     √      |
+|  POST   |  √  |  √  |     √      |      √       |     √      |           √            |     √      |     √      |
+|   PUT   |  √  |  √  |     √      |      x       |     √      |           √            |     x      |     x      |
+| DELETE  |  √  |  √  |     √      |      x       |     √      |           x            |     x      |     x      |
+| CONNECT |  x  |  √  |     √      |      x       |     x      |           x            |     x      |     x      |
+|  HEAD   |  √  |  √  |     √      |      x       |     √      |           x            |     x      |     x      |
+| OPTIONS |  √  |  √  |     √      |      x       |     √      |           x            |     x      |     x      |
+|  TRACE  |  x  |  √  |     √      |      x       |     x      |           x            |     x      |     x      |
 
 ##### interceptor
 
@@ -1307,33 +1322,31 @@ vk.request({
 
 **属性**
 
-|参数名		|类型			|必填	|默认值	|说明																																							|平台差异说明	|
-|:-				|:-				|:-		|:-			|:-																																								|:-						|
-|invoke		|Function	|否		|				|发起请求前拦截，可在此修改请求参数，若函数return false，可阻止请求发起						|							|
-|success	|Function	|否		|				|成功回调前拦截，可在此修改success回调参数，若函数return false，可阻止success回调	|							|
-|fail			|Function	|否		|				|失败回调前拦截，可在此修改fail回调参数，若函数return false，可阻止fail回调				|							|
-|complete	|Function	|否		|				|完成回调前拦截，可在此complete回调参数，若函数return false，可阻止complete回调		|							|
+| 参数名   | 类型     | 必填 | 默认值 | 说明                                                                                  | 平台差异说明 |
+| :------- | :------- | :--- | :----- | :------------------------------------------------------------------------------------ | :----------- |
+| invoke   | Function | 否   |        | 发起请求前拦截，可在此修改请求参数，若函数 return false，可阻止请求发起               |              |
+| success  | Function | 否   |        | 成功回调前拦截，可在此修改 success 回调参数，若函数 return false，可阻止 success 回调 |              |
+| fail     | Function | 否   |        | 失败回调前拦截，可在此修改 fail 回调参数，若函数 return false，可阻止 fail 回调       |              |
+| complete | Function | 否   |        | 完成回调前拦截，可在此 complete 回调参数，若函数 return false，可阻止 complete 回调   |              |
 
 **执行顺序**
 
-执行成功时：interceptor.invoke -> 执行request请求 -> interceptor.success -> success -> interceptor.complete -> complete
+执行成功时：interceptor.invoke -> 执行 request 请求 -> interceptor.success -> success -> interceptor.complete -> complete
 
-执行失败时：interceptor.invoke -> 执行request请求 -> interceptor.fail -> fail -> interceptor.complete -> complete
+执行失败时：interceptor.invoke -> 执行 request 请求 -> interceptor.fail -> fail -> interceptor.complete -> complete
 
-特殊情况，如果code返回的不是0，则执行顺序为：interceptor.invoke -> 执行request请求 -> interceptor.success -> fail -> interceptor.complete -> complete
+特殊情况，如果 code 返回的不是 0，则执行顺序为：interceptor.invoke -> 执行 request 请求 -> interceptor.success -> fail -> interceptor.complete -> complete
 
-**interceptor示例**
+**interceptor 示例**
 
 ```js
 vk.request({
-	url: `https://www.xxx.com/api/xxxx`,
-	method: "POST",
-	header: {
-		"content-type": "application/json; charset=utf-8",
-	},
-	data:{
-
-	},
+  url: `https://www.xxx.com/api/xxxx`,
+  method: 'POST',
+  header: {
+    'content-type': 'application/json; charset=utf-8',
+  },
+  data: {},
   interceptor: {
     invoke: (res) => {
       console.log('interceptor-invoke: ', res);
@@ -1343,7 +1356,7 @@ vk.request({
     success: (res) => {
       console.log('interceptor-success: ', res);
       // 处理code状态码和msg
-      res.code = res.returnCode === "SUCCESS" ? 0 : res.returnCode;
+      res.code = res.returnCode === 'SUCCESS' ? 0 : res.returnCode;
       res.msg = res.returnMsg;
       delete res.returnCode;
       delete res.returnMsg;
@@ -1353,14 +1366,10 @@ vk.request({
     },
     complete: (res) => {
       console.log('interceptor-complete: ', res);
-    }
+    },
   },
-	success: (data) => {
-
-	},
-	fail: (err) => {
-
-	}
+  success: (data) => {},
+  fail: (err) => {},
 });
 ```
 
@@ -1368,7 +1377,7 @@ vk.request({
 
 > vk-unicloud 核心库版本需 >= 2.18.7
 
-仅用于和vk框架的router开启URL化的接口进行加密通信
+仅用于和 vk 框架的 router 开启 URL 化的接口进行加密通信
 
 **效果**
 
@@ -1376,18 +1385,18 @@ vk.request({
 
 ```js
 vk.request({
-	url: "https://fc-mp-666666-6666-45cd-a7d4-1289bec9cd4f.next.bspapp.com/http/router/template/test/pub/testEncryptRequest",
-	encrypt: true, // 开启加密通信
-	header: {
-		'uni-id-token': 'xxxxxxxxx', // 用户token
-		'vk-appid': '__UNI__66666', // 你项目的dcloud_appid
-		'vk-platform': 'h5', // 运行环境，如 h5、mp-weixin、app-plus 等
-	},
-	data: {
-		a: 1,
-		b: "2"
-	}
-})
+  url: 'https://fc-mp-666666-6666-45cd-a7d4-1289bec9cd4f.next.bspapp.com/http/router/template/test/pub/testEncryptRequest',
+  encrypt: true, // 开启加密通信
+  header: {
+    'uni-id-token': 'xxxxxxxxx', // 用户token
+    'vk-appid': '__UNI__66666', // 你项目的dcloud_appid
+    'vk-platform': 'h5', // 运行环境，如 h5、mp-weixin、app-plus 等
+  },
+  data: {
+    a: 1,
+    b: '2',
+  },
+});
 ```
 
 #### vk.request（云端调用）@requestcloud
@@ -1396,74 +1405,72 @@ vk.request({
 
 ```js
 await vk.request({
-	url: `https://www.xxx.com/api/xxxx`,
-	method:"POST",
-	header:{
-		"content-type": "application/json; charset=utf-8",
-	},
-	data:{
-
-	}
+  url: `https://www.xxx.com/api/xxxx`,
+  method: 'POST',
+  header: {
+    'content-type': 'application/json; charset=utf-8',
+  },
+  data: {},
 });
 ```
 
 **云端调用常用请求参数**
 
-|参数名							|类型																																					|是否必填	|默认值	|说明																																																																																			|
-|:--								|:-:																																					|:-:			|:-:		|:--																																																																																			|
-|method							|String																																				|-				|POST		|HTTP 请求方法, 默认为：POST. 可选值： GET, POST, DELETE, PUT																																																							|
-|data								|Object																																				|-				|-			|发送的数据																																																																																|
-|header							|Object																																				|-				|-			|请求头																																																																																		|
-|dataAsQueryString	|Boolean																																			|-				|true		|是否强制转换data为queryString																																																																						|
-|dataType						|String																																				|-				|-			|返回的数据格式，默认为json，可选值为 <br/>json 返回数据转为JSON（如果不满足JSON格式会报错）<br/>text 返回数据转为字符串<br/>default 返回二进制数据												|
-|contentType				|String																																				|-				|-			|上传数据的格式，设为json会自动在header内设置Content-Type: application/json																																																|
-|useContent					|Boolean																																			|-				|false	|是否将data的值转content，效果：content = JSON.stringify(data);																																																						|
-|content						|String、 Buffer																															|-				|-			|手动设置请求的payload，设置后会忽略data																																																																	|
-|timeout						|Number、 Array																																|-				|5000		|超时时间设置。设置为数组时第一项为请求超时，第二项为返回超时。设置为数字时相当于同时设置请求超时和返回超时，即timeout:3000效果等于timeouut:[3000,3000]										|
-|needOriginalRes		|Boolean						|否																																						|false		|此参数为vk新增，设置为true后，返回数据的格式是原始返回数据，里面有请求头等信息<br/>注意，此参数与前端调用时效果不一样<br/>前端是多返回一个originalRes参数<br/>云端是直接返回原始返回数据|																																																																																					|
-|files							|Array<ReadStream、Buffer、String> 、 Object 、 ReadStream 、 Buffer、 String	|-				|-			|上传的文件，设置后将会使用 multipart/form-data 格式。如果未设置method，将会自动将method设置为POST																																				|
-|nestedQuerystring	|Boolean																																			|-				|-			|转换data为queryString时默认不支持嵌套Object，此选项设置为true则支持转换嵌套Object																																												|
-|consumeWriteStream	|Boolean																																			|-				|true		|是否等待 writeStream 完全写完才算响应全部接收完毕																																																												|
-|auth								|String																																				|-				|-			|简单登录授权（Basic Authentication）参数，必须按照 user:password 格式设置																																																|
-|ca									|String、Buffer、Array																												|-				|-			|证书内容																																																																																	|
-|pfx								|String、Buffer																																|-				|-			|包含了私钥, 证书和CA certs, 一般是 PFX 或者 PKCS12 格式																																																									|
-|key								|String、Buffer																																|-				|-			|PEF格式的服务器的私钥																																																																										|
-|cert								|String、Buffer																																|-				|-			|PEM格式的服务器证书密钥																																																																									|
-|stream							|ReadStream																																		|-				|-			|发送请求正文的可读数据流																																																																									|
-|writeStream				|WriteStream																																	|-				|-			|接受响应数据的可写数据流																																																																									|
-|streaming					|Boolean																																			|-				|false	|是否直接返回响应流，开启 streaming 之后，HttpClient 会在拿到响应对象 res 之后马上返回， 此时 result.headers 和 result.status 已经可以读取到，只是没有读取 data 数据而已。|
-|encrypt		|Boolean											|否		|false	|此参数为vk新增，是否加密通信 [详情](#encrypt)																												|																																								|
-|useProxy		|Boolean											|否		|false	|此参数为vk新增，是否使用代理请求，仅阿里云空间生效																										|																																								|
+| 参数名             |                                     类型                                     | 是否必填 | 默认值 | 说明                                                                                                                                                                                           |
+| :----------------- | :--------------------------------------------------------------------------: | :------: | :----: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| method             |                                    String                                    |    -     |  POST  | HTTP 请求方法, 默认为：POST. 可选值： GET, POST, DELETE, PUT                                                                                                                                   |
+| data               |                                    Object                                    |    -     |   -    | 发送的数据                                                                                                                                                                                     |
+| header             |                                    Object                                    |    -     |   -    | 请求头                                                                                                                                                                                         |
+| dataAsQueryString  |                                   Boolean                                    |    -     |  true  | 是否强制转换 data 为 queryString                                                                                                                                                               |
+| dataType           |                                    String                                    |    -     |   -    | 返回的数据格式，默认为 json，可选值为 <br/>json 返回数据转为 JSON（如果不满足 JSON 格式会报错）<br/>text 返回数据转为字符串<br/>default 返回二进制数据                                         |
+| contentType        |                                    String                                    |    -     |   -    | 上传数据的格式，设为 json 会自动在 header 内设置 Content-Type: application/json                                                                                                                |
+| useContent         |                                   Boolean                                    |    -     | false  | 是否将 data 的值转 content，效果：content = JSON.stringify(data);                                                                                                                              |
+| content            |                               String、 Buffer                                |    -     |   -    | 手动设置请求的 payload，设置后会忽略 data                                                                                                                                                      |
+| timeout            |                                Number、 Array                                |    -     |  5000  | 超时时间设置。设置为数组时第一项为请求超时，第二项为返回超时。设置为数字时相当于同时设置请求超时和返回超时，即 timeout:3000 效果等于 timeouut:[3000,3000]                                      |
+| needOriginalRes    |                                   Boolean                                    |    否    | false  | 此参数为 vk 新增，设置为 true 后，返回数据的格式是原始返回数据，里面有请求头等信息<br/>注意，此参数与前端调用时效果不一样<br/>前端是多返回一个 originalRes 参数<br/>云端是直接返回原始返回数据 |     |
+| files              | Array<ReadStream、Buffer、String> 、 Object 、 ReadStream 、 Buffer、 String |    -     |   -    | 上传的文件，设置后将会使用 multipart/form-data 格式。如果未设置 method，将会自动将 method 设置为 POST                                                                                          |
+| nestedQuerystring  |                                   Boolean                                    |    -     |   -    | 转换 data 为 queryString 时默认不支持嵌套 Object，此选项设置为 true 则支持转换嵌套 Object                                                                                                      |
+| consumeWriteStream |                                   Boolean                                    |    -     |  true  | 是否等待 writeStream 完全写完才算响应全部接收完毕                                                                                                                                              |
+| auth               |                                    String                                    |    -     |   -    | 简单登录授权（Basic Authentication）参数，必须按照 user:password 格式设置                                                                                                                      |
+| ca                 |                            String、Buffer、Array                             |    -     |   -    | 证书内容                                                                                                                                                                                       |
+| pfx                |                                String、Buffer                                |    -     |   -    | 包含了私钥, 证书和 CA certs, 一般是 PFX 或者 PKCS12 格式                                                                                                                                       |
+| key                |                                String、Buffer                                |    -     |   -    | PEF 格式的服务器的私钥                                                                                                                                                                         |
+| cert               |                                String、Buffer                                |    -     |   -    | PEM 格式的服务器证书密钥                                                                                                                                                                       |
+| stream             |                                  ReadStream                                  |    -     |   -    | 发送请求正文的可读数据流                                                                                                                                                                       |
+| writeStream        |                                 WriteStream                                  |    -     |   -    | 接受响应数据的可写数据流                                                                                                                                                                       |
+| streaming          |                                   Boolean                                    |    -     | false  | 是否直接返回响应流，开启 streaming 之后，HttpClient 会在拿到响应对象 res 之后马上返回， 此时 result.headers 和 result.status 已经可以读取到，只是没有读取 data 数据而已。                      |
+| encrypt            |                                   Boolean                                    |    否    | false  | 此参数为 vk 新增，是否加密通信 [详情](#encrypt)                                                                                                                                                |     |
+| useProxy           |                                   Boolean                                    |    否    | false  | 此参数为 vk 新增，是否使用代理请求，仅阿里云空间生效                                                                                                                                           |     |
 
 **注意**
 
-默认情况下request接口会尝试将返回数据`JSON.parse(res)`，但需要对方接口返回的数据格式不是JSON，而是普通文本或xml格式，则你需要将 `dataType` 设置为 `text`，如果对方返回的是二进制流，则需要设置 `dataType` 设置为 `default`
+默认情况下 request 接口会尝试将返回数据`JSON.parse(res)`，但需要对方接口返回的数据格式不是 JSON，而是普通文本或 xml 格式，则你需要将 `dataType` 设置为 `text`，如果对方返回的是二进制流，则需要设置 `dataType` 设置为 `default`
 
-接收text示例代码
+接收 text 示例代码
 
 ```js
 let requestRes = await vk.request({
   method: 'POST',
-  url: "https://www.xxx.com/xxx",
+  url: 'https://www.xxx.com/xxx',
   data: {
-    test: 'testValue'
+    test: 'testValue',
   },
   contentType: 'json', // 指定以application/json发送data内的数据
-  dataType: 'text' // 指定返回值为text格式
-})
-console.log(requestRes)
+  dataType: 'text', // 指定返回值为text格式
+});
+console.log(requestRes);
 ```
 
 接收二进制流示例代码
 
 ```js
 let imageBuffer = await vk.request({
-  url: "https://xxxx.xxxx.com/xxx.jpg",
-  method: "GET",
-  dataType: "default"
+  url: 'https://xxxx.xxxx.com/xxx.jpg',
+  method: 'GET',
+  dataType: 'default',
 });
 // 还可以把二进制流转base64
-let base64 = "data:image/png;base64," + imageBuffer.toString('base64');
+let base64 = 'data:image/png;base64,' + imageBuffer.toString('base64');
 ```
 
 ## 前端专属
@@ -1474,12 +1481,11 @@ let base64 = "data:image/png;base64," + imageBuffer.toString('base64');
 
 ```js
 // 简写
-vk.alert("内容");
+vk.alert('内容');
 
 // 完整写法
-vk.alert("内容", "提示", "确定", () => {
+vk.alert('内容', '提示', '确定', () => {
   // 点击确定按钮后的回调
-  
 });
 
 // 多行显示，使用\n进行换行，注意：微信开发者工具调试时不生效，真机运行生效
@@ -1490,18 +1496,16 @@ vk.alert('第一行内容\n第二行内容\n第三行内容');
 
 ```js
 // 简写
-vk.confirm("内容", (res) => {
+vk.confirm('内容', (res) => {
   if (res.confirm) {
     // 点击确定按钮后的回调
-    
   }
 });
 
 // 完整写法
-vk.confirm("内容", "提示", "确定", "取消", (res) => {
+vk.confirm('内容', '提示', '确定', '取消', (res) => {
   if (res.confirm) {
     // 点击确定按钮后的回调
-    
   }
 });
 ```
@@ -1510,62 +1514,63 @@ vk.confirm("内容", "提示", "确定", "取消", (res) => {
 
 ```js
 // 简写
-vk.prompt("请输入", (res) => {
-  if (res.confirm){
+vk.prompt('请输入', (res) => {
+  if (res.confirm) {
     console.log(res.content);
   }
 });
 
 // 完整写法
-vk.prompt("请输入", "提示", "确定", "取消", (res) => {
-  if (res.confirm){
-    console.log(res.content);
-  }
-},"输入框内初始内容");
+vk.prompt(
+  '请输入',
+  '提示',
+  '确定',
+  '取消',
+  (res) => {
+    if (res.confirm) {
+      console.log(res.content);
+    }
+  },
+  '输入框内初始内容'
+);
 ```
 
 #### vk.toast
 
 ```js
 // 简写
-vk.toast("提示内容");
+vk.toast('提示内容');
 // 带图标
-vk.toast("提示内容", "success"); // 带成功的图标
-vk.toast("提示内容", "/static/1.png"); // 带自定义图片
-vk.toast("提示内容", "none", 1000); // 修改时间延迟
+vk.toast('提示内容', 'success'); // 带成功的图标
+vk.toast('提示内容', '/static/1.png'); // 带自定义图片
+vk.toast('提示内容', 'none', 1000); // 修改时间延迟
 // 带回调函数
-vk.toast("提示内容", "none", () => {
-  
-}); 
+vk.toast('提示内容', 'none', () => {});
 // 去除遮罩
-vk.toast("提示内容", "none", false);
+vk.toast('提示内容', 'none', false);
 // 全参数完整写法（最后3个参数的位置顺序没有要求）
-vk.toast("提示内容", "none", 1000, true, () => {
-  
-});
+vk.toast('提示内容', 'none', 1000, true, () => {});
 ```
 
 #### vk.showActionSheet
 
 ```js
 vk.showActionSheet({
-  title: "",
-  list: ["位置", "@好友"],
-  color: "#000000",
-  success: res => {
+  title: '',
+  list: ['位置', '@好友'],
+  color: '#000000',
+  success: (res) => {
     if (res.index == 0) {
-      
     } else if (res.index == 1) {
-      
     }
-  }
+  },
 });
 ```
 
 #### vk.showLoading
 
 ```js
-vk.showLoading("加载中...");
+vk.showLoading('加载中...');
 ```
 
 #### vk.hideLoading
@@ -1574,12 +1579,11 @@ vk.showLoading("加载中...");
 vk.hideLoading();
 ```
 
-
 ### 页面跳转
 
 **与直接用 `uni.navigateTo` 的优势**
 
-使用下方的页面跳转API，框架会自动判断目标页面是否需要登录才能访问。
+使用下方的页面跳转 API，框架会自动判断目标页面是否需要登录才能访问。
 
 如果需要登录，会先到登录页面，登录成功后，再跳转到原本需要访问的页面。
 
@@ -1631,7 +1635,7 @@ checkSharePages: {
 
 #### vk.navigateTo
 
-支持跳转到tab页
+支持跳转到 tab 页
 
 ```js
 vk.navigateTo(url);
@@ -1681,18 +1685,18 @@ vk.navigateToHome();
 
 登录页面即 app.config.js 的 login.url 的值
 
-|参数							|类型			|必填	|默认值	|说明																																									|平台差异说明	|
-|:-:							|:-:			|:-:	|:-:		|:-:																																									|:-:				|
-|mode							|String		|否		|				|跳转页面模式，可选值为 navigateTo redirectTo reLaunch																		|						|
-|needBack					|Boolean	|否		|				|当mode为reLaunch或redirectTo时，登录成功是否需要返回当前页面															|						|
-|redirectUrl			|String		|否		|				|当mode为reLaunch或redirectTo时，指定登录成功后跳转的地址，redirectUrl的优先级高于needBack	|						|
-|query						|String		|否		|				|跳转到登录页面时的url参数，如a=1&b=2（这里的参数值均为字符串）															|						|
-|events						|Object		|否		|				|当mode为navigateTo时，页面间通信接口，用于监听被打开页面发送到当前页面的数据。							|						|
-|animationType		|String		|否		|pop-in	|当mode为navigateTo时，窗口显示的动画效果，详见：窗口动画																	|App				|
-|animationDuration|Number		|否		|300		|当mode为navigateTo时，窗口动画持续时间，单位为 ms																				|App				|
-|success					|Function	|否		|				|接口调用成功的回调函数																																	|						|
-|fail							|Function	|否		|				|接口调用失败的回调函数																																	|						|
-|complete					|Function	|否		|				|接口调用结束的回调函数（调用成功、失败都会执行）																						|						|
+|       参数        |   类型   | 必填 | 默认值 |                                               说明                                                | 平台差异说明 |
+| :---------------: | :------: | :--: | :----: | :-----------------------------------------------------------------------------------------------: | :----------: |
+|       mode        |  String  |  否  |        |                       跳转页面模式，可选值为 navigateTo redirectTo reLaunch                       |              |
+|     needBack      | Boolean  |  否  |        |                当 mode 为 reLaunch 或 redirectTo 时，登录成功是否需要返回当前页面                 |              |
+|    redirectUrl    |  String  |  否  |        | 当 mode 为 reLaunch 或 redirectTo 时，指定登录成功后跳转的地址，redirectUrl 的优先级高于 needBack |              |
+|       query       |  String  |  否  |        |                 跳转到登录页面时的 url 参数，如 a=1&b=2（这里的参数值均为字符串）                 |              |
+|      events       |  Object  |  否  |        |        当 mode 为 navigateTo 时，页面间通信接口，用于监听被打开页面发送到当前页面的数据。         |              |
+|   animationType   |  String  |  否  | pop-in |                   当 mode 为 navigateTo 时，窗口显示的动画效果，详见：窗口动画                    |     App      |
+| animationDuration |  Number  |  否  |  300   |                       当 mode 为 navigateTo 时，窗口动画持续时间，单位为 ms                       |     App      |
+|      success      | Function |  否  |        |                                      接口调用成功的回调函数                                       |              |
+|       fail        | Function |  否  |        |                                      接口调用失败的回调函数                                       |              |
+|     complete      | Function |  否  |        |                         接口调用结束的回调函数（调用成功、失败都会执行）                          |              |
 
 **示例**
 
@@ -1706,7 +1710,7 @@ vk.navigateToLogin();
 
 ```js
 vk.navigateToLogin({
-  mode: "navigateTo"
+  mode: 'navigateTo',
 });
 ```
 
@@ -1714,15 +1718,15 @@ vk.navigateToLogin({
 
 ```js
 vk.navigateToLogin({
-  mode: "navigateTo",
-  query: "a=1&b=2",
+  mode: 'navigateTo',
+  query: 'a=1&b=2',
   events: {
     // 监听登录成功事件
     loginSuccess: (data) => {
       // 当登录页面运行 eventChannel.emit('loginSuccess', {}); 时，会运行这里的代码逻辑。
-      console.log("登录成功");
-    }
-  }
+      console.log('登录成功');
+    },
+  },
 });
 ```
 
@@ -1730,7 +1734,7 @@ vk.navigateToLogin({
 
 ```js
 vk.navigateToLogin({
-  needBack: true
+  needBack: true,
 });
 ```
 
@@ -1738,7 +1742,7 @@ vk.navigateToLogin({
 
 ```js
 vk.navigateToLogin({
-  redirectUrl: `页面地址`
+  redirectUrl: `页面地址`,
 });
 ```
 
@@ -1746,8 +1750,8 @@ vk.navigateToLogin({
 
 ```js
 vk.navigateToLogin({
-  mode: "redirectTo",
-  needBack: true
+  mode: 'redirectTo',
+  needBack: true,
 });
 ```
 
@@ -1755,8 +1759,8 @@ vk.navigateToLogin({
 
 ```js
 vk.navigateToLogin({
-  mode: "redirectTo",
-  redirectUrl: `页面地址`
+  mode: 'redirectTo',
+  redirectUrl: `页面地址`,
 });
 ```
 
@@ -1778,15 +1782,15 @@ setTimeout(() => {
 跳转到抽奖活动小助手的页面，[查看详情](../vk-lucky-draw/#api-client)
 
 ```js
-let activity_id = "685b95a6e9f982fde4835c85"; // 活动id
+let activity_id = '685b95a6e9f982fde4835c85'; // 活动id
 vk.navigateToLuckyDraw({
-  path: `pages/activity/detail/detail?_id=${activity_id}` // 页面地址
+  path: `pages/activity/detail/detail?_id=${activity_id}`, // 页面地址
 });
 ```
 
 #### vk.navigateTo（页面间通信）@navigateTo
 
-##### Vue2写法
+##### Vue2 写法
 
 A 页面跳转 B 页面
 
@@ -1797,17 +1801,16 @@ vk.navigateTo({
     // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
     update: (data) => {
       // 当B页面运行 eventChannel.emit('update', { a:1 }); 时，会运行这里的代码逻辑。
-      
-    }
+    },
   },
   success: (res) => {
     // 通过eventChannel向被打开页面传送数据
-    res.eventChannel.emit('data', { b:2 })
-  }
-})
+    res.eventChannel.emit('data', { b: 2 });
+  },
+});
 ```
 
-B页面接收A页面传过来的数据
+B 页面接收 A 页面传过来的数据
 
 ```js
 // 监听 - 页面每次【加载时】执行(如：前进)
@@ -1816,23 +1819,23 @@ onLoad(options = {}) {
   // 监听data事件，获取上一页面通过eventChannel.emit传送到当前页面的数据
   if (eventChannel.on) {
     eventChannel.on('data', (data) => {
-      
+
     });
   }
 },
 ```
 
-B页面返回时，触发A页面逻辑（如刷新A页面数据）
+B 页面返回时，触发 A 页面逻辑（如刷新 A 页面数据）
 
 ```js
 const eventChannel = this.getOpenerEventChannel();
-if (eventChannel.emit) eventChannel.emit('update', { a:1 }); // 触发A页面 vk.navigateTo 跳转时参数 events 内的 update 监听事件
+if (eventChannel.emit) eventChannel.emit('update', { a: 1 }); // 触发A页面 vk.navigateTo 跳转时参数 events 内的 update 监听事件
 vk.navigateBack();
 ```
 
-##### Vue3写法
+##### Vue3 写法
 
-A 页面跳转 B 页面（这步与Vue2一样）
+A 页面跳转 B 页面（这步与 Vue2 一样）
 
 ```js
 vk.navigateTo({
@@ -1842,16 +1845,16 @@ vk.navigateTo({
     update: (data) => {
       // 当B页面运行 eventChannel.emit('update', { a:1 }); 时，会运行这里的代码逻辑。
       console.log(`A页面：执行监听的update事件`, data);
-    }
+    },
   },
   success: (res) => {
     // 通过eventChannel向被打开页面传送数据
-    res.eventChannel.emit('data', { b:2 })
-  }
+    res.eventChannel.emit('data', { b: 2 });
+  },
 });
 ```
 
-B页面接收A页面传过来的数据，并在B页面返回时，触发A页面逻辑（如刷新A页面数据）
+B 页面接收 A 页面传过来的数据，并在 B 页面返回时，触发 A 页面逻辑（如刷新 A 页面数据）
 
 ```vue
 <script setup>
@@ -1859,7 +1862,7 @@ B页面接收A页面传过来的数据，并在B页面返回时，触发A页面�
   import { getCurrentInstance } from 'vue';
   const vk = uni.vk;
   const instance = getCurrentInstance().proxy;
-  
+
   // 监听 - 页面每次【加载时】执行(如：前进)
   onLoad((options) => {
     const eventChannel = instance.getOpenerEventChannel();
@@ -1870,7 +1873,7 @@ B页面接收A页面传过来的数据，并在B页面返回时，触发A页面�
       });
     }
   });
-  
+
   // 返回页面的函数，在需要返回的时候执行，如 navigateBack({ a:1 });
   const navigateBack = (options) => {
     const eventChannel = instance.getOpenerEventChannel();
@@ -1884,12 +1887,12 @@ B页面接收A页面传过来的数据，并在B页面返回时，触发A页面�
 
 #### $hasRole
 
-判断当前登录的用户是否有此角色（此函数可在client端和admin端使用）
+判断当前登录的用户是否有此角色（此函数可在 client 端和 admin 端使用）
 
 **接口名**
 
 ```js
-$hasRole(...args)
+$hasRole(...args);
 ```
 
 **参数**
@@ -1903,7 +1906,7 @@ false：用户没有传入的任何一个角色，或者数组内的所有角色
 
 **在 js 中使用示例**
 
-以下代码表示：用户是否有角色 user-read 或 admin 或 同时拥有a和b
+以下代码表示：用户是否有角色 user-read 或 admin 或 同时拥有 a 和 b
 
 ```js
 if (this.$hasRole('admin', 'user-manage', ['a', 'b'])) {
@@ -1917,16 +1920,16 @@ if (this.$hasRole('admin', 'user-manage', ['a', 'b'])) {
 
 ```vue
 <template>
-	<view class="app">
-		<button v-if="$hasRole('admin','user-manage')">查看</button>
-		<button v-if="$hasRole('admin','user-manage')">修改</button>
-	</view>
+  <view class="app">
+    <button v-if="$hasRole('admin', 'user-manage')">查看</button>
+    <button v-if="$hasRole('admin', 'user-manage')">修改</button>
+  </view>
 </template>
 ```
 
 #### $hasPermission
 
-判断当前登录的用户是否有此权限（此函数只有admin端可用）
+判断当前登录的用户是否有此权限（此函数只有 admin 端可用）
 
 **在 js 中使用**
 
@@ -1942,25 +1945,25 @@ if (this.$hasRole('admin') || this.$hasPermission('user-update')) {
 
 ```vue
 <template>
-	<view class="app">
-		<button v-if="$hasRole('admin') || $hasPermission('user-read'))">查看</button>
-		<button v-if="$hasRole('admin') || $hasPermission('user-update'))">修改</button>
-	</view>
+  <view class="app">
+    <button v-if="$hasRole('admin') || $hasPermission('user-read'))">查看</button>
+    <button v-if="$hasRole('admin') || $hasPermission('user-update'))">修改</button>
+  </view>
 </template>
 ```
 
 ### 事件函数
 
-> 事件函数API需要vk-unicloud核心库版本 >= 2.16.0
+> 事件函数 API 需要 vk-unicloud 核心库版本 >= 2.16.0
 
 #### vk.notifyEventReady
 
 通知特定事件已准备就绪，并将数据传递给 `vk.awaitEventReady` 注册的回调函数。一定会在 `vk.awaitEventReady` 函数被调用之前触发。
 
 ```js
-vk.notifyEventReady("事件名", {
+vk.notifyEventReady('事件名', {
   a: 1,
-  b: "2"
+  b: '2',
 });
 ```
 
@@ -1977,15 +1980,15 @@ vk.notifyEventReady("事件名", {
 **回调形式**
 
 ```js
-vk.awaitEventReady("事件名", (data)=>{
-  console.log('onLaunch-awaitEventReady: ', data)
+vk.awaitEventReady('事件名', (data) => {
+  console.log('onLaunch-awaitEventReady: ', data);
 });
 ```
 
 **Promise 方式**
 
 ```js
-vk.awaitEventReady("事件名").then((data)=>{
+vk.awaitEventReady('事件名').then((data) => {
   console.log('onLaunch-awaitEventReady: ', data);
 });
 ```
@@ -1993,7 +1996,7 @@ vk.awaitEventReady("事件名").then((data)=>{
 **async/await 方式**
 
 ```js
-let data = await vk.awaitEventReady("事件名"); 
+let data = await vk.awaitEventReady('事件名');
 console.log('onLaunch-awaitEventReady: ', data);
 ```
 
@@ -2022,23 +2025,23 @@ async onLoad(){
 
 #### vk.checkEventReady
 
-检查事件是否已准备就绪，如果事件已准备就绪，它会返回true；否则，它将返回false
+检查事件是否已准备就绪，如果事件已准备就绪，它会返回 true；否则，它将返回 false
 
 ```js
-if (vk.checkEventReady("事件名")) {
-  console.log("已准备就绪");
+if (vk.checkEventReady('事件名')) {
+  console.log('已准备就绪');
 } else {
-  console.log("未准备就绪");
+  console.log('未准备就绪');
 }
 ```
 
 #### vk.getEventReadyData
 
-获取事件就绪时的参数（如果未就绪，会返回null，此API不会等待事件就绪）
+获取事件就绪时的参数（如果未就绪，会返回 null，此 API 不会等待事件就绪）
 
 ```js
-let data = vk.getEventReadyData("事件名");
-console.log('data: ', data)
+let data = vk.getEventReadyData('事件名');
+console.log('data: ', data);
 ```
 
 ### 全局配置
@@ -2051,9 +2054,8 @@ console.log('data: ', data)
 // 获取所有配置
 let config = vk.getConfig();
 // 获取指定配置
-let url = vk.getConfig("login.url");
+let url = vk.getConfig('login.url');
 ```
-
 
 ### 其他
 
@@ -2073,14 +2075,14 @@ let url = vk.getConfig("login.url");
  */
 vk.pubfn.getListData({
   that: this,
-  url: "db_test/pub/select",
-  listName: "rows",
+  url: 'db_test/pub/select',
+  listName: 'rows',
   data: {
-    a: 1
+    a: 1,
   },
   dataPreprocess: (list) => {
     return list;
-  }
+  },
 });
 ```
 
@@ -2095,16 +2097,19 @@ vk.pubfn.getListData({
  *
  */
 
- // 代码示例
- // 如:放置一个动态数据的 公告组件 和 一个轮播图组件
- // view  核心:自定义组件接收一个 Object 类型的属性 datas
+// 代码示例
+// 如:放置一个动态数据的 公告组件 和 一个轮播图组件
+// view  核心:自定义组件接收一个 Object 类型的属性 datas
 ```
 
 ```html
-  <vk-u-notice-bar :datas='componentsDynamic["notice-bar-01"]'></vk-u-notice-bar>
-  <vk-u-swiper :datas='componentsDynamic["index-swiper-01"]' :custom-datas='{
+<vk-u-notice-bar :datas='componentsDynamic["notice-bar-01"]'></vk-u-notice-bar>
+<vk-u-swiper
+  :datas='componentsDynamic["index-swiper-01"]'
+  :custom-datas='{
     "height":600,
-  }'></vk-u-swiper>
+  }'
+></vk-u-swiper>
 ```
 
 ```js
@@ -2136,21 +2141,19 @@ this.vk.pubfn.getComponentsDynamicData({
 vk.pubfn.getCurrentPage();
 ```
 
-#### vk.pubfn.fileToBase64（文件转base64）@fileToBase64
+#### vk.pubfn.fileToBase64（文件转 base64）@fileToBase64
 
 ```js
 /**
  * 文件转base64
  */
 vk.pubfn.fileToBase64({
-  file:res.tempFiles[0],
-  success: (base64) => {
-
-  }
+  file: res.tempFiles[0],
+  success: (base64) => {},
 });
 ```
 
-#### vk.pubfn.base64ToFile（base64转文件）@base64ToFile
+#### vk.pubfn.base64ToFile（base64 转文件）@base64ToFile
 
 ```js
 /**
@@ -2158,15 +2161,13 @@ vk.pubfn.fileToBase64({
  */
 vk.pubfn.base64ToFile({
   base64: base64,
-  success: (file) => {
-
-  }
+  success: (file) => {},
 });
 ```
 
-#### vk.pubfn.parseXlsxFile（前端解析Excel文件数据）@parseXlsxFile
+#### vk.pubfn.parseXlsxFile（前端解析 Excel 文件数据）@parseXlsxFile
 
-> vk-unicloud核心库版本 >= 2.20.2
+> vk-unicloud 核心库版本 >= 2.20.2
 > 仅 vk-admin 端可用
 
 ```js
@@ -2176,16 +2177,17 @@ vk.pubfn.base64ToFile({
  * @param {Number} index - 工作表索引，默认0
  * @param {Number} mode - 返回格式：1-返回对象数组，2-返回二维数组 默认 1
  */
-vk.pubfn.parseXlsxFile({ 
-  file: file, 
-  mode: 1
-})
-.then((result) => {
-  console.log('result: ', result);
-})
-.catch((err) => {
-  console.error('err: ', err);
-});
+vk.pubfn
+  .parseXlsxFile({
+    file: file,
+    mode: 1,
+  })
+  .then((result) => {
+    console.log('result: ', result);
+  })
+  .catch((err) => {
+    console.error('err: ', err);
+  });
 ```
 
 ## 云函数专属
@@ -2199,14 +2201,14 @@ vk.pubfn.parseXlsxFile({
 ```js
 /**
  * 并发执行函数
- * 
+ *
  * @typedef {Object} BatchRunResult
  * @property {Array} stack - 执行结果数组（按任务顺序排列）
  * @property {number} total - 总任务数
  * @property {number} concurrency - 实际使用的并发数
  * @description BatchRunResult 说明：
  *   - stack 项规则：任务成功时为 main 函数返回值；任务失败时为 { code: err.code, msg: err.message }
- * 
+ *
  * @param {Object} options - 配置项
  * @param {Function|Array<Function>} options.main - 主执行函数
  * @param {Array} [options.data=[]] - 单函数模式的数据源（函数数组模式下无效）
@@ -2214,13 +2216,13 @@ vk.pubfn.parseXlsxFile({
  * @description 执行模式说明：
  *   1. 单函数模式：main 为单个 async 函数，接收 (item, index) 参数，遍历 data 逐项执行
  *   2. 函数数组模式：main 为 async 函数数组（每个函数无参数），此时 data 参数无效
- * 
+ *
  * @returns {Promise<BatchRunResult>} 执行结果
  */
 await vk.pubfn.batchRun(options);
 ```
 
-注意：`concurrency` 并不是越大越好，太大可能会卡死（一次性并发太多请求可能反而会卡死，且大部分三方api其实是有并发限制的）。
+注意：`concurrency` 并不是越大越好，太大可能会卡死（一次性并发太多请求可能反而会卡死，且大部分三方 api 其实是有并发限制的）。
 
 **有数据源形式**
 
@@ -2232,22 +2234,12 @@ let batchRunRes = await vk.pubfn.batchRun({
   main: async (item, index) => {
     await vk.pubfn.sleep((Math.floor(Math.random() * (3 - 0)) + 0) * 100);
     console.log(index, item);
-    return { code:0, index }
+    return { code: 0, index };
   },
   // 最大并发量，如果设置为1，则会按顺序执行
-  concurrency: 50, 
+  concurrency: 50,
   // 数据源，这些数据会依次跑一遍main函数
-  data: [
-    { a: 1 }, 
-    { a: 2 }, 
-    { a: 3 },
-    { a: 4 },
-    { a: 5 },
-    { a: 6 }, 
-    { a: 7 },
-    { a: 8 },
-    { a: 9 }
-  ],
+  data: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 6 }, { a: 7 }, { a: 8 }, { a: 9 }],
 });
 ```
 
@@ -2265,41 +2257,41 @@ let batchRunRes = await vk.pubfn.batchRun({
     async () => {
       return await vk.daoCenter.goodsDao.count({
         status: 1,
-        is_on_sale: true
+        is_on_sale: true,
       });
     },
     // 已下架的商品数量
     async () => {
       return await vk.daoCenter.goodsDao.count({
         status: 1,
-        is_on_sale: false
+        is_on_sale: false,
       });
     },
     // 回收站内的商品数量
     async () => {
       return await vk.daoCenter.goodsDao.count({
-        status: 2
+        status: 2,
       });
     },
     // 已售罄的商品数量
     async () => {
       return await vk.daoCenter.goodsDao.count({
         status: 1,
-        stock: _.lte(0)
+        stock: _.lte(0),
       });
     },
   ],
   // 最大并发量，如果设置为1，则会按顺序执行
-  concurrency: 10
+  concurrency: 10,
 });
 res.group = batchRunRes.stack;
 // 业务逻辑结束-----------------------------------------------------------
 return res;
 ```
 
-### vk.pubfn.getUniCloudRequestId（获取请求id）@getUniCloudRequestId
+### vk.pubfn.getUniCloudRequestId（获取请求 id）@getUniCloudRequestId
 
-获取本次云函数请求id（只有云端云函数才有，本地云函数无法获取请求id）
+获取本次云函数请求 id（只有云端云函数才有，本地云函数无法获取请求 id）
 
 ```js
 let request_id = vk.pubfn.getUniCloudRequestId();
@@ -2307,7 +2299,7 @@ let request_id = vk.pubfn.getUniCloudRequestId();
 
 ### vk.pubfn.randomAsync（产生不重复随机数）@randomAsync
 
-（异步）产生指定位数的不重复随机数（支持任意字符，s默认纯数字）
+（异步）产生指定位数的不重复随机数（支持任意字符，s 默认纯数字）
 
 ```js
 /**
@@ -2320,18 +2312,23 @@ let request_id = vk.pubfn.getUniCloudRequestId();
 await vk.pubfn.randomAsync(length, range, fn, maxRetryCount);
 ```
 
-**以下是产生用户6位数分享码的具体代码**
+**以下是产生用户 6 位数分享码的具体代码**
 
 特意从可选字符中去除 0、1、I、O
 
 ```js
-let randomStr = await vk.pubfn.randomAsync(6, "23456789ABCDEFGHJKLMNPQRSTUVWXYZ", async (val)=>{
-  let num = await vk.baseDao.count({
-    dbName:"uni-id-users",
-    whereJson:{
-      my_invite_code: val
-    }
-  });
-  return num === 0 ? true : false;
-}, 10); // 最大重试10次
+let randomStr = await vk.pubfn.randomAsync(
+  6,
+  '23456789ABCDEFGHJKLMNPQRSTUVWXYZ',
+  async (val) => {
+    let num = await vk.baseDao.count({
+      dbName: 'uni-id-users',
+      whereJson: {
+        my_invite_code: val,
+      },
+    });
+    return num === 0 ? true : false;
+  },
+  10
+); // 最大重试10次
 ```

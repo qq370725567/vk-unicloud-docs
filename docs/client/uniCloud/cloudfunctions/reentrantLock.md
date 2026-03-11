@@ -19,7 +19,7 @@ sidebarDepth: 0
 
 **注意事项**
 
-1. 锁的唯一标识：锁的id参数应该确保相对唯一性，以避免不同的资源使用了相同的锁标识导致错误的同步。
+1. 锁的唯一标识：锁的 id 参数应该确保相对唯一性，以避免不同的资源使用了相同的锁标识导致错误的同步。
 2. 超时设置：合理设置超时时间，以确保在异常情况下锁能够被自动释放，同时避免过短的超时导致锁过早释放。
 
 ## 示例代码
@@ -27,32 +27,32 @@ sidebarDepth: 0
 下方代码只能在云函数或云对象中执行
 
 ```js
-let lockId = "001"; // 锁的id
+let lockId = '001'; // 锁的id
 
 // 获得锁的实例
 const lockManage = vk.getReentrantLockManage({
-	id: lockId, // 锁的id
-	timeout: 5, // 锁的超时时间，超时后强制归还锁，单位秒，0代表永不超时，默认5秒
+  id: lockId, // 锁的id
+  timeout: 5, // 锁的超时时间，超时后强制归还锁，单位秒，0代表永不超时，默认5秒
 });
 
 // 尝试获取锁
 let lock = await lockManage.lock();
 if (!lock) {
-	return { code: -1, msg: `${lockId}锁已被占用` };
+  return { code: -1, msg: `${lockId}锁已被占用` };
 }
 // 注意必须 try 包裹，防止自己的代码出现异常，锁无法及时归还
 try {
-	console.log("自己的逻辑-开始");
-	await vk.pubfn.sleep(1000);
-	console.log("自己的逻辑-结束");
+  console.log('自己的逻辑-开始');
+  await vk.pubfn.sleep(1000);
+  console.log('自己的逻辑-结束');
 } finally {
-	// 归还锁
-	await lock.unlock();
+  // 归还锁
+  await lock.unlock();
 }
 return {
   code: 0,
-  msg: "成功拿到了锁"
-}
+  msg: '成功拿到了锁',
+};
 ```
 
 **前端模拟并发测试**
@@ -64,14 +64,10 @@ for (let i = 0; i < 3; i++) {
     url: '你的云函数地址',
     title: '请求中...',
     data: {
-      index: i
+      index: i,
     },
-    success: (data) => {
-      
-    },
-    fail: (err) => {
-      
-    }
+    success: (data) => {},
+    fail: (err) => {},
   });
 }
 ```

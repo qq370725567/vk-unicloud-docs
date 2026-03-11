@@ -33,12 +33,12 @@ sidebarDepth: 0
 │ ──── └── kh───────────────────# kh函数为必须登录后才能访问的函数
 │ ──── └── pub──────────────────# pub函数为所有人都可以访问,不限制
 │ ──── └── util─────────────────# 订单服务专用的工具包
-│ ── └── xxxxxxxxxxxxxxx──────# 
-│ ── └── xxxxxxxxxxxxxxx──────# 
+│ ── └── xxxxxxxxxxxxxxx──────#
+│ ── └── xxxxxxxxxxxxxxx──────#
 │ └── common───────────────# 公共逻辑（公共接口）
-│ ── └── xxxxxxxxxxxxxxxx─────# 
-│ ── └── xxxxxxxxxxxxxxxx─────# 
-│ ── └── xxxxxxxxxxxxxxxx─────# 
+│ ── └── xxxxxxxxxxxxxxxx─────#
+│ ── └── xxxxxxxxxxxxxxxx─────#
+│ ── └── xxxxxxxxxxxxxxxx─────#
 │ └── user─────────────────# 统一用户中心服务(已集成uniID)（用户中心作为核心，且为了方便插件升级,故与admin和client平级）
 │ ── └── kh───────────────────# kh函数为必须登录后才能访问的函数(客户端用户)
 │ ── └── pub──────────────────# pub函数为所有人都可以访问,不限制
@@ -57,5 +57,3 @@ sidebarDepth: 0
 │ └── muban_easy.js────────# 云函数模板（简易版）
 └─────────────────────────────────
 ```
-
- 

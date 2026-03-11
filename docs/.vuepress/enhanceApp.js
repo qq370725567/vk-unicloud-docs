@@ -2,7 +2,7 @@ export default ({ router, Vue }) => {
   if (typeof process === 'undefined') {
     router.onReady(() => {
       const { app } = router;
-      app.$once("hook:mounted", () => {
+      app.$once('hook:mounted', () => {
         // 插入横幅广告到左侧菜单
         insertBannerToSidebar();
         setTimeout(() => {
@@ -21,7 +21,7 @@ export default ({ router, Vue }) => {
       });
     });
   }
-}
+};
 
 // 插入横幅广告到左侧菜单的函数
 function insertBannerToSidebar() {

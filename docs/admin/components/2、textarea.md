@@ -19,23 +19,23 @@
 
 ### 组件属性@props
 
-| 参数							| 说明															| 类型			| 默认值		| 可选值									|
-|------------------	|-------------------------------	|---------|--------	|-------								|
-| maxlength					| 最大输入长度											| Number	| -				| -											|
-| showWordLimit			| 是否显示输入字数统计								| Boolean	| false		| true									|
-| readonly					| 原生属性，是否只读									| boolean	|  false	| true									|
-| autosize					| 自适应内容高度										| object	| -				| -											|
-| trimMode（1.21.0）| 空格过滤模式 [传送门](#trim-mode)	| String	| trim		| trim、removeAll、none	|
+| 参数               | 说明                              | 类型    | 默认值 | 可选值                |
+| ------------------ | --------------------------------- | ------- | ------ | --------------------- |
+| maxlength          | 最大输入长度                      | Number  | -      | -                     |
+| showWordLimit      | 是否显示输入字数统计              | Boolean | false  | true                  |
+| readonly           | 原生属性，是否只读                | boolean | false  | true                  |
+| autosize           | 自适应内容高度                    | object  | -      | -                     |
+| trimMode（1.21.0） | 空格过滤模式 [传送门](#trim-mode) | String  | trim   | trim、removeAll、none |
 
 #### trimMode（空格过滤模式）@trim-mode
 
-> vk-unicloud-admin-ui 的npm依赖版本需 >= 1.21.0
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.21.0
 
-| 值								| 说明														|
-|------------------	|-------------------------------|
-| trim							| 过滤前后空格										|
-| removeAll					| 过滤所有空格										|
-| none							| 不过滤，保持原值								|
+| 值        | 说明             |
+| --------- | ---------------- |
+| trim      | 过滤前后空格     |
+| removeAll | 过滤所有空格     |
+| none      | 不过滤，保持原值 |
 
 ### 万能表格使用方式@table
 

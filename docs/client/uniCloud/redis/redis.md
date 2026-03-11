@@ -2,6 +2,6 @@
 sidebarDepth: 0
 ---
 
-# Redis扩展
+# Redis 扩展
 
 [点击查看](https://vkdoc.fsq.pub/vk-redis/)

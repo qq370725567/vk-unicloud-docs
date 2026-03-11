@@ -1,25 +1,28 @@
 # 代码块快捷提示
 
 ### 效果
-#### 在 `script` 内输入vk
+
+#### 在 `script` 内输入 vk
+
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/3d2824ab-d034-48be-9fff-f49edde50921.png)
 
-#### 在 `云函数` 内输入dao.
+#### 在 `云函数` 内输入 dao.
+
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/fe965ad9-e9ed-44fc-ad0b-5bc286988e09.png)
 
-#### 在 `template` 内输入vk
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/7a8db184-f842-4576-baa5-bbae0f5cb52f.png)
+#### 在 `template` 内输入 vk
 
+![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/7a8db184-f842-4576-baa5-bbae0f5cb52f.png)
 
 ### 安装代码快捷提示步骤
 
 ### 自动安装
 
-直接安装VK框架快速开发辅助工具 [传送门](https://ext.dcloud.net.cn/plugin?id=6663)
- 
+直接安装 VK 框架快速开发辅助工具 [传送门](https://ext.dcloud.net.cn/plugin?id=6663)
+
 ### 手动安装
 
-* 1、将下方代码 复制到 hbx 工具 - 代码块设置 - javascript代码块
+- 1、将下方代码 复制到 hbx 工具 - 代码块设置 - javascript 代码块
 
 ```js
 // 将下方代码复制到 hbx 工具 - 代码块设置 - javascript代码块
@@ -879,7 +882,7 @@
 		"triggerAssist": false,
 		"description": "数组过滤"
 	},
-	
+
 	"保留两位小数": {
 	 "prefix": "qq.",
 	 "body": [
@@ -1390,12 +1393,12 @@
 		"triggerAssist": false,
 		"description": "连表"
 	}
-	
+
 }
 
 ```
 
-* 2、将下方代码  复制到 hbx 工具 - 代码块设置 - vue代码块
+- 2、将下方代码 复制到 hbx 工具 - 代码块设置 - vue 代码块
 
 ```js
 // 将下方代码复制到 hbx 工具 - 代码块设置 - vue代码块
@@ -1595,6 +1598,3 @@
 }
 
 ```
-
-
-

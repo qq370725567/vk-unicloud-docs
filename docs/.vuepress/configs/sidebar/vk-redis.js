@@ -1,9 +1,7 @@
-module.exports = [{
-  title: 'Redis扩展',
-  collapsable: false,
-  children: [
-    '',
-    'quickstart',
-    'api'
-  ]
-}]
+module.exports = [
+  {
+    title: 'Redis扩展',
+    collapsable: false,
+    children: ['', 'quickstart', 'api'],
+  },
+];

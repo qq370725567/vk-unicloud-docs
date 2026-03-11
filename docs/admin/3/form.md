@@ -6,23 +6,23 @@ sidebarDepth: 1
 
 ## 组件名：vk-data-form
 
-### 核心思想：通过JSON配置渲染规则
+### 核心思想：通过 JSON 配置渲染规则
 
-如：渲染一个input输入框,只需要如下代码
+如：渲染一个 input 输入框,只需要如下代码
 
- ```js
+```js
 { key: "nickname", title: "昵称", type: "text" }
 ```
 
 渲染一个单选框组,只需要如下代码
 
- ```js
+```js
 {
-  key: "gender", title: "性别", type: "radio",
-  data: [
-    { value: 1, label: "男" },
-    { value: 2, label: "女" }
-  ]
+ key: "gender", title: "性别", type: "radio",
+ data: [
+   { value: 1, label: "男" },
+   { value: 2, label: "女" }
+ ]
 }
 ```
 
@@ -30,15 +30,10 @@ sidebarDepth: 1
 
 ## 基础用法@base
 
-vk-data-dialog为弹窗表单，去掉则为表单页面
+vk-data-dialog 为弹窗表单，去掉则为表单页面
 
 ```html
-<vk-data-dialog
-  v-model="form1.props.show"
-  title="表单标题"
-  width="600px"
-  mode="form"
->
+<vk-data-dialog v-model="form1.props.show" title="表单标题" width="600px" mode="form">
   <vk-data-form
     ref="form1"
     v-model="form1.data"
@@ -53,7 +48,9 @@ vk-data-dialog为弹窗表单，去掉则为表单页面
   ></vk-data-form>
 </vk-data-dialog>
 ```
-js部分
+
+js 部分
+
 ```js
 export default {
   data() {
@@ -64,50 +61,52 @@ export default {
         // 表单请求数据，此处可以设置默认值
         data: {
           radio: 1,
-          checkbox : [1,2]
+          checkbox: [1, 2],
         },
         // 表单属性
         props: {
           // 表单请求地址
-          action: "template/test/sys/test",
+          action: 'template/test/sys/test',
           // 表单字段显示规则
           columns: [
-            { key: "text", title: "text类型字段", type: "text" },
-            { key: "number", title: "number类型字段", type: "number" },
-            { 
-              key: "radio", title: "radio类型字段", type: "radio",
+            { key: 'text', title: 'text类型字段', type: 'text' },
+            { key: 'number', title: 'number类型字段', type: 'number' },
+            {
+              key: 'radio',
+              title: 'radio类型字段',
+              type: 'radio',
               data: [
-                { value: 1, label: "选项一" },
-                { value: 2, label: "选项二" },
-              ]
+                { value: 1, label: '选项一' },
+                { value: 2, label: '选项二' },
+              ],
             },
-            { 
-              key: "checkbox", title: "checkbox类型字段", type: "checkbox",
+            {
+              key: 'checkbox',
+              title: 'checkbox类型字段',
+              type: 'checkbox',
               data: [
-                { value: 1, label: "选项一" },
-                { value: 2, label: "选项二" },
-              ]
+                { value: 1, label: '选项一' },
+                { value: 2, label: '选项二' },
+              ],
             },
-            { key: "switch", title: "switch类型字段", type: "switch" }
+            { key: 'switch', title: 'switch类型字段', type: 'switch' },
           ],
           // 表单验证规则
           rules: {
-            text: [
-              { required: true, message: "text不能为空", trigger: "change" },
-            ]
+            text: [{ required: true, message: 'text不能为空', trigger: 'change' }],
           },
           // add 代表添加 update 代表修改
-          formType: "",
+          formType: '',
           // 表单是否在请求中
           loading: false,
           // 是否显示表单1 的弹窗
-          show: false
-        }
+          show: false,
+        },
       },
       // 表单相关结束-----------------------------------------------------------
     };
-  }
-}
+  },
+};
 ```
 
 ## 进阶用法@pro
@@ -118,56 +117,55 @@ export default {
 
 ## 属性@props
 
-| 参数							| 说明																																																				| 类型							| 默认值			| 可选值					|
-|------------------	|-----------------------																																										|---------				|--------		|-------				|
-| v-model						| 表单数据源																																																	| Object					| {}				| -							|
-| rules							| 表单验证规则 [查看规则](#rules)																																							| Object					| 无					| -							|
-| action						| 表单提交地址，支持：<br/>1、vk框架下的云函数地址 <br/>2、http请求地址<br/>3、[自定义function请求模式](#function)	| String、Function	| 无					| -							|
-| before-action			| action请求前拦截器 [查看示例代码](#before-action)																														| Function				| 无					| -							|
-| is-request				| 是否是http请求模式 [查看http请求模式](#http)																																	| Boolean					| false			| true					|
-| form-type					| 表单类型，用于复用表单 [查看表单复用](#columns-show)																													| String					| 无					| -							|
-| columns						| 通用 - 字段规则 [查看columns](#columns)																																			| Array						| []				| -							|
-| loading						| 表单是否在请求中																																														| Boolean					| false			| true					|
-| label-width				| 左侧label宽度																																															| String,Number		| "80px"		| -							|
-| width							| 表单宽度																																																		| Number,String		| 无					| -							|
-| footer-show				| 底部按钮是否显示																																														| Boolean					| true			| false					|
-| footer-center			| 底部按钮是否居中																																														| Boolean					| true			| false					|
-| show-cancel				| 是否显示取消按钮																																														| Boolean					| true			| false					|
-| cancel-text				| 取消按钮的文字																																															| String					| 关 闭			| -							|
-| submit-text				| 确定按钮的文字																																															| String					| 确 定			| -							|
-| submit-disabled		| 确定按钮是否禁用																																														| Boolean					| false			| true					|
-| auto-close				| 表单请求成功后自动关闭																																												| Boolean					| true			| false					|
-| label-position		| 对齐方式																																																		| String					| right			| right left top|
-| max-height				| 表单最大高度																																																| String					| 无					| -							|
-| size							| 表单内组件的size																																														| String					| 无					| -							|
-| label-suffix			| label的后缀																																																| String					| 无					| -							|
-| disabled					| 禁用表单																																																		| Boolean					| false			| true					|
-| clearable					| 表单内的组件有清空效果																																												| Boolean					| true			| false					|
-| success-msg				| 表单提交成功后右上角的提示																																										| String					| 操作成功！	| -							|
-| inline						| 是否设置整个表单为横向表单																																										| Boolean					| false			| true					|
-| columns-number		| 横向表单每行显示数量																																													| Number					| 2					| -							|
-| need-alert				| 表单请求失败后，是否自动alert弹窗（若设为false，则可以通过监听fail事件自己处理错误）															|Boolean					| true			| false					|
-| encrypt-action		| 是否加密请求	[查看encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)	|Boolean					| false			| true					|
+| 参数            | 说明                                                                                                                 | 类型             | 默认值     | 可选值         |
+| --------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------- | -------------- |
+| v-model         | 表单数据源                                                                                                           | Object           | {}         | -              |
+| rules           | 表单验证规则 [查看规则](#rules)                                                                                      | Object           | 无         | -              |
+| action          | 表单提交地址，支持：<br/>1、vk 框架下的云函数地址 <br/>2、http 请求地址<br/>3、[自定义 function 请求模式](#function) | String、Function | 无         | -              |
+| before-action   | action 请求前拦截器 [查看示例代码](#before-action)                                                                   | Function         | 无         | -              |
+| is-request      | 是否是 http 请求模式 [查看 http 请求模式](#http)                                                                     | Boolean          | false      | true           |
+| form-type       | 表单类型，用于复用表单 [查看表单复用](#columns-show)                                                                 | String           | 无         | -              |
+| columns         | 通用 - 字段规则 [查看 columns](#columns)                                                                             | Array            | []         | -              |
+| loading         | 表单是否在请求中                                                                                                     | Boolean          | false      | true           |
+| label-width     | 左侧 label 宽度                                                                                                      | String,Number    | "80px"     | -              |
+| width           | 表单宽度                                                                                                             | Number,String    | 无         | -              |
+| footer-show     | 底部按钮是否显示                                                                                                     | Boolean          | true       | false          |
+| footer-center   | 底部按钮是否居中                                                                                                     | Boolean          | true       | false          |
+| show-cancel     | 是否显示取消按钮                                                                                                     | Boolean          | true       | false          |
+| cancel-text     | 取消按钮的文字                                                                                                       | String           | 关 闭      | -              |
+| submit-text     | 确定按钮的文字                                                                                                       | String           | 确 定      | -              |
+| submit-disabled | 确定按钮是否禁用                                                                                                     | Boolean          | false      | true           |
+| auto-close      | 表单请求成功后自动关闭                                                                                               | Boolean          | true       | false          |
+| label-position  | 对齐方式                                                                                                             | String           | right      | right left top |
+| max-height      | 表单最大高度                                                                                                         | String           | 无         | -              |
+| size            | 表单内组件的 size                                                                                                    | String           | 无         | -              |
+| label-suffix    | label 的后缀                                                                                                         | String           | 无         | -              |
+| disabled        | 禁用表单                                                                                                             | Boolean          | false      | true           |
+| clearable       | 表单内的组件有清空效果                                                                                               | Boolean          | true       | false          |
+| success-msg     | 表单提交成功后右上角的提示                                                                                           | String           | 操作成功！ | -              |
+| inline          | 是否设置整个表单为横向表单                                                                                           | Boolean          | false      | true           |
+| columns-number  | 横向表单每行显示数量                                                                                                 | Number           | 2          | -              |
+| need-alert      | 表单请求失败后，是否自动 alert 弹窗（若设为 false，则可以通过监听 fail 事件自己处理错误）                            | Boolean          | true       | false          |
+| encrypt-action  | 是否加密请求 [查看 encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)                            | Boolean          | false      | true           |
 
 ### columns（字段渲染规则）@columns
 
-columns是一个数组，数组内每个元素有以下属性，每个元素代表一个表单元素
+columns 是一个数组，数组内每个元素有以下属性，每个元素代表一个表单元素
 
-| 参数				| 说明																																							| 类型											| 默认值| 可选值|
-|-------			|-----------																																				|---------									|-------|-------|
-| key					| 字段名  [查看](#columns-key)																												| String										| -			| -			|
-| title				| 字段显示的名称  [查看](#columns-title)																								| String										| -			| -			|
-| type				| 组件类型    [查看](#columns-type)																								| String										| -			| -			|
-| width				| 宽度      [查看](#columns-width)																											| Number										| -			| -			|
-| placeholder	| 占位符  [查看](#columns-placeholder)																								| String										| -			| -			|
-| tips				| 下方的提示  [查看](#columns-tips)																					| String										| 无		| -			|
-| labelWidth	| 单独设置该字段的左侧label宽度，单位px [查看](#columns-label-width)		| Number										| -			| -			|
-| showLabel		|  是否显示左侧label文字 [查看](#columns-show-label)														| Boolean										| true	| false	|
-| show				| 表单复用时的显示规则 [查看](#columns-show)																| array											| -			| -			|
-| showRule		|  是否显示该字段  [查看](#columns-show-rule)																	| String、Function					| -			| -			|
-| disabled		|  是否禁用 [查看](#columns-disabled)																				| Boolean、String、Function	| false	| true	|
-| watch				| 监听key对应的值的改变（只监听组件内部造成的值的改变） [查看](#columns-watch)					| Function									| -			| -			|
-
+| 参数        | 说明                                                                           | 类型                      | 默认值 | 可选值 |
+| ----------- | ------------------------------------------------------------------------------ | ------------------------- | ------ | ------ |
+| key         | 字段名 [查看](#columns-key)                                                    | String                    | -      | -      |
+| title       | 字段显示的名称 [查看](#columns-title)                                          | String                    | -      | -      |
+| type        | 组件类型 [查看](#columns-type)                                                 | String                    | -      | -      |
+| width       | 宽度 [查看](#columns-width)                                                    | Number                    | -      | -      |
+| placeholder | 占位符 [查看](#columns-placeholder)                                            | String                    | -      | -      |
+| tips        | 下方的提示 [查看](#columns-tips)                                               | String                    | 无     | -      |
+| labelWidth  | 单独设置该字段的左侧 label 宽度，单位 px [查看](#columns-label-width)          | Number                    | -      | -      |
+| showLabel   | 是否显示左侧 label 文字 [查看](#columns-show-label)                            | Boolean                   | true   | false  |
+| show        | 表单复用时的显示规则 [查看](#columns-show)                                     | array                     | -      | -      |
+| showRule    | 是否显示该字段 [查看](#columns-show-rule)                                      | String、Function          | -      | -      |
+| disabled    | 是否禁用 [查看](#columns-disabled)                                             | Boolean、String、Function | false  | true   |
+| watch       | 监听 key 对应的值的改变（只监听组件内部造成的值的改变） [查看](#columns-watch) | Function                  | -      | -      |
 
 ### key（字段名）@columns-key
 
@@ -195,7 +193,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ### width（宽度）@columns-width
 
-单位是px，只能是数字，如下
+单位是 px，只能是数字，如下
 
 ```js
 { key: "nickname", title: "昵称", type: "text", width: 200 },
@@ -213,7 +211,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/82fe7344-1aa0-4e31-9c33-8232099b700f.png)
 
-**tips支持解析html字符串，如下所示**
+**tips 支持解析 html 字符串，如下所示**
 
 ```js
 // 增加详情按钮 跳新窗口打开新页面
@@ -224,7 +222,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 { key: "text3", title: "text类型字段", type: "text", tips: `<text>这里使其他文字介绍</text><a href="https://www.baidu.com" target="_blank">跳百度</a>`, width: 600 },
 ```
 
-**tips还支持解析对象数组，如下所示**
+**tips 还支持解析对象数组，如下所示**
 
 ```js
 {
@@ -247,13 +245,13 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 },
 ```
 
-### labelWidth（单独设置label宽度）@columns-label-width
+### labelWidth（单独设置 label 宽度）@columns-label-width
 
-默认在万能表单的属性上设置统一的labelWidth，如果在columns内设置了labelWidth，则此为准
+默认在万能表单的属性上设置统一的 labelWidth，如果在 columns 内设置了 labelWidth，则此为准
 
-### showLabel（是否显示label）@columns-show-label
+### showLabel（是否显示 label）@columns-show-label
 
-默认为true，当设置为false时，对应的title不显示。
+默认为 true，当设置为 false 时，对应的 title 不显示。
 
 ### show（复用时的显示规则）@columns-show
 
@@ -263,9 +261,9 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 `show` 是一个字符串数组，`columns` 数组内每一个元素都可以单独设置 `show`
 
-* 如果 show 字段不存在，代表显示。
-* 如果 show 的某元素中包含 `form-type`的值，则代表显示。
-* 如果 show 的某元素中不包含 `form-type`的值，则不显示。
+- 如果 show 字段不存在，代表显示。
+- 如果 show 的某元素中包含 `form-type`的值，则代表显示。
+- 如果 show 的某元素中不包含 `form-type`的值，则不显示。
 
 ### showRule（自定义显示规则）@columns-show-rule
 
@@ -385,7 +383,7 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 
 ### watch（监听）@columns-watch
 
-用于监听key对应的值的改变（只监听组件内部造成的值的改变）
+用于监听 key 对应的值的改变（只监听组件内部造成的值的改变）
 
 使用示例如下：
 
@@ -401,26 +399,29 @@ columns是一个数组，数组内每个元素有以下属性，每个元素代�
 ### inline（行内表单）@inline
 
 ```html
-<vk-data-form
-  ...其他组件
-  :inline="true"
-  :columnsNumber="2"
-></vk-data-form>
+<vk-data-form ...其他组件 :inline="true" :columnsNumber="2"></vk-data-form>
 ```
 
-**行内表单中columns若设置oneLine:true可强制单独一行**
+**行内表单中 columns 若设置 oneLine:true 可强制单独一行**
 
 ```js
 columns: [
-  { key: "text1", title: "text类型字段", type: "text" },
-  { key: "text2", title: "text类型字段", type: "text" },
-  { key: "text3", title: "text类型字段", type: "text", oneLine: true }, // 单独一行
-  { key: "text4", title: "text类型字段", type: "text", oneLine: true, width: 500 }, // 单独一行，并设置input的宽度
-]
+  { key: 'text1', title: 'text类型字段', type: 'text' },
+  { key: 'text2', title: 'text类型字段', type: 'text' },
+  { key: 'text3', title: 'text类型字段', type: 'text', oneLine: true }, // 单独一行
+  {
+    key: 'text4',
+    title: 'text类型字段',
+    type: 'text',
+    oneLine: true,
+    width: 500,
+  }, // 单独一行，并设置input的宽度
+];
 ```
 
 ### type（组件类型）@columns-type
-type类型（更多请见：`/pages_template/components/form/form-pro`）
+
+type 类型（更多请见：`/pages_template/components/form/form-pro`）
 
 ```js
 form1: {
@@ -609,9 +610,7 @@ form1: {
 ### before-action（请求前拦截）@before-action
 
 ```html
-<vk-data-form
-  :before-action="form1.props.beforeAction"
-></vk-data-form>
+<vk-data-form :before-action="form1.props.beforeAction"></vk-data-form>
 ```
 
 ```js
@@ -638,9 +637,7 @@ data: function() {
 表单验证规则，和 element 表单验证规则一致，以下是部分示例
 
 ```html
-<vk-data-form
-  :rules="form1.props.rules"
-></vk-data-form>
+<vk-data-form :rules="form1.props.rules"></vk-data-form>
 ```
 
 ```js
@@ -797,20 +794,17 @@ data: function() {
 
 ## 事件@event
 
-| 事件名   | 说明                    | 回调参数 |
-|----------|------------------------|------|
-| success     | 表单提交成功   |  { data, formType }  |
-| fail    | 表单提交失败       |  { data, formType }   |
-| complete | 表单提交结束 |  { data, formType } |
-| cancel  | 表单点击取消按钮 |    -     |
+| 事件名   | 说明             | 回调参数           |
+| -------- | ---------------- | ------------------ |
+| success  | 表单提交成功     | { data, formType } |
+| fail     | 表单提交失败     | { data, formType } |
+| complete | 表单提交结束     | { data, formType } |
+| cancel   | 表单点击取消按钮 | -                  |
 
 **如监听表单提交成功事件**
 
 ```html
-<vk-data-form
-  ...其他属性
-  @success="onFormSuccess"
-></vk-data-form>
+<vk-data-form ...其他属性 @success="onFormSuccess"></vk-data-form>
 ```
 
 ```js
@@ -825,22 +819,21 @@ methods: {
 
 通过 this.$refs.form1.xxx(); 方式调用
 
-| 方法名   | 说明                    |
-|----------|------------------------|
-| submitForm     | 提交表单（提交前会自动进行一次表单验证） |
-| resetForm     | 重置表单 |
-| clearValidate     | 移除整个表单的校验 |
-| validate     | 进行表单验证 |
-| validateField     | 对部分表单字段进行校验 |
-| setResetFormData     | 设置重置表单函数执行后，数据重置的数据源 |
+| 方法名           | 说明                                     |
+| ---------------- | ---------------------------------------- |
+| submitForm       | 提交表单（提交前会自动进行一次表单验证） |
+| resetForm        | 重置表单                                 |
+| clearValidate    | 移除整个表单的校验                       |
+| validate         | 进行表单验证                             |
+| validateField    | 对部分表单字段进行校验                   |
+| setResetFormData | 设置重置表单函数执行后，数据重置的数据源 |
 
 #### validate
 
 ```js
 this.$refs.form1.validate((valid) => {
-  if (valid){
+  if (valid) {
     // 验证通过
-    
   }
 });
 ```
@@ -848,10 +841,9 @@ this.$refs.form1.validate((valid) => {
 #### validateField
 
 ```js
-this.$refs.form1.validate("username",(errMsg, arr) => {
+this.$refs.form1.validate('username', (errMsg, arr) => {
   if (errMsg) {
     // 未验证通过
-    
   }
 });
 ```
@@ -867,7 +859,7 @@ this.$refs.form1.resetForm();
 
 ## 插槽@slot
 
-### columns中每一个key都是插槽名称
+### columns 中每一个 key 都是插槽名称
 
 详情见示例:`/pages_template/components/form/form-slot`
 
@@ -880,7 +872,7 @@ this.$refs.form1.resetForm();
   :rules="form1.props.rules"
   :action="form1.props.action"
   :form-type="form1.props.formType"
-  :columns='form1.props.columns'
+  :columns="form1.props.columns"
   :loading.sync="form1.props.loading"
   label-width="140px"
   @success="onFormSuccess"
@@ -903,14 +895,14 @@ this.$refs.form1.resetForm();
   :rules="form1.props.rules"
   :action="form1.props.action"
   :form-type="form1.props.formType"
-  :columns='form1.props.columns'
+  :columns="form1.props.columns"
   :loading.sync="form1.props.loading"
   label-width="140px"
   @success="onFormSuccess"
 >
   <template v-slot:footer="{ loading }">
-    <view style="text-align: center;" >
-      <el-button :loading="loading" type="danger"  size="small" style="padding: 10px 40px;margin-right: 30px; " @click="adopt(-1)"> 拒绝 </el-button>
+    <view style="text-align: center;">
+      <el-button :loading="loading" type="danger" size="small" style="padding: 10px 40px;margin-right: 30px; " @click="adopt(-1)"> 拒绝 </el-button>
       <el-button :loading="loading" type="success" size="small" style="padding: 10px 40px; " @click="adopt(1)"> 通过 </el-button>
     </view>
   </template>
@@ -927,17 +919,17 @@ adopt(status){
     },
     success: (data) => {
       // 提交成功
-      
+
     },
     fail: (data) => {
       // 提交失败
-      
+
     }
   });
 }
 ```
 
-## http请求模式@http
+## http 请求模式@http
 
 **示例代码**
 
@@ -953,24 +945,20 @@ adopt(status){
 ></vk-data-form>
 ```
 
-## 自定义function请求模式@function
+## 自定义 function 请求模式@function
 
-> vk-unicloud-admin-ui 的npm依赖版本需 >= 1.17.0
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.17.0
 
-此方式同样支持http，且更自由化，比如可以在发起请求前处理请求参数，在请求成功后，处理返回参数等等。
+此方式同样支持 http，且更自由化，比如可以在发起请求前处理请求参数，在请求成功后，处理返回参数等等。
 
 优势：更自由化、基本可以满足所有需求场景
 
 劣势：代码量较多
 
-### 自定义function-http请求模式示例@function-http
+### 自定义 function-http 请求模式示例@function-http
 
 ```html
-<vk-data-form
-  ref="form1"
-  :action="form1.props.action"
-  ...其他属性
-></vk-data-form>
+<vk-data-form ref="form1" :action="form1.props.action" ...其他属性></vk-data-form>
 ```
 
 ```js
@@ -980,8 +968,6 @@ export default {
       form1: {
         // 表单属性
         props: {
-
-
           action: (obj = {}) => {
             let {
               data, // 请求数据
@@ -991,39 +977,33 @@ export default {
             } = obj;
             vk.request({
               url: `https://www.xxx.com/api/form`,
-              method: "POST",
+              method: 'POST',
               header: {
-                "content-type": "application/json; charset=utf-8",
+                'content-type': 'application/json; charset=utf-8',
               },
               data: data,
               success: (res) => {
-                if (typeof success === "function") success(res);
+                if (typeof success === 'function') success(res);
               },
               fail: (res) => {
-                if (typeof fail === "function") fail(res);
+                if (typeof fail === 'function') fail(res);
               },
               complete: (res) => {
-                if (typeof complete === "function") complete(res);
-              }
+                if (typeof complete === 'function') complete(res);
+              },
             });
           },
-
-
-        }
-      }
-    }
-  }
-}
+        },
+      },
+    };
+  },
+};
 ```
 
-### 自定义function-云函数请求示例@function-cloud
+### 自定义 function-云函数请求示例@function-cloud
 
 ```html
-<vk-data-form
-  ref="form1"
-  :action="form1.props.action"
-  ...其他属性
-></vk-data-form>
+<vk-data-form ref="form1" :action="form1.props.action" ...其他属性></vk-data-form>
 ```
 
 ```js
@@ -1033,8 +1013,6 @@ export default {
       form1: {
         // 表单属性
         props: {
-
-
           action: (obj = {}) => {
             let {
               data, // 请求数据
@@ -1046,23 +1024,21 @@ export default {
               url: `云函数或云对象路径`,
               data: data,
               success: (res) => {
-                if (typeof success === "function") success(res);
+                if (typeof success === 'function') success(res);
               },
               fail: (res) => {
-                if (typeof fail === "function") fail(res);
+                if (typeof fail === 'function') fail(res);
               },
               complete: (res) => {
-                if (typeof complete === "function") complete(res);
-              }
+                if (typeof complete === 'function') complete(res);
+              },
             });
           },
-
-
-        }
-      }
-    }
-  }
-}
+        },
+      },
+    };
+  },
+};
 ```
 
 ## 弹窗表单独立组件形式
@@ -1071,209 +1047,219 @@ export default {
 
 **介绍**
 
-如果把所有表单全写在一个vue页面内，会导致后期不方便维护，因此可以写成一个弹窗表单对应一个组件的形式。
+如果把所有表单全写在一个 vue 页面内，会导致后期不方便维护，因此可以写成一个弹窗表单对应一个组件的形式。
 
-**打开弹窗API**
+**打开弹窗 API**
 
 ```js
 vk.pubfn.openForm(name, value, this);
 
-vk.pubfn.openForm('bindRole',{ item: {} }); // 来源页面 /pages_plugs/system/user/list
+vk.pubfn.openForm('bindRole', { item: {} }); // 来源页面 /pages_plugs/system/user/list
 ```
 
 **参数**
 
-| 参数							| 说明																				| 类型		| 默认值							| 可选值|
-|------------------	|-----------------------											|---------|--------							|-------|
-| name							| 弹窗表单组件名															| String	|											|				|
-| value							| 传给表单的数据（格式为 { item: 当前行数据 }	| Object	|											|				|
-| this							| 页面或组件实例，在组件内调用时必传					| Object	|当前页面实例（this）	|				|
+| 参数  | 说明                                        | 类型   | 默认值               | 可选值 |
+| ----- | ------------------------------------------- | ------ | -------------------- | ------ |
+| name  | 弹窗表单组件名                              | String |                      |        |
+| value | 传给表单的数据（格式为 { item: 当前行数据 } | Object |                      |        |
+| this  | 页面或组件实例，在组件内调用时必传          | Object | 当前页面实例（this） |        |
 
 **使用示例**
 
 以 `/pages_plugs/system/user/list` 用户管理页面为例，功能是点击弹出表单【绑定角色】
 
-- 1、新建一个表单组件，一般在该页面新建form目录，在form目录下创建弹窗表单组件，如 `bindRole`
+- 1、新建一个表单组件，一般在该页面新建 form 目录，在 form 目录下创建弹窗表单组件，如 `bindRole`
 
-**bindRole.vue代码如下**
+**bindRole.vue 代码如下**
 
 ```html
 <template>
-	<vk-data-dialog
-		v-model="value.show"
-		:title="page.title"
-		:top="page.top"
-		:width="page.width"
-		mode="form"
-		@open="onOpen"
-		@closed="onClose"
-	>
-		<!-- 页面主体内容开始 -->
-		<vk-data-form
-			ref="form1"
-			:form-type="value.mode"
-			v-loading="page.loading"
-			v-model="form1.data"
-			:rules="form1.props.rules"
-			:action="form1.props.action"
-			:columns="form1.props.columns"
-			:loading.sync="form1.props.loading"
-			:labelWidth="form1.props.labelWidth"
-			:show-cancel="page.showCancel"
-			:cancel-text="page.cancelText"
-			:submit-text="page.submitText"
-			@success="onFormSuccess"
-		>
-			<template v-slot:user_id>
-				<view style="display: flex;align-items: center;">
-					<el-avatar v-if="data.avatar" :src="data.avatar" fit="cover"></el-avatar>
-					<text style="margin-left: 10px;">{{ data.nickname }}（ID：{{ data._id }}）</text>
-				</view>
-			</template>
-		</vk-data-form>
-		<!-- 页面主体内容结束 -->
-	</vk-data-dialog>
+  <vk-data-dialog v-model="value.show" :title="page.title" :top="page.top" :width="page.width" mode="form" @open="onOpen" @closed="onClose">
+    <!-- 页面主体内容开始 -->
+    <vk-data-form
+      ref="form1"
+      :form-type="value.mode"
+      v-loading="page.loading"
+      v-model="form1.data"
+      :rules="form1.props.rules"
+      :action="form1.props.action"
+      :columns="form1.props.columns"
+      :loading.sync="form1.props.loading"
+      :labelWidth="form1.props.labelWidth"
+      :show-cancel="page.showCancel"
+      :cancel-text="page.cancelText"
+      :submit-text="page.submitText"
+      @success="onFormSuccess"
+    >
+      <template v-slot:user_id>
+        <view style="display: flex;align-items: center;">
+          <el-avatar v-if="data.avatar" :src="data.avatar" fit="cover"></el-avatar>
+          <text style="margin-left: 10px;">{{ data.nickname }}（ID：{{ data._id }}）</text>
+        </view>
+      </template>
+    </vk-data-form>
+    <!-- 页面主体内容结束 -->
+  </vk-data-dialog>
 </template>
 
 <script>
-let vk = uni.vk; // vk实例
-export default {
-  props: {
-    value: {
-      Type: Object,
-      default: function() {
-        return {
-          show: false,
-          mode: "",
-          item: ""
-        };
-      }
-    }
-  },
-  data: function() {
-    // 组件创建时,进行数据初始化
-    return {
-      // 页面基础数据
-      page: {
-        title: "角色绑定",
-        submitText: "绑定",
-        cancelText: "关闭",
-        showCancel: true,
-        top: "7vh",
-        width: "820px",
-        loading: false
-      },
-      data: {
-
-      },
-      form1: {
-        // 表单请求数据，此处可以设置默认值
-        data: {
-          user_id: "",
-          roleList: [],
-          reset: true
+  let vk = uni.vk; // vk实例
+  export default {
+    props: {
+      value: {
+        Type: Object,
+        default: function () {
+          return {
+            show: false,
+            mode: '',
+            item: '',
+          };
         },
-        // 表单属性
-        props: {
-          // 表单请求地址
-          action: "admin/system/user/sys/bindRole",
-          // 表单字段显示规则
-          columns: [
-            { key: "user_id", title: "用户", type: "text" },
-            {
-              key: "roleList",
-              title: "角色列表",
-              type: "table-select",
-              placeholder: "选择角色",
-              action: "admin/system/role/sys/getList",
-              columns: [
-                { key: "role_name", title: "角色昵称", type: "text", nameKey: true },
-                { key: "role_id", title: "角色标识", type: "text", idKey: true },
-                { key: "comment", title: "备注", type: "text" },
-              ],
-              formData: {
-                enable: true
-              },
-              queryColumns: [
-                { key: "role_name", title: "角色昵称", type: "text", width: 150, mode: "%%" },
-                { key: "role_id", title: "角色标识", type: "text", width: 150, mode: "%%" },
-                { key: "enable", type: "text", mode: "=", hidden: true }
-              ],
-              multiple: true,
-              pageSize: 10, // 只有5和10可以选
-            },
-          ],
-          // 表单验证规则
-          rules: {
-            user_id: [
-              { "required": true, "message": "user_id不能为空", "trigger": "change" }
-            ]
+      },
+    },
+    data: function () {
+      // 组件创建时,进行数据初始化
+      return {
+        // 页面基础数据
+        page: {
+          title: '角色绑定',
+          submitText: '绑定',
+          cancelText: '关闭',
+          showCancel: true,
+          top: '7vh',
+          width: '820px',
+          loading: false,
+        },
+        data: {},
+        form1: {
+          // 表单请求数据，此处可以设置默认值
+          data: {
+            user_id: '',
+            roleList: [],
+            reset: true,
           },
-          // label宽度
-          labelWidth: "100px",
-          // label对其方式
-          labelPosition: "left",
-        }
-      }
-    };
-  },
-  mounted() {
-    this.init();
-  },
-  methods: {
-    // 初始化
-    init() {
-      let { value } = this;
-      this.$emit("input", value);
+          // 表单属性
+          props: {
+            // 表单请求地址
+            action: 'admin/system/user/sys/bindRole',
+            // 表单字段显示规则
+            columns: [
+              { key: 'user_id', title: '用户', type: 'text' },
+              {
+                key: 'roleList',
+                title: '角色列表',
+                type: 'table-select',
+                placeholder: '选择角色',
+                action: 'admin/system/role/sys/getList',
+                columns: [
+                  {
+                    key: 'role_name',
+                    title: '角色昵称',
+                    type: 'text',
+                    nameKey: true,
+                  },
+                  {
+                    key: 'role_id',
+                    title: '角色标识',
+                    type: 'text',
+                    idKey: true,
+                  },
+                  { key: 'comment', title: '备注', type: 'text' },
+                ],
+                formData: {
+                  enable: true,
+                },
+                queryColumns: [
+                  {
+                    key: 'role_name',
+                    title: '角色昵称',
+                    type: 'text',
+                    width: 150,
+                    mode: '%%',
+                  },
+                  {
+                    key: 'role_id',
+                    title: '角色标识',
+                    type: 'text',
+                    width: 150,
+                    mode: '%%',
+                  },
+                  { key: 'enable', type: 'text', mode: '=', hidden: true },
+                ],
+                multiple: true,
+                pageSize: 10, // 只有5和10可以选
+              },
+            ],
+            // 表单验证规则
+            rules: {
+              user_id: [
+                {
+                  required: true,
+                  message: 'user_id不能为空',
+                  trigger: 'change',
+                },
+              ],
+            },
+            // label宽度
+            labelWidth: '100px',
+            // label对其方式
+            labelPosition: 'left',
+          },
+        },
+      };
     },
-    // 监听 - 页面打开
-    onOpen() {
-      let { value } = this;
-      let { role = [], _id } = value.item;
-      this.data = value.item;
-      this.form1.props.show = true;
-      this.form1.data.user_id = _id;
-      this.form1.data.roleList = role;
+    mounted() {
+      this.init();
     },
-    // 监听 - 页面关闭
-    onClose() {
-      this.$refs.form1.resetForm(); // 关闭时，重置表单
+    methods: {
+      // 初始化
+      init() {
+        let { value } = this;
+        this.$emit('input', value);
+      },
+      // 监听 - 页面打开
+      onOpen() {
+        let { value } = this;
+        let { role = [], _id } = value.item;
+        this.data = value.item;
+        this.form1.props.show = true;
+        this.form1.data.user_id = _id;
+        this.form1.data.roleList = role;
+      },
+      // 监听 - 页面关闭
+      onClose() {
+        this.$refs.form1.resetForm(); // 关闭时，重置表单
+      },
+      // 表单提交成功后
+      onFormSuccess() {
+        this.$set(this.value.item, 'role', this.form1.data.roleList);
+        this.value.show = false; // 关闭页面
+        this.$emit('success');
+      },
     },
-    // 表单提交成功后
-    onFormSuccess() {
-      this.$set(this.value.item, "role", this.form1.data.roleList);
-      this.value.show = false; // 关闭页面
-      this.$emit("success");
-    }
-  },
-  // 监听属性
-  watch: {
-
-  },
-  // 计算属性
-  computed: {}
-};
+    // 监听属性
+    watch: {},
+    // 计算属性
+    computed: {},
+  };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
-
+<style lang="scss" scoped></style>
 ```
 
-- 2、list.vue的 `template` 新增以下代码
+- 2、list.vue 的 `template` 新增以下代码
 
 ```html
 <el-button type="primary" size="small" icon="el-icon-s-tools" @click="bindRoleBtn">角色绑定</el-button>
 
 <bindRole v-model="formDatas.bindRole"></bindRole>
-
 ```
 
-- 3、list.vue的 `script` 新增以下代码
+- 3、list.vue 的 `script` 新增以下代码
 
 ```js
-import bindRole from './form/bindRole'
+import bindRole from './form/bindRole';
 
 export default {
   components: {
@@ -1282,7 +1268,7 @@ export default {
   data() {
     return {
       formDatas: {}, // 在此处定义下formDatas（无论该页面有几个弹窗表单，只需要定义这一个空对象即可）
-    }
+    };
   },
   methods: {
     // 角色绑定按钮
@@ -1290,8 +1276,8 @@ export default {
       let item = this.getCurrentRow(true);
       vk.pubfn.openForm('bindRole', { item });
     },
-  }
-}
+  },
+};
 ```
 
 - 4、完成，此时点击【角色绑定】按钮即可弹出表单【角色绑定】

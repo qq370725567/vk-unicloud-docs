@@ -14,16 +14,16 @@ sidebarDepth: 0
 
 **请求参数**
 
-| 参数			| 类型									| 必填		| 说明																																		|
-|------			|------								|------	|------																																	|
-| provider	| String							| 是			| 服务供应商：`unicloud`（uniCloud 内置）、`aliyun`（阿里云）								|
-| phone			| String							| 否			| 单个手机号，与 phoneList 二选一																					|
-| phoneList	| Array&lt;String&gt;	| 否			| 批量发送手机号，与 phone 二选一																					|
-| templateId| String							| 是			| 短信模板 ID（unicloud 为数字如 11558，阿里云为如 SMS_xxx）								|
-| data			| Object							| 是			| 模板变量，key 与模板中占位符一致，如 `{ orderNo, expressCom, expressNo }`	|
-| smsKey		| String							| 否			| 密钥 ID，不传则从 config 公共模块读取																		|
-| smsSecret	| String							| 否			| 密钥密码，不传则从 config 读取																						|
-| signName	| String							| 否			| 短信签名，不传则从 config 读取（阿里云必填签名时需配置或传入）								|
+| 参数       | 类型                | 必填 | 说明                                                                      |
+| ---------- | ------------------- | ---- | ------------------------------------------------------------------------- |
+| provider   | String              | 是   | 服务供应商：`unicloud`（uniCloud 内置）、`aliyun`（阿里云）               |
+| phone      | String              | 否   | 单个手机号，与 phoneList 二选一                                           |
+| phoneList  | Array&lt;String&gt; | 否   | 批量发送手机号，与 phone 二选一                                           |
+| templateId | String              | 是   | 短信模板 ID（unicloud 为数字如 11558，阿里云为如 SMS_xxx）                |
+| data       | Object              | 是   | 模板变量，key 与模板中占位符一致，如 `{ orderNo, expressCom, expressNo }` |
+| smsKey     | String              | 否   | 密钥 ID，不传则从 config 公共模块读取                                     |
+| smsSecret  | String              | 否   | 密钥密码，不传则从 config 读取                                            |
+| signName   | String              | 否   | 短信签名，不传则从 config 读取（阿里云必填签名时需配置或传入）            |
 
 **返回说明**
 
@@ -32,50 +32,50 @@ sidebarDepth: 0
 ```js
 // 单个手机号 - uniCloud
 let sendSmsRes = await vk.sendSms({
-  provider: "unicloud",
-  phone: "15200000001",
-  templateId: "11558",
+  provider: 'unicloud',
+  phone: '15200000001',
+  templateId: '11558',
   data: {
-    orderNo: "DD8888888888",
-    expressCom: "顺丰快递",
-    expressNo: "SF88888888"
-  }
+    orderNo: 'DD8888888888',
+    expressCom: '顺丰快递',
+    expressNo: 'SF88888888',
+  },
 });
 
 // 多个手机号 - uniCloud
 let sendSmsBatchRes = await vk.sendSms({
-  provider: "unicloud",
-  phoneList: ["15200000001", "15200000002"],
-  templateId: "11558",
+  provider: 'unicloud',
+  phoneList: ['15200000001', '15200000002'],
+  templateId: '11558',
   data: {
-    orderNo: "DD8888888888",
-    expressCom: "顺丰快递",
-    expressNo: "SF88888888"
-  }
+    orderNo: 'DD8888888888',
+    expressCom: '顺丰快递',
+    expressNo: 'SF88888888',
+  },
 });
 
 // 单个手机号 - 阿里云
 let sendSmsResAliyun = await vk.sendSms({
-  provider: "aliyun",
-  phone: "15200000001",
-  templateId: "SMS_202470413",
+  provider: 'aliyun',
+  phone: '15200000001',
+  templateId: 'SMS_202470413',
   data: {
-    orderNo: "DD8888888888",
-    expressCom: "顺丰快递",
-    expressNo: "SF88888888"
-  }
+    orderNo: 'DD8888888888',
+    expressCom: '顺丰快递',
+    expressNo: 'SF88888888',
+  },
 });
 
 // 多个手机号 - 阿里云
 let sendSmsResAliyun = await vk.sendSms({
-  provider: "aliyun",
-  phoneList: ["15200000001", "15200000002"],
-  templateId: "11558",
+  provider: 'aliyun',
+  phoneList: ['15200000001', '15200000002'],
+  templateId: '11558',
   data: {
-    orderNo: "DD8888888888",
-    expressCom: "顺丰快递",
-    expressNo: "SF88888888"
-  }
+    orderNo: 'DD8888888888',
+    expressCom: '顺丰快递',
+    expressNo: 'SF88888888',
+  },
 });
 ```
 
@@ -85,26 +85,26 @@ let sendSmsResAliyun = await vk.sendSms({
 
 **适用 type**
 
-| type			| 说明																					|
-|------			|------																				|
-| login			| 手机号登录																		|
-| bind			| 绑定手机																			|
-| unbind		| 解绑手机																			|
-| reset-pwd	| 重置账号密码																	|
-| 自定义		| 如 verify，需自行调用 `uniID.verifyCode` 校验	|
+| type      | 说明                                          |
+| --------- | --------------------------------------------- |
+| login     | 手机号登录                                    |
+| bind      | 绑定手机                                      |
+| unbind    | 解绑手机                                      |
+| reset-pwd | 重置账号密码                                  |
+| 自定义    | 如 verify，需自行调用 `uniID.verifyCode` 校验 |
 
 **请求参数**
 
-| 参数			| 类型		| 必填		| 说明																														|
-|------			|------	|------	|------																													|
-| provider	| String| 是			| 短信供应商：`unicloud`（内置验证码）、`aliyun`（阿里云验证码）			|
-| phone			| String| 是			| 手机号																													|
-| code			| String| 是			| 验证码内容（如 4～6 位数字）																			|
-| type			| String| 是			| 用途：`login` / `bind` / `unbind` / `reset-pwd` 或自定义				|
-| expiresIn	| Number| 否			| 有效时间（秒），须为 60 的倍数，不传则用 config 中的 codeExpiresIn	|
-| smsKey		| String| 否			| 密钥 ID，不传则从 config 读取																		|
-| smsSecret	| String| 否			| 密钥密码，不传则从 config 读取																		|
-| signName	| String| 否			| 短信签名，不传则从 config 读取																		|
+| 参数      | 类型   | 必填 | 说明                                                               |
+| --------- | ------ | ---- | ------------------------------------------------------------------ |
+| provider  | String | 是   | 短信供应商：`unicloud`（内置验证码）、`aliyun`（阿里云验证码）     |
+| phone     | String | 是   | 手机号                                                             |
+| code      | String | 是   | 验证码内容（如 4 ～ 6 位数字）                                     |
+| type      | String | 是   | 用途：`login` / `bind` / `unbind` / `reset-pwd` 或自定义           |
+| expiresIn | Number | 否   | 有效时间（秒），须为 60 的倍数，不传则用 config 中的 codeExpiresIn |
+| smsKey    | String | 否   | 密钥 ID，不传则从 config 读取                                      |
+| smsSecret | String | 否   | 密钥密码，不传则从 config 读取                                     |
+| signName  | String | 否   | 短信签名，不传则从 config 读取                                     |
 
 **返回说明**
 
@@ -118,26 +118,26 @@ module.exports = {
   main: async (event) => {
     let { data = {}, util } = event;
     let { vk } = util;
-    let { mobile, type = "login" } = data;
-    let res = { code: 0, msg: "" };
+    let { mobile, type = 'login' } = data;
+    let res = { code: 0, msg: '' };
 
-    if (!mobile) return { code: -1, msg: "手机号不能为空" };
+    if (!mobile) return { code: -1, msg: '手机号不能为空' };
 
-    let code = vk.pubfn.random(6, "0123456789");
+    let code = vk.pubfn.random(6, '0123456789');
     let sendSmsVerifyCodeRes = await vk.system.smsUtil.sendSmsVerifyCode({
-      provider: "unicloud",
+      provider: 'unicloud',
       phone: mobile,
       code,
       type,
-      expiresIn: 180
+      expiresIn: 180,
     });
 
     if (sendSmsVerifyCodeRes.code !== 0) {
-      return { code: -1, msg: sendSmsVerifyCodeRes.msg || "验证码发送失败" };
+      return { code: -1, msg: sendSmsVerifyCodeRes.msg || '验证码发送失败' };
     }
-    res.msg = "验证码已发送";
+    res.msg = '验证码已发送';
     return res;
-  }
+  },
 };
 ```
 
@@ -158,17 +158,17 @@ async sendSmsCode(mobile, type = "login") {
 }
 ```
 
-#### 自定义校验type@@sendSmsVerifyCode-type
+#### 自定义校验 type@@sendSmsVerifyCode-type
 
-如果业务不是上面4种（手机号登录、绑定手机、解绑手机、重置账号密码），那么 type 可以自己自定义，例如 type: "verify"。发送时仍用 `vk.system.smsUtil.sendSmsVerifyCode`，校验时需手动调用 `uniID.verifyCode`。
+如果业务不是上面 4 种（手机号登录、绑定手机、解绑手机、重置账号密码），那么 type 可以自己自定义，例如 type: "verify"。发送时仍用 `vk.system.smsUtil.sendSmsVerifyCode`，校验时需手动调用 `uniID.verifyCode`。
 
 **uniID.verifyCode 请求参数**
 
-| 参数 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| mobile | String | 是 | 手机号 |
-| code | String | 是 | 用户输入的验证码 |
-| type | String | 是 | 须与发送验证码时传入的 type 一致（如 "verify"） |
+| 参数   | 类型   | 必填 | 说明                                            |
+| ------ | ------ | ---- | ----------------------------------------------- |
+| mobile | String | 是   | 手机号                                          |
+| code   | String | 是   | 用户输入的验证码                                |
+| type   | String | 是   | 须与发送验证码时传入的 type 一致（如 "verify"） |
 
 **返回说明**
 
@@ -183,26 +183,26 @@ module.exports = {
     let { data = {}, userInfo, util, filterResponse, originalParam } = event;
     let { customUtil, uniID, config, pubFun, vk, db, _, $ } = util;
     let { uid } = data;
-    let res = { code: 0, msg: "" };
+    let res = { code: 0, msg: '' };
     // 业务逻辑开始-----------------------------------------------------------
     let verifyCodeRes = await uniID.verifyCode({
-      mobile: "15200000001", // 手机号
-      code: "123456", // 验证码
+      mobile: '15200000001', // 手机号
+      code: '123456', // 验证码
       type: 'verify', // 此处的type的值需和你发送验证码时传的type一致
     });
     if (verifyCodeRes.code !== 0) {
       // 校验失败
       return {
         code: -1,
-        msg: "短信验证码错误"
-      }
-    } 
+        msg: '短信验证码错误',
+      };
+    }
     // 校验成功，继续执行其他逻辑
-    
+
     // 业务逻辑结束-----------------------------------------------------------
     return res;
-  }
-}
+  },
+};
 ```
 
 **云对象调用示例**
@@ -210,21 +210,21 @@ module.exports = {
 ```js
 let { uniID } = this.getUtil();
 let verifyCodeRes = await uniID.verifyCode({
-  mobile: "15200000001", // 手机号
-  code: "123456", // 验证码
+  mobile: '15200000001', // 手机号
+  code: '123456', // 验证码
   type: 'verify', // 此处的type的值需和你发送验证码时传的type一致
 });
 if (verifyCodeRes.code !== 0) {
   // 校验失败
   return {
     code: -1,
-    msg: "短信验证码错误"
-  }
-} 
+    msg: '短信验证码错误',
+  };
+}
 // 校验成功，继续执行其他逻辑
 ```
 
-## 配置unicloud短信@unicloud
+## 配置 unicloud 短信@unicloud
 
 定位到文件 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 的 `service.sms`
 
@@ -264,8 +264,8 @@ if (verifyCodeRes.code !== 0) {
 
 ## 常见问题@question
 
-### 发送短信失败，报错uniCloud.sendSms由uni-cloud-sms扩展库提供，请确保云函数/云对象/clientDB依赖了此扩展库@q1
+### 发送短信失败，报错 uniCloud.sendSms 由 uni-cloud-sms 扩展库提供，请确保云函数/云对象/clientDB 依赖了此扩展库@q1
 
-需要右键云函数，管理依赖，添加uni-cloud-sms扩展库，如下图所示
+需要右键云函数，管理依赖，添加 uni-cloud-sms 扩展库，如下图所示
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/446.png)

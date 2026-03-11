@@ -14,21 +14,23 @@
 
 ### 组件属性@props
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| multiple            | 是否可多选 | Boolean  | false | true  |
-| multipleLimit          | 最大多选数量 | Number  | - | -  |
-| filter          | 图标过滤器（仅万能表单有效） | Function、String  | - | -  |
+| 参数          | 说明                         | 类型             | 默认值 | 可选值 |
+| ------------- | ---------------------------- | ---------------- | ------ | ------ |
+| multiple      | 是否可多选                   | Boolean          | false  | true   |
+| multipleLimit | 最大多选数量                 | Number           | -      | -      |
+| filter        | 图标过滤器（仅万能表单有效） | Function、String | -      | -      |
 
 ### filter
 
 **字符串过滤模式**
+
 ```js
 // 只显示 vk- 开头的图标
 { key: "icon", title: "图标", type: "icon", filter: "vk-" },
 ```
 
 **函数过滤模式**
+
 ```js
 // 只显示 vk-custom-icon 开头的图标
 {

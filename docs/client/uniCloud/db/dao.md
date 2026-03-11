@@ -2,7 +2,7 @@
 sidebarDepth: 0
 ---
 
-# Dao 层（2.0版本）
+# Dao 层（2.0 版本）
 
 :::warning 注意
 
@@ -16,11 +16,11 @@ Dao 2.0 采用**类继承**方式：每个 Dao 继承 `BaseDao`，在构造函�
 
 ## 注意事项
 
-* Dao 层代码默认写在 `router/dao/modules/` 目录下
-* 文件名必须以 `xxxDao.js` 结尾
-* Dao 2.0 最终调用代码和 Dao 1.0 是完全一致的，均通过 `await vk.daoCenter.xxxDao.xxx()` 调用
-* 尽量只写与数据库交互的代码，业务逻辑放在 service 层
-* 新建 Dao 后若提示不存在，重新运行项目即可
+- Dao 层代码默认写在 `router/dao/modules/` 目录下
+- 文件名必须以 `xxxDao.js` 结尾
+- Dao 2.0 最终调用代码和 Dao 1.0 是完全一致的，均通过 `await vk.daoCenter.xxxDao.xxx()` 调用
+- 尽量只写与数据库交互的代码，业务逻辑放在 service 层
+- 新建 Dao 后若提示不存在，重新运行项目即可
 
 ## 表名配置
 
@@ -29,8 +29,8 @@ Dao 2.0 采用**类继承**方式：每个 Dao 继承 `BaseDao`，在构造函�
 ```js
 // dao/config.js
 module.exports = {
-  test: "vk-test",
-  user: "uni-id-users",
+  test: 'vk-test',
+  user: 'uni-id-users',
   // ...
 };
 ```
@@ -55,7 +55,7 @@ const { BaseDao, Tables } = require('../base.js');
 class DemoDao extends BaseDao {
   constructor(obj) {
     super(obj);
-    this.tableName = Tables.test;  // 指定当前 Dao 操作的表
+    this.tableName = Tables.test; // 指定当前 Dao 操作的表
   }
 }
 
@@ -80,10 +80,10 @@ let info = await vk.daoCenter.demoDao.findById(id);
 let info = await vk.daoCenter.demoDao.findById({
   db,
   id: id,
-  fieldJson: { 
-    name: 1, 
-    status: 1 
-  }
+  fieldJson: {
+    name: 1,
+    status: 1,
+  },
 });
 ```
 
@@ -96,12 +96,12 @@ let info = await vk.daoCenter.demoDao.findByWhereJson({ status: 1 });
 // 完整版
 let info = await vk.daoCenter.demoDao.findByWhereJson({
   db,
-  whereJson: { 
-    status: 1
+  whereJson: {
+    status: 1,
   },
-  fieldJson: { 
-    name: 1
-  }
+  fieldJson: {
+    name: 1,
+  },
 });
 ```
 
@@ -111,16 +111,16 @@ let info = await vk.daoCenter.demoDao.findByWhereJson({
 
 ```js
 // 简易版
-let res = await vk.daoCenter.demoDao.add({ name: "测试", status: 1 });
+let res = await vk.daoCenter.demoDao.add({ name: '测试', status: 1 });
 
 // 支持事务：第二参数传 db，或使用对象形式
-let res = await vk.daoCenter.demoDao.add({ name: "测试" }, db);
+let res = await vk.daoCenter.demoDao.add({ name: '测试' }, db);
 let res = await vk.daoCenter.demoDao.add({
   db,
-  dataJson: { 
-    name: "测试", 
-    status: 1 
-  }
+  dataJson: {
+    name: '测试',
+    status: 1,
+  },
 });
 ```
 
@@ -129,17 +129,14 @@ let res = await vk.daoCenter.demoDao.add({
 ```js
 // 简易版
 let res = await vk.daoCenter.demoDao.adds([
-  { name: "测试1", status: 1 },
-  { name: "测试2", status: 1 }
+  { name: '测试1', status: 1 },
+  { name: '测试2', status: 1 },
 ]);
 
 // 完整版
 let res = await vk.daoCenter.demoDao.adds({
   db,
-  dataJson: [
-    { name: "测试1" }, 
-    { name: "测试2" }
-  ]
+  dataJson: [{ name: '测试1' }, { name: '测试2' }],
 });
 ```
 
@@ -150,18 +147,18 @@ let res = await vk.daoCenter.demoDao.adds({
 ```js
 let res = await vk.daoCenter.demoDao.updateById({
   id: id,
-  dataJson: { 
-    name: "新名称"
-  }
+  dataJson: {
+    name: '新名称',
+  },
 });
 
 // 支持事务
 let res = await vk.daoCenter.demoDao.updateById({
   db,
   id: id,
-  dataJson: { 
-    name: "新名称" 
-  }
+  dataJson: {
+    name: '新名称',
+  },
 });
 ```
 
@@ -169,12 +166,12 @@ let res = await vk.daoCenter.demoDao.updateById({
 
 ```js
 let res = await vk.daoCenter.demoDao.update({
-  whereJson: { 
-    status: 1
+  whereJson: {
+    status: 1,
   },
   dataJson: {
-    status: 2
-  }
+    status: 2,
+  },
 });
 ```
 
@@ -183,42 +180,42 @@ let res = await vk.daoCenter.demoDao.update({
 ```js
 let res = await vk.daoCenter.demoDao.updateAndReturn({
   whereJson: {
-    status: 0 
+    status: 0,
   },
-  dataJson: { 
-    status: 1 
-  }
+  dataJson: {
+    status: 1,
+  },
 });
 
 // 支持事务
 let res = await vk.daoCenter.demoDao.updateAndReturn({
   db,
   whereJson: {
-    status: 0 
+    status: 0,
   },
-  dataJson: { 
-    status: 1 
-  }
+  dataJson: {
+    status: 1,
+  },
 });
 ```
 
-**setById** — 有则更新，无则插入（以 dataJson 中的 _id 或传入的 id 为准）
+**setById** — 有则更新，无则插入（以 dataJson 中的 \_id 或传入的 id 为准）
 
 ```js
 let res = await vk.daoCenter.demoDao.setById({
   dataJson: {
-    _id: 'xxx', 
-    name: 'test'
-  }
+    _id: 'xxx',
+    name: 'test',
+  },
 });
 
 // 支持事务
 let res = await vk.daoCenter.demoDao.setById({
   db,
   dataJson: {
-    _id: 'xxx', 
-    name: 'test'
-  }
+    _id: 'xxx',
+    name: 'test',
+  },
 });
 ```
 
@@ -251,10 +248,22 @@ let count = await vk.daoCenter.demoDao.count(whereJson, db);
 **sum / max / min / avg** — 求和、最大值、最小值、平均值
 
 ```js
-let sum = await vk.daoCenter.demoDao.sum({ fieldName: "amount", whereJson: { status: 1 } });
-let max = await vk.daoCenter.demoDao.max({ fieldName: "amount", whereJson: { status: 1 } });
-let min = await vk.daoCenter.demoDao.min({ fieldName: "amount", whereJson: { status: 1 } });
-let avg = await vk.daoCenter.demoDao.avg({ fieldName: "amount", whereJson: { status: 1 } });
+let sum = await vk.daoCenter.demoDao.sum({
+  fieldName: 'amount',
+  whereJson: { status: 1 },
+});
+let max = await vk.daoCenter.demoDao.max({
+  fieldName: 'amount',
+  whereJson: { status: 1 },
+});
+let min = await vk.daoCenter.demoDao.min({
+  fieldName: 'amount',
+  whereJson: { status: 1 },
+});
+let avg = await vk.daoCenter.demoDao.avg({
+  fieldName: 'amount',
+  whereJson: { status: 1 },
+});
 ```
 
 均支持在参数中传入 `db` 以配合事务。
@@ -284,16 +293,18 @@ let res = await vk.daoCenter.demoDao.selects({
   getCount: true,
   whereJson: { status: 1 },
   fieldJson: { name: 1, status: 1 },
-  sortArr: [{ name: "_id", type: "desc" }],
-  foreignDB: [{
-    dbName: "vk-test-2",       // 副表表名
-    localKey: "user_id",      // 主表外键
-    foreignKey: "_id",        // 副表外键
-    as: "userInfo",           // 连表结果别名
-    limit: 1,                 // 1 条则以对象返回，否则数组
-    whereJson: { deleted: false },
-    fieldJson: { name: 1, age: 1 }
-  }]
+  sortArr: [{ name: '_id', type: 'desc' }],
+  foreignDB: [
+    {
+      dbName: 'vk-test-2', // 副表表名
+      localKey: 'user_id', // 主表外键
+      foreignKey: '_id', // 副表外键
+      as: 'userInfo', // 连表结果别名
+      limit: 1, // 1 条则以对象返回，否则数组
+      whereJson: { deleted: false },
+      fieldJson: { name: 1, age: 1 },
+    },
+  ],
 });
 ```
 
@@ -303,21 +314,21 @@ let res = await vk.daoCenter.demoDao.selects({
 
 ```js
 let res = await vk.daoCenter.demoDao.getTableData({
-  data   // vk-admin 万能表格传入的 data
+  data, // vk-admin 万能表格传入的 data
 });
 
 // 强制追加 where 条件
 let res = await vk.daoCenter.demoDao.getTableData({
   data,
-  whereJson: { status: 1 }
+  whereJson: { status: 1 },
 });
 ```
 
 ## 自定义与重写
 
-* **只加表名**：只写 `constructor` + `this.tableName`，即可使用上述全部方法。
-* **重写方法**：在子类中写同名方法，实现自定义。
-* **新增方法**：在子类中直接写新方法，需要时使用 `this.collection` 或调用 `this.findByWhereJson`、`this.dao.xxx` 等。
+- **只加表名**：只写 `constructor` + `this.tableName`，即可使用上述全部方法。
+- **重写方法**：在子类中写同名方法，实现自定义。
+- **新增方法**：在子类中直接写新方法，需要时使用 `this.collection` 或调用 `this.findByWhereJson`、`this.dao.xxx` 等。
 
 ### 重写示例
 
@@ -417,7 +428,7 @@ async getPriceBucket(boundaries) {
 
 ## 与 BaseDao 的关系
 
-* **BaseDao**：通用底层封装，不绑定具体表，需要每次传入 `dbName`。
-* **Dao 2.0**：继承 BaseDao，在子类中绑定 `this.tableName`，调用时不再传表名，代码更简洁、表名集中配置，便于维护。
+- **BaseDao**：通用底层封装，不绑定具体表，需要每次传入 `dbName`。
+- **Dao 2.0**：继承 BaseDao，在子类中绑定 `this.tableName`，调用时不再传表名，代码更简洁、表名集中配置，便于维护。
 
 表名统一在 `dao/config.js` 维护

@@ -1,6 +1,6 @@
 # 主题
 
-`vk-admin` 框架自 `1.8.0`版本起，支持自定义主题，同时内置了（纯黑、纯白、黑白）3个主题。
+`vk-admin` 框架自 `1.8.0`版本起，支持自定义主题，同时内置了（纯黑、纯白、黑白）3 个主题。
 
 ## 黑白主题效果预览
 
@@ -16,9 +16,8 @@ tips：图片被压缩，比较模糊。
 
 ```js
 // 引入主题配置文件
-import themeConfig from '@/common/theme/index.js'
+import themeConfig from '@/common/theme/index.js';
 ```
-
 
 ```js
 // 主题配置
@@ -68,47 +67,45 @@ aaa.js 代码模板
 export default {
   // 左侧菜单样式
   leftMenu: {
-    backgroundColor: "#191a23",
-    subBackgroundColor:"#101117",
-    textColor: "rgba(255,255,255,0.8)",
-    activeTextColor: "#ffffff",
-    activeBackgroundColor: "#2d8cf0",
-    collapseActiveTextColor:"#2d8cf0",
-    collapseActiveBackgroundColor: "#2c3239",
-    hoverTextColor: "#ffffff",
-    hoverBackgroundColor: "#545f6c",
-    boxShadow: "2px 0 4px rgba(0,21,4,0.25)",
+    backgroundColor: '#191a23',
+    subBackgroundColor: '#101117',
+    textColor: 'rgba(255,255,255,0.8)',
+    activeTextColor: '#ffffff',
+    activeBackgroundColor: '#2d8cf0',
+    collapseActiveTextColor: '#2d8cf0',
+    collapseActiveBackgroundColor: '#2c3239',
+    hoverTextColor: '#ffffff',
+    hoverBackgroundColor: '#545f6c',
+    boxShadow: '2px 0 4px rgba(0,21,4,0.25)',
   },
   // 顶部菜单样式
   topMenu: {
-    backgroundColor: "#ffffff", // 顶部背景颜色
-    textColor: "#999999", // 顶部文字颜色
-  }
-}
+    backgroundColor: '#ffffff', // 顶部背景颜色
+    textColor: '#999999', // 顶部文字颜色
+  },
+};
 ```
 
 ## 如何分享自己的主题？
 
-1、直接将 `aaa.js` 文件发给你的好友。（可以上传到群里，Q群：22466457）
+1、直接将 `aaa.js` 文件发给你的好友。（可以上传到群里，Q 群：22466457）
 
 2、好友将 `aaa.js` 文件复制到 `项目根目录/common/theme/` 内，同时修改 `/common/theme/index.js` 文件，引入 `aaa` 主题
 
 ```js
-import white from './white.js'
-import black from './black.js'
-import blackWhite from './blackWhite.js'
+import white from './white.js';
+import black from './black.js';
+import blackWhite from './blackWhite.js';
 
-import aaa from './aaa.js'
+import aaa from './aaa.js';
 
 export default {
   white,
   black,
   blackWhite,
-  
-  aaa
+
+  aaa,
 };
-
-
 ```
 
 3、最后修改 `theme.use` 内的值为 `aaa`，代表使用 `aaa` 主题。

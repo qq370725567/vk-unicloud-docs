@@ -1,4 +1,4 @@
-# 创建我的第一个带CRUD的页面
+# 创建我的第一个带 CRUD 的页面
 
 建议：你自己业务的页面全部创建在 `pages` 目录下
 
@@ -6,13 +6,13 @@
 
 ## 1、写云函数
 
-* 1、在目录`uniCloud/cloudfunctions/router/service/admin/`下创建新的目录 `user`
+- 1、在目录`uniCloud/cloudfunctions/router/service/admin/`下创建新的目录 `user`
 
-* 2、复制`router/service/admin/kong/sys/` 目录到 刚刚新建的`user`目录（包含sys文件夹）
+- 2、复制`router/service/admin/kong/sys/` 目录到 刚刚新建的`user`目录（包含 sys 文件夹）
 
-* 3、将4个云函数中的参数`dbName`的值改为 `uni-id-users`
+- 3、将 4 个云函数中的参数`dbName`的值改为 `uni-id-users`
 
-* 4、正确编写add、update中的请求参数和可操作的字段名称
+- 4、正确编写 add、update 中的请求参数和可操作的字段名称
 
 ### 增：`add.js`
 
@@ -29,33 +29,27 @@ module.exports = {
     let { customUtil, uniID, config, pubFun, vk, db, _ } = util;
     let { uid } = data;
     let res = { code: 0, msg: '' };
-    // 业务逻辑开始----------------------------------------------------------- 
-    let {
-      username,
-      nickname,
-      gender = 0,
-      mobile,
-      comment
-    } = data;
+    // 业务逻辑开始-----------------------------------------------------------
+    let { username, nickname, gender = 0, mobile, comment } = data;
     // 此处应该还需要判断下mobile和username是否已存在等参数校验逻辑和
     let register_date = new Date().getTime();
     res.id = await vk.baseDao.add({
-      dbName:"uni-id-users",
-      dataJson:{
+      dbName: 'uni-id-users',
+      dataJson: {
         username,
         nickname,
         gender,
         mobile,
         comment,
-        register_date
-      }
+        register_date,
+      },
     });
     return res;
-  }
-}
+  },
+};
 ```
 
-实际开发用户管理时，接口可以参考`admin/system/user/sys/add`内的更详细的写法。（这里是为了演示常规页面的CRUD）
+实际开发用户管理时，接口可以参考`admin/system/user/sys/add`内的更详细的写法。（这里是为了演示常规页面的 CRUD）
 
 ### 删：delete.js
 
@@ -72,7 +66,7 @@ module.exports = {
     let { customUtil, uniID, config, pubFun, vk, db, _ } = util;
     let { uid } = data;
     let res = { code: 0, msg: '' };
-    // 业务逻辑开始----------------------------------------------------------- 
+    // 业务逻辑开始-----------------------------------------------------------
     let { _id } = data;
     if (vk.pubfn.isNullOne(_id)) {
       return { code: -1, msg: '_id不能为空' };
@@ -82,14 +76,15 @@ module.exports = {
     }
     // 执行数据库API请求
     res.num = await vk.baseDao.deleteById({
-      dbName: "uni-id-users",
-      id:_id
+      dbName: 'uni-id-users',
+      id: _id,
     });
     return res;
-  }
-}
+  },
+};
 ```
-### 查：getList.js （只改dbName即可）
+
+### 查：getList.js （只改 dbName 即可）
 
 全部代码如下：
 
@@ -107,22 +102,21 @@ module.exports = {
    */
   main: async (event) => {
     let { data = {}, userInfo, util, filterResponse, originalParam } = event;
-    let { customUtil, uniID, config, pubFun, vk , db, _ } = util;
+    let { customUtil, uniID, config, pubFun, vk, db, _ } = util;
     let { uid } = data;
-    let res = { code : 0, msg : '' };
+    let res = { code: 0, msg: '' };
     // 业务逻辑开始-----------------------------------------------------------
-    let dbName = "uni-id-users";
+    let dbName = 'uni-id-users';
     res = await vk.baseDao.getTableData({
       dbName,
-      data
+      data,
     });
     return res;
-  }
-
-}
+  },
+};
 ```
 
-### 改：update.js 
+### 改：update.js
 
 ```js
 module.exports = {
@@ -137,53 +131,47 @@ module.exports = {
     let { customUtil, uniID, config, pubFun, vk, db, _ } = util;
     let { uid } = data;
     let res = { code: 0, msg: '' };
-    // 业务逻辑开始----------------------------------------------------------- 
-    let {
-      _id,
-      nickname,
-      gender = 0,
-      mobile,
-      comment,
-    } = data;
+    // 业务逻辑开始-----------------------------------------------------------
+    let { _id, nickname, gender = 0, mobile, comment } = data;
     if (vk.pubfn.isNullOne(_id)) {
       return { code: -1, msg: '_id不能为空' };
     }
     // 此处还应该还需要判断下mobile和username是否已存在等参数校验逻辑和
     // 执行数据库API请求
     res.id = await vk.baseDao.updateById({
-      dbName:"uni-id-users",
-      id:_id,
-      dataJson:{
+      dbName: 'uni-id-users',
+      id: _id,
+      dataJson: {
         nickname,
         gender,
         mobile,
-        comment
-      }
+        comment,
+      },
     });
     return res;
-  }
-}
+  },
+};
 ```
 
-实际开发用户管理时，接口可以参考`admin/system/user/sys/update`内的更详细的写法。（这里是为了演示常规页面的CRUD）
+实际开发用户管理时，接口可以参考`admin/system/user/sys/update`内的更详细的写法。（这里是为了演示常规页面的 CRUD）
 
-* 5、上传云函数`router`
+- 5、上传云函数`router`
 
 ## 2、写页面
 
-* 1、在目录 `pages` 下创建新的目录 `user`（只建目录，无需建页面）
+- 1、在目录 `pages` 下创建新的目录 `user`（只建目录，无需建页面）
 
-* 2、复制 `pages_template/kong/list.vue` 文件到 刚刚新建的`pages/user`目录
+- 2、复制 `pages_template/kong/list.vue` 文件到 刚刚新建的`pages/user`目录
 
-* 3、修改变量`table1.action `值 `template/db_api/sys/getList` 为 `admin/user/sys/getList`
+- 3、修改变量`table1.action `值 `template/db_api/sys/getList` 为 `admin/user/sys/getList`
 
-* 4、修改变量`addBtn ` 函数中的action `template/db_api/sys/add` 为 `admin/user/sys/add`
+- 4、修改变量`addBtn ` 函数中的 action `template/db_api/sys/add` 为 `admin/user/sys/add`
 
-* 5、修改变量`updateBtn ` 函数中的action `template/db_api/sys/update` 为 `admin/user/sys/update`
+- 5、修改变量`updateBtn ` 函数中的 action `template/db_api/sys/update` 为 `admin/user/sys/update`
 
-* 6、修改变量`deleteBtn ` 函数中的action `template/db_api/sys/delete` 为 `admin/user/sys/delete`
+- 6、修改变量`deleteBtn ` 函数中的 action `template/db_api/sys/delete` 为 `admin/user/sys/delete`
 
-* 7、修改变量 `table1.columns` 
+- 7、修改变量 `table1.columns`
 
 ```js
 table1:{
@@ -228,13 +216,13 @@ table1:{
 },
 ```
 
-* 8、修改变量 `queryForm1.columns` 
+- 8、修改变量 `queryForm1.columns`
 
 ```js
 queryForm1:{
   // 查询表单数据源，可在此设置默认值
   formData:{
-    
+
   },
   // 查询表单的字段规则 fieldName:指定数据库字段名,不填默认等于key
   columns:[
@@ -248,13 +236,13 @@ queryForm1:{
 },
 ```
 
-* 9、修改变量 `form1.props`
+- 9、修改变量 `form1.props`
 
 ```js
 form1: {
   // 表单请求数据，此处可以设置默认值
   data: {
-    
+
   },
   // 表单属性
   props: {
@@ -302,7 +290,7 @@ form1: {
 },
 ```
 
-* 10、在 `pages.json` 的 `Pages`中配置页面路由
+- 10、在 `pages.json` 的 `Pages`中配置页面路由
 
 ```js
 "pages": [
@@ -311,7 +299,7 @@ form1: {
 ],
 ```
 
-* 11、在 `static_menu/menu.json` 添加静态菜单（或者去菜单管理中添加动态菜单）
+- 11、在 `static_menu/menu.json` 添加静态菜单（或者去菜单管理中添加动态菜单）
 
 ```js
 {
@@ -339,4 +327,4 @@ sort : 菜单排序（从小到大排序）
 children : 子菜单列表
 ```
 
-* 12、完成
+- 12、完成

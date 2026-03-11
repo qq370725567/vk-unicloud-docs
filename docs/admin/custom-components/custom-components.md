@@ -36,52 +36,42 @@
       // 双向绑定的值
       value: {
         type: String,
-        default: ""
+        default: '',
       },
       // 字段规则
       column: {
         type: Object,
-        default: function() {
+        default: function () {
           return {};
-        }
+        },
       },
       // 当前场景 form 万能表单 table 万能表格 detail 表格详情页
       scene: {
         type: String,
-        default: "form"
-      }
+        default: 'form',
+      },
     },
     data() {
-      return {
-
-      };
+      return {};
     },
     // 组件加载完成时触发
-    mounted() {
-
-    },
+    mounted() {},
     // 组件函数
     methods: {
-      _input(value){
+      _input(value) {
         // 固定顺序，先input，再change
-        this.$emit("input", value);
-        this.$emit("change", value);
-      }
+        this.$emit('input', value);
+        this.$emit('change', value);
+      },
     },
     // 监听器
-    watch: {
-
-    },
+    watch: {},
     // 计算属性
-    computed: {
-
-    },
+    computed: {},
   };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 ```
 
 ## 使用方式
@@ -100,10 +90,10 @@
 
 ### 开发万能表单
 
-在万能表单场景下，组件需要提供2个事件，分别为
+在万能表单场景下，组件需要提供 2 个事件，分别为
 
 1. input（表单双向绑定需要）
-2. change（watch需要）
+2. change（watch 需要）
 
 注意：事件触发顺序必须是先 `input` 再 `change`
 

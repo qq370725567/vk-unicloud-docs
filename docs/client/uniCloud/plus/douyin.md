@@ -2,15 +2,15 @@
 sidebarDepth: 0
 ---
 
-# 抖音小程序API
+# 抖音小程序 API
 
-> 以下API需要vk-unicloud核心库版本 >= 2.14.1
+> 以下 API 需要 vk-unicloud 核心库版本 >= 2.14.1
 
 ## 配置文件@config
 
-打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的 
+打开 `uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json` 文件，配置里面的
 
-"mp-toutiao" 抖音小程序（注意，抖音的是mp-toutiao，而不是mp-douyin）
+"mp-toutiao" 抖音小程序（注意，抖音的是 mp-toutiao，而不是 mp-douyin）
 
 ```js
 "mp-toutiao": {
@@ -27,11 +27,11 @@ sidebarDepth: 0
 
 配置完需要上传 `uni-config-center` 这个公共模块才会生效
 
-## 授权相关API@auth
+## 授权相关 API@auth
 
-### 获取token@getAccessToken
+### 获取 token@getAccessToken
 
-`vk.openapi.douyin.auth.getAccessToken` 
+`vk.openapi.douyin.auth.getAccessToken`
 
 ```js
 /**
@@ -41,7 +41,7 @@ sidebarDepth: 0
 let access_token = await vk.openapi.douyin.auth.getAccessToken();
 ```
 
-### code换取openid@code2Session
+### code 换取 openid@code2Session
 
 `vk.openapi.douyin.auth.code2Session`
 
@@ -53,7 +53,7 @@ let access_token = await vk.openapi.douyin.auth.getAccessToken();
  */
 let code2SessionRes = await vk.openapi.douyin.auth.code2Session({
   code: code,
-  needKey: false
+  needKey: false,
 });
 ```
 
@@ -68,18 +68,17 @@ let code2SessionRes = await vk.openapi.douyin.auth.code2Session({
  * @param {String} path 必须是已经发布的小程序存在的页面（否则报错），例如 pages/index/index, 根路径前不要填加 / 可以携带参数 如 pages/index/index?a=1
  */
 let getMiniCodeRes = await vk.openapi.douyin.acode.getMiniCode({
-  path: "pages/index/index?a=1&b=2",
+  path: 'pages/index/index?a=1&b=2',
 });
-
 ```
 
-**注意：getMiniCode在执行成功后返回的是二进制，故在云函数中需要转换，完整代码如下**
+**注意：getMiniCode 在执行成功后返回的是二进制，故在云函数中需要转换，完整代码如下**
 
 ```js
 let getMiniCodeRes = await vk.openapi.douyin.acode.getMiniCode({
-  page: "pages/index/index",
+  page: 'pages/index/index',
 });
-if (typeof getMiniCodeRes === "object" && getMiniCodeRes.code) {
+if (typeof getMiniCodeRes === 'object' && getMiniCodeRes.code) {
   return getMiniCodeRes;
 }
 try {
@@ -87,22 +86,23 @@ try {
   let base64 = Buffer.from(getMiniCodeRes, 'binary').toString('base64');
   return {
     code: 0,
-    base64: `data:image/png;base64,${base64}`
+    base64: `data:image/png;base64,${base64}`,
   };
 } catch (err) {
   // 转base64失败
   return {
     code: -1,
-    msg: "生成小程序码失败",
+    msg: '生成小程序码失败',
     err: {
       message: err.message,
-      stack: err.stack
-    }
+      stack: err.stack,
+    },
   };
 }
 ```
 
 ## 内容安全@security
+
 ### 检测文本是否违规@security-msgSecCheck
 
 `vk.openapi.douyin.security.msgSecCheck`
@@ -122,15 +122,15 @@ let msgSecCheckRes = await vk.openapi.douyin.security.msgSecCheck({
 let msgSecCheckRes = await vk.openapi.douyin.security.msgSecCheck({
   tasks: [
     {
-      content: "第一段文本"
+      content: '第一段文本',
     },
     {
-      content: "第二段文本"
+      content: '第二段文本',
     },
     {
-      content: "第三段文本"
-    }
-  ]
+      content: '第三段文本',
+    },
+  ],
 });
 ```
 
@@ -168,13 +168,13 @@ let imgSecCheckRes = await vk.openapi.douyin.security.imgSecCheck({
  * @param {Object} data               模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
  */
 let sendRes = await vk.openapi.douyin.subscribeMessage.send({
-  touser: "9D26812AF23D9B2743235C4E3F3353E8", // 接收者（用户）的 openid
-  template_id: "789697983d789c9257b7745470442be4", // 所需下发的订阅模板id
-  page: "pages/index/index", // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
+  touser: '9D26812AF23D9B2743235C4E3F3353E8', // 接收者（用户）的 openid
+  template_id: '789697983d789c9257b7745470442be4', // 所需下发的订阅模板id
+  page: 'pages/index/index', // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
   data: {
-    "物品名称": "测试值0",
-    "购买金额": "测试值1"
-  }
+    物品名称: '测试值0',
+    购买金额: '测试值1',
+  },
 });
 console.log('sendRes: ', sendRes);
 ```
@@ -187,39 +187,37 @@ console.log('sendRes: ', sendRes);
 
 ```js
 uni.requestSubscribeMessage({
-  tmplIds: ["271167b4691a07becf2ac115a896ebd6"], // 模板id
+  tmplIds: ['271167b4691a07becf2ac115a896ebd6'], // 模板id
   success: (res) => {
-    console.log("----subscribeAppMsg----success", res);
+    console.log('----subscribeAppMsg----success', res);
   },
   fail: (res) => {
-    console.log("----subscribeAppMsg----fail", res);
-  }
+    console.log('----subscribeAppMsg----fail', res);
+  },
 });
 ```
 
-## 抖音小程序万能API调用接口@generalapi
+## 抖音小程序万能 API 调用接口@generalapi
 
-**如果以上API不能满足你的需求，你可以使用这个万能API**
+**如果以上 API 不能满足你的需求，你可以使用这个万能 API**
 
 ```js
 let requestRes = await vk.openapi.douyin.request({
-  method: "POST",
-  url: "接口路径",
-  data: {
-
-  }
+  method: 'POST',
+  url: '接口路径',
+  data: {},
 });
 ```
 
 **请求参数**
 
-| 参数             | 说明                           | 类型    | 默认值  | 可选值 |
-|------------------|-------------------------------|---------|--------|-------|
-| method           | 请求模式，分为GET和POST（不区分大小写）  | String | POST   | GET |
-| url           | 接口路径         | String | -   | - |
-| data           | 请求数据         | Object | -   | - |
+| 参数   | 说明                                       | 类型   | 默认值 | 可选值 |
+| ------ | ------------------------------------------ | ------ | ------ | ------ |
+| method | 请求模式，分为 GET 和 POST（不区分大小写） | String | POST   | GET    |
+| url    | 接口路径                                   | String | -      | -      |
+| data   | 请求数据                                   | Object | -      | -      |
 
-**url参数详解**
+**url 参数详解**
 
 以 `获取小程序 URL Link` 为例
 
@@ -235,44 +233,40 @@ let requestRes = await vk.openapi.douyin.request({
 
 ```js
 let requestRes = await vk.openapi.douyin.request({
-  method: "POST",
-  url: "api/apps/url_link/generate",
+  method: 'POST',
+  url: 'api/apps/url_link/generate',
   data: {
     access_token: true, // 传true代表自动获取access_token
-    ma_app_id: "tt35f7434aaac849b101",
-    app_name: "douyin",
-    path: "pages/index/index",
+    ma_app_id: 'tt35f7434aaac849b101',
+    app_name: 'douyin',
+    path: 'pages/index/index',
     query: JSON.stringify({
       a: 1,
-      b: "2"
+      b: '2',
     }),
     expire_time: parseInt((Date.now() + 1000 * 3600) / 1000), // 1小时过期
-  }
+  },
 });
 console.log('requestRes: ', requestRes);
 ```
 
-
 **公共返回参数**
 
-| 参数             | 说明                           | 类型    | 
-|------------------|-------------------------------|---------|
-| code           | 0代表成功，其他均为失败           | Number | 
-| msg           | 失败时的提示内容           | String | 
+| 参数 | 说明                     | 类型   |
+| ---- | ------------------------ | ------ |
+| code | 0 代表成功，其他均为失败 | Number |
+| msg  | 失败时的提示内容         | String |
 
-其他返回参数参考抖音小程序服务端API文档 [传送门 - 抖音官方文档](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/develop/server/interface-request-credential/get-access-token)
+其他返回参数参考抖音小程序服务端 API 文档 [传送门 - 抖音官方文档](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/develop/server/interface-request-credential/get-access-token)
 
 ## 多小程序调用@many
 
-以上所有API均支持多加2个参数 
+以上所有 API 均支持多加 2 个参数
 
-| 参数							| 说明																												| 类型		|
-|------------------	|----------------------------------------------------------		|---------|
-| appid							| 可不填，不填会自动从uni-id配置的mp-douyin节点里获取appid		| String	|
-| appsecret					| 可不填，不填会自动从uni-id配置的mp-douyin节点里获取appsecret| String	|
+| 参数      | 说明                                                              | 类型   |
+| --------- | ----------------------------------------------------------------- | ------ |
+| appid     | 可不填，不填会自动从 uni-id 配置的 mp-douyin 节点里获取 appid     | String |
+| appsecret | 可不填，不填会自动从 uni-id 配置的 mp-douyin 节点里获取 appsecret | String |
 
-1. 如果 `appid` 和 `appsecret` 均不填，则自动从uni-id配置的mp-douyin节点里获取appid
+1. 如果 `appid` 和 `appsecret` 均不填，则自动从 uni-id 配置的 mp-douyin 节点里获取 appid
 2. 如果填了 `appid` 不填 `appsecret`，则 `appsecret` 会自动从 `uni-config-center/vk-unicloud/index.js 的抖音小程序配置（vk.oauth.douyin.list）` 里找对应的值
-
-
-

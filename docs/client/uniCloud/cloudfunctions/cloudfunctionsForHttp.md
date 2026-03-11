@@ -2,13 +2,13 @@
 sidebarDepth: 0
 ---
 
-# 使用axios等工具请求云函数或云对象
+# 使用 axios 等工具请求云函数或云对象
 
-## 开启URL化
+## 开启 URL 化
 
-___必须开启云函数的URL化，假如URL地址为：https://xxx.bspapp.com/http/router___
+**_必须开启云函数的 URL 化，假如 URL 地址为：https://xxx.bspapp.com/http/router_**
 
-开启URL化方法为：打开 `router/package.json` 文件，在 `path` 里填写 `/http/router`，最后重新上传云函数。
+开启 URL 化方法为：打开 `router/package.json` 文件，在 `path` 里填写 `/http/router`，最后重新上传云函数。
 
 ```js
 cloudfunction-config": {
@@ -21,40 +21,41 @@ cloudfunction-config": {
 }
 ```
 
-## 获得云函数URL化的域名地址
+## 获得云函数 URL 化的域名地址
 
-进入uniCloud后台，在云函数的函数列表里找到router，点详情
+进入 uniCloud 后台，在云函数的函数列表里找到 router，点详情
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/53ab9faf-4e28-4d5c-b735-2d7cee4a991e.png)
 
-___注意：如果你直接在浏览器中访问url化地址，会触发下载请求，需要用 `postman` 等工具进行访问测试。___
+**_注意：如果你直接在浏览器中访问 url 化地址，会触发下载请求，需要用 `postman` 等工具进行访问测试。_**
 
 ## 请求示例
 
-### 使用axios发起请求
+### 使用 axios 发起请求
 
-假设router的url化地址是 `https://xxx.com/http/router`
+假设 router 的 url 化地址是 `https://xxx.com/http/router`
 
 假设需要请求的云函数路由是 `template/test/pub/test`
 
-则完整请求url是 `https://xxx.com/http/router/template/test/pub/test`
+则完整请求 url 是 `https://xxx.com/http/router/template/test/pub/test`
 
-axios（不带token）
+axios（不带 token）
 
 ```js
-axios.post('https://xxx.bspapp.com/http/router/test/pub/test', {
-  a:1,
-  b:"2"
-})
-.then((res) => {
-  console.log("then", res);
-})
-.catch((err) => {
-  console.log("catch", err);
-});
+axios
+  .post('https://xxx.bspapp.com/http/router/test/pub/test', {
+    a: 1,
+    b: '2',
+  })
+  .then((res) => {
+    console.log('then', res);
+  })
+  .catch((err) => {
+    console.log('catch', err);
+  });
 ```
 
-axios（带token）
+axios（带 token）
 
 ```js
 axios({
@@ -68,93 +69,93 @@ axios({
   },
   data: {
     a: 1,
-    b: "2"
-  }
+    b: '2',
+  },
 })
-.then((res) => {
-  console.log("then", res);
-})
-.catch((err) => {
-  console.log("catch", err);
-});
+  .then((res) => {
+    console.log('then', res);
+  })
+  .catch((err) => {
+    console.log('catch', err);
+  });
 ```
 
-### 使用jquery发起请求
+### 使用 jquery 发起请求
 
-假设router的url化地址是 `https://xxx.com/http/router`
+假设 router 的 url 化地址是 `https://xxx.com/http/router`
 
 假设需要请求的云函数路由是 `template/test/pub/test`
 
-则完整请求url是 `https://xxx.com/http/router/template/test/pub/test`
+则完整请求 url 是 `https://xxx.com/http/router/template/test/pub/test`
 
-jquery（无token示例）
+jquery（无 token 示例）
 
 ```js
 $.ajax({
   type: 'POST',
-  url: "https://xxx.com/http/router/template/test/pub/test",
+  url: 'https://xxx.com/http/router/template/test/pub/test',
   data: JSON.stringify({
     a: 1,
-    b: "2"
+    b: '2',
   }),
   success: (data) => {
-    console.log("data", data);
-  }
-})
+    console.log('data', data);
+  },
+});
 ```
 
-jquery（有token示例）
+jquery（有 token 示例）
 
 ```js
 $.ajax({
   type: 'POST',
-  url: "https://xxx.com/http/router/template/test/pub/test",
-  headers:{ 
+  url: 'https://xxx.com/http/router/template/test/pub/test',
+  headers: {
     'content-type': 'application/json;charset=utf8',
     'uni-id-token': 'xxxxxxxxx', // 用户token
     'vk-appid': '__UNI__89927A9', // 你项目的dcloud_appid
     'vk-platform': 'mp-weixin', // 运行环境，如 h5、mp-weixin、app-plus 等
   },
   data: JSON.stringify({
-    a:1,
-    b:"2"
+    a: 1,
+    b: '2',
   }),
   success: (data) => {
-    console.log("data", data);
-  }
-})
-```
-
-### 使用uni.request发起请求
-
-假设router的url化地址是 `https://xxx.com/http/router`
-
-假设需要请求的云函数路由是 `template/test/pub/test`
-
-则完整请求url是 `https://xxx.com/http/router/template/test/pub/test`
-
-uni.request（不带token）
-
-```js
-uni.request({
-  method: 'POST',
-  url: "https://xxx.com/http/router/template/test/pub/test",
-  data: {
-    a: 1,
-    b: "2"
+    console.log('data', data);
   },
-  success: (data) => {
-    console.log("data", data);
-  }
 });
 ```
 
-uni.request（带token）
+### 使用 uni.request 发起请求
+
+假设 router 的 url 化地址是 `https://xxx.com/http/router`
+
+假设需要请求的云函数路由是 `template/test/pub/test`
+
+则完整请求 url 是 `https://xxx.com/http/router/template/test/pub/test`
+
+uni.request（不带 token）
 
 ```js
 uni.request({
   method: 'POST',
-  url: "https://xxx.com/http/router/template/test/pub/test",
+  url: 'https://xxx.com/http/router/template/test/pub/test',
+  data: {
+    a: 1,
+    b: '2',
+  },
+  success: (data) => {
+    console.log('data', data);
+  },
+});
+```
+
+uni.request（带 token）
+
+```js
+uni.request({
+  method: 'POST',
+  url: 'https://xxx.com/http/router/template/test/pub/test',
   header: {
     'content-type': 'application/json;charset=utf8',
     'uni-id-token': 'xxxxxxxxx', // 用户token
@@ -163,11 +164,11 @@ uni.request({
   },
   data: {
     a: 1,
-    b: "2"
+    b: '2',
   },
   success: (data) => {
-    console.log("data", data);
-  }
+    console.log('data', data);
+  },
 });
 ```
 
@@ -177,7 +178,7 @@ uni.request({
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/eb418f3f-7268-433f-9ca4-79f8902752c7.png)
 
-则需要在请求头多传2个参数 `vk-appid` 和 `vk-platform`
+则需要在请求头多传 2 个参数 `vk-appid` 和 `vk-platform`
 
 其中 `vk-appid` 是 `manifest.json` 内的 `dcloud_appid`
 `vk-platform` 是当前环境，如：`h5` `mp-weixin` `app-plus` 等
@@ -197,14 +198,13 @@ axios({
   },
   data: {
     a: 1,
-    b: "2"
-  }
+    b: '2',
+  },
 })
-.then((res) => {
-  console.log("then", res);
-})
-.catch((err) => {
-  console.log("catch", err);
-});
-
+  .then((res) => {
+    console.log('then', res);
+  })
+  .catch((err) => {
+    console.log('catch', err);
+  });
 ```
