@@ -1,4 +1,5 @@
-module.exports = [{
+module.exports = [
+  {
     title: '起步',
     collapsable: false,
     children: [
@@ -14,10 +15,11 @@ module.exports = [{
       'changeGuide',
       'codeTips',
       'codeAssist',
+      'codeFormat',
       'i18n',
       'globalAccelerate',
-      'product'
-    ]
+      'product',
+    ],
   },
   'jsapi',
   'vk.userCenter',
@@ -41,11 +43,9 @@ module.exports = [{
       'pages/icon',
       {
         title: '组件',
-        children: [
-          'pages/components/vk-data-goods-sku-popup'
-        ]
+        children: ['pages/components/vk-data-goods-sku-popup'],
       },
-    ]
+    ],
   },
   {
     title: '后端（云端）',
@@ -74,8 +74,8 @@ module.exports = [{
           'uniCloud/cloudfunctions/rateLimit',
           'uniCloud/cloudfunctions/uploadFile',
           'uniCloud/cloudfunctions/websocket',
-          'uniCloud/cloudfunctions/question'
-        ]
+          'uniCloud/cloudfunctions/question',
+        ],
       },
       {
         title: '数据库',
@@ -89,23 +89,18 @@ module.exports = [{
           'uniCloud/db/dao',
           'uniCloud/db/transaction',
           'uniCloud/db/schema',
-          'uniCloud/db/ext-database'
-        ]
+          'uniCloud/db/ext-database',
+        ],
       },
       {
         title: '缓存',
         collapsable: false,
-        children: [
-          'uniCloud/cache/cache',
-          'uniCloud/cache/oldCache'
-        ]
+        children: ['uniCloud/cache/cache', 'uniCloud/cache/oldCache'],
       },
       {
         title: '中间件',
         collapsable: false,
-        children: [
-          'uniCloud/middleware/filter'
-        ]
+        children: ['uniCloud/middleware/filter'],
       },
       {
         title: '扩展',
@@ -121,30 +116,21 @@ module.exports = [{
           'uniCloud/plus/sms',
           'uniCloud/plus/mail',
           'uniCloud/plus/map',
-          'uniCloud/plus/login'
-        ]
+          'uniCloud/plus/login',
+        ],
       },
       {
         title: '全局配置',
         collapsable: false,
-        children: [
-          'uniCloud/config/uni-id',
-          'uniCloud/config/vk-unicloud',
-          'uniCloud/config/uni-pay',
-        ]
+        children: ['uniCloud/config/uni-id', 'uniCloud/config/vk-unicloud', 'uniCloud/config/uni-pay'],
       },
       'uniCloud/redis/redis',
-    ]
+    ],
   },
   {
     title: '发行',
     collapsable: true,
-    children: [
-      'publish/cloud',
-      'publish/h5',
-      'publish/mp-weixin',
-      'publish/app'
-    ]
+    children: ['publish/cloud', 'publish/h5', 'publish/mp-weixin', 'publish/app'],
   },
   {
     title: '常见问题',
@@ -162,7 +148,7 @@ module.exports = [{
       'question/q10',
       'question/q11',
       'question/q12',
-    ]
+    ],
   },
-  'question/question'
-]
+  'question/question',
+];
