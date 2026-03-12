@@ -31,4 +31,15 @@ module.exports = {
   embeddedLanguageFormatting: 'auto',
   // 标签多个短属性尽可能同行显示
   singleAttributePerLine: false,
+  // 单独覆盖特定文件的配置
+  overrides: [
+    {
+      // 以下文件使用双引号
+      files: ['**/config.md'],
+      options: {
+        singleQuote: false, // 使用双引号
+        quoteProps: 'preserve',
+      },
+    },
+  ],
 };
