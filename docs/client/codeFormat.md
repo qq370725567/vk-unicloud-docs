@@ -154,7 +154,7 @@ changelog.md
 如果你有其他不需要格式化的文件或目录，可以在 `.prettierignore` 中自行添加。
 :::
 
-3. 在项目根目录内添加 Prettier 配置文件 `prettier.config.js`
+3. 在项目根目录内新增配置文件 `prettier.config.js`
 
 ```js
 module.exports = {
@@ -190,6 +190,17 @@ module.exports = {
   embeddedLanguageFormatting: 'auto',
   // 标签多个短属性尽可能同行显示
   singleAttributePerLine: false,
+  // 单独覆盖特定文件的配置
+  overrides: [
+    {
+      // 以下文件使用双引号
+      files: ['**/config.js', 'uni_modules/uni-config-center/uniCloud/cloudfunctions/common/uni-config-center/**/*.js'],
+      options: {
+        singleQuote: false, // 使用双引号
+        quoteProps: 'preserve',
+      },
+    },
+  ],
 };
 ```
 
@@ -201,9 +212,9 @@ module.exports = {
 npx prettier "**/*" --write --ignore-unknown
 ```
 
-5. 还原原本是压缩成一行的文件
+5. 还原本是压缩成一行的文件
 
-如 `router/service/admin/system/app/util/createPublishHtml/lib/art-template.js` 这些文件原本被压缩成一行的，最好不要格式化，所以需要还原 Ta，如下图所示
+如 `router/service/admin/system/app/util/createPublishHtml/lib/art-template.js` 这些文件原本被压缩成一行或几行的文件，最好不要格式化，所以需要还原 Ta，如下图所示
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/5feb688e-66d6-4711-bbca-320b6e786a8a.png)
 
