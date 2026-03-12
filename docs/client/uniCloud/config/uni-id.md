@@ -10,7 +10,7 @@ sidebarDepth: 0
 
 **由于`uni-id`配置无法打注释，故下方为`uni-id`配置的介绍（实际使用需要去除所有注释）**
 
-```js
+```json
 {
   "passwordSecret": "passwordSecret-demo", // 加密密码所用的密钥，修改会导致所用户之前的密码失效。如一定要修改，请查看https://uniapp.dcloud.io/uniCloud/uni-id?id=modifysecret
   "tokenSecret": "tokenSecret-demo", // 生成token所用的密钥，修改会导致所有用户之前的token失效。
@@ -174,7 +174,7 @@ module.exports = async (tokenObj) => {
   //   permission: [] // 用户权限列表，admin角色的用户权限列表为空数组
   // }
 
-  tokenObj.customField = 'hello custom token'; // 自定义token字段
+  tokenObj.customField = "hello custom token"; // 自定义token字段
   return tokenObj; // 注意务必返回修改后的token对象
 };
 ```
