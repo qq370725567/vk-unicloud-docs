@@ -41,5 +41,12 @@ module.exports = {
         quoteProps: 'preserve',
       },
     },
+    {
+      // 以下文件使用双引号
+      files: ['docs/.vuepress/configs/sidebar/*.js'],
+      options: {
+        printWidth: 50,
+      },
+    },
   ],
 };

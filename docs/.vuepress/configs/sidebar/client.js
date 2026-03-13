@@ -13,12 +13,18 @@ module.exports = [
       'catalogue',
       'changelog',
       'changeGuide',
-      'codeTips',
-      'codeAssist',
-      'codeFormat',
       'i18n',
       'globalAccelerate',
       'product',
+    ],
+  },
+  {
+    title: '辅助工具',
+    collapsable: false,
+    children: [
+      'codeAssist',
+      'codeFormat',
+      'codeTips',
     ],
   },
   'jsapi',
@@ -43,7 +49,9 @@ module.exports = [
       'pages/icon',
       {
         title: '组件',
-        children: ['pages/components/vk-data-goods-sku-popup'],
+        children: [
+          'pages/components/vk-data-goods-sku-popup',
+        ],
       },
     ],
   },
@@ -95,7 +103,10 @@ module.exports = [
       {
         title: '缓存',
         collapsable: false,
-        children: ['uniCloud/cache/cache', 'uniCloud/cache/oldCache'],
+        children: [
+          'uniCloud/cache/cache',
+          'uniCloud/cache/oldCache',
+        ],
       },
       {
         title: '中间件',
@@ -122,7 +133,11 @@ module.exports = [
       {
         title: '全局配置',
         collapsable: false,
-        children: ['uniCloud/config/uni-id', 'uniCloud/config/vk-unicloud', 'uniCloud/config/uni-pay'],
+        children: [
+          'uniCloud/config/uni-id',
+          'uniCloud/config/vk-unicloud',
+          'uniCloud/config/uni-pay',
+        ],
       },
       'uniCloud/redis/redis',
     ],
@@ -130,7 +145,12 @@ module.exports = [
   {
     title: '发行',
     collapsable: true,
-    children: ['publish/cloud', 'publish/h5', 'publish/mp-weixin', 'publish/app'],
+    children: [
+      'publish/cloud',
+      'publish/h5',
+      'publish/mp-weixin',
+      'publish/app',
+    ],
   },
   {
     title: '常见问题',

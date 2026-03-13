@@ -2,14 +2,27 @@ module.exports = [
   {
     title: '起步',
     collapsable: false,
-    children: ['', '1/quickstart', '1/catalogue', '1/changelog', '1/update', '1/codeTips', '1/theme'],
+    children: [
+      '',
+      '1/quickstart',
+      '1/catalogue',
+      '1/changelog',
+      '1/update',
+      '1/codeTips',
+      '1/theme',
+    ],
   },
   '2/table',
   '3/form',
   {
     title: '进阶',
     collapsable: false,
-    children: ['4/role', '4/codeTips', '4/forceResetAdminPassword', '4/userIsolation'],
+    children: [
+      '4/role',
+      '4/codeTips',
+      '4/forceResetAdminPassword',
+      '4/userIsolation',
+    ],
   },
   '5/template',
   {
@@ -51,7 +64,13 @@ module.exports = [
   {
     title: '其他组件',
     collapsable: false,
-    children: ['components2/1、vk-data-icon', 'components2/2、vk-data-link', 'components2/3、vk-data-dialog', 'components2/4、vk-data-drawer', 'components2/5、vk-data-menu-nav'],
+    children: [
+      'components2/1、vk-data-icon',
+      'components2/2、vk-data-link',
+      'components2/3、vk-data-dialog',
+      'components2/4、vk-data-drawer',
+      'components2/5、vk-data-menu-nav',
+    ],
   },
   {
     title: '扩展自定义组件',
@@ -62,14 +81,27 @@ module.exports = [
       {
         title: '已提交的自定义组件',
         collapsable: false,
-        children: ['custom-components/components/custom-editor-tinymce'],
+        children: [
+          'custom-components/components/custom-editor-tinymce',
+        ],
       },
     ],
   },
   {
     title: '内置功能',
     collapsable: false,
-    children: ['6/user', '6/role', '6/permission', '6/menu', '6/app', '6/app-upgrade-center', '6/uni-id-files', '6/vk-global-data', '6/uni-id-log', '6/opendb-admin-log'],
+    children: [
+      '6/user',
+      '6/role',
+      '6/permission',
+      '6/menu',
+      '6/app',
+      '6/app-upgrade-center',
+      '6/uni-id-files',
+      '6/vk-global-data',
+      '6/uni-id-log',
+      '6/opendb-admin-log',
+    ],
   },
   'question/question',
 ];

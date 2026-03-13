@@ -2,7 +2,15 @@ module.exports = [
   {
     title: '起步',
     collapsable: false,
-    children: ['', 'quickstart', 'config', 'example', 'catalogue', 'changeGuide', 'question/question'],
+    children: [
+      '',
+      'quickstart',
+      'config',
+      'example',
+      'catalogue',
+      'changeGuide',
+      'question/question',
+    ],
   },
   {
     title: '通用-后端SDK（云函数）',
@@ -20,17 +28,27 @@ module.exports = [
   {
     title: '通用-前端SDK（页面）',
     collapsable: false,
-    children: ['page/vk-uni-pay', 'page/createPayment', 'page/url'],
+    children: [
+      'page/vk-uni-pay',
+      'page/createPayment',
+      'page/url',
+    ],
   },
   {
     title: '通用-数据库表',
     collapsable: false,
-    children: ['db/vk-pay-orders', 'db/vk-pay-config'],
+    children: [
+      'db/vk-pay-orders',
+      'db/vk-pay-config',
+    ],
   },
   {
     title: '进阶',
     collapsable: false,
-    children: ['advanced/multi-merchant', 'advanced/multi-merchant-service-provider'],
+    children: [
+      'advanced/multi-merchant',
+      'advanced/multi-merchant-service-provider',
+    ],
   },
   'iosiap',
   'wxpay-virtual',
