@@ -35,7 +35,7 @@ module.exports = {
   overrides: [
     {
       // 以下文件使用双引号
-      files: ['**/config.md', '**/config/**/*.md'],
+      files: ['**/config.js', '**/uni-config-center/**/*.js'],
       options: {
         singleQuote: false, // 使用双引号
         quoteProps: 'preserve',
