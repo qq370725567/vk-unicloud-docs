@@ -8,11 +8,11 @@ sidebarDepth: 0
 
 本项目使用 [Prettier](https://prettier.io/) 作为代码格式化工具，以下是在 HBuilderX 中的配置步骤。
 
-## 步骤一：安装 Prettier 插件
+## 步骤一：安装 Prettier 插件@install
 
 前往 HBuilderX 插件市场下载 Prettier 插件：[下载地址](https://ext.dcloud.net.cn/plugin?id=2025)
 
-## 步骤二：编辑器设置
+## 步骤二：编辑器设置@hbx-config
 
 点击 HBuilderX 上方菜单 **【工具】→【设置】→【源码视图】**，将下方的配置项复制到右边的输入框中。
 
@@ -43,7 +43,7 @@ sidebarDepth: 0
 | `prettier.scope`                | 指定 Prettier 格式化的文件范围                             |
 | `editor.formatOnSave`           | 保存文件时自动格式化                                       |
 
-## 步骤三：Prettier 配置
+## 步骤三：Prettier 配置@config
 
 在 **【插件配置】** 中按如下图点击操作：
 
@@ -97,7 +97,7 @@ module.exports = {
 };
 ```
 
-## 批量格式化项目所有文件
+## 批量格式化项目所有文件@format-all
 
 **特别注意：操作前先提交 git，确保如果出错也能还原**
 
@@ -230,9 +230,9 @@ npx prettier "**/*" --write --ignore-unknown
 npm uninstall -g prettier
 ```
 
-## 常见问题
+## 常见问题@q
 
-**Q：保存时没有自动格式化？**
+### 保存时没有自动格式化？@q1
 
 请检查以下几点：
 
@@ -240,11 +240,11 @@ npm uninstall -g prettier
 2. 确认 `editor.formatOnSave` 已设置为 `true`
 3. 确认当前文件类型在 `prettier.scope` 的范围内
 
-**Q：格式化后代码风格和团队不一致？**
+### 格式化后代码风格和团队不一致？@q2
 
 请确保你使用的是上述统一的 Prettier 配置，不要使用个人自定义的配置覆盖项目配置。
 
-**Q：格式化后部分条件编译格式错乱，导致无法运行项目？**
+### 格式化后部分条件编译格式错乱，导致无法运行项目？@q3
 
 什么情况下会出现条件编译格式错乱？`vk-uview-ui` 的 `u-input` 组件就碰到了这个问题，具体问题如下
 
