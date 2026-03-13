@@ -237,14 +237,20 @@ npm uninstall -g prettier
 请检查以下几点：
 
 1. 确认 Prettier 插件已正确安装
-2. 确认 `editor.formatOnSave` 已设置为 `true`
+2. 点击 HBuilderX 上方菜单 **【工具】→【设置】→【源码视图】**，确认 `editor.formatOnSave` 已设置为 `true`
 3. 确认当前文件类型在 `prettier.scope` 的范围内
 
-### 格式化后代码风格和团队不一致？@q2
+### 如何取消保存时自动格式化？@q2
+
+点击 HBuilderX 上方菜单 **【工具】→【设置】→【源码视图】**
+
+将 `editor.formatOnSave` 已设置为 `false`
+
+### 格式化后代码风格和团队不一致？@q3
 
 请确保你使用的是上述统一的 Prettier 配置，不要使用个人自定义的配置覆盖项目配置。
 
-### 格式化后部分条件编译格式错乱，导致无法运行项目？@q3
+### 格式化后部分条件编译格式错乱，导致无法运行项目？@q4
 
 什么情况下会出现条件编译格式错乱？`vk-uview-ui` 的 `u-input` 组件就碰到了这个问题，具体问题如下
 
