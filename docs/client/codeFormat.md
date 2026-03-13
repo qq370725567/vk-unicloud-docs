@@ -97,6 +97,8 @@ module.exports = {
 
 ## 批量格式化项目所有文件
 
+**特别注意：操作前先提交 git，确保如果出错也能还原**
+
 1. 安装全局 prettier 依赖
 
 这里指定版本为 `2.8.4` 是为了和 `HBuilderX` 插件市场的版本对齐
@@ -237,3 +239,86 @@ npm uninstall -g prettier
 **Q：格式化后代码风格和团队不一致？**
 
 请确保你使用的是上述统一的 Prettier 配置，不要使用个人自定义的配置覆盖项目配置。
+
+**Q：格式化后部分条件编译格式错乱，导致无法运行项目？**
+
+什么情况下会出现条件编译格式错乱？`vk-uview-ui` 的 `u-input` 组件就碰到了这个问题，具体问题如下
+
+**格式化前**
+
+```vue
+<template>
+  <!-- prettier-ignore -->
+  <view
+    class="u-input"
+
+    <!-- #ifndef MP-HARMONY -->
+    @tap.stop="inputClick"
+    <!-- #endif -->
+
+    <!-- #ifdef MP-HARMONY -->
+    @tap="inputClick"
+    <!-- #endif -->
+  >
+  </view
+</template>
+```
+
+是因为在 `template` 内的 `view` 标签内使用了条件编译，此时可能格式化后会变成下面这样
+
+**格式化后**
+
+```vue
+<template>
+  <!-- prettier-ignore -->
+  <view
+    class="u-input"
+
+    <!--
+    #ifndef
+    MP-HARMONY
+    --
+  >
+    @tap.stop="inputClick"
+    <!-- #endif -->
+
+    <!-- #ifdef MP-HARMONY -->
+    @tap="inputClick"
+    <!-- #endif -->
+  >
+  </view>
+</template>
+```
+
+即 `<!-- #ifndef MP-HARMONY -->` 会被拆成多行，导致条件编译失效，进而格式错乱导致无法正常编译，因此，尽量不要在组件标签内部使用 条件编译，而应该在组件标签外写条件编译，如下这样写就没问题
+
+```vue
+<template>
+  <!-- #ifndef MP-HARMONY -->
+  <view class="u-input" @tap.stop="inputClick"></view>
+  <!-- #endif -->
+  <!-- #ifdef MP-HARMONY -->
+  <view class="u-input" @tap="inputClick"></view>
+  <!-- #endif -->
+</template>
+```
+
+当然，如果代码较多，不想重构，可以直接使用 `<!-- prettier-ignore -->` 来忽略该组件的格式化，如下写法也没问题
+
+```vue
+<template>
+  <!-- prettier-ignore -->
+  <view
+    class="u-input"
+
+    <!-- #ifndef MP-HARMONY -->
+    @tap.stop="inputClick"
+    <!-- #endif -->
+
+    <!-- #ifdef MP-HARMONY -->
+    @tap="inputClick"
+    <!-- #endif -->
+  >
+  </view
+</template>
+```
