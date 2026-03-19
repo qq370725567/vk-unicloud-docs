@@ -80,17 +80,12 @@ module.exports = [
     link: '',
     ariaLabel: 'AI小助手',
     items: [
-      {
-        text: 'VK小助手之云开发',
-        link: 'https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c?lang=zh',
-      },
-      {
-        text: 'VK小助手之前端开发',
-        link: 'https://chatglm.cn/main/gdetail/65fd3f408da5f6f0bb6c739a?lang=zh',
-      },
-      { text: '腾讯元宝', link: 'https://yuanbao.tencent.com/chat/naQivTmsDa' },
-      { text: 'DeepSeek', link: 'https://chat.deepseek.com' },
-      { text: 'Copilot GTP-4o', link: 'https://github.com/copilot' },
+      { text: 'VK小助手之云开发', link: 'https://chatglm.cn/main/gdetail/65ddd9d832f609421a9c719c?lang=zh' },
+      { text: '国内-抖音豆包', link: 'https://www.doubao.com/chat' },
+      { text: '国内-阿里千问', link: 'https://www.qianwen.com' },
+      { text: '国内-腾讯元宝', link: 'https://yuanbao.tencent.com/chat/naQivTmsDa' },
+      { text: '海外-Gemini', link: 'https://gemini.google.com/app' },
+      { text: '海外-Copilot', link: 'https://github.com/copilot' },
     ],
   },
   {
