@@ -4,65 +4,168 @@ sidebarDepth: 0
 
 # URL 化之 URL 重写
 
-**什么是 URL 化?**
+URL 重写的作用很简单：
 
-云函数 URL 化 是 uniCloud 为开发者提供的 HTTP 访问服务，让开发者可以通过 HTTP URL 方式访问到云函数。
+1. 把外部 URL 改得更短、更好记。
+2. 隐藏内部真实路径。
+3. 支持把 query 参数改成路径参数。
+4. 支持把云对象的 `.` 改成 `/`。
 
-场景 1：比如 App 端微信支付，需要配服务器回调地址，此时需要一个 HTTP URL。
+例如：
 
-场景 2：非 uni-app 开发的系统，想要连接 uniCloud，读取数据，也需要通过 HTTP URL 方式访问。
+```text
+外部访问: https://xxx.bspapp.com/http/router/goods/getList
+实际执行: client/goods/pub/getList
+```
 
-用户通过 `https://xxx.bspapp.com/http/router` 的形式访问云函数
+效果：隐藏了 `client` 和 `pub` 目录
 
-## 什么是 URL 重写
+如果你还没有配置 URL 化，可以先查看 [使用 axios 等工具请求云函数或云对象](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudfunctionsForHttp.html)。
 
-URL 重写就是将 URL 按一定规则书写一个更容易阅读的 URL
+## 快速开始
 
-**好处**
-
-1. 美化 URL
-2. 隐藏真实 URL
-3. 伪静态（可将 url 后缀改成.html）（不过目前 unicloud 还不支持服务端渲染）
-4. 等等
-
-如：`https://xxx.bspapp.com/http/router/client/user/pub/findGoodsList` 这一个 URL。
-
-用户请求后，在路由框架的规则下，最终执行的是`client/user/pub/findGoodsList`这个云函数
-
-**而重写可以达到这样的效果**
-
-可以将 `https://xxx.bspapp.com/http/router/client/user/pub/findGoodsList`
-重写成 `https://xxx.bspapp.com/http/router/findGoodsList`
-
-它可以让你的 URL 更简短易懂，通常用于公开开放 API 时使用（也达到了一个隐藏真实 URL 的目的）
-
-它还可以将 `https://xxx.bspapp.com/http/router/client/user/pub/findGoodsInfo?id=1`
-重写成 `https://xxx.bspapp.com/http/router/findGoodsInfo/1`
-
-甚至可以将 `https://xxx.bspapp.com/http/router/template/db_api/pub/findById?id=1`
-重写成 `https://xxx.bspapp.com/http/router/findById/1.html`
-
-具体如何书写都由你自己来定义。
-
-**你的 URL 由你做主！**
-
-## 重写教程
-
-1. 编写 `router/util/urlrewrite.js`（如果没有则新建）
+新建或编辑 `router/util/urlrewrite.js`
 
 ```js
 module.exports = {
   rule: {
-    '^findById/(.+)': 'template/db_api/pub/findById?_id=$1',
-    '^aaa$': 'template/db_api/pub/select',
+    '^goods/getList$': 'client/goods/pub/getList',
   },
   config: {
-    // 当设置为true时，只有符合url重写规则内的云函数才可以被url化访问。
+    // true: 只允许访问下面 rule 中声明的地址
+    // false: 未声明的真实地址也可以直接访问
     accessOnlyInRule: false,
   },
 };
 ```
 
-**注意：当 `config.accessOnlyInRule=true` 时，只有符合 url 重写规则内的云函数才可以被 url 化访问。（可以做到只暴露指定的 API 接口）**
+修改后重新上传 `router` 云函数即可生效。
 
-2. 上传云函数（完成）
+## 规则说明
+
+```js
+'^goods/getList$': 'client/goods/pub/getList',
+```
+
+含义：
+
+1. 当访问 `goods/getList` 时，会命中这条规则。
+2. `^` 表示以 `goods/getList` 开头，`$` 表示以 `goods/getList` 结尾。
+3. 因为没有使用 `(.+)` 这类捕获参数，所以这条规则是精确匹配。
+4. 命中后会转发到 `client/goods/pub/getList` 执行。
+5. 这样对外访问地址中就隐藏了内部的 `client` 和 `pub` 目录。
+
+## 常用示例
+
+注意：以下 `外部访问` 地址均要拼接 `云函数URL化地址`，如` https://xxx.bspapp.com/http/router`
+
+### 缩短 URL
+
+```js
+module.exports = {
+  rule: {
+    '^findGoodsList$': 'client/user/pub/findGoodsList',
+  },
+};
+```
+
+```text
+外部访问: /findGoodsList
+实际执行: client/user/pub/findGoodsList
+```
+
+### 云对象 `.` 改 `/`
+
+```js
+module.exports = {
+  rule: {
+    '^client/user/(.+)$': 'client/user.$1',
+  },
+};
+```
+
+```text
+外部访问: /client/user/getInfo
+实际执行: client/user.getInfo
+```
+
+### 隐藏 `pub`
+
+```js
+module.exports = {
+  rule: {
+    '^goods/list$': 'client/goods/pub/list',
+    '^user/(.+)': 'client/user/pub/$1',
+  },
+};
+```
+
+```text
+外部访问: /goods/list
+实际执行: client/goods/pub/list
+
+外部访问: /user/xxx
+实际执行: client/user/pub/xxx
+```
+
+### 隐藏 `kh`
+
+```js
+module.exports = {
+  rule: {
+    '^user/profile$': 'client/user/kh/getProfile',
+  },
+};
+```
+
+```text
+外部访问: /user/profile
+实际执行: client/user/kh/getProfile
+```
+
+说明：去掉 `kh` 只是隐藏路径，登录校验仍然存在。
+
+### 隐藏 `sys`
+
+```js
+module.exports = {
+  rule: {
+    '^admin/order/refund$': 'admin/order/sys/refund',
+  },
+};
+```
+
+```text
+外部访问: /admin/order/refund
+实际执行: admin/order/sys/refund
+```
+
+说明：去掉 `sys` 只是隐藏路径，后台权限校验仍然存在。
+
+### 统一 API 前缀
+
+```js
+module.exports = {
+  rule: {
+    '^api/goods/list$': 'client/goods/pub/list',
+    '^api/goods/detail/(.+)$': 'client/goods/pub/detail?id=$1',
+    '^api/goods/category/list$': 'client/goods/pub/getCategoryList',
+  },
+};
+```
+
+适合开放 API、第三方对接、Webhook 等场景。
+
+## 使用建议
+
+1. 对外公开的地址，尽量不要直接带 `pub` `kh` `sys`。
+2. 公开接口建议统一前缀，例如 `/api/`、`/open/`。
+3. 具体规则写前面，通用规则写后面。
+4. 不要一开始就写过宽的正则。
+5. URL 重写只是美化请求地址，不是权限系统。
+
+## 相关文档
+
+1. [使用 axios 等工具请求云函数或云对象](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudfunctionsForHttp.html)
+2. [云函数](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudFunctions.html)
+3. [云对象 URL 化之 URL 重写](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#urlrewrite)
