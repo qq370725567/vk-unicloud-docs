@@ -901,11 +901,13 @@ module.exports = {
 
 [点击查看](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/crypto.html)
 
-## 同一个云对象内 A 函数调用 B 函数@q1
+## 云对象操作常见问题@q
+
+### 同一个云对象内 A 函数调用 B 函数@q1
 
 在同一个云对象内，可以通过 `await this.xxx()` 来调用其他函数，xxx 为函数名。
 
-## A 云对象内的函数调用 B 云对象的函数@q2
+### A 云对象内的函数调用 B 云对象的函数@q2
 
 **不建议**
 
@@ -929,7 +931,7 @@ let xxxRes = await pubFun.xxx();
 
 **我就要互相调用，应该怎么写？**
 
-### 方式一（推荐）
+#### 方式一（推荐）
 
 > vk-unicloud 版本需>=2.9.0
 
@@ -948,7 +950,7 @@ let callRes = await vk.callFunction({
 console.log(callRes);
 ```
 
-### 方式二（通用）
+#### 方式二（通用）
 
 ```js
 let callFunctionRes = await uniCloud.callFunction({
@@ -964,8 +966,6 @@ let callFunctionRes = await uniCloud.callFunction({
 console.log(callFunctionRes.result);
 ```
 
-## 云对象操作常见问题@q
+### 云对象内函数比较多，如何快速查看函数列表
 
-与云函数一致
-
-[点击查看](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/question.html)
+在 `HBuilderX` 内按 `Alt + w` 即可显示云对象结构，展开 `cloudObject` 对象即可看到所有函数名列表
