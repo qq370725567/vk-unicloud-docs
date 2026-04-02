@@ -31,7 +31,6 @@
 | cloudDirectory         | 上传至指定的云端目录（默认会以年月日为目录）                                                                                              | String                   | -            | -          |
 | cloudPathRemoveChinese | 删除文件名中的中文（默认 true）                                                                                                           | Boolean                  | true         | false      |
 | httpRequest            | 覆盖默认的上传行为，可以自定义上传的实现（下方有详细说明）                                                                                | function                 | -            | -          |
-| buttonText             | 上传按钮的文本                                                                                                                            | String                   | 点击上传     | -          |
 | drag                   | 是否开启拖拽上传                                                                                                                          | Boolean                  | false        | true       |
 | fileSize               | 限制文件大小                                                                                                                              | Number                   | -            | -          |
 | sizeUnit               | 文件的单位                                                                                                                                | String                   | MB           | KB、MB、GB |
