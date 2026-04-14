@@ -68,12 +68,40 @@ sidebarDepth: 0
 
 ## uni-agent 注意事项@uni-agent-tips
 
-因 uni-agent 不支持读取 `.claude/rules/` 目录，故 uni-agent 的全局提示词需要写到 `AGENTS.md`
+因 uni-agent 不会自动读取 `.claude/rules/` 目录，故 uni-agent 的全局提示词需要写到 `AGENTS.md`
 
 **操作步骤**
 
 1. 在项目根目录创建一个 `AGENTS.md` 文件，这是 uni-agent 提供的全局自定义规则
-2. 复制 `.claude/rules/env.md` 文件内所有内容，粘贴到 `AGENTS.md` 内，可放在最顶部
+
+文件内容如下：
+
+```md
+# 项目规则
+
+每次会话必须先阅读完文件 `/.claude/rules/env.md` 和 `/.claude/rules/rules.md` 文件后才能开始
+```
+
+## Cursor 注意事项@cursor-tips
+
+因 Cursor 不会自动读取 `.claude/rules/` 目录，故 Cursor 的全局提示词需要写到 `.cursor/rules/rules.mdc`
+
+**操作步骤**
+
+1. 创建 `.cursor/rules/rules.mdc` 文件
+
+文件内容如下：
+
+```md
+---
+description: 项目通用规则与代码规范（vk-unicloud）
+alwaysApply: true
+---
+
+# 项目规则
+
+每次会话必须先阅读完文件 `/.claude/rules/env.md` 和 `/.claude/rules/rules.md` 文件后才能开始
+```
 
 ## 框架 AI 后续发展计划
 
