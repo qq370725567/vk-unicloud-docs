@@ -24,7 +24,7 @@ module.exports = [
     children: [
       'codeAssist',
       'codeFormat',
-      'aiCoding'
+      'aiCoding',
       'codeTips',
     ],
   },
