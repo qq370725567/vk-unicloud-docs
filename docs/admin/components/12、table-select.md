@@ -6,17 +6,21 @@
 
 ```js
 {
-  key: "role", title: "通过表格选择(单选)", type: "table-select", placeholder: "请选择角色",
-  action: "admin/system/role/sys/getList",
+  key: 'user_id',
+  title: '选择用户',
+  type: 'table-select',
+  placeholder: '请选择用户',
+  action: 'admin/system/user/sys/getList',
   columns: [
-    { key: "role_name", title: "角色昵称", type: "text", nameKey: true },
-    { key: "role_id", title: "角色标识", type: "text", idKey: true }, // idKey:true 代表此字段为主键字段，若设置show:["none"],则可以在表格中隐藏该字段的显示
-    { key: "comment", title: "备注", type: "text" }
+    { key: '_id', title: '用户ID', type: 'text', idKey: true, show: ['none'] }, // idKey:true 代表此字段为主键字段，若设置show:["none"]，则可以在表格中隐藏该字段的显示
+    { key: 'avatar', title: '头像', type: 'image', width: 80 },
+    { key: 'nickname', title: '用户昵称', type: 'text', minWidth: 200, nameKey: true }, // nameKey: true 代表此字段的值会显示在表单上
+    { key: 'mobile', title: '手机号', type: 'text', minWidth: 140 }, // 设置 minWidth 的列会自动撑开
   ],
   queryColumns: [
-    { key: "role_name", title: "角色昵称", type: "text", width: 150, mode: "%%" },
-    { key: "role_id", title: "角色标识", type: "text", width: 150, mode: "%%" }
-  ]
+    { key: 'nickname', title: '用户昵称', type: 'text', width: 150, mode: '%%' },
+    { key: 'mobile', title: '手机号', type: 'text', width: 150, mode: '%%' },
+  ],
 },
 ```
 
@@ -24,23 +28,27 @@
 
 ```js
 {
-  key: "role", title: "通过表格选择(单选)", type: "table-select", placeholder: "请选择角色",
-  action: "admin/system/role/sys/getList",
+  key: 'user_id',
+  title: '选择用户',
+  type: 'table-select',
+  placeholder: '请选择用户',
+  action: 'admin/system/user/sys/getList',
   columns: [
-    { key: "role_name", title: "角色昵称", type: "text", nameKey: true },
-    { key: "role_id", title: "角色标识", type: "text", idKey: true }, // idKey:true 代表此字段为主键字段，若设置show:["none"],则可以在表格中隐藏该字段的显示
-    { key: "comment", title: "备注", type: "text" }
+    { key: '_id', title: '用户ID', type: 'text', idKey: true, show: ['none'] }, // idKey:true 代表此字段为主键字段，若设置show:["none"]，则可以在表格中隐藏该字段的显示
+    { key: 'avatar', title: '头像', type: 'image', width: 80 },
+    { key: 'nickname', title: '用户昵称', type: 'text', minWidth: 200, nameKey: true }, // nameKey: true 代表此字段的值会显示在表单上
+    { key: 'mobile', title: '手机号', type: 'text', minWidth: 140 }, // 设置 minWidth 的列会自动撑开
   ],
   queryColumns: [
-    { key: "role_name", title: "角色昵称", type: "text", width: 150, mode: "%%" },
-    { key: "role_id", title: "角色标识", type: "text", width: 150, mode: "%%" },
-    { key: "a", title: "a字段", type: "text", width: 150, mode: "=", show:["none"] }, // 只有这里设置了 a 字段, 则下面的formData中的 a 参数才会生效
+    { key: 'nickname', title: '用户昵称', type: 'text', width: 150, mode: '%%' },
+    { key: 'mobile', title: '手机号', type: 'text', width: 150, mode: '%%' },
+    { key: 'a', title: 'a字段', type: 'text', width: 150, mode: '=', show: ['none'] }, // 只有这里设置了 a 字段, 则下面的formData中的 a 参数才会生效
   ],
   formData: () => {
     return {
-      a: "1", // 支持通过 this 获取到其他参数
-    }
-  }
+      a: '1', // 支持通过 this 获取到其他参数
+    };
+  },
 },
 ```
 
