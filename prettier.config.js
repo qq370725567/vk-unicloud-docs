@@ -35,14 +35,19 @@ module.exports = {
   overrides: [
     {
       // 以下文件使用双引号
-      files: ['**/config.js', '**/uni-config-center/**/*.js'],
+      files: ['**/config.js', '**/uni-config-center/**/*.js', '**/config.md'],
       options: {
         singleQuote: false, // 使用双引号
         quoteProps: 'preserve',
       },
     },
     {
-      // 以下文件使用双引号
+      files: ['**wxpay-virtual.md'],
+      options: {
+        quoteProps: 'preserve',
+      },
+    },
+    {
       files: ['docs/.vuepress/configs/sidebar/*.js'],
       options: {
         printWidth: 50,
