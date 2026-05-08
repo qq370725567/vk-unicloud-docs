@@ -42,16 +42,16 @@ module.exports = {
   'wxpay-virtual': {
     // 微信 - 小程序支付
     'mp-weixin': {
-      appId: '', // 小程序的appid
-      secret: '', // 小程序的secret
-      mchId: '', // 商户id
-      offerId: '', // 支付应用ID
-      appKey: '', // 现网AppKey（正式环境）
-      sandboxAppKey: '', // 沙箱AppKey
-      rate: 100, // 代币兑换比例，比如1元兑换100代币，那么这里就是100，建议设置为100（需要开通虚拟支付的时候也设置成 1 人民币 = 100 代币）
-      token: '', // 微信小程序通信的token，在开发 - 开发管理 - 消息推送 - Token(令牌)
-      encodingAESKey: '', // 必须43位，微信小程序消息加密密钥，在开发 - 开发管理 - 消息推送 - EncodingAESKey(消息加解密密钥)
-      sandbox: false, // 是否是沙箱环境（注意：沙箱环境异步回调可能有延迟，建议直接正式环境测试）
+      'appId': '', // 小程序的appid
+      'secret': '', // secret
+      'mchId': '', // 商户id（在虚拟支付 - 基本配置 - 微信支付账号信息中获取）
+      'offerId': '', // 支付应用ID（在虚拟支付 - 基本配置 - 基础配置中获取）
+      'appKey': '', // 现网AppKey（正式环境，在虚拟支付 - 基本配置 - 基础配置中获取）
+      'sandboxAppKey': '', // 沙箱AppKey（在虚拟支付 - 基本配置 - 基础配置中获取）
+      'rate': 100, // 代币兑换比例，比如1元兑换100代币，那么这里就是100（需要开通虚拟支付的时候也设置成 1 人民币 = 100 代币）
+      'token': '', // 微信小程序通信的token，在开发 - 开发管理 - 消息推送 - Token(令牌) 通信地址填：https://url地址/vk-pay-notify/wxpay-virtual_mp-weixin
+      'encodingAESKey': '', // 必须43位，微信小程序消息加密密钥，在开发 - 开发管理 - 消息推送 - EncodingAESKey(消息加解密密钥)
+      'sandbox': false, // 是否是沙箱环境（注意：沙箱环境异步回调可能有延迟，建议直接正式环境测试）
     },
   },
 };
@@ -673,6 +673,16 @@ module.exports = {
 ## 开通
 
 - 前往 [微信虚拟支付官方文档](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/virtual-payment.html#_1-%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D)
+
+## 配置微信小程序消息推送
+
+微信虚拟支付的异步回调依赖微信小程序消息推送，请按下图所示配置
+
+其中 URL（服务器地址）填：`https://vk-pay的云函数URL地址/vk-pay-notify/wxpay-virtual_mp-weixin`
+
+正确示例：`https://env-00jxho66o66.dev-hz.cloudbasefunction.cn/http/vk-pay/vk-pay-notify/wxpay-virtual_mp-weixin`
+
+![](https://cdn.fsq.pub/vkdoc/vk-pay/bbc229ba-8635-4dab-82c2-3d462bb9a71b.png)
 
 ## API
 
