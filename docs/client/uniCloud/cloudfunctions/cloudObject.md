@@ -46,7 +46,7 @@ sidebarDepth: 0
 
 ## 云对象内置 API@api
 
-**特别注意**：云对象内置 API 无法通过重写覆盖，因此业务函数的命名需要规避云对象内置 API 的名称
+**特别注意**：云对象内置 API 无法通过重写覆盖，因此业务函数的命名需要规避云对象内置 API 的名称（如不要用 `getUserInfo` 做为函数名称，应该用 `getMyUserInfo`）
 
 ### this.getClientInfo（获取客户端信息）@get-client-info
 
