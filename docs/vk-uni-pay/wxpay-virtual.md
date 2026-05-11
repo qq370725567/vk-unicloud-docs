@@ -12,9 +12,8 @@ sidebarDepth: 0
 
 **注意**
 
-1. 微信小程序虚拟支付只有短剧类目的小程序才能开通
-2. 微信小程序虚拟支付不支持 ios 系统
-3. 微信小程序虚拟支付有较高的手续费（已知目前为 10% ~ 20%），由微信官方收取，非本插件收取（手续费多少跟使用本插件无关）
+1. 微信小程序虚拟支付只有特定类目的小程序才能开通
+2. 微信小程序虚拟支付有较高的手续费，由微信官方收取，非本插件收取（手续费多少跟使用本插件无关）
 
 ## 配置
 
@@ -64,7 +63,7 @@ module.exports = {
   <view class="app">
     <!-- 页面示例开始 -->
     <view class="page-content">
-      <view class="ios-tips"> 注意：苹果手机不支持微信虚拟支付 </view>
+      <view class="ios-tips"> 注意：苹果手机需要在微信虚拟支付 - 基本配置 - 启用苹果IAP支付后才能支付（订单实付金额需≥1元） </view>
 
       <view class="card">
         <view class="title">代币充值示例</view>
@@ -84,10 +83,10 @@ module.exports = {
         <view class="title">道具直购示例</view>
         <view class="content">
           <view style="margin-bottom: 8px">
-            <view style="margin: 10rpx 0;">道具选择</view>
+            <view style="margin: 5px 0">道具选择</view>
             <radio-group @change="productIdChange">
               <label> <radio value="test001" checked="true" />道具1 </label>
-              <label style="margin-left: 10px;"> <radio value="test002" />道具2 </label>
+              <label style="margin-left: 10px"> <radio value="test002" />道具2 </label>
             </radio-group>
           </view>
           <view style="margin-bottom: 8px">购买道具数量</view>
@@ -129,10 +128,10 @@ module.exports = {
       </view>
     </view>
 
-    <!-- 页面示例结束s -->
+    <!-- 页面示例结束 -->
 
     <!-- vue2版本的支付组件开始 -->
-    <!-- #ifndef VUE3 -->
+    <!-- #ifdef VUE2 -->
     <vk-uni-pay
       ref="vkPay"
       :status.sync="vkPay.status"
@@ -249,10 +248,11 @@ module.exports = {
         });
         return;
         // #endif
-        let { form1 } = this;
+        let that = this;
+        let { form1 } = that;
         // 这里的订单号\金额等数据应该是从数据库里获取的,这里为演示需要,故直接本地生成.
         form1.out_trade_no = obj.out_trade_no || 'test_' + Date.now();
-        this.$refs.vkPay.createPayment({
+        that.$refs.vkPay.createPayment({
           // 如果是非路由框架，则外层action不再是json，而为字符串，值为云函数名称，如 action: "你的云函数名称"
           // 如果是路由框架，则按下方配置填写
           // 如果云函数name为 vk-pay，则无需改动 action
@@ -387,11 +387,7 @@ module.exports = {
             },
           },
           success: (data) => {
-            uni.showModal({
-              title: '提示',
-              content: data.msg,
-              showCancel: false,
-            });
+            uni.showModal({ title: '提示', content: data.msg, showCancel: false });
           },
         });
       },
@@ -547,23 +543,13 @@ module.exports = {
             if (res.code === 0) {
               if (typeof obj.success == 'function') obj.success(res);
             } else {
-              if (needAlert && res.msg)
-                uni.showModal({
-                  title: '提示',
-                  content: res.msg,
-                  showCancel: false,
-                });
+              if (needAlert && res.msg) uni.showModal({ title: '提示', content: res.msg, showCancel: false });
               if (typeof obj.fail == 'function') obj.fail(res);
             }
           },
           fail: (res = {}) => {
             if (obj.title) uni.hideLoading();
-            if (needAlert && res.msg)
-              uni.showModal({
-                title: '提示',
-                content: res.msg,
-                showCancel: false,
-              });
+            if (needAlert && res.msg) uni.showModal({ title: '提示', content: res.msg, showCancel: false });
             if (typeof obj.fail == 'function') obj.fail(res);
           },
         });
@@ -577,12 +563,15 @@ module.exports = {
   /* 示例页面样式开始 */
   page,
   .app {
-    background-color: #f8f8f8;
+    background-color: var(--page-bg, #f8f8f8);
   }
+
   .page-content {
     padding: 1px 0;
     max-width: 800px;
     margin: 0 auto;
+    font-size: 16px;
+
     .input {
       width: 100%;
       height: 46px;
@@ -592,32 +581,39 @@ module.exports = {
       padding: 0px 15px;
       box-sizing: border-box;
     }
+
     .button {
       margin-bottom: 15px;
+
       &.button-green {
         background-color: #4caf50;
       }
     }
+
     .ios-tips {
       padding: 5px 20px;
       color: red;
-      font-size: 28rpx;
+      font-size: 14px;
       font-weight: bold;
     }
   }
+
   .card {
     margin: 10px;
-    background-color: #ffffff;
+    background-color: var(--card-bg, #ffffff);
     border-radius: 10px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
     .title {
       padding: 15px;
       font-weight: bold;
       font-size: 17px;
-      border-bottom: 1px solid #ebeef5;
+      border-bottom: 1px solid var(--border-color, #f0f0f0);
     }
+
     .content {
       padding: 15px;
+
       .tips {
         color: #8f8f8f;
         font-size: 12px;
@@ -625,6 +621,7 @@ module.exports = {
       }
     }
   }
+
   /* 示例页面样式结束 */
 
   /* 二维码支付弹窗开始 */
@@ -634,6 +631,7 @@ module.exports = {
     width: 100vw;
     top: 0;
     bottom: 0;
+
     .pay-qrcode-popup-mask {
       position: absolute;
       top: 0;
@@ -642,30 +640,35 @@ module.exports = {
       height: 100vh;
       background-color: rgba(0, 0, 0, 0.6);
     }
+
     .pay-qrcode-popup-content {
       position: relative;
       width: 250px;
       margin: 40% auto 0 auto;
-      background-color: #ffffff;
+      background-color: var(--card-bg, #ffffff);
       border-radius: 5px;
       padding: 20px;
       box-sizing: content-box;
       text-align: center;
+
       .pay-qrcode-popup-info {
         text-align: center;
         padding: 10px;
+
         .pay-qrcode-popup-info-fee {
           color: red;
           font-size: 30px;
           font-weight: bold;
         }
       }
+
       .pay-qrcode-popup-image {
         width: 225px;
         height: 225px;
       }
     }
   }
+
   /* 二维码支付弹窗结束 */
 </style>
 ```
