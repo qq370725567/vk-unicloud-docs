@@ -453,7 +453,7 @@ data() {
 | type     | 按钮类型                                          | String                           | default | primary、success、warning、danger、info、text |
 | icon     | 按钮图标                                          | String                           | -       | -                                             |
 | onClick  | 点击回调，参数 items 为当前多选框选中的行数据     | Function(items)                  | -       | -                                             |
-| confirm  | 点击时是否需要二次确认                            | Boolean                          | false   | true                                          |
+| confirm  | 点击时是否需要二次确认，传对象可自定义确认弹窗参数 [查看 confirm 配置](#batch-btns-confirm) | Boolean、Object                  | false   | true                                          |
 | show     | 是否显示按钮，参数 items 为当前多选框选中的行数据 | Function(items)                  | -       | -                                             |
 | disabled | 是否禁用按钮，参数 items 为当前多选框选中的行数据 | Function(items)                  | -       | -                                             |
 | btns     | 子按钮列表（配置后渲染为下拉聚合按钮）            | Array（子项同上，无 btns、icon） | -       | -                                             |
@@ -571,6 +571,41 @@ batchBtns: [
     confirm: true,
     // 选中超过50条时禁用
     disabled: (items) => items.length > 50,
+    onClick: (items) => {
+      let ids = items.map((item) => item._id);
+      console.log('批量删除：', items, ids);
+    },
+  },
+];
+```
+
+**confirm 对象配置@batch-btns-confirm**
+
+`confirm` 除了支持 `Boolean`，还支持传入对象来自定义 `$confirm` 弹窗的参数。对象中的属性会与默认配置合并（传入的值优先）。
+
+| 参数              | 说明                                      | 类型   | 默认值         |
+| ----------------- | ----------------------------------------- | ------ | -------------- |
+| title             | 弹窗标题                                  | String | 二次确认       |
+| message           | 弹窗消息内容，支持 `%title%` 占位符（替换为按钮的 title） | String | 确定执行【%title%】吗？ |
+| confirmButtonText | 确认按钮文本                              | String | 确定           |
+| cancelButtonText  | 取消按钮文本                              | String | 取消           |
+| type              | 弹窗图标类型                              | String | warning        |
+
+> 除以上字段外，还支持 Element UI `$confirm` 的其他参数（如 `closeOnClickModal`、`closeOnPressEscape` 等）
+
+```js
+batchBtns: [
+  {
+    title: '批量删除',
+    type: 'danger',
+    icon: 'el-icon-delete',
+    confirm: {
+      title: '危险操作',
+      message: '此操作将永久删除选中的 %count% 条数据，是否继续？',
+      confirmButtonText: '确认删除',
+      cancelButtonText: '我再想想',
+      type: 'error',
+    },
     onClick: (items) => {
       let ids = items.map((item) => item._id);
       console.log('批量删除：', items, ids);
