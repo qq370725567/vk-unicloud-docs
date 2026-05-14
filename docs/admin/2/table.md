@@ -881,6 +881,8 @@ data() {
 }
 ```
 
+> **注意**：`batchBtns` 的 `onClick`、`show`、`disabled` 等回调必须使用**箭头函数**，不能使用普通 `function`。原因是：使用箭头函数可以正确捕获 `this` 指向当前 Vue 实例，而普通 `function` 的 `this` 在被组件调用时可能不指向 Vue 实例。同理，`rightBtnsMore` 中的 `onClick` 也应使用箭头函数。
+
 **下拉聚合按钮**
 
 ```js
