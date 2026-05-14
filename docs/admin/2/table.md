@@ -837,7 +837,7 @@ export default {
 
 可以配合 show 选择展开后显示的哪些字段 [查看 show](#columns-show)
 
-同时还可以通过插槽编写展开后的样式 [查看插槽](#展开行插槽-demo-2)
+同时还可以通过插槽编写展开后的样式 [查看插槽](#slot-demo-2)
 
 ### 表格自带的多选框禁用规则@selection
 
@@ -1847,7 +1847,7 @@ columns 属性的写法与万能表单相似(但部分表单组件搜索不支�
 | type          | 组件类型                                                    | String  | 无       | -                  |
 | width         | 组件宽度                                                    | Number  | 无       | -                  |
 | placeholder   | 输入前的提示                                                | String  | -        | -                  |
-| mode          | 查询模式                                                    | String  | =        | [查看 mode](#mode) |
+| mode          | 查询模式                                                    | String  | =        | [查看 mode](#query-mode) |
 | fieldName     | 数据库字段名称，默认=key 的值                               | String  | key 的值 | -                  |
 | lastWhereJson | 是否是连表后的 where 条件                                   | Boolean | false    | true               |
 | hidden        | 是否隐藏该字段（规则依然生效，但不在页面中渲染此组件）      | Boolean | false    | true               |
