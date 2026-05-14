@@ -42,62 +42,62 @@ export default {
 
 ## 属性@props
 
-| 参数                     | 说明                                                                                                                                                                | 类型                | 默认值                                             | 可选值                               |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | -------------------------------------------------- | ------------------------------------ |
-| action                   | 动态模式 - 支持：<br/>1、vk 框架下的云函数地址 <br/>2、http 请求地址<br/>3、[自定义 function 请求模式](#function)                                                   | String、Function    | 无                                                 | -                                    |
-| auto-action              | 动态模式 - 是否组件加载完毕后自动运行 action                                                                                                                        | Boolean             | 无                                                 | -                                    |
-| query-form-param         | 动态模式 - 请求参数（表格查询参数）                                                                                                                                 | Object              | {}                                                 | -                                    |
-| data-preprocess          | 动态模式 - 云函数返回的数据进行预处理 [查看数据预处理](#data-preprocess)                                                                                            | function(list)      | -                                                  | -                                    |
-| is-request               | 动态模式 - 是否是 http 请求模式 [查看 http 请求模式](#http)                                                                                                         | Boolean             | false                                              | true                                 |
-| request-header           | 动态模式 - http 请求头                                                                                                                                              | Object              | -                                                  | -                                    |
-| props                    | 动态模式 - 渲染数据的配置选项 [查看 http 请求模式](#http)                                                                                                           | Object              | -                                                  | -                                    |
-| retry-count              | 动态模式 - 请求最大重试次数 [查看异常重试机制](#retry-count)                                                                                                        | Number              | 0                                                  | -                                    |
-| retry-interval           | 动态模式 - 每次重试间隔，单位毫秒                                                                                                                                   | Number              | 0                                                  | -                                    |
-| data                     | 静态模式 - 列表数据                                                                                                                                                 | Array               | 无                                                 | -                                    |
-| total                    | 静态模式 - 总记录数                                                                                                                                                 | Number              | 无                                                 | -                                    |
-| columns                  | 通用 - 字段显示规则 [查看 columns](#columns)                                                                                                                        | Array               | []                                                 | -                                    |
-| height                   | 通用 - table 的高度                                                                                                                                                 | Number              | 无                                                 | -                                    |
-| max-height               | 通用 - table 的最大高度                                                                                                                                             | Number              | 无                                                 | -                                    |
-| row-height               | 通用 - 行高                                                                                                                                                         | Number              | 无                                                 | -                                    |
-| row-key                  | 通用 - 行数据的 Key （重要：值必须唯一，默认是\_id）                                                                                                                | String              | "\_id"                                             | -                                    |
-| top                      | 通用 - margin-top 的高度                                                                                                                                            | Number              | 10                                                 | -                                    |
-| selection                | 通用 - 显示多选框                                                                                                                                                   | Boolean             | false                                              | true                                 |
-| selectable               | 通用 - 搭配 `:selection=true` 时使用，返回值用来决定这一行的 CheckBox 是否可以勾选 [查看用法](#selection)                                                           | Function(row,index) | -                                                  | -                                    |
-| rowNo                    | 通用 - 显示序号                                                                                                                                                     | Boolean             | false                                              | true                                 |
-| pagination               | 通用 - 显示分页器                                                                                                                                                   | Boolean             | false                                              | true                                 |
-| page-size                | 通用 - 每页显示数量                                                                                                                                                 | Number              | 10                                                 | -                                    |
-| page-sizes               | 通用 - 每页显示数量选择列表                                                                                                                                         | Array               | [1, 5, 10, 20, 50, 100, 1000]                      | -                                    |
-| get-count                | [1.18.0 新增] 通用 - 执行 count 请求的模式 <br/>与 vk.baseDao.getTableData 配合使用才有效果，可选<br/>auto：自动判断<br/>true：总是执行<br/>false：从不执行         | String、Boolean     | auto                                               | auto、true、false                    |
-| max-page-count           | [1.18.0 新增] 通用 - 最大可显示的页数                                                                                                                               | Number              | -                                                  | -                                    |
-| right-btns               | 通用 - 右侧显示的按钮列表 [查看 right-btns](#right-btns)                                                                                                            | Array               | []                                                 | -                                    |
-| right-btns-type          | 通用 - 右侧显示的按钮类型                                                                                                                                           | String              | button                                             | text                                 |
-| right-btns-align         | 通用 - 右侧显示的按钮对齐方式                                                                                                                                       | String              | center                                             | left right                           |
-| right-btns-more          | 通用 - 右侧更多按钮 [查看 right-btns-more](#right-btns-more)                                                                                                        | Array               | []                                                 | -                                    |
-| right-btns-width         | 通用 - 右侧按钮宽度，单位 px，不传会根据按钮数量自动计算宽度                                                                                                        | Number              | -                                                  | -                                    |
-| custom-right-btns        | 通用 - 自定义右侧按钮 [查看 custom-right-btns](#custom-right-btns)                                                                                                  | Array               | []                                                 | -                                    |
-| batch-btns               | [1.24.0 新增] 通用 - 底部批量操作按钮列表，需搭配 `:selection=true` 时使用 [查看 batch-btns](#batch-btns)                                                           | Array               | []                                                 | -                                    |
-| pagination-placement     | [1.24.0 新增] 通用 - 分页器位置（当 batchBtns 有值时固定为 right）自 1.24.0 起，分页器位置默认在右下角                                                          | String              | right                                          | left、center、right |
-| fullscreen               | [1.24.0 新增] 通用 - 为 true 时表格高度撑满到屏幕底部（全屏模式）自 1.24.0 起，表格不再默认全屏（高度撑满到屏幕底部），需要手动设置 `:fullscreen="true"` 才会全屏。 | Boolean             | false                                              | true                                 |
-| empty-text               | 通用 - 空数据时显示的文本内容                                                                                                                                       | String              | "暂无数据"                                         | -                                    |
-| default-expand-all       | 通用 - 是否默认展开所有行，当 Table 包含展开行存在或者为树形表格时有效                                                                                              | Boolean             | false                                              | true                                 |
-| tree-props               | 通用 - 渲染嵌套数据的配置选项                                                                                                                                       | Object              | {children: 'children', hasChildren: 'hasChildren'} | -                                    |
-| border                   | 通用 - 是否带有纵向边框，设置为 true 后列可以通过拖动改变宽度                                                                                                       | Boolean             | false                                              | true                                 |
-| stripe                   | 通用 - 是否为斑马纹                                                                                                                                                 | Boolean             | false                                              | true                                 |
-| size                     | 通用 - Table 的尺寸                                                                                                                                                 | String              | 无                                                 | medium / small / mini                |
-| show-header              | 通用 - 是否显示表头                                                                                                                                                 | Boolean             | true                                               | false                                |
-| highlight-current-row    | 通用 - 是否要高亮当前行 [查看高亮行处理](#highlight-current-row)                                                                                                    | Boolean             | true                                               | false                                |
-| detail-dialog-width      | 通用 - 详情弹窗的宽度                                                                                                                                               | Number,String       | "830px"                                            | -                                    |
-| multiple                 | 通用 - 可多选                                                                                                                                                       | Boolean             | true                                               | false                                |
-| default-sort             | 默认排序规则 [查看 default-sort](#default-sort)                                                                                                                     | Object              | -                                                  | -                                    |
-| show-summary             | 通用 - 是否需要显示合计行                                                                                                                                           | Boolean             | false                                              | true                                 |
-| summary-method           | 通用 - 自定义合计的计算函数（详情见下方） [查看 summary-method](#summary-method)                                                                                    | Function            | -                                                  | -                                    |
-| total-option             | 通用 - 需要自动统计的行（详情见下方）                                                                                                                               | Array               | -                                                  | -                                    |
-| expand                   | 通用 - 是否开启点击可以展开行 [查看展开行](#expand)                                                                                                                 | Boolean             | false                                              | true                                 |
-| left-fixed               | 通用 - 序号、多选框是否固定在左侧                                                                                                                                   | Boolean             | true                                               | false                                |
-| right-fixed              | 通用 - 操作按钮是否固定在右侧                                                                                                                                       | Boolean             | true                                               | false                                |
-| searched-clean-selection | 通用 - 表格搜索后是否清空多选框选中的值                                                                                                                             | Boolean             | true                                               | false                                |
-| need-alert               | 通用 - 表格请求失败后，是否自动 alert 弹窗（若设为 false，则可以通过监听 fail 事件自己处理错误）                                                                    | Boolean             | true                                               | false                                |
-| encrypt-action           | 是否加密请求 [查看 encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)                                                                           | Boolean             | false                                              | true                                 |
+| 参数                     | 说明                                                                                                                                                                | 类型                | 默认值                                             | 可选值                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | -------------------------------------------------- | --------------------- |
+| action                   | 动态模式 - 支持：<br/>1、vk 框架下的云函数地址 <br/>2、http 请求地址<br/>3、[自定义 function 请求模式](#function)                                                   | String、Function    | 无                                                 | -                     |
+| auto-action              | 动态模式 - 是否组件加载完毕后自动运行 action                                                                                                                        | Boolean             | 无                                                 | -                     |
+| query-form-param         | 动态模式 - 请求参数（表格查询参数）                                                                                                                                 | Object              | {}                                                 | -                     |
+| data-preprocess          | 动态模式 - 云函数返回的数据进行预处理 [查看数据预处理](#data-preprocess)                                                                                            | function(list)      | -                                                  | -                     |
+| is-request               | 动态模式 - 是否是 http 请求模式 [查看 http 请求模式](#http)                                                                                                         | Boolean             | false                                              | true                  |
+| request-header           | 动态模式 - http 请求头                                                                                                                                              | Object              | -                                                  | -                     |
+| props                    | 动态模式 - 渲染数据的配置选项 [查看 http 请求模式](#http)                                                                                                           | Object              | -                                                  | -                     |
+| retry-count              | 动态模式 - 请求最大重试次数 [查看异常重试机制](#retry-count)                                                                                                        | Number              | 0                                                  | -                     |
+| retry-interval           | 动态模式 - 每次重试间隔，单位毫秒                                                                                                                                   | Number              | 0                                                  | -                     |
+| data                     | 静态模式 - 列表数据                                                                                                                                                 | Array               | 无                                                 | -                     |
+| total                    | 静态模式 - 总记录数                                                                                                                                                 | Number              | 无                                                 | -                     |
+| columns                  | 通用 - 字段显示规则 [查看 columns](#columns)                                                                                                                        | Array               | []                                                 | -                     |
+| height                   | 通用 - table 的高度                                                                                                                                                 | Number              | 无                                                 | -                     |
+| max-height               | 通用 - table 的最大高度                                                                                                                                             | Number              | 无                                                 | -                     |
+| row-height               | 通用 - 行高                                                                                                                                                         | Number              | 无                                                 | -                     |
+| row-key                  | 通用 - 行数据的 Key （重要：值必须唯一，默认是\_id）                                                                                                                | String              | "\_id"                                             | -                     |
+| top                      | 通用 - margin-top 的高度                                                                                                                                            | Number              | 10                                                 | -                     |
+| selection                | 通用 - 显示多选框                                                                                                                                                   | Boolean             | false                                              | true                  |
+| selectable               | 通用 - 搭配 `:selection=true` 时使用，返回值用来决定这一行的 CheckBox 是否可以勾选 [查看用法](#selection)                                                           | Function(row,index) | -                                                  | -                     |
+| rowNo                    | 通用 - 显示序号                                                                                                                                                     | Boolean             | false                                              | true                  |
+| pagination               | 通用 - 显示分页器                                                                                                                                                   | Boolean             | false                                              | true                  |
+| page-size                | 通用 - 每页显示数量                                                                                                                                                 | Number              | 10                                                 | -                     |
+| page-sizes               | 通用 - 每页显示数量选择列表                                                                                                                                         | Array               | [1, 5, 10, 20, 50, 100, 1000]                      | -                     |
+| get-count                | [1.18.0 新增] 通用 - 执行 count 请求的模式 <br/>与 vk.baseDao.getTableData 配合使用才有效果，可选<br/>auto：自动判断<br/>true：总是执行<br/>false：从不执行         | String、Boolean     | auto                                               | auto、true、false     |
+| max-page-count           | [1.18.0 新增] 通用 - 最大可显示的页数                                                                                                                               | Number              | -                                                  | -                     |
+| right-btns               | 通用 - 右侧显示的按钮列表 [查看 right-btns](#right-btns)                                                                                                            | Array               | []                                                 | -                     |
+| right-btns-type          | 通用 - 右侧显示的按钮类型                                                                                                                                           | String              | button                                             | text                  |
+| right-btns-align         | 通用 - 右侧显示的按钮对齐方式                                                                                                                                       | String              | center                                             | left right            |
+| right-btns-more          | 通用 - 右侧更多按钮 [查看 right-btns-more](#right-btns-more)                                                                                                        | Array               | []                                                 | -                     |
+| right-btns-width         | 通用 - 右侧按钮宽度，单位 px，不传会根据按钮数量自动计算宽度                                                                                                        | Number              | -                                                  | -                     |
+| custom-right-btns        | 通用 - 自定义右侧按钮 [查看 custom-right-btns](#custom-right-btns)                                                                                                  | Array               | []                                                 | -                     |
+| batch-btns               | [1.24.0 新增] 通用 - 底部批量操作按钮列表，需搭配 `:selection=true` 时使用 [查看 batch-btns](#batch-btns)                                                           | Array               | []                                                 | -                     |
+| pagination-placement     | [1.24.0 新增] 通用 - 分页器位置（当 batchBtns 有值时固定为 right）自 1.24.0 起，分页器位置默认在右下角                                                              | String              | right                                              | left、center、right   |
+| fullscreen               | [1.24.0 新增] 通用 - 为 true 时表格高度撑满到屏幕底部（全屏模式）自 1.24.0 起，表格不再默认全屏（高度撑满到屏幕底部），需要手动设置 `:fullscreen="true"` 才会全屏。 | Boolean             | false                                              | true                  |
+| empty-text               | 通用 - 空数据时显示的文本内容                                                                                                                                       | String              | "暂无数据"                                         | -                     |
+| default-expand-all       | 通用 - 是否默认展开所有行，当 Table 包含展开行存在或者为树形表格时有效                                                                                              | Boolean             | false                                              | true                  |
+| tree-props               | 通用 - 渲染嵌套数据的配置选项                                                                                                                                       | Object              | {children: 'children', hasChildren: 'hasChildren'} | -                     |
+| border                   | 通用 - 是否带有纵向边框，设置为 true 后列可以通过拖动改变宽度                                                                                                       | Boolean             | false                                              | true                  |
+| stripe                   | 通用 - 是否为斑马纹                                                                                                                                                 | Boolean             | false                                              | true                  |
+| size                     | 通用 - Table 的尺寸                                                                                                                                                 | String              | 无                                                 | medium / small / mini |
+| show-header              | 通用 - 是否显示表头                                                                                                                                                 | Boolean             | true                                               | false                 |
+| highlight-current-row    | 通用 - 是否要高亮当前行 [查看高亮行处理](#highlight-current-row)                                                                                                    | Boolean             | true                                               | false                 |
+| detail-dialog-width      | 通用 - 详情弹窗的宽度                                                                                                                                               | Number,String       | "830px"                                            | -                     |
+| multiple                 | 通用 - 可多选                                                                                                                                                       | Boolean             | true                                               | false                 |
+| default-sort             | 默认排序规则 [查看 default-sort](#default-sort)                                                                                                                     | Object              | -                                                  | -                     |
+| show-summary             | 通用 - 是否需要显示合计行                                                                                                                                           | Boolean             | false                                              | true                  |
+| summary-method           | 通用 - 自定义合计的计算函数（详情见下方） [查看 summary-method](#summary-method)                                                                                    | Function            | -                                                  | -                     |
+| total-option             | 通用 - 需要自动统计的行（详情见下方）                                                                                                                               | Array               | -                                                  | -                     |
+| expand                   | 通用 - 是否开启点击可以展开行 [查看展开行](#expand)                                                                                                                 | Boolean             | false                                              | true                  |
+| left-fixed               | 通用 - 序号、多选框是否固定在左侧                                                                                                                                   | Boolean             | true                                               | false                 |
+| right-fixed              | 通用 - 操作按钮是否固定在右侧                                                                                                                                       | Boolean             | true                                               | false                 |
+| searched-clean-selection | 通用 - 表格搜索后是否清空多选框选中的值                                                                                                                             | Boolean             | true                                               | false                 |
+| need-alert               | 通用 - 表格请求失败后，是否自动 alert 弹窗（若设为 false，则可以通过监听 fail 事件自己处理错误）                                                                    | Boolean             | true                                               | false                 |
+| encrypt-action           | 是否加密请求 [查看 encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)                                                                           | Boolean             | false                                              | true                  |
 
 ### columns（字段列表）@columns
 
@@ -118,6 +118,398 @@ columns 是一个数组，数组内每个元素有以下属性
 | defaultValue | 默认值                                        | String                            | 无                        | -                                  |
 | formatter    | 自定义格式化函数                              | function(val, row, column, index) | -                         | -                                  |
 | buttons      | 扩展按钮列表 [查看 buttons](#columns-buttons) | Array                             | -                         | -                                  |
+
+#### show（字段显示规则）@columns-show
+
+show 是一个字符串数组，columns 数组内每一个元素都可以单独设置 show
+
+- 如果 columns 的某元素中不存在 show 参数，则代表全部显示（行内、详情弹窗、行展开时）
+
+- 如果数组中有包含 "detail" ，则代表会在详情弹窗时显示
+
+- 如果数组中有包含 "row" ，则代表会在表格行内显示
+
+- 如果数组中有包含 "expand" ，则代表会在表格行展开时显示
+
+- 如果数组只有 ["none"] ，则代表都不显示
+
+**举例**
+
+**只在详情弹窗时显示**
+
+```js
+{ key: "nickname", title: "昵称", type: "text",  show: ["detail"] },
+```
+
+**只在表格行内显示**
+
+```js
+{ key: "nickname", title: "昵称", type: "text",  show: ["row"] },
+```
+
+**都不显示**
+
+```js
+{ key: "nickname", title: "昵称", type: "text",  show: ["none"] },
+```
+
+#### 动态控制字段显示和隐藏@dynamic-show-hide
+
+```js
+// 隐藏第1个字段
+this.$set(this.table1.columns[0], 'show', ['none']);
+// 显示第1个字段
+this.$set(this.table1.columns[0], 'show', ['detail', 'row', 'expand']);
+
+// 隐藏第3个字段
+this.$set(this.table1.columns[2], 'show', ['none']);
+// 显示第3个字段
+this.$set(this.table1.columns[2], 'show', ['detail', 'row', 'expand']);
+```
+
+[返回展开行](#expand)
+
+#### type（字段类型）@columns-type
+
+```js
+table1: {
+  columns: [
+    {
+      key: 'nickname',
+      title: '昵称',
+      type: 'text',
+      width: 120,
+      defaultValue: '未设置昵称',
+    },
+    {
+      key: 'avatar',
+      title: '头像',
+      type: 'avatar',
+      width: 80,
+      imageWidth: 40,
+      shape: 'circle',
+    }, // circle 圆形 square 方形
+    { key: 'images', title: '图片', type: 'image', width: 120, imageWidth: 60 },
+    { key: 'rate', title: '评分', type: 'rate', width: 120 },
+    {
+      key: 'switch',
+      title: '开关',
+      type: 'switch',
+      width: 120,
+      activeValue: true,
+      inactiveValue: false,
+    },
+    { key: 'icon1', title: '图标', type: 'icon', width: 120 },
+    {
+      key: 'icon2',
+      title: '图标',
+      type: 'icon',
+      width: 120,
+      // 当 icon2 值为1时，显示vk-icon-activityfill图标，2时，显示vk-icon-crownfill图标
+      data: [
+        { value: 1, icon: 'vk-icon-activityfill' },
+        { value: 2, icon: 'vk-icon-crownfill' },
+      ],
+    },
+    {
+      key: 'type',
+      title: '类型',
+      type: 'tag',
+      width: 120,
+      size: 'small',
+      data: [
+        { value: 1, label: '收入', tagType: 'success' },
+        { value: 2, label: '支出', tagType: 'danger' },
+      ],
+    },
+    {
+      key: '_add_time',
+      title: '添加时间',
+      type: 'time',
+      width: 160,
+      valueFormat: 'yyyy-MM-dd hh:mm:ss',
+    },
+    { key: '_add_time', title: '距离现在', type: 'dateDiff', width: 120 },
+    {
+      key: 'exp_time',
+      title: '到期剩',
+      type: 'dateDiff2',
+      endText: '已到期',
+      width: 80,
+      defaultValue: '永久',
+      sortable: 'custom',
+    },
+    {
+      key: 'nickname',
+      title: 'html渲染',
+      type: 'html',
+      formatter: (val, row, column, index) => {
+        let str = `<text>${val}</text>（审核通过）`;
+        return str;
+      },
+    },
+    { key: 'balance', title: '余额', type: 'money', width: 120 },
+    { key: 'percentage', title: '占比', type: 'percentage', width: 120 },
+    { key: 'address', title: '地址', type: 'address', width: 120 },
+    // 方便连表查询时快速将userInfo的头像和昵称展示出来（值需有avatar和nickname字段）
+    { key: 'userInfo', title: '用户', type: 'userInfo', width: 120 },
+    // group 是将多个字段显示在一个单元格内
+    {
+      key: '',
+      title: '分组显示',
+      type: 'group',
+      minWidth: 290,
+      align: 'left',
+      columns: [
+        { key: '_id', title: 'ID', type: 'text' },
+        { key: 'avatar', title: '头像', type: 'avatar' },
+        { key: 'nickname', title: '昵称', type: 'text' },
+      ],
+    },
+    // object 是解析对象类型的字段
+    {
+      key: 'object1',
+      title: '对象字段',
+      type: 'object',
+      width: 180,
+      align: 'left',
+      columns: [
+        { key: 'key1', title: '对象内字段1', type: 'text' },
+        { key: 'key2', title: '对象内字段2', type: 'text' },
+      ],
+    },
+    // table 是解析对象数组类型的字段，建议只在详情页内展示.
+    {
+      key: 'arr1',
+      title: '对象数组字段',
+      type: 'table',
+      width: 200,
+      show: ['detail'],
+      rowHeight: 50, // 行高
+      columns: [
+        { key: 'key1', title: '对象的字段1', type: 'text', width: 120 },
+        { key: 'key2', title: '对象内字段2', type: 'text', width: 120 },
+      ],
+    },
+    {
+      key: 'gender',
+      title: '性别',
+      type: 'radio',
+      width: 120,
+      defaultValue: 0,
+      data: [
+        { value: 1, label: '男' },
+        { value: 2, label: '女' },
+        { value: 0, label: '保密' },
+      ],
+    },
+    {
+      key: 'gender',
+      title: '性别',
+      type: 'select',
+      width: 120,
+      defaultValue: 0,
+      data: [
+        { value: 1, label: '男' },
+        { value: 2, label: '女' },
+        { value: 0, label: '保密' },
+      ],
+    },
+    {
+      key: 'checkbox',
+      title: '多选字段',
+      type: 'checkbox',
+      width: 120,
+      defaultValue: 1,
+      data: [
+        { value: 1, label: '选项一' },
+        { value: 2, label: '选项二' },
+      ],
+    },
+    {
+      key: 'json',
+      title: 'json字段',
+      type: 'json',
+      width: 120,
+      maxHeight: 300,
+    },
+  ];
+}
+```
+
+#### buttons（字段扩展按钮列表）@columns-buttons
+
+每个字段的扩展按钮列表（支持每行记录显示不同的按钮）
+
+效果图：（此效果图为场景 1 的样式）
+
+![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/ff651c6a-5478-4479-859f-0cb6898a14bd.png)
+
+主要使用场景：
+
+- 1、点击修改该字段（如修改商品名称，点击后自动在字段右侧显示修改商品名称的弹窗，输入新商品名称，点击确定，自动修改）;
+- 2、点击后查看字段扩展信息（如：审核未通过旁边加个 `原因` 按钮，点击后查看未通过的审核的原因）;
+- 3、余额字段，点击后给用户加余额;
+- 4、点击后给待发货的订单发货;
+- 5、等等;
+
+原先我们实现此功能需要使用插槽来写，而现在只需要写一个 `buttons` 属性即可
+
+特别注意：使用 `buttons` 的 `key` 的值不支持 `a.b` 这样的路径（即不支持带.）
+
+**_如果扩展按钮列表无法满足你的需求，则可以用插槽来完全自定义该字段的实现。_** [查看插槽](#slot)
+
+**单个修改按钮示例**
+
+```js
+{
+  key: "key1",
+  title: "标题",
+  type: "text",
+  width: 200,
+  buttonsPosition: "right", // 支持 left right bottom top
+  buttons: [
+    {
+      title: "修改",
+      type: "text", // 文字形式按钮 可选：primary / success / warning / danger / info / text
+      mode: "update", // 模式 可选：update（通用修改模式） / default（自定义模式）
+      show: ["row"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
+      showRule: (formData) => {
+        // 此为演示只有字段 key2 不等于 1时，才会显示此按钮。
+        return (formData.key2 != 1) ? true : false;
+      },
+      click: (options) => {
+        console.log(1, options.value, options.formData);
+        vk.callFunction({
+          url: 'template/test/pub/test',
+          data: options.formData,
+          success: (data) => {
+            // 通知组件操作成功（否则组件按钮会一直处于loading状态）
+            options.success({
+              msg: "修改成功"
+            });
+          }
+        });
+      }
+    }
+  ]
+},
+```
+
+**复制文本按钮示例**
+
+```js
+{
+  key: "key1",
+  title: "标题",
+  type: "text",
+  width: 200,
+  buttonsPosition: "right", // 支持 left right bottom top
+  buttons: [
+    {
+      title: "复制",
+      type: "text", // 文字形式按钮 可选：primary / success / warning / danger / info / text
+      mode: "default", // 模式 可选：update（通用修改模式） / default（自定义模式）
+      show: ["row", "detail"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
+      click: (options) => {
+        uni.setClipboardData({
+          data: options.value,
+          success: () => {
+            vk.toast("复制成功");
+          }
+        });
+      }
+    }
+  ]
+},
+```
+
+**多个修改按钮示例**
+
+```js
+{
+  key: "key1", title: "标题", type: "text", width: 200,
+  buttonsPosition:"right", // 支持 left right bottom top
+  buttons: [
+    {
+      title: "修改",
+      type: "text", // 文字形式按钮 可选：primary / success / warning / danger / info / text
+      mode: "update", // 模式 可选：update（通用修改模式） / default（自定义模式）
+      show: ["row"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
+      showRule: (formData) => {
+        // 此为演示只有字段 key2 不等于 1时，才会显示此按钮。
+        return (formData.key2 != 1) ? true : false;
+      },
+      click: (options) => {
+        console.log(1, options.value, options.formData);
+        vk.callFunction({
+          url: 'template/test/pub/test',
+          data: options.formData,
+          success: (data) => {
+            // 通知组件操作成功（否则组件按钮会一直处于loading状态）
+            options.success({
+              msg: "修改成功"
+            });
+          }
+        });
+      }
+    },
+    {
+      title: "查看",
+      type: "text",
+      show: ["detail", "row"],
+      click: (options) => {
+        console.log(2, options.value, options.formData);
+        uni.vk.toast("你点击了查看");
+      }
+    }
+  ]
+},
+```
+
+#### filter（本地数据过滤器）@columns-filter
+
+```js
+{
+  key: "remark", title: "备注", type: "text", width: 200,
+  // 本地数据过滤器
+  filter: {
+    data: [
+      { text: '备注1', value: '备注1' },
+      { text: '备注2', value: '备注2' },
+    ],
+    multiple: true, // 是否可多选
+    method: (value, row, column) => {
+      return value === row.remark;
+    },
+    defaultValue: [], // 过滤器默认值 如：["备注1"]
+  }
+},
+```
+
+#### formatter（自定义格式化渲染）@columns-formatter
+
+一般用于 `type` 为 `html` 或 `text` 时使用，最终显示的结果时 `formatter` 函数 `return` 的值
+
+```js
+{
+  key: "nickname", title: "text", type: "text",
+  formatter: (val, row, column, index) => {
+    let str = `${val}（审核通过）`;
+    return str;
+  }
+},
+```
+
+```js
+{
+  key: "nickname", title: "html", type: "html",
+  formatter: (val, row, column, index) => {
+    let str = `<text>${val}</text>（审核通过）`;
+    return str;
+  }
+},
+```
 
 ### default-sort（默认排序）@default-sort
 
@@ -447,16 +839,16 @@ data() {
 
 **batch-btns 内每个元素的属性**
 
-| 参数     | 说明                                              | 类型                             | 默认值  | 可选值                                        |
-| -------- | ------------------------------------------------- | -------------------------------- | ------- | --------------------------------------------- |
-| title    | 按钮文本                                          | String                           | -       | -                                             |
-| type     | 按钮类型                                          | String                           | default | primary、success、warning、danger、info、text |
-| icon     | 按钮图标                                          | String                           | -       | -                                             |
-| onClick  | 点击回调，参数 items 为当前多选框选中的行数据     | Function(items)                  | -       | -                                             |
+| 参数     | 说明                                                                                        | 类型                             | 默认值  | 可选值                                        |
+| -------- | ------------------------------------------------------------------------------------------- | -------------------------------- | ------- | --------------------------------------------- |
+| title    | 按钮文本                                                                                    | String                           | -       | -                                             |
+| type     | 按钮类型                                                                                    | String                           | default | primary、success、warning、danger、info、text |
+| icon     | 按钮图标                                                                                    | String                           | -       | -                                             |
+| onClick  | 点击回调，参数 items 为当前多选框选中的行数据                                               | Function(items)                  | -       | -                                             |
 | confirm  | 点击时是否需要二次确认，传对象可自定义确认弹窗参数 [查看 confirm 配置](#batch-btns-confirm) | Boolean、Object                  | false   | true                                          |
-| show     | 是否显示按钮，参数 items 为当前多选框选中的行数据 | Function(items)                  | -       | -                                             |
-| disabled | 是否禁用按钮，参数 items 为当前多选框选中的行数据 | Function(items)                  | -       | -                                             |
-| btns     | 子按钮列表（配置后渲染为下拉聚合按钮）            | Array（子项同上，无 btns、icon） | -       | -                                             |
+| show     | 是否显示按钮，参数 items 为当前多选框选中的行数据                                           | Function(items)                  | -       | -                                             |
+| disabled | 是否禁用按钮，参数 items 为当前多选框选中的行数据                                           | Function(items)                  | -       | -                                             |
+| btns     | 子按钮列表（配置后渲染为下拉聚合按钮）                                                      | Array（子项同上，无 btns、icon） | -       | -                                             |
 
 **基础用法 - 独立按钮**
 
@@ -579,17 +971,61 @@ batchBtns: [
 ];
 ```
 
+##### batch-btns 根据当前用户角色或权限控制是否显示、隐藏、禁用@batch-btns-permission
+
+```html
+<vk-data-table :selection="true" :batch-btns="table1.batchBtns"></vk-data-table>
+```
+
+```js
+data() {
+  return {
+    table1: {
+
+      batchBtns: [
+        {
+          title: '批量审核',
+          type: 'success',
+          show: (items) => {
+            // 只有admin角色或拥有batch-audit权限的用户才能看到批量审核按钮
+            return this.$hasRole("admin") || this.$hasPermission("batch-audit");
+          },
+          onClick: (items) => {
+            let ids = items.map((item) => item._id);
+            console.log('批量审核：', items, ids);
+          },
+        },
+        {
+          title: '批量删除',
+          type: 'danger',
+          confirm: true,
+          disabled: (items) => {
+            // 代表不是admin角色也没有batch-delete权限的用户则按钮置灰禁用
+            return !this.$hasRole("admin") && !this.$hasPermission("batch-delete");
+          },
+          onClick: (items) => {
+            let ids = items.map((item) => item._id);
+            console.log('批量删除：', items, ids);
+          },
+        },
+      ],
+
+    }
+  }
+}
+```
+
 **confirm 对象配置@batch-btns-confirm**
 
 `confirm` 除了支持 `Boolean`，还支持传入对象来自定义 `$confirm` 弹窗的参数。对象中的属性会与默认配置合并（传入的值优先）。
 
-| 参数              | 说明                                      | 类型   | 默认值         |
-| ----------------- | ----------------------------------------- | ------ | -------------- |
-| title             | 弹窗标题                                  | String | 二次确认       |
+| 参数              | 说明                                                      | 类型   | 默认值                  |
+| ----------------- | --------------------------------------------------------- | ------ | ----------------------- |
+| title             | 弹窗标题                                                  | String | 二次确认                |
 | message           | 弹窗消息内容，支持 `%title%` 占位符（替换为按钮的 title） | String | 确定执行【%title%】吗？ |
-| confirmButtonText | 确认按钮文本                              | String | 确定           |
-| cancelButtonText  | 取消按钮文本                              | String | 取消           |
-| type              | 弹窗图标类型                              | String | warning        |
+| confirmButtonText | 确认按钮文本                                              | String | 确定                    |
+| cancelButtonText  | 取消按钮文本                                              | String | 取消                    |
+| type              | 弹窗图标类型                                              | String | warning                 |
 
 > 除以上字段外，还支持 Element UI `$confirm` 的其他参数（如 `closeOnClickModal`、`closeOnPressEscape` 等）
 
@@ -882,400 +1318,6 @@ export default {
 
 ```html
 <vk-data-table ref="table1" :border="true"></vk-data-table>
-```
-
-### columns（属性详细说明）@columns-detail
-
-### show（字段显示规则）@columns-show
-
-show 是一个字符串数组，columns 数组内每一个元素都可以单独设置 show
-
-- 如果 columns 的某元素中不存在 show 参数，则代表全部显示（行内、详情弹窗、行展开时）
-
-- 如果数组中有包含 "detail" ，则代表会在详情弹窗时显示
-
-- 如果数组中有包含 "row" ，则代表会在表格行内显示
-
-- 如果数组中有包含 "expand" ，则代表会在表格行展开时显示
-
-- 如果数组只有 ["none"] ，则代表都不显示
-
-**举例**
-
-**只在详情弹窗时显示**
-
-```js
-{ key: "nickname", title: "昵称", type: "text",  show: ["detail"] },
-```
-
-**只在表格行内显示**
-
-```js
-{ key: "nickname", title: "昵称", type: "text",  show: ["row"] },
-```
-
-**都不显示**
-
-```js
-{ key: "nickname", title: "昵称", type: "text",  show: ["none"] },
-```
-
-### 动态控制字段显示和隐藏@dynamic-show-hide
-
-```js
-// 隐藏第1个字段
-this.$set(this.table1.columns[0], 'show', ['none']);
-// 显示第1个字段
-this.$set(this.table1.columns[0], 'show', ['detail', 'row', 'expand']);
-
-// 隐藏第3个字段
-this.$set(this.table1.columns[2], 'show', ['none']);
-// 显示第3个字段
-this.$set(this.table1.columns[2], 'show', ['detail', 'row', 'expand']);
-```
-
-[返回展开行](#expand)
-
-### type（字段类型）@columns-type
-
-```js
-table1: {
-  columns: [
-    {
-      key: 'nickname',
-      title: '昵称',
-      type: 'text',
-      width: 120,
-      defaultValue: '未设置昵称',
-    },
-    {
-      key: 'avatar',
-      title: '头像',
-      type: 'avatar',
-      width: 80,
-      imageWidth: 40,
-      shape: 'circle',
-    }, // circle 圆形 square 方形
-    { key: 'images', title: '图片', type: 'image', width: 120, imageWidth: 60 },
-    { key: 'rate', title: '评分', type: 'rate', width: 120 },
-    {
-      key: 'switch',
-      title: '开关',
-      type: 'switch',
-      width: 120,
-      activeValue: true,
-      inactiveValue: false,
-    },
-    { key: 'icon1', title: '图标', type: 'icon', width: 120 },
-    {
-      key: 'icon2',
-      title: '图标',
-      type: 'icon',
-      width: 120,
-      // 当 icon2 值为1时，显示vk-icon-activityfill图标，2时，显示vk-icon-crownfill图标
-      data: [
-        { value: 1, icon: 'vk-icon-activityfill' },
-        { value: 2, icon: 'vk-icon-crownfill' },
-      ],
-    },
-    {
-      key: 'type',
-      title: '类型',
-      type: 'tag',
-      width: 120,
-      size: 'small',
-      data: [
-        { value: 1, label: '收入', tagType: 'success' },
-        { value: 2, label: '支出', tagType: 'danger' },
-      ],
-    },
-    {
-      key: '_add_time',
-      title: '添加时间',
-      type: 'time',
-      width: 160,
-      valueFormat: 'yyyy-MM-dd hh:mm:ss',
-    },
-    { key: '_add_time', title: '距离现在', type: 'dateDiff', width: 120 },
-    {
-      key: 'exp_time',
-      title: '到期剩',
-      type: 'dateDiff2',
-      endText: '已到期',
-      width: 80,
-      defaultValue: '永久',
-      sortable: 'custom',
-    },
-    {
-      key: 'nickname',
-      title: 'html渲染',
-      type: 'html',
-      formatter: (val, row, column, index) => {
-        let str = `<text>${val}</text>（审核通过）`;
-        return str;
-      },
-    },
-    { key: 'balance', title: '余额', type: 'money', width: 120 },
-    { key: 'percentage', title: '占比', type: 'percentage', width: 120 },
-    { key: 'address', title: '地址', type: 'address', width: 120 },
-    // 方便连表查询时快速将userInfo的头像和昵称展示出来（值需有avatar和nickname字段）
-    { key: 'userInfo', title: '用户', type: 'userInfo', width: 120 },
-    // group 是将多个字段显示在一个单元格内
-    {
-      key: '',
-      title: '分组显示',
-      type: 'group',
-      minWidth: 290,
-      align: 'left',
-      columns: [
-        { key: '_id', title: 'ID', type: 'text' },
-        { key: 'avatar', title: '头像', type: 'avatar' },
-        { key: 'nickname', title: '昵称', type: 'text' },
-      ],
-    },
-    // object 是解析对象类型的字段
-    {
-      key: 'object1',
-      title: '对象字段',
-      type: 'object',
-      width: 180,
-      align: 'left',
-      columns: [
-        { key: 'key1', title: '对象内字段1', type: 'text' },
-        { key: 'key2', title: '对象内字段2', type: 'text' },
-      ],
-    },
-    // table 是解析对象数组类型的字段，建议只在详情页内展示.
-    {
-      key: 'arr1',
-      title: '对象数组字段',
-      type: 'table',
-      width: 200,
-      show: ['detail'],
-      rowHeight: 50, // 行高
-      columns: [
-        { key: 'key1', title: '对象的字段1', type: 'text', width: 120 },
-        { key: 'key2', title: '对象内字段2', type: 'text', width: 120 },
-      ],
-    },
-    {
-      key: 'gender',
-      title: '性别',
-      type: 'radio',
-      width: 120,
-      defaultValue: 0,
-      data: [
-        { value: 1, label: '男' },
-        { value: 2, label: '女' },
-        { value: 0, label: '保密' },
-      ],
-    },
-    {
-      key: 'gender',
-      title: '性别',
-      type: 'select',
-      width: 120,
-      defaultValue: 0,
-      data: [
-        { value: 1, label: '男' },
-        { value: 2, label: '女' },
-        { value: 0, label: '保密' },
-      ],
-    },
-    {
-      key: 'checkbox',
-      title: '多选字段',
-      type: 'checkbox',
-      width: 120,
-      defaultValue: 1,
-      data: [
-        { value: 1, label: '选项一' },
-        { value: 2, label: '选项二' },
-      ],
-    },
-    {
-      key: 'json',
-      title: 'json字段',
-      type: 'json',
-      width: 120,
-      maxHeight: 300,
-    },
-  ];
-}
-```
-
-### buttons（字段扩展按钮列表）@columns-buttons
-
-每个字段的扩展按钮列表（支持每行记录显示不同的按钮）
-
-效果图：（此效果图为场景 1 的样式）
-
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/ff651c6a-5478-4479-859f-0cb6898a14bd.png)
-
-主要使用场景：
-
-- 1、点击修改该字段（如修改商品名称，点击后自动在字段右侧显示修改商品名称的弹窗，输入新商品名称，点击确定，自动修改）;
-- 2、点击后查看字段扩展信息（如：审核未通过旁边加个 `原因` 按钮，点击后查看未通过的审核的原因）;
-- 3、余额字段，点击后给用户加余额;
-- 4、点击后给待发货的订单发货;
-- 5、等等;
-
-原先我们实现此功能需要使用插槽来写，而现在只需要写一个 `buttons` 属性即可
-
-特别注意：使用 `buttons` 的 `key` 的值不支持 `a.b` 这样的路径（即不支持带.）
-
-**_如果扩展按钮列表无法满足你的需求，则可以用插槽来完全自定义该字段的实现。_** [查看插槽](#slot)
-
-**单个修改按钮示例**
-
-```js
-{
-  key: "key1",
-  title: "标题",
-  type: "text",
-  width: 200,
-  buttonsPosition: "right", // 支持 left right bottom top
-  buttons: [
-    {
-      title: "修改",
-      type: "text", // 文字形式按钮 可选：primary / success / warning / danger / info / text
-      mode: "update", // 模式 可选：update（通用修改模式） / default（自定义模式）
-      show: ["row"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
-      showRule: (formData) => {
-        // 此为演示只有字段 key2 不等于 1时，才会显示此按钮。
-        return (formData.key2 != 1) ? true : false;
-      },
-      click: (options) => {
-        console.log(1, options.value, options.formData);
-        vk.callFunction({
-          url: 'template/test/pub/test',
-          data: options.formData,
-          success: (data) => {
-            // 通知组件操作成功（否则组件按钮会一直处于loading状态）
-            options.success({
-              msg: "修改成功"
-            });
-          }
-        });
-      }
-    }
-  ]
-},
-```
-
-**复制文本按钮示例**
-
-```js
-{
-  key: "key1",
-  title: "标题",
-  type: "text",
-  width: 200,
-  buttonsPosition: "right", // 支持 left right bottom top
-  buttons: [
-    {
-      title: "复制",
-      type: "text", // 文字形式按钮 可选：primary / success / warning / danger / info / text
-      mode: "default", // 模式 可选：update（通用修改模式） / default（自定义模式）
-      show: ["row", "detail"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
-      click: (options) => {
-        uni.setClipboardData({
-          data: options.value,
-          success: () => {
-            vk.toast("复制成功");
-          }
-        });
-      }
-    }
-  ]
-},
-```
-
-**多个修改按钮示例**
-
-```js
-{
-  key: "key1", title: "标题", type: "text", width: 200,
-  buttonsPosition:"right", // 支持 left right bottom top
-  buttons: [
-    {
-      title: "修改",
-      type: "text", // 文字形式按钮 可选：primary / success / warning / danger / info / text
-      mode: "update", // 模式 可选：update（通用修改模式） / default（自定义模式）
-      show: ["row"], // 在哪些场景显示按钮 多选：row（在行内显示） / detail（在详情页显示）
-      showRule: (formData) => {
-        // 此为演示只有字段 key2 不等于 1时，才会显示此按钮。
-        return (formData.key2 != 1) ? true : false;
-      },
-      click: (options) => {
-        console.log(1, options.value, options.formData);
-        vk.callFunction({
-          url: 'template/test/pub/test',
-          data: options.formData,
-          success: (data) => {
-            // 通知组件操作成功（否则组件按钮会一直处于loading状态）
-            options.success({
-              msg: "修改成功"
-            });
-          }
-        });
-      }
-    },
-    {
-      title: "查看",
-      type: "text",
-      show: ["detail", "row"],
-      click: (options) => {
-        console.log(2, options.value, options.formData);
-        uni.vk.toast("你点击了查看");
-      }
-    }
-  ]
-},
-```
-
-### filter（本地数据过滤器）@columns-filter
-
-```js
-{
-  key: "remark", title: "备注", type: "text", width: 200,
-  // 本地数据过滤器
-  filter: {
-    data: [
-      { text: '备注1', value: '备注1' },
-      { text: '备注2', value: '备注2' },
-    ],
-    multiple: true, // 是否可多选
-    method: (value, row, column) => {
-      return value === row.remark;
-    },
-    defaultValue: [], // 过滤器默认值 如：["备注1"]
-  }
-},
-```
-
-### formatter（自定义格式化渲染）@columns-formatter
-
-一般用于 `type` 为 `html` 或 `text` 时使用，最终显示的结果时 `formatter` 函数 `return` 的值
-
-```js
-{
-  key: "nickname", title: "text", type: "text",
-  formatter: (val, row, column, index) => {
-    let str = `${val}（审核通过）`;
-    return str;
-  }
-},
-```
-
-```js
-{
-  key: "nickname", title: "html", type: "html",
-  formatter: (val, row, column, index) => {
-    let str = `<text>${val}</text>（审核通过）`;
-    return str;
-  }
-},
 ```
 
 ## 分页@pagination
@@ -1840,19 +1882,19 @@ columns 属性的写法与万能表单相似(但部分表单组件搜索不支�
 
 [万能表单文档](https://vkdoc.fsq.pub/admin/3/form.html)
 
-| 参数          | 说明                                                        | 类型    | 默认值   | 可选值             |
-| ------------- | ----------------------------------------------------------- | ------- | -------- | ------------------ |
-| key           | 键名                                                        | String  | 无       | -                  |
-| title         | 标题                                                        | String  | 无       | -                  |
-| type          | 组件类型                                                    | String  | 无       | -                  |
-| width         | 组件宽度                                                    | Number  | 无       | -                  |
-| placeholder   | 输入前的提示                                                | String  | -        | -                  |
+| 参数          | 说明                                                        | 类型    | 默认值   | 可选值                   |
+| ------------- | ----------------------------------------------------------- | ------- | -------- | ------------------------ |
+| key           | 键名                                                        | String  | 无       | -                        |
+| title         | 标题                                                        | String  | 无       | -                        |
+| type          | 组件类型                                                    | String  | 无       | -                        |
+| width         | 组件宽度                                                    | Number  | 无       | -                        |
+| placeholder   | 输入前的提示                                                | String  | -        | -                        |
 | mode          | 查询模式                                                    | String  | =        | [查看 mode](#query-mode) |
-| fieldName     | 数据库字段名称，默认=key 的值                               | String  | key 的值 | -                  |
-| lastWhereJson | 是否是连表后的 where 条件                                   | Boolean | false    | true               |
-| hidden        | 是否隐藏该字段（规则依然生效，但不在页面中渲染此组件）      | Boolean | false    | true               |
-| show          | 显示规则,page 代表显示在页面上，drawer 代表显示在高级搜索中 | Array   | ["page"] | ["page","drawer"]  |
-| autoSearch    | 选择型组件触发 change 时是否自动搜索                        | Boolean | true     | false              |
+| fieldName     | 数据库字段名称，默认=key 的值                               | String  | key 的值 | -                        |
+| lastWhereJson | 是否是连表后的 where 条件                                   | Boolean | false    | true                     |
+| hidden        | 是否隐藏该字段（规则依然生效，但不在页面中渲染此组件）      | Boolean | false    | true                     |
+| show          | 显示规则,page 代表显示在页面上，drawer 代表显示在高级搜索中 | Array   | ["page"] | ["page","drawer"]        |
+| autoSearch    | 选择型组件触发 change 时是否自动搜索                        | Boolean | true     | false                    |
 
 ### fieldName 参数的用处@query-fieldname
 
