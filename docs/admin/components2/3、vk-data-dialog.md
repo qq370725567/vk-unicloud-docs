@@ -82,7 +82,14 @@ word-break: break-all;
 
 **mode="form"（表单模式）**
 
-内容区域**没有默认样式**，需要自行设置 `padding` 等样式。
+内容区域会自动应用以下默认样式：
+
+```css
+padding: 0px;
+color: #606266;
+font-size: 14px;
+word-break: break-all;
+```
 
 适用于表单弹窗，因为表单组件（如 `vk-data-form`）通常有自己的布局和间距，所以不会自动添加 padding，避免样式冲突。
 
@@ -90,7 +97,21 @@ word-break: break-all;
 
 - 普通弹窗使用 `mode="default"`，无需手动设置样式
 - 表单弹窗使用 `mode="form"`，由表单组件自行控制布局
-- 如果在 `mode="form"` 下需要自定义样式，可以通过 `custom-class` 属性添加自定义类名
+- 如果在 `mode="form"` 下需要自定义样式，可以通过 `custom-class` 属性添加自定义类名，并通过 `::v-deep` 方式重写样式，如
+
+```vue
+<vk-data-dialog mode="form" custom-class="export-column-dialog"></vk-data-dialog>
+```
+
+```scss
+::v-deep {
+  .export-column-dialog {
+    .el-dialog__body {
+      padding: 12px 20px 0 20px !important;
+    }
+  }
+}
+```
 
 ### 事件
 
