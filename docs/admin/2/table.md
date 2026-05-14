@@ -723,7 +723,7 @@ export default {
             data, // 请求数据
             success, // 成功回调
             fail, // 失败回调
-            complete, // 成功回调
+            complete, // 完成回调
           } = obj;
           // 发起http请求
           vk.request({
@@ -773,7 +773,7 @@ export default {
             data, // 请求数据
             success, // 成功回调
             fail, // 失败回调
-            complete, // 成功回调
+            complete, // 完成回调
           } = obj;
           // 发起http请求
           vk.callFunction({
@@ -884,7 +884,7 @@ export default {
 <vk-data-table ref="table1" :border="true"></vk-data-table>
 ```
 
-## columns（属性详细说明）@columns-detail
+### columns（属性详细说明）@columns-detail
 
 ### show（字段显示规则）@columns-show
 
@@ -1311,7 +1311,7 @@ table1: {
 **劣势**
 
 1. 每次查询都会进行 count 请求，有点浪费性能（带条件的 count 在数据越多的时候性能越差）
-2. 性能在翻页过程中有衰减，如翻到第 10 万页时，性能明显降低，可以通过设置 max-page-size 来限制最大页数
+2. 性能在翻页过程中有衰减，如翻到第 10 万页时，性能明显降低，可以通过设置 max-page-count 来限制最大页数
 
 **适用场景**
 
@@ -1692,6 +1692,8 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 </vk-data-table>
 ```
 
+[返回展开行](#expand)
+
 ### 表头插槽@slot-demo-3
 
 每个字段的表头插槽名：`v-slot:header_字段名`
@@ -1783,8 +1785,6 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
   };
 </script>
 ```
-
-[返回展开行](#expand)
 
 ## 万能表格搜索组件 @query
 
