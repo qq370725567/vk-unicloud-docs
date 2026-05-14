@@ -63,6 +63,35 @@
 | max-height            | 最大高度，超过会有滚动条                                                     | String   | Number  | -      | -   |
 | destroy-on-close      | 控制是否在关闭弹窗之后将子元素全部销毁                                       | Boolean  | false   | true   |
 
+### mode 样式说明
+
+`mode` 属性影响弹窗内容区域的默认样式：
+
+**mode="default"（默认模式）**
+
+内容区域会自动应用以下默认样式：
+
+```css
+padding: 30px 20px;
+color: #606266;
+font-size: 14px;
+word-break: break-all;
+```
+
+适用于普通弹窗，如提示信息、确认框等。
+
+**mode="form"（表单模式）**
+
+内容区域**没有默认样式**，需要自行设置 `padding` 等样式。
+
+适用于表单弹窗，因为表单组件（如 `vk-data-form`）通常有自己的布局和间距，所以不会自动添加 padding，避免样式冲突。
+
+**使用建议**
+
+- 普通弹窗使用 `mode="default"`，无需手动设置样式
+- 表单弹窗使用 `mode="form"`，由表单组件自行控制布局
+- 如果在 `mode="form"` 下需要自定义样式，可以通过 `custom-class` 属性添加自定义类名
+
 ### 事件
 
 | 事件名 | 说明                       | 回调参数 |
