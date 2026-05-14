@@ -4,7 +4,7 @@ sidebarDepth: 1
 
 # 万能表格
 
-## 组件名：vk-data-table
+## 组件名：vk-data-table@vk-data-table
 
 **核心思想：通过 JSON 配置渲染规则**
 
@@ -203,7 +203,7 @@ data() {
 }
 ```
 
-##### right-btns 根据当前用户角色或权限控制是否显示、隐藏、禁用
+##### right-btns 根据当前用户角色或权限控制是否显示、隐藏、禁用@right-btns-permission
 
 ```html
 <vk-data-table :right-btns="table1.rightBtns" right-btns-align="right"></vk-data-table>
@@ -238,7 +238,7 @@ data() {
 }
 ```
 
-##### right-btns 数组内的可选值有
+##### right-btns 数组内的可选值有@right-btns-options
 
 | 可选值      | 说明                      |
 | ----------- | ------------------------- |
@@ -305,7 +305,7 @@ data() {
 }
 ```
 
-##### right-btns-more 根据当前用户角色或权限控制是否显示、隐藏、禁用
+##### right-btns-more 根据当前用户角色或权限控制是否显示、隐藏、禁用@right-btns-more-permission
 
 ```html
 <vk-data-table :right-btns="['detail_auto','update','delete','more']" :right-btns-more="table1.rightBtnsMore"></vk-data-table>
@@ -397,7 +397,7 @@ data() {
 }
 ```
 
-#### 根据当前用户角色或权限控制是否显示、隐藏、禁用
+#### 根据当前用户角色或权限控制是否显示、隐藏、禁用@permission-control
 
 `right-btns` `right-btns-more` `custom-right-btns` 均支持
 
@@ -614,7 +614,7 @@ batchBtns: [
 ];
 ```
 
-### 默认最大高度计算规则
+### 默认最大高度计算规则@max-height-calc
 
 **自 1.24.0 起**，当未显式设置 `max-height` 且非全屏模式时，表格会自动计算最大高度，规则如下：
 
@@ -633,7 +633,7 @@ batchBtns: [
 3. **自适应体验**：在大屏设备上充分利用屏幕空间，在小屏设备上保持合理高度
 4. **减少手动配置**：开发者无需为不同屏幕尺寸手动设置 `max-height`，框架自动处理
 
-### 行高对不齐处理
+### 行高对不齐处理@row-height-align
 
 **原因**
 
@@ -835,9 +835,9 @@ export default {
 <vk-data-table ref="table1" :action="table1.action" :columns="table1.columns" :query-form-param="queryForm1" :expand="true"></vk-data-table>
 ```
 
-可以配合 show 选择展开后显示的哪些字段 [查看 show](#show)
+可以配合 show 选择展开后显示的哪些字段 [查看 show](#columns-show)
 
-同时还可以通过插槽编写展开后的样式 [查看插槽](#展开行插槽)
+同时还可以通过插槽编写展开后的样式 [查看插槽](#展开行插槽-demo-2)
 
 ### 表格自带的多选框禁用规则@selection
 
@@ -884,7 +884,7 @@ export default {
 <vk-data-table ref="table1" :border="true"></vk-data-table>
 ```
 
-## columns（属性详细说明）
+## columns（属性详细说明）@columns-detail
 
 ### show（字段显示规则）@columns-show
 
@@ -920,7 +920,7 @@ show 是一个字符串数组，columns 数组内每一个元素都可以单独�
 { key: "nickname", title: "昵称", type: "text",  show: ["none"] },
 ```
 
-### 动态控制字段显示和隐藏
+### 动态控制字段显示和隐藏@dynamic-show-hide
 
 ```js
 // 隐藏第1个字段
@@ -1124,7 +1124,7 @@ table1: {
 
 特别注意：使用 `buttons` 的 `key` 的值不支持 `a.b` 这样的路径（即不支持带.）
 
-**_如果扩展按钮列表无法满足你的需求，则可以用插槽来完全自定义该字段的实现。_** [查看插槽](#插槽)
+**_如果扩展按钮列表无法满足你的需求，则可以用插槽来完全自定义该字段的实现。_** [查看插槽](#slot)
 
 **单个修改按钮示例**
 
@@ -1666,7 +1666,7 @@ let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据
 
 ## 插槽@slot
 
-### columns 中每一个 key 都是插槽名称
+### columns 中每一个 key 都是插槽名称@columns-slot
 
 ### 重写`gender`字段的渲染示例@slot-demo-1
 
@@ -1856,7 +1856,7 @@ columns 属性的写法与万能表单相似(但部分表单组件搜索不支�
 
 ### fieldName 参数的用处@query-fieldname
 
-##### 如余额按金额范围查询
+##### 如余额按金额范围查询@balance-range-query
 
 ```js
 columns: [
@@ -1922,7 +1922,7 @@ queryForm1.columns 中 mode 参数详情
 | ()     | 范围 arr[0] < x < arr[1]        |
 | custom | 声明此字段不自动参与 where 条件 |
 
-### 特殊说明
+### 特殊说明@special-notes
 
 当 value 为以下值时，会有特殊效果。
 
@@ -1939,13 +1939,13 @@ queryForm1.columns 中 mode 参数详情
 
 用法与 `vk.baseDao.selects` 基本相似，除了以下区别
 
-1. 多了一个 data 参数 [data 参数介绍](#data-参数介绍)
-2. 有默认排序规则，默认以 `_add_time` 降序 [设置全局默认排序规则](#设置全局默认排序规则)
+1. 多了一个 data 参数 [data 参数介绍](#data-intro)
+2. 有默认排序规则，默认以 `_add_time` 降序 [设置全局默认排序规则](#global-sort)
 3. 参数 `getCount` 的值在无 `lastWhere` 或 `lastSortArr` 时，默认为 true，否则，默认为 false（兼顾性能和实用性）[getCount 说明](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#getcount)
 
 [vk.baseDao.selects 万能连表文档](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html)
 
-### data 参数介绍
+### data 参数介绍@data-intro
 
 `data` 参数的作用是让前端可以直接传查询条件和排序条件。同时为了控制安全性，`getTableData` 的 `whereJson` 参数可以设置强制 where 条件
 
@@ -1963,7 +1963,7 @@ queryForm1.columns 中 mode 参数详情
 | columns   | 查询条件字段规则 | Array  | -      | -      |
 | sortRule  | 排序规则         | Array  | -      | -      |
 
-### 云函数代码示例
+### 云函数代码示例@cloud-function-example
 
 ```js
 // 通常data是前端传过来的数据
@@ -2006,7 +2006,7 @@ vk.baseDao.getTableData({
 });
 ```
 
-### 设置全局默认排序规则
+### 设置全局默认排序规则@global-sort
 
 在 `common/uni-config-center/vk-unicloud/index.js` 中
 
@@ -2038,7 +2038,7 @@ sortArr 参数说明
 
 ## 万能表格合计列的示例@show-summary
 
-### 简单模式
+### 简单模式@simple-mode
 
 ```html
 <vk-data-table
@@ -2051,9 +2051,9 @@ sortArr 参数说明
 ></vk-data-table>
 ```
 
-#### summary-method
+#### summary-method@summary-method
 
-### 自定义模式
+### 自定义模式@custom-mode
 
 **自定义函数方法，如果想要自定义合计规则和样式，则需要使用 summary-method 属性进行自定义，代码如下**
 
