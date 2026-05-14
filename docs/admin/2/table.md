@@ -98,6 +98,8 @@ export default {
 | searched-clean-selection | 通用 - 表格搜索后是否清空多选框选中的值                                                                                                                             | Boolean             | true                                               | false                 |
 | need-alert               | 通用 - 表格请求失败后，是否自动 alert 弹窗（若设为 false，则可以通过监听 fail 事件自己处理错误）                                                                    | Boolean             | true                                               | false                 |
 | encrypt-action           | 是否加密请求 [查看 encrypt](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt)                                                                           | Boolean             | false                                              | true                  |
+| show-export              | 通用 - 是否显示内置导出按钮（仅 PC 端生效）                                                                                                                         | Boolean             | false                                              | true                  |
+| export-options           | 通用 - 导出弹窗配置项 [查看 export-options](#export-options)                                                                                                        | Object              | {}                                                 | -                     |
 
 ### columns（字段列表）@columns
 
@@ -1621,6 +1623,77 @@ this.$refs.table1.exportExcel({
     { key: 'b', title: '标题b', type: 'text' },
   ],
 });
+```
+
+### 导出弹窗配置项@export-options
+
+通过 `export-options` 属性可以配置导出 Excel 弹窗的默认值和控制各项配置是否显示。
+
+```html
+<vk-data-table :show-export="true" :export-options="table1.exportOptions"></vk-data-table>
+```
+
+```js
+data() {
+  return {
+    table1: {
+      exportOptions: {
+        // 默认值配置
+        scope: 'page',        // 默认数据源：'page'（本页数据）或 'all'（全部数据）
+        fileName: '表格数据',   // 默认文件名（不含扩展名）
+        showNo: true,          // 默认是否含序号
+        freezeHeader: true,    // 默认是否首行锁定
+        autoFilter: true,      // 默认是否可筛选
+        original: false,       // 默认是否导出原始数据
+
+        // 显示/隐藏配置项（设为 false 则隐藏对应配置项，默认全部显示）
+        showScope: true,           // 是否显示数据源选择
+        showFileName: true,        // 是否显示文件名输入框
+        showShowNo: true,          // 是否显示"含序号"开关
+        showFreezeHeader: true,    // 是否显示"首行锁定"开关
+        showAutoFilter: true,      // 是否显示"可筛选"开关
+        showOriginal: true,        // 是否显示"导出原始数据"开关
+      },
+    },
+  };
+},
+```
+
+**export-options 属性说明**
+
+| 参数             | 说明                                            | 类型    | 默认值 | 可选值      |
+| ---------------- | ----------------------------------------------- | ------- | ------ | ----------- |
+| scope            | 默认数据源                                      | String  | page   | page、all   |
+| fileName         | 默认文件名（不含 .xlsx 扩展名）                 | String  | -      | -           |
+| showNo           | 默认是否含序号                                  | Boolean | true   | true、false |
+| freezeHeader     | 默认是否首行锁定（需引入 ExcelJS）              | Boolean | true   | true、false |
+| autoFilter       | 默认是否可筛选（需引入 ExcelJS）                | Boolean | true   | true、false |
+| original         | 默认是否导出原始数据（未经过 formatter 格式化） | Boolean | false  | true、false |
+| showScope        | 是否显示数据源选择                              | Boolean | true   | true、false |
+| showFileName     | 是否显示文件名输入框                            | Boolean | true   | true、false |
+| showShowNo       | 是否显示"含序号"开关                            | Boolean | true   | true、false |
+| showFreezeHeader | 是否显示"首行锁定"开关                          | Boolean | true   | true、false |
+| showAutoFilter   | 是否显示"可筛选"开关                            | Boolean | true   | true、false |
+| showOriginal     | 是否显示"导出原始数据"开关                      | Boolean | true   | true、false |
+
+**仅导出本页数据、隐藏数据源选择的示例**
+
+```js
+exportOptions: {
+  scope: 'page',
+  showScope: false,  // 隐藏数据源选择，用户只能导出本页数据
+}
+```
+
+**简化导出弹窗，只保留文件名和序号配置**
+
+```js
+exportOptions: {
+  showScope: false,
+  showFreezeHeader: false,
+  showAutoFilter: false,
+  showOriginal: false,
+}
 ```
 
 ### 获取选中行数据（原始数据）@getCurrent-row-1
