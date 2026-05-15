@@ -1627,6 +1627,18 @@ this.$refs.table1.exportExcel({
 });
 ```
 
+#### 弹出列选择器后导出@export-excel-7
+
+设置 `showColumnSelector: true` 后，调用 `exportExcel` 会先弹出列选择器弹窗，用户选择要导出的列并确认后才会执行导出。其余参数（如 `showNo`、`freezeHeader` 等）会作为弹窗的默认值。
+
+```js
+this.$refs.table1.exportExcel({
+  showColumnSelector: true,
+  showNo: false, // 列选择器弹窗中"含序号"默认关闭
+  freezeHeader: true, // 列选择器弹窗中"首行锁定"默认开启
+});
+```
+
 ### 导出弹窗配置项@export-options
 
 通过 `export-options` 属性可以配置导出 Excel 弹窗的默认值和控制各项配置是否显示。
@@ -2051,6 +2063,59 @@ queryForm1.columns 中 mode 参数详情
 | `___existent___`     | 字段存在   |
 
 **\_tips: 左右各 3 个下划线\_\_**
+
+## 内置样式@builtin-styles
+
+表格页面的主卡片样式，可直接使用以下 CSS 类名：
+
+其中 `var(--border-radius)` 定义在 `/common/css/app.scss` 中
+
+```css
+/* 表格页面的主卡片 */
+.vk-page-card {
+  background-color: #ffffff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  padding: 18px;
+  margin-bottom: 10px;
+}
+
+.vk-page-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #303133;
+}
+
+/* 工具栏 */
+.vk-page-card-toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  justify-content: space-between;
+}
+
+/* 表格区域 */
+.vk-page-card-table {
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  overflow: hidden;
+}
+```
+
+**使用示例**
+
+```vue
+<view class="vk-page-card">
+  <view class="vk-page-card-toolbar">
+    <view class="vk-page-card-title">用户列表</view>
+    <view>
+      <el-button type="primary" size="small">新增</el-button>
+    </view>
+  </view>
+  <view class="vk-page-card-table">
+    <vk-data-table :action="table1.action" :columns="table1.columns"></vk-data-table>
+  </view>
+</view>
+```
 
 ## vk.baseDao.getTableData@query-getTableData
 
