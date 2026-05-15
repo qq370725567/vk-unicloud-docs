@@ -1627,6 +1627,18 @@ this.$refs.table1.exportExcel({
 });
 ```
 
+#### 弹出列选择器后导出@export-excel-7
+
+设置 `showColumnSelector: true` 后，调用 `exportExcel` 会先弹出列选择器弹窗，用户选择要导出的列并确认后才会执行导出。其余参数（如 `showNo`、`freezeHeader` 等）会作为弹窗的默认值。
+
+```js
+this.$refs.table1.exportExcel({
+  showColumnSelector: true,
+  showNo: false,          // 列选择器弹窗中"含序号"默认关闭
+  freezeHeader: true,     // 列选择器弹窗中"首行锁定"默认开启
+});
+```
+
 ### 导出弹窗配置项@export-options
 
 通过 `export-options` 属性可以配置导出 Excel 弹窗的默认值和控制各项配置是否显示。
