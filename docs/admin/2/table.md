@@ -1520,22 +1520,23 @@ export default {
 
 **通过 this.$refs.table1.xxx(); 方式调用**
 
-| 方法名                | 说明                                      |
-| --------------------- | ----------------------------------------- |
-| refresh               | 刷新                                      |
-| search                | 查询（搜索）                              |
-| getCurrentRow         | 获取当前选中的行的数据                    |
-| getTableData          | 获取整个表格数据                          |
-| getTableFormatterData | 获取整个表格数据（格式化后的数据）        |
-| getMultipleSelection  | 获取多选框的数据                          |
-| showDetail            | 显示详情页                                |
-| closeDetail           | 关闭详情页                                |
-| exportExcel           | 导出 xls 表格文件                         |
-| deleteRows            | 删除指定的行（不删数据库数据）            |
-| updateRows            | 更新指定的行数据（不更新据库数据）        |
-| setTableData          | 手动给表格重新赋值数据                    |
-| toggleRowSelection    | 批量修改表格内的多选框选中状态            |
-| getRowIndex           | 获取指定行所在的 index （新增于 1.17.39） |
+| 方法名                | 说明                                                |
+| --------------------- | --------------------------------------------------- |
+| refresh               | 刷新                                                |
+| search                | 查询（搜索）                                        |
+| getCurrentRow         | 获取当前选中的行的数据                              |
+| getTableData          | 获取整个表格数据                                    |
+| getTableFormatterData | 获取整个表格数据（格式化后的数据）                  |
+| getMultipleSelection  | 获取多选框的数据                                    |
+| showDetail            | 显示详情页                                          |
+| closeDetail           | 关闭详情页                                          |
+| exportExcel           | 导出 xls 表格文件                                   |
+| deleteRows            | 删除指定的行（不删数据库数据）                      |
+| updateRows            | 更新指定的行数据（不更新据库数据）                  |
+| setTableData          | 手动给表格重新赋值数据                              |
+| toggleRowSelection    | 批量修改表格内的多选框选中状态                      |
+| getRowIndex           | 获取指定行所在的 index （新增于 1.17.39）           |
+| doLayout              | 对 Table 进行重新布局（当表格高度有变化时可以调用） |
 
 ### showDetail（显示详情页）@show-detail
 
@@ -1791,6 +1792,27 @@ this.$refs.table1.toggleRowSelection(arr);
 
 ```js
 let index = this.$refs.table1.getRowIndex(item); // item是该条记录的数据源
+```
+
+### doLayout（重新布局）@do-layout
+
+对 Table 进行重新布局。当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法来修正表格的列宽和滚动条。
+
+```js
+this.$refs.table1.doLayout();
+```
+
+**典型使用场景**
+
+在标签页（Tab）切换、抽屉（Drawer）弹出等涉及表格可见性变化的场景中，表格可能出现列宽异常或滚动条错位的问题，此时调用 `doLayout` 即可修复。
+
+```js
+// 例如：标签页切换后重新布局表格
+onTabChange() {
+  this.$nextTick(() => {
+    this.$refs.table1.doLayout();
+  });
+}
 ```
 
 ## 插槽@slot
