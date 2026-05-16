@@ -2114,13 +2114,21 @@ queryForm1.columns 中 mode 参数详情
 其中 `var(--border-radius)` 定义在 `/common/css/app.scss` 中
 
 ```css
-/* 表格页面的主卡片 */
+/* 表格页面的主卡片 - 开始 */
 .vk-page-card {
   background-color: #ffffff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   padding: 18px;
   margin-bottom: 10px;
+}
+
+.vk-page-card:last-of-type {
+  margin-bottom: 0;
+}
+
+.vk-page-search-card {
+  padding-bottom: 8px;
 }
 
 .vk-page-card-title {
@@ -2142,6 +2150,7 @@ queryForm1.columns 中 mode 参数详情
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   overflow: hidden;
 }
+/* 表格页面的主卡片 - 结束 */
 ```
 
 **使用示例**
@@ -2149,11 +2158,12 @@ queryForm1.columns 中 mode 参数详情
 ```vue
 <view class="vk-page-card">
   <view class="vk-page-card-toolbar">
-    <view class="vk-page-card-title">用户列表</view>
-    <view>
-      <el-button type="primary" size="small">新增</el-button>
-    </view>
+  <view class="vk-page-card-title">用户列表</view>
+  <view class="vk-page-card-actions">
+    <el-button type="primary" size="small" icon="el-icon-plus">添加用户</el-button>
+    <el-button size="small" icon="el-icon-download">导出Excel</el-button>
   </view>
+</view>
   <view class="vk-page-card-table">
     <vk-data-table :action="table1.action" :columns="table1.columns"></vk-data-table>
   </view>
