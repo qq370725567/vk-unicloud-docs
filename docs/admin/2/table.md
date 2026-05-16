@@ -1947,20 +1947,61 @@ queryForm1: {
 }
 ```
 
+**搜索区域折叠**
+
+当搜索字段较多时，可使用 `collapse-rows` 指定显示的行数，超出部分自动折叠，用户点击"展开/收起"按钮切换显示。
+
+```html
+<vk-data-table-query
+  v-model="queryForm1.formData"
+  :columns="queryForm1.columns"
+  :span="3"
+  :collapse-rows="1"
+  :collapse-default-expand="true"
+  @search="search"
+></vk-data-table-query>
+```
+
+```js
+queryForm1: {
+  formData: {},
+  columns: [
+    { key: 'nickname', title: '昵称', type: 'text', mode: '%%' },
+    { key: 'status', title: '状态', type: 'select', mode: '=', data: [] },
+    { key: '_add_time', title: '添加时间', type: 'datetimerange', span: 8, mode: '[]' },
+  ]
+}
+```
+
+**columns 中使用 span**
+
+可在单个字段上设置 `span` 属性，控制该字段占多少栏（共 24 栏），优先级高于组件级 `span`。适合让时间范围等宽字段占据更多空间。
+
+```js
+columns: [
+  { key: 'appid', title: 'AppID', type: 'text', mode: '%%' },
+  { key: 'name', title: '应用名称', type: 'text', mode: '%%' },
+  { key: '_add_time', title: '添加时间', type: 'datetimerange', span: 8, mode: '[]' },
+];
+```
+
 ### 组件属性@props@query-props
 
-| 参数               | 说明                                                             | 类型     | 默认值   | 可选值                   |
-| ------------------ | ---------------------------------------------------------------- | -------- | -------- | ------------------------ |
-| v-model            | 绑定查询表单数据源                                               | Object   | -        | -                        |
-| columns            | 字段渲染规则                                                     | Array    | -        | [查看 columns](#columns) |
-| show-reset         | 是否显示重置按钮                                                 | Boolean  | false    | true                     |
-| main-columns       | 在页面上直接显示的字段名数组，此值若不为空，则会显示高级搜索按钮 | Array    | -        | -                        |
-| drawer             | 高级搜索的抽屉弹窗的属性（详情见 element 的 drawer 文档）        | Object   | -        |
-| search-text        | 搜索按钮的文本                                                   | String   | 搜索     | -                        |
-| senior-search-text | 高级搜索按钮的文本                                               | String   | 高级搜索 | -                        |
-| auto-search        | 选择型组件触发 change 时是否自动搜索                             | Boolean  | true     | false                    |
-| @search            | 搜索按钮事件                                                     | Function | -        | -                        |
-| @reset             | 重置按钮事件                                                     | Function | -        | -                        |
+| 参数                    | 说明                                                                  | 类型          | 默认值   | 可选值                   |
+| ----------------------- | --------------------------------------------------------------------- | ------------- | -------- | ------------------------ |
+| v-model                 | 绑定查询表单数据源                                                    | Object        | -        | -                        |
+| columns                 | 字段渲染规则                                                          | Array         | -        | [查看 columns](#columns) |
+| span                    | [1.24.0 新增] 字段栅格占位数（共 24 栏），列级未设置 span 时生效      | Number,String | -        | 1-24                     |
+| collapse-rows           | [1.24.0 新增] 搜索区域可折叠的行数阈值，超过此行数时显示展开/收起按钮 | Number,String | -        | -                        |
+| collapse-default-expand | [1.24.0 新增] 配合 `collapse-rows` 使用，是否默认展开                 | Boolean       | false    | true                     |
+| show-reset              | 是否显示重置按钮                                                      | Boolean       | false    | true                     |
+| main-columns            | 在页面上直接显示的字段名数组，此值若不为空，则会显示高级搜索按钮      | Array         | -        | -                        |
+| drawer                  | 高级搜索的抽屉弹窗的属性（详情见 element 的 drawer 文档）             | Object        | -        |
+| search-text             | 搜索按钮的文本                                                        | String        | 搜索     | -                        |
+| senior-search-text      | 高级搜索按钮的文本                                                    | String        | 高级搜索 | -                        |
+| auto-search             | 选择型组件触发 change 时是否自动搜索                                  | Boolean       | true     | false                    |
+| @search                 | 搜索按钮事件                                                          | Function      | -        | -                        |
+| @reset                  | 重置按钮事件                                                          | Function      | -        | -                        |
 
 ### columns@query-columns
 
@@ -1969,19 +2010,21 @@ columns 属性的写法与万能表单相似(但部分表单组件搜索不支�
 
 [万能表单文档](https://vkdoc.fsq.pub/admin/3/form.html)
 
-| 参数          | 说明                                                        | 类型    | 默认值   | 可选值                   |
-| ------------- | ----------------------------------------------------------- | ------- | -------- | ------------------------ |
-| key           | 键名                                                        | String  | 无       | -                        |
-| title         | 标题                                                        | String  | 无       | -                        |
-| type          | 组件类型                                                    | String  | 无       | -                        |
-| width         | 组件宽度                                                    | Number  | 无       | -                        |
-| placeholder   | 输入前的提示                                                | String  | -        | -                        |
-| mode          | 查询模式                                                    | String  | =        | [查看 mode](#query-mode) |
-| fieldName     | 数据库字段名称，默认=key 的值                               | String  | key 的值 | -                        |
-| lastWhereJson | 是否是连表后的 where 条件                                   | Boolean | false    | true                     |
-| hidden        | 是否隐藏该字段（规则依然生效，但不在页面中渲染此组件）      | Boolean | false    | true                     |
-| show          | 显示规则,page 代表显示在页面上，drawer 代表显示在高级搜索中 | Array   | ["page"] | ["page","drawer"]        |
-| autoSearch    | 选择型组件触发 change 时是否自动搜索                        | Boolean | true     | false                    |
+| 参数          | 说明                                                            | 类型          | 默认值   | 可选值                   |
+| ------------- | --------------------------------------------------------------- | ------------- | -------- | ------------------------ |
+| key           | 键名                                                            | String        | 无       | -                        |
+| title         | 标题                                                            | String        | 无       | -                        |
+| type          | 组件类型                                                        | String        | 无       | -                        |
+| width         | 组件宽度                                                        | Number        | 无       | -                        |
+| minWidth      | [1.24.0 新增] 组件最小宽度（仅设置了 span 后才生效）            | Number        | 无       | -                        |
+| span          | [1.24.0 新增] 字段栅格占位数（共 24 栏），优先级高于组件级 span | Number,String | 无       | 1-24                     |
+| placeholder   | 输入前的提示                                                    | String        | -        | -                        |
+| mode          | 查询模式                                                        | String        | =        | [查看 mode](#query-mode) |
+| fieldName     | 数据库字段名称，默认=key 的值                                   | String        | key 的值 | -                        |
+| lastWhereJson | 是否是连表后的 where 条件                                       | Boolean       | false    | true                     |
+| hidden        | 是否隐藏该字段（规则依然生效，但不在页面中渲染此组件）          | Boolean       | false    | true                     |
+| show          | 显示规则,page 代表显示在页面上，drawer 代表显示在高级搜索中     | Array         | ["page"] | ["page","drawer"]        |
+| autoSearch    | 选择型组件触发 change 时是否自动搜索                            | Boolean       | true     | false                    |
 
 ### fieldName 参数的用处@query-fieldname
 
