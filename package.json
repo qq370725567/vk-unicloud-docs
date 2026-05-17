@@ -7,7 +7,8 @@
     "uniCloudDeploy-1": "cli hosting deploy --provider aliyun --space mp-0cfbb5f1-fa7e-4585-a530-dde5e1109066 --source D:/hbxwork/vk-unicloud-docs/dist/ --prefix /",
     "uniCloudDeploy-2": "cli hosting deploy --provider aliyun --space mp-0cfbb5f1-fa7e-4585-a530-dde5e1109066 --source E:/VK/3_work-uni-app/vk-unicloud-docs/dist/ --prefix /",
     "dev": "vuepress dev docs --temp .temp",
-    "build": "vuepress build docs"
+    "build": "vuepress build docs",
+    "gen-links": "node scripts/generate-links.js"
   },
   "keywords": [],
   "author": "VK",
