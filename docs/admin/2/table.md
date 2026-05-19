@@ -2009,21 +2009,26 @@ columns: [
 
 ### 组件属性@props@query-props
 
-| 参数                    | 说明                                                                  | 类型          | 默认值   | 可选值                   |
-| ----------------------- | --------------------------------------------------------------------- | ------------- | -------- | ------------------------ |
-| v-model                 | 绑定查询表单数据源                                                    | Object        | -        | -                        |
-| columns                 | 字段渲染规则                                                          | Array         | -        | [查看 columns](#columns) |
-| span                    | [1.24.0 新增] 字段栅格占位数（共 24 栏），列级未设置 span 时生效      | Number,String | -        | 1-24                     |
-| collapse-rows           | [1.24.0 新增] 搜索区域可折叠的行数阈值，超过此行数时显示展开/收起按钮 | Number,String | -        | -                        |
-| collapse-default-expand | [1.24.0 新增] 配合 `collapse-rows` 使用，是否默认展开                 | Boolean       | false    | true                     |
-| show-reset              | 是否显示重置按钮                                                      | Boolean       | false    | true                     |
-| main-columns            | 在页面上直接显示的字段名数组，此值若不为空，则会显示高级搜索按钮      | Array         | -        | -                        |
-| drawer                  | 高级搜索的抽屉弹窗的属性（详情见 element 的 drawer 文档）             | Object        | -        |
-| search-text             | 搜索按钮的文本                                                        | String        | 搜索     | -                        |
-| senior-search-text      | 高级搜索按钮的文本                                                    | String        | 高级搜索 | -                        |
-| auto-search             | 选择型组件触发 change 时是否自动搜索                                  | Boolean       | true     | false                    |
-| @search                 | 搜索按钮事件                                                          | Function      | -        | -                        |
-| @reset                  | 重置按钮事件                                                          | Function      | -        | -                        |
+| 参数                    | 说明                                                                    | 类型               | 默认值   | 可选值                   |
+| ----------------------- | ----------------------------------------------------------------------- | ------------------ | -------- | ------------------------ |
+| v-model                 | 绑定查询表单数据源                                                      | Object             | -        | -                        |
+| columns                 | 字段渲染规则                                                            | Array              | -        | [查看 columns](#columns) |
+| size                    | 表单组件尺寸（继承自 element 的 size）                                  | String             | -        | medium / small / mini    |
+| span                    | [1.24.0 新增] 字段栅格占位数（共 24 栏），列级未设置 span 时生效        | Number,String      | -        | 1-24                     |
+| min-width               | [1.24.0 新增] 组件级字段最小宽度（单位 px），列级未设置 minWidth 时生效 | Number,String      | 200      | -                        |
+| label-width             | 表单标签宽度，未设置时根据 span 自动计算标签宽度                        | Number,String      | -        | -                        |
+| label-position          | 表单标签位置                                                            | String             | right    | left / right / top       |
+| collapse-rows           | [1.24.0 新增] 搜索区域可折叠的行数阈值，超过此行数时显示展开/收起按钮   | Number,String      | -        | -                        |
+| collapse-default-expand | [1.24.0 新增] 配合 `collapse-rows` 使用，是否默认展开                   | Boolean            | false    | true                     |
+| show-reset              | 是否显示重置按钮                                                        | Boolean,String     | auto     | true / false / auto      |
+| main-columns            | 在页面上直接显示的字段名数组，此值若不为空，则会显示高级搜索按钮        | Array              | -        | -                        |
+| drawer                  | 高级搜索的抽屉弹窗的属性（详情见 element 的 drawer 文档）               | Object             | -        |
+| search-text             | 搜索按钮的文本                                                          | String             | 搜索     | -                        |
+| senior-search-text      | 高级搜索按钮的文本                                                      | String             | 高级搜索 | -                        |
+| auto-search             | 选择型组件触发 change 时是否自动搜索                                    | Boolean            | true     | false                    |
+| @search                 | 搜索按钮事件                                                            | Function           | -        | -                        |
+| @reset                  | 重置按钮事件                                                            | Function           | -        | -                        |
+| @collapse-change        | 搜索区域展开/收起状态变化时触发                                         | Function(expanded) | -        | -                        |
 
 ### columns@query-columns
 
