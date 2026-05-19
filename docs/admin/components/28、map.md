@@ -6,6 +6,12 @@
 { key: "position", title: "地图位置", type: "map", width: 600, height: 300, defaultLocation: { latitude: 30.224781, longitude: 120.12438 } },
 ```
 
+**启用手动输入经纬度功能**
+
+```js
+{ key: "position", title: "地图位置", type: "map", width: 600, height: 300, defaultLocation: { latitude: 30.224781, longitude: 120.12438 }, manualInput: true },
+```
+
 **注意**
 
 H5 需要设置 `manifest.json` - `H5配置` - `腾讯地图和高德地图二选一` - 填写 key
@@ -20,12 +26,35 @@ key 的申请地址：[腾讯地图](https://lbs.qq.com) [高德](https://lbs.am
 
 ### 组件属性@props
 
-| 参数            | 说明                                     | 类型   | 默认值 | 可选值 |
-| --------------- | ---------------------------------------- | ------ | ------ | ------ |
-| width           | 当有值时，地图显示的宽度，单位 px        | Number | 600    | -      |
-| height          | 当有值时，地图显示的高度，单位 px        | Number | 300    | -      |
-| defaultLocation | 当无值的情况下，打开地图时默认显示的位置 | Object | -      | -      |
-| mode            | 模式 edit 编辑模式 preview 预览模式      | String | -      | -      |
+| 参数            | 说明                                     | 类型    | 默认值 | 可选值 |
+| --------------- | ---------------------------------------- | ------- | ------ | ------ |
+| width           | 当有值时，地图显示的宽度，单位 px        | Number  | 600    | -      |
+| height          | 当有值时，地图显示的高度，单位 px        | Number  | 300    | -      |
+| defaultLocation | 当无值的情况下，打开地图时默认显示的位置 | Object  | -      | -      |
+| mode            | 模式 edit 编辑模式 preview 预览模式      | String  | -      | -      |
+| manualInput     | 是否启用手动输入经纬度功能               | Boolean | false  | -      |
+
+#### 手动输入功能说明
+
+当设置 `manualInput: true` 时，组件会在地图下方显示一个手动输入表单，允许用户不通过地图选择器直接输入经纬度和地址信息。
+
+**功能特性：**
+
+- 支持手动输入经度和纬度（带格式验证）
+- 支持选择省市区（使用 address 地址选择组件）
+- 支持输入详细地址和地点名称
+- 输入完成后点击「应用手动输入」按钮即可生效
+- 仅在编辑模式（`mode: 'edit'`）下显示
+
+**验证规则：**
+
+| 字段     | 验证规则                                      |
+| -------- | --------------------------------------------- |
+| 经度     | 必填，数字格式，范围 -180 到 180              |
+| 纬度     | 必填，数字格式，范围 -90 到 90                |
+| 省市区   | 必填                                          |
+| 详细地址 | 必填                                          |
+| 地点名称 | 选填                                          |
 
 #### defaultLocation
 
@@ -63,6 +92,12 @@ key 的申请地址：[腾讯地图](https://lbs.qq.com) [高德](https://lbs.am
 
 ```html
 <vk-data-input-map v-model="value" placeholder="请选择地图" :width="600" :height="300"></vk-data-input-map>
+```
+
+**启用手动输入功能**
+
+```html
+<vk-data-input-map v-model="value" placeholder="请选择地图" :width="600" :height="300" :manual-input="true"></vk-data-input-map>
 ```
 
 ### 组件双向绑定的值格式
