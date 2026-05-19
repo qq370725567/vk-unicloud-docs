@@ -2146,7 +2146,7 @@ queryForm1.columns 中 mode 参数详情
   background-color: #ffffff;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  padding: 18px;
+  padding: 15px;
   margin-bottom: 10px;
 }
 
@@ -2155,7 +2155,7 @@ queryForm1.columns 中 mode 参数详情
 }
 
 .vk-page-search-card {
-  padding-bottom: 8px;
+  padding-bottom: 5px;
 }
 
 .vk-page-card-title {
@@ -2168,7 +2168,7 @@ queryForm1.columns 中 mode 参数详情
 .vk-page-card-toolbar {
   display: flex;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 15px;
   justify-content: space-between;
 }
 
