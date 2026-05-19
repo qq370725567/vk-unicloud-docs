@@ -357,15 +357,15 @@ props 对象属性
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-input-table-select
   v-model="role"
   action="admin/system/role/sys/getList"
   placeholder="请选择"
-  :columns='[
-    { key:"role_name", title:"角色昵称", type:"text", nameKey:true },
-    { key:"role_id", title:"角色标识", type:"text", idKey:true },
-    { key:"comment", title:"备注", type:"text" }
-  ]'
+  :columns="[
+    { key: 'role_name', title: '角色昵称', type: 'text', nameKey: true },
+    { key: 'role_id', title: '角色标识', type: 'text', idKey: true },
+    { key: 'comment', title: '备注', type: 'text' },
+  ]"
 ></vk-data-input-table-select>
 ```

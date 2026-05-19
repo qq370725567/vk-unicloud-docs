@@ -144,39 +144,39 @@
 
 #### 常规用法
 
-```html
+```vue
 <vk-data-input-select
   v-model="form1.value1"
-  :localdata='[
-    { value:1, label:"选项一" },
-    { value:2, label:"选项二" }
-  ]'
+  :localdata="[
+    { value: 1, label: '选项一' },
+    { value: 2, label: '选项二' },
+  ]"
   placeholder="请选择"
 ></vk-data-input-select>
 ```
 
 #### 分组用法
 
-```html
+```vue
 <vk-data-input-select
   v-model="form1.value2"
   :group="true"
-  :localdata='[
+  :localdata="[
     {
-      label: "分组1",
-      children:[
-        { value:1, label:"选项一" },
-        { value:2, label:"选项二" }
-      ]
+      label: '分组1',
+      children: [
+        { value: 1, label: '选项一' },
+        { value: 2, label: '选项二' },
+      ],
     },
     {
-      label: "分组2",
-      children:[
-        { value:3, label:"选项三" },
-        { value:4, label:"选项四" }
-      ]
-    }
-  ]'
+      label: '分组2',
+      children: [
+        { value: 3, label: '选项三' },
+        { value: 4, label: '选项四' },
+      ],
+    },
+  ]"
   placeholder="请选择"
 ></vk-data-input-select>
 ```

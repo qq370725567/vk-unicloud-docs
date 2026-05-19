@@ -84,7 +84,7 @@
 
 #### 开关形式
 
-```html
+```vue
 <vk-data-input-switch v-model="switch" :active-value="1" :inactive-value="0"></vk-data-input-switch>
 ```
 
@@ -92,6 +92,6 @@
 
 注意：多选框形式下，`activeValue` 和 `inactiveValue` 只能是 `number` 或 `string`，不可以是 `boolean`
 
-```html
+```vue
 <vk-data-input-switch v-model="switch" switch-type="checkbox" :true-label="1" :false-label="0">允许为空</vk-data-input-switch>
 ```

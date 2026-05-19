@@ -36,6 +36,6 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <el-rate v-model="rate"></el-rate>
 ```

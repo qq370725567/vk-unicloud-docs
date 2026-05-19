@@ -2,7 +2,7 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-link href="https://ext.dcloud.net.cn" text="https://ext.dcloud.net.cn"></vk-data-link>
 ```
 

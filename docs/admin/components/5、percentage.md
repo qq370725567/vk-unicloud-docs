@@ -60,7 +60,7 @@
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
 
-```html
+```vue
 <vk-data-input-numeric mode="percentage" v-model="form1.value1" placeholder="请输入百分比" :precision="2" :max="100" width="300px"></vk-data-input-numeric>
 ```
 
@@ -68,7 +68,7 @@
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
 
-```html
+```vue
 <vk-data-input-numeric mode="percentage" v-model="form1.rateRange" :range="true" :max="100" placeholder="['最低百分比', '最高百分比']" width="400px"></vk-data-input-numeric>
 ```
 
@@ -76,7 +76,7 @@
 
 旧组件 `vk-data-input-percentage` 仍然可用，但推荐使用统一组件 `vk-data-input-numeric`（mode="percentage"）替代。
 
-```html
+```vue
 <!-- 旧写法（仍可用） -->
 <vk-data-input-percentage v-model="form1.value1" placeholder="请输入百分比" :precision="2" :max="100" width="300px"></vk-data-input-percentage>
 ```

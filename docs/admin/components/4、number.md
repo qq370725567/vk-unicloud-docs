@@ -59,7 +59,7 @@
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
 
-```html
+```vue
 <vk-data-input-numeric mode="number" v-model="form1.value2" :precision="2" width="300px" placeholder="请输入数字"></vk-data-input-numeric>
 ```
 
@@ -67,7 +67,7 @@
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
 
-```html
+```vue
 <vk-data-input-numeric mode="number" v-model="form1.rangeValue" :range="true" placeholder="['最小值', '最大值']" width="400px"></vk-data-input-numeric>
 ```
 
@@ -75,7 +75,7 @@
 
 旧组件 `vk-data-input-number` 和 `vk-data-input-number-box` 仍然可用，但推荐使用统一组件 `vk-data-input-numeric`（mode="number"）替代。
 
-```html
+```vue
 <!-- 旧写法（仍可用） -->
 <vk-data-input-number v-model="form1.value2" :precision="2" width="300px" placeholder="请输入数字"></vk-data-input-number>
 

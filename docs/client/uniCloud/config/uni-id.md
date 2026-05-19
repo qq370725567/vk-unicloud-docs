@@ -174,7 +174,7 @@ module.exports = async (tokenObj) => {
   //   permission: [] // 用户权限列表，admin角色的用户权限列表为空数组
   // }
 
-  tokenObj.customField = "hello custom token"; // 自定义token字段
+  tokenObj.customField = 'hello custom token'; // 自定义token字段
   return tokenObj; // 注意务必返回修改后的token对象
 };
 ```

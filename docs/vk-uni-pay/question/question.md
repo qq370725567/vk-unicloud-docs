@@ -30,7 +30,7 @@ sidebarDepth: 0
 - 2、唤起微信 APP，在微信 APP 内输入支付密码
 - 3、支付成功后，会返回之前的页面（返回的页面可以通过 `return-url` 指定）
 
-```html
+```vue
 <vk-uni-pay ref="vkPay" :status.sync="vkPay.status" :query-payment-action="vkPay.queryPaymentAction" :return-url="vkPay.returnUrl"></vk-uni-pay>
 ```
 

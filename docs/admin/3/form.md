@@ -32,7 +32,7 @@ sidebarDepth: 1
 
 vk-data-dialog 为弹窗表单，去掉则为表单页面
 
-```html
+```vue
 <vk-data-dialog v-model="form1.props.show" title="表单标题" width="600px" mode="form">
   <vk-data-form
     ref="form1"
@@ -398,7 +398,7 @@ columns 是一个数组，数组内每个元素有以下属性，每个元素代
 
 ### inline（行内表单）@inline
 
-```html
+```vue
 <vk-data-form ...其他组件 :inline="true" :columnsNumber="2"></vk-data-form>
 ```
 
@@ -609,7 +609,7 @@ form1: {
 
 ### before-action（请求前拦截）@before-action
 
-```html
+```vue
 <vk-data-form :before-action="form1.props.beforeAction"></vk-data-form>
 ```
 
@@ -636,7 +636,7 @@ data: function() {
 
 表单验证规则，和 element 表单验证规则一致，以下是部分示例
 
-```html
+```vue
 <vk-data-form :rules="form1.props.rules"></vk-data-form>
 ```
 
@@ -803,7 +803,7 @@ data: function() {
 
 **如监听表单提交成功事件**
 
-```html
+```vue
 <vk-data-form ...其他属性 @success="onFormSuccess"></vk-data-form>
 ```
 
@@ -865,7 +865,7 @@ this.$refs.form1.resetForm();
 
 ### 重写`rate`字段的渲染示例
 
-```html
+```vue
 <vk-data-form
   ref="form1"
   v-model="form1.data"
@@ -888,7 +888,7 @@ this.$refs.form1.resetForm();
 
 ### 重写提交按钮的示例
 
-```html
+```vue
 <vk-data-form
   ref="form1"
   v-model="form1.data"
@@ -933,14 +933,14 @@ adopt(status){
 
 **示例代码**
 
-```html
+```vue
 <vk-data-form
   ref="form1"
   v-model="form1.data"
   :rules="form1.props.rules"
   action="https://www.xxx.com/xxx/xxx"
   :is-request="true"
-  :request-header="{ 'content-type':'application/json; charset=utf-8'} "
+  :request-header="{ 'content-type': 'application/json; charset=utf-8' }"
   :columns="form1.props.columns"
 ></vk-data-form>
 ```
@@ -957,7 +957,7 @@ adopt(status){
 
 ### 自定义 function-http 请求模式示例@function-http
 
-```html
+```vue
 <vk-data-form ref="form1" :action="form1.props.action" ...其他属性></vk-data-form>
 ```
 
@@ -1002,7 +1002,7 @@ export default {
 
 ### 自定义 function-云函数请求示例@function-cloud
 
-```html
+```vue
 <vk-data-form ref="form1" :action="form1.props.action" ...其他属性></vk-data-form>
 ```
 
@@ -1073,7 +1073,7 @@ vk.pubfn.openForm('bindRole', { item: {} }); // 来源页面 /pages_plugs/system
 
 **bindRole.vue 代码如下**
 
-```html
+```vue
 <template>
   <vk-data-dialog v-model="value.show" :title="page.title" :top="page.top" :width="page.width" mode="form" @open="onOpen" @closed="onClose">
     <!-- 页面主体内容开始 -->
@@ -1250,7 +1250,7 @@ vk.pubfn.openForm('bindRole', { item: {} }); // 来源页面 /pages_plugs/system
 
 - 2、list.vue 的 `template` 新增以下代码
 
-```html
+```vue
 <el-button type="primary" size="small" icon="el-icon-s-tools" @click="bindRoleBtn">角色绑定</el-button>
 
 <bindRole v-model="formDatas.bindRole"></bindRole>

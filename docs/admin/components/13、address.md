@@ -27,7 +27,7 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-input-address v-model="address" placeholder="请选择省市区" :level="3"></vk-data-input-address>
 ```
 

@@ -38,13 +38,13 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <el-slider v-model="value1"></el-slider>
 ```
 
 ### marks 用法
 
-```html
+```vue
 <template>
   <view>
     <el-slider v-model="value" range :marks="marks"></el-slider>

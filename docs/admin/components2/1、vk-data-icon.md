@@ -2,7 +2,7 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-icon name="vk-icon-full" size="16" color="rgba(0,0,0,.7)"></vk-data-icon>
 ```
 
@@ -61,7 +61,7 @@ Font Family：vk-aaa-icon
 
 则 `vk-custom-icon-update` 就是图标的 `name`，也是图标的值
 
-```html
+```vue
 <vk-data-icon name="vk-custom-icon-update" size="16" color="#000000"></vk-data-icon>
 ```
 
@@ -69,13 +69,13 @@ Font Family：vk-aaa-icon
 
 **如果你 `client端` 也需要自定义图标，也是按上面方式操作即可。操作完后，如下代码即可显示自定义图标**
 
-```html
+```vue
 <text class="vk-custom-icon vk-custom-icon-update" style=" font-size: 16px;color: #000000;"></text>
 ```
 
 **如果你 `client端` 使用了 `vk-uview-ui` 组件库，则可以这样显示图标**
 
-```html
+```vue
 <u-icon name="vk-custom-icon-update" size="16" color="#000000"></u-icon>
 ```
 

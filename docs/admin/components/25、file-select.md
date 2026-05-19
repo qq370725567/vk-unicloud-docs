@@ -51,7 +51,7 @@
 
 ### template 使用方式@template@template
 
-```html
+```vue
 <vk-data-input-file-select v-model="image1" placeholder="请选择图片" multiple :multiple-limit="9" file-type="image" image-fit="cover"></vk-data-input-file-select>
 ```
 

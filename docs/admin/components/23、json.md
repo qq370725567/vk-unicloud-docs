@@ -24,6 +24,6 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-input-json v-model="value1"></vk-data-input-json>
 ```

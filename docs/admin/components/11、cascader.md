@@ -344,25 +344,25 @@
 
 **示例**
 
-```html
+```vue
 <vk-data-input-cascader
   v-model="form1.value"
   :localdata="[
     {
-      value:1,
-      label:'数学',
-      children:[
-        { value:11,label:'奥数' },
-        { value:12,label:'微积分' }
-      ]
+      value: 1,
+      label: '数学',
+      children: [
+        { value: 11, label: '奥数' },
+        { value: 12, label: '微积分' },
+      ],
     },
     {
-      value:2,
-      label:'语文',
-      children:[
-        { value:21, label:'文言文' },
-        { value:22, label:'古诗' }
-      ]
+      value: 2,
+      label: '语文',
+      children: [
+        { value: 21, label: '文言文' },
+        { value: 22, label: '古诗' },
+      ],
     },
   ]"
   placeholder="请选择"
@@ -375,11 +375,11 @@
 
 **示例**
 
-```html
+```vue
 <vk-data-input-cascader
   v-model="form1.value"
   action="admin/system/permission/sys/getAll"
-  :props="{ list:'rows', value:'permission_id', label:'label', children:'children' }"
+  :props="{ list: 'rows', value: 'permission_id', label: 'label', children: 'children' }"
   placeholder="请选择"
 ></vk-data-input-cascader>
 ```

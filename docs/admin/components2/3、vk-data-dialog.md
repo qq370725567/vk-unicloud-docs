@@ -6,7 +6,7 @@
 
 完整代码见示例项目的 `pages_template/components/dialog/dialog-basic`
 
-```html
+```vue
 <vk-data-dialog v-model="dialog.show1" title="标题1" width="500px" top="14vh" center :close-on-click-modal="true">
   这里是自定义按钮内容
   <template v-slot:footer>
@@ -20,7 +20,7 @@
 
 完整代码见示例项目的 `pages_template/components/dialog/dialog-form`
 
-```html
+```vue
 <vk-data-dialog v-model="form1.props.show" title="表单标题" width="600px" mode="form">
   <vk-data-form
     ref="form1"
@@ -142,7 +142,7 @@ word-break: break-all;
 
 **插槽示例**
 
-```html
+```vue
 <vk-data-dialog v-model="showDialog" width="500px" top="14vh" :close-on-click-modal="true">
   <template v-slot:title>
     <view> 这是标题的插槽 </view>

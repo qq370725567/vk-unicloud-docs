@@ -288,24 +288,24 @@ sidebarDepth: 0
 
 ### 单个日期 - date 类型（年月日）
 
-```html
+```vue
 <vk-data-input-date-time v-model="value1" type="date"></vk-data-input-date-time>
 ```
 
 ### 单个日期 - dataTime 类型（年月日时分秒）
 
-```html
+```vue
 <vk-data-input-date-time v-model="value1" type="datetime"></vk-data-input-date-time>
 ```
 
 ### 日期范围 - date 类型（年月日）
 
-```html
+```vue
 <vk-data-input-date-time v-model="value1" type="daterange"></vk-data-input-date-time>
 ```
 
 ### 日期范围 - dataTime 类型（年月日时分秒）
 
-```html
+```vue
 <vk-data-input-date-time v-model="value1" type="datetimerange"></vk-data-input-date-time>
 ```

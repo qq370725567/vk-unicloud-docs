@@ -175,6 +175,6 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-upload v-model="image1" :limit="9" upload-type="file" list-type="text" button-text="点击上传"></vk-data-upload>
 ```

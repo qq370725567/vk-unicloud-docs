@@ -43,6 +43,6 @@
 
 **注意：此方式不支持属性 trimMode**
 
-```html
+```vue
 <el-input v-model="form1.value" placeholder="请输入内容"></el-input>
 ```

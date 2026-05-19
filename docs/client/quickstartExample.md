@@ -74,7 +74,7 @@ calc: async function(data) {
 
 如
 
-```html
+```vue
 <template>
   <view class="content">
     <button @click="test()">请求云对象的方法</button>
@@ -111,7 +111,7 @@ calc: async function(data) {
 
 云对象还有一种特殊的方式调用云端接口，即通过 `uni.vk.importObject` 先引入云对象，然后可以直接调用云对象内的方法。
 
-```html
+```vue
 <template>
   <view class="content">
     <button @click="test()">请求云对象的方法</button>

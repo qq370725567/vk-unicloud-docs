@@ -43,6 +43,6 @@ rgb：不带透明度 rgb(255,255,255) 带透明度 rgba(255,255,255,0.8) [关�
 
 ### template 使用方式@template
 
-```html
+```vue
 <el-color-picker v-model="color"></el-color-picker>
 ```

@@ -66,13 +66,13 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-input-time
   v-model="value1"
   :picker-options="{
     start: '08:30',
     step: '00:15',
-    end: '18:30'
+    end: '18:30',
   }"
   placeholder="选择时间"
 ></vk-data-input-time>

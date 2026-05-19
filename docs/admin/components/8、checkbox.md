@@ -257,12 +257,12 @@
 
 应用场景：选项数据为静态数据的情况。
 
-```html
+```vue
 <vk-data-input-checkbox
   v-model="form1.value"
   :localdata="[
-    { value:1, label:'选项一' },
-    { value:2, label:'选项二' },
+    { value: 1, label: '选项一' },
+    { value: 2, label: '选项二' },
   ]"
 ></vk-data-input-checkbox>
 ```
@@ -271,11 +271,11 @@
 
 应用场景：需要从数据库中获取选项的情况。
 
-```html
+```vue
 <vk-data-input-checkbox
   v-model="form1.value"
   :item-width="80"
   action="admin/system/user/sys/getList"
-  :props="{ list:'rows', value:'_id', label:'nickname' }"
+  :props="{ list: 'rows', value: '_id', label: 'nickname' }"
 ></vk-data-input-checkbox>
 ```

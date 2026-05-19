@@ -54,6 +54,6 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-input-tag v-model="value" :limit="5"></vk-data-input-tag>
 ```

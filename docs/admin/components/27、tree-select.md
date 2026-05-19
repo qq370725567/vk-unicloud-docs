@@ -279,25 +279,25 @@
 
 #### 应用场景：选项数据为静态数据的情况。
 
-```html
+```vue
 <vk-data-input-tree-select
   v-model="form1.value"
   :localdata="[
     {
-      value:1,
-      label:'数学',
-      children:[
-        { value:11,label:'奥数' },
-        { value:12,label:'微积分' }
-      ]
+      value: 1,
+      label: '数学',
+      children: [
+        { value: 11, label: '奥数' },
+        { value: 12, label: '微积分' },
+      ],
     },
     {
-      value:2,
-      label:'语文',
-      children:[
-        { value:21, label:'文言文' },
-        { value:22, label:'古诗' }
-      ]
+      value: 2,
+      label: '语文',
+      children: [
+        { value: 21, label: '文言文' },
+        { value: 22, label: '古诗' },
+      ],
     },
   ]"
   placeholder="请选择"
@@ -308,11 +308,11 @@
 
 #### 应用场景：需要从数据库中获取选项的情况。
 
-```html
+```vue
 <vk-data-input-tree-select
   v-model="form1.value"
   action="admin/system/menu/sys/getAll"
-  :props="{ list:'rows', value:'menu_id', label:'label', children:'children' }"
+  :props="{ list: 'rows', value: 'menu_id', label: 'label', children: 'children' }"
   placeholder="请选择"
 ></vk-data-input-tree-select>
 ```

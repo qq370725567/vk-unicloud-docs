@@ -10,7 +10,7 @@ sidebarDepth: 1
 
 ## 基础用法@base
 
-```html
+```vue
 <vk-data-table :data="table1.data" :columns="table1.columns"></vk-data-table>
 ```
 
@@ -522,8 +522,8 @@ table1: {
 
 如默认按排序值从小到大排序
 
-```html
-<vk-data-table :default-sort="{ name:'sort', type:'asc' }"></vk-data-table>
+```vue
+<vk-data-table :default-sort="{ name: 'sort', type: 'asc' }"></vk-data-table>
 ```
 
 **注意**
@@ -532,8 +532,8 @@ table1: {
 
 **推荐写法**
 
-```html
-<vk-data-table :default-sort="{ name:'_add_time', type:'asc' }"></vk-data-table>
+```vue
+<vk-data-table :default-sort="{ name: '_add_time', type: 'asc' }"></vk-data-table>
 ```
 
 `columns` 中的 `key` 也要写 `_add_time`，同时加上属性 `sortable:"custom"`
@@ -552,8 +552,8 @@ columns: [
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/bb64b55a-9f94-4b40-a1d5-d4ad93513e83.png)
 
-```html
-<vk-data-table :right-btns="['detail_auto','update','delete','more']"></vk-data-table>
+```vue
+<vk-data-table :right-btns="['detail_auto', 'update', 'delete', 'more']"></vk-data-table>
 ```
 
 **自定义显示规则用法**
@@ -562,7 +562,7 @@ columns: [
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/97b70681-214b-49bb-a96c-835f8876aec7.png)
 
-```html
+```vue
 <vk-data-table :right-btns="table1.rightBtns" right-btns-align="right"></vk-data-table>
 ```
 
@@ -599,7 +599,7 @@ data() {
 
 ##### right-btns 根据当前用户角色或权限控制是否显示、隐藏、禁用@right-btns-permission
 
-```html
+```vue
 <vk-data-table :right-btns="table1.rightBtns" right-btns-align="right"></vk-data-table>
 ```
 
@@ -650,8 +650,8 @@ right-btns-more（右侧更多按钮点击后显示的按钮列表）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/04d7bad0-87d3-4e54-b275-3c89cb833d11.png)
 
-```html
-<vk-data-table :right-btns="['detail_auto','update','delete','more']" :right-btns-more="table1.rightBtnsMore"></vk-data-table>
+```vue
+<vk-data-table :right-btns="['detail_auto', 'update', 'delete', 'more']" :right-btns-more="table1.rightBtnsMore"></vk-data-table>
 ```
 
 ```js
@@ -701,8 +701,8 @@ data() {
 
 ##### right-btns-more 根据当前用户角色或权限控制是否显示、隐藏、禁用@right-btns-more-permission
 
-```html
-<vk-data-table :right-btns="['detail_auto','update','delete','more']" :right-btns-more="table1.rightBtnsMore"></vk-data-table>
+```vue
+<vk-data-table :right-btns="['detail_auto', 'update', 'delete', 'more']" :right-btns-more="table1.rightBtnsMore"></vk-data-table>
 ```
 
 ```js
@@ -742,7 +742,7 @@ data() {
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/3d559376-73af-4749-9516-f9c33149d74f.png)
 
-```html
+```vue
 <vk-data-table :custom-right-btns="table1.customRightBtns" right-btns-align="right"></vk-data-table>
 ```
 
@@ -795,7 +795,7 @@ data() {
 
 `right-btns` `right-btns-more` `custom-right-btns` 均支持
 
-```html
+```vue
 <vk-data-table :custom-right-btns="table1.customRightBtns" right-btns-align="right"></vk-data-table>
 ```
 
@@ -854,7 +854,7 @@ data() {
 
 **基础用法 - 独立按钮**
 
-```html
+```vue
 <vk-data-table :selection="true" :batch-btns="table1.batchBtns"></vk-data-table>
 ```
 
@@ -977,7 +977,7 @@ batchBtns: [
 
 ##### batch-btns 根据当前用户角色或权限控制是否显示、隐藏、禁用@batch-btns-permission
 
-```html
+```vue
 <vk-data-table :selection="true" :batch-btns="table1.batchBtns"></vk-data-table>
 ```
 
@@ -1083,13 +1083,13 @@ batchBtns: [
 
 方案一：设置一下固定的行高，此方案只适用最大行高是已知的情况
 
-```html
+```vue
 <vk-data-table :row-height="100"></vk-data-table>
 ```
 
 方案二：去掉左右两侧浮动的效果，此方案万能，但缺点是没有浮动了
 
-```html
+```vue
 <vk-data-table :left-fixed="false" :right-fixed="false"></vk-data-table>
 ```
 
@@ -1097,7 +1097,7 @@ batchBtns: [
 
 通过设置
 
-```html
+```vue
 :highlight-current-row = "false"
 ```
 
@@ -1126,7 +1126,7 @@ batchBtns: [
 
 **示例代码**
 
-```html
+```vue
 <vk-data-table
   ref="table1"
   action="https://www.xxx.com/xxx/xxx"
@@ -1149,7 +1149,7 @@ batchBtns: [
 
 #### 自定义 function-http 请求模式示例@function-http
 
-```html
+```vue
 <vk-data-table ref="table1" :action="table1.action"></vk-data-table>
 ```
 
@@ -1199,7 +1199,7 @@ export default {
 
 #### 自定义 function-云函数请求示例@function-cloud
 
-```html
+```vue
 <vk-data-table ref="table1" :action="table1.action" ...其他属性></vk-data-table>
 ```
 
@@ -1245,7 +1245,7 @@ export default {
 
 ### 数据预处理@data-preprocess
 
-```html
+```vue
 <vk-data-table :data-preprocess="table1.dataPreprocess"></vk-data-table>
 ```
 
@@ -1271,7 +1271,7 @@ export default {
 
 当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
 
-```html
+```vue
 <vk-data-table ref="table1" :action="table1.action" :columns="table1.columns" :query-form-param="queryForm1" :expand="true"></vk-data-table>
 ```
 
@@ -1281,7 +1281,7 @@ export default {
 
 ### 表格自带的多选框禁用规则@selection
 
-```html
+```vue
 <vk-data-table :selection="true" :selectable="table1.selectable"></vk-data-table>
 ```
 
@@ -1310,7 +1310,7 @@ export default {
 
 同时可以通过设置 `retry-interval` 属性，可以控制每次重试的间隔（单位为毫秒）
 
-```html
+```vue
 <vk-data-table ref="table1" :action="table1.action" :columns="table1.columns" :query-form-param="queryForm1" :retry-count="3"></vk-data-table>
 ```
 
@@ -1320,7 +1320,7 @@ export default {
 
 设置 border 为 true 即可
 
-```html
+```vue
 <vk-data-table ref="table1" :border="true"></vk-data-table>
 ```
 
@@ -1367,7 +1367,7 @@ export default {
 
 万能表格组件设置属性 `:getCount="true"`
 
-```html
+```vue
 <vk-data-table :getCount="true"></vk-data-table>
 ```
 
@@ -1398,7 +1398,7 @@ export default {
 
 万能表格组件设置属性 `getCount="auto"` 如不设置，默认也是 auto
 
-```html
+```vue
 <vk-data-table getCount="auto"></vk-data-table>
 ```
 
@@ -1426,7 +1426,7 @@ export default {
 
 万能表格组件设置属性 `:getCount="false"`
 
-```html
+```vue
 <vk-data-table :getCount="false"></vk-data-table>
 ```
 
@@ -1644,7 +1644,7 @@ this.$refs.table1.exportExcel({
 
 通过 `export-options` 属性可以配置导出 Excel 弹窗的默认值和控制各项配置是否显示。
 
-```html
+```vue
 <vk-data-table :show-export="true" :export-options="table1.exportOptions"></vk-data-table>
 ```
 
@@ -1823,7 +1823,7 @@ onTabChange() {
 
 - 注意: 只需要把下方`<template></template>`标签和标签内的代码复制到你页面上的`<vk-data-table></vk-data-table>`标签内即可
 
-```html
+```vue
 <vk-data-table>
   <!-- v-slot:gender 中的 gender 对应 columns中的 key, row对应 这一行的数据源 -->
   <template v-slot:gender="{ row, column, index }">
@@ -1834,7 +1834,7 @@ onTabChange() {
 
 ### 展开行插槽示例@slot-demo-2
 
-```html
+```vue
 <vk-data-table>
   <!-- v-slot:tableExpand 是固定的 row 是该行的数据源-->
   <template v-slot:tableExpand="{ row }">
@@ -1939,7 +1939,7 @@ onTabChange() {
 
 ## 万能表格搜索组件 @query
 
-```html
+```vue
 <!-- 表格搜索组件开始 -->
 <vk-data-table-query v-model="queryForm1.formData" :columns="queryForm1.columns" @search="search"></vk-data-table-query>
 <!-- 表格搜索组件结束 -->
@@ -1951,8 +1951,8 @@ onTabChange() {
 
 折叠抽屉弹窗模式
 
-```html
-<vk-data-table-query ref="tableQuery1" v-model="queryForm1.formData" :columns="queryForm1.columns" :main-columns="['user_id','_add_time']" @search="search"></vk-data-table-query>
+```vue
+<vk-data-table-query ref="tableQuery1" v-model="queryForm1.formData" :columns="queryForm1.columns" :main-columns="['user_id', '_add_time']" @search="search"></vk-data-table-query>
 ```
 
 ```js
@@ -1973,7 +1973,7 @@ queryForm1: {
 
 当搜索字段较多时，可使用 `collapse-rows` 指定显示的行数，超出部分自动折叠，用户点击"展开/收起"按钮切换显示。
 
-```html
+```vue
 <vk-data-table-query
   v-model="queryForm1.formData"
   :columns="queryForm1.columns"
@@ -2302,13 +2302,13 @@ sortArr 参数说明
 
 ### 简单模式@simple-mode
 
-```html
+```vue
 <vk-data-table
   ...其他属性
   :show-summary="true"
-  :total-option=" [
-     { key: '（此为table1.columns中key的值）', 'unit': '单位', type:'number', precision:2 },
-     { key: 'balance', 'unit': '元', type:'money', precision:2 }
+  :total-option="[
+    { key: '（此为table1.columns中key的值）', unit: '单位', type: 'number', precision: 2 },
+    { key: 'balance', unit: '元', type: 'money', precision: 2 },
   ]"
 ></vk-data-table>
 ```
@@ -2319,7 +2319,7 @@ sortArr 参数说明
 
 **自定义函数方法，如果想要自定义合计规则和样式，则需要使用 summary-method 属性进行自定义，代码如下**
 
-```html
+```vue
 <vk-data-table ...其他属性 :show-summary="true" :summary-method="summaryMethod"></vk-data-table>
 ```
 

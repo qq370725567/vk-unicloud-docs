@@ -14,7 +14,7 @@ sidebarDepth: 0
 
 ## template
 
-```html
+```vue
 <vk-uni-pay
   ref="vkPay"
   :query-payment-action="vkPay.queryPaymentAction"
@@ -56,7 +56,7 @@ sidebarDepth: 0
 
 **注意：需要在 `template` 内声明组件，且声明 `ref="vkPay"`**
 
-```html
+```vue
 <vk-uni-pay ref="vkPay" ...其他参数></vk-uni-pay>
 ```
 

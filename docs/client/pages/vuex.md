@@ -146,7 +146,7 @@ watch: {
 
 完整示例代码
 
-```html
+```vue
 <template>
   <view class="app">
     <view>
@@ -155,7 +155,7 @@ watch: {
     </view>
     <view style="margin-top: 10px;">
       <text>当前的 $user.test 值：</text>
-      <text>{{ vk.getVuex("$user.test") }}</text>
+      <text>{{ vk.getVuex('$user.test') }}</text>
     </view>
     <view>
       <button @click="vk.setVuex('$user.test', 1)">设置值为1</button>

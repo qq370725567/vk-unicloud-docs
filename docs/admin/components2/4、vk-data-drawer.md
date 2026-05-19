@@ -2,7 +2,7 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-drawer v-model="drawerShow" title="标题" width="800px"> </vk-data-drawer>
 ```
 
@@ -54,7 +54,7 @@
 
 **插槽示例**
 
-```html
+```vue
 <vk-data-drawer v-model="showDrawer" width="500px">
   <template v-slot:title>
     <view> 这是标题的插槽 </view>

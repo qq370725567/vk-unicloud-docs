@@ -271,13 +271,13 @@
 
 应用场景：选项数据为静态数据的情况。
 
-```html
+```vue
 <vk-data-input-radio
   v-model="form1.value"
   :localdata="[
-    { value:1, label:'男' },
-    { value:2, label:'女' },
-    { value:0, label:'保密' }
+    { value: 1, label: '男' },
+    { value: 2, label: '女' },
+    { value: 0, label: '保密' },
   ]"
 ></vk-data-input-radio>
 ```
@@ -286,6 +286,6 @@
 
 应用场景：需要从数据库中获取选项的情况。
 
-```html
-<vk-data-input-radio v-model="form1.value" :item-width="80" action="admin/system/user/sys/getList" :props="{ list:'rows', value:'_id', label:'nickname' }"></vk-data-input-radio>
+```vue
+<vk-data-input-radio v-model="form1.value" :item-width="80" action="admin/system/user/sys/getList" :props="{ list: 'rows', value: '_id', label: 'nickname' }"></vk-data-input-radio>
 ```

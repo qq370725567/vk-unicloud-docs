@@ -49,7 +49,7 @@
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-input-icon v-model="icon" placeholder="请选择图标"></vk-data-input-icon>
 ```
 

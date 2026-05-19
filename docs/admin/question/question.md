@@ -61,7 +61,7 @@ $.ajax({
 
 在 `App.vue` 中引入 `unicloud-admin` 的公共样式
 
-```html
+```vue
 <style lang="scss">
   @import '@/common/unicloud-admin/css/uni.css';
   @import '@/common/unicloud-admin/css/uni-icons.css';

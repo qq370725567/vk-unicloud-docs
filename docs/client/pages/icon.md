@@ -50,13 +50,13 @@ Font Family：vk-aaa-icon
 
 **显示图标**
 
-```html
+```vue
 <text class="vk-custom-icon vk-custom-icon-update" style=" font-size: 20px;color: #000000;"></text>
 ```
 
 **如果你使用了 `vk-uview-ui` 组件库，则可以这样显示图标**
 
-```html
+```vue
 <u-icon name="vk-custom-icon-update" size="20px" color="#000000"></u-icon>
 ```
 
@@ -1267,13 +1267,13 @@ admin 端的图标库有 2 个，1 个是 Element 内置的图标库，1 个是 
 
 **显示图标**
 
-```html
+```vue
 <text class="el-icon el-icon-info" style=" font-size: 20px;color: #000000;"></text>
 ```
 
 **如果你使用了 `vk-uview-ui` 组件库，则可以这样显示图标**
 
-```html
+```vue
 <u-icon name="el-icon-info" size="20px" color="#000000"></u-icon>
 ```
 
@@ -3197,13 +3197,13 @@ admin 端的图标库有 2 个，1 个是 Element 内置的图标库，1 个是 
 
 #### 使用示例@admin-vk-demo
 
-```html
+```vue
 <text class="vk-icon vk-icon-file" style=" font-size: 20px;color: #000000;"></text>
 ```
 
 **如果你使用了 `vk-uview-ui` 组件库，则可以这样显示图标**
 
-```html
+```vue
 <u-icon name="vk-icon-file" size="20px" color="#000000"></u-icon>
 ```
 

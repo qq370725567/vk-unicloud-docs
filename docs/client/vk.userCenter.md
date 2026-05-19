@@ -1131,7 +1131,7 @@ let sessionKey = decryptedRes.sessionKey;
 1. 此接口需要 `隐私条款` 中包含获取用户手机号
 2. 需要已微信认证的企业小程序（含个体户）
 
-```html
+```vue
 <button type="default" open-type="getPhoneNumber" @getphonenumber="loginByWeixinPhoneNumber">使用微信绑定的手机号登录/注册</button>
 ```
 
@@ -1175,7 +1175,7 @@ loginByWeixinPhoneNumber(e) {
 1. 此接口需要 `隐私条款` 中包含获取用户手机号
 2. 需要已微信认证的企业小程序（含个体户）
 
-```html
+```vue
 <button type="default" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取微信绑定的手机号</button>
 ```
 
@@ -1585,7 +1585,7 @@ vk.userCenter.loginByDouyin({
 1. 此接口需要 `隐私条款` 中包含获取用户手机号
 2. 需要单独申请接口权限 [申请教程](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/operation/management/specification/account-login-standard)
 
-```html
+```vue
 <button type="default" open-type="getPhoneNumber" @getphonenumber="loginByDouyinPhoneNumber">使用抖音绑定的手机号登录/注册</button>
 ```
 
@@ -1631,7 +1631,7 @@ loginByDouyinPhoneNumber(e) {
 1. 此接口需要 `隐私条款` 中包含获取用户手机号
 2. 需要单独申请接口权限 [申请教程](https://developer.open-douyin.com/docs/resource/zh-CN/mini-app/operation/management/specification/account-login-standard)
 
-```html
+```vue
 <button type="default" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">获取抖音绑定的手机号</button>
 ```
 

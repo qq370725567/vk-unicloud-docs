@@ -126,7 +126,7 @@ Vue.use(uView);
 
 - 2、App.vue 引入基础样式（注意 style 标签需声明 scss 属性支持）
 
-```html
+```vue
 <style lang="scss">
   @import './uni_modules/vk-uview-ui/index.scss';
 </style>
@@ -155,7 +155,7 @@ Vue.use(uView);
 - 1、前置步骤：修改 `manifest.json` 内的 `vue` 版本为 `vue3`
 - 2、项目根目录新增 `index.html` 文件，文件代码为
 
-```html
+```vue
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -196,7 +196,7 @@ export function createApp() {
 
 - 4、App.vue 引入基础样式（注意 style 标签需声明 scss 属性支持）
 
-```html
+```vue
 <style lang="scss">
   @import './uni_modules/vk-uview-ui/index.scss';
 </style>
@@ -227,7 +227,7 @@ Vue.use(uView);
 
 - 2、App.vue 引入基础样式（注意 style 标签需声明 scss 属性支持）
 
-```html
+```vue
 <style lang="scss">
   @import './uni_modules/uview-ui/index.scss';
 </style>
@@ -303,7 +303,7 @@ app.$mount();
 
 - 5、`App.vue` 配置样式
 
-```html
+```vue
 <style lang="scss">
   /*每个页面公共css */
   @import './tm-vuetify/mian.min.css';
@@ -471,7 +471,7 @@ export function createApp() {
 
 - 7、`App.vue` 配置样式
 
-```html
+```vue
 <style lang="scss">
   /* #ifdef APP-NVUE */
   @import './tmui/scss/nvue.css';
@@ -513,7 +513,7 @@ Vue.use(uView);
 
 - 2、App.vue 删除基础样式
 
-```html
+```vue
 <style lang="scss">
   @import 'uview-ui/index.scss';
 </style>
@@ -564,7 +564,7 @@ Vue.use(uView);
 
 - 2、App.vue 删除基础样式
 
-```html
+```vue
 <style lang="scss">
   @import './uni_modules/vk-uview-ui/index.scss';
 </style>

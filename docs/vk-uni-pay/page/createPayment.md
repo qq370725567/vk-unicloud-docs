@@ -14,7 +14,7 @@ sidebarDepth: 0
 
 ## template
 
-```html
+```vue
 <vk-uni-pay
   ref="vkPay"
   :query-payment-action="vkPay.queryPaymentAction"

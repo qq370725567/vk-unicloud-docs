@@ -343,6 +343,6 @@ module.exports = {
 
 ### template 使用方式@template
 
-```html
+```vue
 <vk-data-upload v-model="image1" :limit="9"></vk-data-upload>
 ```

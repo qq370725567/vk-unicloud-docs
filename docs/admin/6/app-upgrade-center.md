@@ -198,7 +198,7 @@ try {
 
 在 `App.vue` 的 `onLaunch` 执行下面的代码即可自动检测更新
 
-```html
+```vue
 <script>
   // 引入插件
   import upAPP from '@/uni_modules/uni-upgrade-center-app/utils/check-update.ts';
@@ -217,7 +217,7 @@ try {
 
 当然你也可以手动通过按钮的形式触发更新，如
 
-```html
+```vue
 <template>
   <view>
     <button @click="doUpAPP">手动检查更新</button>

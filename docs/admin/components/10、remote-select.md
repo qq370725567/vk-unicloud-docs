@@ -365,7 +365,7 @@
 
 应用场景：数据量不大时使用。
 
-```html
+```vue
 <vk-data-input-remote-select
   v-model="form1.category_ids"
   placeholder="请选择分类"
@@ -382,6 +382,6 @@
 
 应用场景：数据量很大，不方便一次性全部加载时使用。
 
-```html
+```vue
 <vk-data-input-remote-select v-model="form1.user_id" placeholder="请输入用户名" action="admin/select/kh/user" width="300px"></vk-data-input-remote-select>
 ```

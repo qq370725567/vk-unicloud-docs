@@ -61,7 +61,7 @@
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
 
-```html
+```vue
 <vk-data-input-numeric mode="money" v-model="form1.balance" placeholder="请输入金额" width="300px"></vk-data-input-numeric>
 ```
 
@@ -69,7 +69,7 @@
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
 
-```html
+```vue
 <vk-data-input-numeric mode="money" v-model="form1.priceRange" :range="true" placeholder="['最低金额', '最高金额']" width="400px"></vk-data-input-numeric>
 ```
 
@@ -77,7 +77,7 @@
 
 旧组件 `vk-data-input-money` 仍然可用，但推荐使用统一组件 `vk-data-input-numeric`（mode="money"）替代。
 
-```html
+```vue
 <!-- 旧写法（仍可用） -->
 <vk-data-input-money v-model="form1.balance" placeholder="请输入金额" width="300px"></vk-data-input-money>
 ```

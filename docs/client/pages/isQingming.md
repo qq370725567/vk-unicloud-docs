@@ -8,7 +8,7 @@ sidebarDepth: 0
 
 `page.vue` 页面代码如下
 
-```html
+```vue
 <template>
   <view class="app" :class="classCom">
     <!-- 页面内容开始 -->

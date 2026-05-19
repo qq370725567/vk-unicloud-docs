@@ -2102,13 +2102,13 @@ vk.pubfn.getListData({
 // view  核心:自定义组件接收一个 Object 类型的属性 datas
 ```
 
-```html
-<vk-u-notice-bar :datas='componentsDynamic["notice-bar-01"]'></vk-u-notice-bar>
+```vue
+<vk-u-notice-bar :datas="componentsDynamic['notice-bar-01']"></vk-u-notice-bar>
 <vk-u-swiper
-  :datas='componentsDynamic["index-swiper-01"]'
-  :custom-datas='{
-    "height":600,
-  }'
+  :datas="componentsDynamic['index-swiper-01']"
+  :custom-datas="{
+    height: 600,
+  }"
 ></vk-u-swiper>
 ```
 
