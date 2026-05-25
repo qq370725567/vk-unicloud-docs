@@ -22,6 +22,7 @@ module.exports = [
       '4/codeTips',
       '4/forceResetAdminPassword',
       '4/userIsolation',
+      '4/i18n',
     ],
   },
   '5/template',
