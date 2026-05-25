@@ -8,29 +8,29 @@ sidebarDepth: 0
 
 ```js
 // 引入自定义公共函数
-import myPubFunction from '@/common/function/myPubFunction.js';
+import myPubFunction from "@/common/function/myPubFunction.js";
 export default {
   // 开发模式启用调式模式(请求时会打印日志)
-  debug: process.env.NODE_ENV !== 'production',
+  debug: process.env.NODE_ENV !== "production",
   // 主云函数名称
-  functionName: 'router',
+  functionName: "router",
   // 登录页面路径
   login: {
-    url: '/pages_template/uni-id/login/index/index',
+    url: "/pages_template/uni-id/login/index/index",
   },
   // 首页页面路径
   index: {
-    url: '/pages/index/index',
+    url: "/pages/index/index",
   },
   // 404 Not Found 错误页面路径
   error: {
-    url: '/pages/error/404/404',
+    url: "/pages/error/404/404",
   },
   // 前端默认时区（中国为8）
   targetTimezone: 8,
   // 日志风格
   logger: {
-    colorArr: ['#0095f8', '#67C23A'],
+    colorArr: ["#0095f8", "#67C23A"],
   },
   /**
    * app主题颜色
@@ -38,8 +38,8 @@ export default {
    * vk.getVuex('$app.config.color.secondary')
    */
   color: {
-    main: '#ff4444',
-    secondary: '#555555',
+    main: "#ff4444",
+    secondary: "#555555",
   },
   // 需要检查是否登录的页面列表
   checkTokenPages: {
@@ -53,7 +53,7 @@ export default {
      * 在无需登录的页面上执行kh或sys函数，也会自动判断是否登录，未登录会自动跳登录页面，登录成功后会自动返回本来要跳转的页面。
      */
     mode: 2,
-    list: ['/pages_template/*', '/pages/login/*', '/pages/index/*', '/pages/error/*'],
+    list: ["/pages_template/*", "/pages/login/*", "/pages/index/*", "/pages/error/*"],
   },
   // 需要检查是否可以分享的页面列表(仅小程序有效)
   checkSharePages: {
@@ -65,8 +65,8 @@ export default {
      */
     mode: 0,
     // ['shareAppMessage', 'shareTimeline'],
-    menus: ['shareAppMessage'],
-    list: ['/pages/index/*', '/pages/goods/*', '/pages_template/*'],
+    menus: ["shareAppMessage"],
+    list: ["/pages/index/*", "/pages/goods/*", "/pages_template/*"],
   },
   // 需要检查是否哪些请求需要加密通信
   checkEncryptRequest: {
@@ -78,14 +78,14 @@ export default {
      */
     mode: 1,
     list: [
-      '^template/test/pub/testEncryptRequest$', // 表示 template/test/pub/testEncryptRequest 云函数需要加密通信
-      '^template/encrypt/(.*)', // 表示以 template/encrypt/ 开头的云函数或云对象需要加密通信
+      "^template/test/pub/testEncryptRequest$", // 表示 template/test/pub/testEncryptRequest 云函数需要加密通信
+      "^template/encrypt/(.*)", // 表示以 template/encrypt/ 开头的云函数或云对象需要加密通信
     ],
   },
   // 静态文件的资源URL地址
   staticUrl: {
     // Logo
-    logo: '/static/logo.png',
+    logo: "/static/logo.png",
   },
   // 自定义公共函数，myPubFunction内的函数可通过vk.myfn.xxx() 调用
   myfn: myPubFunction,
@@ -99,20 +99,20 @@ export default {
        * extStorage 扩展存储
        * aliyun 阿里云oss
        */
-      defaultProvider: 'unicloud',
+      defaultProvider: "unicloud",
       // 空间内置存储
       unicloud: {
         // 暂无配置项
       },
       // 扩展存储配置
       extStorage: {
-        provider: 'qiniu', // qiniu: 扩展存储-七牛云
+        provider: "qiniu", // qiniu: 扩展存储-七牛云
         // 根目录名称（如果改了这里的dirname，则云函数user/pub/getUploadFileOptionsForExtStorage内判断的目录权限也要改，否则无法上传）
-        dirname: 'public',
+        dirname: "public",
         // 用于鉴权的云函数地址（一般不需要改这个参数）
-        authAction: 'user/pub/getUploadFileOptionsForExtStorage',
+        authAction: "user/pub/getUploadFileOptionsForExtStorage",
         // 自定义域名，如：cdn.example.com（填你在扩展存储绑定的域名，若云端已设置 uni-config-center/vk-unicloud/index.js 内的 vk.service.cloudStorage.extStorage.domain 则此处可不填）
-        domain: '',
+        domain: "",
         // 上传时，是否按用户id进行分组储存
         groupUserId: false,
       },
@@ -122,16 +122,16 @@ export default {
       aliyun: {
         // 密钥和签名信息
         uploadData: {
-          OSSAccessKeyId: '',
-          policy: '',
-          signature: '',
+          OSSAccessKeyId: "",
+          policy: "",
+          signature: "",
         },
         // oss上传地址
-        action: 'https://xxx.oss-cn-hangzhou.aliyuncs.com',
+        action: "https://xxx.oss-cn-hangzhou.aliyuncs.com",
         // 根目录名称
-        dirname: 'public',
+        dirname: "public",
         // oss外网访问地址，也可以是阿里云cdn地址
-        host: 'https://xxx.xxx.com',
+        host: "https://xxx.xxx.com",
         // 上传时，是否按用户id进行分组储存
         groupUserId: false,
       },
@@ -140,15 +140,15 @@ export default {
   // 全局异常码，可以自定义提示结果
   globalErrorCode: {
     // 阿里云10秒非正常超时，其实请求还在执行（且一般已经成功了，但前端接受不到成功结果）
-    'cloudfunction-unusual-timeout': '请求超时，但请求还在执行，请重新进入页面。',
+    "cloudfunction-unusual-timeout": "请求超时，但请求还在执行，请重新进入页面。",
     // 请求超时（真正的请求超时）
-    'cloudfunction-timeout': '请求超时，请重试！',
+    "cloudfunction-timeout": "请求超时，请重试！",
     // 不在预期内的异常（如数据库异常、云函数编译异常等）
-    'cloudfunction-system-error': '网络开小差了！',
+    "cloudfunction-system-error": "网络开小差了！",
     // 云函数达到并发限制
-    'cloudfunction-reaches-burst-limit': '系统繁忙，请稍后再试。',
+    "cloudfunction-reaches-burst-limit": "系统繁忙，请稍后再试。",
     // APP未授权网络访问时的异常提示
-    'cloudfunction-network-unauthorized': '需要进行网络请求许可，若您已授权，请点击确定',
+    "cloudfunction-network-unauthorized": "需要进行网络请求许可，若您已授权，请点击确定",
   },
   // 自定义拦截器
   interceptor: {
@@ -175,6 +175,6 @@ export default {
 
 **config 已注入 vuex，可以通过 vk.getVuex('$app.config') 获取配置信息（不包含函数）**
 
-```html
+```vue
 <image :src="vk.getVuex('$app.config.staticUrl.cartEmpty')" style="width: 330rpx;height: 275rpx;"></image>
 ```
