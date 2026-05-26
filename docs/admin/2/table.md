@@ -2053,6 +2053,63 @@ columns 属性的写法与万能表单相似(但部分表单组件搜索不支�
 | show          | 显示规则,page 代表显示在页面上，drawer 代表显示在高级搜索中     | Array         | ["page"] | ["page","drawer"]        |
 | autoSearch    | 选择型组件触发 change 时是否自动搜索                            | Boolean       | true     | false                    |
 
+### 自定义字段插槽@query-slot
+
+每个搜索字段都支持自定义插槽，可以通过插槽完全自定义某个字段的渲染方式。
+
+**插槽语法**
+
+```vue
+<vk-data-table-query v-model="queryForm1.formData" :columns="queryForm1.columns" @search="search">
+  <template v-slot:字段key="{ form, keyName }">
+    <!-- 自定义组件 -->
+  </template>
+</vk-data-table-query>
+```
+
+**作用域参数**
+
+| 参数 | 说明 | 类型 |
+| --- | --- | --- |
+| form | 整个表单数据源对象 | Object |
+| keyName | 当前字段名 | String |
+
+**使用示例**
+
+```vue
+<template>
+  <vk-data-table-query
+    v-model="queryForm1.formData"
+    :columns="queryForm1.columns"
+    @search="search"
+  >
+    <!-- 自定义 nickname 字段的搜索组件 -->
+    <template v-slot:nickname="{ form, keyName }">
+      <el-input
+        v-model="form[keyName]"
+        placeholder="自定义搜索框"
+        @keyup.enter.native="search"
+      ></el-input>
+    </template>
+  </vk-data-table-query>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      queryForm1: {
+        formData: {},
+        columns: [
+          { key: 'nickname', title: '昵称', type: 'text', mode: '%%' },
+        ]
+      }
+    }
+  }
+}
+</script>
+```
+
 ### fieldName 参数的用处@query-fieldname
 
 ##### 如余额按金额范围查询@balance-range-query
