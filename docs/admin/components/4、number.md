@@ -4,13 +4,13 @@
 
 ### 万能表单使用方式@form
 
-#### 基础用法
+#### 基础用法@base
 
 ```js
 { key: "number", title: "数字类型", type: "number" },
 ```
 
-#### 范围输入（输入多个值）
+#### 范围输入（输入多个值）@range
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.1
 
@@ -55,7 +55,7 @@
 
 ### template 使用方式@template
 
-#### 基础用法
+#### 基础用法@template-base
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.1
 
@@ -63,7 +63,7 @@
 <vk-data-input-numeric mode="number" v-model="form1.value2" :precision="2" width="300px" placeholder="请输入数字"></vk-data-input-numeric>
 ```
 
-#### 范围输入
+#### 范围输入@template-range
 
 > vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.1
 
