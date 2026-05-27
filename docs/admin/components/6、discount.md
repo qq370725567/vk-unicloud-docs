@@ -14,7 +14,7 @@
 
 #### 范围输入（输入多个值）
 
-> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.1
 
 ```js
 // 输入2个值
@@ -42,11 +42,11 @@
 | disabled       | 是否禁用                                   | Boolean         | false  | true              |
 | clearable      | 是否可以清空                               | Boolean         | true   | false             |
 | readonly       | 是否只读                                   | Boolean         | false  | true              |
-| allowNegative  | [1.24.0 新增] 是否允许输入负数             | Boolean         | false  | true              |
-| showRightText  | [1.24.0 新增] 是否显示右侧后缀             | Boolean         | true   | false             |
-| emptyValue     | [1.24.0 新增] 空值时实际发出的值           | String、Number  | null   | -                 |
-| range          | [1.24.0 新增] 范围输入模式                 | Boolean、Number | false  | true / 数字 N(≥2) |
-| rangeSeparator | [1.24.0 新增] 范围输入的分隔符             | String          | -      | -                 |
+| allowNegative  | [1.24.1 新增] 是否允许输入负数             | Boolean         | false  | true              |
+| showRightText  | [1.24.1 新增] 是否显示右侧后缀             | Boolean         | true   | false             |
+| emptyValue     | [1.24.1 新增] 空值时实际发出的值           | String、Number  | null   | -                 |
+| range          | [1.24.1 新增] 范围输入模式                 | Boolean、Number | false  | true / 数字 N(≥2) |
+| rangeSeparator | [1.24.1 新增] 范围输入的分隔符             | String          | -      | -                 |
 
 ### 万能表格使用方式@table
 
@@ -58,7 +58,7 @@
 
 #### 基础用法
 
-> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.1
 
 ```vue
 <vk-data-input-numeric mode="discount" v-model="form1.value1" placeholder="请输入折扣" :precision="2" width="300px"></vk-data-input-numeric>
@@ -66,7 +66,7 @@
 
 #### 范围输入
 
-> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.1
 
 ```vue
 <vk-data-input-numeric mode="discount" v-model="form1.discountRange" :range="true" placeholder="['最低折扣', '最高折扣']" width="400px"></vk-data-input-numeric>

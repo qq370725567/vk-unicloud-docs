@@ -75,9 +75,9 @@ export default {
 | right-btns-more          | 通用 - 右侧更多按钮 [查看 right-btns-more](#right-btns-more)                                                                                                        | Array               | []                                                 | -                     |
 | right-btns-width         | 通用 - 右侧按钮宽度，单位 px，不传会根据按钮数量自动计算宽度                                                                                                        | Number              | -                                                  | -                     |
 | custom-right-btns        | 通用 - 自定义右侧按钮 [查看 custom-right-btns](#custom-right-btns)                                                                                                  | Array               | []                                                 | -                     |
-| batch-btns               | [1.24.0 新增] 通用 - 底部批量操作按钮列表，需搭配 `:selection=true` 时使用 [查看 batch-btns](#batch-btns)                                                           | Array               | []                                                 | -                     |
-| pagination-placement     | [1.24.0 新增] 通用 - 分页器位置（当 batchBtns 有值时固定为 right）自 1.24.0 起，分页器位置默认在右下角                                                              | String              | right                                              | left、center、right   |
-| fullscreen               | [1.24.0 新增] 通用 - 为 true 时表格高度撑满到屏幕底部（全屏模式）自 1.24.0 起，表格不再默认全屏（高度撑满到屏幕底部），需要手动设置 `:fullscreen="true"` 才会全屏。 | Boolean             | false                                              | true                  |
+| batch-btns               | [1.24.1 新增] 通用 - 底部批量操作按钮列表，需搭配 `:selection=true` 时使用 [查看 batch-btns](#batch-btns)                                                           | Array               | []                                                 | -                     |
+| pagination-placement     | [1.24.1 新增] 通用 - 分页器位置（当 batchBtns 有值时固定为 right）自 1.24.1 起，分页器位置默认在右下角                                                              | String              | right                                              | left、center、right   |
+| fullscreen               | [1.24.1 新增] 通用 - 为 true 时表格高度撑满到屏幕底部（全屏模式）自 1.24.1 起，表格不再默认全屏（高度撑满到屏幕底部），需要手动设置 `:fullscreen="true"` 才会全屏。 | Boolean             | false                                              | true                  |
 | empty-text               | 通用 - 空数据时显示的文本内容                                                                                                                                       | String              | "暂无数据"                                         | -                     |
 | default-expand-all       | 通用 - 是否默认展开所有行，当 Table 包含展开行存在或者为树形表格时有效                                                                                              | Boolean             | false                                              | true                  |
 | tree-props               | 通用 - 渲染嵌套数据的配置选项                                                                                                                                       | Object              | {children: 'children', hasChildren: 'hasChildren'} | -                     |
@@ -832,7 +832,7 @@ data() {
 
 ### batch-btns（底部批量操作按钮列表）@batch-btns
 
-> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.0
+> vk-unicloud-admin-ui 的 npm 依赖版本需 >= 1.24.1
 
 底部批量操作按钮，显示在分页器同行左侧，需配合 `:selection="true"` 使用。支持两种模式：
 
@@ -1056,7 +1056,7 @@ batchBtns: [
 
 ### 默认最大高度计算规则@max-height-calc
 
-**自 1.24.0 起**，当未显式设置 `max-height` 且非全屏模式时，表格会自动计算最大高度，规则如下：
+**自 1.24.1 起**，当未显式设置 `max-height` 且非全屏模式时，表格会自动计算最大高度，规则如下：
 
 **计算逻辑：**
 
@@ -2014,12 +2014,12 @@ columns: [
 | v-model                 | 绑定查询表单数据源                                                      | Object             | -        | -                        |
 | columns                 | 字段渲染规则                                                            | Array              | -        | [查看 columns](#columns) |
 | size                    | 表单组件尺寸（继承自 element 的 size）                                  | String             | -        | medium / small / mini    |
-| span                    | [1.24.0 新增] 字段栅格占位数（共 24 栏），列级未设置 span 时生效        | Number,String      | -        | 1-24                     |
-| min-width               | [1.24.0 新增] 组件级字段最小宽度（单位 px），列级未设置 minWidth 时生效 | Number,String      | 200      | -                        |
+| span                    | [1.24.1 新增] 字段栅格占位数（共 24 栏），列级未设置 span 时生效        | Number,String      | -        | 1-24                     |
+| min-width               | [1.24.1 新增] 组件级字段最小宽度（单位 px），列级未设置 minWidth 时生效 | Number,String      | 200      | -                        |
 | label-width             | 表单标签宽度，未设置时根据 span 自动计算标签宽度                        | Number,String      | -        | -                        |
 | label-position          | 表单标签位置                                                            | String             | right    | left / right / top       |
-| collapse-rows           | [1.24.0 新增] 搜索区域可折叠的行数阈值，超过此行数时显示展开/收起按钮   | Number,String      | -        | -                        |
-| collapse-default-expand | [1.24.0 新增] 配合 `collapse-rows` 使用，是否默认展开                   | Boolean            | false    | true                     |
+| collapse-rows           | [1.24.1 新增] 搜索区域可折叠的行数阈值，超过此行数时显示展开/收起按钮   | Number,String      | -        | -                        |
+| collapse-default-expand | [1.24.1 新增] 配合 `collapse-rows` 使用，是否默认展开                   | Boolean            | false    | true                     |
 | show-reset              | 是否显示重置按钮                                                        | Boolean,String     | auto     | true / false / auto      |
 | main-columns            | 在页面上直接显示的字段名数组，此值若不为空，则会显示高级搜索按钮        | Array              | -        | -                        |
 | drawer                  | 高级搜索的抽屉弹窗的属性（详情见 element 的 drawer 文档）               | Object             | -        |
@@ -2043,8 +2043,8 @@ columns 属性的写法与万能表单相似(但部分表单组件搜索不支�
 | title         | 标题                                                            | String        | 无       | -                        |
 | type          | 组件类型                                                        | String        | 无       | -                        |
 | width         | 组件宽度                                                        | Number        | 无       | -                        |
-| minWidth      | [1.24.0 新增] 组件最小宽度（仅设置了 span 后才生效）            | Number        | 无       | -                        |
-| span          | [1.24.0 新增] 字段栅格占位数（共 24 栏），优先级高于组件级 span | Number,String | 无       | 1-24                     |
+| minWidth      | [1.24.1 新增] 组件最小宽度（仅设置了 span 后才生效）            | Number        | 无       | -                        |
+| span          | [1.24.1 新增] 字段栅格占位数（共 24 栏），优先级高于组件级 span | Number,String | 无       | 1-24                     |
 | placeholder   | 输入前的提示                                                    | String        | -        | -                        |
 | mode          | 查询模式                                                        | String        | =        | [查看 mode](#query-mode) |
 | fieldName     | 数据库字段名称，默认=key 的值                                   | String        | key 的值 | -                        |
@@ -2069,44 +2069,34 @@ columns 属性的写法与万能表单相似(但部分表单组件搜索不支�
 
 **作用域参数**
 
-| 参数 | 说明 | 类型 |
-| --- | --- | --- |
-| form | 整个表单数据源对象 | Object |
-| keyName | 当前字段名 | String |
+| 参数    | 说明               | 类型   |
+| ------- | ------------------ | ------ |
+| form    | 整个表单数据源对象 | Object |
+| keyName | 当前字段名         | String |
 
 **使用示例**
 
 ```vue
 <template>
-  <vk-data-table-query
-    v-model="queryForm1.formData"
-    :columns="queryForm1.columns"
-    @search="search"
-  >
+  <vk-data-table-query v-model="queryForm1.formData" :columns="queryForm1.columns" @search="search">
     <!-- 自定义 nickname 字段的搜索组件 -->
     <template v-slot:nickname="{ form, keyName }">
-      <el-input
-        v-model="form[keyName]"
-        placeholder="自定义搜索框"
-        @keyup.enter.native="search"
-      ></el-input>
+      <el-input v-model="form[keyName]" placeholder="自定义搜索框" @keyup.enter.native="search"></el-input>
     </template>
   </vk-data-table-query>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      queryForm1: {
-        formData: {},
-        columns: [
-          { key: 'nickname', title: '昵称', type: 'text', mode: '%%' },
-        ]
-      }
-    }
-  }
-}
+  export default {
+    data() {
+      return {
+        queryForm1: {
+          formData: {},
+          columns: [{ key: 'nickname', title: '昵称', type: 'text', mode: '%%' }],
+        },
+      };
+    },
+  };
 </script>
 ```
 
