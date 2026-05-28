@@ -2,7 +2,7 @@
 
 ### 效果图
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/0ca12bfc-703e-4662-98b8-068ed01e4fac.png)
+![](https://cdn.fsq.pub/vkdoc/vk-admin/8915475d-54d4-4fb7-9659-f54b63cc0795.png)
 
 ### 万能表单使用方式@form
 
@@ -57,16 +57,4 @@
 
 ### 注意：@tips
 
-**需确保有以下云函数（如没有，则从新版本中拷贝）**
-
-1. admin/system_uni/uni-id-files/files/kh/delete
-2. admin/system_uni/uni-id-files/files/kh/getList
-3. admin/system_uni/uni-id-files/files/kh/getTempFileURL
-4. admin/system_uni/uni-id-files/files/kh/update
-5. admin/system_uni/uni-id-files/categories/kh/getList
-6. admin/system_uni/uni-id-files/categories/sys/add
-7. admin/system_uni/uni-id-files/categories/sys/delete
-8. admin/system_uni/uni-id-files/categories/sys/update
-9. user/kh/addUploadRecord
-
-**注意：前端 `vk.uploadFile` 带参数 `needSave: true` 时，上传的图片记录会保存到 admin 后台，可在 `素材管理` 中查看**
+- 前端 `vk.uploadFile` 带参数 `needSave: true` 时，上传的图片记录会保存到 admin 后台，可在 `素材管理` 中查看

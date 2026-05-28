@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 用户登录日志
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/bd79dbe1-cc6b-4c12-8d0a-247c42945591.png)
+![](https://cdn.fsq.pub/vkdoc/vk-admin/e81a0d11-f417-426b-bc24-c50d0db0c28f.png)
 
 ## 页面路径
 

@@ -4,7 +4,7 @@ sidebarDepth: 0
 
 # 角色管理
 
-![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/886434d8-b401-4d42-a1ac-94f4879c747e.png)
+![](https://cdn.fsq.pub/vkdoc/vk-admin/9a3d81dd-2486-422b-8ad9-9c82d7c137de.png)
 
 ## 页面路径
 
