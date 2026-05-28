@@ -109,3 +109,37 @@ export default {
 ```
 
 3、最后修改 `theme.use` 内的值为 `aaa`，代表使用 `aaa` 主题。
+
+## 页面组件尺寸配置
+
+框架支持通过 `pageStyle.size` 统一管理页面中按钮、表单等组件的尺寸，并提供响应式自动适配。
+
+### 配置
+
+在 `app.config.js` 中配置：
+
+```js
+pageStyle: {
+  // 表单组件和表格组件的 size
+  size: 'auto', // medium / small / mini / auto
+},
+```
+
+| 值       | 说明                                                                    |
+| -------- | ----------------------------------------------------------------------- |
+| `medium` | 中等尺寸                                                                |
+| `small`  | 小尺寸（Element UI 默认值）                                             |
+| `mini`   | 迷你尺寸                                                                |
+| `auto`   | 自动模式（默认值）：屏幕宽度 > 1600px 时使用 `medium`，否则使用 `small` |
+
+### 使用
+
+配置为 `auto` 时，框架会根据屏幕宽度自动计算尺寸，通过全局变量 `this.$global.size` 获取实际生效的值：
+
+```html
+<el-button type="primary" :size="$global.size">添加</el-button> <el-input :size="$global.size" placeholder="请输入"></el-input>
+```
+
+:::tip
+建议使用 `auto` 模式，这样在大屏和小屏设备上都能获得合适的组件尺寸，无需手动调整。
+:::

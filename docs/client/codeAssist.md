@@ -129,6 +129,17 @@ vk.navigateTo 也能自动提示页面了
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/1716040555591j18l512eqsg.png)
 
+### 16、快速定位项目（选择项目）
+
+当工作区打开了多个项目时，可以通过此功能快速搜索并切换到目标项目。
+
+**使用方式（任选其一）：**
+
+1. 点击 HBX 上方菜单【工具】- 【VK-选择项目（一键搜索）】
+2. 使用快捷键 `Ctrl+Alt+P`（Mac: `Ctrl+Alt+P`）
+
+在弹出的搜索框中输入项目名关键字进行搜索，选择目标项目后，会自动打开该项目的 `App.vue`（或 `App.uvue`），方便快速定位到项目入口文件。
+
 ### 如何设置快捷键
 
 | 快捷键命令                                     | 说明                       |
@@ -144,6 +155,7 @@ vk.navigateTo 也能自动提示页面了
 | extension.vk_deleteAllLog1                     | 一键删除所有 log 类型日志  |
 | extension.vk_deleteAllLog2                     | 一键删除所有类型日志       |
 | extension.vk_createCloudObject                 | 新建云对象                 |
+| extension.vk_pickProject                       | 快速定位项目               |
 
 点击 hbx 菜单工具、自定义快捷键，将下方代码复制到右侧的[]内
 

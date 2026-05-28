@@ -1788,6 +1788,70 @@ vk.navigateToLuckyDraw({
 });
 ```
 
+#### vk.navigateTo403
+
+跳转到权限不足页面（403页面），需要在 `app.config.js` 中配置 `noPermission.url`。
+
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+| :--: | :--: | :--: | :----: | :--: |
+| mode | String | 否 | redirectTo | 跳转页面模式，可选值为 navigateTo redirectTo reLaunch |
+
+**示例**
+
+默认：关闭当前页面，并跳转到403页面
+
+```js
+vk.navigateTo403();
+```
+
+指定跳转模式
+
+```js
+vk.navigateTo403({
+  mode: 'reLaunch',
+});
+```
+
+**app.config.js 配置示例**
+
+```js
+// 权限不足页面配置
+noPermission: {
+  url: "/pages/error/403"
+}
+```
+
+#### vk.navigateToMiniProgram
+
+跳转到另一个小程序，参数与 `uni.navigateToMiniProgram` 一致。在 H5 端会提示"不支持打开小程序"。
+
+|    参数     |   类型    | 必填 |  默认值  |                                         说明                                          | 平台差异说明 |
+| :---------: | :-------: | :--: | :------: | :------------------------------------------------------------------------------------: | :----------: |
+|   appId    |  String  |  是  |          |                                      要打开的小程序 appId                                      |              |
+|    path    |  String  |  否  |          |                                  打开的页面路径，如果为空则打开首页                                  |              |
+| extraData  |  Object  |  否  |          |                                          需要传递给目标小程序的数据，目标小程序可在 `App.vue` 的 `onLaunch`或`onShow`中获取到这些数据 |              |
+| envVersion |  String  |  否  | 'release' |                                         小程序版本：release（正式版）、develop（开发版）、trial（体验版）                                          |     微信     |
+|   success  | Function |  否  |          |                                      接口调用成功的回调函数                                      |              |
+|    fail    | Function |  否  |          |                                      接口调用失败的回调函数                                      |              |
+|  complete  | Function |  否  |          |                           接口调用结束的回调函数（调用成功、失败都会执行）                           |              |
+
+**示例**
+
+```js
+vk.navigateToMiniProgram({
+  appId: 'wx1234567890abcdef',
+  path: 'pages/index/index',
+  extraData: {
+    // 发送数据携带的参数
+    a: 1,
+    b: '2',
+  },
+  success(res) {
+    // 打开成功
+  },
+});
+```
+
 #### vk.navigateTo（页面间通信）@navigateTo
 
 ##### Vue2 写法
