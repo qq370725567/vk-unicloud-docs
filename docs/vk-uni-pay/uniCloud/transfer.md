@@ -65,18 +65,20 @@ if (transferRes.code === 0) {
 
 ### 请求参数@alipay-params
 
-| 参数               | 说明                                                                                                                                                                    | 类型    | 默认值   | 可选值 |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------- | ------ |
-| provider           | 固定值 alipay                                                                                                                                                           | String  | -        |        |
-| out_bill_no        | 必填，商户系统内部的商家单号，要求此参数只能由数字、大小写字母组成，在商户系统内部唯一                                                                                  | String  | -        | -      |
-| payee_info         | 必填，收款方信息                                                                                                                                                        | Object  | true     | false  |
-| transfer_amount    | 转账金额 100=1 元(单位分)，金额最低 0.1 元，也就是 amount >= 10                                                                                                         | Number  | -        | -      |
-| order_title        | 必填，转账业务的标题，用于在支付宝用户的账单里显示。                                                                                                                    | String  | -        | -      |
-| transfer_remark    | 转账备注                                                                                                                                                                | String  | -        | -      |
-| payer_use_alias    | 支付宝专用 - 是否展示付款方别名，为 true 将展示商家支付宝在商家中心 商户信息 > 商户基本信息 页面配置的 商户别名                                                         | Boolean | false    | true   |
-| platform           | 使用哪个平台的配置，使用哪个平台的配置，如 mp-weixin、h5-weixin 等，默认是 transfer                                                                                     | String  | transfer | -      |
-| pid                | 多商户模式下的自定义商户 id（等于 vk-pay-config 表的\_id）[查看 vk-pay-config 表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)，与 `config_directory` 二选一 | String  | -        | -      |
-| `config_directory` | 多商户模式下的配置所在目录，与 pid 二选一                                                                                                                               | String  | -        | -      |
+| 参数               | 说明                                                                                                                                                                    | 类型    | 默认值          | 可选值 |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | --------------- | ------ |
+| provider           | 固定值 alipay                                                                                                                                                           | String  | -               |        |
+| out_bill_no        | 必填，商户系统内部的商家单号，要求此参数只能由数字、大小写字母组成，在商户系统内部唯一                                                                                  | String  | -               | -      |
+| payee_info         | 必填，收款方信息                                                                                                                                                        | Object  | true            | false  |
+| transfer_amount    | 转账金额 100=1 元(单位分)，金额最低 0.1 元，也就是 amount >= 10                                                                                                         | Number  | -               | -      |
+| order_title        | 必填，转账业务的标题，用于在支付宝用户的账单里显示。                                                                                                                    | String  | -               | -      |
+| transfer_remark    | 转账备注                                                                                                                                                                | String  | -               | -      |
+| payer_use_alias    | 支付宝专用 - 是否展示付款方别名，为 true 将展示商家支付宝在商家中心 商户信息 > 商户基本信息 页面配置的 商户别名                                                         | Boolean | false           | true   |
+| platform           | 使用哪个平台的配置，使用哪个平台的配置，如 mp-weixin、h5-weixin 等，默认是 transfer                                                                                     | String  | transfer        | -      |
+| pid                | 多商户模式下的自定义商户 id（等于 vk-pay-config 表的\_id）[查看 vk-pay-config 表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)，与 `config_directory` 二选一 | String  | -               | -      |
+| `config_directory` | 多商户模式下的配置所在目录，与 pid 二选一                                                                                                                               | String  | default         | -      |
+| app_auth_token     | 支付宝服务商模式下，子商户的授权 token                                                                                                                                  | String  | -               | -      |
+| biz_scene          | 业务场景                                                                                                                                                                | String  | DIRECT_TRANSFER | -      |
 
 ### 返回值@alipay-return
 
@@ -237,15 +239,15 @@ if (transferRes.code === 0) {
 | sponsor_mchid               | 出资商户号，可指定已授权发起商户资金权限的商户进行出资                                                                     | String | -        | -      |
 | platform                    | 使用哪个平台的配置，如 mp-weixin、h5-weixin 等，默认是 transfer                                                            | String | transfer | -      |
 | pid                         | vk-pay-config 表的\_id（多商户模式下必填） [查看 vk-pay-config 表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html) | String | -        | -      |
-| config_directory            | 多商户模式下的配置所在目录，与 pid 二选一                                                                                  | String | -        | -      |
+| config_directory            | 多商户模式下的配置所在目录，与 pid 二选一                                                                                  | String | default  | -      |
 
 **返回值**
 
-| 参数   | 说明                                                                                        |
-| ------ | ------------------------------------------------------------------------------------------- |
-| code   | 0 接口请求成功 其他均为接口请求失败                                                         |
-| msg    | 转账结果描述（已受理 / 处理中 / 转账成功 / 转账失败）                                       |
-| result | 微信支付官方原始返回值 [微信官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4014399371) |
+| 参数   | 说明                                                                                                |
+| ------ | --------------------------------------------------------------------------------------------------- |
+| code   | 0 接口请求成功 其他均为接口请求失败                                                                 |
+| msg    | 转账结果描述（已受理 / 处理中 / 等待用户确认 / 转账中 / 转账成功 / 转账失败 / 撤销受理 / 撤销完成） |
+| result | 微信支付官方原始返回值 [微信官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4014399371)         |
 
 ### 查询免确认收款授权@queryUserConfirmAuthorization
 
@@ -275,7 +277,7 @@ console.log('res: ', res);
 | out_authorization_no | 必填，商户系统内部的免确认收款授权单号                                                                                     | String | -        | -      |
 | platform             | 使用哪个平台的配置，如 mp-weixin、h5-weixin 等，默认是 transfer                                                            | String | transfer | -      |
 | pid                  | vk-pay-config 表的\_id（多商户模式下必填） [查看 vk-pay-config 表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html) | String | -        | -      |
-| config_directory     | 多商户模式下的配置所在目录，与 pid 二选一                                                                                  | String | -        | -      |
+| config_directory     | 多商户模式下的配置所在目录，与 pid 二选一                                                                                  | String | default  | -      |
 
 **返回值**
 
@@ -311,7 +313,7 @@ if (res.code === 0) {
 | out_authorization_no | 必填，商户系统内部的免确认收款授权单号                                                                                     | String | -        | -      |
 | platform             | 使用哪个平台的配置，如 mp-weixin、h5-weixin 等，默认是 transfer                                                            | String | transfer | -      |
 | pid                  | vk-pay-config 表的\_id（多商户模式下必填） [查看 vk-pay-config 表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html) | String | -        | -      |
-| config_directory     | 多商户模式下的配置所在目录，与 pid 二选一                                                                                  | String | -        | -      |
+| config_directory     | 多商户模式下的配置所在目录，与 pid 二选一                                                                                  | String | default  | -      |
 
 **返回值**
 
@@ -438,9 +440,10 @@ if (transferRes.code === 0) {
 | transfer_scene_report_infos              | 必填，各转账场景下需报备的内容 详见：https://pay.weixin.qq.com/doc/v3/merchant/4012711988#（3）按转账场景报备背景信息                                                                                               | Array  | -        | -      |
 | transfer_scene_report_infos.info_type    | 必填，请根据产品文档确认当前转账场景下需传入的信息类型，需按要求填入，有多个字段时需填写完整 如：转账场景为 1000-现金营销，需填入活动名称、奖励说明                                                                 | String | -        | -      |
 | transfer_scene_report_infos.info_content | 必填，请根据信息类型，描述当前这笔转账单的转账背景 如：信息类型为活动名称，请在信息内容描述用户参与活动的名称，如新会员有礼。信息类型为奖励说明，请在信息内容描述用户因为什么奖励获取这笔资金，如注册会员抽奖一等奖 | String | -        | -      |
+| notify_url                               | 转账回调通知地址，不填则自动拼接                                                                                                                                                                                    | String | -        | -      |
 | platform                                 | 使用哪个平台的配置，如 mp-weixin、h5-weixin 等，默认是 transfer                                                                                                                                                     | String | transfer | -      |
 | pid                                      | vk-pay-config 表的\_id（多商户模式下必填） [查看 vk-pay-config 表](https://vkdoc.fsq.pub/vk-uni-pay/db/vk-pay-config.html)                                                                                          | String | -        | -      |
-| config_directory                         | 多商户模式下的配置所在目录，与 pid 二选一                                                                                                                                                                           | String | -        | -      |
+| config_directory                         | 多商户模式下的配置所在目录，与 pid 二选一                                                                                                                                                                           | String | default  | -      |
 
 #### 返回值@wxpay-manual-return
 
@@ -541,7 +544,7 @@ let cancelTransferRes = await vkPay.cancelTransfer({
   platform: 'mp-weixin', // 平台类型：app-plus、mp-weixin，用于获取对应平台的支付配置信息
   out_bill_no: '商户转账单号', // 商户转账单号
 });
-if (cancelTransferRes === 0) {
+if (cancelTransferRes.code === 0) {
   // 撤销成功
 } else {
   // 撤销失败
