@@ -391,7 +391,7 @@ module.exports = async (obj) => {
 **推荐流程**
 
 1. 用户首次申请提现 → 检测该用户是否已授权（数据库中是否存在该 `user_id` 对应的 `out_authorization_no`）
-2. 未授权 → 调用 `createUserConfirmAuthorization` 发起授权，前端拉起授权弹窗，用户确认后，将 `user_id` 与 `out_authorization_no` 一对一绑定存库
+2. 未授权 → 调用 `createUserConfirmAuthorization` 发起授权，前端拉起授权弹窗，用户确认后，将 `user_id` 与 `out_authorization_no` 一对一绑定存库（比如在 uni-id-users 表新增一个字段存储 `out_authorization_no` 或新建一张表专门存储 `user_id` 与 `out_authorization_no` 的对应关系）
 3. 已授权 → 直接进入申请提现流程
 4. 商家审核通过 → 根据 `user_id` 取出 `out_authorization_no`，直接调用 `transfer` 执行转账，用户无需任何操作，资金自动到账
 5. 后续再次提现 → 跳过授权步骤，审核通过直接转账
