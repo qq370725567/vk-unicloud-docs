@@ -1109,19 +1109,50 @@ let newVal = vk.pubfn.toDecimal(val, precision);
 let newVal = vk.pubfn.toDecimal(1.56555, 2);
 ```
 
+### vk.pubfn.thousandSeparator（千分位分隔符）@thousandSeparator
+
+千分位分隔符格式化，将数字格式化为带逗号的千分位格式
+
+```js
+/**
+ * 千分位分隔符格式化
+ * @param {String|Number} num 数字或数字字符串
+ * @return {String} 格式化后的字符串
+ * vk.pubfn.thousandSeparator(1234567); // "1,234,567"
+ */
+let newVal = vk.pubfn.thousandSeparator(num);
+
+let newVal = vk.pubfn.thousandSeparator(1234567); // "1,234,567"
+let newVal = vk.pubfn.thousandSeparator('1234567.89'); // "1,234,567.89"
+let newVal = vk.pubfn.thousandSeparator(100); // "100"
+```
+
 ### vk.pubfn.priceFilter（金额显示过滤器）@priceFilter
 
 金额显示过滤器（以分为单位，将 100 转成 1）
 
 ```js
 /**
- * 金额显示过滤器（以分为单位，将100 转成 1
+ * 金额显示过滤器（以分为单位，将100 转成 1）
  * @param {Number} money 金额
- * @return {Number} newVal 转换后的值
+ * @param {Object|String} options 配置选项（可选）
+ * @param {String} options.defaultValue 为空时的默认值
+ * @param {String} options.format 格式化方式，目前支持 'thousandSeparator'（千分位分隔符）
+ * @return {String} newVal 转换后的值
  */
 let newVal = vk.pubfn.priceFilter(money);
+let newVal = vk.pubfn.priceFilter(money, options);
 
-let newVal = vk.pubfn.priceFilter(100); // 1
+// 基础用法
+let newVal = vk.pubfn.priceFilter(100); // "1.00"
+let newVal = vk.pubfn.priceFilter(100, '暂无'); // 金额为空时返回 "暂无"
+
+// 带千分位分隔符
+let newVal = vk.pubfn.priceFilter(123456789, { format: 'thousandSeparator' }); // "1,234,567.89"
+let newVal = vk.pubfn.priceFilter(100, { format: 'thousandSeparator' }); // "1.00"
+
+// 同时设置默认值和格式化
+let newVal = vk.pubfn.priceFilter(null, { defaultValue: '0.00', format: 'thousandSeparator' }); // "0.00"
 ```
 
 ### vk.pubfn.percentageFilter（百分比显示过滤器）@percentageFilter
