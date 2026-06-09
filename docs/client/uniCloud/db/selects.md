@@ -98,7 +98,7 @@ let res = await vk.baseDao.selects({
 
 ### vk.baseDao.getTableData 的连表@getTableData
 
-注意：`vk.baseDao.getTableData` 和 `vk.baseDao.selects` 的连表用法完全一致，也支持 `foreignDB` 属性。在 vk-admin 项目中比较常用 [详细介绍](https://vkdoc.fsq.pub/admin/2/table.html#vk-basedao-gettabledata)
+注意：`vk.baseDao.getTableData` 和 `vk.baseDao.selects` 的连表用法完全一致，也支持 `foreignDB`、`groupJson` 等属性。在 vk-admin 项目中比较常用 [详细介绍](https://vkdoc.fsq.pub/admin/2/table.html#vk-basedao-gettabledata)
 
 getTableData 连表示例：
 
@@ -178,6 +178,39 @@ foreignDB: [
 | foreignDB      | Array  | 否   | 副表连表规则                                                                  |
 | addFields      | Object | 否   | 副表添加自定义字段规则                                                        |
 | fieldJson      | Object | 否   | 副表字段显示规则                                                              |
+
+### groupJson（分组）@groupjson
+
+```js
+res = await vk.baseDao.selects({
+  dbName: '你的消费记录表或订单表',
+  pageIndex: 1,
+  pageSize: 10,
+  // 主表where条件
+  whereJson: {},
+  groupJson: {
+    _id: '$user_id', // _id是分组id（_id:为固定写法，必填属性），这里指按user_id字段进行分组
+    user_id: $.first('$user_id'), // 这里是为了把user_id原样输出
+    payment_amount: $.sum('$payment_amount'), // sum求和支付金额
+    count: $.sum(1), // count记录条数
+  },
+  sortArr: [{ name: 'payment_amount', type: 'desc' }], // 对分组后的结果进行排序
+  // 副表列表
+  foreignDB: [
+    {
+      dbName: 'uni-id-users',
+      localKey: 'user_id',
+      foreignKey: '_id',
+      as: 'userInfo',
+      limit: 1,
+    },
+  ],
+  // 最后的where，（分组后的筛选）主要用于对分组后的结果再进行筛选 如：筛选金额大于1000才能上榜（这里的lastWhereJson在数据量大的情况下是有性能问题的，（建议主表的where条件中先进行筛选，如只查本季度数据，只要主表过滤完后数据量不大，则没有性能问题。）
+  lastWhereJson: {
+    payment_amount: _.gt(1000),
+  },
+});
+```
 
 ### getCount
 
