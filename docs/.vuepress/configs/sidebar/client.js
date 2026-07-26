@@ -42,6 +42,7 @@ module.exports = [
       'pages/updateRequestGlobalParam',
       'pages/vuex',
       'pages/uploadFile',
+      'pages/chooseAndUploadFile',
       'pages/config',
       'pages/localStorage',
       'pages/sessionStorage',
