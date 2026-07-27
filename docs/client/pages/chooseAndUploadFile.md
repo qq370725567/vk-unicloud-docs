@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 ## 接口名：vk.chooseAndUploadFile@chooseAndUploadFile
 
-> vk-unicloud 核心库版本 ≥ 2.24.1
+> vk-unicloud 核心库版本 ≥ 2.25.1
 
 通过 UI 界面选择文件（图片/视频/任意文件）并直接上传到云存储。
 
