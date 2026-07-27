@@ -32,79 +32,104 @@ sidebarDepth: 0
 
 ## 功能列表
 
-### 1、复制页面路径
+### 初始化项目文件
+
+用于在项目根目录快速补充常用的 Git、Prettier、HBuilderX 格式化文件。
+
+**使用方式**
+
+1. 在 HBuilderX 项目管理器中右键项目根目录，选择【VK】-【初始化项目文件】。
+2. 在弹窗中勾选需要添加的文件。所有文件默认勾选，推荐文件带有【推荐】标识，项目中已有的文件会显示“已存在，将跳过”。
+3. 点击【添加】，完成后弹窗会显示新建和跳过的文件数量及明细。
+
+> 至少需要选择一个文件。右键菜单仅在项目缺少 `.gitattributes`、`.gitignore`、`.prettierignore` 或 `prettier.config.js` 中的任意一个文件时显示。
+
+**支持初始化的文件**
+
+| 文件                 | 推荐 | 用途                                                             |
+| -------------------- | ---- | ---------------------------------------------------------------- |
+| `.gitattributes`     | 是   | 统一 Git 仓库中文本及脚本文件的换行符，减少跨平台差异。          |
+| `.gitignore`         | 是   | 指定 Git 无需跟踪的依赖、构建产物、缓存和本地配置文件。          |
+| `.prettierignore`    | 是   | 指定 Prettier 无需格式化的依赖、构建产物、第三方模块和静态资源。 |
+| `prettier.config.js` | 是   | 配置 Prettier 代码格式化规则，统一项目代码风格。                 |
+| `.jsbeautifyrc`      | 否   | 未使用 Prettier 时，配置 HBuilderX 内置的代码格式化规则。        |
+| `.npmignore`         | 否   | 指定发布 npm 包时需要排除的开发目录、构建产物和本地文件。        |
+
+初始化过程不会覆盖项目中已有的同名文件，重复执行是安全的。如果写入文件时发生错误，本次操作已经新建的文件会自动回滚，避免项目处于只初始化了一部分的状态。
+
+### 复制页面路径
 
 在.vue 文件右键，点击 VK-复制 vue 页面路径（同时支持在打开的文件代码编辑器中右键）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/a55536a0-583b-495d-9cf0-7913c50332c9.png)
 
-### 2、复制 VK 云函数路由框架内的云函数路径
+### 复制 VK 云函数路由框架内的云函数路径
 
 在云函数文件右键，点击 VK-复制云函数路径（同时支持在打开的文件代码编辑器中右键）
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/6c5262f5-2ed3-43da-95cf-dd558c86dfa8.png)
 
-### 3、复制 VK 云函数路由框架内的云对象下的云函数路径
+### 复制 VK 云函数路由框架内的云对象下的云函数路径
 
 需要先选中云对象内的某个函数名（双击函数名达到选中效果），再右键-VK-复制云函数（云对象）路径
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/cloudstorage/1be8a665-499e-4e00-864b-6604117ce336.png)
 
-### 4、新建云函数
+### 新建云函数
 
 在需要新建云函数的目录右键，点击 VK-新建云函数
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/32c0b56e-1e71-4c2c-8bb6-1dfc966f8342.png)
 
-### 5、新建云对象
+### 新建云对象
 
 在需要新建云对象的目录右键，点击 VK-新建云对象
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/613e4fb9-c562-46b4-8426-411797d218a6.png)
 
-### 6、新建 Dao
+### 新建 Dao
 
 在 dao/modules/目录右键，点击 VK-新建 Dao
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/066fed7d-11fe-4c72-91a3-a8a0e6390be8.png)
 
-### 7、本地运行云函数
+### 本地运行云函数
 
 右键云函数，点击 VK-本地运行云函数 1
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/f0e2ff43-8e54-45b3-bc93-3cd5f461f38f.png)
 
-### 8、本地运行云对象
+### 本地运行云对象
 
 需要先选中云对象内的某个函数名（双击函数名达到选中效果），再右键-VK-本地运行云函数
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/e647fdbb-dedb-433e-b5c9-1f15b9349a1c.png)
 
-### 9、一键生成云函数加密配置
+### 一键生成云函数加密配置
 
 右键需要加密的云函数根目录下的 `package.json` 文件，点击 VK-一键生成云函数加密配置
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/1ecf9272-0a67-4248-b8a5-216822d0bd40.png)
 
-### 10、schema2code（vk-admin 版）
+### schema2code（vk-admin 版）
 
 右键需要生成 `.schema.json` 文件，点击 VK-schema2code
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/29ead8cb-a775-43f1-a80e-1716b93e6f47.png)
 
-### 11、快速插入日志
+### 快速插入日志
 
 选中某变量名，右键，点击 VK-插入日志
 
-### 12、一键删除所有 log 类型日志
+### 一键删除所有 log 类型日志
 
 在编辑器文档内右键，点击 VK-删除所有 log 类型日志
 
-### 13、一键删除所有类型日志
+### 一键删除所有类型日志
 
 在编辑器文档内右键，点击 VK-删除所有类型日志
 
-### 14、开启 VK 框架 d.ts 语法提示
+### 开启 VK 框架 d.ts 语法提示
 
 在任意 vue 或 js 文档内右键，点击 VK-开启 VK 框架 d.ts 语法提示（需重启 HBX 才会生效）
 
@@ -123,13 +148,13 @@ vk.navigateTo 也能自动提示页面了
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/171578624935168169cn3k3.png)
 
-### 15、关闭 VK 框架 d.ts 语法提示
+### 关闭 VK 框架 d.ts 语法提示
 
 在任意 vue 或 js 文档内右键，点击 VK-关闭 VK 框架 d.ts 语法提示（需重启 HBX 才会生效）
 
 ![](https://cdn.fsq.pub/vkdoc/vk-client/1716040555591j18l512eqsg.png)
 
-### 16、快速定位项目（选择项目）
+### 快速定位项目（选择项目）
 
 当工作区打开了多个项目时，可以通过此功能快速搜索并切换到目标项目。
 
@@ -140,7 +165,7 @@ vk.navigateTo 也能自动提示页面了
 
 在弹出的搜索框中输入项目名关键字进行搜索，选择目标项目后，会自动打开该项目的 `App.vue`（或 `App.uvue`），方便快速定位到项目入口文件。
 
-### 如何设置快捷键
+## 如何设置快捷键
 
 | 快捷键命令                                     | 说明                       |
 | ---------------------------------------------- | -------------------------- |
