@@ -1,0 +1,12 @@
+site: dist
+output_subdir: pagefind
+root_selector: main
+exclude_selectors:
+  - '.page-edit'
+  - '.page-nav'
+  - '.ra-wrapper'
+  - '.header-anchor'
+  - '.line-numbers-wrapper'
+  - '.sidebar-banner'
+include_characters: '._-@$'
+write_playground: false

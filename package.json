@@ -7,7 +7,11 @@
     "uniCloudDeploy-1": "cli hosting deploy --provider aliyun --space mp-0cfbb5f1-fa7e-4585-a530-dde5e1109066 --source D:/hbxwork/vk-unicloud-docs/dist/ --prefix /",
     "uniCloudDeploy-2": "cli hosting deploy --provider aliyun --space mp-0cfbb5f1-fa7e-4585-a530-dde5e1109066 --source E:/VK/3_work-uni-app/vk-unicloud-docs/dist/ --prefix /",
     "dev": "vuepress dev docs --temp .temp",
-    "build": "vuepress build docs",
+    "build:docs": "vuepress build docs",
+    "prepare:search": "node scripts/prepare-pagefind.js",
+    "build:search": "npm run prepare:search && pagefind",
+    "build": "npm run build:docs && npm run build:search",
+    "preview": "npm run build:docs && npm run prepare:search && pagefind --serve",
     "gen-links": "node scripts/generate-links.js",
     "gen-txt": "node scripts/generate-txt.js"
   },
@@ -15,6 +19,7 @@
   "author": "VK",
   "license": "ISC",
   "devDependencies": {
+    "pagefind": "1.5.2",
     "vuepress": "1.9.9"
   },
   "dependencies": {

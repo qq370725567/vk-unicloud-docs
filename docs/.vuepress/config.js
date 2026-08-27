@@ -1,7 +1,9 @@
+const path = require('path');
 const navbar = require('./configs/navbar.js'); // 顶部导航
 const sidebar = require('./configs/sidebar.js'); // 左侧菜单
 const { slugify } = require('@vuepress/shared-utils'); // 用于处理标题的插件
 const headerPlugin = require('./markdown/header'); // 用于处理标题的插件
+const pagefindCodeWeightPlugin = require('./markdown/pagefind-code-weight'); // 降低代码块搜索权重
 
 function simplifySlugText(text) {
   // 移除方法后面的括号及里面的内容
@@ -19,6 +21,14 @@ module.exports = {
   base: '/', // 部署站点的基础路径
   title: 'vk-unicloud 快速开发框架', // 网站的标题
   description: 'VK云开发：多平台全栈快速开发框架。vk-unicloud-router、vk-unicloud-admin、vk-uni-pay', // 网站的描述
+  locales: {
+    '/': {
+      lang: 'zh-CN',
+    },
+  },
+  alias: {
+    '@SearchBox': path.resolve(__dirname, './components/SearchBox.vue'),
+  },
   // 额外的需要被注入到当前页面的 HTML <head> 中的标签
   head: [
     ['link', { rel: 'icon', href: '/image/logo.png' }],
@@ -42,7 +52,7 @@ module.exports = {
     // 显示所有页面的标题链接
     //displayAllHeaders: true,
     // 搜索框显示的最大结果数量
-    searchMaxSuggestions: 1000,
+    searchMaxSuggestions: 12,
     // 网站logo
     logo: '/image/logo.png',
     lastUpdated: '最后修改时间',
@@ -90,6 +100,7 @@ module.exports = {
     extractHeaders: ['h1', 'h2', 'h3', 'h4'],
     chainMarkdown(config) {
       config.plugin('convert-header').use(headerPlugin);
+      config.plugin('pagefind-code-weight').use(pagefindCodeWeightPlugin);
     },
   },
   plugins: [
