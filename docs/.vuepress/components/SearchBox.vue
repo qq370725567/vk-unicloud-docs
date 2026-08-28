@@ -53,7 +53,7 @@
         query: '',
         focused: false,
         focusIndex: -1,
-        placeholder: '',
+        placeholder: '搜索文档...',
         suggestions: [],
         searched: false,
         searching: false,
