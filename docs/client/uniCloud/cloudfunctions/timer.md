@@ -76,7 +76,7 @@ sidebarDepth: 0
    修改 `service/crontab/taskConfig.js`：
 
 - **main**：主函数触发间隔（秒），必须与上面 `triggers[0].config` 的周期一致。
-- **tasks**：子任务名到执行周期的映射。子任务会在每次主函数被触发时，根据当前时间判断是否执行（如「每 60 秒」「每 1 小时」「每天 12:30」等）。支持以下写法：
+- **tasks**：子任务名到执行周期的映射，支持「每 60 秒」「每 1 小时」「每天 12:30」等配置。任务中可通过 [event.triggerTime](#task-params) 获取本轮触发时间。支持以下写法：
 
 > **版本要求**：每周（`weekly`）、每月（`monthly`）和 cron 表达式（包括对象写法及 cron 字符串直写）自 vk-unicloud 核心库 2.25.1 起支持。
 
@@ -109,7 +109,7 @@ sidebarDepth: 0
 - 通配符：`*` 任意值、`,` 列表、`-` 范围、`/` 步长，与 [Cron 表达式](#cron) 章节一致
 - 周字段：0-7（0 和 7 均为周日）或 `SUN`-`SAT` 英文缩写
 - 「日」和「周」同时指定（均非 `*`）时，为**或**关系
-- 触发精度受 `main` 限制：实际执行时刻按 `main` 粒度对齐（框架每 `main` 秒判断一次「本轮时间窗口内是否存在触发点」，因此不会因云函数触发延迟而漏触发）
+- 触发精度受 `main` 限制：框架将本轮 `triggerTime` 按 `main` 粒度对齐，判断该窗口内是否存在触发点；同一窗口内的多个触发点会合并为一次执行
 
 ```js
 tasks: {
@@ -157,9 +157,9 @@ module.exports = {
 提示：当 `concurrency` 设置为 1 时，定时任务会按 `tasks` 内的顺序执行，当大于 1 时，会并发执行，此时云函数的日志打印是**无序**的。
 
 3. **编写具体任务**  
-   在 `service/crontab/tasks/xxx.js` 中实现业务逻辑。文件名为任务名（如 `timer1.js`），需在 `taskConfig.js` 的 `tasks` 中有同名 key。导出为一个 `async function`，可使用全局 `vk` 和 云对象的 `this` 等。示例：
+   在 `service/crontab/tasks/xxx.js` 中实现业务逻辑。文件名为任务名（如 `timer1.js`），需在 `taskConfig.js` 的 `tasks` 中有同名 key。导出为一个 `async function`，通过参数 `event` 接收本轮触发时间，也可使用全局 `vk` 和云对象的 `this`。示例：
 
-   注意：这里的 `this` 指向云对象 `crontab/pub`
+   注意：这里的 `this` 指向云对象 `crontab/pub`。
 
 ```js
 // tasks/timer1.js
@@ -168,15 +168,35 @@ const db = uniCloud.database();
 const _ = db.command;
 const $ = _.aggregate;
 
-module.exports = async function () {
+module.exports = async function (event) {
+  let {
+    triggerTime, // 本轮触发时间戳（毫秒），2.25.2 起支持
+  } = event;
   let res = { code: 0, msg: '' };
   // 业务逻辑
   console.log('我是1号定时任务');
+  console.log('本轮触发时间：', triggerTime);
   return res;
 };
 ```
 
 4. 上传并部署 router 云函数后，定时任务会按 Cron 与 `taskConfig.js` 的配置自动执行。
+
+### 任务参数与触发时间@task-params
+
+> vk-unicloud 核心库版本 ≥ 2.25.2
+
+| 参数 | 类型 | 说明 |
+| --- | --- | --- |
+| `event.triggerTime` | Number | 本轮触发时间的毫秒时间戳，同一轮所有子任务获得的值相同 |
+
+例如 12:00 触发的一轮任务，即使某个子任务排队到 12:01 才开始执行，它收到的 `triggerTime` 仍对应 12:00。统计任务可使用该时间计算区间，避免受排队耗时影响：
+
+```js
+// 在任务函数内使用，triggerTime 从 event 中取得。
+let { startTime, endTime } = vk.pubfn.getHourOffsetStartAndEnd(-1, triggerTime);
+console.log('待统计的上一小时：', startTime, endTime);
+```
 
 ## vk-unicloud 版本 < 2.21.0@old
 
