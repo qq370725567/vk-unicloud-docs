@@ -48,6 +48,13 @@ module.exports = {
     ],
   ],
   dest: 'dist', // 指定 vuepress build 的输出目录
+  chainWebpack(config, isServer) {
+    if (process.env.NODE_ENV === 'production' && !isServer) {
+      // VuePress 1 / webpack 4 的数字模块 ID 会随依赖变化。
+      // 主包和页面分包使用同一构建 hash，避免发布后复用旧分包导致模块引用错位。
+      config.output.filename('assets/js/[name].[hash:8].js').chunkFilename('assets/js/[name].[hash:8].js');
+    }
+  },
   themeConfig: {
     // 显示所有页面的标题链接
     //displayAllHeaders: true,
