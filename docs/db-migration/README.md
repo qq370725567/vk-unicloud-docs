@@ -56,13 +56,30 @@
 
 ## 一键搬家配置
 
-配置文件为【一键搬家】项目根目录下的 `vk.db.config.js` 文件
+从 `1.9.0` 起，【一键搬家】项目根目录下的配置分为主配置和扩展配置：
+
+| 配置文件              | 用途                                                                   |
+| --------------------- | ---------------------------------------------------------------------- |
+| `vk.db.config.js`     | 主配置：旧空间、新空间、每批数据量、文件链接替换规则和需要迁移的表列表 |
+| `vk.db.config-ext.js` | 扩展配置：并发、重试、日志和数据兼容处理等参数，一般保持默认即可       |
+
+通常只需修改主配置中的 `oldEnv`、`newEnv` 和 `db`，按需调整 `maxPageSize`、`fileRule`；需要调整并发或重试等行为时，再修改扩展配置。
+
+这里的“扩展配置”是对配置文件的拆分，与 `dbType: 'ext-db'` 表示的“扩展数据库”无关，使用内置数据库时同样会加载扩展配置。云函数目录下的 `vk.db.config.js` 仍用于配置 `actionsecret`、`runKey` 等云函数参数。
+
+### 主配置 vk.db.config.js
+
+主配置通过 `import` 引入扩展配置，并在配置对象开头使用 `...dbConfigExt` 合并，请保留这两处代码。
 
 ```js
 /**
  * 一键搬家配置
  */
+import dbConfigExt from './vk.db.config-ext.js';
+
 export default {
+  // 并发、重试、日志等参数统一在扩展配置中维护
+  ...dbConfigExt,
   // 旧环境
   oldEnv: {
     cloud: 'uniCloud', // 通用参数 固定为 uniCloud
@@ -90,12 +107,6 @@ export default {
     endpoint: '私有云专属参数', // 私有云专属参数 从 https://unicloud.dcloud.net.cn/pages/private-cloud/cluster-list 获取 ApiEndpoint
   },
   maxPageSize: 500, // 数据库单次请求获取数量，默认500，如果前端报内存超出大小限制的错误，可以尝试调小此值来解决。如设置为100或50或更小的值，最小为1，最大1000
-  concurrencyImport: false, // 是否并发导入？设置为true可以提高性能，但无法保证迁移后的数据与原始顺序一致（一般业务进行查询时都会加排序条件，此时基本无影响），设置为false则可保证迁移后的数据与原始数据顺序一致
-  debug: false, // 浏览器控制台是否打印请求日志，设置为 false 可以提升性能
-  errorReconnectionCount: 10, // 数据库连接失败后重新连接次数，默认10次，一般无需修改
-  maxImportQueueCount: 10, // 最大等待的导入队列数，默认10，一般无需修改（太大会影响前端性能）最小为1，最大为20
-  maxLogCount: 200, // 控制台显示的最大日志数量，默认200，一般无需修改（太大会影响前端性能）
-  handleObjectKeyName: true, // 是否需要同时处理满足阿里云_id格式的字段名，一般无需修改（true：同时处理字段名和字段值 false：只处理字段值，默认true）
   // 数据库内存储链接地址域名替换规则
   // 打开 fileRule 内的注释，编写旧域名和新域名，导入后数据库内的文件链接会用新域名代替旧域名
   fileRule: [
@@ -103,7 +114,8 @@ export default {
   ],
   // 数据库集合（表）列表，目前没有接口可以直接获取表列表，故需要在此手动填写数据库中需要搬家的表信息
   // 可以自动根据 database 目录内的文件 生成数据库表名列表 方法：在项目根目录执行 node vk.create-db-config.js 详见文档 https://vkdoc.fsq.pub/db-migration/#如何生成数据库初始化文件
-  db: [{ name: 'uni-id-users' }, { name: 'uni-id-roles' }, { name: 'uni-id-permissions' }, { name: 'opendb-admin-menus' }, { name: 'opendb-app-list' }],
+  // prettier-ignore
+  "db": [{ name: 'uni-id-users' }, { name: 'uni-id-roles' }, { name: 'uni-id-permissions' }, { name: 'opendb-admin-menus' }, { name: 'opendb-app-list' }],
 };
 ```
 
@@ -111,9 +123,41 @@ export default {
 
 登录[unicloud-web 控制台](https://unicloud.dcloud.net.cn/home)，在总览页面即可看到对应的参数。
 
+### 扩展配置 vk.db.config-ext.js
+
+以下为扩展配置的默认值，可根据实际需要调整：
+
+```js
+export default {
+  debug: false, // 浏览器控制台是否打印请求日志，设置为 false 可以提升性能
+  countBatchSize: 10, // 获取记录数时每批查询的表数，必须为正整数
+  maxConcurrentCountRequests: 5, // 获取记录数时最多同时执行的批次数，必须为正整数；1表示按批串行
+  maxConcurrentTables: 5, // 最大同时迁移的表数，必须为正整数；1表示按表串行
+  concurrencyImport: false, // 同一张表内是否并发导入数据批次；false保持单表内原始导入顺序，true不保证顺序
+  maxConcurrentImports: 5, // 每张表最多同时进行的导入请求数，必须为正整数；仅concurrencyImport为true时生效
+  errorReconnectionCount: 10, // 数据库连接失败后的重试次数
+  maxImportQueueCount: 10, // 每张表最大等待的导入队列数，最小为1，最大为20；太大会影响前端性能
+  maxLogCount: 200, // 页面控制台显示的最大日志数量；太大会影响前端性能
+  handleObjectKeyName: true, // 处理阿里云_id格式时，true同时处理字段名和字段值，false只处理字段值
+  removeNullValueFieldsForAlipay: true, // 迁移到支付宝云内置数据库时删除null值字段，解决int/long/bool类型字段不能为null的问题
+};
+```
+
+**并发参数如何配合？**
+
+- 获取记录数：`countBatchSize` 控制每批查询多少张表，`maxConcurrentCountRequests` 控制同时查询多少批，默认每批 10 张表、最多同时查询 5 批，与迁移并发独立。
+- 多表迁移：`maxConcurrentTables` 控制同时迁移的表数，默认 5 张表；任意一张表完成或失败收尾后，会继续处理下一张表。
+- 单表导入：`concurrencyImport` 控制同一张表内的数据批次是否并发导入。默认 `false`，单表按顺序导入，但仍可同时迁移多张表；设为 `true` 后，每张表最多同时发起 `maxConcurrentImports` 个导入请求，无法保证单表内的原始导入顺序。
+
+如果希望逐表、逐批顺序迁移，将 `maxConcurrentTables` 设为 `1`，并保持 `concurrencyImport: false` 即可。
+
+**旧版本配置如何调整？**
+
+将原主配置中的并发、重试、日志及数据兼容处理参数移到 `vk.db.config-ext.js`，保留原来需要的参数值，并在主配置中加入上述 `import` 和 `...dbConfigExt`。主配置中写在 `...dbConfigExt` 后面的同名参数会覆盖扩展配置，请将这些参数统一在扩展配置中维护，避免修改后未生效。
+
 ## 操作步骤
 
-- 1、打开【一键搬家】项目根目录 `vk.db.config.js` 配置文件，修改 `oldEnv` 、 `newEnv` 配置
+- 1、打开【一键搬家】项目根目录的主配置 `vk.db.config.js`，修改 `oldEnv`、`newEnv`，按需调整 `maxPageSize`、`fileRule`。并发、重试等参数在 `vk.db.config-ext.js` 中修改，一般保持默认即可；表列表 `db` 可在第 3 步生成。
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/433.png)
 
@@ -137,7 +181,7 @@ export default {
 
 ![](https://mp-cf0c5e69-620c-4f3c-84ab-f4619262939f.cdn.bspapp.com/vk-doc/455.png)
 
-然后在项目根目录执行 `node vk.create-db-config.js`
+然后在项目根目录执行 `node vk.create-db-config.js`，生成的表列表会写入主配置 `vk.db.config.js` 的 `db`，扩展配置 `vk.db.config-ext.js` 不会被修改。如果需要按 `startId`、`endId` 指定迁移范围，请在生成后补充到 `db` 中对应的表配置，再次生成会覆盖这些表配置。
 
 ![](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-cf0c5e69-620c-4f3c-84ab-f4619262939f/4ee5f06a-4665-450e-8d8f-00825a8801ea.png)
 
@@ -169,7 +213,7 @@ export default {
 
 - 9、点击【开始一键搬家】按钮
 
-- 10、如不出意外，等待进度条到 100%即可。如果出了意外（比如阿里云数据库不稳定导致连续 20 次数据库连接失败（目前会自动重试 20 次），则需要刷新页面并重新点击【开始一键搬家】按钮
+- 10、等待全部表完成。连接失败会按扩展配置 `vk.db.config-ext.js` 中的 `errorReconnectionCount` 重试，默认 10 次。某张表最终失败不会中止其他表；若有失败，请复制页面生成的重试配置，替换主配置 `vk.db.config.js` 内的 `db`，然后刷新页面重新迁移失败表。
 
 - 11、完成后请将 `uniCloud/cloudfunctions/vk-db-migration/vk.db.config.js` 和 `uniCloud/cloudfunctions/vk-db-migration-ext-db/vk.db.config.js` 的 `runKey` 设置为 false，再分别上传到 `旧空间` 和 `新空间`（这步很关键，防止后面误点导致数据被清空，也可以直接去 web 控制台删除云函数 `vk-db-migration` 和 `vk-db-migration-ext-db`）
 
@@ -197,7 +241,7 @@ let endId = dbRes.data[0]._id;
 console.log('endId: ', endId);
 ```
 
-`vk.db.config.js` 配置的时候这样写，多配置一个参数 `endId`，配置如下
+在主配置 `vk.db.config.js` 的 `db` 中，为对应的表增加一个参数 `endId`，配置如下
 
 解释：`endId` 代表只迁移到这个 `_id`（包含此 id） 后就结束此表
 
@@ -225,7 +269,7 @@ console.log('endId: ', endId);
 
 ### 数据库里的文件 URL 域名如何替换？
 
-修改配置 `fileRule` 数组，如下所示
+修改主配置 `vk.db.config.js` 中的 `fileRule` 数组，如下所示
 
 注意：文件本身不会迁移，这里只替换域名，适用于云存储文件已迁移完成只需要改数据库内字段的 URL 值的情况。
 
