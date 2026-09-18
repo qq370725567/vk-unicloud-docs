@@ -1506,6 +1506,8 @@ let base64 = 'data:image/png;base64,' + imageBuffer.toString('base64');
 
 ### vk.pubfn.batchRun（并发执行）@batchRun
 
+**版本要求：前端调用需使用 `vk-unicloud 2.25.3` 及以上版本；此前仅支持后端调用。**
+
 前后端通用，按指定并发量执行异步函数。前端可用于批量调用接口、上传文件等；后端可用于批量发送短信、邮件、消息通知等。
 
 在 `async` 函数中使用 `await vk.pubfn.batchRun(...)`，等待全部任务执行完成。
