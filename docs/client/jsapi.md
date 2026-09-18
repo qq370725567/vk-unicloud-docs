@@ -1504,6 +1504,133 @@ let imageBuffer = await vk.request({
 let base64 = 'data:image/png;base64,' + imageBuffer.toString('base64');
 ```
 
+### vk.pubfn.batchRun（并发执行）@batchRun
+
+前后端通用，按指定并发量执行异步函数。前端可用于批量调用接口、上传文件等；后端可用于批量发送短信、邮件、消息通知等。
+
+在 `async` 函数中使用 `await vk.pubfn.batchRun(...)`，等待全部任务执行完成。
+
+```js
+/**
+ * 并发执行函数
+ *
+ * @typedef {Object} BatchRunResult
+ * @property {Array} stack - 执行结果数组（按任务顺序排列）
+ * @property {number} total - 总任务数
+ * @property {number} [concurrency] - 实际使用的并发数；任务总数为 0 时不返回此字段
+ * @description BatchRunResult 说明：
+ *   - stack 项规则：任务正常返回时保存 main 的返回值；抛出异常或 Promise 拒绝时保存 { code, msg }
+ *   - 单个任务失败不会中断后续任务，stack 始终按任务顺序排列
+ *
+ * @param {Object} options - 配置项
+ * @param {Function|Array<Function>} options.main - 主执行函数
+ * @param {Array} [options.data=[]] - 单函数模式的数据源（函数数组模式下无效）
+ * @param {number} [options.concurrency=50] - 最大并发量（设为 1 则串行执行，实际并发数取 min(配置值, 任务总数)）
+ * @description 执行模式说明：
+ *   1. 单函数模式：main 为单个 async 函数，接收 (item, index) 参数，遍历 data 逐项执行
+ *   2. 函数数组模式：main 为 async 函数数组（每个函数无参数），此时 data 参数无效
+ *
+ * @returns {Promise<BatchRunResult>} 执行结果
+ */
+await vk.pubfn.batchRun(options);
+```
+
+注意：`concurrency` 并不是越大越好，太大可能会卡死（一次性并发太多请求可能反而会卡死，且大部分三方 api 其实是有并发限制的）。
+
+**失败结果说明**
+
+- `code`：保留非空且不为 `0` 的错误码，否则使用 `-1`。
+- `msg`：依次取非空的 `err.msg`、`err.errMsg`、`err.message`；字符串错误直接作为消息，未提供有效消息时使用“未知错误”。
+- `main` 正常返回的结果会原样保存，`batchRun` 不会根据返回值中的 `code` 再次判定成功或失败。
+- 无任务时返回 `{ stack: [], total: 0 }`，不会调用 `main`。
+
+**有数据源形式**
+
+以下示例前后端均可运行，可将 `main` 中的模拟任务替换为实际异步操作。前端调用云函数或云对象时，在 `main` 中使用 `await vk.callFunction(...)`。
+
+```js
+let batchRunRes = await vk.pubfn.batchRun({
+  // 主执行函数
+  main: async (item, index) => {
+    await vk.pubfn.sleep((Math.floor(Math.random() * (3 - 0)) + 0) * 100);
+    console.log(index, item);
+    return { code: 0, index };
+  },
+  // 最大并发量，如果设置为1，则会按顺序执行
+  concurrency: 50,
+  // 数据源，这些数据会依次跑一遍main函数
+  data: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 6 }, { a: 7 }, { a: 8 }, { a: 9 }],
+});
+```
+
+**无数据源形式**
+
+将多个不同的异步函数放入 `main` 数组，此时无需传入 `data`。以下示例前后端均可运行：
+
+```js
+let batchRunRes = await vk.pubfn.batchRun({
+  main: [
+    async () => {
+      await vk.pubfn.sleep(200);
+      return '任务一完成';
+    },
+    async () => {
+      await vk.pubfn.sleep(100);
+      return '任务二完成';
+    },
+  ],
+  concurrency: 2,
+});
+// 即使任务二先完成，结果仍按 main 数组的顺序排列
+console.log(batchRunRes.stack); // ['任务一完成', '任务二完成']
+```
+
+**后端统计示例**
+
+以下示例使用 `vk.daoCenter` 和数据库查询指令，只能在后端运行。
+
+```js
+let res = { code: 0, msg: '' };
+// 业务逻辑开始-----------------------------------------------------------
+let batchRunRes = await vk.pubfn.batchRun({
+  // 主执行函数
+  main: [
+    // 已上架的商品数量
+    async () => {
+      return await vk.daoCenter.goodsDao.count({
+        status: 1,
+        is_on_sale: true,
+      });
+    },
+    // 已下架的商品数量
+    async () => {
+      return await vk.daoCenter.goodsDao.count({
+        status: 1,
+        is_on_sale: false,
+      });
+    },
+    // 回收站内的商品数量
+    async () => {
+      return await vk.daoCenter.goodsDao.count({
+        status: 2,
+      });
+    },
+    // 已售罄的商品数量
+    async () => {
+      return await vk.daoCenter.goodsDao.count({
+        status: 1,
+        stock: _.lte(0),
+      });
+    },
+  ],
+  // 最大并发量，如果设置为1，则会按顺序执行
+  concurrency: 10,
+});
+res.group = batchRunRes.stack;
+// 业务逻辑结束-----------------------------------------------------------
+return res;
+```
+
 ## 前端专属
 
 ### 弹窗
@@ -2288,101 +2415,6 @@ vk.pubfn
 ## 云函数专属
 
 以下函数只能在云函数内调用
-
-### vk.pubfn.batchRun（并发执行）@batchRun
-
-并发执行异步函数（使用场景: 批量发送短信、邮件、消息通知等。）
-
-```js
-/**
- * 并发执行函数
- *
- * @typedef {Object} BatchRunResult
- * @property {Array} stack - 执行结果数组（按任务顺序排列）
- * @property {number} total - 总任务数
- * @property {number} concurrency - 实际使用的并发数
- * @description BatchRunResult 说明：
- *   - stack 项规则：任务成功时为 main 函数返回值；任务失败时为 { code: err.code, msg: err.message }
- *
- * @param {Object} options - 配置项
- * @param {Function|Array<Function>} options.main - 主执行函数
- * @param {Array} [options.data=[]] - 单函数模式的数据源（函数数组模式下无效）
- * @param {number} [options.concurrency=50] - 最大并发量（设为 1 则串行执行，实际并发数取 min(配置值, 任务总数)）
- * @description 执行模式说明：
- *   1. 单函数模式：main 为单个 async 函数，接收 (item, index) 参数，遍历 data 逐项执行
- *   2. 函数数组模式：main 为 async 函数数组（每个函数无参数），此时 data 参数无效
- *
- * @returns {Promise<BatchRunResult>} 执行结果
- */
-await vk.pubfn.batchRun(options);
-```
-
-注意：`concurrency` 并不是越大越好，太大可能会卡死（一次性并发太多请求可能反而会卡死，且大部分三方 api 其实是有并发限制的）。
-
-**有数据源形式**
-
-一般用于：批量发短信、邮件、消息通知等等
-
-```js
-let batchRunRes = await vk.pubfn.batchRun({
-  // 主执行函数
-  main: async (item, index) => {
-    await vk.pubfn.sleep((Math.floor(Math.random() * (3 - 0)) + 0) * 100);
-    console.log(index, item);
-    return { code: 0, index };
-  },
-  // 最大并发量，如果设置为1，则会按顺序执行
-  concurrency: 50,
-  // 数据源，这些数据会依次跑一遍main函数
-  data: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 6 }, { a: 7 }, { a: 8 }, { a: 9 }],
-});
-```
-
-**无数据源形式**
-
-一般用于：将多个不一样的异步函数并发执行。
-
-```js
-let res = { code: 0, msg: '' };
-// 业务逻辑开始-----------------------------------------------------------
-let batchRunRes = await vk.pubfn.batchRun({
-  // 主执行函数
-  main: [
-    // 已上架的商品数量
-    async () => {
-      return await vk.daoCenter.goodsDao.count({
-        status: 1,
-        is_on_sale: true,
-      });
-    },
-    // 已下架的商品数量
-    async () => {
-      return await vk.daoCenter.goodsDao.count({
-        status: 1,
-        is_on_sale: false,
-      });
-    },
-    // 回收站内的商品数量
-    async () => {
-      return await vk.daoCenter.goodsDao.count({
-        status: 2,
-      });
-    },
-    // 已售罄的商品数量
-    async () => {
-      return await vk.daoCenter.goodsDao.count({
-        status: 1,
-        stock: _.lte(0),
-      });
-    },
-  ],
-  // 最大并发量，如果设置为1，则会按顺序执行
-  concurrency: 10,
-});
-res.group = batchRunRes.stack;
-// 业务逻辑结束-----------------------------------------------------------
-return res;
-```
 
 ### vk.pubfn.getUniCloudRequestId（获取请求 id）@getUniCloudRequestId
 
