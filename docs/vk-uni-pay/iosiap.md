@@ -45,6 +45,8 @@ module.exports = {
 
 下面的代码中，只需要把 `productList` 变量内的值替换成你自己的商品信息即可。
 
+如需隐藏本次内购支付的“请求中...”“支付处理中...”及后续结果查询提示，可在 `createPayment` 的顶层参数中设置 `loading: false` 或 `title: ''`，与 `action`、`data` 同级。`loading` 默认为 `true`；非空 `title` 可统一自定义本次流程的加载提示文字，省略时保留各阶段原有文案。详见[加载提示说明](./page/vk-uni-pay.md#createpayment-loading)。
+
 ```vue
 <template>
   <view class="content">
@@ -136,6 +138,7 @@ module.exports = {
         form1.out_trade_no = obj.out_trade_no || 'test_' + Date.now();
         // 发起支付
         this.$refs.vkPay.createPayment({
+          loading: true, // 默认true，设为false可关闭本次支付的加载提示
           // 如果是非路由框架，则外层action不再是json，而为字符串，值为云函数名称，如 action: "你的云函数名称"
           // 如果是路由框架，则按下方配置填写
           // 如果云函数为 vk-pay，则无需改动 action

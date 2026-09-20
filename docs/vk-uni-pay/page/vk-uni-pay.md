@@ -75,10 +75,40 @@ vkPay.value.createPayment({
 });
 ```
 
+## createPayment 加载提示@createpayment-loading
+
+`createPayment` 支持通过 `loading` 和 `title` 参数控制本次支付的加载提示。两个参数均放在方法的顶层参数中，与 `action`、`data` 同级。
+
+| 参数    | 说明                         | 类型    | 默认值 | 可选值      |
+| ------- | ---------------------------- | ------- | ------ | ----------- |
+| loading | 是否显示本次支付的加载提示   | Boolean | true   | true、false |
+| title   | 自定义加载提示文字，空字符串等效于 `loading: false` | String | 各阶段原有文案，支付请求时为“请求中...” | - |
+
+传入 `loading: false` 或 `title: ''` 后，组件会关闭本次支付请求、后续支付结果查询、等待异步通知及 iOS 内购处理过程中的加载提示，并跳过对应的 `uni.hideLoading()` 调用，便于页面自行管理加载提示。`loading: false` 的优先级高于自定义 `title`。
+
+```js
+this.$refs.vkPay.createPayment({
+  ...paymentOptions, // 原有支付参数，包含 action、data 及回调
+  loading: false, // 也可以使用 title: ''
+});
+```
+
+自定义提示文字示例：
+
+```js
+this.$refs.vkPay.createPayment({
+  ...paymentOptions,
+  title: '正在创建订单...',
+});
+```
+
+非空 `title` 会替换本次流程中需要显示的加载提示文字，后台静默轮询保持原有行为。省略 `title` 时，各阶段继续使用原有文案，如“请求中...”“请稍等...”和 iOS 内购的“支付处理中...”。Vue3 setup 内使用 `vkPay.value.createPayment` 时，参数写法相同。以上设置仅对本次 `createPayment` 调用及其后续流程生效。
+
 ## createPayment 示例
 
 ```js
 this.$refs.vkPay.createPayment({
+  loading: true, // 默认true，设为false可关闭本次支付的加载提示
   // 如果是非路由框架，则action为字符串，值为云函数名称
   // 如果是路由框架，则按下方配置填写
   action: {
@@ -368,6 +398,7 @@ alert(content, title = "提示") {
         form1.provider = 'alipay';
         // #endif
         this.$refs.vkPay.createPayment({
+          loading: true, // 默认true，设为false可关闭本次支付的加载提示
           // 如果是非路由框架，则外层action不再是json，而为字符串，值为云函数名称，如 action: "你的云函数名称"
           // 如果是路由框架，则按下方配置填写
           // 如果云函数name为 vk-pay，则无需改动 action

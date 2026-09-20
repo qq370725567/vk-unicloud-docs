@@ -68,11 +68,14 @@ export default {
 
 ## methods
 
+如需自行管理加载提示，可在 `createPayment` 的顶层参数中设置 `loading: false` 或 `title: ''`，与 `action`、`data` 同级。`loading` 默认为 `true`；`title` 可自定义本次支付及后续查询的加载提示文字，省略时保留各阶段原有文案。详见[加载提示说明](./vk-uni-pay.md#createpayment-loading)。
+
 ```js
 
 methods: {
   createPayment(){
     this.$refs.vkPay.createPayment({
+      loading: true, // 默认true，设为false可关闭本次支付的加载提示
       // 如果是非路由框架，则action为字符串，值为云函数名称
       // 如果是路由框架，则按下方配置填写
       action: {
