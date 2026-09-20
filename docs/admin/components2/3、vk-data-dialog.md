@@ -16,6 +16,27 @@
 </vk-data-dialog>
 ```
 
+#### 自动居中弹窗
+
+设置 `auto-center`（对应组件属性 `autoCenter`）后，弹窗会在视口内水平、垂直居中。默认值为 `false`，未开启时保持原有布局。
+
+```vue
+<vk-data-dialog v-model="dialog.show2" title="居中弹窗" width="500px" auto-center :close-on-click-modal="true">
+  这里是自定义内容
+  <template v-slot:footer="{ close }">
+    <el-button :size="$global.size" @click="close">取 消</el-button>
+    <el-button type="primary" :size="$global.size" @click="close">确 定</el-button>
+  </template>
+</vk-data-dialog>
+```
+
+- 短内容保持自然高度；弹窗整体最大高度为 `96vh`，包含标题、内容和底部，超出时内容区域内部滚动，标题和 `footer` 插槽保持可见。
+- 内容动态增减或窗口缩放时，布局自动适配，无需手动计算高度。
+- 自动居中生效时，`top` 不参与弹窗定位；关闭自动居中后恢复原有 `top` 设置。
+- 全屏状态优先，进入全屏时停用自动居中和 `96vh` 限制，退出全屏后恢复。
+- `center` 仅控制标题和底部内容的对齐，与 `auto-center` 独立，可以同时使用。
+- `max-height` 继续限制内部内容区高度。例如同时设置 `auto-center :max-height="400"`，内容区最大高度为 `400px`；视口不足时还会进一步收缩，保证弹窗整体不超过 `96vh`。插槽内组件自带的滚动布局仍由该组件控制。
+
 #### 表单弹窗
 
 完整代码见示例项目的 `pages_template/components/dialog/dialog-form`
@@ -42,12 +63,13 @@
 ### 属性
 
 | 参数                  | 说明                                                                         | 类型     | 默认值  | 可选值 |
-| --------------------- | ---------------------------------------------------------------------------- | -------- | ------- | ------ | --- |
+| --------------------- | ---------------------------------------------------------------------------- | -------- | ------- | ------ |
 | v-model               | 双向绑定一个变量,当变量为 true: 弹窗显示 false: 弹窗关闭                     | Boolean  | -       | -      |
 | title                 | 弹窗标题                                                                     | String   | -       | -      |
 | width                 | 弹窗宽度                                                                     | Number   | -       | -      |
 | mode                  | 弹窗模式                                                                     | String   | default | form   |
-| top                   | margin-top 值                                                                | String   | 7vh     | -      |
+| top                   | margin-top 值，自动居中生效时不参与弹窗定位                                   | String   | 7vh     | -      |
+| auto-center           | 是否自动居中，开启后弹窗整体最大高度为 96vh，全屏时不生效                    | Boolean  | false   | true   |
 | close-on-click-modal  | 是否可以通过点击 modal 关闭 Dialog                                           | Boolean  | false   | true   |
 | close-on-press-escape | 是否可以通过按下 ESC 关闭 Dialog                                             | Boolean  | true    | false  |
 | show-close            | 是否显示关闭按钮                                                             | Boolean  | true    | false  |
@@ -59,8 +81,8 @@
 | show-fullscreen       | 是否显示全屏按钮（仅在 mode="form"时生效）                                   | Boolean  | true    | false  |
 | show-header           | 是否显示头部                                                                 | Boolean  | true    | false  |
 | before-close          | 关闭前的回调，会暂停 Dialog 的关闭                                           | Function | -       | -      |
-| center                | 是否对头部和底部采用居中布局                                                 | Boolean  | false   | true   |
-| max-height            | 最大高度，超过会有滚动条                                                     | String   | Number  | -      | -   |
+| center                | 是否对标题和底部内容采用居中对齐，与弹窗整体居中的 auto-center 独立         | Boolean  | false   | true   |
+| max-height            | 内部内容区最大高度，超出时内部滚动；数字单位为 px，字符串可携带 CSS 单位    | String / Number | - | - |
 | destroy-on-close      | 控制是否在关闭弹窗之后将子元素全部销毁                                       | Boolean  | false   | true   |
 
 ### mode 样式说明
